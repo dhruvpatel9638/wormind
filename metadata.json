@@ -1,0 +1,6 @@
+{
+  "name": "WorMind - Play, Think, Discover",
+  "description": "Vibrant tactile word puzzle game featuring playful world portals, interactive word search levels, 7-day streak rewards, and companion mascot Loki.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
