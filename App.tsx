@@ -6,6 +6,7 @@ import {
   StatusBar,
   Platform,
   Alert,
+  BackHandler,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Screen, PlayerState } from './src/types';
@@ -64,6 +65,20 @@ export default function App() {
     nativeAudio.setSoundEnabled(playerState.soundEnabled);
     nativeAudio.setMusicEnabled(playerState.musicEnabled);
   }, [playerState]);
+
+  // Handle hardware Back button on Android for main screens
+  useEffect(() => {
+    const onBackPress = () => {
+      if (currentScreen !== 'worlds' && currentScreen !== 'game') {
+        setCurrentScreen('worlds');
+        return true;
+      }
+      return false;
+    };
+
+    const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    return () => subscription.remove();
+  }, [currentScreen]);
 
   // Hearts refill timer
   useEffect(() => {
@@ -181,6 +196,7 @@ export default function App() {
       wordsDiscovered: 148,
       soundEnabled: true,
       musicEnabled: true,
+      hapticsEnabled: true,
     });
   };
 

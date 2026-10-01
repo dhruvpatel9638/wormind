@@ -8,6 +8,7 @@ import {
   Dimensions,
   Alert,
   PanResponder,
+  BackHandler,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -71,6 +72,25 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setHintedCells([]);
     setLastFoundMessage(null);
   }, [levelId]);
+
+  // Handle hardware Back button on Android to show Game Paused menu instead of exiting app
+  useEffect(() => {
+    const onBackPress = () => {
+      if (isVictory) {
+        onExit();
+        return true;
+      }
+      if (isPaused) {
+        setIsPaused(false);
+        return true;
+      }
+      setIsPaused(true);
+      return true;
+    };
+
+    const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    return () => subscription.remove();
+  }, [isPaused, isVictory, onExit]);
 
   const foundCount = targetWords.filter((w) => w.found).length;
   const totalCount = targetWords.length;
@@ -325,7 +345,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       {/* Top Level Nav Bar */}
       <View style={styles.topNav}>
         <Pressable
-          onPress={onExit}
+          onPress={() => setIsPaused(true)}
           style={({ pressed }) => [styles.backBtn, pressed && styles.pressed]}
         >
           <MaterialIcons name="map" size={20} color="#286BEA" />
