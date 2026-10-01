@@ -590,7 +590,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
             >
               <Text style={styles.continueBtnText}>NEXT LEVEL</Text>
             </Pressable>
-          </View>
+          </Animated.View>
         </View>
       </Modal>
 
@@ -1009,3 +1009,4 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.96 }],
   },
 });
+
