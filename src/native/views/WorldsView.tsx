@@ -23,7 +23,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   onStartLevel,
-  activeLevelId = 4,
+  activeLevelId = 51,
 }) => {
   const [selectedModalLevel, setSelectedModalLevel] = useState<number | null>(null);
   const [alertInfo, setAlertInfo] = useState<{title: string, message: string} | null>(null);

@@ -20,12 +20,16 @@ import { nativeAudio } from './src/native/audio';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 
+// ⚙️ DEV / GAME CONFIG:
+export const START_LEVEL_ID = 51;
+export const START_DEV_COINS = 100000;
+
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
-  const [activeLevelId, setActiveLevelId] = useState<number>(4);
+  const [activeLevelId, setActiveLevelId] = useState<number>(START_LEVEL_ID);
 
   const [playerState, setPlayerState] = useState<PlayerState>({
-    coins: 10000,
+    coins: START_DEV_COINS,
     stars: 380,
     hearts: 5,
     maxHearts: 5,
@@ -119,7 +123,7 @@ export default function App() {
       solvedCount: prev.solvedCount + 1,
       wordsDiscovered: prev.wordsDiscovered + 5,
     }));
-    setActiveLevelId((prev) => (prev < 50 ? prev + 1 : prev));
+    setActiveLevelId((prev) => (prev < 100 ? prev + 1 : prev));
     setCurrentScreen('worlds');
   };
 
@@ -211,7 +215,7 @@ export default function App() {
         maxHearts={playerState.maxHearts}
         heartCountdown={formatCountdown(playerState.heartSeconds)}
         level={activeLevelId}
-        onOpenShop={() => {}}
+        onOpenShop={() => handleAddCoins(10000)}
         onRefillHearts={handleRefillHearts}
         musicEnabled={playerState.musicEnabled}
         onToggleMusic={handleToggleMusic}
