@@ -75,6 +75,28 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     }
   }, [isVictory]);
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
+
+  const scaleAnim = useRef(new Animated.Value(0)).current;
+  const star1Anim = useRef(new Animated.Value(0)).current;
+  const star2Anim = useRef(new Animated.Value(0)).current;
+  const star3Anim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (isVictory) {
+      Animated.sequence([
+        Animated.spring(scaleAnim, { toValue: 1, friction: 5, tension: 40, useNativeDriver: true }),
+        Animated.spring(star1Anim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+        Animated.spring(star2Anim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+        Animated.spring(star3Anim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+      ]).start();
+    } else {
+      scaleAnim.setValue(0);
+      star1Anim.setValue(0);
+      star2Anim.setValue(0);
+      star3Anim.setValue(0);
+    }
+  }, [isVictory]);
+
   const [lastFoundMessage, setLastFoundMessage] = useState<string | null>(null);
 
   // Sync level on levelId change
@@ -533,7 +555,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       {/* Level Victory Modal */}
       <Modal visible={isVictory} transparent animationType="fade">
         <View style={styles.modalBackdrop}>
-          <View style={styles.victoryCard}>
+          <Animated.View style={[styles.victoryCard, { transform: [{ scale: scaleAnim }] }]}>
             <View style={styles.trophyCircle}>
               <MaterialIcons name="emoji-events" size={40} color="#172858" />
             </View>
