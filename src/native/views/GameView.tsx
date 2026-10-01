@@ -7,6 +7,8 @@ import {
   Modal,
   Dimensions,
   Alert,
+  Animated,
+  Easing,
   PanResponder,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -52,6 +54,26 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [alertInfo, setAlertInfo] = useState<{title: string, message: string} | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isVictory, setIsVictory] = useState<boolean>(false);
+  const victoryScale = useRef(new Animated.Value(0)).current;
+  const star1Scale = useRef(new Animated.Value(0)).current;
+  const star2Scale = useRef(new Animated.Value(0)).current;
+  const star3Scale = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (isVictory) {
+      Animated.sequence([
+        Animated.spring(victoryScale, { toValue: 1, friction: 5, tension: 60, useNativeDriver: true }),
+        Animated.spring(star1Scale, { toValue: 1, friction: 4, useNativeDriver: true }),
+        Animated.spring(star2Scale, { toValue: 1, friction: 4, useNativeDriver: true }),
+        Animated.spring(star3Scale, { toValue: 1, friction: 4, useNativeDriver: true }),
+      ]).start();
+    } else {
+      victoryScale.setValue(0);
+      star1Scale.setValue(0);
+      star2Scale.setValue(0);
+      star3Scale.setValue(0);
+    }
+  }, [isVictory]);
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
   const [lastFoundMessage, setLastFoundMessage] = useState<string | null>(null);
 
