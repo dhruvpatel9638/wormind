@@ -391,10 +391,12 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           )}
         </View>
 
-        {spelledWord !== '' && (
+        {spelledWord !== '' ? (
           <Pressable onPress={handleClear} style={styles.clearBtn}>
             <MaterialIcons name="close" size={16} color="#FFFFFF" />
           </Pressable>
+        ) : (
+          <View style={{ width: 24, height: 24 }} />
         )}
       </View>
 
@@ -724,6 +726,7 @@ const styles = StyleSheet.create({
   },
   spellingBar: {
     width: '100%',
+    height: 44,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -732,12 +735,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#D4B5FF',
     paddingHorizontal: 12,
-    paddingVertical: 6,
     marginBottom: 8,
   },
   spellingLeft: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
     gap: 8,
   },
   spellingLabel: {
