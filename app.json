@@ -11,6 +11,11 @@
     },
     "android": {
       "package": "com.dhruvpatel.wormind"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f377a021-f853-4da0-beb4-b616f62ca6f1"
+      }
     }
   }
 }
