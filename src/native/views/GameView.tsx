@@ -372,7 +372,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           onPress={onExit}
           style={({ pressed }) => [styles.backBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="map" size={20} color="#286BEA" />
+          <MaterialIcons name="map" size={20} color="#7C3AED" />
           <Text style={styles.backBtnText}>MAP</Text>
         </Pressable>
 
@@ -476,17 +476,17 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                 }
 
                 let tileBg = '#FFFFFF';
-                let tileColor = '#000000';
+                let tileColor = '#2E1065';
 
                 if (isSolved) {
-                  tileBg = '#E8F5E9'; // light green
-                  tileColor = '#2E7D32';
+                  tileBg = '#CCFBF1'; // Teal solved
+                  tileColor = '#0F766E';
                 } else if (isSelected) {
-                  tileBg = '#E3F2FD'; // light blue
-                  tileColor = '#1565C0';
+                  tileBg = '#EDE9FE'; // Violet selected
+                  tileColor = '#6D28D9';
                 } else if (isHinted) {
-                  tileBg = '#FFF8E1';
-                  tileColor = '#F57F17';
+                  tileBg = '#FEF3C7'; // Gold hinted
+                  tileColor = '#B45309';
                 }
 
                 return (
@@ -526,9 +526,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           onPress={handleShuffle}
           style={({ pressed }) => [styles.actionBtn, styles.shuffleBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="refresh" size={20} color="#7652D9" />
-          <Text style={[styles.actionBtnTitle, { color: '#7652D9' }]}>CLEAR</Text>
-          <Text style={[styles.actionBtnSub, { color: '#7652D9' }]}>Free</Text>
+          <MaterialIcons name="refresh" size={20} color="#7C3AED" />
+          <Text style={[styles.actionBtnTitle, { color: '#7C3AED' }]}>CLEAR</Text>
+          <Text style={[styles.actionBtnSub, { color: '#7C3AED' }]}>Free</Text>
         </Pressable>
 
         {/* Hint */}
@@ -536,9 +536,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           onPress={handleHint}
           style={({ pressed }) => [styles.actionBtn, styles.hintBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="lightbulb" size={20} color="#5A3800" />
-          <Text style={[styles.actionBtnTitle, { color: '#5A3800' }]}>HINT</Text>
-          <Text style={[styles.actionBtnSub, { color: '#5A3800' }]}>🪙 25</Text>
+          <MaterialIcons name="lightbulb" size={20} color="#B45309" />
+          <Text style={[styles.actionBtnTitle, { color: '#B45309' }]}>HINT</Text>
+          <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>🪙 25</Text>
         </Pressable>
 
         {/* Reveal */}
@@ -546,9 +546,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           onPress={handleReveal}
           style={({ pressed }) => [styles.actionBtn, styles.revealBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="auto-fix-high" size={20} color="#286BEA" />
-          <Text style={[styles.actionBtnTitle, { color: '#286BEA' }]}>REVEAL</Text>
-          <Text style={[styles.actionBtnSub, { color: '#286BEA' }]}>🪙 50</Text>
+          <MaterialIcons name="auto-fix-high" size={20} color="#0D9488" />
+          <Text style={[styles.actionBtnTitle, { color: '#0D9488' }]}>REVEAL</Text>
+          <Text style={[styles.actionBtnSub, { color: '#0D9488' }]}>🪙 50</Text>
         </Pressable>
       </View>
 
@@ -557,7 +557,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         <View style={styles.modalBackdrop}>
           <Animated.View style={[styles.victoryCard, { transform: [{ scale: scaleAnim }] }]}>
             <View style={styles.trophyCircle}>
-              <MaterialIcons name="emoji-events" size={40} color="#172858" />
+              <MaterialIcons name="emoji-events" size={40} color="#5A3800" />
             </View>
             <Text style={styles.victoryTitle}>LEVEL COMPLETE!</Text>
             <Text style={styles.victorySubtitle}>You solved all words in Level {levelId}!</Text>
@@ -575,7 +575,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                 <Text style={styles.rewardLabel}>Coins</Text>
               </View>
               <View style={styles.rewardBox}>
-                <MaterialIcons name="military-tech" size={22} color="#7652D9" />
+                <MaterialIcons name="military-tech" size={22} color="#7C3AED" />
                 <Text style={styles.rewardValue}>+100</Text>
                 <Text style={styles.rewardLabel}>XP</Text>
               </View>
@@ -634,7 +634,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EBF4FF',
+    backgroundColor: '#FAF8FF',
     alignItems: 'center',
     paddingHorizontal: 14,
     paddingTop: 8,
@@ -654,7 +654,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderWidth: 2,
-    borderColor: 'rgba(40, 107, 234, 0.25)',
+    borderColor: 'rgba(124, 58, 237, 0.25)',
     gap: 4,
   },
   backBtnText: {
@@ -670,7 +670,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 16,
     borderWidth: 2,
-    borderColor: '#FFE066',
+    borderColor: '#FDE68A',
     gap: 4,
   },
   levelBadgeText: {
@@ -689,7 +689,7 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderWidth: 2,
-    borderColor: 'rgba(23, 40, 88, 0.15)',
+    borderColor: 'rgba(124, 58, 237, 0.2)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -698,7 +698,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.92)',
     borderRadius: 16,
     borderWidth: 2,
-    borderColor: 'rgba(40, 107, 234, 0.2)',
+    borderColor: 'rgba(124, 58, 237, 0.25)',
     padding: 10,
     marginBottom: 8,
   },
@@ -720,15 +720,15 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   foundBadge: {
-    backgroundColor: '#E8F5E9',
+    backgroundColor: '#CCFBF1',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#A3F7A0',
+    borderColor: '#99F6E4',
   },
   foundBadgeText: {
-    color: '#2E7D32',
+    color: '#0F766E',
     fontWeight: '800',
     fontSize: 10,
   },
@@ -745,14 +745,14 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   pillNormal: {
-    backgroundColor: '#F0F4FC',
+    backgroundColor: '#FAF8FF',
     borderWidth: 1.5,
-    borderColor: '#D4E2F5',
+    borderColor: '#DDD6FE',
   },
   pillFound: {
-    backgroundColor: '#E8F5E9',
+    backgroundColor: '#CCFBF1',
     borderWidth: 1.5,
-    borderColor: '#35C94A',
+    borderColor: '#14B8A6',
   },
   pillText: {
     fontWeight: '800',
@@ -763,7 +763,7 @@ const styles = StyleSheet.create({
     color: '#4B5563',
   },
   pillTextFound: {
-    color: '#2E7D32',
+    color: '#0F766E',
     textDecorationLine: 'line-through',
   },
   spellingBar: {
@@ -774,7 +774,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#D4B5FF',
+    borderColor: '#DDD6FE',
     paddingHorizontal: 12,
     paddingVertical: 6,
     marginBottom: 8,
@@ -785,18 +785,18 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   spellingLabel: {
-    color: '#7652D9',
+    color: '#7C3AED',
     fontSize: 10,
     fontWeight: '900',
   },
   spelledActive: {
-    color: '#286BEA',
+    color: '#7C3AED',
     fontSize: 17,
     fontWeight: '900',
     letterSpacing: 3,
   },
   foundAlertText: {
-    color: '#35C94A',
+    color: '#0D9488',
     fontSize: 13,
     fontWeight: '900',
   },
@@ -809,7 +809,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
-    backgroundColor: '#7652D9',
+    backgroundColor: '#7C3AED',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -852,19 +852,19 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   shuffleBtn: {
-    backgroundColor: '#F3E8FF',
+    backgroundColor: '#F5F3FF',
     borderWidth: 2,
-    borderColor: '#D4B5FF',
+    borderColor: '#DDD6FE',
   },
   hintBtn: {
     backgroundColor: '#FFF8E1',
     borderWidth: 2,
-    borderColor: '#FFE066',
+    borderColor: '#FDE68A',
   },
   revealBtn: {
-    backgroundColor: '#EBF4FF',
+    backgroundColor: '#F0FDFA',
     borderWidth: 2,
-    borderColor: '#B0D0FF',
+    borderColor: '#99F6E4',
   },
   actionBtnTitle: {
     fontSize: 11,
@@ -884,7 +884,7 @@ const styles = StyleSheet.create({
   },
   victoryCard: {
     width: 290,
-    backgroundColor: '#172858',
+    backgroundColor: '#2E1065',
     borderRadius: 24,
     borderWidth: 3,
     borderColor: '#FFC928',
@@ -910,7 +910,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   victorySubtitle: {
-    color: '#B0C2E8',
+    color: '#DDD6FE',
     fontSize: 12,
     fontWeight: '600',
     marginTop: 3,
@@ -941,14 +941,14 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   rewardLabel: {
-    color: '#B0C2E8',
+    color: '#DDD6FE',
     fontSize: 10,
     fontWeight: '700',
   },
   continueBtn: {
     width: '100%',
     height: 46,
-    backgroundColor: '#35C94A',
+    backgroundColor: '#7C3AED',
     borderRadius: 23,
     alignItems: 'center',
     justifyContent: 'center',
@@ -960,10 +960,10 @@ const styles = StyleSheet.create({
   },
   pauseCard: {
     width: 270,
-    backgroundColor: '#172858',
+    backgroundColor: '#2E1065',
     borderRadius: 20,
     borderWidth: 2,
-    borderColor: '#286BEA',
+    borderColor: '#7C3AED',
     alignItems: 'center',
     padding: 20,
   },
@@ -973,7 +973,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   pauseSub: {
-    color: '#B0C2E8',
+    color: '#DDD6FE',
     fontSize: 11,
     marginTop: 2,
     marginBottom: 16,
@@ -981,7 +981,7 @@ const styles = StyleSheet.create({
   resumeBtn: {
     width: '100%',
     height: 42,
-    backgroundColor: '#286BEA',
+    backgroundColor: '#7C3AED',
     borderRadius: 21,
     alignItems: 'center',
     justifyContent: 'center',
@@ -995,7 +995,7 @@ const styles = StyleSheet.create({
   exitBtn: {
     width: '100%',
     height: 38,
-    backgroundColor: '#253D75',
+    backgroundColor: '#3B1A66',
     borderRadius: 19,
     alignItems: 'center',
     justifyContent: 'center',

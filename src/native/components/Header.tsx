@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -28,7 +28,7 @@ export const NativeHeader: React.FC<HeaderProps> = ({
 }) => {
   return (
     <LinearGradient
-      colors={['#A8E6FF', '#D4B5FF']}
+      colors={['#8B5CF6', '#7C3AED']}
       style={styles.headerContainer}
     >
       <View style={styles.row}>
@@ -37,16 +37,16 @@ export const NativeHeader: React.FC<HeaderProps> = ({
           onPress={onRefillHearts}
           style={({ pressed }) => [styles.badge, styles.heartBadge, pressed && styles.pressed]}
         >
-          <MaterialIcons name="favorite" size={17} color="#EF3B3B" />
+          <MaterialIcons name="favorite" size={17} color="#EF4444" />
           <Text style={styles.heartText}>{hearts}/{maxHearts}</Text>
           {hearts < maxHearts && (
             <Text style={styles.countdownText}>{heartCountdown}</Text>
           )}
         </Pressable>
 
-        {/* Coins Money Badge */}
+        {/* Coins Money Badge (Gold Rewards) */}
         <View style={[styles.badge, styles.coinBadge]}>
-          <MaterialIcons name="monetization-on" size={17} color="#D4A200" />
+          <MaterialIcons name="monetization-on" size={17} color="#F59E0B" />
           <Text style={styles.coinText}>{coins.toLocaleString()}</Text>
           <Pressable
             onPress={onOpenShop}
@@ -56,9 +56,9 @@ export const NativeHeader: React.FC<HeaderProps> = ({
           </Pressable>
         </View>
 
-        {/* Level Badge */}
+        {/* Level Badge (Teal Secondary) */}
         <View style={[styles.badge, styles.levelBadge]}>
-          <MaterialIcons name="military-tech" size={17} color="#286BEA" />
+          <MaterialIcons name="military-tech" size={17} color="#0D9488" />
           <Text style={styles.levelText}>Lv. {level}</Text>
         </View>
 
@@ -75,7 +75,7 @@ export const NativeHeader: React.FC<HeaderProps> = ({
             <MaterialIcons
               name={musicEnabled ? 'music-note' : 'music-off'}
               size={18}
-              color={musicEnabled ? '#FFFFFF' : '#9B8EC0'}
+              color={musicEnabled ? '#FFFFFF' : '#8B7FB0'}
             />
           </Pressable>
         )}
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     paddingHorizontal: 12,
     borderBottomWidth: 2,
-    borderBottomColor: 'rgba(255, 255, 255, 0.6)',
+    borderBottomColor: 'rgba(255, 255, 255, 0.25)',
   },
   row: {
     flexDirection: 'row',
@@ -103,36 +103,36 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 36,
     borderRadius: 18,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 8,
   },
   heartBadge: {
-    borderColor: '#FFB0C0',
+    borderColor: '#FECACA',
     borderWidth: 1.5,
   },
   heartText: {
-    color: '#EF3B3B',
+    color: '#EF4444',
     fontWeight: '800',
     fontSize: 12,
     marginLeft: 4,
   },
   countdownText: {
-    color: '#E06080',
+    color: '#F87171',
     fontSize: 9,
     fontWeight: '700',
     marginLeft: 4,
   },
   coinBadge: {
-    borderColor: '#FFE066',
+    borderColor: '#FDE68A',
     borderWidth: 1.5,
     justifyContent: 'space-between',
     paddingRight: 4,
   },
   coinText: {
-    color: '#B8860B',
+    color: '#B45309',
     fontWeight: '800',
     fontSize: 12,
     marginLeft: 2,
@@ -152,11 +152,11 @@ const styles = StyleSheet.create({
     lineHeight: 16,
   },
   levelBadge: {
-    borderColor: '#B0D8FF',
+    borderColor: '#99F6E4',
     borderWidth: 1.5,
   },
   levelText: {
-    color: '#286BEA',
+    color: '#0F766E',
     fontWeight: '800',
     fontSize: 12,
     marginLeft: 4,
@@ -169,12 +169,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   musicOn: {
-    backgroundColor: '#35C94A',
+    backgroundColor: '#0D9488',
   },
   musicOff: {
     backgroundColor: 'rgba(255, 255, 255, 0.75)',
     borderWidth: 1,
-    borderColor: '#D4B5FF',
+    borderColor: '#DDD6FE',
   },
   pressed: {
     transform: [{ scale: 0.92 }],

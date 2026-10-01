@@ -64,7 +64,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
               <Text style={styles.chapterTitle}>CHAPTER 1: SUNNY VALLEY</Text>
             </View>
             <View style={styles.chapterStars}>
-              <MaterialIcons name="star" size={14} color="#D4A200" />
+              <MaterialIcons name="star" size={14} color="#F59E0B" />
               <Text style={styles.chapterStarsText}>18/25</Text>
             </View>
           </View>
@@ -72,7 +72,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
           {/* Progress bar */}
           <View style={styles.progressBarBg}>
             <LinearGradient
-              colors={['#FFC928', '#35C94A']}
+              colors={['#FFC928', '#0D9488']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={[styles.progressBarFill, { width: '72%' }]}
@@ -89,14 +89,14 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
               onPress={() => setAlertInfo({ title: 'Coming Soon', message: 'Bubble Ocean unlocks at Chapter 2!' })}
               style={[styles.worldPill, styles.worldPillInactive]}
             >
-              <MaterialIcons name="water-drop" size={14} color="#9B8EC0" />
+              <MaterialIcons name="water-drop" size={14} color="#8B7FB0" />
               <Text style={styles.worldPillTextInactive}>Ocean</Text>
             </Pressable>
             <Pressable
               onPress={() => setAlertInfo({ title: 'Coming Soon', message: 'Candy Clouds unlocks at Chapter 3!' })}
               style={[styles.worldPill, styles.worldPillInactive]}
             >
-              <MaterialIcons name="cloud" size={14} color="#9B8EC0" />
+              <MaterialIcons name="cloud" size={14} color="#8B7FB0" />
               <Text style={styles.worldPillTextInactive}>Candy</Text>
             </Pressable>
           </ScrollView>
@@ -139,7 +139,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             <Path
               d={INITIAL_LEVELS.map((_, idx) => ` ${idx === 0 ? 'M' : 'L'} ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
               fill="none"
-              stroke="rgba(118, 82, 217, 0.35)"
+              stroke="rgba(124, 58, 237, 0.35)"
               strokeWidth="3"
               strokeDasharray="8, 8"
               strokeLinejoin="round"
@@ -177,7 +177,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                       <Text style={styles.activePlayText}>PLAY</Text>
                     </>
                   )}
-                  {isLocked && <MaterialIcons name="lock" size={22} color="#9B8EC0" />}
+                  {isLocked && <MaterialIcons name="lock" size={22} color="#8B7FB0" />}
                 </Pressable>
 
                 {isDone && (
@@ -188,7 +188,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                   </View>
                 )}
                 
-                <Text style={[styles.nodeLabel, isActive && { color: '#286BEA', fontWeight: '900', fontSize: 13 }, isLocked && { color: '#9B8EC0' }]}>
+                <Text style={[styles.nodeLabel, isActive && { color: '#7C3AED', fontWeight: '900', fontSize: 13 }, isLocked && { color: '#8B7FB0' }]}>
                   {lvl.id}: {lvl.title.split(' ')[0]}
                 </Text>
               </View>
@@ -263,7 +263,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EBF4FF',
+    backgroundColor: '#FAF8FF',
   },
   scrollContent: {
     paddingHorizontal: 14,
@@ -276,11 +276,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
     borderRadius: 20,
     borderWidth: 3,
-    borderColor: '#7FFFB0',
+    borderColor: '#DDD6FE',
     padding: 12,
     marginBottom: 12,
     elevation: 4,
-    shadowColor: '#35C94A',
+    shadowColor: '#7C3AED',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.15,
     shadowRadius: 6,
@@ -300,27 +300,27 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: '#35C94A',
+    backgroundColor: '#0D9488',
   },
   chapterTitle: {
     fontSize: 13,
     fontWeight: '900',
-    color: '#218A30',
+    color: '#6D28D9',
     letterSpacing: 0.5,
   },
   chapterStars: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFF3B0',
+    backgroundColor: '#FEF3C7',
     borderWidth: 1.5,
-    borderColor: '#FFE066',
+    borderColor: '#FDE68A',
     borderRadius: 12,
     paddingHorizontal: 8,
     paddingVertical: 2,
     gap: 4,
   },
   chapterStarsText: {
-    color: '#D4A200',
+    color: '#B45309',
     fontWeight: '900',
     fontSize: 12,
   },
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 12,
     borderRadius: 6,
-    backgroundColor: 'rgba(127, 255, 176, 0.3)',
+    backgroundColor: 'rgba(124, 58, 237, 0.12)',
     overflow: 'hidden',
   },
   progressBarFill: {
@@ -349,12 +349,12 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   worldPillActive: {
-    backgroundColor: '#35C94A',
+    backgroundColor: '#7C3AED',
   },
   worldPillInactive: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
     borderWidth: 1.5,
-    borderColor: '#E8DDFF',
+    borderColor: '#EDE9FE',
   },
   worldPillTextActive: {
     color: '#FFFFFF',
@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
   worldPillTextInactive: {
-    color: '#9B8EC0',
+    color: '#8B7FB0',
     fontWeight: '700',
     fontSize: 11,
   },
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderRadius: 24,
     borderWidth: 3,
-    borderColor: 'rgba(255, 255, 255, 0.8)',
+    borderColor: 'rgba(221, 214, 254, 0.8)',
     position: 'relative',
     overflow: 'hidden',
   },
@@ -393,9 +393,9 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: '#35C94A',
+    backgroundColor: '#0D9488',
     borderWidth: 3,
-    borderColor: '#7FFFB0',
+    borderColor: '#5EEAD4',
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 4,
@@ -408,7 +408,7 @@ const styles = StyleSheet.create({
   treeTrunk: {
     width: 10,
     height: 18,
-    backgroundColor: '#D4A200',
+    backgroundColor: '#B45309',
     borderBottomLeftRadius: 3,
     borderBottomRightRadius: 3,
   },
@@ -417,10 +417,10 @@ const styles = StyleSheet.create({
     top: 14,
     left: '50%',
     transform: [{ translateX: -80 }],
-    backgroundColor: '#7652D9',
+    backgroundColor: '#6D28D9',
     borderRadius: 14,
     borderWidth: 2,
-    borderColor: '#D4B5FF',
+    borderColor: '#DDD6FE',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
@@ -435,7 +435,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   valleyGateSub: {
-    color: '#D4B5FF',
+    color: '#DDD6FE',
     fontSize: 8,
     fontWeight: '600',
   },
@@ -453,9 +453,9 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   nodeDone: {
-    backgroundColor: '#35C94A',
+    backgroundColor: '#0D9488',
     borderWidth: 3,
-    borderColor: '#7FFFB0',
+    borderColor: '#5EEAD4',
   },
   nodeActive: {
     width: 60,
@@ -466,9 +466,9 @@ const styles = StyleSheet.create({
     borderColor: '#FFFFFF',
   },
   nodeLocked: {
-    backgroundColor: '#E8DDFF',
+    backgroundColor: '#EDE9FE',
     borderWidth: 3,
-    borderColor: '#D4B5FF',
+    borderColor: '#DDD6FE',
   },
   activeNumber: {
     color: '#5A3800',
@@ -482,7 +482,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   letsGoBubble: {
-    backgroundColor: '#286BEA',
+    backgroundColor: '#7C3AED',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 10,
@@ -503,7 +503,7 @@ const styles = StyleSheet.create({
   nodeLabel: {
     fontSize: 11,
     fontWeight: '800',
-    color: '#172858',
+    color: '#2E1065',
     marginTop: 1,
   },
   stickyFooter: {
@@ -516,16 +516,20 @@ const styles = StyleSheet.create({
   continueBtn: {
     width: '100%',
     maxWidth: 380,
-    height: 50,
-    backgroundColor: '#35C94A',
-    borderRadius: 25,
+    height: 52,
+    backgroundColor: '#7C3AED',
+    borderRadius: 26,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
     elevation: 8,
     borderWidth: 2,
-    borderColor: '#7FFFB0',
+    borderColor: '#A78BFA',
+    shadowColor: '#7C3AED',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
   continueBtnText: {
     color: '#FFFFFF',
@@ -534,7 +538,7 @@ const styles = StyleSheet.create({
   },
   modalBackdrop: {
     flex: 1,
-    backgroundColor: 'rgba(10, 18, 42, 0.75)',
+    backgroundColor: 'rgba(46, 16, 101, 0.75)',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
@@ -551,7 +555,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#286BEA',
+    backgroundColor: '#7C3AED',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: -40,
@@ -561,18 +565,18 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: '900',
-    color: '#172858',
+    color: '#2E1065',
     marginTop: 10,
   },
   modalSub: {
     fontSize: 12,
-    color: '#7B8AB8',
+    color: '#8B7FB0',
     fontWeight: '600',
     marginBottom: 12,
   },
   modalWordsPreview: {
     width: '100%',
-    backgroundColor: '#F3E8FF',
+    backgroundColor: '#F5F3FF',
     borderRadius: 12,
     padding: 10,
     marginBottom: 16,
@@ -580,7 +584,7 @@ const styles = StyleSheet.create({
   modalWordsLabel: {
     fontSize: 10,
     fontWeight: '900',
-    color: '#7652D9',
+    color: '#7C3AED',
     marginBottom: 2,
   },
   modalWordsText: {
@@ -597,12 +601,14 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 42,
     borderRadius: 21,
-    backgroundColor: '#F0F4FC',
+    backgroundColor: '#F5F3FF',
+    borderWidth: 1,
+    borderColor: '#DDD6FE',
     alignItems: 'center',
     justifyContent: 'center',
   },
   modalCancelText: {
-    color: '#7B8AB8',
+    color: '#7C3AED',
     fontWeight: '800',
     fontSize: 13,
   },
@@ -610,7 +616,7 @@ const styles = StyleSheet.create({
     flex: 1.4,
     height: 42,
     borderRadius: 21,
-    backgroundColor: '#35C94A',
+    backgroundColor: '#7C3AED',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

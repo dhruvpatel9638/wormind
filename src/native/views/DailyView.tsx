@@ -208,6 +208,7 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FAF8FF',
   },
   scrollContent: {
     paddingHorizontal: 16,
@@ -215,11 +216,11 @@ const styles = StyleSheet.create({
     paddingBottom: 120,
   },
   streakBanner: {
-    backgroundColor: '#1E3468',
+    backgroundColor: '#2E1065',
     borderRadius: 20,
     padding: 14,
     borderWidth: 1.5,
-    borderColor: '#EF3B3B',
+    borderColor: '#F59E0B',
     marginBottom: 16,
   },
   streakRow: {
@@ -252,14 +253,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   onFireText: {
-    color: '#172858',
+    color: '#5A3800',
     fontSize: 9,
     fontWeight: '900',
   },
   sectionTitle: {
     fontSize: 12,
     fontWeight: '900',
-    color: '#286BEA',
+    color: '#7C3AED',
     letterSpacing: 0.5,
     marginBottom: 10,
   },
@@ -276,17 +277,17 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     borderWidth: 1.5,
-    borderColor: '#E8DDFF',
+    borderColor: '#EDE9FE',
     elevation: 2,
   },
   rewardCardReady: {
-    borderColor: '#35C94A',
+    borderColor: '#F59E0B',
     borderWidth: 2,
-    backgroundColor: '#F0FFF4',
+    backgroundColor: '#FEF3C7',
   },
   rewardCardClaimed: {
     opacity: 0.6,
-    backgroundColor: '#F8F9FD',
+    backgroundColor: '#F5F3FF',
   },
   rewardDay: {
     fontSize: 10,
@@ -297,12 +298,12 @@ const styles = StyleSheet.create({
   rewardText: {
     fontSize: 11,
     fontWeight: '800',
-    color: '#172858',
+    color: '#2E1065',
     textAlign: 'center',
     marginVertical: 4,
   },
   claimedPill: {
-    backgroundColor: '#E8DDFF',
+    backgroundColor: '#EDE9FE',
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 8,
@@ -310,10 +311,10 @@ const styles = StyleSheet.create({
   claimedPillText: {
     fontSize: 8,
     fontWeight: '800',
-    color: '#7B8AB8',
+    color: '#8B7FB0',
   },
   claimBtn: {
-    backgroundColor: '#35C94A',
+    backgroundColor: '#F59E0B',
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 12,
@@ -334,17 +335,17 @@ const styles = StyleSheet.create({
     padding: 18,
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#D4B5FF',
+    borderColor: '#DDD6FE',
     elevation: 3,
   },
   wheelTitle: {
     fontSize: 16,
     fontWeight: '900',
-    color: '#7652D9',
+    color: '#6D28D9',
   },
   wheelSub: {
     fontSize: 11,
-    color: '#9B8EC0',
+    color: '#8B7FB0',
     marginTop: 2,
     marginBottom: 16,
   },
@@ -359,7 +360,7 @@ const styles = StyleSheet.create({
     width: 140,
     height: 140,
     borderRadius: 70,
-    backgroundColor: '#7652D9',
+    backgroundColor: '#7C3AED',
     borderWidth: 4,
     borderColor: '#FFC928',
     position: 'relative',
@@ -385,12 +386,12 @@ const styles = StyleSheet.create({
     borderColor: '#FFFFFF',
   },
   wonBanner: {
-    backgroundColor: '#FFF3B0',
+    backgroundColor: '#FEF3C7',
     paddingHorizontal: 14,
     paddingVertical: 6,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#FFC928',
+    borderColor: '#F59E0B',
     marginBottom: 12,
   },
   wonText: {
@@ -401,7 +402,7 @@ const styles = StyleSheet.create({
   spinBtn: {
     width: '100%',
     height: 44,
-    backgroundColor: '#7652D9',
+    backgroundColor: '#7C3AED',
     borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
@@ -413,7 +414,7 @@ const styles = StyleSheet.create({
   },
   modalBackdrop: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.45)',
+    backgroundColor: 'rgba(46, 16, 101, 0.75)',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
@@ -425,12 +426,12 @@ const styles = StyleSheet.create({
     padding: 22,
     alignItems: 'center',
     borderWidth: 3,
-    borderColor: '#35C94A',
+    borderColor: '#7C3AED',
   },
   popupTitle: {
     fontSize: 18,
     fontWeight: '900',
-    color: '#35C94A',
+    color: '#7C3AED',
     marginTop: 8,
   },
   popupSub: {
@@ -442,7 +443,7 @@ const styles = StyleSheet.create({
   popupBtn: {
     width: '100%',
     height: 42,
-    backgroundColor: '#35C94A',
+    backgroundColor: '#7C3AED',
     borderRadius: 21,
     alignItems: 'center',
     justifyContent: 'center',
