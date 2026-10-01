@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Pressable,
   ScrollView,
-  ScrollView,
   Modal,
   Dimensions,
 } from 'react-native';
@@ -625,3 +624,4 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.94 }],
   },
 });
+
