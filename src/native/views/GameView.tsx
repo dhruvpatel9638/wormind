@@ -9,6 +9,7 @@ import {
   Alert,
   PanResponder,
   BackHandler,
+  Animated,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -53,15 +54,12 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [alertInfo, setAlertInfo] = useState<{title: string, message: string} | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isVictory, setIsVictory] = useState<boolean>(false);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [timeLeft, setTimeLeft] = useState<number>(120); // 2:00 minutes
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
   const [lastFoundMessage, setLastFoundMessage] = useState<string | null>(null);
 
-  // Sync level on levelId change
-  useEffect(() => {
-    const lvl =
-      INITIAL_LEVELS.find((l) => l.id === levelId) ||
-      INITIAL_LEVELS.find((l) => l.id === 4) ||
-      INITIAL_LEVELS[0];
+  const resetLevelState = useCallback((lvl: typeof currentLevel) => {
     setGrid(lvl.grid);
     setTargetWords(lvl.targetWords.map((tw) => ({ ...tw, found: false })));
     setSolvedCells([]);
@@ -69,14 +67,87 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setSpelledWord('');
     setIsVictory(false);
     setIsPaused(false);
+    setIsGameOver(false);
+    setTimeLeft(120);
     setHintedCells([]);
     setLastFoundMessage(null);
-  }, [levelId]);
+  }, []);
 
-  // Handle hardware Back button on Android to show Game Paused menu instead of exiting app
+  // Sync level on levelId change
+  useEffect(() => {
+    const lvl =
+      INITIAL_LEVELS.find((l) => l.id === levelId) ||
+      INITIAL_LEVELS.find((l) => l.id === 4) ||
+      INITIAL_LEVELS[0];
+    resetLevelState(lvl);
+  }, [levelId, resetLevelState]);
+
+  // 2:00 Countdown Timer Effect
+  useEffect(() => {
+    if (isPaused || isVictory || isGameOver) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setIsGameOver(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isPaused, isVictory, isGameOver]);
+
+  // Pulse animation on every second tick of the timer
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    if (isPaused || isVictory || isGameOver) return;
+    Animated.sequence([
+      Animated.timing(pulseAnim, {
+        toValue: 1.12,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      Animated.timing(pulseAnim, {
+        toValue: 1,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [timeLeft, isPaused, isVictory, isGameOver, pulseAnim]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  // Dynamic progressive color theme as time decreases
+  const getTimerTheme = (seconds: number) => {
+    if (seconds > 90) {
+      // 2:00 -> 1:30 (Purple / Indigo)
+      return { text: '#7652D9', bg: '#F0EAFF', border: '#D4B5FF' };
+    } else if (seconds > 60) {
+      // 1:30 -> 1:00 (Ocean Blue)
+      return { text: '#286BEA', bg: '#EBF3FF', border: '#A8C7FF' };
+    } else if (seconds > 30) {
+      // 1:00 -> 0:30 (Golden Orange)
+      return { text: '#D97706', bg: '#FEF3C7', border: '#FDE68A' };
+    } else {
+      // 0:30 -> 0:00 (Crimson Red)
+      return { text: '#EF3B3B', bg: '#FFEEEE', border: '#FFB3B3' };
+    }
+  };
+
+  const timerTheme = getTimerTheme(timeLeft);
+
+  // Handle hardware Back button on Android
   useEffect(() => {
     const onBackPress = () => {
-      if (isVictory) {
+      if (isGameOver || isVictory) {
         onExit();
         return true;
       }
@@ -90,7 +161,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
     const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
     return () => subscription.remove();
-  }, [isPaused, isVictory, onExit]);
+  }, [isPaused, isVictory, isGameOver, onExit]);
 
   const foundCount = targetWords.filter((w) => w.found).length;
   const totalCount = targetWords.length;
@@ -148,11 +219,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   );
 
   // Fix stale closures in PanResponder by using a ref for current state values
-  const gameStateRef = useRef({ isPaused, isVictory, grid, checkSelection });
+  const gameStateRef = useRef({ isPaused, isVictory, isGameOver, grid, checkSelection });
   
   useEffect(() => {
-    gameStateRef.current = { isPaused, isVictory, grid, checkSelection };
-  }, [isPaused, isVictory, grid, checkSelection]);
+    gameStateRef.current = { isPaused, isVictory, isGameOver, grid, checkSelection };
+  }, [isPaused, isVictory, isGameOver, grid, checkSelection]);
 
   // PanResponder for smooth drag / swipe selection
   const panResponder = useRef(
@@ -161,7 +232,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: (evt) => {
         const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory) return;
+        if (state.isPaused || state.isVictory || state.isGameOver) return;
         const { locationX, locationY } = evt.nativeEvent;
         const c = Math.floor(locationX / TILE_SIZE);
         const r = Math.floor(locationY / TILE_SIZE);
@@ -173,7 +244,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       },
       onPanResponderMove: (evt) => {
         const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory) return;
+        if (state.isPaused || state.isVictory || state.isGameOver) return;
         const { locationX, locationY } = evt.nativeEvent;
         const c = Math.floor(locationX / TILE_SIZE);
         const r = Math.floor(locationY / TILE_SIZE);
@@ -222,7 +293,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       },
       onPanResponderRelease: () => {
         const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory) return;
+        if (state.isPaused || state.isVictory || state.isGameOver) return;
         setSelectedCells((current) => {
           const solved = state.checkSelection(current);
           if (!solved) {
@@ -236,7 +307,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   // Tap-to-select support (tap letters one by one)
   const handleTileClick = (r: number, c: number) => {
-    if (isPaused || isVictory) return;
+    if (isPaused || isVictory || isGameOver) return;
     if (!grid[r]?.[c] || grid[r][c] === ' ') return;
 
     const existingIdx = selectedCells.findIndex((cell) => cell.r === r && cell.c === c);
@@ -342,30 +413,6 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   return (
     <View style={styles.container}>
-      {/* Top Level Nav Bar */}
-      <View style={styles.topNav}>
-        <Pressable
-          onPress={() => setIsPaused(true)}
-          style={({ pressed }) => [styles.backBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="map" size={20} color="#286BEA" />
-          <Text style={styles.backBtnText}>MAP</Text>
-        </Pressable>
-
-        <View style={styles.levelBadge}>
-          <MaterialIcons name="star" size={16} color="#FFC928" />
-          <Text style={styles.levelBadgeText}>LEVEL {levelId}</Text>
-          <Text style={styles.levelBadgeSub}>• {currentLevel.title}</Text>
-        </View>
-
-        <Pressable
-          onPress={() => setIsPaused(true)}
-          style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="pause" size={20} color="#172858" />
-        </Pressable>
-      </View>
-
       {/* Target Words Drawer */}
       <View style={styles.wordsCard}>
         <View style={styles.wordsHeader}>
@@ -418,6 +465,32 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         ) : (
           <View style={{ width: 24, height: 24 }} />
         )}
+      </View>
+
+      {/* Timer & Pause Row (Below Spelling Bar) */}
+      <View style={styles.timerControlRow}>
+        <Animated.View
+          style={[
+            styles.timerBadge,
+            {
+              backgroundColor: timerTheme.bg,
+              borderColor: timerTheme.border,
+              transform: [{ scale: pulseAnim }],
+            },
+          ]}
+        >
+          <MaterialIcons name="timer" size={18} color={timerTheme.text} />
+          <Text style={[styles.timerText, { color: timerTheme.text }]}>
+            {formatTime(timeLeft)}
+          </Text>
+        </Animated.View>
+
+        <Pressable
+          onPress={() => setIsPaused(true)}
+          style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
+        >
+          <MaterialIcons name="pause" size={20} color="#172858" />
+        </Pressable>
       </View>
 
       {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
@@ -572,6 +645,35 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         </View>
       </Modal>
 
+      {/* Time Up / Game Over Modal */}
+      <Modal visible={isGameOver} transparent animationType="fade">
+        <View style={styles.modalBackdrop}>
+          <View style={styles.gameOverCard}>
+            <View style={styles.timerCircle}>
+              <MaterialIcons name="timer-off" size={38} color="#EF3B3B" />
+            </View>
+            <Text style={styles.gameOverTitle}>TIME'S UP!</Text>
+            <Text style={styles.gameOverSubtitle}>
+              You ran out of time on Level {levelId}!
+            </Text>
+
+            <Pressable
+              onPress={() => resetLevelState(currentLevel)}
+              style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
+            >
+              <Text style={styles.retryBtnText}>TRY AGAIN</Text>
+            </Pressable>
+
+            <Pressable
+              onPress={onExit}
+              style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
+            >
+              <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
       {/* Pause Modal */}
       <Modal visible={isPaused} transparent animationType="fade">
         <View style={styles.modalBackdrop}>
@@ -617,49 +719,43 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingTop: 8,
   },
-  topNav: {
+  timerControlRow: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 8,
+    paddingHorizontal: 4,
   },
-  backBtn: {
+  timerBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 12,
+    backgroundColor: '#F0EAFF',
+    paddingHorizontal: 14,
     paddingVertical: 6,
-    borderRadius: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 18,
     borderWidth: 2,
-    borderColor: 'rgba(40, 107, 234, 0.25)',
-    gap: 4,
+    borderColor: '#D4B5FF',
+    gap: 6,
+    elevation: 2,
+    shadowColor: '#7652D9',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
-  backBtnText: {
-    color: '#286BEA',
-    fontWeight: '800',
-    fontSize: 12,
+  timerBadgeWarning: {
+    backgroundColor: '#FFEEEE',
+    borderColor: '#FFB3B3',
+    shadowColor: '#EF3B3B',
   },
-  levelBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 16,
-    borderWidth: 2,
-    borderColor: '#FFE066',
-    gap: 4,
-  },
-  levelBadgeText: {
-    color: '#172858',
+  timerText: {
+    color: '#7652D9',
     fontWeight: '900',
-    fontSize: 13,
+    fontSize: 15,
+    letterSpacing: 0.5,
   },
-  levelBadgeSub: {
-    color: '#7B8AB8',
-    fontSize: 11,
-    fontWeight: '600',
+  timerTextWarning: {
+    color: '#EF3B3B',
   },
   pauseBtn: {
     width: 34,
@@ -936,6 +1032,53 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '900',
     fontSize: 15,
+  },
+  gameOverCard: {
+    width: 280,
+    backgroundColor: '#172858',
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: '#EF3B3B',
+    alignItems: 'center',
+    padding: 20,
+  },
+  timerCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'rgba(239, 59, 59, 0.15)',
+    borderWidth: 2,
+    borderColor: '#EF3B3B',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  gameOverTitle: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: '900',
+    letterSpacing: 1,
+  },
+  gameOverSubtitle: {
+    color: '#B0C2E8',
+    fontSize: 12,
+    marginTop: 4,
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  retryBtn: {
+    width: '100%',
+    height: 44,
+    backgroundColor: '#FFC928',
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+  },
+  retryBtnText: {
+    color: '#172858',
+    fontWeight: '900',
+    fontSize: 14,
   },
   pauseCard: {
     width: 270,
