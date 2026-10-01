@@ -1,6 +1,6 @@
 // Professional Game Audio Engine with Royalty-Free CC0/CC-BY Audio & Background Music
 // Music: "Carefree" by Kevin MacLeod (incompetech.com, CC-BY 3.0)
-// SFX: Public Domain (CC0) tactile sounds (Tap, Chime, Coin, Applause)
+// SFX: Public Domain (CC0) tactile sounds (Tap, Chime, Coin, Applause )
 
 class SoundEngine {
   private ctx: AudioContext | null = null;
