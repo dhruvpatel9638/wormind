@@ -1,4 +1,4 @@
-export type Screen = 'home' | 'worlds' | 'game' | 'daily' | 'profile';
+export type Screen = 'worlds' | 'game' | 'daily' | 'profile';
 
 export interface TargetWord {
   word: string;

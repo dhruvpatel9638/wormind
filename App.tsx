@@ -1,0 +1,264 @@
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  View,
+  SafeAreaView,
+  StatusBar,
+  Platform,
+  Alert,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Screen, PlayerState } from './src/types';
+import { NativeHeader } from './src/native/components/Header';
+import { NativeBottomNav } from './src/native/components/BottomNav';
+import { NativeWorldsView } from './src/native/views/WorldsView';
+import { NativeGameView } from './src/native/views/GameView';
+import { NativeDailyView } from './src/native/views/DailyView';
+import { NativeProfileView } from './src/native/views/ProfileView';
+import { nativeAudio } from './src/native/audio';
+
+const STORAGE_KEY = '@wormind_player_state_native_v1';
+
+export default function App() {
+  const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
+  const [activeLevelId, setActiveLevelId] = useState<number>(4);
+
+  const [playerState, setPlayerState] = useState<PlayerState>({
+    coins: 10000,
+    stars: 380,
+    hearts: 5,
+    maxHearts: 5,
+    heartSeconds: 252,
+    streak: 5,
+    streakLvl: 2,
+    streakMax: 7,
+    claimedDays: [1, 2, 3, 4],
+    hasClaimedDay5: false,
+    hintsAvailable: 2,
+    equippedHat: 'none',
+    unlockedHats: ['none', 'sunglasses'],
+    solvedCount: 23,
+    wordsDiscovered: 148,
+    soundEnabled: true,
+    musicEnabled: true,
+    hapticsEnabled: true,
+  });
+
+  // Load saved state from native AsyncStorage
+  useEffect(() => {
+    AsyncStorage.getItem(STORAGE_KEY).then((data) => {
+      if (data) {
+        try {
+          const parsed = JSON.parse(data);
+          setPlayerState(parsed);
+          nativeAudio.setSoundEnabled(parsed.soundEnabled);
+          nativeAudio.setMusicEnabled(parsed.musicEnabled);
+        } catch {}
+      }
+    });
+  }, []);
+
+  // Save state on change
+  useEffect(() => {
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(playerState)).catch(() => {});
+    nativeAudio.setSoundEnabled(playerState.soundEnabled);
+    nativeAudio.setMusicEnabled(playerState.musicEnabled);
+  }, [playerState]);
+
+  // Hearts refill timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setPlayerState((prev) => {
+        if (prev.hearts >= prev.maxHearts) {
+          return { ...prev, heartSeconds: 252 };
+        }
+        if (prev.heartSeconds <= 1) {
+          return {
+            ...prev,
+            hearts: Math.min(prev.maxHearts, prev.hearts + 1),
+            heartSeconds: 300,
+          };
+        }
+        return { ...prev, heartSeconds: prev.heartSeconds - 1 };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatCountdown = (secs: number) => {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  const handleStartLevel = (levelId: number) => {
+    setActiveLevelId(levelId);
+    setCurrentScreen('game');
+  };
+
+  const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
+    setPlayerState((prev) => ({
+      ...prev,
+      coins: prev.coins + coinsEarned,
+      stars: prev.stars + starsEarned,
+      solvedCount: prev.solvedCount + 1,
+      wordsDiscovered: prev.wordsDiscovered + 5,
+    }));
+    setActiveLevelId((prev) => (prev < 50 ? prev + 1 : prev));
+    setCurrentScreen('worlds');
+  };
+
+  const handleAddCoins = (amount: number) => {
+    setPlayerState((prev) => ({ ...prev, coins: prev.coins + amount }));
+  };
+
+  const handleDeductCoins = (amount: number): boolean => {
+    if (playerState.coins < amount) return false;
+    setPlayerState((prev) => ({ ...prev, coins: prev.coins - amount }));
+    return true;
+  };
+
+  const handleAddHints = (amount: number) => {
+    setPlayerState((prev) => ({
+      ...prev,
+      hintsAvailable: prev.hintsAvailable + amount,
+    }));
+  };
+
+  const handleRefillHearts = () => {
+    setPlayerState((prev) => ({
+      ...prev,
+      hearts: prev.maxHearts,
+      heartSeconds: 252,
+    }));
+  };
+
+  const handleClaimDay5 = () => {
+    setPlayerState((prev) => ({
+      ...prev,
+      hasClaimedDay5: true,
+      claimedDays: [...prev.claimedDays, 5],
+    }));
+  };
+
+  const handleToggleSound = () => {
+    setPlayerState((prev) => {
+      const next = !prev.soundEnabled;
+      nativeAudio.setSoundEnabled(next);
+      return { ...prev, soundEnabled: next };
+    });
+  };
+
+  const handleToggleMusic = () => {
+    setPlayerState((prev) => {
+      const next = !prev.musicEnabled;
+      nativeAudio.setMusicEnabled(next);
+      return { ...prev, musicEnabled: next };
+    });
+  };
+
+  const handleToggleHaptics = () => {
+    setPlayerState((prev) => ({ ...prev, hapticsEnabled: !prev.hapticsEnabled }));
+  };
+
+  const handleResetProgress = () => {
+    AsyncStorage.removeItem(STORAGE_KEY).catch(() => {});
+    setPlayerState({
+      coins: 10000,
+      stars: 380,
+      hearts: 5,
+      maxHearts: 5,
+      heartSeconds: 252,
+      streak: 5,
+      streakLvl: 2,
+      streakMax: 7,
+      claimedDays: [1, 2, 3, 4],
+      hasClaimedDay5: false,
+      hintsAvailable: 2,
+      equippedHat: 'none',
+      unlockedHats: ['none', 'sunglasses'],
+      solvedCount: 23,
+      wordsDiscovered: 148,
+      soundEnabled: true,
+      musicEnabled: true,
+    });
+  };
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="dark-content" backgroundColor="#A8E6FF" />
+
+      {/* Top Persistent HUD Header */}
+      <NativeHeader
+        coins={playerState.coins}
+        hearts={playerState.hearts}
+        maxHearts={playerState.maxHearts}
+        heartCountdown={formatCountdown(playerState.heartSeconds)}
+        level={activeLevelId}
+        onOpenShop={() => {}}
+        onRefillHearts={handleRefillHearts}
+        musicEnabled={playerState.musicEnabled}
+        onToggleMusic={handleToggleMusic}
+      />
+
+      {/* Screen Views */}
+      <View style={styles.screenContainer}>
+        {currentScreen === 'worlds' && (
+          <NativeWorldsView
+            onStartLevel={handleStartLevel}
+            activeLevelId={activeLevelId}
+          />
+        )}
+
+        {currentScreen === 'game' && (
+          <NativeGameView
+            levelId={activeLevelId}
+            onExit={() => setCurrentScreen('worlds')}
+            onCompleteLevel={handleCompleteLevel}
+            coins={playerState.coins}
+            onDeductCoins={handleDeductCoins}
+          />
+        )}
+
+        {currentScreen === 'daily' && (
+          <NativeDailyView
+            hasClaimedDay5={playerState.hasClaimedDay5}
+            onClaimDay5={handleClaimDay5}
+            onAddCoins={handleAddCoins}
+            onAddHints={handleAddHints}
+          />
+        )}
+
+        {currentScreen === 'profile' && (
+          <NativeProfileView
+            playerState={playerState}
+            onToggleSound={handleToggleSound}
+            onToggleMusic={handleToggleMusic}
+            onToggleHaptics={handleToggleHaptics}
+            onResetProgress={handleResetProgress}
+          />
+        )}
+      </View>
+
+      {/* Bottom Floating Navigation (shown outside game view) */}
+      {currentScreen !== 'game' && (
+        <NativeBottomNav
+          currentScreen={currentScreen}
+          onNavigate={setCurrentScreen}
+          hasClaimableDaily={!playerState.hasClaimedDay5}
+        />
+      )}
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#EBF4FF',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  screenContainer: {
+    flex: 1,
+  },
+});

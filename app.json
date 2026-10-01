@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "WorMind",
+    "slug": "wormind",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#A8E6FF"
+    },
+    "android": {
+      "package": "com.dhruvpatel.wormind"
+    }
+  }
+}
