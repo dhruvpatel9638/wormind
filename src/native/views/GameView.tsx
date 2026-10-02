@@ -59,6 +59,41 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
   const [lastFoundMessage, setLastFoundMessage] = useState<string | null>(null);
 
+  // 🔥 STREAK STATE & ANIMATION REFS
+  const [wordStreak, setWordStreak] = useState<number>(0);
+  const [maxWordStreak, setMaxWordStreak] = useState<number>(0);
+
+  const streakScaleAnim = useRef(new Animated.Value(1)).current;
+  const streakRotateAnim = useRef(new Animated.Value(0)).current;
+  const iconScaleAnim = useRef(new Animated.Value(1)).current;
+  const iconRotateAnim = useRef(new Animated.Value(0)).current;
+  const ringScaleAnim = useRef(new Animated.Value(1)).current;
+  const ringOpacityAnim = useRef(new Animated.Value(0)).current;
+  const activeStreakPulse = useRef(new Animated.Value(1)).current;
+
+  // 6 Radial flame particles
+  const particleAnims = useRef(
+    [0, 60, 120, 180, 240, 300].map(() => ({
+      x: new Animated.Value(0),
+      y: new Animated.Value(0),
+      opacity: new Animated.Value(0),
+      scale: new Animated.Value(0.5),
+    }))
+  ).current;
+
+  // Persistent flame pulse effect when wordStreak >= 2
+  useEffect(() => {
+    if (wordStreak < 2 || isPaused || isVictory || isGameOver) return;
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(activeStreakPulse, { toValue: 1.08, duration: 400, useNativeDriver: true }),
+        Animated.timing(activeStreakPulse, { toValue: 1, duration: 400, useNativeDriver: true }),
+      ])
+    );
+    loop.start();
+    return () => loop.stop();
+  }, [wordStreak, isPaused, isVictory, isGameOver, activeStreakPulse]);
+
   const resetLevelState = useCallback((lvl: typeof currentLevel) => {
     setGrid(lvl.grid);
     setTargetWords(lvl.targetWords.map((tw) => ({ ...tw, found: false })));
@@ -71,6 +106,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setTimeLeft(120);
     setHintedCells([]);
     setLastFoundMessage(null);
+    setWordStreak(0);
+    setMaxWordStreak(0);
   }, []);
 
   // Sync level on levelId change
@@ -144,6 +181,95 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   const timerTheme = getTimerTheme(timeLeft);
 
+  // Dynamic colors for Streak Badge
+  const getStreakStyle = (streak: number) => {
+    if (streak <= 0) {
+      return { bg: '#F1F5F9', border: '#CBD5E1', text: '#94A3B8', icon: '#94A3B8' };
+    }
+    if (streak === 1) {
+      return { bg: '#FFF7ED', border: '#FFD8A8', text: '#EA580C', icon: '#FF6B00' };
+    }
+    if (streak === 2) {
+      return { bg: '#FEF2F2', border: '#FCA5A5', text: '#DC2626', icon: '#EF4444' };
+    }
+    if (streak === 3) {
+      return { bg: '#FFF0F6', border: '#FCC2D7', text: '#D6336C', icon: '#FF1E00' };
+    }
+    return { bg: '#FFF9DB', border: '#FFE066', text: '#B45309', icon: '#FF1E00' };
+  };
+
+  const streakStyle = getStreakStyle(wordStreak);
+
+  // Trigger streak celebration animation directly on the Streak Badge & Flame Icon!
+  const triggerStreakAnimation = (newStreak: number) => {
+    // 1. Reset values for fresh animation
+    streakScaleAnim.setValue(1);
+    streakRotateAnim.setValue(0);
+    iconScaleAnim.setValue(1);
+    iconRotateAnim.setValue(0);
+    ringScaleAnim.setValue(1);
+    ringOpacityAnim.setValue(1);
+
+    Animated.parallel([
+      // Badge Punch Bounce
+      Animated.sequence([
+        Animated.timing(streakScaleAnim, { toValue: 1.4, duration: 130, useNativeDriver: true }),
+        Animated.spring(streakScaleAnim, { toValue: 1, friction: 3, tension: 200, useNativeDriver: true }),
+      ]),
+      // Badge Rotation Wiggle
+      Animated.sequence([
+        Animated.timing(streakRotateAnim, { toValue: -1, duration: 60, useNativeDriver: true }),
+        Animated.timing(streakRotateAnim, { toValue: 1, duration: 80, useNativeDriver: true }),
+        Animated.timing(streakRotateAnim, { toValue: -0.5, duration: 60, useNativeDriver: true }),
+        Animated.timing(streakRotateAnim, { toValue: 0, duration: 60, useNativeDriver: true }),
+      ]),
+      // Flame Icon Scale Pop & 360 Spin
+      Animated.sequence([
+        Animated.timing(iconScaleAnim, { toValue: 1.85, duration: 150, useNativeDriver: true }),
+        Animated.spring(iconScaleAnim, { toValue: 1, friction: 4, tension: 220, useNativeDriver: true }),
+      ]),
+      Animated.timing(iconRotateAnim, { toValue: 1, duration: 320, useNativeDriver: true }),
+      // Shockwave ring burst behind icon
+      Animated.timing(ringScaleAnim, { toValue: 2.2, duration: 420, useNativeDriver: true }),
+      Animated.timing(ringOpacityAnim, { toValue: 0, duration: 420, useNativeDriver: true }),
+    ]).start();
+
+    // 2. Radial 6-Particle Fire Explosion around Badge
+    const angles = [0, 60, 120, 180, 240, 300];
+    const distance = 30;
+
+    particleAnims.forEach((p, idx) => {
+      const rad = (angles[idx] * Math.PI) / 180;
+      const targetX = Math.cos(rad) * distance;
+      const targetY = Math.sin(rad) * distance;
+
+      p.x.setValue(0);
+      p.y.setValue(0);
+      p.opacity.setValue(1);
+      p.scale.setValue(0.6);
+
+      Animated.parallel([
+        Animated.timing(p.x, { toValue: targetX, duration: 450, useNativeDriver: true }),
+        Animated.timing(p.y, { toValue: targetY, duration: 450, useNativeDriver: true }),
+        Animated.timing(p.opacity, { toValue: 0, duration: 450, useNativeDriver: true }),
+        Animated.timing(p.scale, { toValue: 1.5, duration: 450, useNativeDriver: true }),
+      ]).start();
+    });
+  };
+
+  const triggerStreakReset = useCallback(() => {
+    setWordStreak((prev) => {
+      if (prev > 0) {
+        Animated.sequence([
+          Animated.timing(streakRotateAnim, { toValue: 1, duration: 70, useNativeDriver: true }),
+          Animated.timing(streakRotateAnim, { toValue: -1, duration: 70, useNativeDriver: true }),
+          Animated.timing(streakRotateAnim, { toValue: 0, duration: 70, useNativeDriver: true }),
+        ]).start();
+      }
+      return 0;
+    });
+  }, [streakRotateAnim]);
+
   // Handle hardware Back button on Android
   useEffect(() => {
     const onBackPress = () => {
@@ -180,6 +306,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       if (matchIdx !== -1) {
         const matched = targetWords[matchIdx];
         nativeAudio.playWordFound();
+
+        // Increment Streak & trigger streak animation
+        setWordStreak((prev) => {
+          const next = prev + 1;
+          setMaxWordStreak((m) => Math.max(m, next));
+          triggerStreakAnimation(next);
+          return next;
+        });
 
         // Update targetWords
         const updatedWords = [...targetWords];
@@ -298,6 +432,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           const solved = state.checkSelection(current);
           if (!solved) {
             setSpelledWord('');
+            if (current.length >= 2) {
+              triggerStreakReset();
+            }
           }
           return [];
         });
@@ -333,6 +470,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   };
 
   const handleClear = () => {
+    if (selectedCells.length >= 2) {
+      triggerStreakReset();
+    }
     setSelectedCells([]);
     setSpelledWord('');
   };
@@ -467,23 +607,105 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         )}
       </View>
 
-      {/* Timer & Pause Row (Below Spelling Bar) */}
+      {/* Timer & Streak Row (Below Spelling Bar) */}
       <View style={styles.timerControlRow}>
-        <Animated.View
-          style={[
-            styles.timerBadge,
-            {
-              backgroundColor: timerTheme.bg,
-              borderColor: timerTheme.border,
-              transform: [{ scale: pulseAnim }],
-            },
-          ]}
-        >
-          <MaterialIcons name="timer" size={18} color={timerTheme.text} />
-          <Text style={[styles.timerText, { color: timerTheme.text }]}>
-            {formatTime(timeLeft)}
-          </Text>
-        </Animated.View>
+        <View style={styles.timerStreakGroup}>
+          <Animated.View
+            style={[
+              styles.timerBadge,
+              {
+                backgroundColor: timerTheme.bg,
+                borderColor: timerTheme.border,
+                transform: [{ scale: pulseAnim }],
+              },
+            ]}
+          >
+            <MaterialIcons name="timer" size={18} color={timerTheme.text} />
+            <Text style={[styles.timerText, { color: timerTheme.text }]}>
+              {formatTime(timeLeft)}
+            </Text>
+          </Animated.View>
+
+          {/* 🔥 STREAK BADGE (Right next to Time!) */}
+          <View style={styles.streakWrapper}>
+            {/* Shockwave Aura Burst Ring */}
+            <Animated.View
+              style={[
+                styles.shockwaveRing,
+                {
+                  borderColor: streakStyle.icon,
+                  opacity: ringOpacityAnim,
+                  transform: [{ scale: ringScaleAnim }],
+                },
+              ]}
+            />
+
+            <Animated.View
+              style={[
+                styles.streakBadge,
+                {
+                  backgroundColor: streakStyle.bg,
+                  borderColor: streakStyle.border,
+                  transform: [
+                    { scale: Animated.multiply(streakScaleAnim, activeStreakPulse) },
+                    {
+                      rotate: streakRotateAnim.interpolate({
+                        inputRange: [-1, 0, 1],
+                        outputRange: ['-14deg', '0deg', '14deg'],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
+              {/* Animated Flame Icon */}
+              <Animated.View
+                style={{
+                  transform: [
+                    { scale: iconScaleAnim },
+                    {
+                      rotate: iconRotateAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: ['0deg', '360deg'],
+                      }),
+                    },
+                  ],
+                }}
+              >
+                <MaterialIcons
+                  name={wordStreak >= 4 ? 'local-fire-department' : 'whatshot'}
+                  size={20}
+                  color={streakStyle.icon}
+                />
+              </Animated.View>
+
+              <Text style={[styles.streakText, { color: streakStyle.text }]}>
+                {wordStreak > 0 ? `${wordStreak}x` : '0x'}
+              </Text>
+            </Animated.View>
+
+            {/* 6 Radial Flame Particles Bursting directly from Icon */}
+            {particleAnims.map((p, idx) => (
+              <Animated.View
+                key={`particle-${idx}`}
+                pointerEvents="none"
+                style={[
+                  styles.fireParticle,
+                  {
+                    opacity: p.opacity,
+                    transform: [
+                      { translateX: p.x },
+                      { translateY: p.y },
+                      { scale: p.scale },
+                    ],
+                  },
+                ]}
+              >
+                <MaterialIcons name="whatshot" size={13} color={streakStyle.icon} />
+              </Animated.View>
+            ))}
+          </View>
+        </View>
 
         <Pressable
           onPress={() => setIsPaused(true)}
@@ -612,6 +834,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
             </View>
             <Text style={styles.victoryTitle}>LEVEL COMPLETE!</Text>
             <Text style={styles.victorySubtitle}>You solved all words in Level {levelId}!</Text>
+
+            {maxWordStreak > 0 && (
+              <View style={styles.streakVictoryBadge}>
+                <MaterialIcons name="whatshot" size={16} color="#FF6B00" />
+                <Text style={styles.streakVictoryText}>BEST STREAK: {maxWordStreak}x</Text>
+              </View>
+            )}
 
             <View style={styles.starsRow}>
               <MaterialIcons name="star" size={36} color="#FFC928" />
@@ -1129,5 +1358,63 @@ const styles = StyleSheet.create({
   },
   pressed: {
     transform: [{ scale: 0.96 }],
+  },
+  timerStreakGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  streakWrapper: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  streakBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 18,
+    borderWidth: 2,
+    gap: 4,
+    elevation: 3,
+    shadowColor: '#FF6B00',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+  },
+  streakText: {
+    fontWeight: '900',
+    fontSize: 14,
+    letterSpacing: 0.5,
+  },
+  fireParticle: {
+    position: 'absolute',
+    alignSelf: 'center',
+  },
+  shockwaveRing: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    borderRadius: 18,
+    borderWidth: 2.5,
+  },
+  streakVictoryBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 107, 0, 0.15)',
+    borderWidth: 1.5,
+    borderColor: '#FF6B00',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+    gap: 4,
+    marginTop: 8,
+  },
+  streakVictoryText: {
+    color: '#FF6B00',
+    fontWeight: '800',
+    fontSize: 12,
+    letterSpacing: 0.5,
   },
 });

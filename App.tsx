@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -21,7 +21,7 @@ import { nativeAudio } from './src/native/audio';
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 
 // ⚙️ DEV / GAME CONFIG:
-export const START_LEVEL_ID = 51;
+export const START_LEVEL_ID = 1;
 export const START_DEV_COINS = 100000;
 
 export default function App() {
