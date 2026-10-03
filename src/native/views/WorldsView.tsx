@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 14,
     paddingTop: 10,
-    paddingBottom: 110,
+    paddingBottom: 200,
     alignItems: 'center',
   },
   chapterCard: {
@@ -508,7 +508,7 @@ const styles = StyleSheet.create({
   },
   stickyFooter: {
     position: 'absolute',
-    bottom: 100,
+    bottom: 126,
     left: 14,
     right: 14,
     alignItems: 'center',

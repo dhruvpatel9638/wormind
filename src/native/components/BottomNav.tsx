@@ -58,11 +58,12 @@ export const NativeBottomNav: React.FC<BottomNavProps> = ({
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 12,
+    bottom: 58,
     left: 0,
     right: 0,
     alignItems: 'center',
     paddingHorizontal: 16,
+    zIndex: 100,
   },
   pillContainer: {
     flexDirection: 'row',

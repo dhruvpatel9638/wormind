@@ -2,12 +2,12 @@
 import {
   StyleSheet,
   View,
-  SafeAreaView,
   StatusBar,
   Platform,
   Alert,
   BackHandler,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Screen, PlayerState } from './src/types';
 import { NativeHeader } from './src/native/components/Header';
@@ -17,6 +17,8 @@ import { NativeGameView } from './src/native/views/GameView';
 import { NativeDailyView } from './src/native/views/DailyView';
 import { NativeProfileView } from './src/native/views/ProfileView';
 import { nativeAudio } from './src/native/audio';
+import { AdBanner } from './src/native/components/AdBanner';
+import { initAdMob, showInterstitialAd } from './src/utils/admobService';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 
@@ -48,6 +50,11 @@ export default function App() {
     musicEnabled: true,
     hapticsEnabled: true,
   });
+
+  // Initialize Google Mobile Ads SDK on app startup
+  useEffect(() => {
+    initAdMob();
+  }, []);
 
   // Load saved state from native AsyncStorage
   useEffect(() => {
@@ -116,6 +123,9 @@ export default function App() {
   };
 
   const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
+    // 🔹 Trigger AdMob Interstitial Ad on Level Completion
+    showInterstitialAd();
+
     setPlayerState((prev) => ({
       ...prev,
       coins: prev.coins + coinsEarned,
@@ -259,6 +269,9 @@ export default function App() {
           />
         )}
       </View>
+
+      {/* Bottom AdMob Banner Ad */}
+      <AdBanner />
 
       {/* Bottom Floating Navigation (shown outside game view) */}
       {currentScreen !== 'game' && (

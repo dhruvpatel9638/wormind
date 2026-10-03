@@ -17,6 +17,7 @@ import { TargetWord } from '../../types';
 import { INITIAL_LEVELS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
 import { CustomAlert } from '../components/CustomAlert';
+import { showRewardedAd } from '../../utils/admobService';
 
 interface GameViewProps {
   levelId: number;
@@ -501,6 +502,22 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setTimeout(() => setHintedCells([]), 3500);
   };
 
+  // Rewarded Ad: Free Hint by watching Ad
+  const handleRewardedHint = () => {
+    const unfound = targetWords.find((tw) => !tw.found);
+    if (!unfound) {
+      setAlertInfo({ title: 'No Words Left', message: 'All words are already found!' });
+      return;
+    }
+
+    showRewardedAd(() => {
+      nativeAudio.playSparkle();
+      setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
+      setTimeout(() => setHintedCells([]), 3500);
+      setAlertInfo({ title: '🎁 Free Hint Unlocked!', message: 'You watched an ad and earned a free hint!' });
+    });
+  };
+
   // Power-up: Reveal (50 Coins)
   const handleReveal = () => {
     const unfoundIdx = targetWords.findIndex((tw) => !tw.found);
@@ -812,6 +829,16 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           <MaterialIcons name="lightbulb" size={20} color="#5A3800" />
           <Text style={[styles.actionBtnTitle, { color: '#5A3800' }]}>HINT</Text>
           <Text style={[styles.actionBtnSub, { color: '#5A3800' }]}>🪙 25</Text>
+        </Pressable>
+
+        {/* Free Hint (Rewarded Ad) */}
+        <Pressable
+          onPress={handleRewardedHint}
+          style={({ pressed }) => [styles.actionBtn, { backgroundColor: '#E0F2FE', borderColor: '#38BDF8' }, pressed && styles.pressed]}
+        >
+          <MaterialIcons name="ondemand-video" size={20} color="#0284C7" />
+          <Text style={[styles.actionBtnTitle, { color: '#0284C7' }]}>FREE HINT</Text>
+          <Text style={[styles.actionBtnSub, { color: '#0284C7' }]}>🎬 Watch Ad</Text>
         </Pressable>
 
         {/* Reveal */}
