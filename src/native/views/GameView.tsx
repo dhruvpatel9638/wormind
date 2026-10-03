@@ -52,7 +52,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [solvedCells, setSolvedCells] = useState<{ r: number; c: number }[]>([]);
   const [selectedCells, setSelectedCells] = useState<{ r: number; c: number }[]>([]);
   const [spelledWord, setSpelledWord] = useState<string>('');
-  const [alertInfo, setAlertInfo] = useState<{title: string, message: string} | null>(null);
+  const [alertInfo, setAlertInfo] = useState<{ title: string; message: string; onConfirm?: () => void } | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isVictory, setIsVictory] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
@@ -511,10 +511,15 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     }
 
     showRewardedAd(() => {
-      nativeAudio.playSparkle();
-      setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
-      setTimeout(() => setHintedCells([]), 3500);
-      setAlertInfo({ title: '🎁 Free Hint Unlocked!', message: 'You watched an ad and earned a free hint!' });
+      setAlertInfo({
+        title: '🎁 Free Hint Unlocked!',
+        message: 'You watched an ad! Tap GOT IT to show your free hint on the grid.',
+        onConfirm: () => {
+          nativeAudio.playSparkle();
+          setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
+          setTimeout(() => setHintedCells([]), 3500);
+        },
+      });
     });
   };
 
@@ -961,7 +966,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         visible={!!alertInfo}
         title={alertInfo?.title || ''}
         message={alertInfo?.message || ''}
-        onClose={() => setAlertInfo(null)}
+        onClose={() => {
+          const onConfirm = alertInfo?.onConfirm;
+          setAlertInfo(null);
+          if (onConfirm) {
+            onConfirm();
+          }
+        }}
       />
     </View>
   );
