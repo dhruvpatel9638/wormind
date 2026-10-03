@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Modal, View, Text, StyleSheet, Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -40,7 +40,7 @@ export const CustomAlert: React.FC<CustomAlertProps> = ({
 const styles = StyleSheet.create({
   modalBackdrop: {
     flex: 1,
-    backgroundColor: 'rgba(10, 18, 42, 0.75)',
+    backgroundColor: 'rgba(46, 16, 101, 0.75)',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
@@ -52,20 +52,24 @@ const styles = StyleSheet.create({
     padding: 24,
     alignItems: 'center',
     borderWidth: 3,
-    borderColor: '#FFC928',
+    borderColor: '#7C3AED',
     elevation: 10,
+    shadowColor: '#7C3AED',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
   },
   popupTitle: {
     fontSize: 18,
     fontWeight: '900',
-    color: '#FFC928',
+    color: '#7C3AED',
     marginTop: 12,
     marginBottom: 6,
     textAlign: 'center',
   },
   popupSub: {
     fontSize: 13,
-    color: '#7B8AB8',
+    color: '#6B7280',
     textAlign: 'center',
     marginBottom: 20,
     lineHeight: 18,
@@ -74,13 +78,13 @@ const styles = StyleSheet.create({
   popupBtn: {
     width: '100%',
     height: 44,
-    backgroundColor: '#FFC928',
+    backgroundColor: '#7C3AED',
     borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
   },
   popupBtnText: {
-    color: '#5A3800',
+    color: '#FFFFFF',
     fontWeight: '900',
     fontSize: 14,
   },

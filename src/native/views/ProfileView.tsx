@@ -74,8 +74,8 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               <Switch
                 value={playerState.soundEnabled}
                 onValueChange={onToggleSound}
-                trackColor={{ false: '#253D75', true: '#35C94A' }}
-                thumbColor="#FFFFFF"
+                trackColor={{ false: '#4B5563', true: '#7C3AED' }}
+                thumbColor="#C4B5FD"
               />
             </View>
 
@@ -88,8 +88,8 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               <Switch
                 value={playerState.musicEnabled}
                 onValueChange={onToggleMusic}
-                trackColor={{ false: '#253D75', true: '#35C94A' }}
-                thumbColor="#FFFFFF"
+                trackColor={{ false: '#4B5563', true: '#7C3AED' }}
+                thumbColor="#C4B5FD"
               />
             </View>
 
@@ -102,8 +102,8 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               <Switch
                 value={playerState.hapticsEnabled}
                 onValueChange={onToggleHaptics}
-                trackColor={{ false: '#253D75', true: '#35C94A' }}
-                thumbColor="#FFFFFF"
+                trackColor={{ false: '#4B5563', true: '#7C3AED' }}
+                thumbColor="#C4B5FD"
               />
             </View>
 
@@ -173,6 +173,7 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FAF8FF',
     paddingHorizontal: 16,
     paddingTop: 12,
   },
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
     padding: 4,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#E8DDFF',
+    borderColor: '#EDE9FE',
   },
   tabBtn: {
     flex: 1,
@@ -192,12 +193,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   tabBtnActive: {
-    backgroundColor: '#286BEA',
+    backgroundColor: '#7C3AED',
   },
   tabBtnText: {
     fontSize: 13,
     fontWeight: '800',
-    color: '#9B8EC0',
+    color: '#8B7FB0',
   },
   tabBtnTextActive: {
     color: '#FFFFFF',
@@ -206,11 +207,11 @@ const styles = StyleSheet.create({
     paddingBottom: 160,
   },
   card: {
-    backgroundColor: '#1E3468',
+    backgroundColor: '#2E1065',
     borderRadius: 20,
     padding: 18,
     borderWidth: 1,
-    borderColor: 'rgba(40, 107, 234, 0.25)',
+    borderColor: 'rgba(124, 58, 237, 0.25)',
   },
   cardTitle: {
     fontSize: 16,
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(40, 107, 234, 0.15)',
+    borderBottomColor: 'rgba(124, 58, 237, 0.2)',
   },
   settingLeft: {
     flexDirection: 'row',
@@ -257,12 +258,12 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   journalItem: {
-    backgroundColor: 'rgba(30, 52, 104, 0.6)',
+    backgroundColor: 'rgba(46, 16, 101, 0.6)',
     borderRadius: 14,
     padding: 12,
     marginTop: 8,
     borderWidth: 1,
-    borderColor: 'rgba(40, 107, 234, 0.15)',
+    borderColor: 'rgba(124, 58, 237, 0.2)',
   },
   journalHeader: {
     flexDirection: 'row',
@@ -271,18 +272,18 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   journalWord: {
-    color: '#4D8AFF',
+    color: '#14B8A6',
     fontSize: 14,
     fontWeight: '900',
   },
   worldTag: {
-    backgroundColor: 'rgba(118, 82, 217, 0.2)',
+    backgroundColor: 'rgba(124, 58, 237, 0.2)',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 8,
   },
   worldTagText: {
-    color: '#9B7EFF',
+    color: '#DDD6FE',
     fontSize: 10,
     fontWeight: '700',
   },
@@ -293,7 +294,7 @@ const styles = StyleSheet.create({
   },
   modalBackdrop: {
     flex: 1,
-    backgroundColor: 'rgba(10, 18, 42, 0.75)',
+    backgroundColor: 'rgba(46, 16, 101, 0.75)',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
@@ -331,13 +332,15 @@ const styles = StyleSheet.create({
   modalCancelBtn: {
     flex: 1,
     height: 44,
-    backgroundColor: '#F0F4FC',
+    backgroundColor: '#F5F3FF',
+    borderWidth: 1,
+    borderColor: '#DDD6FE',
     borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
   },
   modalCancelText: {
-    color: '#7B8AB8',
+    color: '#7C3AED',
     fontWeight: '900',
     fontSize: 13,
   },

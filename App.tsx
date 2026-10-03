@@ -5,7 +5,6 @@ import {
   StatusBar,
   Platform,
   Alert,
-  BackHandler,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -114,7 +113,7 @@ export default function App() {
   const formatCountdown = (secs: number) => {
     const m = Math.floor(secs / 60);
     const s = secs % 60;
-    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    return `${Math.floor(secs / 60).toString().padStart(2, '0')}:${(secs % 60).toString().padStart(2, '0')}`;
   };
 
   const handleStartLevel = (levelId: number) => {
@@ -216,7 +215,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="#A8E6FF" />
+      <StatusBar barStyle="light-content" backgroundColor="#7C3AED" />
 
       {/* Top Persistent HUD Header */}
       <NativeHeader
@@ -288,7 +287,7 @@ export default function App() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#EBF4FF',
+    backgroundColor: '#FAF8FF',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   screenContainer: {

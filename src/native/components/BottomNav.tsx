@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Screen } from '../../types';
@@ -15,9 +15,9 @@ export const NativeBottomNav: React.FC<BottomNavProps> = ({
   hasClaimableDaily = false,
 }) => {
   const navItems: { id: Screen; label: string; icon: keyof typeof MaterialIcons.glyphMap; color: string }[] = [
-    { id: 'worlds', label: 'Map', icon: 'map', color: '#35C94A' },
-    { id: 'daily', label: 'Daily Reward', icon: 'card-giftcard', color: '#EF3B3B' },
-    { id: 'profile', label: 'Profile', icon: 'person', color: '#7652D9' },
+    { id: 'worlds', label: 'Map', icon: 'map', color: '#7C3AED' },
+    { id: 'daily', label: 'Daily Reward', icon: 'card-giftcard', color: '#F59E0B' },
+    { id: 'profile', label: 'Profile', icon: 'person', color: '#0D9488' },
   ];
 
   return (
@@ -38,7 +38,7 @@ export const NativeBottomNav: React.FC<BottomNavProps> = ({
               <MaterialIcons
                 name={item.icon}
                 size={22}
-                color={isActive ? '#FFFFFF' : '#9B8EC0'}
+                color={isActive ? '#FFFFFF' : '#8B7FB0'}
               />
               <Text style={[styles.navLabel, isActive && styles.navLabelActive]}>
                 {item.label}
@@ -73,13 +73,13 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     height: 58,
     borderRadius: 29,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backgroundColor: 'rgba(255, 255, 255, 0.96)',
     borderWidth: 2,
-    borderColor: 'rgba(212, 181, 255, 0.6)',
+    borderColor: '#DDD6FE',
     elevation: 8,
-    shadowColor: '#7652D9',
+    shadowColor: '#7C3AED',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.18,
     shadowRadius: 12,
     paddingHorizontal: 8,
   },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   navLabel: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#9B8EC0',
+    color: '#8B7FB0',
   },
   navLabelActive: {
     color: '#FFFFFF',
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     width: 9,
     height: 9,
     borderRadius: 4.5,
-    backgroundColor: '#EF3B3B',
+    backgroundColor: '#F59E0B',
     borderWidth: 1.5,
     borderColor: '#FFFFFF',
   },
