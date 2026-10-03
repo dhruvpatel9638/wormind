@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -19,7 +19,7 @@ import { NativeDailyView } from './src/native/views/DailyView';
 import { NativeProfileView } from './src/native/views/ProfileView';
 import { nativeAudio } from './src/native/audio';
 import { AdBanner } from './src/native/components/AdBanner';
-import { initAdMob, showInterstitialAd } from './src/utils/admobService';
+import { initAdMob, showSmartInterstitialAd } from './src/utils/admobService';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 
@@ -124,8 +124,8 @@ export default function App() {
   };
 
   const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
-    // 🔹 Trigger AdMob Interstitial Ad on Level Completion
-    showInterstitialAd();
+    // 🔹 Smart AdMob Interstitial Ad (Randomized Win + 3-min Time Auto-Trigger)
+    showSmartInterstitialAd();
 
     setPlayerState((prev) => ({
       ...prev,
