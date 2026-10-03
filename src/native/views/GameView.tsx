@@ -11,7 +11,6 @@ import {
   Easing,
   PanResponder,
   BackHandler,
-  Animated,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -57,6 +56,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [alertInfo, setAlertInfo] = useState<{ title: string; message: string; onConfirm?: () => void } | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isVictory, setIsVictory] = useState<boolean>(false);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [timeLeft, setTimeLeft] = useState<number>(120);
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
 
   const scaleAnim = useRef(new Animated.Value(0)).current;
@@ -1051,6 +1052,25 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(40, 107, 234, 0.25)',
     gap: 4,
   },
+  topNav: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+    paddingHorizontal: 4,
+  },
+  backBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: 'rgba(40, 107, 234, 0.25)',
+    gap: 4,
+  },
   backBtnText: {
     color: '#286BEA',
     fontWeight: '800',
@@ -1066,6 +1086,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#FFE066',
     gap: 4,
+  },
+  levelBadgeText: {
+    color: '#172858',
+    fontWeight: '900',
+    fontSize: 13,
+  },
+  levelBadgeSub: {
+    color: '#64748B',
+    fontWeight: '600',
+    fontSize: 12,
   },
   timerText: {
     color: '#7652D9',
