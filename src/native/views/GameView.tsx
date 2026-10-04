@@ -10,6 +10,7 @@ import {
   Animated,
   Easing,
   PanResponder,
+  BackHandler,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -17,6 +18,7 @@ import { TargetWord } from '../../types';
 import { INITIAL_LEVELS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
 import { CustomAlert } from '../components/CustomAlert';
+import { showRewardedAd } from '../../utils/admobService';
 
 interface GameViewProps {
   levelId: number;
@@ -51,29 +53,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [solvedCells, setSolvedCells] = useState<{ r: number; c: number }[]>([]);
   const [selectedCells, setSelectedCells] = useState<{ r: number; c: number }[]>([]);
   const [spelledWord, setSpelledWord] = useState<string>('');
-  const [alertInfo, setAlertInfo] = useState<{title: string, message: string} | null>(null);
+  const [alertInfo, setAlertInfo] = useState<{ title: string; message: string; onConfirm?: () => void } | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isVictory, setIsVictory] = useState<boolean>(false);
-  const victoryScale = useRef(new Animated.Value(0)).current;
-  const star1Scale = useRef(new Animated.Value(0)).current;
-  const star2Scale = useRef(new Animated.Value(0)).current;
-  const star3Scale = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    if (isVictory) {
-      Animated.sequence([
-        Animated.spring(victoryScale, { toValue: 1, friction: 5, tension: 60, useNativeDriver: true }),
-        Animated.spring(star1Scale, { toValue: 1, friction: 4, useNativeDriver: true }),
-        Animated.spring(star2Scale, { toValue: 1, friction: 4, useNativeDriver: true }),
-        Animated.spring(star3Scale, { toValue: 1, friction: 4, useNativeDriver: true }),
-      ]).start();
-    } else {
-      victoryScale.setValue(0);
-      star1Scale.setValue(0);
-      star2Scale.setValue(0);
-      star3Scale.setValue(0);
-    }
-  }, [isVictory]);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [timeLeft, setTimeLeft] = useState<number>(120);
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
 
   const scaleAnim = useRef(new Animated.Value(0)).current;
@@ -99,12 +83,42 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   const [lastFoundMessage, setLastFoundMessage] = useState<string | null>(null);
 
-  // Sync level on levelId change
+  // 🔥 STREAK STATE & ANIMATION REFS
+  const [wordStreak, setWordStreak] = useState<number>(0);
+  const [maxWordStreak, setMaxWordStreak] = useState<number>(0);
+
+  const streakScaleAnim = useRef(new Animated.Value(1)).current;
+  const streakRotateAnim = useRef(new Animated.Value(0)).current;
+  const iconScaleAnim = useRef(new Animated.Value(1)).current;
+  const iconRotateAnim = useRef(new Animated.Value(0)).current;
+  const ringScaleAnim = useRef(new Animated.Value(1)).current;
+  const ringOpacityAnim = useRef(new Animated.Value(0)).current;
+  const activeStreakPulse = useRef(new Animated.Value(1)).current;
+
+  // 6 Radial flame particles
+  const particleAnims = useRef(
+    [0, 60, 120, 180, 240, 300].map(() => ({
+      x: new Animated.Value(0),
+      y: new Animated.Value(0),
+      opacity: new Animated.Value(0),
+      scale: new Animated.Value(0.5),
+    }))
+  ).current;
+
+  // Persistent flame pulse effect when wordStreak >= 2
   useEffect(() => {
-    const lvl =
-      INITIAL_LEVELS.find((l) => l.id === levelId) ||
-      INITIAL_LEVELS.find((l) => l.id === 4) ||
-      INITIAL_LEVELS[0];
+    if (wordStreak < 2 || isPaused || isVictory || isGameOver) return;
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(activeStreakPulse, { toValue: 1.08, duration: 400, useNativeDriver: true }),
+        Animated.timing(activeStreakPulse, { toValue: 1, duration: 400, useNativeDriver: true }),
+      ])
+    );
+    loop.start();
+    return () => loop.stop();
+  }, [wordStreak, isPaused, isVictory, isGameOver, activeStreakPulse]);
+
+  const resetLevelState = useCallback((lvl: typeof currentLevel) => {
     setGrid(lvl.grid);
     setTargetWords(lvl.targetWords.map((tw) => ({ ...tw, found: false })));
     setSolvedCells([]);
@@ -112,9 +126,192 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setSpelledWord('');
     setIsVictory(false);
     setIsPaused(false);
+    setIsGameOver(false);
+    setTimeLeft(120);
     setHintedCells([]);
     setLastFoundMessage(null);
-  }, [levelId]);
+    setWordStreak(0);
+    setMaxWordStreak(0);
+  }, []);
+
+  // Sync level on levelId change
+  useEffect(() => {
+    const lvl =
+      INITIAL_LEVELS.find((l) => l.id === levelId) ||
+      INITIAL_LEVELS.find((l) => l.id === 4) ||
+      INITIAL_LEVELS[0];
+    resetLevelState(lvl);
+  }, [levelId, resetLevelState]);
+
+  // 2:00 Countdown Timer Effect
+  useEffect(() => {
+    if (isPaused || isVictory || isGameOver) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setIsGameOver(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isPaused, isVictory, isGameOver]);
+
+  // Pulse animation on every second tick of the timer
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    if (isPaused || isVictory || isGameOver) return;
+    Animated.sequence([
+      Animated.timing(pulseAnim, {
+        toValue: 1.12,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      Animated.timing(pulseAnim, {
+        toValue: 1,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [timeLeft, isPaused, isVictory, isGameOver, pulseAnim]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  // Dynamic progressive color theme as time decreases
+  const getTimerTheme = (seconds: number) => {
+    if (seconds > 90) {
+      // 2:00 -> 1:30 (Purple / Indigo)
+      return { text: '#7652D9', bg: '#F0EAFF', border: '#D4B5FF' };
+    } else if (seconds > 60) {
+      // 1:30 -> 1:00 (Ocean Blue)
+      return { text: '#286BEA', bg: '#EBF3FF', border: '#A8C7FF' };
+    } else if (seconds > 30) {
+      // 1:00 -> 0:30 (Golden Orange)
+      return { text: '#D97706', bg: '#FEF3C7', border: '#FDE68A' };
+    } else {
+      // 0:30 -> 0:00 (Crimson Red)
+      return { text: '#EF3B3B', bg: '#FFEEEE', border: '#FFB3B3' };
+    }
+  };
+
+  const timerTheme = getTimerTheme(timeLeft);
+
+  // Dynamic colors for Streak Badge
+  const getStreakStyle = (streak: number) => {
+    if (streak <= 0) {
+      return { bg: '#F1F5F9', border: '#CBD5E1', text: '#94A3B8', icon: '#94A3B8' };
+    }
+    if (streak === 1) {
+      return { bg: '#FFF7ED', border: '#FFD8A8', text: '#EA580C', icon: '#FF6B00' };
+    }
+    if (streak === 2) {
+      return { bg: '#FEF2F2', border: '#FCA5A5', text: '#DC2626', icon: '#EF4444' };
+    }
+    if (streak === 3) {
+      return { bg: '#FFF0F6', border: '#FCC2D7', text: '#D6336C', icon: '#FF1E00' };
+    }
+    return { bg: '#FFF9DB', border: '#FFE066', text: '#B45309', icon: '#FF1E00' };
+  };
+
+  const streakStyle = getStreakStyle(wordStreak);
+
+  // Trigger streak celebration animation directly on the Streak Badge & Flame Icon!
+  const triggerStreakAnimation = (newStreak: number) => {
+    // 1. Reset values for fresh animation
+    streakScaleAnim.setValue(1);
+    streakRotateAnim.setValue(0);
+    iconScaleAnim.setValue(1);
+    iconRotateAnim.setValue(0);
+    ringScaleAnim.setValue(1);
+    ringOpacityAnim.setValue(1);
+
+    Animated.parallel([
+      // Badge Punch Bounce
+      Animated.sequence([
+        Animated.timing(streakScaleAnim, { toValue: 1.4, duration: 130, useNativeDriver: true }),
+        Animated.spring(streakScaleAnim, { toValue: 1, friction: 3, tension: 200, useNativeDriver: true }),
+      ]),
+      // Badge Rotation Wiggle
+      Animated.sequence([
+        Animated.timing(streakRotateAnim, { toValue: -1, duration: 60, useNativeDriver: true }),
+        Animated.timing(streakRotateAnim, { toValue: 1, duration: 80, useNativeDriver: true }),
+        Animated.timing(streakRotateAnim, { toValue: -0.5, duration: 60, useNativeDriver: true }),
+        Animated.timing(streakRotateAnim, { toValue: 0, duration: 60, useNativeDriver: true }),
+      ]),
+      // Flame Icon Scale Pop & 360 Spin
+      Animated.sequence([
+        Animated.timing(iconScaleAnim, { toValue: 1.85, duration: 150, useNativeDriver: true }),
+        Animated.spring(iconScaleAnim, { toValue: 1, friction: 4, tension: 220, useNativeDriver: true }),
+      ]),
+      Animated.timing(iconRotateAnim, { toValue: 1, duration: 320, useNativeDriver: true }),
+      // Shockwave ring burst behind icon
+      Animated.timing(ringScaleAnim, { toValue: 2.2, duration: 420, useNativeDriver: true }),
+      Animated.timing(ringOpacityAnim, { toValue: 0, duration: 420, useNativeDriver: true }),
+    ]).start();
+
+    // 2. Radial 6-Particle Fire Explosion around Badge
+    const angles = [0, 60, 120, 180, 240, 300];
+    const distance = 30;
+
+    particleAnims.forEach((p, idx) => {
+      const rad = (angles[idx] * Math.PI) / 180;
+      const targetX = Math.cos(rad) * distance;
+      const targetY = Math.sin(rad) * distance;
+
+      p.x.setValue(0);
+      p.y.setValue(0);
+      p.opacity.setValue(1);
+      p.scale.setValue(0.6);
+
+      Animated.parallel([
+        Animated.timing(p.x, { toValue: targetX, duration: 450, useNativeDriver: true }),
+        Animated.timing(p.y, { toValue: targetY, duration: 450, useNativeDriver: true }),
+        Animated.timing(p.opacity, { toValue: 0, duration: 450, useNativeDriver: true }),
+        Animated.timing(p.scale, { toValue: 1.5, duration: 450, useNativeDriver: true }),
+      ]).start();
+    });
+  };
+
+  const triggerStreakReset = useCallback(() => {
+    setWordStreak((prev) => {
+      if (prev > 0) {
+        Animated.sequence([
+          Animated.timing(streakRotateAnim, { toValue: 1, duration: 70, useNativeDriver: true }),
+          Animated.timing(streakRotateAnim, { toValue: -1, duration: 70, useNativeDriver: true }),
+          Animated.timing(streakRotateAnim, { toValue: 0, duration: 70, useNativeDriver: true }),
+        ]).start();
+      }
+      return 0;
+    });
+  }, [streakRotateAnim]);
+
+  // Handle hardware Back button on Android
+  useEffect(() => {
+    const onBackPress = () => {
+      if (isGameOver || isVictory) {
+        onExit();
+        return true;
+      }
+      if (isPaused) {
+        setIsPaused(false);
+        return true;
+      }
+      setIsPaused(true);
+      return true;
+    };
+
+    const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    return () => subscription.remove();
+  }, [isPaused, isVictory, isGameOver, onExit]);
 
   const foundCount = targetWords.filter((w) => w.found).length;
   const totalCount = targetWords.length;
@@ -133,6 +330,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       if (matchIdx !== -1) {
         const matched = targetWords[matchIdx];
         nativeAudio.playWordFound();
+
+        // Increment Streak & trigger streak animation
+        setWordStreak((prev) => {
+          const next = prev + 1;
+          setMaxWordStreak((m) => Math.max(m, next));
+          triggerStreakAnimation(next);
+          return next;
+        });
 
         // Update targetWords
         const updatedWords = [...targetWords];
@@ -172,11 +377,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   );
 
   // Fix stale closures in PanResponder by using a ref for current state values
-  const gameStateRef = useRef({ isPaused, isVictory, grid, checkSelection });
+  const gameStateRef = useRef({ isPaused, isVictory, isGameOver, grid, checkSelection });
   
   useEffect(() => {
-    gameStateRef.current = { isPaused, isVictory, grid, checkSelection };
-  }, [isPaused, isVictory, grid, checkSelection]);
+    gameStateRef.current = { isPaused, isVictory, isGameOver, grid, checkSelection };
+  }, [isPaused, isVictory, isGameOver, grid, checkSelection]);
 
   // PanResponder for smooth drag / swipe selection
   const panResponder = useRef(
@@ -185,7 +390,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: (evt) => {
         const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory) return;
+        if (state.isPaused || state.isVictory || state.isGameOver) return;
         const { locationX, locationY } = evt.nativeEvent;
         const c = Math.floor(locationX / TILE_SIZE);
         const r = Math.floor(locationY / TILE_SIZE);
@@ -197,7 +402,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       },
       onPanResponderMove: (evt) => {
         const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory) return;
+        if (state.isPaused || state.isVictory || state.isGameOver) return;
         const { locationX, locationY } = evt.nativeEvent;
         const c = Math.floor(locationX / TILE_SIZE);
         const r = Math.floor(locationY / TILE_SIZE);
@@ -246,11 +451,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       },
       onPanResponderRelease: () => {
         const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory) return;
+        if (state.isPaused || state.isVictory || state.isGameOver) return;
         setSelectedCells((current) => {
           const solved = state.checkSelection(current);
           if (!solved) {
             setSpelledWord('');
+            if (current.length >= 2) {
+              triggerStreakReset();
+            }
           }
           return [];
         });
@@ -260,7 +468,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   // Tap-to-select support (tap letters one by one)
   const handleTileClick = (r: number, c: number) => {
-    if (isPaused || isVictory) return;
+    if (isPaused || isVictory || isGameOver) return;
     if (!grid[r]?.[c] || grid[r][c] === ' ') return;
 
     const existingIdx = selectedCells.findIndex((cell) => cell.r === r && cell.c === c);
@@ -286,6 +494,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   };
 
   const handleClear = () => {
+    if (selectedCells.length >= 2) {
+      triggerStreakReset();
+    }
     setSelectedCells([]);
     setSpelledWord('');
   };
@@ -312,6 +523,27 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     nativeAudio.playSparkle();
     setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
     setTimeout(() => setHintedCells([]), 3500);
+  };
+
+  // Rewarded Ad: Free Hint by watching Ad
+  const handleRewardedHint = () => {
+    const unfound = targetWords.find((tw) => !tw.found);
+    if (!unfound) {
+      setAlertInfo({ title: 'No Words Left', message: 'All words are already found!' });
+      return;
+    }
+
+    showRewardedAd(() => {
+      setAlertInfo({
+        title: '🎁 Free Hint Unlocked!',
+        message: 'You watched an ad! Tap GOT IT to show your free hint on the grid.',
+        onConfirm: () => {
+          nativeAudio.playSparkle();
+          setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
+          setTimeout(() => setHintedCells([]), 3500);
+        },
+      });
+    });
   };
 
   // Power-up: Reveal (50 Coins)
@@ -372,7 +604,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           onPress={onExit}
           style={({ pressed }) => [styles.backBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="map" size={20} color="#7C3AED" />
+          <MaterialIcons name="map" size={20} color="#286BEA" />
           <Text style={styles.backBtnText}>MAP</Text>
         </Pressable>
 
@@ -435,11 +667,121 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           )}
         </View>
 
-        {spelledWord !== '' && (
+        {spelledWord !== '' ? (
           <Pressable onPress={handleClear} style={styles.clearBtn}>
             <MaterialIcons name="close" size={16} color="#FFFFFF" />
           </Pressable>
+        ) : (
+          <View style={{ width: 24, height: 24 }} />
         )}
+      </View>
+
+      {/* Timer & Streak Row (Below Spelling Bar) */}
+      <View style={styles.timerControlRow}>
+        <View style={styles.timerStreakGroup}>
+          <Animated.View
+            style={[
+              styles.timerBadge,
+              {
+                backgroundColor: timerTheme.bg,
+                borderColor: timerTheme.border,
+                transform: [{ scale: pulseAnim }],
+              },
+            ]}
+          >
+            <MaterialIcons name="timer" size={18} color={timerTheme.text} />
+            <Text style={[styles.timerText, { color: timerTheme.text }]}>
+              {formatTime(timeLeft)}
+            </Text>
+          </Animated.View>
+
+          {/* 🔥 STREAK BADGE (Right next to Time!) */}
+          <View style={styles.streakWrapper}>
+            {/* Shockwave Aura Burst Ring */}
+            <Animated.View
+              style={[
+                styles.shockwaveRing,
+                {
+                  borderColor: streakStyle.icon,
+                  opacity: ringOpacityAnim,
+                  transform: [{ scale: ringScaleAnim }],
+                },
+              ]}
+            />
+
+            <Animated.View
+              style={[
+                styles.streakBadge,
+                {
+                  backgroundColor: streakStyle.bg,
+                  borderColor: streakStyle.border,
+                  transform: [
+                    { scale: Animated.multiply(streakScaleAnim, activeStreakPulse) },
+                    {
+                      rotate: streakRotateAnim.interpolate({
+                        inputRange: [-1, 0, 1],
+                        outputRange: ['-14deg', '0deg', '14deg'],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
+              {/* Animated Flame Icon */}
+              <Animated.View
+                style={{
+                  transform: [
+                    { scale: iconScaleAnim },
+                    {
+                      rotate: iconRotateAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: ['0deg', '360deg'],
+                      }),
+                    },
+                  ],
+                }}
+              >
+                <MaterialIcons
+                  name={wordStreak >= 4 ? 'local-fire-department' : 'whatshot'}
+                  size={20}
+                  color={streakStyle.icon}
+                />
+              </Animated.View>
+
+              <Text style={[styles.streakText, { color: streakStyle.text }]}>
+                {wordStreak > 0 ? `${wordStreak}x` : '0x'}
+              </Text>
+            </Animated.View>
+
+            {/* 6 Radial Flame Particles Bursting directly from Icon */}
+            {particleAnims.map((p, idx) => (
+              <Animated.View
+                key={`particle-${idx}`}
+                pointerEvents="none"
+                style={[
+                  styles.fireParticle,
+                  {
+                    opacity: p.opacity,
+                    transform: [
+                      { translateX: p.x },
+                      { translateY: p.y },
+                      { scale: p.scale },
+                    ],
+                  },
+                ]}
+              >
+                <MaterialIcons name="whatshot" size={13} color={streakStyle.icon} />
+              </Animated.View>
+            ))}
+          </View>
+        </View>
+
+        <Pressable
+          onPress={() => setIsPaused(true)}
+          style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
+        >
+          <MaterialIcons name="pause" size={20} color="#172858" />
+        </Pressable>
       </View>
 
       {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
@@ -541,6 +883,16 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>🪙 25</Text>
         </Pressable>
 
+        {/* Free Hint (Rewarded Ad) */}
+        <Pressable
+          onPress={handleRewardedHint}
+          style={({ pressed }) => [styles.actionBtn, { backgroundColor: '#E0F2FE', borderColor: '#38BDF8' }, pressed && styles.pressed]}
+        >
+          <MaterialIcons name="ondemand-video" size={20} color="#0284C7" />
+          <Text style={[styles.actionBtnTitle, { color: '#0284C7' }]}>FREE HINT</Text>
+          <Text style={[styles.actionBtnSub, { color: '#0284C7' }]}>🎬 Watch Ad</Text>
+        </Pressable>
+
         {/* Reveal */}
         <Pressable
           onPress={handleReveal}
@@ -561,6 +913,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
             </View>
             <Text style={styles.victoryTitle}>LEVEL COMPLETE!</Text>
             <Text style={styles.victorySubtitle}>You solved all words in Level {levelId}!</Text>
+
+            {maxWordStreak > 0 && (
+              <View style={styles.streakVictoryBadge}>
+                <MaterialIcons name="whatshot" size={16} color="#FF6B00" />
+                <Text style={styles.streakVictoryText}>BEST STREAK: {maxWordStreak}x</Text>
+              </View>
+            )}
 
             <View style={styles.starsRow}>
               <MaterialIcons name="star" size={36} color="#FFC928" />
@@ -591,6 +950,35 @@ export const NativeGameView: React.FC<GameViewProps> = ({
               <Text style={styles.continueBtnText}>NEXT LEVEL</Text>
             </Pressable>
           </Animated.View>
+        </View>
+      </Modal>
+
+      {/* Time Up / Game Over Modal */}
+      <Modal visible={isGameOver} transparent animationType="fade">
+        <View style={styles.modalBackdrop}>
+          <View style={styles.gameOverCard}>
+            <View style={styles.timerCircle}>
+              <MaterialIcons name="timer-off" size={38} color="#EF3B3B" />
+            </View>
+            <Text style={styles.gameOverTitle}>TIME'S UP!</Text>
+            <Text style={styles.gameOverSubtitle}>
+              You ran out of time on Level {levelId}!
+            </Text>
+
+            <Pressable
+              onPress={() => resetLevelState(currentLevel)}
+              style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
+            >
+              <Text style={styles.retryBtnText}>TRY AGAIN</Text>
+            </Pressable>
+
+            <Pressable
+              onPress={onExit}
+              style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
+            >
+              <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
+            </Pressable>
+          </View>
         </View>
       </Modal>
 
@@ -625,7 +1013,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         visible={!!alertInfo}
         title={alertInfo?.title || ''}
         message={alertInfo?.message || ''}
-        onClose={() => setAlertInfo(null)}
+        onClose={() => {
+          const onConfirm = alertInfo?.onConfirm;
+          setAlertInfo(null);
+          if (onConfirm) {
+            onConfirm();
+          }
+        }}
       />
     </View>
   );
@@ -639,22 +1033,42 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingTop: 8,
   },
+  timerControlRow: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+    paddingHorizontal: 4,
+  },
+  timerBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F0EAFF',
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 18,
+    borderWidth: 2,
+    borderColor: 'rgba(40, 107, 234, 0.25)',
+    gap: 4,
+  },
   topNav: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 8,
+    paddingHorizontal: 4,
   },
   backBtn: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderWidth: 2,
-    borderColor: 'rgba(124, 58, 237, 0.25)',
+    borderColor: 'rgba(40, 107, 234, 0.25)',
     gap: 4,
   },
   backBtnText: {
@@ -670,7 +1084,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 16,
     borderWidth: 2,
-    borderColor: '#FDE68A',
+    borderColor: '#FFE066',
     gap: 4,
   },
   levelBadgeText: {
@@ -679,9 +1093,18 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   levelBadgeSub: {
-    color: '#7B8AB8',
-    fontSize: 11,
+    color: '#64748B',
     fontWeight: '600',
+    fontSize: 12,
+  },
+  timerText: {
+    color: '#7652D9',
+    fontWeight: '900',
+    fontSize: 15,
+    letterSpacing: 0.5,
+  },
+  timerTextWarning: {
+    color: '#EF3B3B',
   },
   pauseBtn: {
     width: 34,
@@ -768,6 +1191,7 @@ const styles = StyleSheet.create({
   },
   spellingBar: {
     width: '100%',
+    height: 44,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -776,12 +1200,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#DDD6FE',
     paddingHorizontal: 12,
-    paddingVertical: 6,
     marginBottom: 8,
   },
   spellingLeft: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
     gap: 8,
   },
   spellingLabel: {
@@ -958,6 +1382,53 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     fontSize: 15,
   },
+  gameOverCard: {
+    width: 280,
+    backgroundColor: '#172858',
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: '#EF3B3B',
+    alignItems: 'center',
+    padding: 20,
+  },
+  timerCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'rgba(239, 59, 59, 0.15)',
+    borderWidth: 2,
+    borderColor: '#EF3B3B',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  gameOverTitle: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: '900',
+    letterSpacing: 1,
+  },
+  gameOverSubtitle: {
+    color: '#B0C2E8',
+    fontSize: 12,
+    marginTop: 4,
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  retryBtn: {
+    width: '100%',
+    height: 44,
+    backgroundColor: '#FFC928',
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+  },
+  retryBtnText: {
+    color: '#172858',
+    fontWeight: '900',
+    fontSize: 14,
+  },
   pauseCard: {
     width: 270,
     backgroundColor: '#2E1065',
@@ -1007,6 +1478,64 @@ const styles = StyleSheet.create({
   },
   pressed: {
     transform: [{ scale: 0.96 }],
+  },
+  timerStreakGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  streakWrapper: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  streakBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 18,
+    borderWidth: 2,
+    gap: 4,
+    elevation: 3,
+    shadowColor: '#FF6B00',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+  },
+  streakText: {
+    fontWeight: '900',
+    fontSize: 14,
+    letterSpacing: 0.5,
+  },
+  fireParticle: {
+    position: 'absolute',
+    alignSelf: 'center',
+  },
+  shockwaveRing: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    borderRadius: 18,
+    borderWidth: 2.5,
+  },
+  streakVictoryBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 107, 0, 0.15)',
+    borderWidth: 1.5,
+    borderColor: '#FF6B00',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+    gap: 4,
+    marginTop: 8,
+  },
+  streakVictoryText: {
+    color: '#FF6B00',
+    fontWeight: '800',
+    fontSize: 12,
+    letterSpacing: 0.5,
   },
 });
 

@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 16,
     paddingTop: 12,
-    paddingBottom: 120,
+    paddingBottom: 160,
   },
   streakBanner: {
     backgroundColor: '#2E1065',

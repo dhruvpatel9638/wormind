@@ -23,7 +23,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   onStartLevel,
-  activeLevelId = 4,
+  activeLevelId = 51,
 }) => {
   const [selectedModalLevel, setSelectedModalLevel] = useState<number | null>(null);
   const [alertInfo, setAlertInfo] = useState<{title: string, message: string} | null>(null);
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 14,
     paddingTop: 10,
-    paddingBottom: 110,
+    paddingBottom: 200,
     alignItems: 'center',
   },
   chapterCard: {
@@ -508,7 +508,7 @@ const styles = StyleSheet.create({
   },
   stickyFooter: {
     position: 'absolute',
-    bottom: 100,
+    bottom: 126,
     left: 14,
     right: 14,
     alignItems: 'center',

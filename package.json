@@ -1,8 +1,7 @@
 {
-  "name": "react-example",
+  "name": "wormind",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
@@ -21,10 +20,14 @@
     "@react-native-async-storage/async-storage": "^2.2.0",
     "@tailwindcss/vite": "^4.3.3",
     "@vitejs/plugin-react": "^6.1.1",
+    "buffer": "^6.0.3",
     "canvas-confetti": "^1.9.4",
     "dotenv": "^17.2.3",
     "expo": "^57.0.26",
+    "expo-asset": "^57.0.0",
     "expo-audio": "^57.0.5",
+    "expo-dev-client": "~57.0.19",
+    "expo-font": "^57.0.0",
     "expo-linear-gradient": "^57.0.2",
     "express": "^4.21.2",
     "lucide-react": "^0.546.0",
@@ -32,21 +35,22 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-native": "^0.86.3",
+    "react-native-google-mobile-ads": "^17.2.0",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-svg": "^15.15.5",
     "vite": "^8.3.0"
   },
   "devDependencies": {
-    "@capacitor/cli": "^8.5.2",
+    "@capacitor/cli": "^8.4.3",
     "@types/canvas-confetti": "^1.9.0",
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.4.21",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.21.0",
-    "typescript": "^7.0.2"
+    "typescript": "^5.3.3"
   }
 }

@@ -1,11 +1,14 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
-  SafeAreaView,
   StatusBar,
   Platform,
+  Alert,
+  BackHandler,
+
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Screen, PlayerState } from './src/types';
 import { NativeHeader } from './src/native/components/Header';
@@ -15,15 +18,21 @@ import { NativeGameView } from './src/native/views/GameView';
 import { NativeDailyView } from './src/native/views/DailyView';
 import { NativeProfileView } from './src/native/views/ProfileView';
 import { nativeAudio } from './src/native/audio';
+import { AdBanner } from './src/native/components/AdBanner';
+import { initAdMob, showSmartInterstitialAd } from './src/utils/admobService';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 
+// ⚙️ DEV / GAME CONFIG:
+export const START_LEVEL_ID = 1;
+export const START_DEV_COINS = 100000;
+
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
-  const [activeLevelId, setActiveLevelId] = useState<number>(4);
+  const [activeLevelId, setActiveLevelId] = useState<number>(START_LEVEL_ID);
 
   const [playerState, setPlayerState] = useState<PlayerState>({
-    coins: 10000,
+    coins: START_DEV_COINS,
     stars: 380,
     hearts: 5,
     maxHearts: 5,
@@ -42,6 +51,11 @@ export default function App() {
     musicEnabled: true,
     hapticsEnabled: true,
   });
+
+  // Initialize Google Mobile Ads SDK on app startup
+  useEffect(() => {
+    initAdMob();
+  }, []);
 
   // Load saved state from native AsyncStorage
   useEffect(() => {
@@ -63,6 +77,20 @@ export default function App() {
     nativeAudio.setSoundEnabled(playerState.soundEnabled);
     nativeAudio.setMusicEnabled(playerState.musicEnabled);
   }, [playerState]);
+
+  // Handle hardware Back button on Android for main screens
+  useEffect(() => {
+    const onBackPress = () => {
+      if (currentScreen !== 'worlds' && currentScreen !== 'game') {
+        setCurrentScreen('worlds');
+        return true;
+      }
+      return false;
+    };
+
+    const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    return () => subscription.remove();
+  }, [currentScreen]);
 
   // Hearts refill timer
   useEffect(() => {
@@ -96,6 +124,9 @@ export default function App() {
   };
 
   const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
+    // 🔹 Smart AdMob Interstitial Ad (Randomized Win + 3-min Time Auto-Trigger)
+    showSmartInterstitialAd();
+
     setPlayerState((prev) => ({
       ...prev,
       coins: prev.coins + coinsEarned,
@@ -103,7 +134,7 @@ export default function App() {
       solvedCount: prev.solvedCount + 1,
       wordsDiscovered: prev.wordsDiscovered + 5,
     }));
-    setActiveLevelId((prev) => (prev < 50 ? prev + 1 : prev));
+    setActiveLevelId((prev) => (prev < 100 ? prev + 1 : prev));
     setCurrentScreen('worlds');
   };
 
@@ -180,6 +211,7 @@ export default function App() {
       wordsDiscovered: 148,
       soundEnabled: true,
       musicEnabled: true,
+      hapticsEnabled: true,
     });
   };
 
@@ -194,7 +226,7 @@ export default function App() {
         maxHearts={playerState.maxHearts}
         heartCountdown={formatCountdown(playerState.heartSeconds)}
         level={activeLevelId}
-        onOpenShop={() => {}}
+        onOpenShop={() => handleAddCoins(10000)}
         onRefillHearts={handleRefillHearts}
         musicEnabled={playerState.musicEnabled}
         onToggleMusic={handleToggleMusic}
@@ -238,6 +270,9 @@ export default function App() {
           />
         )}
       </View>
+
+      {/* Bottom AdMob Banner Ad */}
+      <AdBanner />
 
       {/* Bottom Floating Navigation (shown outside game view) */}
       {currentScreen !== 'game' && (
