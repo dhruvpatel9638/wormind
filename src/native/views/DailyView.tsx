@@ -127,8 +127,8 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
       else if (wonItem.prize.includes('100')) onAddCoins(100);
       else if (wonItem.prize.includes('50')) onAddCoins(50);
       else if (wonItem.prize.includes('25')) onAddCoins(25);
+      else if (wonItem.prize.includes('10')) onAddCoins(10);
       else if (wonItem.prize.includes('+5')) onAddCoins(5);
-      else if (wonItem.prize.includes('1x')) onAddHints(1);
 
       setShowWinModal(true);
       winScaleAnim.setValue(0);

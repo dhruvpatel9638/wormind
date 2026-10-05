@@ -72,6 +72,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const star2Anim = useRef(new Animated.Value(0)).current;
   const star3Anim = useRef(new Animated.Value(0)).current;
 
+  const lossScaleAnim = useRef(new Animated.Value(0)).current;
+  const lossHeartAnim = useRef(new Animated.Value(0)).current;
+  const lossStrikeAnim = useRef(new Animated.Value(0)).current;
+  const lossShakeAnim = useRef(new Animated.Value(0)).current;
+  const floatMinusOneAnim = useRef(new Animated.Value(0)).current;
+  const floatMinusOneY = useRef(new Animated.Value(0)).current;
+
   useEffect(() => {
     if (isVictory) {
       Animated.sequence([
@@ -87,6 +94,43 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       star3Anim.setValue(0);
     }
   }, [isVictory]);
+
+  useEffect(() => {
+    if (isGameOver) {
+      lossScaleAnim.setValue(0);
+      lossHeartAnim.setValue(0);
+      lossStrikeAnim.setValue(0);
+      lossShakeAnim.setValue(0);
+      floatMinusOneAnim.setValue(0);
+      floatMinusOneY.setValue(0);
+
+      Animated.sequence([
+        Animated.spring(lossScaleAnim, { toValue: 1, friction: 5, tension: 60, useNativeDriver: true }),
+        Animated.sequence([
+          Animated.timing(lossShakeAnim, { toValue: -12, duration: 40, useNativeDriver: true }),
+          Animated.timing(lossShakeAnim, { toValue: 12, duration: 40, useNativeDriver: true }),
+          Animated.timing(lossShakeAnim, { toValue: -8, duration: 40, useNativeDriver: true }),
+          Animated.timing(lossShakeAnim, { toValue: 8, duration: 40, useNativeDriver: true }),
+          Animated.timing(lossShakeAnim, { toValue: 0, duration: 40, useNativeDriver: true }),
+        ]),
+        Animated.parallel([
+          Animated.spring(lossHeartAnim, { toValue: 1, friction: 4, tension: 70, useNativeDriver: true }),
+          Animated.spring(lossStrikeAnim, { toValue: 1, friction: 4, tension: 70, useNativeDriver: true }),
+        ]),
+        Animated.parallel([
+          Animated.timing(floatMinusOneAnim, { toValue: 1, duration: 700, useNativeDriver: true }),
+          Animated.timing(floatMinusOneY, { toValue: -32, duration: 700, useNativeDriver: true }),
+        ]),
+      ]).start();
+    } else {
+      lossScaleAnim.setValue(0);
+      lossHeartAnim.setValue(0);
+      lossStrikeAnim.setValue(0);
+      lossShakeAnim.setValue(0);
+      floatMinusOneAnim.setValue(0);
+      floatMinusOneY.setValue(0);
+    }
+  }, [isGameOver]);
 
   // Pause BGM when entering GameView, resume when exiting
   useEffect(() => {
@@ -899,10 +943,90 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       {/* Game Over Time-Out Modal */}
       <Modal visible={isGameOver} transparent animationType="fade">
         <View style={styles.modalBackdrop}>
-          <View style={[styles.pauseCard, { borderColor: '#EF4444' }]}>
-            <MaterialIcons name="timer-off" size={48} color="#EF4444" style={{ marginBottom: 6 }} />
+          <Animated.View
+            style={[
+              styles.pauseCard,
+              {
+                borderColor: '#EF4444',
+                transform: [
+                  { scale: lossScaleAnim },
+                  { translateX: lossShakeAnim },
+                ],
+              },
+            ]}
+          >
+            <View style={styles.lossCircleHeader}>
+              <MaterialIcons name="heart-broken" size={38} color="#EF4444" />
+            </View>
             <Text style={[styles.pauseTitle, { color: '#EF4444' }]}>TIME'S UP! ⏰</Text>
-            <Text style={styles.pauseSub}>You ran out of time for Level {levelId}! (-1 Heart ❤️)</Text>
+            <Text style={styles.pauseSub}>Level {levelId} Failed</Text>
+
+            {/* Loss Animations: -1 Heart & Strike Reset */}
+            <View style={styles.lossBadgeContainer}>
+              {/* -1 Heart Box */}
+              <Animated.View
+                style={[
+                  styles.lossBadgeBox,
+                  {
+                    backgroundColor: '#FEF2F2',
+                    borderColor: '#FCA5A5',
+                    transform: [
+                      { scale: lossHeartAnim },
+                      {
+                        translateY: lossHeartAnim.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [14, 0],
+                        }),
+                      },
+                    ],
+                  },
+                ]}
+              >
+                {/* Floating "-1" animation */}
+                <Animated.View
+                  style={[
+                    styles.floatingMinusBadge,
+                    {
+                      opacity: floatMinusOneAnim.interpolate({
+                        inputRange: [0, 0.2, 0.8, 1],
+                        outputRange: [0, 1, 1, 0],
+                      }),
+                      transform: [{ translateY: floatMinusOneY }],
+                    },
+                  ]}
+                >
+                  <Text style={styles.floatingMinusText}>-1 ❤️</Text>
+                </Animated.View>
+
+                <MaterialIcons name="favorite" size={26} color="#DC2626" />
+                <Text style={styles.lossBadgeValue}>-1 Heart</Text>
+                <Text style={styles.lossBadgeLabel}>LIFE MINUS</Text>
+              </Animated.View>
+
+              {/* Strike Reset Box */}
+              <Animated.View
+                style={[
+                  styles.lossBadgeBox,
+                  {
+                    backgroundColor: '#FFF7ED',
+                    borderColor: '#FDBA74',
+                    transform: [
+                      { scale: lossStrikeAnim },
+                      {
+                        translateY: lossStrikeAnim.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [14, 0],
+                        }),
+                      },
+                    ],
+                  },
+                ]}
+              >
+                <MaterialIcons name="whatshot" size={26} color="#EA580C" />
+                <Text style={[styles.lossBadgeValue, { color: '#EA580C' }]}>Reset 🔥</Text>
+                <Text style={[styles.lossBadgeLabel, { color: '#C2410C' }]}>STRIKE MINUS</Text>
+              </Animated.View>
+            </View>
 
             <Pressable
               onPress={() => {
@@ -922,7 +1046,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
             >
               <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
             </Pressable>
-          </View>
+          </Animated.View>
         </View>
       </Modal>
 
@@ -1445,6 +1569,64 @@ const styles = StyleSheet.create({
     color: '#EF3B3B',
     fontWeight: '800',
     fontSize: 13,
+  },
+  lossBadgeContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    width: '100%',
+    marginVertical: 12,
+  },
+  lossBadgeBox: {
+    flex: 1,
+    borderRadius: 14,
+    borderWidth: 1.5,
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  lossBadgeValue: {
+    color: '#EF4444',
+    fontWeight: '900',
+    fontSize: 15,
+    marginTop: 2,
+  },
+  lossBadgeLabel: {
+    color: '#991B1B',
+    fontSize: 10,
+    fontWeight: '700',
+    marginTop: 1,
+  },
+  lossCircleHeader: {
+    width: 62,
+    height: 62,
+    borderRadius: 31,
+    backgroundColor: '#FEF2F2',
+    borderWidth: 2,
+    borderColor: '#EF4444',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+    marginTop: -10,
+  },
+  floatingMinusBadge: {
+    position: 'absolute',
+    top: -12,
+    backgroundColor: '#EF4444',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 10,
+    elevation: 4,
+    shadowColor: '#EF4444',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+  },
+  floatingMinusText: {
+    color: '#FFFFFF',
+    fontWeight: '900',
+    fontSize: 12,
   },
   pressed: {
     transform: [{ scale: 0.96 }],

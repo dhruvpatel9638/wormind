@@ -11,12 +11,12 @@ export interface WheelSegmentData {
 }
 
 export const WHEEL_SEGMENTS: WheelSegmentData[] = [
-  { label: '50 COINS', prize: '+50 Coins', color: '#0284C7', icon: 'monetization-on' },
-  { label: '5 COINS', prize: '+5 Coins', color: '#7C3AED', icon: 'monetization-on' },
-  { label: '100 COINS', prize: '+100 Coins', color: '#D97706', icon: 'monetization-on' },
-  { label: 'JACKPOT!', prize: '🎁 Jackpot (+250 Coins)', color: '#DC2626', icon: 'card-giftcard' },
-  { label: '1x HINT', prize: '1x Hint', color: '#2563EB', icon: 'lightbulb' },
-  { label: '25 COINS', prize: '+25 Coins', color: '#059669', icon: 'monetization-on' },
+  { label: '🪙 50', prize: '+50 Coins', color: '#0284C7', icon: 'monetization-on' },
+  { label: '🪙 5', prize: '+5 Coins', color: '#7C3AED', icon: 'monetization-on' },
+  { label: '🪙 100', prize: '+100 Coins', color: '#D97706', icon: 'monetization-on' },
+  { label: '🎁 250', prize: '🎁 Jackpot (+250 Coins)', color: '#DC2626', icon: 'card-giftcard' },
+  { label: '🪙 10', prize: '+10 Coins', color: '#2563EB', icon: 'monetization-on' },
+  { label: '🪙 25', prize: '+25 Coins', color: '#059669', icon: 'monetization-on' },
 ];
 
 const SIZE = 240;
@@ -73,7 +73,7 @@ export const SvgSpinWheel: React.FC<SvgSpinWheelProps> = ({ spinInterpolate }) =
                     x={tx}
                     y={ty}
                     fill="#FFFFFF"
-                    fontSize="11"
+                    fontSize="13"
                     fontWeight="900"
                     textAnchor="middle"
                     alignmentBaseline="middle"

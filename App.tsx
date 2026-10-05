@@ -128,11 +128,6 @@ export default function App() {
       setShowRefillHeartsModal(true);
       return;
     }
-    if ((playerState.strike ?? 10) <= 0) {
-      setPendingLevelToStart(levelId);
-      setShowRestoreStrikeModal(true);
-      return;
-    }
     setActiveLevelId(levelId);
     setCurrentScreen('game');
   };
@@ -156,14 +151,17 @@ export default function App() {
   };
 
   const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
+    const nextLevel = Math.min(50, levelId + 1);
     setPlayerState((prev) => ({
       ...prev,
       coins: prev.coins + coinsEarned,
       stars: prev.stars + starsEarned,
       solvedCount: prev.solvedCount + 1,
       wordsDiscovered: prev.wordsDiscovered + 5,
+      currentLevel: Math.max(prev.currentLevel || 1, nextLevel),
+      strike: (prev.strike || 0) + 1,
     }));
-    setActiveLevelId((prev) => (prev < 50 ? prev + 1 : prev));
+    setActiveLevelId(nextLevel);
     setCurrentScreen('worlds');
   };
 
@@ -268,6 +266,12 @@ export default function App() {
         maxHearts={playerState.maxHearts}
         heartCountdown={formatCountdown(playerState.heartSeconds)}
         level={activeLevelId}
+        strike={playerState.strike ?? 10}
+        onPressStrike={() => {
+          if ((playerState.strike ?? 10) <= 0) {
+            setShowRestoreStrikeModal(true);
+          }
+        }}
         onOpenShop={() => {}}
         onRefillHearts={() => setShowRefillHeartsModal(true)}
         musicEnabled={playerState.musicEnabled}

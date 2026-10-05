@@ -6,9 +6,11 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#A8E6FF"
+      "backgroundColor": "#0E0921"
     },
+    "icon": "./assets/icon.png",
     "android": {
       "package": "com.dhruvpatel.wormind"
     },
