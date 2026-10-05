@@ -530,29 +530,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Top Level Nav Bar */}
-      <View style={styles.topNav}>
-        <Pressable
-          onPress={onExit}
-          style={({ pressed }) => [styles.backBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="map" size={20} color="#7C3AED" />
-          <Text style={styles.backBtnText}>MAP</Text>
-        </Pressable>
 
-        <View style={styles.levelBadge}>
-          <MaterialIcons name="star" size={16} color="#FFC928" />
-          <Text style={styles.levelBadgeText}>LEVEL {levelId}</Text>
-          <Text style={styles.levelBadgeSub}>• {currentLevel.title}</Text>
-        </View>
-
-        <Pressable
-          onPress={() => setIsPaused(true)}
-          style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="pause" size={20} color="#172858" />
-        </Pressable>
-      </View>
 
       {/* Target Words Drawer */}
       <View style={styles.wordsCard}>
