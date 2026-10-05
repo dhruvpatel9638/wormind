@@ -25,13 +25,14 @@ import { nativeAudio } from './src/native/audio';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 const START_LEVEL_ID = 24;
-const START_DEV_COINS = 1000;
+const START_DEV_COINS = 100;
 
 export default function App() {
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
   const [activeLevelId, setActiveLevelId] = useState<number>(START_LEVEL_ID);
   const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
+  const [showRefillHeartsModal, setShowRefillHeartsModal] = useState<boolean>(false);
   const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
 
   const [playerState, setPlayerState] = useState<PlayerState>({
@@ -71,10 +72,12 @@ export default function App() {
           const savedLevel = typeof parsed.currentLevel === 'number' && parsed.currentLevel >= 1
             ? parsed.currentLevel
             : START_LEVEL_ID;
+          const savedCoins = typeof parsed.coins === 'number' && parsed.coins <= 1000 ? parsed.coins : 100;
           const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
           setPlayerState((prev) => ({
             ...prev,
             ...parsed,
+            coins: savedCoins,
             currentLevel: savedLevel,
             strike: savedStrike,
           }));
@@ -98,6 +101,7 @@ export default function App() {
     const timer = setInterval(() => {
       setPlayerState((prev) => {
         if (prev.hearts >= prev.maxHearts) {
+          if (prev.heartSeconds === 252) return prev;
           return { ...prev, heartSeconds: 252 };
         }
         if (prev.heartSeconds <= 1) {
@@ -120,6 +124,10 @@ export default function App() {
   };
 
   const handleStartLevel = (levelId: number) => {
+    if (playerState.hearts <= 0) {
+      setShowRefillHeartsModal(true);
+      return;
+    }
     if ((playerState.strike ?? 10) <= 0) {
       setPendingLevelToStart(levelId);
       setShowRestoreStrikeModal(true);
@@ -132,6 +140,7 @@ export default function App() {
   const handleFailLevel = () => {
     setPlayerState((prev) => ({
       ...prev,
+      hearts: Math.max(0, prev.hearts - 1),
       strike: 0,
     }));
   };
@@ -225,7 +234,7 @@ export default function App() {
   const handleResetProgress = () => {
     AsyncStorage.removeItem(STORAGE_KEY).catch(() => {});
     setPlayerState({
-      coins: 10000,
+      coins: 100,
       stars: 380,
       hearts: 5,
       maxHearts: 5,
@@ -260,7 +269,7 @@ export default function App() {
         heartCountdown={formatCountdown(playerState.heartSeconds)}
         level={activeLevelId}
         onOpenShop={() => {}}
-        onRefillHearts={handleRefillHearts}
+        onRefillHearts={() => setShowRefillHeartsModal(true)}
         musicEnabled={playerState.musicEnabled}
         onToggleMusic={handleToggleMusic}
       />
@@ -328,6 +337,61 @@ export default function App() {
       {isAppLoading && (
         <NativeLoadingScreen onFinish={() => setIsAppLoading(false)} />
       )}
+
+      {/* Refill Hearts Modal */}
+      <Modal visible={showRefillHeartsModal} transparent animationType="fade">
+        <View style={styles.modalBackdrop}>
+          <View style={styles.restoreCard}>
+            <View style={[styles.fireHeaderCircle, { backgroundColor: '#FEF2F2', borderColor: '#FCA5A5' }]}>
+              <MaterialIcons name="favorite" size={44} color="#EF4444" />
+            </View>
+            <Text style={[styles.restoreTitle, { color: '#DC2626' }]}>
+              {playerState.hearts <= 0 ? 'OUT OF HEARTS! ❤️' : 'REFILL HEARTS ❤️'}
+            </Text>
+            <Text style={styles.restoreSub}>
+              {playerState.hearts <= 0
+                ? `You need at least 1 heart to play levels. Refill now with 50 Coins or wait for the timer (${formatCountdown(playerState.heartSeconds)}).`
+                : `Your hearts: ${playerState.hearts}/${playerState.maxHearts}. Refill to full 5 hearts now for 50 Coins!`}
+            </Text>
+
+            <View style={styles.restorePriceBox}>
+              <Text style={styles.restorePriceLabel}>REFILL COST:</Text>
+              <View style={styles.priceRow}>
+                <MaterialIcons name="monetization-on" size={24} color="#F59E0B" />
+                <Text style={styles.priceText}>50 Coins</Text>
+              </View>
+              <Text style={styles.currentCoinsText}>
+                Your Coins: {playerState.coins.toLocaleString()}
+              </Text>
+            </View>
+
+            <View style={styles.restoreBtnRow}>
+              <Pressable
+                onPress={() => setShowRefillHeartsModal(false)}
+                style={({ pressed }) => [styles.restoreCancelBtn, pressed && styles.pressed]}
+              >
+                <Text style={styles.restoreCancelText}>CLOSE</Text>
+              </Pressable>
+
+              <Pressable
+                onPress={() => {
+                  if (handleDeductCoins(50)) {
+                    handleRefillHearts();
+                    setShowRefillHeartsModal(false);
+                  }
+                }}
+                style={({ pressed }) => [
+                  styles.restoreConfirmBtn,
+                  { backgroundColor: '#DC2626' },
+                  pressed && styles.pressed,
+                ]}
+              >
+                <Text style={styles.restoreConfirmText}>REFILL (50 🪙)</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
 
       {/* Snapchat Strike Restore Modal */}
       <Modal visible={showRestoreStrikeModal} transparent animationType="fade">

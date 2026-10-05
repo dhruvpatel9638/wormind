@@ -136,6 +136,10 @@ class NativeSoundEngine {
     this.playSound(SOUND_ASSETS.btn_1, 0.5);
   }
 
+  public playGameOver() {
+    this.playSound(SOUND_ASSETS.btn_3, 0.7);
+  }
+
   public playTick() {
     this.playLetterTap(0);
   }

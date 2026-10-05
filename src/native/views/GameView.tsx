@@ -155,8 +155,10 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
-  const timerTheme = timeLeft <= 30
+  const timerTheme = timeLeft <= 15
     ? { bg: '#FEE2E2', border: '#EF4444', text: '#DC2626' }
+    : timeLeft <= 30
+    ? { bg: '#FEF3C7', border: '#F59E0B', text: '#B45309' }
     : { bg: '#F0EAFF', border: 'rgba(40, 107, 234, 0.25)', text: '#7652D9' };
 
   const getStreakStyle = (s: number) => {
@@ -180,6 +182,43 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     return () => loop.stop();
   }, [wordStreak, isPaused, isVictory, isGameOver, activeStreakPulse]);
 
+  const onFailLevelRef = useRef(onFailLevel);
+  useEffect(() => {
+    onFailLevelRef.current = onFailLevel;
+  }, [onFailLevel]);
+
+  // Level Countdown Timer (120 seconds)
+  useEffect(() => {
+    if (isPaused || isVictory || isGameOver) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setIsGameOver(true);
+          nativeAudio.playGameOver();
+          if (onFailLevelRef.current) onFailLevelRef.current();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isPaused, isVictory, isGameOver]);
+
+  // Pulse timer badge on tick & urgent pulse when low time (<= 30s)
+  useEffect(() => {
+    if (isPaused || isVictory || isGameOver) return;
+    pulseAnim.setValue(1);
+    if (timeLeft <= 30 && timeLeft > 0) {
+      Animated.sequence([
+        Animated.timing(pulseAnim, { toValue: 1.18, duration: 180, useNativeDriver: true }),
+        Animated.timing(pulseAnim, { toValue: 1, duration: 220, useNativeDriver: true }),
+      ]).start();
+    }
+  }, [timeLeft, isPaused, isVictory, isGameOver, pulseAnim]);
+
   const resetLevelState = useCallback((lvl: typeof currentLevel) => {
     setGrid(lvl.grid);
     setTargetWords(lvl.targetWords.map((tw) => ({ ...tw, found: false })));
@@ -192,6 +231,10 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setTimeLeft(120);
     setHintedCells([]);
     setLastFoundMessage(null);
+  }, [levelId]);
+
+  useEffect(() => {
+    resetLevelState(currentLevel);
   }, [levelId]);
 
   const foundCount = targetWords.filter((w) => w.found).length;
@@ -865,6 +908,36 @@ export const NativeGameView: React.FC<GameViewProps> = ({
             <Pressable
               onPress={() => {
                 setIsPaused(false);
+                onExit();
+              }}
+              style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
+            >
+              <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Game Over Time-Out Modal */}
+      <Modal visible={isGameOver} transparent animationType="fade">
+        <View style={styles.modalBackdrop}>
+          <View style={[styles.pauseCard, { borderColor: '#EF4444' }]}>
+            <MaterialIcons name="timer-off" size={48} color="#EF4444" style={{ marginBottom: 6 }} />
+            <Text style={[styles.pauseTitle, { color: '#EF4444' }]}>TIME'S UP! ⏰</Text>
+            <Text style={styles.pauseSub}>You ran out of time for Level {levelId}! (-1 Heart ❤️)</Text>
+
+            <Pressable
+              onPress={() => {
+                resetLevelState(currentLevel);
+              }}
+              style={({ pressed }) => [styles.resumeBtn, { backgroundColor: '#EF4444' }, pressed && styles.pressed]}
+            >
+              <Text style={styles.resumeBtnText}>TRY AGAIN</Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() => {
+                setIsGameOver(false);
                 onExit();
               }}
               style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}

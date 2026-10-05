@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -9,9 +9,14 @@ import {
   Animated,
   Easing,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 import { DAILY_REWARDS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
+import { SvgSpinWheel, WHEEL_SEGMENTS } from '../components/SvgSpinWheel';
+
+const SPINS_STORAGE_KEY = '@wormind_daily_spins_count_v1';
+const MAX_DAILY_SPINS = 3;
 
 interface DailyViewProps {
   claimedDays?: number[];
@@ -37,11 +42,33 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
   onAddHints,
 }) => {
   const [showClaimModal, setShowClaimModal] = useState<boolean>(false);
+  const [showWinModal, setShowWinModal] = useState<boolean>(false);
   const [claimedMessage, setClaimedMessage] = useState<string>('You received your daily reward!');
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [wheelPrize, setWheelPrize] = useState<string | null>(null);
+  const [spinsUsed, setSpinsUsed] = useState<number>(0);
 
   const spinAnim = useRef(new Animated.Value(0)).current;
+  const winScaleAnim = useRef(new Animated.Value(0)).current;
+  const winIconAnim = useRef(new Animated.Value(0)).current;
+
+  // Track 3 daily spins limit
+  useEffect(() => {
+    const todayStr = new Date().toISOString().split('T')[0];
+    AsyncStorage.getItem(SPINS_STORAGE_KEY).then((data) => {
+      if (data) {
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.date === todayStr) {
+            setSpinsUsed(typeof parsed.count === 'number' ? parsed.count : 0);
+          } else {
+            setSpinsUsed(0);
+            AsyncStorage.setItem(SPINS_STORAGE_KEY, JSON.stringify({ date: todayStr, count: 0 }));
+          }
+        } catch {}
+      }
+    });
+  }, []);
 
   const handleClaim = (day: number) => {
     if (!canClaimToday) return;
@@ -68,34 +95,54 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
     setShowClaimModal(true);
   };
 
+
+
   const handleSpin = () => {
-    if (isSpinning) return;
+    if (isSpinning || spinsUsed >= MAX_DAILY_SPINS) return;
+
+    const todayStr = new Date().toISOString().split('T')[0];
+    const newSpinsUsed = spinsUsed + 1;
+    setSpinsUsed(newSpinsUsed);
+    AsyncStorage.setItem(SPINS_STORAGE_KEY, JSON.stringify({ date: todayStr, count: newSpinsUsed })).catch(() => {});
+
     setIsSpinning(true);
     nativeAudio.playSparkle();
 
+    const selectedIdx = Math.floor(Math.random() * WHEEL_SEGMENTS.length);
+    const targetDegrees = 360 * 5 + (360 - selectedIdx * 60 - 30);
+
     spinAnim.setValue(0);
     Animated.timing(spinAnim, {
-      toValue: 1,
-      duration: 3000,
+      toValue: targetDegrees,
+      duration: 3500,
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start(() => {
       setIsSpinning(false);
-      const prizes = ['+50 Coins', '2x Hints', '+100 Coins', '+25 Coins'];
-      const won = prizes[Math.floor(Math.random() * prizes.length)];
-      setWheelPrize(won);
+      const wonItem = WHEEL_SEGMENTS[selectedIdx];
+      setWheelPrize(wonItem.prize);
       nativeAudio.playVictory();
 
-      if (won.includes('50')) onAddCoins(50);
-      else if (won.includes('100')) onAddCoins(100);
-      else if (won.includes('25')) onAddCoins(25);
-      else if (won.includes('Hints')) onAddHints(2);
+      if (wonItem.prize.includes('250')) onAddCoins(250);
+      else if (wonItem.prize.includes('100')) onAddCoins(100);
+      else if (wonItem.prize.includes('50')) onAddCoins(50);
+      else if (wonItem.prize.includes('25')) onAddCoins(25);
+      else if (wonItem.prize.includes('+5')) onAddCoins(5);
+      else if (wonItem.prize.includes('1x')) onAddHints(1);
+
+      setShowWinModal(true);
+      winScaleAnim.setValue(0);
+      winIconAnim.setValue(0);
+      Animated.sequence([
+        Animated.spring(winScaleAnim, { toValue: 1, friction: 5, tension: 45, useNativeDriver: true }),
+        Animated.spring(winIconAnim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+      ]).start();
     });
   };
 
   const spinInterpolate = spinAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '1440deg'],
+    inputRange: [0, 360],
+    outputRange: ['0deg', '360deg'],
   });
 
   return (
@@ -173,46 +220,76 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
 
         {/* Lucky Spin Wheel Section */}
         <View style={styles.wheelCard}>
-          <Text style={styles.wheelTitle}>DAILY LUCKY SPIN</Text>
-          <Text style={styles.wheelSub}>Spin the prize wheel for free bonus loot!</Text>
-
-          <View style={styles.wheelWrapper}>
-            <Animated.View style={[styles.wheelCircle, { transform: [{ rotate: spinInterpolate }] }]}>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '0deg' }] }]}>
-                <Text style={styles.segmentText}>🪙 50</Text>
-              </View>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '90deg' }] }]}>
-                <Text style={styles.segmentText}>💡 2x</Text>
-              </View>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '180deg' }] }]}>
-                <Text style={styles.segmentText}>🪙 100</Text>
-              </View>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '270deg' }] }]}>
-                <Text style={styles.segmentText}>🪙 25</Text>
-              </View>
-            </Animated.View>
-            <View style={styles.wheelCenterPin} />
+          <View style={styles.wheelCardHeader}>
+            <MaterialIcons name="stars" size={22} color="#F59E0B" />
+            <Text style={styles.wheelTitle}>DAILY LUCKY SPIN</Text>
           </View>
+          <Text style={styles.wheelSub}>Spin the wheel daily for free bonus coins & hints!</Text>
+
+          {/* Remaining Spins Counter Badge */}
+          <View style={styles.spinsCountBadge}>
+            <MaterialIcons name="autorenew" size={14} color="#7C3AED" />
+            <Text style={styles.spinsCountText}>
+              SPINS REMAINING TODAY: {Math.max(0, MAX_DAILY_SPINS - spinsUsed)} / {MAX_DAILY_SPINS}
+            </Text>
+          </View>
+
+          {/* Vector SVG Arcade Spin Wheel */}
+          <SvgSpinWheel spinInterpolate={spinInterpolate} />
 
           {wheelPrize && (
             <View style={styles.wonBanner}>
-              <Text style={styles.wonText}>🎉 You Won: {wheelPrize}!</Text>
+              <MaterialIcons name="emoji-events" size={20} color="#D97706" />
+              <Text style={styles.wonText}>🎉 WON: {wheelPrize}!</Text>
             </View>
           )}
 
           <Pressable
-            disabled={isSpinning}
+            disabled={isSpinning || spinsUsed >= MAX_DAILY_SPINS}
             onPress={handleSpin}
             style={({ pressed }) => [
               styles.spinBtn,
+              spinsUsed >= MAX_DAILY_SPINS && styles.spinBtnDisabled,
               isSpinning && { opacity: 0.6 },
-              pressed && styles.pressed,
+              pressed && spinsUsed < MAX_DAILY_SPINS && styles.pressed,
             ]}
           >
-            <Text style={styles.spinBtnText}>{isSpinning ? 'SPINNING...' : 'SPIN WHEEL'}</Text>
+            <MaterialIcons name="cached" size={20} color="#FFFFFF" style={{ marginRight: 6 }} />
+            <Text style={styles.spinBtnText}>
+              {spinsUsed >= MAX_DAILY_SPINS
+                ? 'DAILY LIMIT REACHED (0/3 LEFT)'
+                : isSpinning
+                ? 'SPINNING...'
+                : 'SPIN WHEEL NOW'}
+            </Text>
           </Pressable>
         </View>
       </ScrollView>
+
+      {/* Spin Winner Celebration Modal */}
+      <Modal visible={showWinModal} transparent animationType="fade">
+        <View style={styles.modalBackdrop}>
+          <Animated.View style={[styles.winCard, { transform: [{ scale: winScaleAnim }] }]}>
+            <Animated.View style={[styles.winIconCircle, { transform: [{ scale: winIconAnim }] }]}>
+              <MaterialIcons name="emoji-events" size={44} color="#5A3800" />
+            </Animated.View>
+            <Text style={styles.winTitle}>LUCKY SPIN REWARD!</Text>
+            <Text style={styles.winSub}>Congratulations! You landed on:</Text>
+
+            <View style={styles.prizeBadgeBox}>
+              <MaterialIcons name="stars" size={24} color="#F59E0B" />
+              <Text style={styles.prizeBadgeText}>{wheelPrize}</Text>
+            </View>
+
+            <Pressable
+              onPress={() => setShowWinModal(false)}
+              style={({ pressed }) => [styles.winClaimBtn, pressed && styles.pressed]}
+            >
+              <Text style={styles.winClaimBtnText}>COLLECT REWARD</Text>
+            </Pressable>
+          </Animated.View>
+        </View>
+      </Modal>
 
       {/* Reward Claimed Modal */}
       <Modal visible={showClaimModal} transparent animationType="fade">
@@ -366,81 +443,154 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#DDD6FE',
-    elevation: 3,
+    elevation: 4,
+    shadowColor: '#7C3AED',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+  },
+  wheelCardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
   },
   wheelTitle: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '900',
     color: '#6D28D9',
+    letterSpacing: 0.5,
   },
   wheelSub: {
     fontSize: 11,
     color: '#8B7FB0',
     marginTop: 2,
-    marginBottom: 16,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  spinsCountBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F3E8FF',
+    borderWidth: 1.5,
+    borderColor: '#C084FC',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+    gap: 4,
+    marginBottom: 4,
+  },
+  spinsCountText: {
+    color: '#6B21A8',
+    fontWeight: '900',
+    fontSize: 11,
+    letterSpacing: 0.5,
   },
   wheelWrapper: {
-    width: 140,
-    height: 140,
+    width: 170,
+    height: 170,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
+    position: 'relative',
+  },
+  pointerContainer: {
+    position: 'absolute',
+    top: -8,
+    zIndex: 20,
+    alignItems: 'center',
+  },
+  pointerArrow: {
+    width: 0,
+    height: 0,
+    borderLeftWidth: 10,
+    borderRightWidth: 10,
+    borderTopWidth: 16,
+    borderStyle: 'solid',
+    backgroundColor: 'transparent',
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderTopColor: '#F59E0B',
   },
   wheelCircle: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    backgroundColor: '#7C3AED',
-    borderWidth: 4,
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    backgroundColor: '#2E1065',
+    borderWidth: 5,
     borderColor: '#FFC928',
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
   },
   wheelSegment: {
     position: 'absolute',
+    width: 60,
+    height: 40,
     alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    paddingHorizontal: 4,
   },
   segmentText: {
     color: '#FFFFFF',
     fontWeight: '900',
     fontSize: 12,
+    textShadowColor: 'rgba(0, 0, 0, 0.4)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   wheelCenterPin: {
     position: 'absolute',
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     backgroundColor: '#FFC928',
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10,
+    elevation: 4,
   },
   wonBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#FEF3C7',
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 12,
-    borderWidth: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 14,
+    borderWidth: 1.5,
     borderColor: '#F59E0B',
-    marginBottom: 12,
+    marginBottom: 14,
+    gap: 6,
   },
   wonText: {
-    color: '#5A3800',
-    fontWeight: '800',
+    color: '#92400E',
+    fontWeight: '900',
     fontSize: 13,
   },
   spinBtn: {
     width: '100%',
-    height: 44,
+    height: 46,
     backgroundColor: '#7C3AED',
-    borderRadius: 22,
+    borderRadius: 23,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    elevation: 3,
+    borderWidth: 1.5,
+    borderColor: '#A78BFA',
+  },
+  spinBtnDisabled: {
+    backgroundColor: '#9CA3AF',
+    borderColor: '#D1D5DB',
   },
   spinBtnText: {
     color: '#FFFFFF',
     fontWeight: '900',
     fontSize: 14,
+    letterSpacing: 0.5,
   },
   modalBackdrop: {
     flex: 1,
@@ -482,6 +632,73 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 14,
     fontWeight: '900',
+  },
+  winCard: {
+    width: 280,
+    backgroundColor: '#2E1065',
+    borderRadius: 24,
+    borderWidth: 3,
+    borderColor: '#FFC928',
+    alignItems: 'center',
+    padding: 22,
+    elevation: 10,
+  },
+  winIconCircle: {
+    width: 68,
+    height: 68,
+    borderRadius: 34,
+    backgroundColor: '#FFC928',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 3,
+    borderColor: '#FFFFFF',
+    marginTop: -44,
+    marginBottom: 8,
+  },
+  winTitle: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '900',
+    marginTop: 4,
+  },
+  winSub: {
+    color: '#DDD6FE',
+    fontSize: 12,
+    fontWeight: '600',
+    marginTop: 4,
+    textAlign: 'center',
+  },
+  prizeBadgeBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FEF3C7',
+    borderWidth: 2,
+    borderColor: '#F59E0B',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 16,
+    marginVertical: 16,
+    gap: 8,
+  },
+  prizeBadgeText: {
+    color: '#92400E',
+    fontWeight: '900',
+    fontSize: 16,
+  },
+  winClaimBtn: {
+    width: '100%',
+    height: 44,
+    backgroundColor: '#FFC928',
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+  },
+  winClaimBtnText: {
+    color: '#5A3800',
+    fontWeight: '900',
+    fontSize: 14,
+    letterSpacing: 0.5,
   },
   pressed: {
     transform: [{ scale: 0.95 }],
