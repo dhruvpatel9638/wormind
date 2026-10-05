@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { PlayerState } from '../../types';
-import { VOCABULARY_JOURNAL } from '../../data/gameData';
 import { nativeAudio } from '../audio';
 
 interface ProfileViewProps {
@@ -28,40 +27,11 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
   onToggleHaptics,
   onResetProgress,
 }) => {
-  const [activeTab, setActiveTab] = useState<'settings' | 'journal'>('settings');
   const [showResetModal, setShowResetModal] = useState<boolean>(false);
 
   return (
     <View style={styles.container}>
-      {/* Tab Switcher */}
-      <View style={styles.tabBar}>
-        <Pressable
-          onPress={() => {
-            nativeAudio.playLetterTap(1);
-            setActiveTab('settings');
-          }}
-          style={[styles.tabBtn, activeTab === 'settings' && styles.tabBtnActive]}
-        >
-          <Text style={[styles.tabBtnText, activeTab === 'settings' && styles.tabBtnTextActive]}>
-            Settings
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => {
-            nativeAudio.playLetterTap(2);
-            setActiveTab('journal');
-          }}
-          style={[styles.tabBtn, activeTab === 'journal' && styles.tabBtnActive]}
-        >
-          <Text style={[styles.tabBtnText, activeTab === 'journal' && styles.tabBtnTextActive]}>
-            Dictionary Journal
-          </Text>
-        </Pressable>
-      </View>
-
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {activeTab === 'settings' && (
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Audio & Preferences</Text>
 
@@ -115,26 +85,6 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               <Text style={styles.resetBtnText}>Reset Progress</Text>
             </Pressable>
           </View>
-        )}
-
-        {activeTab === 'journal' && (
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Word Collector's Dictionary</Text>
-            <Text style={styles.cardSub}>Words discovered along your word journey:</Text>
-
-            {VOCABULARY_JOURNAL.map((item) => (
-              <View key={item.word} style={styles.journalItem}>
-                <View style={styles.journalHeader}>
-                  <Text style={styles.journalWord}>{item.word}</Text>
-                  <View style={styles.worldTag}>
-                    <Text style={styles.worldTagText}>{item.world}</Text>
-                  </View>
-                </View>
-                <Text style={styles.journalDef}>{item.definition}</Text>
-              </View>
-            ))}
-          </View>
-        )}
       </ScrollView>
 
       {/* Reset Confirmation Modal */}
@@ -176,32 +126,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAF8FF',
     paddingHorizontal: 16,
     paddingTop: 12,
-  },
-  tabBar: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 4,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: '#EDE9FE',
-  },
-  tabBtn: {
-    flex: 1,
-    paddingVertical: 8,
-    alignItems: 'center',
-    borderRadius: 12,
-  },
-  tabBtnActive: {
-    backgroundColor: '#7C3AED',
-  },
-  tabBtnText: {
-    fontSize: 13,
-    fontWeight: '800',
-    color: '#8B7FB0',
-  },
-  tabBtnTextActive: {
-    color: '#FFFFFF',
   },
   scrollContent: {
     paddingBottom: 160,
@@ -256,41 +180,6 @@ const styles = StyleSheet.create({
     color: '#EF3B3B',
     fontWeight: '800',
     fontSize: 13,
-  },
-  journalItem: {
-    backgroundColor: 'rgba(46, 16, 101, 0.6)',
-    borderRadius: 14,
-    padding: 12,
-    marginTop: 8,
-    borderWidth: 1,
-    borderColor: 'rgba(124, 58, 237, 0.2)',
-  },
-  journalHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 4,
-  },
-  journalWord: {
-    color: '#14B8A6',
-    fontSize: 14,
-    fontWeight: '900',
-  },
-  worldTag: {
-    backgroundColor: 'rgba(124, 58, 237, 0.2)',
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 8,
-  },
-  worldTagText: {
-    color: '#DDD6FE',
-    fontSize: 10,
-    fontWeight: '700',
-  },
-  journalDef: {
-    color: '#7B8AB8',
-    fontSize: 12,
-    lineHeight: 16,
   },
   modalBackdrop: {
     flex: 1,

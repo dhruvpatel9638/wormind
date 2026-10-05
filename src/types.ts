@@ -42,6 +42,9 @@ export interface PlayerState {
   soundEnabled: boolean;
   musicEnabled: boolean;
   hapticsEnabled: boolean;
+  currentLevel?: number;
+  lastDailyClaimDate?: string | null;
+  strike: number;
 }
 
 export interface DailyReward {

@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
+  SafeAreaView,
   StatusBar,
   Platform,
-  Alert,
-  BackHandler,
-
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Screen, PlayerState } from './src/types';
 import { NativeHeader } from './src/native/components/Header';
@@ -18,16 +15,11 @@ import { NativeGameView } from './src/native/views/GameView';
 import { NativeDailyView } from './src/native/views/DailyView';
 import { NativeProfileView } from './src/native/views/ProfileView';
 import { nativeAudio } from './src/native/audio';
-import { AdBanner } from './src/native/components/AdBanner';
-import { initAdMob, showSmartInterstitialAd } from './src/utils/admobService';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 
-// ⚙️ DEV / GAME CONFIG:
-export const START_LEVEL_ID = 1;
-export const START_DEV_COINS = 100000;
-
 export default function App() {
+  const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
   const [activeLevelId, setActiveLevelId] = useState<number>(START_LEVEL_ID);
 
@@ -52,20 +44,25 @@ export default function App() {
     hapticsEnabled: true,
   });
 
-  // Initialize Google Mobile Ads SDK on app startup
-  useEffect(() => {
-    initAdMob();
-  }, []);
-
   // Load saved state from native AsyncStorage
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY).then((data) => {
       if (data) {
         try {
           const parsed = JSON.parse(data);
-          setPlayerState(parsed);
-          nativeAudio.setSoundEnabled(parsed.soundEnabled);
-          nativeAudio.setMusicEnabled(parsed.musicEnabled);
+          const savedLevel = typeof parsed.currentLevel === 'number' && parsed.currentLevel >= 1
+            ? parsed.currentLevel
+            : START_LEVEL_ID;
+          const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
+          setPlayerState((prev) => ({
+            ...prev,
+            ...parsed,
+            currentLevel: savedLevel,
+            strike: savedStrike,
+          }));
+          setActiveLevelId(savedLevel);
+          nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
+          nativeAudio.setMusicEnabled(parsed.musicEnabled ?? true);
         } catch {}
       }
     });
@@ -77,20 +74,6 @@ export default function App() {
     nativeAudio.setSoundEnabled(playerState.soundEnabled);
     nativeAudio.setMusicEnabled(playerState.musicEnabled);
   }, [playerState]);
-
-  // Handle hardware Back button on Android for main screens
-  useEffect(() => {
-    const onBackPress = () => {
-      if (currentScreen !== 'worlds' && currentScreen !== 'game') {
-        setCurrentScreen('worlds');
-        return true;
-      }
-      return false;
-    };
-
-    const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
-    return () => subscription.remove();
-  }, [currentScreen]);
 
   // Hearts refill timer
   useEffect(() => {
@@ -119,14 +102,16 @@ export default function App() {
   };
 
   const handleStartLevel = (levelId: number) => {
+    if ((playerState.strike ?? 10) <= 0) {
+      setPendingLevelToStart(levelId);
+      setShowRestoreStrikeModal(true);
+      return;
+    }
     setActiveLevelId(levelId);
     setCurrentScreen('game');
   };
 
   const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
-    // 🔹 Smart AdMob Interstitial Ad (Randomized Win + 3-min Time Auto-Trigger)
-    showSmartInterstitialAd();
-
     setPlayerState((prev) => ({
       ...prev,
       coins: prev.coins + coinsEarned,
@@ -134,7 +119,7 @@ export default function App() {
       solvedCount: prev.solvedCount + 1,
       wordsDiscovered: prev.wordsDiscovered + 5,
     }));
-    setActiveLevelId((prev) => (prev < 100 ? prev + 1 : prev));
+    setActiveLevelId((prev) => (prev < 50 ? prev + 1 : prev));
     setCurrentScreen('worlds');
   };
 
@@ -163,11 +148,22 @@ export default function App() {
     }));
   };
 
-  const handleClaimDay5 = () => {
+  const handleClaimDaily = (day: number) => {
+    const reward = DAILY_REWARDS.find((r) => r.day === day) || DAILY_REWARDS[0];
+    const isConsecutive = playerState.lastDailyClaimDate === yesterdayDateStr;
+    const nextStreak = isConsecutive ? (playerState.streak || 0) + 1 : 1;
+
+    const baseClaimed = (playerState.claimedDays || []).length >= 7 ? [] : (playerState.claimedDays || []);
+    const updatedClaimed = baseClaimed.includes(day) ? baseClaimed : [...baseClaimed, day];
+
     setPlayerState((prev) => ({
       ...prev,
-      hasClaimedDay5: true,
-      claimedDays: [...prev.claimedDays, 5],
+      coins: prev.coins + reward.coins,
+      hintsAvailable: prev.hintsAvailable + reward.hints,
+      claimedDays: updatedClaimed,
+      lastDailyClaimDate: todayDateStr,
+      hasClaimedDay5: updatedClaimed.includes(5),
+      streak: nextStreak,
     }));
   };
 
@@ -202,7 +198,7 @@ export default function App() {
       streak: 5,
       streakLvl: 2,
       streakMax: 7,
-      claimedDays: [1, 2, 3, 4],
+      claimedDays: [],
       hasClaimedDay5: false,
       hintsAvailable: 2,
       equippedHat: 'none',
@@ -211,8 +207,8 @@ export default function App() {
       wordsDiscovered: 148,
       soundEnabled: true,
       musicEnabled: true,
-      hapticsEnabled: true,
     });
+    setActiveLevelId(START_LEVEL_ID);
   };
 
   return (
@@ -226,7 +222,7 @@ export default function App() {
         maxHearts={playerState.maxHearts}
         heartCountdown={formatCountdown(playerState.heartSeconds)}
         level={activeLevelId}
-        onOpenShop={() => handleAddCoins(10000)}
+        onOpenShop={() => {}}
         onRefillHearts={handleRefillHearts}
         musicEnabled={playerState.musicEnabled}
         onToggleMusic={handleToggleMusic}
@@ -237,7 +233,7 @@ export default function App() {
         {currentScreen === 'worlds' && (
           <NativeWorldsView
             onStartLevel={handleStartLevel}
-            activeLevelId={activeLevelId}
+            activeLevelId={playerState.currentLevel || activeLevelId}
           />
         )}
 
@@ -248,13 +244,21 @@ export default function App() {
             onCompleteLevel={handleCompleteLevel}
             coins={playerState.coins}
             onDeductCoins={handleDeductCoins}
+            strike={playerState.strike ?? 10}
+            onFailLevel={handleFailLevel}
+            onRestoreStrike={handleRestoreStrike}
           />
         )}
 
         {currentScreen === 'daily' && (
           <NativeDailyView
-            hasClaimedDay5={playerState.hasClaimedDay5}
-            onClaimDay5={handleClaimDay5}
+            claimedDays={activeClaimedDays}
+            canClaimToday={canClaimDaily}
+            currentDayToClaim={currentDailyDay}
+            streak={playerState.streak}
+            onClaimDaily={handleClaimDaily}
+            hasClaimedDay5={!canClaimDaily}
+            onClaimDay5={() => handleClaimDaily(currentDailyDay)}
             onAddCoins={handleAddCoins}
             onAddHints={handleAddHints}
           />
@@ -279,9 +283,68 @@ export default function App() {
         <NativeBottomNav
           currentScreen={currentScreen}
           onNavigate={setCurrentScreen}
-          hasClaimableDaily={!playerState.hasClaimedDay5}
+          hasClaimableDaily={canClaimDaily}
         />
       )}
+
+      {/* Starting Loading Screen with Active Neon Animation */}
+      {isAppLoading && (
+        <NativeLoadingScreen onFinish={() => setIsAppLoading(false)} />
+      )}
+
+      {/* Snapchat Strike Restore Modal */}
+      <Modal visible={showRestoreStrikeModal} transparent animationType="fade">
+        <View style={styles.modalBackdrop}>
+          <View style={styles.restoreCard}>
+            <View style={styles.fireHeaderCircle}>
+              <MaterialIcons name="local-fire-department" size={44} color="#FF4500" />
+            </View>
+            <Text style={styles.restoreTitle}>STRIKE IS 0! 🔥</Text>
+            <Text style={styles.restoreSub}>
+              Your Snapchat winning strike is currently 0. Restore your strike with 100 Coins to play and start building your fire!
+            </Text>
+
+            <View style={styles.restorePriceBox}>
+              <Text style={styles.restorePriceLabel}>REPAIR COST:</Text>
+              <View style={styles.priceRow}>
+                <MaterialIcons name="monetization-on" size={24} color="#F59E0B" />
+                <Text style={styles.priceText}>100 Coins</Text>
+              </View>
+              <Text style={styles.currentCoinsText}>
+                Your Coins: {playerState.coins.toLocaleString()}
+              </Text>
+            </View>
+
+            <View style={styles.restoreBtnRow}>
+              <Pressable
+                onPress={() => {
+                  setShowRestoreStrikeModal(false);
+                  setPendingLevelToStart(null);
+                }}
+                style={({ pressed }) => [styles.restoreCancelBtn, pressed && styles.pressed]}
+              >
+                <Text style={styles.restoreCancelText}>CANCEL</Text>
+              </Pressable>
+
+              <Pressable
+                onPress={() => {
+                  if (handleRestoreStrike()) {
+                    setShowRestoreStrikeModal(false);
+                    if (pendingLevelToStart !== null) {
+                      setActiveLevelId(pendingLevelToStart);
+                      setCurrentScreen('game');
+                      setPendingLevelToStart(null);
+                    }
+                  }
+                }}
+                style={({ pressed }) => [styles.restoreConfirmBtn, pressed && styles.pressed]}
+              >
+                <Text style={styles.restoreConfirmText}>RESTORE (100 🪙)</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -294,5 +357,114 @@ const styles = StyleSheet.create({
   },
   screenContainer: {
     flex: 1,
+  },
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: 'rgba(26, 11, 46, 0.75)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+  },
+  restoreCard: {
+    width: '100%',
+    maxWidth: 320,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 24,
+    padding: 24,
+    alignItems: 'center',
+    elevation: 8,
+    borderWidth: 2,
+    borderColor: '#FED7AA',
+  },
+  fireHeaderCircle: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: '#FFF7ED',
+    borderWidth: 2,
+    borderColor: '#FDBA74',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 12,
+  },
+  restoreTitle: {
+    fontSize: 20,
+    fontWeight: '900',
+    color: '#EA580C',
+    marginBottom: 6,
+  },
+  restoreSub: {
+    fontSize: 12,
+    color: '#6B7280',
+    textAlign: 'center',
+    lineHeight: 18,
+    marginBottom: 18,
+  },
+  restorePriceBox: {
+    width: '100%',
+    backgroundColor: '#FFFBEB',
+    borderRadius: 14,
+    padding: 12,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#FDE68A',
+    marginBottom: 20,
+  },
+  restorePriceLabel: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#92400E',
+    marginBottom: 4,
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  priceText: {
+    fontSize: 18,
+    fontWeight: '900',
+    color: '#B45309',
+  },
+  currentCoinsText: {
+    fontSize: 11,
+    color: '#78350F',
+    marginTop: 4,
+    fontWeight: '600',
+  },
+  restoreBtnRow: {
+    flexDirection: 'row',
+    gap: 10,
+    width: '100%',
+  },
+  restoreCancelBtn: {
+    flex: 1,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#F3F4F6',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  restoreCancelText: {
+    color: '#4B5563',
+    fontWeight: '800',
+    fontSize: 12,
+  },
+  restoreConfirmBtn: {
+    flex: 1.4,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#EA580C',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
+  },
+  restoreConfirmText: {
+    color: '#FFFFFF',
+    fontWeight: '900',
+    fontSize: 12,
+  },
+  pressed: {
+    transform: [{ scale: 0.96 }],
   },
 });

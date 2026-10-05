@@ -10,7 +10,6 @@ import {
   Animated,
   Easing,
   PanResponder,
-  BackHandler,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -26,6 +25,9 @@ interface GameViewProps {
   onCompleteLevel: (levelId: number, stars: number, coinsEarned: number) => void;
   coins: number;
   onDeductCoins: (amount: number) => boolean;
+  strike?: number;
+  onFailLevel?: () => void;
+  onRestoreStrike?: () => boolean;
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -38,6 +40,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   onCompleteLevel,
   coins,
   onDeductCoins,
+  strike = 10,
+  onFailLevel,
+  onRestoreStrike,
 }) => {
   const currentLevel =
     INITIAL_LEVELS.find((l) => l.id === levelId) ||
@@ -59,6 +64,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [timeLeft, setTimeLeft] = useState<number>(120);
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
+  const [isScrollingEnabled, setIsScrollingEnabled] = useState<boolean>(true);
 
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const star1Anim = useRef(new Animated.Value(0)).current;
@@ -80,6 +86,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       star3Anim.setValue(0);
     }
   }, [isVictory]);
+
+  // Pause BGM when entering GameView, resume when exiting
+  useEffect(() => {
+    nativeAudio.setInGame(true);
+    return () => {
+      nativeAudio.setInGame(false);
+    };
+  }, []);
 
   const [lastFoundMessage, setLastFoundMessage] = useState<string | null>(null);
 
@@ -130,188 +144,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setTimeLeft(120);
     setHintedCells([]);
     setLastFoundMessage(null);
-    setWordStreak(0);
-    setMaxWordStreak(0);
-  }, []);
-
-  // Sync level on levelId change
-  useEffect(() => {
-    const lvl =
-      INITIAL_LEVELS.find((l) => l.id === levelId) ||
-      INITIAL_LEVELS.find((l) => l.id === 4) ||
-      INITIAL_LEVELS[0];
-    resetLevelState(lvl);
-  }, [levelId, resetLevelState]);
-
-  // 2:00 Countdown Timer Effect
-  useEffect(() => {
-    if (isPaused || isVictory || isGameOver) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          setIsGameOver(true);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [isPaused, isVictory, isGameOver]);
-
-  // Pulse animation on every second tick of the timer
-  const pulseAnim = useRef(new Animated.Value(1)).current;
-
-  useEffect(() => {
-    if (isPaused || isVictory || isGameOver) return;
-    Animated.sequence([
-      Animated.timing(pulseAnim, {
-        toValue: 1.12,
-        duration: 150,
-        useNativeDriver: true,
-      }),
-      Animated.timing(pulseAnim, {
-        toValue: 1,
-        duration: 250,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }, [timeLeft, isPaused, isVictory, isGameOver, pulseAnim]);
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  // Dynamic progressive color theme as time decreases
-  const getTimerTheme = (seconds: number) => {
-    if (seconds > 90) {
-      // 2:00 -> 1:30 (Purple / Indigo)
-      return { text: '#7652D9', bg: '#F0EAFF', border: '#D4B5FF' };
-    } else if (seconds > 60) {
-      // 1:30 -> 1:00 (Ocean Blue)
-      return { text: '#286BEA', bg: '#EBF3FF', border: '#A8C7FF' };
-    } else if (seconds > 30) {
-      // 1:00 -> 0:30 (Golden Orange)
-      return { text: '#D97706', bg: '#FEF3C7', border: '#FDE68A' };
-    } else {
-      // 0:30 -> 0:00 (Crimson Red)
-      return { text: '#EF3B3B', bg: '#FFEEEE', border: '#FFB3B3' };
-    }
-  };
-
-  const timerTheme = getTimerTheme(timeLeft);
-
-  // Dynamic colors for Streak Badge
-  const getStreakStyle = (streak: number) => {
-    if (streak <= 0) {
-      return { bg: '#F1F5F9', border: '#CBD5E1', text: '#94A3B8', icon: '#94A3B8' };
-    }
-    if (streak === 1) {
-      return { bg: '#FFF7ED', border: '#FFD8A8', text: '#EA580C', icon: '#FF6B00' };
-    }
-    if (streak === 2) {
-      return { bg: '#FEF2F2', border: '#FCA5A5', text: '#DC2626', icon: '#EF4444' };
-    }
-    if (streak === 3) {
-      return { bg: '#FFF0F6', border: '#FCC2D7', text: '#D6336C', icon: '#FF1E00' };
-    }
-    return { bg: '#FFF9DB', border: '#FFE066', text: '#B45309', icon: '#FF1E00' };
-  };
-
-  const streakStyle = getStreakStyle(wordStreak);
-
-  // Trigger streak celebration animation directly on the Streak Badge & Flame Icon!
-  const triggerStreakAnimation = (newStreak: number) => {
-    // 1. Reset values for fresh animation
-    streakScaleAnim.setValue(1);
-    streakRotateAnim.setValue(0);
-    iconScaleAnim.setValue(1);
-    iconRotateAnim.setValue(0);
-    ringScaleAnim.setValue(1);
-    ringOpacityAnim.setValue(1);
-
-    Animated.parallel([
-      // Badge Punch Bounce
-      Animated.sequence([
-        Animated.timing(streakScaleAnim, { toValue: 1.4, duration: 130, useNativeDriver: true }),
-        Animated.spring(streakScaleAnim, { toValue: 1, friction: 3, tension: 200, useNativeDriver: true }),
-      ]),
-      // Badge Rotation Wiggle
-      Animated.sequence([
-        Animated.timing(streakRotateAnim, { toValue: -1, duration: 60, useNativeDriver: true }),
-        Animated.timing(streakRotateAnim, { toValue: 1, duration: 80, useNativeDriver: true }),
-        Animated.timing(streakRotateAnim, { toValue: -0.5, duration: 60, useNativeDriver: true }),
-        Animated.timing(streakRotateAnim, { toValue: 0, duration: 60, useNativeDriver: true }),
-      ]),
-      // Flame Icon Scale Pop & 360 Spin
-      Animated.sequence([
-        Animated.timing(iconScaleAnim, { toValue: 1.85, duration: 150, useNativeDriver: true }),
-        Animated.spring(iconScaleAnim, { toValue: 1, friction: 4, tension: 220, useNativeDriver: true }),
-      ]),
-      Animated.timing(iconRotateAnim, { toValue: 1, duration: 320, useNativeDriver: true }),
-      // Shockwave ring burst behind icon
-      Animated.timing(ringScaleAnim, { toValue: 2.2, duration: 420, useNativeDriver: true }),
-      Animated.timing(ringOpacityAnim, { toValue: 0, duration: 420, useNativeDriver: true }),
-    ]).start();
-
-    // 2. Radial 6-Particle Fire Explosion around Badge
-    const angles = [0, 60, 120, 180, 240, 300];
-    const distance = 30;
-
-    particleAnims.forEach((p, idx) => {
-      const rad = (angles[idx] * Math.PI) / 180;
-      const targetX = Math.cos(rad) * distance;
-      const targetY = Math.sin(rad) * distance;
-
-      p.x.setValue(0);
-      p.y.setValue(0);
-      p.opacity.setValue(1);
-      p.scale.setValue(0.6);
-
-      Animated.parallel([
-        Animated.timing(p.x, { toValue: targetX, duration: 450, useNativeDriver: true }),
-        Animated.timing(p.y, { toValue: targetY, duration: 450, useNativeDriver: true }),
-        Animated.timing(p.opacity, { toValue: 0, duration: 450, useNativeDriver: true }),
-        Animated.timing(p.scale, { toValue: 1.5, duration: 450, useNativeDriver: true }),
-      ]).start();
-    });
-  };
-
-  const triggerStreakReset = useCallback(() => {
-    setWordStreak((prev) => {
-      if (prev > 0) {
-        Animated.sequence([
-          Animated.timing(streakRotateAnim, { toValue: 1, duration: 70, useNativeDriver: true }),
-          Animated.timing(streakRotateAnim, { toValue: -1, duration: 70, useNativeDriver: true }),
-          Animated.timing(streakRotateAnim, { toValue: 0, duration: 70, useNativeDriver: true }),
-        ]).start();
-      }
-      return 0;
-    });
-  }, [streakRotateAnim]);
-
-  // Handle hardware Back button on Android
-  useEffect(() => {
-    const onBackPress = () => {
-      if (isGameOver || isVictory) {
-        onExit();
-        return true;
-      }
-      if (isPaused) {
-        setIsPaused(false);
-        return true;
-      }
-      setIsPaused(true);
-      return true;
-    };
-
-    const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
-    return () => subscription.remove();
-  }, [isPaused, isVictory, isGameOver, onExit]);
+  }, [levelId]);
 
   const foundCount = targetWords.filter((w) => w.found).length;
   const totalCount = targetWords.length;
@@ -388,7 +221,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
+      onPanResponderTerminationRequest: () => false,
       onPanResponderGrant: (evt) => {
+        setIsScrollingEnabled(false);
         const state = gameStateRef.current;
         if (state.isPaused || state.isVictory || state.isGameOver) return;
         const { locationX, locationY } = evt.nativeEvent;
@@ -450,6 +285,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         }
       },
       onPanResponderRelease: () => {
+        setIsScrollingEnabled(true);
         const state = gameStateRef.current;
         if (state.isPaused || state.isVictory || state.isGameOver) return;
         setSelectedCells((current) => {
@@ -462,6 +298,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           }
           return [];
         });
+      },
+      onPanResponderTerminate: () => {
+        setIsScrollingEnabled(true);
+        setSelectedCells([]);
+        setSpelledWord('');
       },
     })
   ).current;
@@ -604,7 +445,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           onPress={onExit}
           style={({ pressed }) => [styles.backBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="map" size={20} color="#286BEA" />
+          <MaterialIcons name="map" size={20} color="#7C3AED" />
           <Text style={styles.backBtnText}>MAP</Text>
         </Pressable>
 
@@ -784,10 +625,117 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         </Pressable>
       </View>
 
-      {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
+      {/* Timer & Streak Row (Below Spelling Bar) */}
+      <View style={styles.timerControlRow}>
+        <View style={styles.timerStreakGroup}>
+          <Animated.View
+            style={[
+              styles.timerBadge,
+              {
+                backgroundColor: timerTheme.bg,
+                borderColor: timerTheme.border,
+                transform: [{ scale: pulseAnim }],
+              },
+            ]}
+          >
+            <MaterialIcons name="timer" size={18} color={timerTheme.text} />
+            <Text style={[styles.timerText, { color: timerTheme.text }]}>
+              {formatTime(timeLeft)}
+            </Text>
+          </Animated.View>
+
+          {/* 🔥 STREAK BADGE (Right next to Time!) */}
+          <View style={styles.streakWrapper}>
+            {/* Shockwave Aura Burst Ring */}
+            <Animated.View
+              style={[
+                styles.shockwaveRing,
+                {
+                  borderColor: streakStyle.icon,
+                  opacity: ringOpacityAnim,
+                  transform: [{ scale: ringScaleAnim }],
+                },
+              ]}
+            />
+
+            <Animated.View
+              style={[
+                styles.streakBadge,
+                {
+                  backgroundColor: streakStyle.bg,
+                  borderColor: streakStyle.border,
+                  transform: [
+                    { scale: Animated.multiply(streakScaleAnim, activeStreakPulse) },
+                    {
+                      rotate: streakRotateAnim.interpolate({
+                        inputRange: [-1, 0, 1],
+                        outputRange: ['-14deg', '0deg', '14deg'],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
+              {/* Animated Flame Icon */}
+              <Animated.View
+                style={{
+                  transform: [
+                    { scale: iconScaleAnim },
+                    {
+                      rotate: iconRotateAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: ['0deg', '360deg'],
+                      }),
+                    },
+                  ],
+                }}
+              >
+                <MaterialIcons
+                  name={wordStreak >= 4 ? 'local-fire-department' : 'whatshot'}
+                  size={20}
+                  color={streakStyle.icon}
+                />
+              </Animated.View>
+
+              <Text style={[styles.streakText, { color: streakStyle.text }]}>
+                {wordStreak > 0 ? `${wordStreak}x` : '0x'}
+              </Text>
+            </Animated.View>
+
+            {/* 6 Radial Flame Particles Bursting directly from Icon */}
+            {particleAnims.map((p, idx) => (
+              <Animated.View
+                key={`particle-${idx}`}
+                pointerEvents="none"
+                style={[
+                  styles.fireParticle,
+                  {
+                    opacity: p.opacity,
+                    transform: [
+                      { translateX: p.x },
+                      { translateY: p.y },
+                      { scale: p.scale },
+                    ],
+                  },
+                ]}
+              >
+                <MaterialIcons name="whatshot" size={13} color={streakStyle.icon} />
+              </Animated.View>
+            ))}
+          </View>
+        </View>
+
+        <Pressable
+          onPress={() => setIsPaused(true)}
+          style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
+        >
+          <MaterialIcons name="pause" size={20} color="#172858" />
+        </Pressable>
+      </View>
+
       {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
       <View
-        style={[styles.matrixCard, { width: GRID_SIZE + 24, height: GRID_SIZE + 24 }]}
+        style={[styles.matrixCard, { width: GRID_SIZE, height: GRID_SIZE }]}
       >
         <View
           {...panResponder.panHandlers}
@@ -933,6 +881,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                 <Text style={styles.rewardValue}>+50</Text>
                 <Text style={styles.rewardLabel}>Coins</Text>
               </View>
+              <View style={[styles.rewardBox, { borderColor: '#FDBA74', backgroundColor: '#FFF7ED' }]}>
+                <MaterialIcons name="local-fire-department" size={22} color="#FF4500" />
+                <Text style={[styles.rewardValue, { color: '#EA580C' }]}>+10</Text>
+                <Text style={[styles.rewardLabel, { color: '#C2410C' }]}>Strike 🔥</Text>
+              </View>
               <View style={styles.rewardBox}>
                 <MaterialIcons name="military-tech" size={22} color="#7C3AED" />
                 <Text style={styles.rewardValue}>+100</Text>
@@ -950,35 +903,6 @@ export const NativeGameView: React.FC<GameViewProps> = ({
               <Text style={styles.continueBtnText}>NEXT LEVEL</Text>
             </Pressable>
           </Animated.View>
-        </View>
-      </Modal>
-
-      {/* Time Up / Game Over Modal */}
-      <Modal visible={isGameOver} transparent animationType="fade">
-        <View style={styles.modalBackdrop}>
-          <View style={styles.gameOverCard}>
-            <View style={styles.timerCircle}>
-              <MaterialIcons name="timer-off" size={38} color="#EF3B3B" />
-            </View>
-            <Text style={styles.gameOverTitle}>TIME'S UP!</Text>
-            <Text style={styles.gameOverSubtitle}>
-              You ran out of time on Level {levelId}!
-            </Text>
-
-            <Pressable
-              onPress={() => resetLevelState(currentLevel)}
-              style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
-            >
-              <Text style={styles.retryBtnText}>TRY AGAIN</Text>
-            </Pressable>
-
-            <Pressable
-              onPress={onExit}
-              style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
-            >
-              <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
-            </Pressable>
-          </View>
         </View>
       </Modal>
 
@@ -1021,17 +945,37 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           }
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#FAF8FF',
     alignItems: 'center',
     paddingHorizontal: 14,
     paddingTop: 8,
+    paddingBottom: 110,
+  },
+  timerControlRow: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+    paddingHorizontal: 4,
+  },
+  timerBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F0EAFF',
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 18,
+    borderWidth: 2,
+    borderColor: 'rgba(40, 107, 234, 0.25)',
+    gap: 4,
   },
   timerControlRow: {
     width: '100%',
@@ -1239,9 +1183,10 @@ const styles = StyleSheet.create({
   },
   matrixCard: {
     backgroundColor: 'transparent',
-    padding: 12,
+    padding: 2,
     alignItems: 'center',
     justifyContent: 'center',
+    marginVertical: 4,
   },
   gridContainer: {
     backgroundColor: 'transparent',
@@ -1262,11 +1207,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     gap: 8,
-    marginTop: 10,
+    marginTop: 8,
   },
   actionBtn: {
     flex: 1,
-    height: 52,
+    height: 50,
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
@@ -1478,64 +1423,6 @@ const styles = StyleSheet.create({
   },
   pressed: {
     transform: [{ scale: 0.96 }],
-  },
-  timerStreakGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  streakWrapper: {
-    position: 'relative',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  streakBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 18,
-    borderWidth: 2,
-    gap: 4,
-    elevation: 3,
-    shadowColor: '#FF6B00',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-  },
-  streakText: {
-    fontWeight: '900',
-    fontSize: 14,
-    letterSpacing: 0.5,
-  },
-  fireParticle: {
-    position: 'absolute',
-    alignSelf: 'center',
-  },
-  shockwaveRing: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    borderRadius: 18,
-    borderWidth: 2.5,
-  },
-  streakVictoryBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 107, 0, 0.15)',
-    borderWidth: 1.5,
-    borderColor: '#FF6B00',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 12,
-    gap: 4,
-    marginTop: 8,
-  },
-  streakVictoryText: {
-    color: '#FF6B00',
-    fontWeight: '800',
-    fontSize: 12,
-    letterSpacing: 0.5,
   },
 });
 
