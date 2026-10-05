@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   View,
+  ScrollView,
   Text,
   StyleSheet,
   Pressable,
@@ -118,6 +119,53 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       scale: new Animated.Value(0.5),
     }))
   ).current;
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  const triggerStreakAnimation = (currentStreak: number) => {
+    streakScaleAnim.setValue(1);
+    Animated.sequence([
+      Animated.spring(streakScaleAnim, { toValue: 1.35, friction: 3, tension: 60, useNativeDriver: true }),
+      Animated.spring(streakScaleAnim, { toValue: 1, friction: 4, tension: 40, useNativeDriver: true }),
+    ]).start();
+
+    particleAnims.forEach((p, idx) => {
+      const angle = (idx * 60 * Math.PI) / 180;
+      const distance = 24;
+      p.x.setValue(0);
+      p.y.setValue(0);
+      p.opacity.setValue(1);
+      p.scale.setValue(0.5);
+
+      Animated.parallel([
+        Animated.timing(p.x, { toValue: Math.cos(angle) * distance, duration: 400, useNativeDriver: true }),
+        Animated.timing(p.y, { toValue: Math.sin(angle) * distance, duration: 400, useNativeDriver: true }),
+        Animated.timing(p.opacity, { toValue: 0, duration: 400, useNativeDriver: true }),
+        Animated.timing(p.scale, { toValue: 1.2, duration: 400, useNativeDriver: true }),
+      ]).start();
+    });
+  };
+
+  const triggerStreakReset = () => {
+    setWordStreak(0);
+  };
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+  };
+
+  const timerTheme = timeLeft <= 30
+    ? { bg: '#FEE2E2', border: '#EF4444', text: '#DC2626' }
+    : { bg: '#F0EAFF', border: 'rgba(40, 107, 234, 0.25)', text: '#7652D9' };
+
+  const getStreakStyle = (s: number) => {
+    if (s >= 5) return { bg: '#FEF3C7', border: '#F59E0B', icon: '#D97706', text: '#B45309' };
+    if (s >= 3) return { bg: '#FFEDD5', border: '#FB923C', icon: '#EA580C', text: '#C2410C' };
+    if (s >= 1) return { bg: '#FEF2F2', border: '#FCA5A5', icon: '#EF4444', text: '#B91C1C' };
+    return { bg: '#F3F4F6', border: '#E5E7EB', icon: '#9CA3AF', text: '#6B7280' };
+  };
+  const streakStyle = getStreakStyle(wordStreak);
 
   // Persistent flame pulse effect when wordStreak >= 2
   useEffect(() => {
@@ -438,7 +486,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       {/* Top Level Nav Bar */}
       <View style={styles.topNav}>
         <Pressable
@@ -625,113 +673,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         </Pressable>
       </View>
 
-      {/* Timer & Streak Row (Below Spelling Bar) */}
-      <View style={styles.timerControlRow}>
-        <View style={styles.timerStreakGroup}>
-          <Animated.View
-            style={[
-              styles.timerBadge,
-              {
-                backgroundColor: timerTheme.bg,
-                borderColor: timerTheme.border,
-                transform: [{ scale: pulseAnim }],
-              },
-            ]}
-          >
-            <MaterialIcons name="timer" size={18} color={timerTheme.text} />
-            <Text style={[styles.timerText, { color: timerTheme.text }]}>
-              {formatTime(timeLeft)}
-            </Text>
-          </Animated.View>
 
-          {/* 🔥 STREAK BADGE (Right next to Time!) */}
-          <View style={styles.streakWrapper}>
-            {/* Shockwave Aura Burst Ring */}
-            <Animated.View
-              style={[
-                styles.shockwaveRing,
-                {
-                  borderColor: streakStyle.icon,
-                  opacity: ringOpacityAnim,
-                  transform: [{ scale: ringScaleAnim }],
-                },
-              ]}
-            />
-
-            <Animated.View
-              style={[
-                styles.streakBadge,
-                {
-                  backgroundColor: streakStyle.bg,
-                  borderColor: streakStyle.border,
-                  transform: [
-                    { scale: Animated.multiply(streakScaleAnim, activeStreakPulse) },
-                    {
-                      rotate: streakRotateAnim.interpolate({
-                        inputRange: [-1, 0, 1],
-                        outputRange: ['-14deg', '0deg', '14deg'],
-                      }),
-                    },
-                  ],
-                },
-              ]}
-            >
-              {/* Animated Flame Icon */}
-              <Animated.View
-                style={{
-                  transform: [
-                    { scale: iconScaleAnim },
-                    {
-                      rotate: iconRotateAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: ['0deg', '360deg'],
-                      }),
-                    },
-                  ],
-                }}
-              >
-                <MaterialIcons
-                  name={wordStreak >= 4 ? 'local-fire-department' : 'whatshot'}
-                  size={20}
-                  color={streakStyle.icon}
-                />
-              </Animated.View>
-
-              <Text style={[styles.streakText, { color: streakStyle.text }]}>
-                {wordStreak > 0 ? `${wordStreak}x` : '0x'}
-              </Text>
-            </Animated.View>
-
-            {/* 6 Radial Flame Particles Bursting directly from Icon */}
-            {particleAnims.map((p, idx) => (
-              <Animated.View
-                key={`particle-${idx}`}
-                pointerEvents="none"
-                style={[
-                  styles.fireParticle,
-                  {
-                    opacity: p.opacity,
-                    transform: [
-                      { translateX: p.x },
-                      { translateY: p.y },
-                      { scale: p.scale },
-                    ],
-                  },
-                ]}
-              >
-                <MaterialIcons name="whatshot" size={13} color={streakStyle.icon} />
-              </Animated.View>
-            ))}
-          </View>
-        </View>
-
-        <Pressable
-          onPress={() => setIsPaused(true)}
-          style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="pause" size={20} color="#172858" />
-        </Pressable>
-      </View>
 
       {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
       <View
@@ -950,6 +892,56 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 };
 
 const styles = StyleSheet.create({
+  timerStreakGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  streakWrapper: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  shockwaveRing: {
+    position: 'absolute',
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    borderWidth: 2,
+  },
+  streakBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 16,
+    borderWidth: 1.5,
+    gap: 4,
+  },
+  streakText: {
+    fontWeight: '900',
+    fontSize: 13,
+  },
+  fireParticle: {
+    position: 'absolute',
+  },
+  streakVictoryBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF7ED',
+    borderWidth: 1.5,
+    borderColor: '#FFEDD5',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+    gap: 4,
+    marginTop: 6,
+  },
+  streakVictoryText: {
+    color: '#EA580C',
+    fontWeight: '900',
+    fontSize: 12,
+  },
   container: {
     flexGrow: 1,
     backgroundColor: '#FAF8FF',
@@ -977,25 +969,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(40, 107, 234, 0.25)',
     gap: 4,
   },
-  timerControlRow: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 8,
-    paddingHorizontal: 4,
-  },
-  timerBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F0EAFF',
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 18,
-    borderWidth: 2,
-    borderColor: 'rgba(40, 107, 234, 0.25)',
-    gap: 4,
-  },
+
   topNav: {
     width: '100%',
     flexDirection: 'row',

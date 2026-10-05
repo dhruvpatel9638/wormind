@@ -1,12 +1,16 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
+  Text,
+  Pressable,
+  Modal,
   SafeAreaView,
   StatusBar,
   Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Screen, PlayerState } from './src/types';
 import { NativeHeader } from './src/native/components/Header';
 import { NativeBottomNav } from './src/native/components/BottomNav';
@@ -14,14 +18,21 @@ import { NativeWorldsView } from './src/native/views/WorldsView';
 import { NativeGameView } from './src/native/views/GameView';
 import { NativeDailyView } from './src/native/views/DailyView';
 import { NativeProfileView } from './src/native/views/ProfileView';
+import { AdBanner } from './src/native/components/AdBanner';
+import { NativeLoadingScreen } from './src/native/components/LoadingScreen';
+import { DAILY_REWARDS } from './src/data/gameData';
 import { nativeAudio } from './src/native/audio';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
+const START_LEVEL_ID = 24;
+const START_DEV_COINS = 1000;
 
 export default function App() {
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
   const [activeLevelId, setActiveLevelId] = useState<number>(START_LEVEL_ID);
+  const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
+  const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
 
   const [playerState, setPlayerState] = useState<PlayerState>({
     coins: START_DEV_COINS,
@@ -42,7 +53,14 @@ export default function App() {
     soundEnabled: true,
     musicEnabled: true,
     hapticsEnabled: true,
+    strike: 10,
   });
+
+  const todayDateStr = new Date().toISOString().split('T')[0];
+  const yesterdayDateStr = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+  const activeClaimedDays = playerState.claimedDays || [1, 2, 3, 4];
+  const canClaimDaily = playerState.lastDailyClaimDate !== todayDateStr;
+  const currentDailyDay = Math.min((activeClaimedDays.length % 7) + 1, 7);
 
   // Load saved state from native AsyncStorage
   useEffect(() => {
@@ -109,6 +127,23 @@ export default function App() {
     }
     setActiveLevelId(levelId);
     setCurrentScreen('game');
+  };
+
+  const handleFailLevel = () => {
+    setPlayerState((prev) => ({
+      ...prev,
+      strike: 0,
+    }));
+  };
+
+  const handleRestoreStrike = (): boolean => {
+    if (playerState.coins < 100) return false;
+    setPlayerState((prev) => ({
+      ...prev,
+      coins: prev.coins - 100,
+      strike: 10,
+    }));
+    return true;
   };
 
   const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
@@ -207,6 +242,8 @@ export default function App() {
       wordsDiscovered: 148,
       soundEnabled: true,
       musicEnabled: true,
+      hapticsEnabled: true,
+      strike: 10,
     });
     setActiveLevelId(START_LEVEL_ID);
   };
