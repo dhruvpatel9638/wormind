@@ -23,21 +23,22 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   onStartLevel,
-  activeLevelId = 51,
+  activeLevelId = 1,
 }) => {
   const [selectedModalLevel, setSelectedModalLevel] = useState<number | null>(null);
   const [alertInfo, setAlertInfo] = useState<{title: string, message: string} | null>(null);
   const scrollRef = useRef<ScrollView>(null);
 
+  const scrollToActiveLevel = () => {
+    if (scrollRef.current) {
+      const mapHeight = INITIAL_LEVELS.length * 110 + 200;
+      const y = mapHeight - (activeLevelId * 110) - 300; 
+      scrollRef.current.scrollTo({ y: Math.max(0, y), animated: true });
+    }
+  };
+
   useEffect(() => {
-    // Scroll to the active level after a brief delay to ensure layout is ready
-    setTimeout(() => {
-      if (scrollRef.current) {
-        const mapHeight = INITIAL_LEVELS.length * 110 + 200;
-        const y = mapHeight - (activeLevelId * 110) - 400; // Center the active level roughly
-        scrollRef.current.scrollTo({ y: Math.max(0, y), animated: false });
-      }
-    }, 100);
+    setTimeout(scrollToActiveLevel, 300);
   }, [activeLevelId]);
 
   const handleNodeClick = (lvl: number, isLocked: boolean) => {
@@ -49,12 +50,16 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     setSelectedModalLevel(lvl);
   };
 
+  const completedInChapter = Math.min(25, Math.max(0, activeLevelId - 1));
+  const chapterProgressPercent = Math.min(100, Math.round((completedInChapter / 25) * 100));
+
   return (
     <View style={styles.container}>
       <ScrollView
         ref={scrollRef}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        onLayout={scrollToActiveLevel}
       >
         {/* Chapter 1 Card */}
         <View style={styles.chapterCard}>
@@ -65,7 +70,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             </View>
             <View style={styles.chapterStars}>
               <MaterialIcons name="star" size={14} color="#F59E0B" />
-              <Text style={styles.chapterStarsText}>18/25</Text>
+              <Text style={styles.chapterStarsText}>{completedInChapter}/25</Text>
             </View>
           </View>
 
@@ -75,7 +80,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
               colors={['#FFC928', '#0D9488']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
-              style={[styles.progressBarFill, { width: '72%' }]}
+              style={[styles.progressBarFill, { width: `${chapterProgressPercent}%` }]}
             />
           </View>
 
@@ -121,7 +126,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
           <Svg style={StyleSheet.absoluteFill} viewBox={`0 0 360 ${INITIAL_LEVELS.length * 110 + 200}`} preserveAspectRatio="none">
             {/* Lavender background wide road */}
             <Path
-              d={INITIAL_LEVELS.map((_, idx) => ` ${idx === 0 ? 'M' : 'L'} ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
+              d={`M 175 ${INITIAL_LEVELS.length * 110 + 200}` + INITIAL_LEVELS.map((_, idx) => ` L ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
               fill="none"
               stroke="rgba(212, 181, 255, 0.55)"
               strokeWidth="56"
@@ -129,7 +134,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             />
             {/* White road track */}
             <Path
-              d={INITIAL_LEVELS.map((_, idx) => ` ${idx === 0 ? 'M' : 'L'} ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
+              d={`M 175 ${INITIAL_LEVELS.length * 110 + 200}` + INITIAL_LEVELS.map((_, idx) => ` L ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
               fill="none"
               stroke="rgba(255, 255, 255, 0.75)"
               strokeWidth="42"
@@ -137,7 +142,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             />
             {/* Dashed purple center line */}
             <Path
-              d={INITIAL_LEVELS.map((_, idx) => ` ${idx === 0 ? 'M' : 'L'} ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
+              d={`M 175 ${INITIAL_LEVELS.length * 110 + 200}` + INITIAL_LEVELS.map((_, idx) => ` L ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
               fill="none"
               stroke="rgba(124, 58, 237, 0.35)"
               strokeWidth="3"

@@ -14,30 +14,57 @@ import { DAILY_REWARDS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
 
 interface DailyViewProps {
-  hasClaimedDay5: boolean;
-  onClaimDay5: () => void;
+  claimedDays?: number[];
+  canClaimToday?: boolean;
+  currentDayToClaim?: number;
+  streak?: number;
+  onClaimDaily?: (day: number) => void;
+  hasClaimedDay5?: boolean;
+  onClaimDay5?: () => void;
   onAddCoins: (amount: number) => void;
   onAddHints: (amount: number) => void;
 }
 
 export const NativeDailyView: React.FC<DailyViewProps> = ({
+  claimedDays = [1, 2, 3, 4],
+  canClaimToday = true,
+  currentDayToClaim = 5,
+  streak = 5,
+  onClaimDaily,
   hasClaimedDay5,
   onClaimDay5,
   onAddCoins,
   onAddHints,
 }) => {
   const [showClaimModal, setShowClaimModal] = useState<boolean>(false);
+  const [claimedMessage, setClaimedMessage] = useState<string>('You received your daily reward!');
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [wheelPrize, setWheelPrize] = useState<string | null>(null);
 
   const spinAnim = useRef(new Animated.Value(0)).current;
 
-  const handleClaim = () => {
-    if (hasClaimedDay5) return;
+  const handleClaim = (day: number) => {
+    if (!canClaimToday) return;
+    const reward = DAILY_REWARDS.find((r) => r.day === day) || DAILY_REWARDS[0];
     nativeAudio.playCoin();
-    onClaimDay5();
-    onAddCoins(150);
-    onAddHints(2);
+
+    if (onClaimDaily) {
+      onClaimDaily(day);
+    } else {
+      if (onClaimDay5) onClaimDay5();
+      if (reward.coins) onAddCoins(reward.coins);
+      if (reward.hints) onAddHints(reward.hints);
+    }
+
+    let msg = `You received ${reward.rewardText}!`;
+    if (reward.coins > 0 && reward.hints > 0) {
+      msg = `You received +${reward.coins} Coins and +${reward.hints} Free Hints!`;
+    } else if (reward.coins > 0) {
+      msg = `You received +${reward.coins} Coins!`;
+    } else if (reward.hints > 0) {
+      msg = `You received +${reward.hints} Free Hints!`;
+    }
+    setClaimedMessage(msg);
     setShowClaimModal(true);
   };
 
@@ -83,14 +110,18 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
             <View style={styles.fireCircle}>
               <MaterialIcons name="local-fire-department" size={26} color="#EF3B3B" />
             </View>
-            <View>
+            <View style={{ flex: 1 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                <Text style={styles.streakTitle}>5 DAY STREAK!</Text>
+                <Text style={styles.streakTitle}>{streak} DAY STREAK!</Text>
                 <View style={styles.onFireBadge}>
                   <Text style={styles.onFireText}>HOT</Text>
                 </View>
               </View>
-              <Text style={styles.streakSub}>Keep it going tomorrow for the Mega Chest!</Text>
+              <Text style={styles.streakSub}>
+                {canClaimToday
+                  ? `Day ${currentDayToClaim} login reward is ready to claim!`
+                  : `Reward claimed for today! Come back tomorrow for Day ${currentDayToClaim > 7 ? 1 : currentDayToClaim}.`}
+              </Text>
             </View>
           </View>
         </View>
@@ -99,9 +130,8 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
         <Text style={styles.sectionTitle}>7-DAY LOGIN REWARDS</Text>
         <View style={styles.rewardsGrid}>
           {DAILY_REWARDS.map((reward) => {
-            const isDay5 = reward.day === 5;
-            const isClaimed = reward.day <= 4 || (isDay5 && hasClaimedDay5);
-            const isReady = isDay5 && !hasClaimedDay5;
+            const isClaimed = claimedDays.includes(reward.day);
+            const isReady = canClaimToday && reward.day === currentDayToClaim;
 
             return (
               <View
@@ -128,7 +158,7 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
                   </View>
                 ) : isReady ? (
                   <Pressable
-                    onPress={handleClaim}
+                    onPress={() => handleClaim(reward.day)}
                     style={({ pressed }) => [styles.claimBtn, pressed && styles.pressed]}
                   >
                     <Text style={styles.claimBtnText}>CLAIM</Text>
@@ -190,7 +220,7 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
           <View style={styles.claimPopup}>
             <MaterialIcons name="celebration" size={48} color="#FFC928" />
             <Text style={styles.popupTitle}>REWARD CLAIMED!</Text>
-            <Text style={styles.popupSub}>You received +150 Coins and +2 Free Hints!</Text>
+            <Text style={styles.popupSub}>{claimedMessage}</Text>
 
             <Pressable
               onPress={() => setShowClaimModal(false)}

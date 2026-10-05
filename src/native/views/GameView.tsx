@@ -11,6 +11,7 @@ import {
   Easing,
   PanResponder,
   BackHandler,
+  ScrollView,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -26,6 +27,9 @@ interface GameViewProps {
   onCompleteLevel: (levelId: number, stars: number, coinsEarned: number) => void;
   coins: number;
   onDeductCoins: (amount: number) => boolean;
+  strike?: number;
+  onFailLevel?: () => void;
+  onRestoreStrike?: () => boolean;
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -38,6 +42,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   onCompleteLevel,
   coins,
   onDeductCoins,
+  strike = 10,
+  onFailLevel,
+  onRestoreStrike,
 }) => {
   const currentLevel =
     INITIAL_LEVELS.find((l) => l.id === levelId) ||
@@ -59,6 +66,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [timeLeft, setTimeLeft] = useState<number>(120);
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
+  const [isScrollingEnabled, setIsScrollingEnabled] = useState<boolean>(true);
 
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const star1Anim = useRef(new Animated.Value(0)).current;
@@ -80,6 +88,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       star3Anim.setValue(0);
     }
   }, [isVictory]);
+
+  // Pause BGM when entering GameView, resume when exiting
+  useEffect(() => {
+    nativeAudio.setInGame(true);
+    return () => {
+      nativeAudio.setInGame(false);
+    };
+  }, []);
 
   const [lastFoundMessage, setLastFoundMessage] = useState<string | null>(null);
 
@@ -152,6 +168,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         if (prev <= 1) {
           clearInterval(timer);
           setIsGameOver(true);
+          onFailLevel?.();
           return 0;
         }
         return prev - 1;
@@ -388,7 +405,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
+      onPanResponderTerminationRequest: () => false,
       onPanResponderGrant: (evt) => {
+        setIsScrollingEnabled(false);
         const state = gameStateRef.current;
         if (state.isPaused || state.isVictory || state.isGameOver) return;
         const { locationX, locationY } = evt.nativeEvent;
@@ -450,6 +469,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         }
       },
       onPanResponderRelease: () => {
+        setIsScrollingEnabled(true);
         const state = gameStateRef.current;
         if (state.isPaused || state.isVictory || state.isGameOver) return;
         setSelectedCells((current) => {
@@ -462,6 +482,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           }
           return [];
         });
+      },
+      onPanResponderTerminate: () => {
+        setIsScrollingEnabled(true);
+        setSelectedCells([]);
+        setSpelledWord('');
       },
     })
   ).current;
@@ -597,30 +622,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   };
 
   return (
-    <View style={styles.container}>
-      {/* Top Level Nav Bar */}
-      <View style={styles.topNav}>
-        <Pressable
-          onPress={onExit}
-          style={({ pressed }) => [styles.backBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="map" size={20} color="#286BEA" />
-          <Text style={styles.backBtnText}>MAP</Text>
-        </Pressable>
+    <ScrollView
+      style={{ flex: 1, backgroundColor: '#FAF8FF' }}
+      contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}
+      scrollEnabled={isScrollingEnabled}
+      bounces={true}
+    >
 
-        <View style={styles.levelBadge}>
-          <MaterialIcons name="star" size={16} color="#FFC928" />
-          <Text style={styles.levelBadgeText}>LEVEL {levelId}</Text>
-          <Text style={styles.levelBadgeSub}>• {currentLevel.title}</Text>
-        </View>
-
-        <Pressable
-          onPress={() => setIsPaused(true)}
-          style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="pause" size={20} color="#172858" />
-        </Pressable>
-      </View>
 
       {/* Target Words Drawer */}
       <View style={styles.wordsCard}>
@@ -785,9 +794,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       </View>
 
       {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
-      {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
       <View
-        style={[styles.matrixCard, { width: GRID_SIZE + 24, height: GRID_SIZE + 24 }]}
+        style={[styles.matrixCard, { width: GRID_SIZE, height: GRID_SIZE }]}
       >
         <View
           {...panResponder.panHandlers}
@@ -933,6 +941,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                 <Text style={styles.rewardValue}>+50</Text>
                 <Text style={styles.rewardLabel}>Coins</Text>
               </View>
+              <View style={[styles.rewardBox, { borderColor: '#FDBA74', backgroundColor: '#FFF7ED' }]}>
+                <MaterialIcons name="local-fire-department" size={22} color="#FF4500" />
+                <Text style={[styles.rewardValue, { color: '#EA580C' }]}>+10</Text>
+                <Text style={[styles.rewardLabel, { color: '#C2410C' }]}>Strike 🔥</Text>
+              </View>
               <View style={styles.rewardBox}>
                 <MaterialIcons name="military-tech" size={22} color="#7C3AED" />
                 <Text style={styles.rewardValue}>+100</Text>
@@ -965,11 +978,34 @@ export const NativeGameView: React.FC<GameViewProps> = ({
               You ran out of time on Level {levelId}!
             </Text>
 
+            {/* Strike Penalty Banner */}
+            <View style={styles.strikePenaltyBox}>
+              <MaterialIcons name="local-fire-department" size={24} color="#EF4444" />
+              <View style={{ marginLeft: 8, flex: 1 }}>
+                <Text style={styles.strikePenaltyTitle}>-50 STRIKE PENALTY 💔</Text>
+                <Text style={styles.strikePenaltySub}>
+                  {strike > 0
+                    ? `Current Strike: 🔥 ${strike}`
+                    : 'Strike is 0! Restore with 100 Coins to keep playing.'}
+                </Text>
+              </View>
+            </View>
+
             <Pressable
-              onPress={() => resetLevelState(currentLevel)}
+              onPress={() => {
+                if (strike <= 0) {
+                  if (onRestoreStrike && onRestoreStrike()) {
+                    resetLevelState(currentLevel);
+                  }
+                  return;
+                }
+                resetLevelState(currentLevel);
+              }}
               style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
             >
-              <Text style={styles.retryBtnText}>TRY AGAIN</Text>
+              <Text style={styles.retryBtnText}>
+                {strike <= 0 ? 'RESTORE (100 🪙) & RETRY' : 'TRY AGAIN'}
+              </Text>
             </Pressable>
 
             <Pressable
@@ -1021,17 +1057,18 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           }
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#FAF8FF',
     alignItems: 'center',
     paddingHorizontal: 14,
     paddingTop: 8,
+    paddingBottom: 110,
   },
   timerControlRow: {
     width: '100%',
@@ -1239,9 +1276,10 @@ const styles = StyleSheet.create({
   },
   matrixCard: {
     backgroundColor: 'transparent',
-    padding: 12,
+    padding: 2,
     alignItems: 'center',
     justifyContent: 'center',
+    marginVertical: 4,
   },
   gridContainer: {
     backgroundColor: 'transparent',
@@ -1262,11 +1300,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     gap: 8,
-    marginTop: 10,
+    marginTop: 8,
   },
   actionBtn: {
     flex: 1,
-    height: 52,
+    height: 50,
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
@@ -1536,6 +1574,29 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 12,
     letterSpacing: 0.5,
+  },
+  strikePenaltyBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FEF2F2',
+    borderWidth: 1.5,
+    borderColor: '#FECACA',
+    borderRadius: 14,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    marginBottom: 16,
+    width: '100%',
+  },
+  strikePenaltyTitle: {
+    color: '#DC2626',
+    fontWeight: '900',
+    fontSize: 13,
+  },
+  strikePenaltySub: {
+    color: '#7F1D1D',
+    fontSize: 11,
+    fontWeight: '600',
+    marginTop: 2,
   },
 });
 

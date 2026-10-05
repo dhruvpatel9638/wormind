@@ -3,16 +3,16 @@ import { createAudioPlayer, setAudioModeAsync } from 'expo-audio';
 // Pure React Native Audio Engine (zero browser / WebView)
 // Uses local offline assets bundled directly in the app
 const SOUND_ASSETS = {
-  bgm: require('../../assets/sounds/bgm.ogg'),
-  chime: require('../../assets/sounds/chime.ogg'),
-  coin: require('../../assets/sounds/coin.ogg'),
-  tap: require('../../assets/sounds/tap.wav'),
-  victory: require('../../assets/sounds/victory.ogg'),
+  bgm: require('../../assets/sounds/bgm.mp3'),
+  btn_1: require('../../assets/sounds/btn_1.wav'),
+  btn_3: require('../../assets/sounds/btn_3.wav'),
+  level_win: require('../../assets/sounds/level win.mp3'),
 };
 
 class NativeSoundEngine {
   private isSoundEnabled: boolean = true;
   private isMusicEnabled: boolean = true;
+  private isInGame: boolean = false;
   private bgmPlayer: any = null;
 
   constructor() {
@@ -28,15 +28,15 @@ class NativeSoundEngine {
     } catch (e) {
       console.warn('Audio mode init error:', e);
     }
-    // Auto-play BGM if music is enabled
-    if (this.isMusicEnabled) {
+    // Auto-play BGM if music is enabled and not in game
+    if (this.isMusicEnabled && !this.isInGame) {
       setTimeout(() => this.playBgm(), 500);
     }
   }
 
   // ===== BACKGROUND MUSIC =====
   public async playBgm() {
-    if (!this.isMusicEnabled) return;
+    if (!this.isMusicEnabled || this.isInGame) return;
     try {
       if (!this.bgmPlayer) {
         this.bgmPlayer = createAudioPlayer(SOUND_ASSETS.bgm);
@@ -57,9 +57,21 @@ class NativeSoundEngine {
     } catch (e) {}
   }
 
+  public setInGame(inGame: boolean) {
+    if (this.isInGame === inGame) return;
+    this.isInGame = inGame;
+    if (inGame) {
+      this.pauseBgm();
+    } else {
+      if (this.isMusicEnabled) {
+        this.playBgm();
+      }
+    }
+  }
+
   public setMusicEnabled(enabled: boolean) {
     this.isMusicEnabled = enabled;
-    if (enabled) {
+    if (enabled && !this.isInGame) {
       this.playBgm();
     } else {
       this.pauseBgm();
@@ -92,15 +104,15 @@ class NativeSoundEngine {
   }
 
   public playLetterTap(step: number = 0) {
-    this.playSound(SOUND_ASSETS.tap, 0.4);
+    this.playSound(SOUND_ASSETS.btn_1, 0.4);
   }
 
   public playCoin() {
-    this.playSound(SOUND_ASSETS.coin, 0.6);
+    this.playSound(SOUND_ASSETS.btn_3, 0.6);
   }
 
   public playWordFound() {
-    this.playSound(SOUND_ASSETS.chime, 0.85);
+    this.playSound(SOUND_ASSETS.btn_1, 0.85);
   }
 
   private victoryPlayer: any = null;
@@ -110,58 +122,18 @@ class NativeSoundEngine {
   public playVictory() {
     if (!this.isSoundEnabled) return;
     try {
-      this.stopVictory();
-      this.victoryPlayer = createAudioPlayer(SOUND_ASSETS.victory);
-      if (this.victoryPlayer) {
-        this.victoryPlayer.volume = 0.9;
-        this.victoryPlayer.play();
-      }
-
-      // Wait 3 seconds, then gradually fade out over 1 second (total 4 seconds)
-      this.victoryTimer = setTimeout(() => {
-        if (!this.victoryPlayer) return;
-        let volume = 0.9;
-        const fadeSteps = 20; // number of steps for a smooth fade
-        const stepTime = 50; // 20 * 50ms = 1000ms (1 second fade)
-        const volumeStep = volume / fadeSteps;
-
-        this.fadeInterval = setInterval(() => {
-          if (this.victoryPlayer) {
-            volume -= volumeStep;
-            if (volume <= 0.05) { // Stop precisely when near zero
-              this.stopVictory();
-            } else {
-              this.victoryPlayer.volume = volume;
-            }
-          } else {
-            this.stopVictory();
-          }
-        }, stepTime);
-      }, 3000);
+      this.playSound(SOUND_ASSETS.level_win, 0.9);
     } catch (e) {
       console.warn('Error playing victory sound:', e);
     }
   }
 
   public stopVictory() {
-    if (this.victoryTimer) {
-      clearTimeout(this.victoryTimer);
-      this.victoryTimer = null;
-    }
-    if (this.fadeInterval) {
-      clearInterval(this.fadeInterval);
-      this.fadeInterval = null;
-    }
-    try {
-      if (this.victoryPlayer) {
-        this.victoryPlayer.pause();
-        this.victoryPlayer = null;
-      }
-    } catch (e) {}
+    // Keep empty or minimal to prevent errors if called elsewhere
   }
 
   public playSparkle() {
-    this.playSound(SOUND_ASSETS.chime, 0.5);
+    this.playSound(SOUND_ASSETS.btn_1, 0.5);
   }
 
   public playTick() {
