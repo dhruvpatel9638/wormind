@@ -76,6 +76,7 @@ export default function App() {
     currentLevel: START_LEVEL_ID,
     lastDailyClaimDate: null,
     strike: 10,
+    strikeZeroFails: 0,
   });
 
   const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
@@ -110,11 +111,13 @@ export default function App() {
             ? parsed.currentLevel
             : START_LEVEL_ID;
           const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
+          const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
           setPlayerState((prev) => ({
             ...prev,
             ...parsed,
             currentLevel: savedLevel,
             strike: savedStrike,
+            strikeZeroFails: savedZeroFails,
           }));
           setActiveLevelId(savedLevel);
           nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
@@ -177,7 +180,8 @@ export default function App() {
   };
 
   const handleStartLevel = (levelId: number) => {
-    if ((playerState.strike ?? 10) <= 0) {
+    const isLocked = (playerState.strike ?? 10) <= 0 && (playerState.strikeZeroFails ?? 0) >= 2;
+    if (isLocked) {
       setPendingLevelToStart(levelId);
       setShowRestoreStrikeModal(true);
       return;
@@ -198,16 +202,31 @@ export default function App() {
       ...prev,
       coins: prev.coins - 100,
       strike: (prev.strike || 0) + 10,
+      strikeZeroFails: 0,
     }));
     nativeAudio.playCoin();
     return true;
   };
 
   const handleFailLevel = () => {
-    setPlayerState((prev) => ({
-      ...prev,
-      strike: Math.max(0, (prev.strike || 0) - 50),
-    }));
+    setPlayerState((prev) => {
+      const currentStrike = prev.strike ?? 10;
+      if (currentStrike > 0) {
+        const newStrike = Math.max(0, currentStrike - 50);
+        return {
+          ...prev,
+          strike: newStrike,
+          strikeZeroFails: 0,
+        };
+      } else {
+        const newFails = Math.min(2, (prev.strikeZeroFails || 0) + 1);
+        return {
+          ...prev,
+          strike: 0,
+          strikeZeroFails: newFails,
+        };
+      }
+    });
   };
 
   const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
@@ -227,6 +246,7 @@ export default function App() {
         wordsDiscovered: prev.wordsDiscovered + 5,
         currentLevel: updatedHighest,
         strike: (prev.strike || 0) + 10, // 🔥 +10 Strike on win!
+        strikeZeroFails: 0, // Reset failed zero-strike attempts upon win!
       };
     });
 
@@ -322,6 +342,7 @@ export default function App() {
       currentLevel: START_LEVEL_ID,
       lastDailyClaimDate: null,
       strike: 10,
+      strikeZeroFails: 0,
     });
     setActiveLevelId(START_LEVEL_ID);
   };
@@ -339,12 +360,19 @@ export default function App() {
         level={currentScreen === 'game' ? activeLevelId : (playerState.currentLevel || 1)}
         strike={playerState.strike ?? 10}
         onPressStrike={() => {
-          if ((playerState.strike ?? 10) <= 0) {
+          const isLocked = (playerState.strike ?? 10) <= 0 && (playerState.strikeZeroFails ?? 0) >= 2;
+          if (isLocked) {
             setShowRestoreStrikeModal(true);
+          } else if ((playerState.strike ?? 10) <= 0) {
+            const left = Math.max(0, 2 - (playerState.strikeZeroFails || 0));
+            Alert.alert(
+              '🔥 Strike Grace Period',
+              `Your Strike is 0, but you have ${left} of 2 free games left!\n\nWin any game to get +10 Strike and revive your flame!`
+            );
           } else {
             Alert.alert(
               '🔥 Snapchat Strike',
-              `Current Strike: ${playerState.strike}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`
+              `Current Strike: ${playerState.strike}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, you get 2 free games to revive it before needing 100 Coins!`
             );
           }
         }}
@@ -371,6 +399,7 @@ export default function App() {
             coins={playerState.coins}
             onDeductCoins={handleDeductCoins}
             strike={playerState.strike ?? 10}
+            strikeZeroFails={playerState.strikeZeroFails ?? 0}
             onFailLevel={handleFailLevel}
             onRestoreStrike={handleRestoreStrike}
           />
@@ -425,9 +454,9 @@ export default function App() {
             <View style={styles.fireHeaderCircle}>
               <MaterialIcons name="local-fire-department" size={44} color="#FF4500" />
             </View>
-            <Text style={styles.restoreTitle}>STRIKE IS 0! 🔥</Text>
+            <Text style={styles.restoreTitle}>0 FREE CHANCES LEFT! 🔥</Text>
             <Text style={styles.restoreSub}>
-              Your Snapchat winning strike is currently 0. Restore your strike with 100 Coins to play and start building your fire!
+              Your strike reached 0 and you failed both 2 free chances! Restore your strike with 100 Coins to keep playing and build your flame back up!
             </Text>
 
             <View style={styles.restorePriceBox}>

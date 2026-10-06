@@ -45,6 +45,7 @@ export interface PlayerState {
   currentLevel?: number;
   lastDailyClaimDate?: string | null;
   strike: number;
+  strikeZeroFails?: number;
 }
 
 export interface DailyReward {

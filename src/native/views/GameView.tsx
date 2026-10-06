@@ -28,6 +28,7 @@ interface GameViewProps {
   coins: number;
   onDeductCoins: (amount: number) => boolean;
   strike?: number;
+  strikeZeroFails?: number;
   onFailLevel?: () => void;
   onRestoreStrike?: () => boolean;
 }
@@ -43,6 +44,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   coins,
   onDeductCoins,
   strike = 10,
+  strikeZeroFails = 0,
   onFailLevel,
   onRestoreStrike,
 }) => {
@@ -982,18 +984,26 @@ export const NativeGameView: React.FC<GameViewProps> = ({
             <View style={styles.strikePenaltyBox}>
               <MaterialIcons name="local-fire-department" size={24} color="#EF4444" />
               <View style={{ marginLeft: 8, flex: 1 }}>
-                <Text style={styles.strikePenaltyTitle}>-50 STRIKE PENALTY 💔</Text>
+                <Text style={styles.strikePenaltyTitle}>
+                  {strike > 0
+                    ? '-50 STRIKE PENALTY 💔'
+                    : strikeZeroFails >= 2
+                    ? '0 FREE CHANCES LEFT! 🚫'
+                    : 'STRIKE IS 0! ⚠️'}
+                </Text>
                 <Text style={styles.strikePenaltySub}>
                   {strike > 0
                     ? `Current Strike: 🔥 ${strike}`
-                    : 'Strike is 0! Restore with 100 Coins to keep playing.'}
+                    : strikeZeroFails >= 2
+                    ? 'Both free games failed! Restore Strike for 100 Coins to play.'
+                    : `Free Chances Left: ${Math.max(0, 2 - strikeZeroFails)} of 2 • Win to restore strike!`}
                 </Text>
               </View>
             </View>
 
             <Pressable
               onPress={() => {
-                if (strike <= 0) {
+                if (strike <= 0 && strikeZeroFails >= 2) {
                   if (onRestoreStrike && onRestoreStrike()) {
                     resetLevelState(currentLevel);
                   }
@@ -1004,7 +1014,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
               style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
             >
               <Text style={styles.retryBtnText}>
-                {strike <= 0 ? 'RESTORE (100 🪙) & RETRY' : 'TRY AGAIN'}
+                {strike <= 0 && strikeZeroFails >= 2
+                  ? 'RESTORE (100 🪙) & RETRY'
+                  : strike <= 0
+                  ? `TRY AGAIN (FREE ${Math.max(0, 2 - strikeZeroFails)}/2)`
+                  : 'TRY AGAIN'}
               </Text>
             </Pressable>
 
