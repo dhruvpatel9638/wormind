@@ -6,7 +6,7 @@ const SOUND_ASSETS = {
   bgm: require('../../assets/sounds/bgm.mp3'),
   btn_1: require('../../assets/sounds/btn_1.wav'),
   btn_3: require('../../assets/sounds/btn_3.wav'),
-  level_win: require('../../assets/sounds/level win.mp3'),
+  level_win: require('../../assets/sounds/xmer-soft-treble-win-fade-out-ending-sound-effect-416829.mp3'),
 };
 
 class NativeSoundEngine {
