@@ -7,6 +7,7 @@ import {
   Animated,
   Easing,
   Dimensions,
+  Alert,
 } from 'react-native';
 import Svg, {
   Path,
@@ -68,11 +69,15 @@ const STUDS = Array.from({ length: NUM_STUDS }).map((_, i) => {
 interface LuckyWheelProps {
   onAddCoins: (amount: number) => void;
   onAddHints: (amount: number) => void;
+  canSpinToday?: boolean;
+  onRecordSpin?: () => void;
 }
 
 export const LuckyWheel: React.FC<LuckyWheelProps> = ({
   onAddCoins,
   onAddHints,
+  canSpinToday = true,
+  onRecordSpin,
 }) => {
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [wonPrize, setWonPrize] = useState<WheelPrize | null>(null);
@@ -85,6 +90,13 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
 
   const handleSpin = () => {
     if (isSpinning) return;
+    if (!canSpinToday) {
+      Alert.alert(
+        '🎰 Already Spun Today!',
+        'You have already claimed your Lucky Spin for today.\n\nCome back tomorrow for your next free spin!'
+      );
+      return;
+    }
     setIsSpinning(true);
     setWonPrize(null);
     bannerScale.setValue(0);
@@ -134,6 +146,9 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
       } else if (winningPrize.type === 'hints') {
         onAddHints(winningPrize.amount);
       }
+
+      // Record daily spin completed for today
+      onRecordSpin?.();
 
       // Banner pop-in
       Animated.spring(bannerScale, {
@@ -295,6 +310,14 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
         </Animated.View>
       </View>
 
+      {/* Daily Limit Notice when already spun today */}
+      {!canSpinToday && !wonPrize && (
+        <View style={styles.alreadySpunBadge}>
+          <MaterialIcons name="event-available" size={18} color="#FFD700" />
+          <Text style={styles.alreadySpunText}>Spun for today! Next spin available tomorrow.</Text>
+        </View>
+      )}
+
       {/* Won Prize Celebration Banner */}
       {wonPrize && (
         <Animated.View style={[styles.wonBanner, { transform: [{ scale: bannerScale }] }]}>
@@ -313,25 +336,47 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
       {/* 3D Spin Action Button */}
       <Pressable
         onPress={handleSpin}
-        disabled={isSpinning}
+        disabled={isSpinning || !canSpinToday}
         style={({ pressed }) => [
           styles.spinBtnWrapper,
-          pressed && !isSpinning && styles.pressedBtn,
-          isSpinning && styles.disabledBtn,
+          pressed && !isSpinning && canSpinToday && styles.pressedBtn,
+          (isSpinning || !canSpinToday) && styles.disabledBtn,
         ]}
       >
         <LinearGradient
-          colors={['#FFD700', '#F59E0B', '#D97706']}
+          colors={
+            !canSpinToday
+              ? ['#4C1D95', '#3B0764', '#2E1065']
+              : ['#FFD700', '#F59E0B', '#D97706']
+          }
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
           style={styles.spinBtnGradient}
         >
-          <MaterialIcons name="casino" size={22} color="#451A03" />
-          <Text style={styles.spinBtnText}>
-            {isSpinning ? 'SPINNING...' : 'SPIN WHEEL'}
+          <MaterialIcons
+            name={!canSpinToday ? 'check-circle' : 'casino'}
+            size={22}
+            color={!canSpinToday ? '#C4B5FD' : '#451A03'}
+          />
+          <Text
+            style={[
+              styles.spinBtnText,
+              !canSpinToday && { color: '#E9D5FF' },
+            ]}
+          >
+            {isSpinning
+              ? 'SPINNING...'
+              : !canSpinToday
+              ? 'SPUN TODAY ✓'
+              : 'SPIN WHEEL'}
           </Text>
         </LinearGradient>
-        <View style={styles.spinBtnBevel} />
+        <View
+          style={[
+            styles.spinBtnBevel,
+            !canSpinToday && { backgroundColor: '#1E0B40' },
+          ]}
+        />
       </Pressable>
     </View>
   );
@@ -514,6 +559,27 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.97 }],
   },
   disabledBtn: {
-    opacity: 0.65,
+    opacity: 0.85,
+  },
+  alreadySpunBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    backgroundColor: 'rgba(255, 215, 0, 0.12)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255, 215, 0, 0.35)',
+    borderRadius: 14,
+    paddingVertical: 9,
+    paddingHorizontal: 14,
+    marginBottom: 16,
+    width: '100%',
+  },
+  alreadySpunText: {
+    color: '#FDE68A',
+    fontSize: 12,
+    fontWeight: '800',
+    textAlign: 'center',
+    flex: 1,
   },
 });

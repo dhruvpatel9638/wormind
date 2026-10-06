@@ -75,6 +75,7 @@ export default function App() {
     hapticsEnabled: true,
     currentLevel: START_LEVEL_ID,
     lastDailyClaimDate: null,
+    lastSpinDate: null,
     strike: 10,
     strikeZeroFails: 0,
   });
@@ -86,6 +87,9 @@ export default function App() {
   const yesterdayDateStr = getYesterdayDateString();
   const hasClaimedToday = playerState.lastDailyClaimDate === todayDateStr;
   const canClaimDaily = !hasClaimedToday;
+
+  const hasSpunToday = playerState.lastSpinDate === todayDateStr;
+  const canSpinToday = !hasSpunToday;
 
   // Active claimed days in current 7-day cycle
   // If user completed 7 days and a new day arrived, start a fresh 7-day cycle!
@@ -298,6 +302,13 @@ export default function App() {
     }));
   };
 
+  const handleRecordSpin = () => {
+    setPlayerState((prev) => ({
+      ...prev,
+      lastSpinDate: todayDateStr,
+    }));
+  };
+
   const handleToggleSound = () => {
     setPlayerState((prev) => {
       const next = !prev.soundEnabled;
@@ -341,6 +352,7 @@ export default function App() {
       hapticsEnabled: true,
       currentLevel: START_LEVEL_ID,
       lastDailyClaimDate: null,
+      lastSpinDate: null,
       strike: 10,
       strikeZeroFails: 0,
     });
@@ -416,6 +428,8 @@ export default function App() {
             onClaimDay5={() => handleClaimDaily(currentDailyDay)}
             onAddCoins={handleAddCoins}
             onAddHints={handleAddHints}
+            canSpinToday={canSpinToday}
+            onRecordSpin={handleRecordSpin}
           />
         )}
 

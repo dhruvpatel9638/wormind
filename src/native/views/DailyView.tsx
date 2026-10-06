@@ -24,6 +24,8 @@ interface DailyViewProps {
   onClaimDay5?: () => void;
   onAddCoins: (amount: number) => void;
   onAddHints: (amount: number) => void;
+  canSpinToday?: boolean;
+  onRecordSpin?: () => void;
 }
 
 export const NativeDailyView: React.FC<DailyViewProps> = ({
@@ -36,6 +38,8 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
   onClaimDay5,
   onAddCoins,
   onAddHints,
+  canSpinToday = true,
+  onRecordSpin,
 }) => {
   const [showClaimModal, setShowClaimModal] = useState<boolean>(false);
   const [claimedMessage, setClaimedMessage] = useState<string>('You received your daily reward!');
@@ -143,6 +147,8 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
         <LuckyWheel
           onAddCoins={onAddCoins}
           onAddHints={onAddHints}
+          canSpinToday={canSpinToday}
+          onRecordSpin={onRecordSpin}
         />
       </ScrollView>
 

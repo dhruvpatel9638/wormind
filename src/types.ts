@@ -44,6 +44,7 @@ export interface PlayerState {
   hapticsEnabled: boolean;
   currentLevel?: number;
   lastDailyClaimDate?: string | null;
+  lastSpinDate?: string | null;
   strike: number;
   strikeZeroFails?: number;
 }
