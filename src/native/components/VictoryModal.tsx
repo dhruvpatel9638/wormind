@@ -93,6 +93,15 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
     }
   }, [visible]);
 
+  // Auto-advance after celebration if user hasn't tapped
+  useEffect(() => {
+    if (!visible) return;
+    const timer = setTimeout(() => {
+      onNextLevel();
+    }, 4500);
+    return () => clearTimeout(timer);
+  }, [visible, onNextLevel]);
+
   const haloSpin = sunburstRotate.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
@@ -100,7 +109,7 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
 
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
-      <View style={styles.modalBackdrop}>
+      <Pressable style={styles.modalBackdrop} onPress={onNextLevel}>
         {/* Confetti & Streamer Ribbons ("Zario") Celebration */}
         <PartyConfetti active={visible} />
 
@@ -232,24 +241,13 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
             </View>
           </Animated.View>
 
-          {/* 3D Action Button: NEXT LEVEL */}
-          <Pressable
-            onPress={onNextLevel}
-            style={({ pressed }) => [styles.nextBtnWrapper, pressed && styles.pressedBtn]}
-          >
-            <LinearGradient
-              colors={['#FFD700', '#F59E0B', '#D97706']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 0, y: 1 }}
-              style={styles.nextBtnGradient}
-            >
-              <Text style={styles.nextBtnText}>NEXT LEVEL</Text>
-              <MaterialIcons name="arrow-forward" size={22} color="#451A03" />
-            </LinearGradient>
-            <View style={styles.nextBtnBevel} />
-          </Pressable>
+          {/* Tap anywhere to continue hint */}
+          <View style={styles.tapPromptRow}>
+            <Text style={styles.tapPromptText}>TAP ANYWHERE TO CONTINUE</Text>
+            <MaterialIcons name="touch-app" size={16} color="#DDD6FE" />
+          </View>
         </Animated.View>
-      </View>
+      </Pressable>
     </Modal>
   );
 };
@@ -510,7 +508,7 @@ const styles = StyleSheet.create({
     borderColor: '#4C1D95',
     padding: 14,
     marginTop: 16,
-    marginBottom: 20,
+    marginBottom: 12,
   },
   rewardsHeaderRow: {
     flexDirection: 'row',
@@ -617,42 +615,24 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 
-  /* 3D Action Button */
-  nextBtnWrapper: {
-    width: '100%',
-    position: 'relative',
-  },
-  nextBtnGradient: {
-    width: '100%',
-    height: 48,
-    borderRadius: 24,
+  /* Tap Prompt */
+  tapPromptRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
-    elevation: 6,
-    shadowColor: '#F59E0B',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.5,
-    shadowRadius: 8,
+    gap: 6,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+    backgroundColor: 'rgba(139, 92, 246, 0.18)',
+    borderWidth: 1,
+    borderColor: 'rgba(196, 181, 253, 0.3)',
+    marginTop: 2,
   },
-  nextBtnText: {
-    color: '#451A03', // Deep rich amber brown for extreme contrast on gold
-    fontSize: 16,
-    fontWeight: '900',
+  tapPromptText: {
+    color: '#DDD6FE',
+    fontSize: 12,
+    fontWeight: '800',
     letterSpacing: 1,
-  },
-  nextBtnBevel: {
-    position: 'absolute',
-    bottom: -3,
-    left: '4%',
-    width: '92%',
-    height: 6,
-    backgroundColor: '#B45309',
-    borderRadius: 12,
-    zIndex: -1,
-  },
-  pressedBtn: {
-    transform: [{ scale: 0.97 }],
   },
 });

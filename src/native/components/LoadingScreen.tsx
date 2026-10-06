@@ -31,7 +31,6 @@ export const NativeLoadingScreen: React.FC<LoadingScreenProps> = ({
   minDuration = 2800,
 }) => {
   const [progressPercent, setProgressPercent] = useState<number>(0);
-  const [statusMessage, setStatusMessage] = useState<string>('Initializing WorMind...');
 
   // Animated values
   const progressAnim = useRef(new Animated.Value(0)).current;
@@ -167,20 +166,9 @@ export const NativeLoadingScreen: React.FC<LoadingScreenProps> = ({
 
   // 5. Main Progress Bar Sequence
   useEffect(() => {
-    // Listen to progress for UI percentage & dynamic messages
+    // Listen to progress for UI percentage
     const listenerId = progressAnim.addListener(({ value }) => {
-      const pct = Math.round(value);
-      setProgressPercent(pct);
-
-      if (pct < 30) {
-        setStatusMessage('Awakening WorMind Brain...');
-      } else if (pct < 65) {
-        setStatusMessage('Generating Word Puzzles...');
-      } else if (pct < 90) {
-        setStatusMessage('Preparing Sound & Themes...');
-      } else {
-        setStatusMessage('Welcome to WorMind!');
-      }
+      setProgressPercent(Math.round(value));
     });
 
     // Animate smoothly to 100% with game-like easing (fast start, brief suspense, quick finish)
@@ -385,9 +373,8 @@ export const NativeLoadingScreen: React.FC<LoadingScreenProps> = ({
             </Animated.View>
           </View>
 
-          {/* Progress Percentage & Status Message */}
+          {/* Progress Percentage */}
           <View style={styles.statusRow}>
-            <Text style={styles.statusText}>{statusMessage}</Text>
             <Text style={styles.percentText}>{progressPercent}%</Text>
           </View>
         </View>
@@ -553,16 +540,10 @@ const styles = StyleSheet.create({
   statusRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     width: BAR_WIDTH,
     marginTop: 10,
     paddingHorizontal: 4,
-  },
-  statusText: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#DDD6FE',
-    letterSpacing: 0.3,
   },
   percentText: {
     fontSize: 12,

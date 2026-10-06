@@ -131,29 +131,11 @@ interface PartyConfettiProps {
 export const PartyConfetti: React.FC<PartyConfettiProps> = ({ active }) => {
   const particles = useRef<ParticleConfig[]>(generateParticles()).current;
   const animProgress = useRef(particles.map(() => new Animated.Value(0))).current;
-  const popperScale = useRef(new Animated.Value(0)).current;
-
   useEffect(() => {
     if (!active) {
       animProgress.forEach((anim) => anim.setValue(0));
-      popperScale.setValue(0);
       return;
     }
-
-    // Party Popper shockwave pop
-    Animated.sequence([
-      Animated.spring(popperScale, {
-        toValue: 1,
-        friction: 4,
-        tension: 60,
-        useNativeDriver: true,
-      }),
-      Animated.timing(popperScale, {
-        toValue: 0.9,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-    ]).start();
 
     // Launch all confetti & ribbons with slight stagger
     const animations = particles.map((p, index) => {
@@ -194,35 +176,6 @@ export const PartyConfetti: React.FC<PartyConfettiProps> = ({ active }) => {
 
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none">
-      {/* Corner Party Popper Cannons (partybom burst visuals) */}
-      <Animated.View
-        style={[
-          styles.leftPopper,
-          {
-            transform: [
-              { scale: popperScale },
-              { rotate: '-25deg' },
-            ],
-          },
-        ]}
-      >
-        <MaterialIcons name="celebration" size={38} color="#FFC928" />
-      </Animated.View>
-
-      <Animated.View
-        style={[
-          styles.rightPopper,
-          {
-            transform: [
-              { scale: popperScale },
-              { rotate: '25deg' },
-            ],
-          },
-        ]}
-      >
-        <MaterialIcons name="celebration" size={38} color="#FFC928" />
-      </Animated.View>
-
       {/* Confetti & Ribbon Particles ("Zario") */}
       {particles.map((p, index) => {
         const anim = animProgress[index];
@@ -297,25 +250,5 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-  },
-  leftPopper: {
-    position: 'absolute',
-    bottom: 40,
-    left: 20,
-    elevation: 30,
-    shadowColor: '#FFC928',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
-    shadowRadius: 10,
-  },
-  rightPopper: {
-    position: 'absolute',
-    bottom: 40,
-    right: 20,
-    elevation: 30,
-    shadowColor: '#FFC928',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
-    shadowRadius: 10,
   },
 });
