@@ -12,6 +12,7 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import { DAILY_REWARDS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
+import { LuckyWheel } from '../components/LuckyWheel';
 
 interface DailyViewProps {
   claimedDays?: number[];
@@ -38,10 +39,6 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
 }) => {
   const [showClaimModal, setShowClaimModal] = useState<boolean>(false);
   const [claimedMessage, setClaimedMessage] = useState<string>('You received your daily reward!');
-  const [isSpinning, setIsSpinning] = useState<boolean>(false);
-  const [wheelPrize, setWheelPrize] = useState<string | null>(null);
-
-  const spinAnim = useRef(new Animated.Value(0)).current;
 
   const handleClaim = (day: number) => {
     if (!canClaimToday) return;
@@ -68,35 +65,6 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
     setShowClaimModal(true);
   };
 
-  const handleSpin = () => {
-    if (isSpinning) return;
-    setIsSpinning(true);
-    nativeAudio.playSparkle();
-
-    spinAnim.setValue(0);
-    Animated.timing(spinAnim, {
-      toValue: 1,
-      duration: 3000,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start(() => {
-      setIsSpinning(false);
-      const prizes = ['+50 Coins', '2x Hints', '+100 Coins', '+25 Coins'];
-      const won = prizes[Math.floor(Math.random() * prizes.length)];
-      setWheelPrize(won);
-      nativeAudio.playVictory();
-
-      if (won.includes('50')) onAddCoins(50);
-      else if (won.includes('100')) onAddCoins(100);
-      else if (won.includes('25')) onAddCoins(25);
-      else if (won.includes('Hints')) onAddHints(2);
-    });
-  };
-
-  const spinInterpolate = spinAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '1440deg'],
-  });
 
   return (
     <View style={styles.container}>
@@ -171,47 +139,11 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
           })}
         </View>
 
-        {/* Lucky Spin Wheel Section */}
-        <View style={styles.wheelCard}>
-          <Text style={styles.wheelTitle}>DAILY LUCKY SPIN</Text>
-          <Text style={styles.wheelSub}>Spin the prize wheel for free bonus loot!</Text>
-
-          <View style={styles.wheelWrapper}>
-            <Animated.View style={[styles.wheelCircle, { transform: [{ rotate: spinInterpolate }] }]}>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '0deg' }] }]}>
-                <Text style={styles.segmentText}>🪙 50</Text>
-              </View>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '90deg' }] }]}>
-                <Text style={styles.segmentText}>💡 2x</Text>
-              </View>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '180deg' }] }]}>
-                <Text style={styles.segmentText}>🪙 100</Text>
-              </View>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '270deg' }] }]}>
-                <Text style={styles.segmentText}>🪙 25</Text>
-              </View>
-            </Animated.View>
-            <View style={styles.wheelCenterPin} />
-          </View>
-
-          {wheelPrize && (
-            <View style={styles.wonBanner}>
-              <Text style={styles.wonText}>🎉 You Won: {wheelPrize}!</Text>
-            </View>
-          )}
-
-          <Pressable
-            disabled={isSpinning}
-            onPress={handleSpin}
-            style={({ pressed }) => [
-              styles.spinBtn,
-              isSpinning && { opacity: 0.6 },
-              pressed && styles.pressed,
-            ]}
-          >
-            <Text style={styles.spinBtnText}>{isSpinning ? 'SPINNING...' : 'SPIN WHEEL'}</Text>
-          </Pressable>
-        </View>
+        {/* Creative Royal Lucky Wheel */}
+        <LuckyWheel
+          onAddCoins={onAddCoins}
+          onAddHints={onAddHints}
+        />
       </ScrollView>
 
       {/* Reward Claimed Modal */}
@@ -358,89 +290,6 @@ const styles = StyleSheet.create({
     fontSize: 9,
     fontWeight: '700',
     color: '#B0B8D0',
-  },
-  wheelCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 24,
-    padding: 18,
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#DDD6FE',
-    elevation: 3,
-  },
-  wheelTitle: {
-    fontSize: 16,
-    fontWeight: '900',
-    color: '#6D28D9',
-  },
-  wheelSub: {
-    fontSize: 11,
-    color: '#8B7FB0',
-    marginTop: 2,
-    marginBottom: 16,
-  },
-  wheelWrapper: {
-    width: 140,
-    height: 140,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
-  },
-  wheelCircle: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    backgroundColor: '#7C3AED',
-    borderWidth: 4,
-    borderColor: '#FFC928',
-    position: 'relative',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  wheelSegment: {
-    position: 'absolute',
-    alignItems: 'center',
-  },
-  segmentText: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 12,
-  },
-  wheelCenterPin: {
-    position: 'absolute',
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: '#FFC928',
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
-  },
-  wonBanner: {
-    backgroundColor: '#FEF3C7',
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#F59E0B',
-    marginBottom: 12,
-  },
-  wonText: {
-    color: '#5A3800',
-    fontWeight: '800',
-    fontSize: 13,
-  },
-  spinBtn: {
-    width: '100%',
-    height: 44,
-    backgroundColor: '#7C3AED',
-    borderRadius: 22,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  spinBtnText: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 14,
   },
   modalBackdrop: {
     flex: 1,
