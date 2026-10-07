@@ -75,6 +75,37 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const star2Anim = useRef(new Animated.Value(0)).current;
   const star3Anim = useRef(new Animated.Value(0)).current;
 
+  // Loss animation refs
+  const lossScaleAnim = useRef(new Animated.Value(1)).current;
+  const lossShakeAnim = useRef(new Animated.Value(0)).current;
+  const lossHeartAnim = useRef(new Animated.Value(1)).current;
+  const lossStrikeAnim = useRef(new Animated.Value(1)).current;
+  const floatMinusOneAnim = useRef(new Animated.Value(0)).current;
+  const floatMinusOneY = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (isGameOver) {
+      lossScaleAnim.setValue(0.7);
+      lossShakeAnim.setValue(0);
+      lossHeartAnim.setValue(0);
+      lossStrikeAnim.setValue(0);
+      floatMinusOneAnim.setValue(0);
+      floatMinusOneY.setValue(0);
+
+      Animated.sequence([
+        Animated.spring(lossScaleAnim, { toValue: 1, friction: 5, tension: 50, useNativeDriver: true }),
+        Animated.parallel([
+          Animated.spring(lossHeartAnim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+          Animated.spring(lossStrikeAnim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+          Animated.sequence([
+            Animated.timing(floatMinusOneAnim, { toValue: 1, duration: 300, useNativeDriver: true }),
+            Animated.timing(floatMinusOneY, { toValue: -20, duration: 600, useNativeDriver: true }),
+          ]),
+        ]),
+      ]).start();
+    }
+  }, [isGameOver]);
+
   useEffect(() => {
     if (isVictory) {
       Animated.sequence([
@@ -1380,6 +1411,27 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginBottom: 16,
     textAlign: 'center',
+  },
+  strikePenaltyBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(239, 68, 68, 0.3)',
+    padding: 10,
+    marginBottom: 14,
+    width: '100%',
+  },
+  strikePenaltyTitle: {
+    fontSize: 12,
+    fontWeight: '900',
+    color: '#EF4444',
+  },
+  strikePenaltySub: {
+    fontSize: 10,
+    color: '#B0C2E8',
+    marginTop: 2,
   },
   retryBtn: {
     width: '100%',

@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
+  Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -22,6 +23,14 @@ import { AdBanner } from './src/native/components/AdBanner';
 import { NativeLoadingScreen } from './src/native/components/LoadingScreen';
 import { DAILY_REWARDS } from './src/data/gameData';
 import { nativeAudio } from './src/native/audio';
+import { initAdMob, showSmartInterstitialAd } from './src/utils/admobService';
+
+const getTodayDateString = () => new Date().toISOString().split('T')[0];
+const getYesterdayDateString = () => {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d.toISOString().split('T')[0];
+};
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 const START_LEVEL_ID = 24;
@@ -60,13 +69,11 @@ export default function App() {
     strikeZeroFails: 0,
   });
 
-  const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
-  const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
-
   const todayDateStr = getTodayDateString();
   const yesterdayDateStr = getYesterdayDateString();
   const hasClaimedToday = playerState.lastDailyClaimDate === todayDateStr;
   const canClaimDaily = !hasClaimedToday;
+  const canSpinToday = playerState.lastSpinDate !== todayDateStr;
 
   // Active claimed days in current 7-day cycle
   // If user completed 7 days and a new day arrived, start a fresh 7-day cycle!
@@ -158,7 +165,7 @@ export default function App() {
     setPlayerState((prev) => ({
       ...prev,
       hearts: Math.max(0, prev.hearts - 1),
-      strike: 0,
+      strike: Math.max(0, (prev.strike || 0) - 50),
     }));
   };
 
@@ -170,13 +177,6 @@ export default function App() {
       strike: (prev.strike || 0) + 10,
     }));
     return true;
-  };
-
-  const handleFailLevel = () => {
-    setPlayerState((prev) => ({
-      ...prev,
-      strike: Math.max(0, (prev.strike || 0) - 50),
-    }));
   };
 
   const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {

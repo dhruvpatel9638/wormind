@@ -48,6 +48,8 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
   const [wheelPrize, setWheelPrize] = useState<string | null>(null);
 
   const spinAnim = useRef(new Animated.Value(0)).current;
+  const winScaleAnim = useRef(new Animated.Value(1)).current;
+  const winIconAnim = useRef(new Animated.Value(1)).current;
 
   const handleClaim = (day: number) => {
     if (!canClaimToday) return;
