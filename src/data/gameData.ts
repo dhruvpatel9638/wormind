@@ -22,8 +22,9 @@ export const LEVEL_24_GRID: string[][] = [
 ];
 
 import { GENERATED_LEVELS } from './generatedLevels';
+import { OCEAN_LEVELS } from './oceanLevels';
 
-export const INITIAL_LEVELS: LevelData[] = GENERATED_LEVELS;
+export const INITIAL_LEVELS: LevelData[] = [...GENERATED_LEVELS, ...OCEAN_LEVELS];
 
 export const DAILY_REWARDS: DailyReward[] = [
   { day: 1, rewardText: '+50 Coins', coins: 50, hints: 0, status: 'claimed' },

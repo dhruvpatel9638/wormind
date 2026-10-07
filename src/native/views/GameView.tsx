@@ -572,6 +572,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           <View style={styles.wordsTitleRow}>
             <MaterialIcons name="search" size={16} color="#4D8AFF" />
             <Text style={styles.wordsTitle}>WORDS TO FIND</Text>
+            {currentLevel.maskName && (
+              <View style={styles.maskTagBadge}>
+                <Text style={styles.maskTagText}>
+                  {currentLevel.maskIcon} {currentLevel.maskName.toUpperCase()}
+                </Text>
+              </View>
+            )}
           </View>
           <View style={styles.foundBadge}>
             <Text style={styles.foundBadgeText}>{foundCount} / {totalCount} FOUND</Text>
@@ -1212,6 +1219,21 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#286BEA',
     letterSpacing: 0.5,
+  },
+  maskTagBadge: {
+    backgroundColor: '#E0F2FE',
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#BAE6FD',
+    marginLeft: 6,
+  },
+  maskTagText: {
+    fontSize: 9.5,
+    fontWeight: '900',
+    color: '#0369A1',
+    letterSpacing: 0.3,
   },
   foundBadge: {
     backgroundColor: '#CCFBF1',

@@ -33,13 +33,13 @@ const getYesterdayDateString = () => {
 };
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
-const START_LEVEL_ID = 24;
+const DEFAULT_START_LEVEL = 1;
 const START_DEV_COINS = 100;
 
 export default function App() {
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
-  const [activeLevelId, setActiveLevelId] = useState<number>(START_LEVEL_ID);
+  const [activeLevelId, setActiveLevelId] = useState<number>(DEFAULT_START_LEVEL);
   const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
   const [showRefillHeartsModal, setShowRefillHeartsModal] = useState<boolean>(false);
   const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
@@ -63,7 +63,7 @@ export default function App() {
     soundEnabled: true,
     musicEnabled: true,
     hapticsEnabled: true,
-    currentLevel: START_LEVEL_ID,
+    currentLevel: DEFAULT_START_LEVEL,
     lastDailyClaimDate: null,
     strike: 10,
     strikeZeroFails: 0,
@@ -97,7 +97,7 @@ export default function App() {
           const parsed = JSON.parse(data);
           const savedLevel = typeof parsed.currentLevel === 'number' && parsed.currentLevel >= 1
             ? parsed.currentLevel
-            : START_LEVEL_ID;
+            : DEFAULT_START_LEVEL;
           const savedCoins = typeof parsed.coins === 'number' && parsed.coins <= 1000 ? parsed.coins : 100;
           const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
           const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
@@ -113,6 +113,8 @@ export default function App() {
           nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
           nativeAudio.setMusicEnabled(parsed.musicEnabled ?? true);
         } catch {}
+      } else {
+        setActiveLevelId(DEFAULT_START_LEVEL);
       }
     });
   }, []);
@@ -295,12 +297,12 @@ export default function App() {
       soundEnabled: true,
       musicEnabled: true,
       hapticsEnabled: true,
-      currentLevel: START_LEVEL_ID,
+      currentLevel: DEFAULT_START_LEVEL,
       lastDailyClaimDate: null,
       strike: 10,
       strikeZeroFails: 0,
     });
-    setActiveLevelId(START_LEVEL_ID);
+    setActiveLevelId(DEFAULT_START_LEVEL);
   };
 
   return (

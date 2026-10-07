@@ -16,6 +16,8 @@ export interface LevelData {
   subtitle: string;
   world: 'boulevard' | 'island' | 'forest' | 'space';
   themeIcon: string;
+  maskName?: string;
+  maskIcon?: string;
   grid: string[][];
   targetWords: TargetWord[];
   stars: number;

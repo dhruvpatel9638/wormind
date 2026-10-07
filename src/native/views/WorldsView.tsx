@@ -24,6 +24,14 @@ import {
   ValleyCloud,
   ValleyButterfly,
 } from '../components/SunnyValleyVectors';
+import {
+  OceanBubble,
+  OceanCoral,
+  OceanSeaweed,
+  OceanShipwreck,
+  OceanAtlantisPalace,
+  OceanChest,
+} from '../components/BubbleOceanVectors';
 
 interface WorldsViewProps {
   onStartLevel: (levelId: number) => void;
@@ -36,37 +44,72 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   onStartLevel,
   activeLevelId = 4,
 }) => {
+  const [selectedChapter, setSelectedChapter] = useState<'sunny' | 'ocean'>(
+    activeLevelId > 100 ? 'ocean' : 'sunny'
+  );
   const [selectedModalLevel, setSelectedModalLevel] = useState<number | null>(null);
-  const [alertInfo, setAlertInfo] = useState<{title: string, message: string} | null>(null);
+  const [alertInfo, setAlertInfo] = useState<{ title: string; message: string } | null>(null);
   const scrollRef = useRef<ScrollView>(null);
+
+  useEffect(() => {
+    if (activeLevelId > 100) {
+      setSelectedChapter('ocean');
+    }
+  }, [activeLevelId]);
+
+  // ALL 100 Levels for Sunny Valley (Levels 1-100)
+  const chapter1Levels = INITIAL_LEVELS.filter((l) => l.id <= 100);
+  // ALL 100 Levels for Bubble Ocean (Levels 101-200)
+  const chapter2Levels = INITIAL_LEVELS.filter((l) => l.id >= 101);
+  
+  const activeLevelsList = selectedChapter === 'ocean' ? chapter2Levels : chapter1Levels;
 
   const scrollToActiveLevel = () => {
     if (scrollRef.current) {
-      const mapHeight = INITIAL_LEVELS.length * 110 + 200;
-      const y = mapHeight - (activeLevelId * 110) - 300; 
+      const mapHeight = activeLevelsList.length * 110 + 200;
+      const relativeIndex = selectedChapter === 'ocean'
+        ? Math.max(0, Math.min(activeLevelsList.length - 1, activeLevelId - 101))
+        : Math.max(0, Math.min(activeLevelsList.length - 1, activeLevelId - 1));
+      const y = mapHeight - relativeIndex * 110 - 300;
       scrollRef.current.scrollTo({ y: Math.max(0, y), animated: true });
     }
   };
 
   useEffect(() => {
     setTimeout(scrollToActiveLevel, 300);
-  }, [activeLevelId]);
+  }, [activeLevelId, selectedChapter]);
 
   const handleNodeClick = (lvl: number, isLocked: boolean) => {
     if (isLocked) {
-      setAlertInfo({ title: 'Level Locked', message: `Level ${lvl} is locked! Complete earlier levels first.` });
+      setAlertInfo({
+        title: 'Level Locked',
+        message: `Level ${lvl} is locked! Complete earlier levels first.`,
+      });
       return;
     }
     nativeAudio.playLetterTap(2);
     setSelectedModalLevel(lvl);
   };
 
-  const completedInChapter = Math.min(25, Math.max(0, activeLevelId - 1));
-  const chapterProgressPercent = Math.min(100, Math.round((completedInChapter / 25) * 100));
-  const mapHeight = INITIAL_LEVELS.length * 110 + 200;
-  const roadPathD = `M 175 ${mapHeight}` + INITIAL_LEVELS.map((_, idx) => ` L ${150 + Math.sin(idx * 0.8) * 100 + 25} ${mapHeight - (idx * 110 + 100 + 25)}`).join('');
+  const completedInSunny = Math.min(100, Math.max(0, activeLevelId - 1));
+  const completedInOcean = Math.min(100, Math.max(0, activeLevelId - 100));
+  const completedCount = selectedChapter === 'ocean' ? completedInOcean : completedInSunny;
+  const totalInChapter = activeLevelsList.length || 100;
+  const chapterProgressPercent = Math.min(100, Math.round((completedCount / totalInChapter) * 100));
 
-  // Sunny Valley Landmark rendering along the winding trail
+  const mapHeight = activeLevelsList.length * 110 + 200;
+  const roadPathD =
+    `M 175 ${mapHeight}` +
+    activeLevelsList
+      .map(
+        (_, idx) =>
+          ` L ${150 + Math.sin(idx * 0.8) * 100 + 25} ${
+            mapHeight - (idx * 110 + 100 + 25)
+          }`
+      )
+      .join('');
+
+  // Sunny Valley Landmark rendering along trail
   const renderSunnyValleyLandmark = (lvlId: number, index: number) => {
     const bottom = index * 110 + 85;
     const isRightSideCurve = Math.sin(index * 0.8) * 100 > 0;
@@ -97,7 +140,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
               <ValleyTree type="pine" scale={0.9} />
             </View>
           )}
-          {lvlId === 25 && (
+          {lvlId === 100 && (
             <View style={[styles.landmarkItem, { bottom: bottom + 32, left: 236 }]}>
               <ValleySignpost label="VALLEY PEAK" />
             </View>
@@ -106,173 +149,124 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
       );
     }
 
-    switch (lvlId) {
-      case 2:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyTree type="oak" scale={1.08} />
-            <View style={styles.butterflyPin}>
-              <ValleyButterfly color="#EC4899" />
-            </View>
+    const cycle = lvlId % 7;
+    if (cycle === 1) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+          <ValleyTree type="oak" scale={1.08} />
+          <View style={styles.butterflyPin}>
+            <ValleyButterfly color="#EC4899" />
           </View>
-        );
-      case 3:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX - 4 }]}>
-            <ValleyWindmill size={68} />
+        </View>
+      );
+    } else if (cycle === 2) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX - 4 }]}>
+          <ValleyWindmill size={68} />
+        </View>
+      );
+    } else if (cycle === 3) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+          <ValleyFlowerPatch scale={1.2} />
+        </View>
+      );
+    } else if (cycle === 4) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+          <ValleyTree type="pine" scale={1.1} />
+        </View>
+      );
+    } else if (cycle === 6) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+          <ValleyFlowerPatch scale={1.3} />
+          <View style={styles.butterflyPin}>
+            <ValleyButterfly color="#F59E0B" />
           </View>
-        );
-      case 4:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyFlowerPatch scale={1.2} />
-          </View>
-        );
-      case 6:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyTree type="oak" scale={1.12} />
-          </View>
-        );
-      case 7:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyFlowerPatch scale={1.3} />
-            <View style={styles.butterflyPin}>
-              <ValleyButterfly color="#F59E0B" />
-            </View>
-          </View>
-        );
-      case 8:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleySignpost label="ORCHARD" />
-          </View>
-        );
-      case 9:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyTree type="pine" scale={1.1} />
-          </View>
-        );
-      case 11:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX - 4 }]}>
-            <ValleyWindmill size={66} />
-          </View>
-        );
-      case 12:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyTree type="oak" scale={1.1} />
-          </View>
-        );
-      case 13:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyFlowerPatch scale={1.2} />
-            <View style={styles.butterflyPin}>
-              <ValleyButterfly color="#8B5CF6" />
-            </View>
-          </View>
-        );
-      case 14:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyTree type="pine" scale={1.15} />
-          </View>
-        );
-      case 16:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX }]}>
-            <ValleyWindmill size={68} />
-          </View>
-        );
-      case 17:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyFlowerPatch scale={1.25} />
-          </View>
-        );
-      case 18:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyTree type="oak" scale={1.1} />
-          </View>
-        );
-      case 19:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleySignpost label="SUNNY MEADOW" />
-          </View>
-        );
-      case 21:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyFlowerPatch scale={1.2} />
-            <View style={styles.butterflyPin}>
-              <ValleyButterfly color="#06B6D4" />
-            </View>
-          </View>
-        );
-      case 22:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX }]}>
-            <ValleyWindmill size={66} />
-          </View>
-        );
-      case 23:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyTree type="pine" scale={1.1} />
-          </View>
-        );
-      case 24:
-        return (
-          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-            <ValleyTree type="oak" scale={1.2} />
-          </View>
-        );
-      default: {
-        const cycle = lvlId % 7;
-        if (cycle === 1) {
-          return (
-            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-              <ValleyTree type="oak" scale={1.05} />
-            </View>
-          );
-        } else if (cycle === 2) {
-          return (
-            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 8, left: meadowX }]}>
-              <ValleyWindmill size={64} />
-            </View>
-          );
-        } else if (cycle === 3) {
-          return (
-            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-              <ValleyFlowerPatch scale={1.15} />
-            </View>
-          );
-        } else if (cycle === 4) {
-          return (
-            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-              <ValleyTree type="pine" scale={1.05} />
-            </View>
-          );
-        } else if (cycle === 6) {
-          return (
-            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
-              <ValleyFlowerPatch scale={1.1} />
-              <View style={styles.butterflyPin}>
-                <ValleyButterfly color="#F43F5E" />
-              </View>
-            </View>
-          );
-        }
-        return null;
-      }
+        </View>
+      );
     }
+
+    return (
+      <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+        <ValleyTree type="oak" scale={1.05} />
+      </View>
+    );
   };
+
+  // Bubble Ocean Landmark rendering along trail
+  const renderOceanLandmark = (lvlId: number, index: number) => {
+    const bottom = index * 110 + 85;
+    const isRightSideCurve = Math.sin(index * 0.8) * 100 > 0;
+    const meadowX = isRightSideCurve ? 22 : 246;
+
+    if (lvlId === 101) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={styles.landmarkWrapper}>
+          <View style={[styles.landmarkItem, { bottom: bottom - 8, left: 24 }]}>
+            <OceanShipwreck size={58} />
+          </View>
+          <View style={[styles.landmarkItem, { bottom: bottom + 12, left: 232 }]}>
+            <ValleySignpost label="ABYSS START" />
+          </View>
+        </View>
+      );
+    }
+
+    if (lvlId % 5 === 0 || lvlId === 200) {
+      const isClaimed = activeLevelId > lvlId;
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={styles.landmarkWrapper}>
+          <View style={[styles.landmarkItem, { bottom: bottom + 2, left: meadowX }]}>
+            <OceanChest level={lvlId} isClaimed={isClaimed} />
+          </View>
+          {lvlId === 200 && (
+            <View style={[styles.landmarkItem, { bottom: bottom + 35, left: 236 }]}>
+              <OceanAtlantisPalace size={70} />
+            </View>
+          )}
+        </View>
+      );
+    }
+
+    const cycle = lvlId % 6;
+    if (cycle === 1) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+          <OceanCoral scale={1.1} color="#EC4899" />
+        </View>
+      );
+    } else if (cycle === 2) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX - 4 }]}>
+          <OceanBubble size={32} />
+        </View>
+      );
+    } else if (cycle === 3) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+          <OceanSeaweed height={48} />
+        </View>
+      );
+    } else if (cycle === 4) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+          <OceanCoral scale={1.2} color="#F59E0B" />
+        </View>
+      );
+    } else if (cycle === 5) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+          <OceanBubble size={36} opacity={0.9} />
+        </View>
+      );
+    }
+
+    return null;
+  };
+
+  const isOcean = selectedChapter === 'ocean';
 
   return (
     <View style={styles.container}>
@@ -282,26 +276,38 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         showsVerticalScrollIndicator={false}
         onLayout={scrollToActiveLevel}
       >
-        {/* Chapter 1 Card */}
-        <View style={styles.chapterCard}>
+        {/* Chapter Header Card */}
+        <View style={[styles.chapterCard, isOcean && styles.chapterCardOcean]}>
           <View style={styles.chapterHeader}>
             <View style={styles.chapterTitleRow}>
-              <MaterialIcons name="wb-sunny" size={20} color="#F59E0B" />
+              <MaterialIcons
+                name={isOcean ? 'water-drop' : 'wb-sunny'}
+                size={20}
+                color={isOcean ? '#00F2FE' : '#F59E0B'}
+              />
               <View>
-                <Text style={styles.chapterTitle}>CHAPTER 1: SUNNY VALLEY</Text>
-                <Text style={styles.chapterSubtitle}>Golden meadows, windmills & blooming flowers</Text>
+                <Text style={[styles.chapterTitle, isOcean && styles.chapterTitleOcean]}>
+                  {isOcean ? 'CHAPTER 2: BUBBLE OCEAN' : 'CHAPTER 1: SUNNY VALLEY'}
+                </Text>
+                <Text style={[styles.chapterSubtitle, isOcean && styles.chapterSubtitleOcean]}>
+                  {isOcean
+                    ? 'Deep sea treasures, glowing coral reefs & floating bubbles'
+                    : 'Golden meadows, windmills & blooming flowers'}
+                </Text>
               </View>
             </View>
-            <View style={styles.chapterStars}>
-              <MaterialIcons name="star" size={14} color="#F59E0B" />
-              <Text style={styles.chapterStarsText}>{completedInChapter}/25</Text>
+            <View style={[styles.chapterStars, isOcean && styles.chapterStarsOcean]}>
+              <MaterialIcons name="star" size={14} color={isOcean ? '#00F2FE' : '#F59E0B'} />
+              <Text style={[styles.chapterStarsText, isOcean && styles.chapterStarsTextOcean]}>
+                {completedCount}/{totalInChapter}
+              </Text>
             </View>
           </View>
 
           {/* Progress bar */}
           <View style={styles.progressBarBg}>
             <LinearGradient
-              colors={['#F59E0B', '#10B981']}
+              colors={isOcean ? ['#06B6D4', '#00F2FE', '#3B82F6'] : ['#F59E0B', '#10B981']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={[styles.progressBarFill, { width: `${chapterProgressPercent}%` }]}
@@ -310,19 +316,65 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
 
           {/* Worlds Sub-pills */}
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.worldPillsRow}>
-            <View style={[styles.worldPill, styles.worldPillActive]}>
-              <MaterialIcons name="wb-sunny" size={14} color="#FFFFFF" />
-              <Text style={styles.worldPillTextActive}>Sunny Valley</Text>
-            </View>
             <Pressable
-              onPress={() => setAlertInfo({ title: 'Coming Soon', message: 'Bubble Ocean unlocks at Chapter 2!' })}
-              style={[styles.worldPill, styles.worldPillInactive]}
+              onPress={() => {
+                nativeAudio.playLetterTap(1);
+                setSelectedChapter('sunny');
+              }}
+              style={[
+                styles.worldPill,
+                selectedChapter === 'sunny' ? styles.worldPillActive : styles.worldPillInactive,
+              ]}
             >
-              <MaterialIcons name="water-drop" size={14} color="#8B7FB0" />
-              <Text style={styles.worldPillTextInactive}>Ocean</Text>
+              <MaterialIcons
+                name="wb-sunny"
+                size={14}
+                color={selectedChapter === 'sunny' ? '#FFFFFF' : '#8B7FB0'}
+              />
+              <Text
+                style={
+                  selectedChapter === 'sunny'
+                    ? styles.worldPillTextActive
+                    : styles.worldPillTextInactive
+                }
+              >
+                Sunny Valley (1-100)
+              </Text>
             </Pressable>
+
             <Pressable
-              onPress={() => setAlertInfo({ title: 'Coming Soon', message: 'Candy Clouds unlocks at Chapter 3!' })}
+              onPress={() => {
+                nativeAudio.playLetterTap(1);
+                setSelectedChapter('ocean');
+              }}
+              style={[
+                styles.worldPill,
+                selectedChapter === 'ocean' ? styles.worldPillActiveOcean : styles.worldPillInactive,
+              ]}
+            >
+              <MaterialIcons
+                name="water-drop"
+                size={14}
+                color={selectedChapter === 'ocean' ? '#FFFFFF' : '#06B6D4'}
+              />
+              <Text
+                style={
+                  selectedChapter === 'ocean'
+                    ? styles.worldPillTextActive
+                    : styles.worldPillTextInactive
+                }
+              >
+                Bubble Ocean (101-200)
+              </Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() =>
+                setAlertInfo({
+                  title: 'Coming Soon',
+                  message: 'Candy Clouds unlocks at Chapter 3!',
+                })
+              }
               style={[styles.worldPill, styles.worldPillInactive]}
             >
               <MaterialIcons name="cloud" size={14} color="#8B7FB0" />
@@ -332,77 +384,115 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         </View>
 
         {/* Dynamic Winding Road Map Container */}
-        <View style={[styles.mapCard, { height: mapHeight }]}>
-          {/* Lush Meadow Gradient Background */}
+        <View style={[styles.mapCard, isOcean && styles.mapCardOcean, { height: mapHeight }]}>
+          {/* Meadow / Ocean Background Gradient */}
           <LinearGradient
-            colors={[
-              '#BAE6FD',
-              '#E0F2FE',
-              '#FEF9C3',
-              '#DCFCE7',
-              '#BBF7D0',
-              '#86EFAC',
-              '#BBF7D0',
-              '#DCFCE7',
-              '#FEF3C7',
-              '#D1FAE5',
-            ]}
+            colors={
+              isOcean
+                ? [
+                    '#051329',
+                    '#0A2240',
+                    '#0F3460',
+                    '#0284C7',
+                    '#38BDF8',
+                    '#00F2FE',
+                    '#38BDF8',
+                    '#0284C7',
+                    '#0A2240',
+                    '#051329',
+                  ]
+                : [
+                    '#BAE6FD',
+                    '#E0F2FE',
+                    '#FEF9C3',
+                    '#DCFCE7',
+                    '#BBF7D0',
+                    '#86EFAC',
+                    '#BBF7D0',
+                    '#DCFCE7',
+                    '#FEF3C7',
+                    '#D1FAE5',
+                  ]
+            }
             locations={[0, 0.04, 0.08, 0.2, 0.4, 0.6, 0.75, 0.88, 0.95, 1]}
             style={StyleSheet.absoluteFill}
           />
 
-          {/* Sunny Valley Sky Vista at Top */}
+          {/* Sky / Underwater Vista at Top */}
           <View pointerEvents="none" style={styles.topSkyVista}>
-            <View style={styles.topSunWrapper}>
-              <ValleySun size={86} />
-            </View>
-            <View style={styles.topCloudLeft}>
-              <ValleyCloud scale={1.1} opacity={0.9} />
-            </View>
-            <View style={styles.topCloudRight}>
-              <ValleyCloud scale={1.25} opacity={0.95} />
-            </View>
-            <View style={styles.topBannerPill}>
-              <MaterialIcons name="wb-sunny" size={14} color="#D97706" />
-              <Text style={styles.topBannerText}>SUNNY VALLEY SUMMIT</Text>
-            </View>
+            {isOcean ? (
+              <>
+                <View style={styles.topSunWrapper}>
+                  <OceanAtlantisPalace size={80} />
+                </View>
+                <View style={styles.topCloudLeft}>
+                  <OceanBubble size={30} opacity={0.9} />
+                </View>
+                <View style={styles.topCloudRight}>
+                  <OceanBubble size={38} opacity={0.95} />
+                </View>
+                <View style={[styles.topBannerPill, styles.topBannerPillOcean]}>
+                  <MaterialIcons name="water-drop" size={14} color="#00F2FE" />
+                  <Text style={[styles.topBannerText, styles.topBannerTextOcean]}>
+                    BUBBLE OCEAN SUMMIT
+                  </Text>
+                </View>
+              </>
+            ) : (
+              <>
+                <View style={styles.topSunWrapper}>
+                  <ValleySun size={86} />
+                </View>
+                <View style={styles.topCloudLeft}>
+                  <ValleyCloud scale={1.1} opacity={0.9} />
+                </View>
+                <View style={styles.topCloudRight}>
+                  <ValleyCloud scale={1.25} opacity={0.95} />
+                </View>
+                <View style={styles.topBannerPill}>
+                  <MaterialIcons name="wb-sunny" size={14} color="#D97706" />
+                  <Text style={styles.topBannerText}>SUNNY VALLEY SUMMIT</Text>
+                </View>
+              </>
+            )}
           </View>
 
-          {/* SVG Winding Road Path with Sunny Valley Cobblestone Styling */}
+          {/* SVG Winding Road Path */}
           <Svg style={StyleSheet.absoluteFill} viewBox={`0 0 360 ${mapHeight}`} preserveAspectRatio="none">
-            {/* Rolling meadow contour curves */}
-            {INITIAL_LEVELS.map((_, idx) => {
+            {/* Rolling contour curves */}
+            {activeLevelsList.map((_, idx) => {
               if (idx % 4 !== 0) return null;
               const y = mapHeight - (idx * 110 + 100);
               const isAlt = (idx / 4) % 2 === 0;
               return (
                 <Path
                   key={`hill-${idx}`}
-                  d={isAlt 
-                    ? `M -20 ${y} Q 90 ${y - 40} 200 ${y} T 380 ${y + 25}`
-                    : `M -20 ${y + 20} Q 150 ${y - 45} 300 ${y + 10} T 380 ${y}`
+                  d={
+                    isAlt
+                      ? `M -20 ${y} Q 90 ${y - 40} 200 ${y} T 380 ${y + 25}`
+                      : `M -20 ${y + 20} Q 150 ${y - 45} 300 ${y + 10} T 380 ${y}`
                   }
                   fill="none"
-                  stroke="rgba(34, 197, 94, 0.16)"
+                  stroke={isOcean ? 'rgba(0, 242, 254, 0.15)' : 'rgba(34, 197, 94, 0.16)'}
                   strokeWidth="20"
                 />
               );
             })}
 
-            {/* Outer Lush Grass Border */}
+            {/* Outer Trail Border */}
             <Path
               d={roadPathD}
               fill="none"
-              stroke="#16A34A"
+              stroke={isOcean ? '#0284C7' : '#16A34A'}
               strokeWidth="62"
               strokeLinejoin="round"
               strokeLinecap="round"
             />
-            {/* Warm Golden Earth Curb */}
+            {/* Earth/Sea Curb */}
             <Path
               d={roadPathD}
               fill="none"
-              stroke="#F59E0B"
+              stroke={isOcean ? '#06B6D4' : '#F59E0B'}
               strokeWidth="50"
               strokeLinejoin="round"
               strokeLinecap="round"
@@ -411,36 +501,39 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             <Path
               d={roadPathD}
               fill="none"
-              stroke="#FFFBEB"
+              stroke={isOcean ? '#E0F2FE' : '#FFFBEB'}
               strokeWidth="40"
               strokeLinejoin="round"
               strokeLinecap="round"
             />
-            {/* Stepping stone cobblestone texture */}
+            {/* Stepping stone texture */}
             <Path
               d={roadPathD}
               fill="none"
-              stroke="#FDE68A"
+              stroke={isOcean ? '#38BDF8' : '#FDE68A'}
               strokeWidth="32"
-              strokeLinejoin="round"
               strokeDasharray="4, 12"
             />
-            {/* Golden Amber Dashed Centerline */}
+            {/* Glowing Dashed Centerline */}
             <Path
               d={roadPathD}
               fill="none"
-              stroke="#D97706"
+              stroke={isOcean ? '#00F2FE' : '#D97706'}
               strokeWidth="3"
               strokeDasharray="8, 8"
               strokeLinejoin="round"
             />
           </Svg>
 
-          {/* Vector Landmarks along the trail */}
-          {INITIAL_LEVELS.map((lvl, index) => renderSunnyValleyLandmark(lvl.id, index))}
+          {/* Vector Landmarks along trail */}
+          {activeLevelsList.map((lvl, index) =>
+            isOcean
+              ? renderOceanLandmark(lvl.id, index)
+              : renderSunnyValleyLandmark(lvl.id, index)
+          )}
 
-          {/* Level Nodes Placed Along the Winding Road */}
-          {INITIAL_LEVELS.map((lvl, index) => {
+          {/* Level Nodes Placed Along the Winding Road (Preserving existing button styles!) */}
+          {activeLevelsList.map((lvl, index) => {
             const bottom = index * 110 + 100;
             const left = 150 + Math.sin(index * 0.8) * 100;
             const isLocked = lvl.id > activeLevelId;
@@ -450,18 +543,22 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             return (
               <View key={`node-${lvl.id}`} style={[styles.nodeAbsolute, { bottom, left }]}>
                 {isActive && (
-                  <View style={styles.letsGoBubble}>
-                    <MaterialIcons name="wb-sunny" size={11} color="#FEF08A" />
+                  <View style={[styles.letsGoBubble, isOcean && styles.letsGoBubbleOcean]}>
+                    <MaterialIcons
+                      name={isOcean ? 'water-drop' : 'wb-sunny'}
+                      size={11}
+                      color={isOcean ? '#00F2FE' : '#FEF08A'}
+                    />
                     <Text style={styles.letsGoText}>CURRENT</Text>
                   </View>
                 )}
-                
+
                 <Pressable
                   onPress={() => handleNodeClick(lvl.id, isLocked)}
                   style={({ pressed }) => [
                     styles.nodeBtn,
                     isDone ? styles.nodeDone : isActive ? styles.nodeActive : styles.nodeLocked,
-                    pressed && styles.pressed
+                    pressed && styles.pressed,
                   ]}
                 >
                   {isDone && <MaterialIcons name="check" size={24} color="#FFFFFF" />}
@@ -481,18 +578,22 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                     <MaterialIcons name="star" size={13} color="#FFC928" />
                   </View>
                 )}
-                
-                <View style={[
-                  styles.nodeLabelBadge,
-                  isActive && styles.nodeLabelBadgeActive,
-                  isDone && styles.nodeLabelBadgeDone,
-                ]}>
-                  <Text style={[
-                    styles.nodeLabelText,
-                    isActive && styles.nodeLabelTextActive,
-                    isDone && styles.nodeLabelTextDone,
-                    isLocked && styles.nodeLabelTextLocked,
-                  ]}>
+
+                <View
+                  style={[
+                    styles.nodeLabelBadge,
+                    isActive && styles.nodeLabelBadgeActive,
+                    isDone && styles.nodeLabelBadgeDone,
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.nodeLabelText,
+                      isActive && styles.nodeLabelTextActive,
+                      isDone && styles.nodeLabelTextDone,
+                      isLocked && styles.nodeLabelTextLocked,
+                    ]}
+                  >
                     Level {lvl.id}
                   </Text>
                 </View>
@@ -502,14 +603,18 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         </View>
       </ScrollView>
 
-      {/* Sticky Continue Button */}
+      {/* Sticky Continue Button (Preserving existing button design!) */}
       <View style={styles.stickyFooter}>
         <Pressable
           onPress={() => {
             nativeAudio.playLetterTap(3);
             onStartLevel(activeLevelId);
           }}
-          style={({ pressed }) => [styles.continueBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [
+            styles.continueBtn,
+            isOcean && styles.continueBtnOcean,
+            pressed && styles.pressed,
+          ]}
         >
           <MaterialIcons name="play-arrow" size={24} color="#FFFFFF" />
           <Text style={styles.continueBtnText}>CONTINUE LEVEL {activeLevelId}</Text>
@@ -520,15 +625,26 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
       <Modal visible={selectedModalLevel !== null} transparent animationType="fade">
         <View style={styles.modalBackdrop}>
           <View style={styles.modalCard}>
-            <View style={styles.modalHeaderCircle}>
+            <View style={[styles.modalHeaderCircle, isOcean && { backgroundColor: '#0284C7' }]}>
               <MaterialIcons name="explore" size={32} color="#FFFFFF" />
             </View>
             <Text style={styles.modalTitle}>LEVEL {selectedModalLevel}</Text>
-            <Text style={styles.modalSub}>Chapter 1 • Sunny Valley</Text>
+            {(() => {
+              const modalLevelData = INITIAL_LEVELS.find((l) => l.id === selectedModalLevel);
+              return (
+                <Text style={styles.modalSub}>
+                  {selectedModalLevel && selectedModalLevel > 100
+                    ? `Chapter 2 • Bubble Ocean ${modalLevelData?.maskIcon ? `(${modalLevelData.maskIcon} ${modalLevelData.maskName})` : ''}`
+                    : 'Chapter 1 • Sunny Valley'}
+                </Text>
+              );
+            })()}
 
             <View style={styles.modalWordsPreview}>
               <Text style={styles.modalWordsLabel}>OBJECTIVE</Text>
-              <Text style={styles.modalWordsText}>Find all hidden words on the 8x8 matrix to earn 3 stars & 50 coins!</Text>
+              <Text style={styles.modalWordsText}>
+                Find all hidden words on the 8x8 matrix to earn 3 stars & 50 coins!
+              </Text>
             </View>
 
             <View style={styles.modalBtnRow}>
@@ -545,7 +661,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                   setSelectedModalLevel(null);
                   onStartLevel(target);
                 }}
-                style={styles.modalPlayBtn}
+                style={[styles.modalPlayBtn, isOcean && { backgroundColor: '#0284C7' }]}
               >
                 <MaterialIcons name="favorite" size={16} color="#FFFFFF" style={{ marginRight: 4 }} />
                 <Text style={styles.modalPlayText}>Play (1 Heart)</Text>
@@ -555,7 +671,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         </View>
       </Modal>
 
-      <CustomAlert 
+      <CustomAlert
         visible={!!alertInfo}
         title={alertInfo?.title || ''}
         message={alertInfo?.message || ''}
@@ -573,7 +689,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 14,
     paddingTop: 10,
-    paddingBottom: 200,
+    paddingBottom: 260,
     alignItems: 'center',
   },
   chapterCard: {
@@ -589,6 +705,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.15,
     shadowRadius: 6,
+  },
+  chapterCardOcean: {
+    backgroundColor: '#F0F9FF',
+    borderColor: '#BAE6FD',
+    shadowColor: '#0284C7',
   },
   chapterHeader: {
     flexDirection: 'row',
@@ -607,10 +728,16 @@ const styles = StyleSheet.create({
     color: '#78350F',
     letterSpacing: 0.4,
   },
+  chapterTitleOcean: {
+    color: '#0369A1',
+  },
   chapterSubtitle: {
     fontSize: 9.5,
     fontWeight: '600',
     color: '#B45309',
+  },
+  chapterSubtitleOcean: {
+    color: '#0284C7',
   },
   chapterStars: {
     flexDirection: 'row',
@@ -623,10 +750,17 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     gap: 4,
   },
+  chapterStarsOcean: {
+    backgroundColor: '#E0F2FE',
+    borderColor: '#BAE6FD',
+  },
   chapterStarsText: {
     color: '#B45309',
     fontWeight: '900',
     fontSize: 12,
+  },
+  chapterStarsTextOcean: {
+    color: '#0369A1',
   },
   progressBarBg: {
     width: '100%',
@@ -654,6 +788,9 @@ const styles = StyleSheet.create({
   },
   worldPillActive: {
     backgroundColor: '#D97706',
+  },
+  worldPillActiveOcean: {
+    backgroundColor: '#0284C7',
   },
   worldPillInactive: {
     backgroundColor: 'rgba(255, 255, 255, 0.85)',
@@ -683,6 +820,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 8,
     elevation: 5,
+  },
+  mapCardOcean: {
+    borderColor: '#38BDF8',
+    shadowColor: '#0284C7',
+    backgroundColor: '#051329',
   },
   topSkyVista: {
     position: 'absolute',
@@ -723,11 +865,19 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
   },
+  topBannerPillOcean: {
+    backgroundColor: '#0C4A6E',
+    borderColor: '#0284C7',
+    shadowColor: '#00F2FE',
+  },
   topBannerText: {
     fontSize: 10,
     fontWeight: '900',
     color: '#92400E',
     letterSpacing: 0.5,
+  },
+  topBannerTextOcean: {
+    color: '#E0F2FE',
   },
   landmarkWrapper: {
     position: 'absolute',
@@ -798,63 +948,57 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   letsGoBubble: {
-    backgroundColor: '#7C3AED',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: '#D97706',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 10,
     marginBottom: 4,
-    borderWidth: 1.5,
-    borderColor: '#FFFFFF',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 3,
+  },
+  letsGoBubbleOcean: {
+    backgroundColor: '#0284C7',
   },
   letsGoText: {
     color: '#FFFFFF',
     fontSize: 9,
     fontWeight: '900',
-    letterSpacing: 0.3,
+    letterSpacing: 0.4,
   },
   starsRow: {
     flexDirection: 'row',
-    gap: 1,
+    gap: 2,
     marginTop: 2,
   },
   nodeLabelBadge: {
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 10,
-    marginTop: 3,
-    borderWidth: 1,
-    borderColor: 'rgba(203, 213, 225, 0.8)',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    marginTop: 4,
     elevation: 2,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
   },
   nodeLabelBadgeActive: {
-    backgroundColor: '#7C3AED',
-    borderColor: '#6D28D9',
+    backgroundColor: '#FEF3C7',
+    borderColor: '#FDE68A',
   },
   nodeLabelBadgeDone: {
+    backgroundColor: '#D1FAE5',
     borderColor: '#A7F3D0',
-    backgroundColor: '#ECFDF5',
   },
   nodeLabelText: {
-    fontSize: 10,
+    fontSize: 9.5,
     fontWeight: '800',
-    color: '#334155',
+    color: '#64748B',
   },
   nodeLabelTextActive: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 11,
+    color: '#B45309',
   },
   nodeLabelTextDone: {
     color: '#047857',
-    fontWeight: '800',
   },
   nodeLabelTextLocked: {
     color: '#94A3B8',
@@ -865,122 +1009,131 @@ const styles = StyleSheet.create({
     left: 14,
     right: 14,
     alignItems: 'center',
+    zIndex: 90,
   },
   continueBtn: {
     width: '100%',
-    maxWidth: 380,
     height: 52,
-    backgroundColor: '#7C3AED',
     borderRadius: 26,
+    backgroundColor: '#F59E0B',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 6,
+    gap: 8,
     elevation: 8,
-    borderWidth: 2,
-    borderColor: '#A78BFA',
-    shadowColor: '#7C3AED',
+    shadowColor: '#F59E0B',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.35,
     shadowRadius: 8,
+    borderWidth: 2,
+    borderColor: '#FDE68A',
+  },
+  continueBtnOcean: {
+    backgroundColor: '#0284C7',
+    borderColor: '#67E8F9',
+    shadowColor: '#0284C7',
   },
   continueBtnText: {
     color: '#FFFFFF',
-    fontWeight: '900',
     fontSize: 15,
+    fontWeight: '900',
+    letterSpacing: 0.6,
+  },
+  pressed: {
+    transform: [{ scale: 0.96 }],
   },
   modalBackdrop: {
     flex: 1,
-    backgroundColor: 'rgba(46, 16, 101, 0.75)',
+    backgroundColor: 'rgba(15, 23, 42, 0.75)',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
   },
   modalCard: {
-    width: 280,
+    width: '100%',
+    maxWidth: 320,
     backgroundColor: '#FFFFFF',
     borderRadius: 24,
+    padding: 24,
     alignItems: 'center',
-    padding: 20,
     elevation: 10,
   },
   modalHeaderCircle: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#7C3AED',
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: '#F59E0B',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -40,
-    borderWidth: 3,
-    borderColor: '#FFFFFF',
+    marginBottom: 12,
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '900',
-    color: '#2E1065',
-    marginTop: 10,
+    color: '#1E293B',
+    marginBottom: 2,
   },
   modalSub: {
     fontSize: 12,
-    color: '#8B7FB0',
-    fontWeight: '600',
-    marginBottom: 12,
+    fontWeight: '700',
+    color: '#64748B',
+    marginBottom: 16,
   },
   modalWordsPreview: {
     width: '100%',
-    backgroundColor: '#F5F3FF',
-    borderRadius: 12,
-    padding: 10,
-    marginBottom: 16,
+    backgroundColor: '#F8FAFC',
+    borderRadius: 14,
+    padding: 12,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    marginBottom: 20,
   },
   modalWordsLabel: {
     fontSize: 10,
-    fontWeight: '900',
-    color: '#7C3AED',
-    marginBottom: 2,
+    fontWeight: '800',
+    color: '#94A3B8',
+    letterSpacing: 0.6,
+    marginBottom: 4,
   },
   modalWordsText: {
-    fontSize: 11,
-    color: '#4B5563',
-    lineHeight: 16,
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#334155',
+    textAlign: 'center',
+    lineHeight: 18,
   },
   modalBtnRow: {
     flexDirection: 'row',
+    gap: 10,
     width: '100%',
-    gap: 8,
   },
   modalCancelBtn: {
     flex: 1,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: '#F5F3FF',
-    borderWidth: 1,
-    borderColor: '#DDD6FE',
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#F1F5F9',
     alignItems: 'center',
     justifyContent: 'center',
   },
   modalCancelText: {
-    color: '#7C3AED',
+    color: '#64748B',
     fontWeight: '800',
-    fontSize: 13,
+    fontSize: 12,
   },
   modalPlayBtn: {
     flex: 1.4,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: '#7C3AED',
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#F59E0B',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    elevation: 3,
   },
   modalPlayText: {
     color: '#FFFFFF',
     fontWeight: '900',
-    fontSize: 13,
-  },
-  pressed: {
-    transform: [{ scale: 0.94 }],
+    fontSize: 12,
   },
 });
-
