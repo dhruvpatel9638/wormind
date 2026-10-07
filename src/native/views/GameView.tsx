@@ -18,6 +18,7 @@ import { TargetWord } from '../../types';
 import { INITIAL_LEVELS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
 import { CustomAlert } from '../components/CustomAlert';
+import { VictoryModal } from '../components/VictoryModal';
 import { showRewardedAd } from '../../utils/admobService';
 
 interface GameViewProps {
@@ -27,6 +28,7 @@ interface GameViewProps {
   coins: number;
   onDeductCoins: (amount: number) => boolean;
   strike?: number;
+  strikeZeroFails?: number;
   onFailLevel?: () => void;
   onRestoreStrike?: () => boolean;
 }
@@ -42,6 +44,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   coins,
   onDeductCoins,
   strike = 10,
+  strikeZeroFails = 0,
   onFailLevel,
   onRestoreStrike,
 }) => {
@@ -72,13 +75,6 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const star2Anim = useRef(new Animated.Value(0)).current;
   const star3Anim = useRef(new Animated.Value(0)).current;
 
-  const lossScaleAnim = useRef(new Animated.Value(0)).current;
-  const lossHeartAnim = useRef(new Animated.Value(0)).current;
-  const lossStrikeAnim = useRef(new Animated.Value(0)).current;
-  const lossShakeAnim = useRef(new Animated.Value(0)).current;
-  const floatMinusOneAnim = useRef(new Animated.Value(0)).current;
-  const floatMinusOneY = useRef(new Animated.Value(0)).current;
-
   useEffect(() => {
     if (isVictory) {
       Animated.sequence([
@@ -94,43 +90,6 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       star3Anim.setValue(0);
     }
   }, [isVictory]);
-
-  useEffect(() => {
-    if (isGameOver) {
-      lossScaleAnim.setValue(0);
-      lossHeartAnim.setValue(0);
-      lossStrikeAnim.setValue(0);
-      lossShakeAnim.setValue(0);
-      floatMinusOneAnim.setValue(0);
-      floatMinusOneY.setValue(0);
-
-      Animated.sequence([
-        Animated.spring(lossScaleAnim, { toValue: 1, friction: 5, tension: 60, useNativeDriver: true }),
-        Animated.sequence([
-          Animated.timing(lossShakeAnim, { toValue: -12, duration: 40, useNativeDriver: true }),
-          Animated.timing(lossShakeAnim, { toValue: 12, duration: 40, useNativeDriver: true }),
-          Animated.timing(lossShakeAnim, { toValue: -8, duration: 40, useNativeDriver: true }),
-          Animated.timing(lossShakeAnim, { toValue: 8, duration: 40, useNativeDriver: true }),
-          Animated.timing(lossShakeAnim, { toValue: 0, duration: 40, useNativeDriver: true }),
-        ]),
-        Animated.parallel([
-          Animated.spring(lossHeartAnim, { toValue: 1, friction: 4, tension: 70, useNativeDriver: true }),
-          Animated.spring(lossStrikeAnim, { toValue: 1, friction: 4, tension: 70, useNativeDriver: true }),
-        ]),
-        Animated.parallel([
-          Animated.timing(floatMinusOneAnim, { toValue: 1, duration: 700, useNativeDriver: true }),
-          Animated.timing(floatMinusOneY, { toValue: -32, duration: 700, useNativeDriver: true }),
-        ]),
-      ]).start();
-    } else {
-      lossScaleAnim.setValue(0);
-      lossHeartAnim.setValue(0);
-      lossStrikeAnim.setValue(0);
-      lossShakeAnim.setValue(0);
-      floatMinusOneAnim.setValue(0);
-      floatMinusOneY.setValue(0);
-    }
-  }, [isGameOver]);
 
   // Pause BGM when entering GameView, resume when exiting
   useEffect(() => {
@@ -859,72 +818,60 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         </Pressable>
       </View>
 
-      {/* Level Victory Modal */}
-      <Modal visible={isVictory} transparent animationType="fade">
+      {/* Level Victory Modal with Winged Crest, Golden Sunburst & Party Confetti / Zario Ribbons */}
+      <VictoryModal
+        visible={isVictory}
+        levelId={levelId}
+        maxWordStreak={maxWordStreak}
+        coinsEarned={50}
+        strikeEarned={10}
+        xpEarned={100}
+        onNextLevel={() => {
+          nativeAudio.stopVictory();
+          onCompleteLevel(levelId, 3, 50);
+        }}
+      />
+
+      {/* Pause Modal */}
+      <Modal visible={isPaused} transparent animationType="fade">
         <View style={styles.modalBackdrop}>
-          <Animated.View style={[styles.victoryCard, { transform: [{ scale: scaleAnim }] }]}>
-            <View style={styles.trophyCircle}>
-              <MaterialIcons name="emoji-events" size={40} color="#5A3800" />
+          <View style={styles.gameOverCard}>
+            <View style={styles.timerCircle}>
+              <MaterialIcons name="timer-off" size={38} color="#EF3B3B" />
             </View>
-            <Text style={styles.victoryTitle}>LEVEL COMPLETE!</Text>
-            <Text style={styles.victorySubtitle}>You solved all words in Level {levelId}!</Text>
+            <Text style={styles.gameOverTitle}>TIME'S UP!</Text>
+            <Text style={styles.gameOverSubtitle}>
+              You ran out of time on Level {levelId}!
+            </Text>
 
-            {maxWordStreak > 0 && (
-              <View style={styles.streakVictoryBadge}>
-                <MaterialIcons name="whatshot" size={16} color="#FF6B00" />
-                <Text style={styles.streakVictoryText}>BEST STREAK: {maxWordStreak}x</Text>
-              </View>
-            )}
-
-            <View style={styles.starsRow}>
-              <MaterialIcons name="star" size={36} color="#FFC928" />
-              <MaterialIcons name="star" size={42} color="#FFC928" />
-              <MaterialIcons name="star" size={36} color="#FFC928" />
-            </View>
-
-            <View style={styles.rewardRow}>
-              <View style={styles.rewardBox}>
-                <MaterialIcons name="monetization-on" size={22} color="#FFC928" />
-                <Text style={styles.rewardValue}>+50</Text>
-                <Text style={styles.rewardLabel}>Coins</Text>
-              </View>
-              <View style={[styles.rewardBox, { borderColor: '#FDBA74', backgroundColor: '#FFF7ED' }]}>
-                <MaterialIcons name="local-fire-department" size={22} color="#FF4500" />
-                <Text style={[styles.rewardValue, { color: '#EA580C' }]}>+10</Text>
-                <Text style={[styles.rewardLabel, { color: '#C2410C' }]}>Strike 🔥</Text>
-              </View>
-              <View style={styles.rewardBox}>
-                <MaterialIcons name="military-tech" size={22} color="#7C3AED" />
-                <Text style={styles.rewardValue}>+100</Text>
-                <Text style={styles.rewardLabel}>XP</Text>
+            {/* Strike Penalty Banner */}
+            <View style={styles.strikePenaltyBox}>
+              <MaterialIcons name="local-fire-department" size={24} color="#EF4444" />
+              <View style={{ marginLeft: 8, flex: 1 }}>
+                <Text style={styles.strikePenaltyTitle}>-50 STRIKE PENALTY 💔</Text>
+                <Text style={styles.strikePenaltySub}>
+                  {strike > 0
+                    ? `Current Strike: 🔥 ${strike}`
+                    : 'Strike is 0! Restore with 100 Coins to keep playing.'}
+                </Text>
               </View>
             </View>
 
             <Pressable
               onPress={() => {
-                nativeAudio.stopVictory();
-                onCompleteLevel(levelId, 3, 50);
+                if (strike <= 0) {
+                  if (onRestoreStrike && onRestoreStrike()) {
+                    resetLevelState(currentLevel);
+                  }
+                  return;
+                }
+                resetLevelState(currentLevel);
               }}
-              style={({ pressed }) => [styles.continueBtn, pressed && styles.pressed]}
+              style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
             >
-              <Text style={styles.continueBtnText}>NEXT LEVEL</Text>
-            </Pressable>
-          </Animated.View>
-        </View>
-      </Modal>
-
-      {/* Pause Modal */}
-      <Modal visible={isPaused} transparent animationType="fade">
-        <View style={styles.modalBackdrop}>
-          <View style={styles.pauseCard}>
-            <Text style={styles.pauseTitle}>GAME PAUSED</Text>
-            <Text style={styles.pauseSub}>Level {levelId} • {currentLevel.title}</Text>
-
-            <Pressable
-              onPress={() => setIsPaused(false)}
-              style={({ pressed }) => [styles.resumeBtn, pressed && styles.pressed]}
-            >
-              <Text style={styles.resumeBtnText}>RESUME</Text>
+              <Text style={styles.retryBtnText}>
+                {strike <= 0 ? 'RESTORE (100 🪙) & RETRY' : 'TRY AGAIN'}
+              </Text>
             </Pressable>
 
             <Pressable
@@ -1400,82 +1347,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 24,
   },
-  victoryCard: {
-    width: 290,
-    backgroundColor: '#2E1065',
-    borderRadius: 24,
-    borderWidth: 3,
-    borderColor: '#FFC928',
-    alignItems: 'center',
-    padding: 24,
-    elevation: 12,
-  },
-  trophyCircle: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#FFC928',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 3,
-    borderColor: '#FFFFFF',
-    marginTop: -48,
-  },
-  victoryTitle: {
-    color: '#FFFFFF',
-    fontSize: 20,
-    fontWeight: '900',
-    marginTop: 10,
-  },
-  victorySubtitle: {
-    color: '#DDD6FE',
-    fontSize: 12,
-    fontWeight: '600',
-    marginTop: 3,
-    textAlign: 'center',
-  },
-  starsRow: {
-    flexDirection: 'row',
-    gap: 8,
-    marginVertical: 14,
-  },
-  rewardRow: {
-    flexDirection: 'row',
-    gap: 8,
-    width: '100%',
-    marginBottom: 16,
-  },
-  rewardBox: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 12,
-    padding: 8,
-    alignItems: 'center',
-  },
-  rewardValue: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 15,
-    marginTop: 2,
-  },
-  rewardLabel: {
-    color: '#DDD6FE',
-    fontSize: 10,
-    fontWeight: '700',
-  },
-  continueBtn: {
-    width: '100%',
-    height: 46,
-    backgroundColor: '#7C3AED',
-    borderRadius: 23,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  continueBtnText: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 15,
-  },
+
   gameOverCard: {
     width: 280,
     backgroundColor: '#172858',

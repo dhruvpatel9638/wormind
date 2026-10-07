@@ -13,10 +13,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 import { DAILY_REWARDS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
-import { SvgSpinWheel, WHEEL_SEGMENTS } from '../components/SvgSpinWheel';
-
-const SPINS_STORAGE_KEY = '@wormind_daily_spins_count_v1';
-const MAX_DAILY_SPINS = 3;
 
 interface DailyViewProps {
   claimedDays?: number[];
@@ -28,6 +24,8 @@ interface DailyViewProps {
   onClaimDay5?: () => void;
   onAddCoins: (amount: number) => void;
   onAddHints: (amount: number) => void;
+  canSpinToday?: boolean;
+  onRecordSpin?: () => void;
 }
 
 export const NativeDailyView: React.FC<DailyViewProps> = ({
@@ -40,35 +38,16 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
   onClaimDay5,
   onAddCoins,
   onAddHints,
+  canSpinToday = true,
+  onRecordSpin,
 }) => {
   const [showClaimModal, setShowClaimModal] = useState<boolean>(false);
   const [showWinModal, setShowWinModal] = useState<boolean>(false);
   const [claimedMessage, setClaimedMessage] = useState<string>('You received your daily reward!');
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [wheelPrize, setWheelPrize] = useState<string | null>(null);
-  const [spinsUsed, setSpinsUsed] = useState<number>(0);
 
   const spinAnim = useRef(new Animated.Value(0)).current;
-  const winScaleAnim = useRef(new Animated.Value(0)).current;
-  const winIconAnim = useRef(new Animated.Value(0)).current;
-
-  // Track 3 daily spins limit
-  useEffect(() => {
-    const todayStr = new Date().toISOString().split('T')[0];
-    AsyncStorage.getItem(SPINS_STORAGE_KEY).then((data) => {
-      if (data) {
-        try {
-          const parsed = JSON.parse(data);
-          if (parsed.date === todayStr) {
-            setSpinsUsed(typeof parsed.count === 'number' ? parsed.count : 0);
-          } else {
-            setSpinsUsed(0);
-            AsyncStorage.setItem(SPINS_STORAGE_KEY, JSON.stringify({ date: todayStr, count: 0 }));
-          }
-        } catch {}
-      }
-    });
-  }, []);
 
   const handleClaim = (day: number) => {
     if (!canClaimToday) return;
@@ -98,51 +77,33 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
 
 
   const handleSpin = () => {
-    if (isSpinning || spinsUsed >= MAX_DAILY_SPINS) return;
-
-    const todayStr = new Date().toISOString().split('T')[0];
-    const newSpinsUsed = spinsUsed + 1;
-    setSpinsUsed(newSpinsUsed);
-    AsyncStorage.setItem(SPINS_STORAGE_KEY, JSON.stringify({ date: todayStr, count: newSpinsUsed })).catch(() => {});
-
+    if (isSpinning) return;
     setIsSpinning(true);
     nativeAudio.playSparkle();
 
-    const selectedIdx = Math.floor(Math.random() * WHEEL_SEGMENTS.length);
-    const targetDegrees = 360 * 5 + (360 - selectedIdx * 60 - 30);
-
     spinAnim.setValue(0);
     Animated.timing(spinAnim, {
-      toValue: targetDegrees,
-      duration: 3500,
+      toValue: 1,
+      duration: 3000,
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start(() => {
       setIsSpinning(false);
-      const wonItem = WHEEL_SEGMENTS[selectedIdx];
-      setWheelPrize(wonItem.prize);
+      const prizes = ['+50 Coins', '2x Hints', '+100 Coins', '+25 Coins'];
+      const won = prizes[Math.floor(Math.random() * prizes.length)];
+      setWheelPrize(won);
       nativeAudio.playVictory();
 
-      if (wonItem.prize.includes('250')) onAddCoins(250);
-      else if (wonItem.prize.includes('100')) onAddCoins(100);
-      else if (wonItem.prize.includes('50')) onAddCoins(50);
-      else if (wonItem.prize.includes('25')) onAddCoins(25);
-      else if (wonItem.prize.includes('10')) onAddCoins(10);
-      else if (wonItem.prize.includes('+5')) onAddCoins(5);
-
-      setShowWinModal(true);
-      winScaleAnim.setValue(0);
-      winIconAnim.setValue(0);
-      Animated.sequence([
-        Animated.spring(winScaleAnim, { toValue: 1, friction: 5, tension: 45, useNativeDriver: true }),
-        Animated.spring(winIconAnim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
-      ]).start();
+      if (won.includes('50')) onAddCoins(50);
+      else if (won.includes('100')) onAddCoins(100);
+      else if (won.includes('25')) onAddCoins(25);
+      else if (won.includes('Hints')) onAddHints(2);
     });
   };
 
   const spinInterpolate = spinAnim.interpolate({
-    inputRange: [0, 360],
-    outputRange: ['0deg', '360deg'],
+    inputRange: [0, 1],
+    outputRange: ['0deg', '1440deg'],
   });
 
   return (
@@ -220,48 +181,43 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
 
         {/* Lucky Spin Wheel Section */}
         <View style={styles.wheelCard}>
-          <View style={styles.wheelCardHeader}>
-            <MaterialIcons name="stars" size={22} color="#F59E0B" />
-            <Text style={styles.wheelTitle}>DAILY LUCKY SPIN</Text>
-          </View>
-          <Text style={styles.wheelSub}>Spin the wheel daily for free bonus coins & hints!</Text>
+          <Text style={styles.wheelTitle}>DAILY LUCKY SPIN</Text>
+          <Text style={styles.wheelSub}>Spin the prize wheel for free bonus loot!</Text>
 
-          {/* Remaining Spins Counter Badge */}
-          <View style={styles.spinsCountBadge}>
-            <MaterialIcons name="autorenew" size={14} color="#7C3AED" />
-            <Text style={styles.spinsCountText}>
-              SPINS REMAINING TODAY: {Math.max(0, MAX_DAILY_SPINS - spinsUsed)} / {MAX_DAILY_SPINS}
-            </Text>
+          <View style={styles.wheelWrapper}>
+            <Animated.View style={[styles.wheelCircle, { transform: [{ rotate: spinInterpolate }] }]}>
+              <View style={[styles.wheelSegment, { transform: [{ rotate: '0deg' }] }]}>
+                <Text style={styles.segmentText}>🪙 50</Text>
+              </View>
+              <View style={[styles.wheelSegment, { transform: [{ rotate: '90deg' }] }]}>
+                <Text style={styles.segmentText}>💡 2x</Text>
+              </View>
+              <View style={[styles.wheelSegment, { transform: [{ rotate: '180deg' }] }]}>
+                <Text style={styles.segmentText}>🪙 100</Text>
+              </View>
+              <View style={[styles.wheelSegment, { transform: [{ rotate: '270deg' }] }]}>
+                <Text style={styles.segmentText}>🪙 25</Text>
+              </View>
+            </Animated.View>
+            <View style={styles.wheelCenterPin} />
           </View>
-
-          {/* Vector SVG Arcade Spin Wheel */}
-          <SvgSpinWheel spinInterpolate={spinInterpolate} />
 
           {wheelPrize && (
             <View style={styles.wonBanner}>
-              <MaterialIcons name="emoji-events" size={20} color="#D97706" />
-              <Text style={styles.wonText}>🎉 WON: {wheelPrize}!</Text>
+              <Text style={styles.wonText}>🎉 You Won: {wheelPrize}!</Text>
             </View>
           )}
 
           <Pressable
-            disabled={isSpinning || spinsUsed >= MAX_DAILY_SPINS}
+            disabled={isSpinning}
             onPress={handleSpin}
             style={({ pressed }) => [
               styles.spinBtn,
-              spinsUsed >= MAX_DAILY_SPINS && styles.spinBtnDisabled,
               isSpinning && { opacity: 0.6 },
-              pressed && spinsUsed < MAX_DAILY_SPINS && styles.pressed,
+              pressed && styles.pressed,
             ]}
           >
-            <MaterialIcons name="cached" size={20} color="#FFFFFF" style={{ marginRight: 6 }} />
-            <Text style={styles.spinBtnText}>
-              {spinsUsed >= MAX_DAILY_SPINS
-                ? 'DAILY LIMIT REACHED (0/3 LEFT)'
-                : isSpinning
-                ? 'SPINNING...'
-                : 'SPIN WHEEL NOW'}
-            </Text>
+            <Text style={styles.spinBtnText}>{isSpinning ? 'SPINNING...' : 'SPIN WHEEL'}</Text>
           </Pressable>
         </View>
       </ScrollView>
@@ -443,154 +399,81 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#DDD6FE',
-    elevation: 4,
-    shadowColor: '#7C3AED',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
-  },
-  wheelCardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
+    elevation: 3,
   },
   wheelTitle: {
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: '900',
     color: '#6D28D9',
-    letterSpacing: 0.5,
   },
   wheelSub: {
     fontSize: 11,
     color: '#8B7FB0',
     marginTop: 2,
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  spinsCountBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F3E8FF',
-    borderWidth: 1.5,
-    borderColor: '#C084FC',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 12,
-    gap: 4,
-    marginBottom: 4,
-  },
-  spinsCountText: {
-    color: '#6B21A8',
-    fontWeight: '900',
-    fontSize: 11,
-    letterSpacing: 0.5,
+    marginBottom: 16,
   },
   wheelWrapper: {
-    width: 170,
-    height: 170,
+    width: 140,
+    height: 140,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
-    position: 'relative',
-  },
-  pointerContainer: {
-    position: 'absolute',
-    top: -8,
-    zIndex: 20,
-    alignItems: 'center',
-  },
-  pointerArrow: {
-    width: 0,
-    height: 0,
-    borderLeftWidth: 10,
-    borderRightWidth: 10,
-    borderTopWidth: 16,
-    borderStyle: 'solid',
-    backgroundColor: 'transparent',
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderTopColor: '#F59E0B',
   },
   wheelCircle: {
-    width: 160,
-    height: 160,
-    borderRadius: 80,
-    backgroundColor: '#2E1065',
-    borderWidth: 5,
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    backgroundColor: '#7C3AED',
+    borderWidth: 4,
     borderColor: '#FFC928',
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
   },
   wheelSegment: {
     position: 'absolute',
-    width: 60,
-    height: 40,
     alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 8,
-    paddingHorizontal: 4,
   },
   segmentText: {
     color: '#FFFFFF',
     fontWeight: '900',
     fontSize: 12,
-    textShadowColor: 'rgba(0, 0, 0, 0.4)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
   },
   wheelCenterPin: {
     position: 'absolute',
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
     backgroundColor: '#FFC928',
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: '#FFFFFF',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10,
-    elevation: 4,
   },
   wonBanner: {
-    flexDirection: 'row',
-    alignItems: 'center',
     backgroundColor: '#FEF3C7',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 14,
-    borderWidth: 1.5,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 12,
+    borderWidth: 1,
     borderColor: '#F59E0B',
-    marginBottom: 14,
-    gap: 6,
+    marginBottom: 12,
   },
   wonText: {
-    color: '#92400E',
-    fontWeight: '900',
+    color: '#5A3800',
+    fontWeight: '800',
     fontSize: 13,
   },
   spinBtn: {
     width: '100%',
-    height: 46,
+    height: 44,
     backgroundColor: '#7C3AED',
-    borderRadius: 23,
-    flexDirection: 'row',
+    borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3,
-    borderWidth: 1.5,
-    borderColor: '#A78BFA',
-  },
-  spinBtnDisabled: {
-    backgroundColor: '#9CA3AF',
-    borderColor: '#D1D5DB',
   },
   spinBtnText: {
     color: '#FFFFFF',
     fontWeight: '900',
     fontSize: 14,
-    letterSpacing: 0.5,
   },
   modalBackdrop: {
     flex: 1,

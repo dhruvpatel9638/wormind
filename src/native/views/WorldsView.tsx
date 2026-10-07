@@ -14,6 +14,17 @@ import Svg, { Path } from 'react-native-svg';
 import { nativeAudio } from '../audio';
 import { INITIAL_LEVELS } from '../../data/gameData';
 import { CustomAlert } from '../components/CustomAlert';
+import {
+  ValleySun,
+  ValleyTree,
+  ValleyWindmill,
+  ValleyFlowerPatch,
+  ValleySignpost,
+  MilestoneChest,
+  ValleyCloud,
+  ValleyButterfly,
+} from '../components/SunnyValleyVectors';
+
 interface WorldsViewProps {
   onStartLevel: (levelId: number) => void;
   activeLevelId: number;
@@ -52,6 +63,216 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
 
   const completedInChapter = Math.min(25, Math.max(0, activeLevelId - 1));
   const chapterProgressPercent = Math.min(100, Math.round((completedInChapter / 25) * 100));
+  const mapHeight = INITIAL_LEVELS.length * 110 + 200;
+  const roadPathD = `M 175 ${mapHeight}` + INITIAL_LEVELS.map((_, idx) => ` L ${150 + Math.sin(idx * 0.8) * 100 + 25} ${mapHeight - (idx * 110 + 100 + 25)}`).join('');
+
+  // Sunny Valley Landmark rendering along the winding trail
+  const renderSunnyValleyLandmark = (lvlId: number, index: number) => {
+    const bottom = index * 110 + 85;
+    const isRightSideCurve = Math.sin(index * 0.8) * 100 > 0;
+    const meadowX = isRightSideCurve ? 22 : 246;
+
+    if (lvlId === 1) {
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={styles.landmarkWrapper}>
+          <View style={[styles.landmarkItem, { bottom: bottom - 8, left: 24 }]}>
+            <ValleyFlowerPatch scale={1.25} />
+          </View>
+          <View style={[styles.landmarkItem, { bottom: bottom + 12, left: 232 }]}>
+            <ValleySignpost label="START" />
+          </View>
+        </View>
+      );
+    }
+
+    if (lvlId % 5 === 0) {
+      const isClaimed = activeLevelId > lvlId;
+      return (
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={styles.landmarkWrapper}>
+          <View style={[styles.landmarkItem, { bottom: bottom + 2, left: meadowX }]}>
+            <MilestoneChest level={lvlId} isClaimed={isClaimed} />
+          </View>
+          {lvlId === 5 && (
+            <View style={[styles.landmarkItem, { bottom: bottom + 35, left: 22 }]}>
+              <ValleyTree type="pine" scale={0.9} />
+            </View>
+          )}
+          {lvlId === 25 && (
+            <View style={[styles.landmarkItem, { bottom: bottom + 32, left: 236 }]}>
+              <ValleySignpost label="VALLEY PEAK" />
+            </View>
+          )}
+        </View>
+      );
+    }
+
+    switch (lvlId) {
+      case 2:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyTree type="oak" scale={1.08} />
+            <View style={styles.butterflyPin}>
+              <ValleyButterfly color="#EC4899" />
+            </View>
+          </View>
+        );
+      case 3:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX - 4 }]}>
+            <ValleyWindmill size={68} />
+          </View>
+        );
+      case 4:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyFlowerPatch scale={1.2} />
+          </View>
+        );
+      case 6:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyTree type="oak" scale={1.12} />
+          </View>
+        );
+      case 7:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyFlowerPatch scale={1.3} />
+            <View style={styles.butterflyPin}>
+              <ValleyButterfly color="#F59E0B" />
+            </View>
+          </View>
+        );
+      case 8:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleySignpost label="ORCHARD" />
+          </View>
+        );
+      case 9:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyTree type="pine" scale={1.1} />
+          </View>
+        );
+      case 11:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX - 4 }]}>
+            <ValleyWindmill size={66} />
+          </View>
+        );
+      case 12:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyTree type="oak" scale={1.1} />
+          </View>
+        );
+      case 13:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyFlowerPatch scale={1.2} />
+            <View style={styles.butterflyPin}>
+              <ValleyButterfly color="#8B5CF6" />
+            </View>
+          </View>
+        );
+      case 14:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyTree type="pine" scale={1.15} />
+          </View>
+        );
+      case 16:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX }]}>
+            <ValleyWindmill size={68} />
+          </View>
+        );
+      case 17:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyFlowerPatch scale={1.25} />
+          </View>
+        );
+      case 18:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyTree type="oak" scale={1.1} />
+          </View>
+        );
+      case 19:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleySignpost label="SUNNY MEADOW" />
+          </View>
+        );
+      case 21:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyFlowerPatch scale={1.2} />
+            <View style={styles.butterflyPin}>
+              <ValleyButterfly color="#06B6D4" />
+            </View>
+          </View>
+        );
+      case 22:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX }]}>
+            <ValleyWindmill size={66} />
+          </View>
+        );
+      case 23:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyTree type="pine" scale={1.1} />
+          </View>
+        );
+      case 24:
+        return (
+          <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+            <ValleyTree type="oak" scale={1.2} />
+          </View>
+        );
+      default: {
+        const cycle = lvlId % 7;
+        if (cycle === 1) {
+          return (
+            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+              <ValleyTree type="oak" scale={1.05} />
+            </View>
+          );
+        } else if (cycle === 2) {
+          return (
+            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 8, left: meadowX }]}>
+              <ValleyWindmill size={64} />
+            </View>
+          );
+        } else if (cycle === 3) {
+          return (
+            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+              <ValleyFlowerPatch scale={1.15} />
+            </View>
+          );
+        } else if (cycle === 4) {
+          return (
+            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+              <ValleyTree type="pine" scale={1.05} />
+            </View>
+          );
+        } else if (cycle === 6) {
+          return (
+            <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+              <ValleyFlowerPatch scale={1.1} />
+              <View style={styles.butterflyPin}>
+                <ValleyButterfly color="#F43F5E" />
+              </View>
+            </View>
+          );
+        }
+        return null;
+      }
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -65,8 +286,11 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         <View style={styles.chapterCard}>
           <View style={styles.chapterHeader}>
             <View style={styles.chapterTitleRow}>
-              <View style={styles.greenPulseDot} />
-              <Text style={styles.chapterTitle}>CHAPTER 1: SUNNY VALLEY</Text>
+              <MaterialIcons name="wb-sunny" size={20} color="#F59E0B" />
+              <View>
+                <Text style={styles.chapterTitle}>CHAPTER 1: SUNNY VALLEY</Text>
+                <Text style={styles.chapterSubtitle}>Golden meadows, windmills & blooming flowers</Text>
+              </View>
             </View>
             <View style={styles.chapterStars}>
               <MaterialIcons name="star" size={14} color="#F59E0B" />
@@ -77,7 +301,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
           {/* Progress bar */}
           <View style={styles.progressBarBg}>
             <LinearGradient
-              colors={['#FFC928', '#0D9488']}
+              colors={['#F59E0B', '#10B981']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={[styles.progressBarFill, { width: `${chapterProgressPercent}%` }]}
@@ -108,48 +332,112 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         </View>
 
         {/* Dynamic Winding Road Map Container */}
-        <View style={[styles.mapCard, { height: INITIAL_LEVELS.length * 110 + 200 }]}>
-          {/* Decorative Floating Bubbles - repeated for long map */}
-          {INITIAL_LEVELS.map((_, i) => {
-            if (i % 5 !== 0) return null;
-            return (
-              <View key={`bubble-${i}`} style={[styles.bubble, { 
-                bottom: i * 110 + 20, 
-                left: i % 2 === 0 ? 16 : undefined,
-                right: i % 2 !== 0 ? 16 : undefined,
-                backgroundColor: i % 2 === 0 ? 'rgba(255, 182, 193, 0.4)' : 'rgba(76, 175, 80, 0.4)'
-              }]} />
-            );
-          })}
+        <View style={[styles.mapCard, { height: mapHeight }]}>
+          {/* Lush Meadow Gradient Background */}
+          <LinearGradient
+            colors={[
+              '#BAE6FD',
+              '#E0F2FE',
+              '#FEF9C3',
+              '#DCFCE7',
+              '#BBF7D0',
+              '#86EFAC',
+              '#BBF7D0',
+              '#DCFCE7',
+              '#FEF3C7',
+              '#D1FAE5',
+            ]}
+            locations={[0, 0.04, 0.08, 0.2, 0.4, 0.6, 0.75, 0.88, 0.95, 1]}
+            style={StyleSheet.absoluteFill}
+          />
 
-          {/* SVG Winding Road Path */}
-          <Svg style={StyleSheet.absoluteFill} viewBox={`0 0 360 ${INITIAL_LEVELS.length * 110 + 200}`} preserveAspectRatio="none">
-            {/* Lavender background wide road */}
+          {/* Sunny Valley Sky Vista at Top */}
+          <View pointerEvents="none" style={styles.topSkyVista}>
+            <View style={styles.topSunWrapper}>
+              <ValleySun size={86} />
+            </View>
+            <View style={styles.topCloudLeft}>
+              <ValleyCloud scale={1.1} opacity={0.9} />
+            </View>
+            <View style={styles.topCloudRight}>
+              <ValleyCloud scale={1.25} opacity={0.95} />
+            </View>
+            <View style={styles.topBannerPill}>
+              <MaterialIcons name="wb-sunny" size={14} color="#D97706" />
+              <Text style={styles.topBannerText}>SUNNY VALLEY SUMMIT</Text>
+            </View>
+          </View>
+
+          {/* SVG Winding Road Path with Sunny Valley Cobblestone Styling */}
+          <Svg style={StyleSheet.absoluteFill} viewBox={`0 0 360 ${mapHeight}`} preserveAspectRatio="none">
+            {/* Rolling meadow contour curves */}
+            {INITIAL_LEVELS.map((_, idx) => {
+              if (idx % 4 !== 0) return null;
+              const y = mapHeight - (idx * 110 + 100);
+              const isAlt = (idx / 4) % 2 === 0;
+              return (
+                <Path
+                  key={`hill-${idx}`}
+                  d={isAlt 
+                    ? `M -20 ${y} Q 90 ${y - 40} 200 ${y} T 380 ${y + 25}`
+                    : `M -20 ${y + 20} Q 150 ${y - 45} 300 ${y + 10} T 380 ${y}`
+                  }
+                  fill="none"
+                  stroke="rgba(34, 197, 94, 0.16)"
+                  strokeWidth="20"
+                />
+              );
+            })}
+
+            {/* Outer Lush Grass Border */}
             <Path
-              d={`M 175 ${INITIAL_LEVELS.length * 110 + 200}` + INITIAL_LEVELS.map((_, idx) => ` L ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
+              d={roadPathD}
               fill="none"
-              stroke="rgba(212, 181, 255, 0.55)"
-              strokeWidth="56"
+              stroke="#16A34A"
+              strokeWidth="62"
               strokeLinejoin="round"
+              strokeLinecap="round"
             />
-            {/* White road track */}
+            {/* Warm Golden Earth Curb */}
             <Path
-              d={`M 175 ${INITIAL_LEVELS.length * 110 + 200}` + INITIAL_LEVELS.map((_, idx) => ` L ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
+              d={roadPathD}
               fill="none"
-              stroke="rgba(255, 255, 255, 0.75)"
-              strokeWidth="42"
+              stroke="#F59E0B"
+              strokeWidth="50"
               strokeLinejoin="round"
+              strokeLinecap="round"
             />
-            {/* Dashed purple center line */}
+            {/* Cobblestone Sandy Roadbed */}
             <Path
-              d={`M 175 ${INITIAL_LEVELS.length * 110 + 200}` + INITIAL_LEVELS.map((_, idx) => ` L ${150 + Math.sin(idx * 0.8) * 100 + 25} ${(INITIAL_LEVELS.length * 110 + 200) - (idx * 110 + 100 + 25)}`).join('')}
+              d={roadPathD}
               fill="none"
-              stroke="rgba(124, 58, 237, 0.35)"
+              stroke="#FFFBEB"
+              strokeWidth="40"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+            {/* Stepping stone cobblestone texture */}
+            <Path
+              d={roadPathD}
+              fill="none"
+              stroke="#FDE68A"
+              strokeWidth="32"
+              strokeLinejoin="round"
+              strokeDasharray="4, 12"
+            />
+            {/* Golden Amber Dashed Centerline */}
+            <Path
+              d={roadPathD}
+              fill="none"
+              stroke="#D97706"
               strokeWidth="3"
               strokeDasharray="8, 8"
               strokeLinejoin="round"
             />
           </Svg>
+
+          {/* Vector Landmarks along the trail */}
+          {INITIAL_LEVELS.map((lvl, index) => renderSunnyValleyLandmark(lvl.id, index))}
 
           {/* Level Nodes Placed Along the Winding Road */}
           {INITIAL_LEVELS.map((lvl, index) => {
@@ -163,6 +451,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
               <View key={`node-${lvl.id}`} style={[styles.nodeAbsolute, { bottom, left }]}>
                 {isActive && (
                   <View style={styles.letsGoBubble}>
+                    <MaterialIcons name="wb-sunny" size={11} color="#FEF08A" />
                     <Text style={styles.letsGoText}>CURRENT</Text>
                   </View>
                 )}
@@ -182,7 +471,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                       <Text style={styles.activePlayText}>PLAY</Text>
                     </>
                   )}
-                  {isLocked && <MaterialIcons name="lock" size={22} color="#8B7FB0" />}
+                  {isLocked && <MaterialIcons name="lock" size={22} color="#94A3B8" />}
                 </Pressable>
 
                 {isDone && (
@@ -193,9 +482,20 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                   </View>
                 )}
                 
-                <Text style={[styles.nodeLabel, isActive && { color: '#7C3AED', fontWeight: '900', fontSize: 13 }, isLocked && { color: '#8B7FB0' }]}>
-                  {lvl.id}: {lvl.title.split(' ')[0]}
-                </Text>
+                <View style={[
+                  styles.nodeLabelBadge,
+                  isActive && styles.nodeLabelBadgeActive,
+                  isDone && styles.nodeLabelBadgeDone,
+                ]}>
+                  <Text style={[
+                    styles.nodeLabelText,
+                    isActive && styles.nodeLabelTextActive,
+                    isDone && styles.nodeLabelTextDone,
+                    isLocked && styles.nodeLabelTextLocked,
+                  ]}>
+                    Level {lvl.id}
+                  </Text>
+                </View>
               </View>
             );
           })}
@@ -278,14 +578,14 @@ const styles = StyleSheet.create({
   },
   chapterCard: {
     width: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backgroundColor: '#FFFBEB',
     borderRadius: 20,
-    borderWidth: 3,
-    borderColor: '#DDD6FE',
-    padding: 12,
+    borderWidth: 2.5,
+    borderColor: '#FDE68A',
+    padding: 13,
     marginBottom: 12,
     elevation: 4,
-    shadowColor: '#7C3AED',
+    shadowColor: '#D97706',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.15,
     shadowRadius: 6,
@@ -299,19 +599,18 @@ const styles = StyleSheet.create({
   chapterTitleRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
-  },
-  greenPulseDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: '#0D9488',
+    gap: 8,
   },
   chapterTitle: {
     fontSize: 13,
     fontWeight: '900',
-    color: '#6D28D9',
-    letterSpacing: 0.5,
+    color: '#78350F',
+    letterSpacing: 0.4,
+  },
+  chapterSubtitle: {
+    fontSize: 9.5,
+    fontWeight: '600',
+    color: '#B45309',
   },
   chapterStars: {
     flexDirection: 'row',
@@ -333,7 +632,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 12,
     borderRadius: 6,
-    backgroundColor: 'rgba(124, 58, 237, 0.12)',
+    backgroundColor: 'rgba(217, 119, 6, 0.15)',
     overflow: 'hidden',
   },
   progressBarFill: {
@@ -354,7 +653,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   worldPillActive: {
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#D97706',
   },
   worldPillInactive: {
     backgroundColor: 'rgba(255, 255, 255, 0.85)',
@@ -373,76 +672,79 @@ const styles = StyleSheet.create({
   },
   mapCard: {
     width: '100%',
-    height: 700,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderRadius: 24,
     borderWidth: 3,
-    borderColor: 'rgba(221, 214, 254, 0.8)',
+    borderColor: '#86EFAC',
     position: 'relative',
     overflow: 'hidden',
-  },
-  bubble: {
-    position: 'absolute',
-    width: 26,
-    height: 26,
-    borderRadius: 13,
-  },
-  letterTree: {
-    position: 'absolute',
-    top: 50,
-    left: 20,
-    alignItems: 'center',
-    zIndex: 10,
-  },
-  treeCanopy: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: '#0D9488',
-    borderWidth: 3,
-    borderColor: '#5EEAD4',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 4,
-  },
-  treeLetter: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 22,
-  },
-  treeTrunk: {
-    width: 10,
-    height: 18,
-    backgroundColor: '#B45309',
-    borderBottomLeftRadius: 3,
-    borderBottomRightRadius: 3,
-  },
-  valleyGate: {
-    position: 'absolute',
-    top: 14,
-    left: '50%',
-    transform: [{ translateX: -80 }],
-    backgroundColor: '#6D28D9',
-    borderRadius: 14,
-    borderWidth: 2,
-    borderColor: '#DDD6FE',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    gap: 6,
-    zIndex: 20,
+    backgroundColor: '#ECFDF5',
+    shadowColor: '#059669',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
     elevation: 5,
   },
-  valleyGateTitle: {
-    color: '#FFFFFF',
+  topSkyVista: {
+    position: 'absolute',
+    top: 14,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    zIndex: 15,
+  },
+  topSunWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  topCloudLeft: {
+    position: 'absolute',
+    top: 24,
+    left: 20,
+  },
+  topCloudRight: {
+    position: 'absolute',
+    top: 28,
+    right: 18,
+  },
+  topBannerPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#FEF3C7',
+    borderWidth: 1.5,
+    borderColor: '#FDE68A',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 14,
+    marginTop: 6,
+    shadowColor: '#D97706',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  topBannerText: {
     fontSize: 10,
     fontWeight: '900',
+    color: '#92400E',
+    letterSpacing: 0.5,
   },
-  valleyGateSub: {
-    color: '#DDD6FE',
-    fontSize: 8,
-    fontWeight: '600',
+  landmarkWrapper: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  landmarkItem: {
+    position: 'absolute',
+    alignItems: 'center',
+    zIndex: 12,
+  },
+  butterflyPin: {
+    position: 'absolute',
+    top: -8,
+    right: -10,
   },
   nodeAbsolute: {
     position: 'absolute',
@@ -456,33 +758,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   nodeDone: {
-    backgroundColor: '#0D9488',
+    backgroundColor: '#10B981',
     borderWidth: 3,
-    borderColor: '#5EEAD4',
+    borderColor: '#A7F3D0',
   },
   nodeActive: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#FFC928',
+    backgroundColor: '#F59E0B',
     borderWidth: 4,
     borderColor: '#FFFFFF',
+    shadowColor: '#F59E0B',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.45,
+    shadowRadius: 8,
+    elevation: 8,
   },
   nodeLocked: {
-    backgroundColor: '#EDE9FE',
+    backgroundColor: '#F1F5F9',
     borderWidth: 3,
-    borderColor: '#DDD6FE',
+    borderColor: '#CBD5E1',
   },
   activeNumber: {
-    color: '#5A3800',
+    color: '#451A03',
     fontSize: 22,
     fontWeight: '900',
     lineHeight: 24,
   },
   activePlayText: {
-    color: '#5A3800',
+    color: '#451A03',
     fontSize: 9,
     fontWeight: '900',
   },
@@ -494,22 +805,59 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     borderWidth: 1.5,
     borderColor: '#FFFFFF',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
   },
   letsGoText: {
     color: '#FFFFFF',
     fontSize: 9,
     fontWeight: '900',
+    letterSpacing: 0.3,
   },
   starsRow: {
     flexDirection: 'row',
     gap: 1,
     marginTop: 2,
   },
-  nodeLabel: {
-    fontSize: 11,
+  nodeLabelBadge: {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 10,
+    marginTop: 3,
+    borderWidth: 1,
+    borderColor: 'rgba(203, 213, 225, 0.8)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  nodeLabelBadgeActive: {
+    backgroundColor: '#7C3AED',
+    borderColor: '#6D28D9',
+  },
+  nodeLabelBadgeDone: {
+    borderColor: '#A7F3D0',
+    backgroundColor: '#ECFDF5',
+  },
+  nodeLabelText: {
+    fontSize: 10,
     fontWeight: '800',
-    color: '#2E1065',
-    marginTop: 1,
+    color: '#334155',
+  },
+  nodeLabelTextActive: {
+    color: '#FFFFFF',
+    fontWeight: '900',
+    fontSize: 11,
+  },
+  nodeLabelTextDone: {
+    color: '#047857',
+    fontWeight: '800',
+  },
+  nodeLabelTextLocked: {
+    color: '#94A3B8',
   },
   stickyFooter: {
     position: 'absolute',

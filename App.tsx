@@ -54,14 +54,33 @@ export default function App() {
     soundEnabled: true,
     musicEnabled: true,
     hapticsEnabled: true,
+    currentLevel: START_LEVEL_ID,
+    lastDailyClaimDate: null,
     strike: 10,
+    strikeZeroFails: 0,
   });
 
-  const todayDateStr = new Date().toISOString().split('T')[0];
-  const yesterdayDateStr = new Date(Date.now() - 86400000).toISOString().split('T')[0];
-  const activeClaimedDays = playerState.claimedDays || [1, 2, 3, 4];
-  const canClaimDaily = playerState.lastDailyClaimDate !== todayDateStr;
-  const currentDailyDay = Math.min((activeClaimedDays.length % 7) + 1, 7);
+  const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
+  const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
+
+  const todayDateStr = getTodayDateString();
+  const yesterdayDateStr = getYesterdayDateString();
+  const hasClaimedToday = playerState.lastDailyClaimDate === todayDateStr;
+  const canClaimDaily = !hasClaimedToday;
+
+  // Active claimed days in current 7-day cycle
+  // If user completed 7 days and a new day arrived, start a fresh 7-day cycle!
+  const activeClaimedDays =
+    (playerState.claimedDays || []).length >= 7 && canClaimDaily
+      ? []
+      : (playerState.claimedDays || []);
+
+  const currentDailyDay = Math.min(7, (activeClaimedDays.length % 7) + 1);
+
+  // Initialize Google Mobile Ads SDK on app startup
+  useEffect(() => {
+    initAdMob();
+  }, []);
 
   // Load saved state from native AsyncStorage
   useEffect(() => {
@@ -74,12 +93,14 @@ export default function App() {
             : START_LEVEL_ID;
           const savedCoins = typeof parsed.coins === 'number' && parsed.coins <= 1000 ? parsed.coins : 100;
           const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
+          const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
           setPlayerState((prev) => ({
             ...prev,
             ...parsed,
             coins: savedCoins,
             currentLevel: savedLevel,
             strike: savedStrike,
+            strikeZeroFails: savedZeroFails,
           }));
           setActiveLevelId(savedLevel);
           nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
@@ -124,8 +145,9 @@ export default function App() {
   };
 
   const handleStartLevel = (levelId: number) => {
-    if (playerState.hearts <= 0) {
-      setShowRefillHeartsModal(true);
+    if ((playerState.strike ?? 10) <= 0) {
+      setPendingLevelToStart(levelId);
+      setShowRestoreStrikeModal(true);
       return;
     }
     setActiveLevelId(levelId);
@@ -145,23 +167,39 @@ export default function App() {
     setPlayerState((prev) => ({
       ...prev,
       coins: prev.coins - 100,
-      strike: 10,
+      strike: (prev.strike || 0) + 10,
     }));
     return true;
   };
 
-  const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
-    const nextLevel = Math.min(50, levelId + 1);
+  const handleFailLevel = () => {
     setPlayerState((prev) => ({
       ...prev,
-      coins: prev.coins + coinsEarned,
-      stars: prev.stars + starsEarned,
-      solvedCount: prev.solvedCount + 1,
-      wordsDiscovered: prev.wordsDiscovered + 5,
-      currentLevel: Math.max(prev.currentLevel || 1, nextLevel),
-      strike: (prev.strike || 0) + 1,
+      strike: Math.max(0, (prev.strike || 0) - 50),
     }));
-    setActiveLevelId(nextLevel);
+  };
+
+  const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
+    // 🔹 Smart AdMob Interstitial Ad (Randomized Win + 3-min Time Auto-Trigger)
+    showSmartInterstitialAd();
+
+    const nextLevel = levelId < 100 ? levelId + 1 : 100;
+
+    setPlayerState((prev) => {
+      const currentHighest = prev.currentLevel || 1;
+      const updatedHighest = Math.max(currentHighest, nextLevel);
+      return {
+        ...prev,
+        coins: prev.coins + coinsEarned,
+        stars: prev.stars + starsEarned,
+        solvedCount: prev.solvedCount + 1,
+        wordsDiscovered: prev.wordsDiscovered + 5,
+        currentLevel: updatedHighest,
+        strike: (prev.strike || 0) + 10, // 🔥 +10 Strike on win!
+      };
+    });
+
+    setActiveLevelId((prev) => Math.max(prev, nextLevel));
     setCurrentScreen('worlds');
   };
 
@@ -209,6 +247,13 @@ export default function App() {
     }));
   };
 
+  const handleRecordSpin = () => {
+    setPlayerState((prev) => ({
+      ...prev,
+      lastSpinDate: todayDateStr,
+    }));
+  };
+
   const handleToggleSound = () => {
     setPlayerState((prev) => {
       const next = !prev.soundEnabled;
@@ -250,7 +295,10 @@ export default function App() {
       soundEnabled: true,
       musicEnabled: true,
       hapticsEnabled: true,
+      currentLevel: START_LEVEL_ID,
+      lastDailyClaimDate: null,
       strike: 10,
+      strikeZeroFails: 0,
     });
     setActiveLevelId(START_LEVEL_ID);
   };
@@ -268,8 +316,14 @@ export default function App() {
         level={activeLevelId}
         strike={playerState.strike ?? 10}
         onPressStrike={() => {
-          if ((playerState.strike ?? 10) <= 0) {
+          const isLocked = (playerState.strike ?? 10) <= 0 && (playerState.strikeZeroFails ?? 0) >= 2;
+          if (isLocked) {
             setShowRestoreStrikeModal(true);
+          } else {
+            Alert.alert(
+              '🔥 Snapchat Strike',
+              `Current Strike: ${playerState.strike}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`
+            );
           }
         }}
         onOpenShop={() => {}}
@@ -295,6 +349,7 @@ export default function App() {
             coins={playerState.coins}
             onDeductCoins={handleDeductCoins}
             strike={playerState.strike ?? 10}
+            strikeZeroFails={playerState.strikeZeroFails ?? 0}
             onFailLevel={handleFailLevel}
             onRestoreStrike={handleRestoreStrike}
           />
@@ -311,6 +366,8 @@ export default function App() {
             onClaimDay5={() => handleClaimDaily(currentDailyDay)}
             onAddCoins={handleAddCoins}
             onAddHints={handleAddHints}
+            canSpinToday={canSpinToday}
+            onRecordSpin={handleRecordSpin}
           />
         )}
 
@@ -404,9 +461,9 @@ export default function App() {
             <View style={styles.fireHeaderCircle}>
               <MaterialIcons name="local-fire-department" size={44} color="#FF4500" />
             </View>
-            <Text style={styles.restoreTitle}>STRIKE IS 0! 🔥</Text>
+            <Text style={styles.restoreTitle}>0 FREE CHANCES LEFT! 🔥</Text>
             <Text style={styles.restoreSub}>
-              Your Snapchat winning strike is currently 0. Restore your strike with 100 Coins to play and start building your fire!
+              Your strike reached 0 and you failed both 2 free chances! Restore your strike with 100 Coins to keep playing and build your flame back up!
             </Text>
 
             <View style={styles.restorePriceBox}>
