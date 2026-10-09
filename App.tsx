@@ -305,6 +305,15 @@ export default function App() {
     setActiveLevelId(DEFAULT_START_LEVEL);
   };
 
+  if (isAppLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+        <NativeLoadingScreen onFinish={() => setIsAppLoading(false)} />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor="#7C3AED" />
@@ -394,11 +403,6 @@ export default function App() {
           onNavigate={setCurrentScreen}
           hasClaimableDaily={canClaimDaily}
         />
-      )}
-
-      {/* Starting Loading Screen with Active Neon Animation */}
-      {isAppLoading && (
-        <NativeLoadingScreen onFinish={() => setIsAppLoading(false)} />
       )}
 
       {/* Refill Hearts Modal */}
@@ -514,6 +518,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: '#16022B',
+  },
   safeArea: {
     flex: 1,
     backgroundColor: '#FAF8FF',
