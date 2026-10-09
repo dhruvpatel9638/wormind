@@ -24,6 +24,7 @@ import { NativeLoadingScreen } from './src/native/components/LoadingScreen';
 import { DAILY_REWARDS } from './src/data/gameData';
 import { nativeAudio } from './src/native/audio';
 import { initAdMob, showSmartInterstitialAd } from './src/utils/admobService';
+import { CustomAlert } from './src/native/components/CustomAlert';
 
 const getTodayDateString = () => new Date().toISOString().split('T')[0];
 const getYesterdayDateString = () => {
@@ -41,6 +42,7 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
   const [activeLevelId, setActiveLevelId] = useState<number>(DEFAULT_START_LEVEL);
   const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
+  const [showStrikeInfoModal, setShowStrikeInfoModal] = useState<boolean>(false);
   const [showRefillHeartsModal, setShowRefillHeartsModal] = useState<boolean>(false);
   const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
 
@@ -331,10 +333,7 @@ export default function App() {
           if (isLocked) {
             setShowRestoreStrikeModal(true);
           } else {
-            Alert.alert(
-              '🔥 Snapchat Strike',
-              `Current Strike: ${playerState.strike}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`
-            );
+            setShowStrikeInfoModal(true);
           }
         }}
         onOpenShop={() => {}}
@@ -513,6 +512,16 @@ export default function App() {
           </View>
         </View>
       </Modal>
+
+      {/* Word Strike Info Modal */}
+      <CustomAlert
+        visible={showStrikeInfoModal}
+        title="WORD STRIKE"
+        message={`Current Strike: ${playerState.strike ?? 10}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`}
+        icon="local-fire-department"
+        btnText="GOT IT"
+        onClose={() => setShowStrikeInfoModal(false)}
+      />
     </SafeAreaView>
   );
 }
