@@ -30,7 +30,7 @@ interface GameViewProps {
   strike?: number;
   strikeZeroFails?: number;
   onFailLevel?: () => void;
-  onRestoreStrike?: () => boolean;
+  onRestoreStrike?: (onSuccess?: () => void) => void;
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -890,7 +890,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                 <Text style={styles.strikePenaltySub}>
                   {strike > 0
                     ? `Current Strike: 🔥 ${strike}`
-                    : 'Strike is 0! Restore with 100 Coins to keep playing.'}
+                    : 'Strike is 0! Watch a short ad to restore your strike to 10!'}
                 </Text>
               </View>
             </View>
@@ -898,8 +898,10 @@ export const NativeGameView: React.FC<GameViewProps> = ({
             <Pressable
               onPress={() => {
                 if (strike <= 0) {
-                  if (onRestoreStrike && onRestoreStrike()) {
-                    resetLevelState(currentLevel);
+                  if (onRestoreStrike) {
+                    onRestoreStrike(() => {
+                      resetLevelState(currentLevel);
+                    });
                   }
                   return;
                 }
@@ -908,7 +910,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
               style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
             >
               <Text style={styles.retryBtnText}>
-                {strike <= 0 ? 'RESTORE (100 🪙) & RETRY' : 'TRY AGAIN'}
+                {strike <= 0 ? 'WATCH AD TO RESTORE 🔥 & RETRY' : 'TRY AGAIN'}
               </Text>
             </Pressable>
 
@@ -1015,11 +1017,23 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
             <Pressable
               onPress={() => {
+                if (strike <= 0) {
+                  if (onRestoreStrike) {
+                    onRestoreStrike(() => {
+                      setIsGameOver(false);
+                      resetLevelState(currentLevel);
+                    });
+                  }
+                  return;
+                }
+                setIsGameOver(false);
                 resetLevelState(currentLevel);
               }}
               style={({ pressed }) => [styles.resumeBtn, { backgroundColor: '#EF4444' }, pressed && styles.pressed]}
             >
-              <Text style={styles.resumeBtnText}>TRY AGAIN</Text>
+              <Text style={styles.resumeBtnText}>
+                {strike <= 0 ? 'WATCH AD TO RESTORE 🔥 & RETRY' : 'TRY AGAIN'}
+              </Text>
             </Pressable>
 
             <Pressable

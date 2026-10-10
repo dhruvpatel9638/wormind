@@ -28,6 +28,7 @@ export const NativeHeader: React.FC<HeaderProps> = ({
   onOpenShop,
   onRefillHearts,
 }) => {
+
   const formatCoins = (num: number) => {
     if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1)}M`;
     if (num >= 100_000) return `${(num / 1_000).toFixed(1)}K`;
@@ -53,13 +54,13 @@ export const NativeHeader: React.FC<HeaderProps> = ({
           <MaterialIcons
             name="local-fire-department"
             size={18}
-            color={strike > 0 ? '#FF4500' : '#9CA3AF'}
+            color={strike > 0 ? '#FF4500' : '#DC2626'}
           />
           <Text
             numberOfLines={1}
             style={[styles.badgeText, styles.strikeText, strike <= 0 && styles.strikeTextZero]}
           >
-            {strike}
+            {strike > 0 ? strike : 'REVIVE 🔥'}
           </Text>
         </Pressable>
 
@@ -152,8 +153,8 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   strikeBadgeZero: {
-    borderColor: '#E5E7EB',
-    backgroundColor: '#F9FAFB',
+    borderColor: '#FCA5A5',
+    backgroundColor: '#FEF2F2',
   },
   strikeText: {
     color: '#EA580C',
@@ -161,7 +162,10 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   strikeTextZero: {
-    color: '#9CA3AF',
+    color: '#DC2626',
+    fontWeight: '900',
+    fontSize: 10,
+    letterSpacing: 0.3,
   },
   heartBadge: {
     flex: 1.15,
