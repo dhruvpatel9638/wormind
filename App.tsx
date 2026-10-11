@@ -318,22 +318,25 @@ export default function App() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor="#7C3AED" />
 
-      {/* Top Persistent HUD Header */}
-      <NativeHeader
-        coins={playerState.coins}
-        hearts={playerState.hearts}
-        maxHearts={playerState.maxHearts}
-        heartCountdown={formatCountdown(playerState.heartSeconds)}
-        level={activeLevelId}
-        strike={playerState.strike ?? 10}
-        onPressStrike={() => {
-          setShowRestoreStrikeModal(true);
-        }}
-        onOpenShop={() => {}}
-        onRefillHearts={() => setShowRefillHeartsModal(true)}
-        musicEnabled={playerState.musicEnabled}
-        onToggleMusic={handleToggleMusic}
-      />
+      {/* Keep the gameplay HUD out of the startup loading screen. On Android,
+          elevated header badges can otherwise draw above an absolute overlay. */}
+      {!isAppLoading && (
+        <NativeHeader
+          coins={playerState.coins}
+          hearts={playerState.hearts}
+          maxHearts={playerState.maxHearts}
+          heartCountdown={formatCountdown(playerState.heartSeconds)}
+          level={activeLevelId}
+          strike={playerState.strike ?? 10}
+          onPressStrike={() => {
+            setShowRestoreStrikeModal(true);
+          }}
+          onOpenShop={() => {}}
+          onRefillHearts={() => setShowRefillHeartsModal(true)}
+          musicEnabled={playerState.musicEnabled}
+          onToggleMusic={handleToggleMusic}
+        />
+      )}
 
       {/* Screen Views */}
       <View style={styles.screenContainer}>
