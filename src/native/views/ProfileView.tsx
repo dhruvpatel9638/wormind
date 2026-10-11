@@ -32,6 +32,14 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <View style={[styles.card, styles.rewardsCard]}>
+            <Text style={styles.cardTitle}>Your Rewards</Text>
+            <Text style={styles.settingLabel}>⭐ {playerState.xp ?? 0} XP</Text>
+            <Text style={styles.settingLabel}>💡 {playerState.hintsAvailable} free hints</Text>
+            <Text style={styles.settingLabel}>
+              {playerState.unlockedHats.includes('loki') ? '🎩 Loki Hat — Unlocked' : '🎩 Loki Hat — Day 7 reward'}
+            </Text>
+          </View>
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Audio & Preferences</Text>
 
@@ -121,6 +129,10 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
 };
 
 const styles = StyleSheet.create({
+  rewardsCard: {
+    marginBottom: 16,
+    gap: 8,
+  },
   container: {
     flex: 1,
     backgroundColor: '#FAF8FF',

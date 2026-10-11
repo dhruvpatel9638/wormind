@@ -33,7 +33,7 @@ export const DAILY_REWARDS: DailyReward[] = [
   { day: 4, rewardText: '+100 Coins', coins: 100, hints: 0, status: 'claimed' },
   { day: 5, rewardText: '+150 Coins + 2 Hints', coins: 150, hints: 2, status: 'ready' },
   { day: 6, rewardText: '+200 Coins + 50 XP', coins: 200, hints: 0, xp: 50, status: 'locked' },
-  { day: 7, rewardText: 'Ultra Word Chest (+500 Coins, 300 XP, Loki Hat)', coins: 500, hints: 3, xp: 300, isJackpot: true, status: 'locked' },
+  { day: 7, rewardText: 'Ultra Word Chest (+500 Coins, 3 Hints, 300 XP, Loki Hat)', coins: 500, hints: 3, xp: 300, hat: 'loki', hatLabel: 'Loki Hat', isJackpot: true, status: 'locked' },
 ];
 
 export const LOKI_QUOTES = [

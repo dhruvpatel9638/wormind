@@ -11,59 +11,44 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { DAILY_REWARDS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
 import { LuckyWheel } from '../components/LuckyWheel';
+import type { DailyReward, SpinTicket } from '../../types';
 
 interface DailyViewProps {
-  claimedDays?: number[];
-  canClaimToday?: boolean;
-  currentDayToClaim?: number;
-  streak?: number;
-  onClaimDaily?: (day: number) => void;
-  hasClaimedDay5?: boolean;
-  onClaimDay5?: () => void;
-  onAddCoins: (amount: number) => void;
-  onAddHints: (amount: number) => void;
-  canSpinToday?: boolean;
-  onRecordSpin?: () => void;
+  claimedDays: number[];
+  canClaimToday: boolean;
+  currentDayToClaim: number;
+  streak: number;
+  onClaimDaily: (day: number) => DailyReward | null;
+  canSpinToday: boolean;
+  onStartSpin: () => SpinTicket | null;
+  onCompleteSpin: (ticket: SpinTicket) => boolean;
 }
 
 export const NativeDailyView: React.FC<DailyViewProps> = ({
-  claimedDays = [1, 2, 3, 4],
-  canClaimToday = true,
-  currentDayToClaim = 5,
-  streak = 5,
+  claimedDays,
+  canClaimToday,
+  currentDayToClaim,
+  streak,
   onClaimDaily,
-  hasClaimedDay5,
-  onClaimDay5,
-  onAddCoins,
-  onAddHints,
-  canSpinToday = true,
-  onRecordSpin,
+  canSpinToday,
+  onStartSpin,
+  onCompleteSpin,
 }) => {
   const [showClaimModal, setShowClaimModal] = useState<boolean>(false);
   const [claimedMessage, setClaimedMessage] = useState<string>('You received your daily reward!');
 
   const handleClaim = (day: number) => {
     if (!canClaimToday) return;
-    const reward = DAILY_REWARDS.find((r) => r.day === day) || DAILY_REWARDS[0];
+    const reward = onClaimDaily(day);
+    if (!reward) return;
     nativeAudio.playCoin();
-
-    if (onClaimDaily) {
-      onClaimDaily(day);
-    } else {
-      if (onClaimDay5) onClaimDay5();
-      if (reward.coins) onAddCoins(reward.coins);
-      if (reward.hints) onAddHints(reward.hints);
-    }
-
-    let msg = `You received ${reward.rewardText}!`;
-    if (reward.coins > 0 && reward.hints > 0) {
-      msg = `You received +${reward.coins} Coins and +${reward.hints} Free Hints!`;
-    } else if (reward.coins > 0) {
-      msg = `You received +${reward.coins} Coins!`;
-    } else if (reward.hints > 0) {
-      msg = `You received +${reward.hints} Free Hints!`;
-    }
-    setClaimedMessage(msg);
+    const parts = [
+      reward.coins > 0 && `+${reward.coins} Coins`,
+      reward.hints > 0 && `+${reward.hints} Free Hints`,
+      reward.xp && `+${reward.xp} XP`,
+      reward.hat && reward.hatLabel,
+    ].filter(Boolean);
+    setClaimedMessage(`You received ${parts.join(', ')}!`);
     setShowClaimModal(true);
   };
 
@@ -142,10 +127,9 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
 
         {/* Royal Lucky Spin Wheel Component */}
         <LuckyWheel
-          onAddCoins={onAddCoins}
-          onAddHints={onAddHints}
           canSpinToday={canSpinToday}
-          onRecordSpin={onRecordSpin}
+          onStartSpin={onStartSpin}
+          onCompleteSpin={onCompleteSpin}
         />
       </ScrollView>
 

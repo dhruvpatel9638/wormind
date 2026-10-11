@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -22,34 +22,13 @@ import Svg, {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { nativeAudio } from '../audio';
+import { SPIN_PRIZES as PRIZES, spinTargetAngle, WheelPrize } from '../../data/spinPrizes';
+import type { SpinTicket } from '../../types';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-export interface WheelPrize {
-  id: number;
-  label: string;
-  subLabel: string;
-  icon: string;
-  type: 'coins' | 'hints';
-  amount: number;
-  bgColor: string;
-  accentColor: string;
-}
-
-const PRIZES: WheelPrize[] = [
-  { id: 0, label: '+50', subLabel: 'Coins', icon: '🪙', type: 'coins', amount: 50, bgColor: '#2E1065', accentColor: '#FFD700' },
-  { id: 1, label: '+2', subLabel: 'Hints', icon: '💡', type: 'hints', amount: 2, bgColor: '#B45309', accentColor: '#FEF08A' },
-  { id: 2, label: '+100', subLabel: 'Coins', icon: '🪙', type: 'coins', amount: 100, bgColor: '#5B21B6', accentColor: '#FFD700' },
-  { id: 3, label: '+1', subLabel: 'Hint', icon: '💡', type: 'hints', amount: 1, bgColor: '#D97706', accentColor: '#FEF08A' },
-  { id: 4, label: '+25', subLabel: 'Coins', icon: '🪙', type: 'coins', amount: 25, bgColor: '#3B0764', accentColor: '#FDE68A' },
-  { id: 5, label: '+3', subLabel: 'Hints', icon: '💡', type: 'hints', amount: 3, bgColor: '#7C3AED', accentColor: '#E9D5FF' },
-  { id: 6, label: '+250', subLabel: 'Jackpot', icon: '💎', type: 'coins', amount: 250, bgColor: '#4C1D95', accentColor: '#FDE047' },
-  { id: 7, label: '+75', subLabel: 'Coins', icon: '🪙', type: 'coins', amount: 75, bgColor: '#0F766E', accentColor: '#99F6E4' },
-];
-
 const NUM_SLICES = PRIZES.length;
 const SLICE_ANGLE = (2 * Math.PI) / NUM_SLICES; // 45 deg in rad
-const SLICE_DEG = 360 / NUM_SLICES; // 45 deg
 const WHEEL_RADIUS = 108;
 const WHEEL_CENTER = 110;
 const SVG_SIZE = 220;
@@ -67,17 +46,15 @@ const STUDS = Array.from({ length: NUM_STUDS }).map((_, i) => {
 });
 
 interface LuckyWheelProps {
-  onAddCoins: (amount: number) => void;
-  onAddHints: (amount: number) => void;
-  canSpinToday?: boolean;
-  onRecordSpin?: () => void;
+  canSpinToday: boolean;
+  onStartSpin: () => SpinTicket | null;
+  onCompleteSpin: (ticket: SpinTicket) => boolean;
 }
 
 export const LuckyWheel: React.FC<LuckyWheelProps> = ({
-  onAddCoins,
-  onAddHints,
-  canSpinToday = true,
-  onRecordSpin,
+  canSpinToday,
+  onStartSpin,
+  onCompleteSpin,
 }) => {
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [wonPrize, setWonPrize] = useState<WheelPrize | null>(null);
@@ -87,9 +64,27 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
   const currentRotation = useRef<number>(0);
   const needleWobbleAnim = useRef(new Animated.Value(0)).current;
   const bannerScale = useRef(new Animated.Value(0)).current;
+  const mountedRef = useRef(true);
+  const spinningRef = useRef(false);
+  const spinAnimationRef = useRef<Animated.CompositeAnimation | null>(null);
+  const needleAnimationRef = useRef<Animated.CompositeAnimation | null>(null);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      spinningRef.current = false;
+      spinAnimationRef.current?.stop();
+      needleAnimationRef.current?.stop();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (canSpinToday && !spinningRef.current) setWonPrize(null);
+  }, [canSpinToday]);
 
   const handleSpin = () => {
-    if (isSpinning) return;
+    if (spinningRef.current) return;
     if (!canSpinToday) {
       Alert.alert(
         '🎰 Already Spun Today!',
@@ -97,25 +92,17 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
       );
       return;
     }
+    spinningRef.current = true;
+    const ticket = onStartSpin();
+    if (!ticket) { spinningRef.current = false; return; }
     setIsSpinning(true);
     setWonPrize(null);
     bannerScale.setValue(0);
     nativeAudio.playSparkle();
 
-    // Pick winning prize
-    const winnerIndex = Math.floor(Math.random() * NUM_SLICES);
-    const winningPrize = PRIZES[winnerIndex];
-
-    // Math for landing exact slice under top pointer (pointer at 270 deg / 12 o'clock)
-    // Slice i midpoint = i * 45 + 22.5
-    const sliceMidDeg = winnerIndex * SLICE_DEG + SLICE_DEG / 2;
-    // We want: (sliceMidDeg + targetAngle) % 360 = 270
-    // => targetAngleOffset = (270 - sliceMidDeg) mod 360
-    const targetAngleOffset = ((270 - sliceMidDeg) % 360 + 360) % 360;
-
-    // Minimum 5 full rotations (1800 deg) plus target offset from current rotation
-    const baseRot = Math.ceil(currentRotation.current / 360) * 360;
-    const finalAngle = baseRot + 1800 + targetAngleOffset;
+    const winningPrize = PRIZES[ticket.prizeIndex];
+    spinAnim.setValue(currentRotation.current);
+    const finalAngle = spinTargetAngle(currentRotation.current, ticket.prizeIndex);
 
     // Start needle tick wobbling
     const needleWobble = Animated.loop(
@@ -124,31 +111,32 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
         Animated.timing(needleWobbleAnim, { toValue: 8, duration: 65, useNativeDriver: true }),
       ])
     );
+    needleAnimationRef.current = needleWobble;
     needleWobble.start();
 
     // Wheel spin animation
-    Animated.timing(spinAnim, {
+    const animation = Animated.timing(spinAnim, {
       toValue: finalAngle,
       duration: 3800,
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
-    }).start(() => {
+    });
+    spinAnimationRef.current = animation;
+    animation.start(({ finished }) => {
       needleWobble.stop();
+      spinningRef.current = false;
+      if (!mountedRef.current) return;
       needleWobbleAnim.setValue(0);
-      currentRotation.current = finalAngle % 360;
       setIsSpinning(false);
+      if (!finished) {
+        spinAnim.setValue(currentRotation.current);
+        return;
+      }
+      currentRotation.current = finalAngle % 360;
+      spinAnim.setValue(currentRotation.current);
+      if (!onCompleteSpin(ticket)) return;
       setWonPrize(winningPrize);
       nativeAudio.playVictory();
-
-      // Award the prize
-      if (winningPrize.type === 'coins') {
-        onAddCoins(winningPrize.amount);
-      } else if (winningPrize.type === 'hints') {
-        onAddHints(winningPrize.amount);
-      }
-
-      // Record daily spin completed for today
-      onRecordSpin?.();
 
       // Banner pop-in
       Animated.spring(bannerScale, {
@@ -178,7 +166,7 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
         <Text style={styles.title}>ROYAL LUCKY WHEEL</Text>
         <MaterialIcons name="auto-awesome" size={20} color="#FFD700" />
       </View>
-      <Text style={styles.subtitle}>Spin daily for free bonus coins and hints!</Text>
+      <Text style={styles.subtitle}>Spin daily for free bonus coins!</Text>
 
       {/* Main Wheel Bezel Container */}
       <View style={styles.outerBezel}>

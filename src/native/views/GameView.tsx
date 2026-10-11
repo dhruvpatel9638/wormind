@@ -27,6 +27,8 @@ interface GameViewProps {
   onCompleteLevel: (levelId: number, stars: number, coinsEarned: number) => void;
   coins: number;
   onDeductCoins: (amount: number) => boolean;
+  hintsAvailable: number;
+  onUseHint: () => boolean;
   strike?: number;
   strikeZeroFails?: number;
   onFailLevel?: () => void;
@@ -43,6 +45,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   onCompleteLevel,
   coins,
   onDeductCoins,
+  hintsAvailable,
+  onUseHint,
   strike = 10,
   strikeZeroFails = 0,
   onFailLevel,
@@ -491,17 +495,15 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setSpelledWord('');
   };
 
-  // Power-up: Hint (25 Coins)
+  // Use earned free hints first; the parent atomically checks the balance.
   const handleHint = () => {
     const unfound = targetWords.find((tw) => !tw.found);
     if (!unfound) return;
 
-    if (coins < 25) {
-      setAlertInfo({ title: 'Coins Needed', message: 'You need 25 coins for a Hint!' });
+    if (!onUseHint()) {
+      setAlertInfo({ title: 'Coins Needed', message: 'No free hints left. You need 25 coins for a Hint!' });
       return;
     }
-
-    if (!onDeductCoins(25)) return;
 
     nativeAudio.playSparkle();
     setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
@@ -849,7 +851,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         >
           <MaterialIcons name="lightbulb" size={20} color="#B45309" />
           <Text style={[styles.actionBtnTitle, { color: '#B45309' }]}>HINT</Text>
-          <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>🪙 25</Text>
+          <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>{hintsAvailable > 0 ? `Free (${hintsAvailable})` : '🪙 25'}</Text>
         </Pressable>
 
         {/* Free Hint (Rewarded Ad) */}

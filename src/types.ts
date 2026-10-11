@@ -27,6 +27,7 @@ export interface LevelData {
 
 export interface PlayerState {
   coins: number;
+  xp?: number;
   stars: number;
   hearts: number;
   maxHearts: number;
@@ -47,8 +48,15 @@ export interface PlayerState {
   currentLevel?: number;
   lastDailyClaimDate?: string | null;
   lastSpinDate?: string | null;
+  pendingSpin?: SpinTicket | null;
   strike: number;
   strikeZeroFails?: number;
+}
+
+export interface SpinTicket {
+  id: string;
+  date: string;
+  prizeIndex: number;
 }
 
 export interface DailyReward {
@@ -57,6 +65,8 @@ export interface DailyReward {
   coins: number;
   hints: number;
   xp?: number;
+  hat?: string;
+  hatLabel?: string;
   isJackpot?: boolean;
   status: 'claimed' | 'ready' | 'locked';
 }

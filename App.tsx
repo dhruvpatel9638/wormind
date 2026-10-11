@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   StyleSheet,
   View,
@@ -9,11 +9,12 @@ import {
   StatusBar,
   Platform,
   Alert,
+  AppState,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Screen, PlayerState } from './src/types';
+import { Screen, PlayerState, DailyReward, SpinTicket } from './src/types';
 import { NativeHeader } from './src/native/components/Header';
 import { NativeBottomNav } from './src/native/components/BottomNav';
 import { NativeWorldsView } from './src/native/views/WorldsView';
@@ -25,17 +26,13 @@ import { NativeLoadingScreen } from './src/native/components/LoadingScreen';
 import { DAILY_REWARDS, INITIAL_LEVELS } from './src/data/gameData';
 import { nativeAudio } from './src/native/audio';
 import { initAdMob, showSmartInterstitialAd, showRewardedAd } from './src/utils/admobService';
-
-const getTodayDateString = () => new Date().toISOString().split('T')[0];
-const getYesterdayDateString = () => {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return d.toISOString().split('T')[0];
-};
+import {
+  createInitialPlayerState, restorePlayerState, rewardAvailability, claimDailyReward,
+  startDailySpin, completeDailySpin, spendHint, localDayKey, millisecondsToNextDay,
+} from './src/native/rewardLogic';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 const DEFAULT_START_LEVEL = 1;
-const START_DEV_COINS = 100;
 
 export default function App() {
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
@@ -45,45 +42,38 @@ export default function App() {
   const [showRefillHeartsModal, setShowRefillHeartsModal] = useState<boolean>(false);
   const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
 
-  const [playerState, setPlayerState] = useState<PlayerState>({
-    coins: START_DEV_COINS,
-    stars: 380,
-    hearts: 5,
-    maxHearts: 5,
-    heartSeconds: 252,
-    streak: 5,
-    streakLvl: 2,
-    streakMax: 7,
-    claimedDays: [1, 2, 3, 4],
-    hasClaimedDay5: false,
-    hintsAvailable: 2,
-    equippedHat: 'none',
-    unlockedHats: ['none', 'sunglasses'],
-    solvedCount: 23,
-    wordsDiscovered: 148,
-    soundEnabled: true,
-    musicEnabled: true,
-    hapticsEnabled: true,
-    currentLevel: DEFAULT_START_LEVEL,
-    lastDailyClaimDate: null,
-    strike: 10,
-    strikeZeroFails: 0,
-  });
+  const [playerState, setRenderedPlayerState] = useState<PlayerState>(createInitialPlayerState);
+  const playerStateRef = useRef(playerState);
+  const [hasLoadedPlayer, setHasLoadedPlayer] = useState(false);
+  const saveQueue = useRef<Promise<void>>(Promise.resolve());
+  // Force an eligibility refresh even when no gameplay state changes overnight.
+  const [, setToday] = useState(() => localDayKey());
+  // Synchronous ref commits make duplicate presses and animation callbacks
+  // see the latest balance/claim lock, even before React's next render.
+  const setPlayerState = useCallback((action: React.SetStateAction<PlayerState>) => {
+    const next = typeof action === 'function' ? action(playerStateRef.current) : action;
+    playerStateRef.current = next;
+    setRenderedPlayerState(next);
+  }, []);
+  const availability = rewardAvailability(playerState);
+  const canClaimDaily = hasLoadedPlayer && availability.canClaimDaily;
+  const canSpinToday = hasLoadedPlayer && availability.canSpinToday;
+  const activeClaimedDays = availability.claimedDays;
+  const currentDailyDay = availability.currentDay;
 
-  const todayDateStr = getTodayDateString();
-  const yesterdayDateStr = getYesterdayDateString();
-  const hasClaimedToday = playerState.lastDailyClaimDate === todayDateStr;
-  const canClaimDaily = !hasClaimedToday;
-  const canSpinToday = playerState.lastSpinDate !== todayDateStr;
-
-  // Active claimed days in current 7-day cycle
-  // If user completed 7 days and a new day arrived, start a fresh 7-day cycle!
-  const activeClaimedDays =
-    (playerState.claimedDays || []).length >= 7 && canClaimDaily
-      ? []
-      : (playerState.claimedDays || []);
-
-  const currentDailyDay = Math.min(7, (activeClaimedDays.length % 7) + 1);
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    const refreshDay = () => {
+      clearTimeout(timer);
+      setToday(localDayKey());
+      timer = setTimeout(refreshDay, millisecondsToNextDay() + 50);
+    };
+    refreshDay();
+    const subscription = AppState.addEventListener('change', (status) => {
+      if (status === 'active') refreshDay();
+    });
+    return () => { clearTimeout(timer); subscription.remove(); };
+  }, []);
 
   // Initialize Google Mobile Ads SDK on app startup
   useEffect(() => {
@@ -92,43 +82,34 @@ export default function App() {
 
   // Load saved state from native AsyncStorage
   useEffect(() => {
+    let mounted = true;
     AsyncStorage.getItem(STORAGE_KEY).then((data) => {
-      if (data) {
-        try {
-          const parsed = JSON.parse(data);
-          const savedLevel = typeof parsed.currentLevel === 'number' && parsed.currentLevel >= 1
-            ? parsed.currentLevel
-            : DEFAULT_START_LEVEL;
-          const savedCoins = typeof parsed.coins === 'number' && parsed.coins <= 1000 ? parsed.coins : 100;
-          const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
-          const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
-          setPlayerState((prev) => ({
-            ...prev,
-            ...parsed,
-            coins: savedCoins,
-            currentLevel: savedLevel,
-            strike: savedStrike,
-            strikeZeroFails: savedZeroFails,
-          }));
-          setActiveLevelId(savedLevel);
-          nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
-          nativeAudio.setMusicEnabled(parsed.musicEnabled ?? true);
-        } catch {}
-      } else {
-        setActiveLevelId(DEFAULT_START_LEVEL);
-      }
+      if (!mounted) return;
+      const restored = restorePlayerState(data ? JSON.parse(data) : null);
+      setPlayerState(restored);
+      setActiveLevelId(restored.currentLevel ?? DEFAULT_START_LEVEL);
+      setHasLoadedPlayer(true);
+    }).catch((error) => {
+      console.warn('Could not load saved progress:', error);
+      if (mounted) Alert.alert('Progress unavailable', 'Please restart the app to load your saved progress. Rewards are disabled until it loads.');
     });
+    return () => { mounted = false; };
   }, []);
 
   // Save state on change
   useEffect(() => {
-    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(playerState)).catch(() => {});
+    if (!hasLoadedPlayer) return;
+    const snapshot = JSON.stringify(playerState);
+    saveQueue.current = saveQueue.current.then(() => AsyncStorage.setItem(STORAGE_KEY, snapshot)).catch((error) => {
+      console.warn('Could not save player progress:', error);
+    });
     nativeAudio.setSoundEnabled(playerState.soundEnabled);
     nativeAudio.setMusicEnabled(playerState.musicEnabled);
-  }, [playerState]);
+  }, [playerState, hasLoadedPlayer]);
 
   // Hearts refill timer
   useEffect(() => {
+    if (!hasLoadedPlayer) return;
     const timer = setInterval(() => {
       setPlayerState((prev) => {
         if (prev.hearts >= prev.maxHearts) {
@@ -146,7 +127,7 @@ export default function App() {
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [hasLoadedPlayer]);
 
   const formatCountdown = (secs: number) => {
     const m = Math.floor(secs / 60);
@@ -155,6 +136,7 @@ export default function App() {
   };
 
   const handleStartLevel = (levelId: number) => {
+    if (!hasLoadedPlayer) return;
     if ((playerState.strike ?? 10) <= 0) {
       setPendingLevelToStart(levelId);
       setShowRestoreStrikeModal(true);
@@ -202,6 +184,7 @@ export default function App() {
       return {
         ...prev,
         coins: prev.coins + coinsEarned,
+        xp: (prev.xp ?? 0) + 100,
         stars: prev.stars + starsEarned,
         solvedCount: prev.solvedCount + 1,
         wordsDiscovered: prev.wordsDiscovered + 5,
@@ -214,21 +197,18 @@ export default function App() {
     setCurrentScreen('worlds');
   };
 
-  const handleAddCoins = (amount: number) => {
-    setPlayerState((prev) => ({ ...prev, coins: prev.coins + amount }));
-  };
-
   const handleDeductCoins = (amount: number): boolean => {
-    if (playerState.coins < amount) return false;
+    if (!hasLoadedPlayer || !Number.isFinite(amount) || amount < 0 || playerStateRef.current.coins < amount) return false;
     setPlayerState((prev) => ({ ...prev, coins: prev.coins - amount }));
     return true;
   };
 
-  const handleAddHints = (amount: number) => {
-    setPlayerState((prev) => ({
-      ...prev,
-      hintsAvailable: prev.hintsAvailable + amount,
-    }));
+  const handleUseHint = (): boolean => {
+    if (!hasLoadedPlayer) return false;
+    const next = spendHint(playerStateRef.current);
+    if (next === playerStateRef.current) return false;
+    setPlayerState(next);
+    return true;
   };
 
   const handleRefillHearts = () => {
@@ -239,30 +219,27 @@ export default function App() {
     }));
   };
 
-  const handleClaimDaily = (day: number) => {
-    const reward = DAILY_REWARDS.find((r) => r.day === day) || DAILY_REWARDS[0];
-    const isConsecutive = playerState.lastDailyClaimDate === yesterdayDateStr;
-    const nextStreak = isConsecutive ? (playerState.streak || 0) + 1 : 1;
-
-    const baseClaimed = (playerState.claimedDays || []).length >= 7 ? [] : (playerState.claimedDays || []);
-    const updatedClaimed = baseClaimed.includes(day) ? baseClaimed : [...baseClaimed, day];
-
-    setPlayerState((prev) => ({
-      ...prev,
-      coins: prev.coins + reward.coins,
-      hintsAvailable: prev.hintsAvailable + reward.hints,
-      claimedDays: updatedClaimed,
-      lastDailyClaimDate: todayDateStr,
-      hasClaimedDay5: updatedClaimed.includes(5),
-      streak: nextStreak,
-    }));
+  const handleClaimDaily = (day: number): DailyReward | null => {
+    if (!hasLoadedPlayer) return null;
+    const next = claimDailyReward(playerStateRef.current, day, new Date());
+    if (next === playerStateRef.current) return null;
+    setPlayerState(next);
+    return DAILY_REWARDS.find((reward) => reward.day === day) ?? null;
   };
 
-  const handleRecordSpin = () => {
-    setPlayerState((prev) => ({
-      ...prev,
-      lastSpinDate: todayDateStr,
-    }));
+  const handleStartSpin = (): SpinTicket | null => {
+    if (!hasLoadedPlayer || !rewardAvailability(playerStateRef.current).canSpinToday) return null;
+    const next = startDailySpin(playerStateRef.current);
+    setPlayerState(next);
+    return next.pendingSpin ?? null;
+  };
+
+  const handleCompleteSpin = (ticket: SpinTicket): boolean => {
+    if (!hasLoadedPlayer) return false;
+    const next = completeDailySpin(playerStateRef.current, ticket, new Date());
+    if (next === playerStateRef.current) return false;
+    setPlayerState(next);
+    return true;
   };
 
   const handleToggleSound = () => {
@@ -286,31 +263,8 @@ export default function App() {
   };
 
   const handleResetProgress = () => {
-    AsyncStorage.removeItem(STORAGE_KEY).catch(() => {});
-    setPlayerState({
-      coins: 100,
-      stars: 380,
-      hearts: 5,
-      maxHearts: 5,
-      heartSeconds: 252,
-      streak: 5,
-      streakLvl: 2,
-      streakMax: 7,
-      claimedDays: [],
-      hasClaimedDay5: false,
-      hintsAvailable: 2,
-      equippedHat: 'none',
-      unlockedHats: ['none', 'sunglasses'],
-      solvedCount: 23,
-      wordsDiscovered: 148,
-      soundEnabled: true,
-      musicEnabled: true,
-      hapticsEnabled: true,
-      currentLevel: DEFAULT_START_LEVEL,
-      lastDailyClaimDate: null,
-      strike: 10,
-      strikeZeroFails: 0,
-    });
+    if (!hasLoadedPlayer) return;
+    setPlayerState(createInitialPlayerState());
     setActiveLevelId(DEFAULT_START_LEVEL);
   };
 
@@ -354,6 +308,8 @@ export default function App() {
             onCompleteLevel={handleCompleteLevel}
             coins={playerState.coins}
             onDeductCoins={handleDeductCoins}
+            hintsAvailable={playerState.hintsAvailable}
+            onUseHint={handleUseHint}
             strike={playerState.strike ?? 10}
             strikeZeroFails={playerState.strikeZeroFails ?? 0}
             onFailLevel={handleFailLevel}
@@ -366,14 +322,11 @@ export default function App() {
             claimedDays={activeClaimedDays}
             canClaimToday={canClaimDaily}
             currentDayToClaim={currentDailyDay}
-            streak={playerState.streak}
+            streak={availability.streak}
             onClaimDaily={handleClaimDaily}
-            hasClaimedDay5={!canClaimDaily}
-            onClaimDay5={() => handleClaimDaily(currentDailyDay)}
-            onAddCoins={handleAddCoins}
-            onAddHints={handleAddHints}
             canSpinToday={canSpinToday}
-            onRecordSpin={handleRecordSpin}
+            onStartSpin={handleStartSpin}
+            onCompleteSpin={handleCompleteSpin}
           />
         )}
 
