@@ -61,6 +61,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   // Stores { r, c } cells that belong to found words
   const [solvedCells, setSolvedCells] = useState<{ r: number; c: number }[]>([]);
   const [selectedCells, setSelectedCells] = useState<{ r: number; c: number }[]>([]);
+  // Gesture events can arrive before React renders the previous selection.
+  const dragSelectionRef = useRef<{ r: number; c: number }[]>([]);
+  const dragActiveRef = useRef(false);
   const [spelledWord, setSpelledWord] = useState<string>('');
   const [alertInfo, setAlertInfo] = useState<{ title: string; message: string; onConfirm?: () => void } | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
@@ -129,6 +132,16 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       nativeAudio.setInGame(false);
     };
   }, []);
+
+  useEffect(() => {
+    if (isPaused || isGameOver) {
+      dragActiveRef.current = false;
+      nativeAudio.cancelLetterTaps();
+      setIsScrollingEnabled(true);
+      setSelectedCells([]);
+      setSpelledWord('');
+    }
+  }, [isPaused, isGameOver]);
 
   const [lastFoundMessage, setLastFoundMessage] = useState<string | null>(null);
 
@@ -254,6 +267,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   }, [timeLeft, isPaused, isVictory, isGameOver, pulseAnim]);
 
   const resetLevelState = useCallback((lvl: typeof currentLevel) => {
+    nativeAudio.cancelLetterTaps();
+    dragActiveRef.current = false;
+    dragSelectionRef.current = [];
     setGrid(lvl.grid);
     setTargetWords(lvl.targetWords.map((tw) => ({ ...tw, found: false })));
     setSolvedCells([]);
@@ -341,6 +357,50 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     gameStateRef.current = { isPaused, isVictory, isGameOver, grid, checkSelection };
   }, [isPaused, isVictory, isGameOver, grid, checkSelection]);
 
+  // Both move and release must resolve the endpoint: native touch events can
+  // skip intermediate cells (or every move event) during a quick swipe.
+  const updateDragSelection = (locationX: number, locationY: number) => {
+    const state = gameStateRef.current;
+    if (!dragActiveRef.current || state.isPaused || state.isVictory || state.isGameOver) return;
+    const c = Math.floor(locationX / TILE_SIZE);
+    const r = Math.floor(locationY / TILE_SIZE);
+    if (r < 0 || r >= 8 || c < 0 || c >= 8 || !state.grid[r]?.[c] || state.grid[r][c] === ' ') return;
+
+    const prev = dragSelectionRef.current;
+    const lastCell = prev[prev.length - 1];
+    if (lastCell?.r === r && lastCell.c === c) return;
+    const startCell = prev[0];
+    const updated: { r: number; c: number }[] = [];
+    if (!startCell) {
+      updated.push({ r, c });
+    } else {
+      const dr = r - startCell.r;
+      const dc = c - startCell.c;
+      // Keep the existing horizontal, vertical and diagonal selection rules.
+      if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) return;
+      const stepR = Math.sign(dr);
+      const stepC = Math.sign(dc);
+      const len = Math.max(Math.abs(dr), Math.abs(dc));
+      for (let i = 0; i <= len; i++) {
+        updated.push({ r: startCell.r + i * stepR, c: startCell.c + i * stepC });
+      }
+    }
+
+    let sharedCells = 0;
+    while (sharedCells < prev.length && sharedCells < updated.length
+      && prev[sharedCells].r === updated[sharedCells].r
+      && prev[sharedCells].c === updated[sharedCells].c) {
+      sharedCells++;
+    }
+    // Recover clicks for each crossed cell, including coalesced moves and
+    // backtracking. Audio is paced separately; the selection updates now.
+    const crossedCells = Math.max(prev.length - sharedCells, updated.length - sharedCells);
+    dragSelectionRef.current = updated;
+    nativeAudio.playLetterTaps(crossedCells);
+    setSelectedCells(updated);
+    setSpelledWord(updated.map((cell) => state.grid[cell.r][cell.c]).join(''));
+  };
+
   // PanResponder for smooth drag / swipe selection
   const panResponder = useRef(
     PanResponder.create({
@@ -348,84 +408,41 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       onMoveShouldSetPanResponder: () => true,
       onPanResponderTerminationRequest: () => false,
       onPanResponderGrant: (evt) => {
-        setIsScrollingEnabled(false);
         const state = gameStateRef.current;
         if (state.isPaused || state.isVictory || state.isGameOver) return;
+        nativeAudio.cancelLetterTaps();
+        dragActiveRef.current = true;
+        setIsScrollingEnabled(false);
+        dragSelectionRef.current = [];
+        setSelectedCells([]);
+        setSpelledWord('');
         const { locationX, locationY } = evt.nativeEvent;
-        const c = Math.floor(locationX / TILE_SIZE);
-        const r = Math.floor(locationY / TILE_SIZE);
-        if (r >= 0 && r < 8 && c >= 0 && c < 8 && state.grid[r]?.[c] && state.grid[r][c] !== ' ') {
-          setSelectedCells([{ r, c }]);
-          setSpelledWord(state.grid[r][c]);
-          nativeAudio.playLetterTap(1);
-        }
+        updateDragSelection(locationX, locationY);
       },
       onPanResponderMove: (evt) => {
-        const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory || state.isGameOver) return;
         const { locationX, locationY } = evt.nativeEvent;
-        const c = Math.floor(locationX / TILE_SIZE);
-        const r = Math.floor(locationY / TILE_SIZE);
-
-        if (r >= 0 && r < 8 && c >= 0 && c < 8 && state.grid[r]?.[c] && state.grid[r][c] !== ' ') {
-          setSelectedCells((prev) => {
-            if (prev.length === 0) return [{ r, c }];
-            const startCell = prev[0];
-            
-            if (startCell.r === r && startCell.c === c) return [startCell];
-
-            const dr = r - startCell.r;
-            const dc = c - startCell.c;
-
-            // Must be a straight line (horizontal, vertical, or perfectly diagonal)
-            if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) {
-              return prev; // Not a valid line, ignore
-            }
-
-            const stepR = dr === 0 ? 0 : dr / Math.abs(dr);
-            const stepC = dc === 0 ? 0 : dc / Math.abs(dc);
-            const len = Math.max(Math.abs(dr), Math.abs(dc));
-
-            const updated = [];
-            for (let i = 0; i <= len; i++) {
-              updated.push({
-                r: startCell.r + i * stepR,
-                c: startCell.c + i * stepC
-              });
-            }
-
-            // Avoid unnecessary state updates
-            if (updated.length === prev.length && updated[updated.length - 1].r === prev[prev.length - 1].r && updated[updated.length - 1].c === prev[prev.length - 1].c) {
-              return prev;
-            }
-
-            const word = updated.map((cell) => state.grid[cell.r][cell.c]).join('');
-            setSpelledWord(word);
-            
-            if (updated.length !== prev.length) {
-              nativeAudio.playLetterTap(updated.length);
-            }
-            return updated;
-          });
-        }
+        updateDragSelection(locationX, locationY);
       },
-      onPanResponderRelease: () => {
+      onPanResponderRelease: (evt) => {
+        if (!dragActiveRef.current) return;
+        const { locationX, locationY } = evt.nativeEvent;
+        updateDragSelection(locationX, locationY);
+        dragActiveRef.current = false;
         setIsScrollingEnabled(true);
         const state = gameStateRef.current;
+        const current = dragSelectionRef.current;
+        dragSelectionRef.current = [];
+        setSelectedCells([]);
+        setSpelledWord('');
         if (state.isPaused || state.isVictory || state.isGameOver) return;
-        setSelectedCells((current) => {
-          const solved = state.checkSelection(current);
-          if (!solved) {
-            setSpelledWord('');
-            if (current.length >= 2) {
-              triggerStreakReset();
-            }
-          }
-          return [];
-        });
+        const solved = state.checkSelection(current);
+        if (!solved && current.length >= 2) triggerStreakReset();
       },
       onPanResponderTerminate: () => {
+        nativeAudio.cancelLetterTaps();
+        dragActiveRef.current = false;
         setIsScrollingEnabled(true);
+        dragSelectionRef.current = [];
         setSelectedCells([]);
         setSpelledWord('');
       },
@@ -563,7 +580,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.container} scrollEnabled={isScrollingEnabled}>
 
 
       {/* Target Words Drawer */}
