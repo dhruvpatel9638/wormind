@@ -10,7 +10,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#0E0921"
     },
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/Wormind logo.png",
     "android": {
       "package": "com.dhruvpatel.wormind"
     },
