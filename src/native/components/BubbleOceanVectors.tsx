@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Pressable } from 'react-native';
 import Svg, {
   Path,
   G,
@@ -141,30 +141,61 @@ export const OceanAtlantisPalace: React.FC<{ size?: number }> = ({ size = 76 }) 
 );
 
 // 🐚 Ocean Milestone Pearl Chest
-export const OceanChest: React.FC<{ level: number; isClaimed?: boolean }> = ({
+export const OceanChest: React.FC<{
+  level: number;
+  status?: 'locked' | 'ready' | 'claimed';
+  isClaimed?: boolean;
+  onPress?: () => void;
+}> = ({
   level,
+  status = 'locked',
   isClaimed = false,
-}) => (
-  <View style={chestStyles.wrapper}>
-    <Svg width={50} height={44} viewBox="0 0 50 44">
-      {/* Seabed Aura */}
-      <Ellipse cx="25" cy="40" rx="20" ry="4" fill="rgba(6, 182, 212, 0.3)" />
-      {/* Chest Body */}
-      <Rect x="8" y="18" width="34" height="20" fill="#0369A1" stroke="#38BDF8" strokeWidth="1.5" rx="4" />
-      {/* Curved Dome Lid */}
-      <Path d="M 8 18 Q 25 4 42 18 Z" fill="#0284C7" stroke="#67E8F9" strokeWidth="1.5" />
-      {/* Gold Bands */}
-      <Rect x="14" y="10" width="4" height="28" fill="#FDE047" />
-      <Rect x="32" y="10" width="4" height="28" fill="#FDE047" />
-      {/* Glowing Pearl Lock */}
-      <Circle cx="25" cy="23" r="5" fill="#E0F2FE" stroke="#00F2FE" strokeWidth="1.5" />
-      <Circle cx="23" cy="21" r="1.5" fill="#FFFFFF" />
-    </Svg>
-    <View style={chestStyles.badge}>
-      <Text style={chestStyles.badgeText}>{isClaimed ? 'OPEN' : `LVL ${level}`}</Text>
-    </View>
-  </View>
-);
+  onPress,
+}) => {
+  const resolvedStatus: 'locked' | 'ready' | 'claimed' = status || (isClaimed ? 'claimed' : 'locked');
+  const isReady = resolvedStatus === 'ready';
+  const isDone = resolvedStatus === 'claimed';
+
+  return (
+    <Pressable
+      onPress={onPress}
+      disabled={!onPress}
+      hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+      style={({ pressed }) => [
+        chestStyles.wrapper,
+        pressed && chestStyles.pressed,
+      ]}
+    >
+      <Svg width={50} height={44} viewBox="0 0 50 44">
+        {/* Seabed Aura */}
+        <Ellipse cx="25" cy="40" rx="20" ry="4" fill={isReady ? 'rgba(234, 88, 12, 0.35)' : 'rgba(6, 182, 212, 0.3)'} />
+        {/* Chest Body */}
+        <Rect x="8" y="18" width="34" height="20" fill={isReady ? '#0284C7' : '#0369A1'} stroke={isReady ? '#38BDF8' : '#38BDF8'} strokeWidth="1.5" rx="4" />
+        {/* Curved Dome Lid */}
+        <Path d="M 8 18 Q 25 4 42 18 Z" fill={isReady ? '#00F2FE' : '#0284C7'} stroke="#67E8F9" strokeWidth="1.5" />
+        {/* Gold Bands */}
+        <Rect x="14" y="10" width="4" height="28" fill={isReady ? '#FDE047' : '#FBBF24'} />
+        <Rect x="32" y="10" width="4" height="28" fill={isReady ? '#FDE047' : '#FBBF24'} />
+        {/* Glowing Pearl Lock */}
+        <Circle cx="25" cy="23" r="5" fill={isDone ? '#34D399' : '#E0F2FE'} stroke={isDone ? '#059669' : '#00F2FE'} strokeWidth="1.5" />
+        <Circle cx="23" cy="21" r="1.5" fill="#FFFFFF" />
+      </Svg>
+      <View style={[
+        chestStyles.badge,
+        isReady && chestStyles.badgeReady,
+        isDone && chestStyles.badgeClaimed,
+      ]}>
+        <Text style={[
+          chestStyles.badgeText,
+          isReady && chestStyles.badgeTextReady,
+          isDone && chestStyles.badgeTextClaimed,
+        ]}>
+          {isReady ? 'CLAIM 🎁' : isDone ? 'OPEN ✓' : `LVL ${level}`}
+        </Text>
+      </View>
+    </Pressable>
+  );
+};
 
 const chestStyles = StyleSheet.create({
   wrapper: {
@@ -179,9 +210,35 @@ const chestStyles = StyleSheet.create({
     borderColor: '#67E8F9',
     marginTop: -4,
   },
+  badgeReady: {
+    backgroundColor: '#EA580C',
+    borderColor: '#FEF08A',
+    borderWidth: 1.5,
+    elevation: 4,
+    shadowColor: '#EA580C',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+  },
+  badgeClaimed: {
+    backgroundColor: '#059669',
+    borderColor: '#A7F3D0',
+  },
   badgeText: {
     fontSize: 8.5,
     fontWeight: '900',
     color: '#E0F2FE',
+  },
+  badgeTextReady: {
+    color: '#FFFBEB',
+    fontSize: 8.5,
+    fontWeight: '900',
+  },
+  badgeTextClaimed: {
+    color: '#FFFFFF',
+    fontWeight: '900',
+  },
+  pressed: {
+    transform: [{ scale: 0.92 }],
   },
 });

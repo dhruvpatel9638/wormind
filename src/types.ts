@@ -49,6 +49,7 @@ export interface PlayerState {
   lastSpinDate?: string | null;
   strike: number;
   strikeZeroFails?: number;
+  claimedChests?: number[];
 }
 
 export interface DailyReward {

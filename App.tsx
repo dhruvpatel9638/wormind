@@ -69,6 +69,7 @@ export default function App() {
     lastDailyClaimDate: null,
     strike: 10,
     strikeZeroFails: 0,
+    claimedChests: [],
   });
 
   const todayDateStr = getTodayDateString();
@@ -100,9 +101,10 @@ export default function App() {
           const savedLevel = typeof parsed.currentLevel === 'number' && parsed.currentLevel >= 1
             ? parsed.currentLevel
             : DEFAULT_START_LEVEL;
-          const savedCoins = typeof parsed.coins === 'number' && parsed.coins <= 1000 ? parsed.coins : 100;
+          const savedCoins = typeof parsed.coins === 'number' && parsed.coins >= 0 ? parsed.coins : 100;
           const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
           const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
+          const savedClaimedChests = Array.isArray(parsed.claimedChests) ? parsed.claimedChests : [];
           setPlayerState((prev) => ({
             ...prev,
             ...parsed,
@@ -110,6 +112,7 @@ export default function App() {
             currentLevel: savedLevel,
             strike: savedStrike,
             strikeZeroFails: savedZeroFails,
+            claimedChests: savedClaimedChests,
           }));
           setActiveLevelId(savedLevel);
           nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
@@ -209,6 +212,20 @@ export default function App() {
 
   const handleAddCoins = (amount: number) => {
     setPlayerState((prev) => ({ ...prev, coins: prev.coins + amount }));
+  };
+
+  const handleClaimMilestoneChest = (levelId: number) => {
+    setPlayerState((prev) => {
+      const alreadyClaimed = (prev.claimedChests || []).includes(levelId);
+      if (alreadyClaimed) return prev;
+      return {
+        ...prev,
+        coins: prev.coins + 1000,
+        strike: (prev.strike || 0) + 50,
+        claimedChests: [...(prev.claimedChests || []), levelId],
+      };
+    });
+    nativeAudio.playVictory();
   };
 
   const handleDeductCoins = (amount: number): boolean => {
@@ -348,6 +365,8 @@ export default function App() {
           <NativeWorldsView
             onStartLevel={handleStartLevel}
             activeLevelId={playerState.currentLevel || activeLevelId}
+            claimedChests={playerState.claimedChests || []}
+            onClaimChest={handleClaimMilestoneChest}
           />
         )}
 
