@@ -63,26 +63,30 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
       star3Scale.setValue(0);
       rewardsFade.setValue(0);
 
-      Animated.sequence([
+      Animated.parallel([
         // Card pop in with energetic spring
         Animated.spring(cardScale, {
           toValue: 1,
           friction: 5,
-          tension: 48,
+          tension: 55,
           useNativeDriver: true,
         }),
-        // Staggered star pops
-        Animated.stagger(120, [
-          Animated.spring(star1Scale, { toValue: 1, friction: 4, tension: 70, useNativeDriver: true }),
-          Animated.spring(star2Scale, { toValue: 1, friction: 3.5, tension: 70, useNativeDriver: true }),
-          Animated.spring(star3Scale, { toValue: 1, friction: 4, tension: 70, useNativeDriver: true }),
+        // Fast lively star pops
+        Animated.stagger(60, [
+          Animated.spring(star1Scale, { toValue: 1, friction: 4, tension: 80, useNativeDriver: true }),
+          Animated.spring(star2Scale, { toValue: 1, friction: 3.5, tension: 80, useNativeDriver: true }),
+          Animated.spring(star3Scale, { toValue: 1, friction: 4, tension: 80, useNativeDriver: true }),
         ]),
-        // Rewards fade & slide up
-        Animated.timing(rewardsFade, {
-          toValue: 1,
-          duration: 300,
-          useNativeDriver: true,
-        }),
+        // Rewards show promptly with minimal delay
+        Animated.sequence([
+          Animated.delay(100),
+          Animated.timing(rewardsFade, {
+            toValue: 1,
+            duration: 220,
+            easing: Easing.out(Easing.ease),
+            useNativeDriver: true,
+          }),
+        ]),
       ]).start();
     } else {
       cardScale.setValue(0);
@@ -203,7 +207,22 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
           )}
 
           {/* Rewards Container */}
-          <Animated.View style={[styles.rewardsContainer, { opacity: rewardsFade }]}>
+          <Animated.View
+            style={[
+              styles.rewardsContainer,
+              {
+                opacity: rewardsFade,
+                transform: [
+                  {
+                    translateY: rewardsFade.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [10, 0],
+                    }),
+                  },
+                ],
+              },
+            ]}
+          >
             <View style={styles.rewardsHeaderRow}>
               <View style={styles.headerLine} />
               <Text style={styles.rewardsHeaderTitle}>✦ REWARDS ✦</Text>
