@@ -23,9 +23,18 @@ import { NativeDailyView } from './src/native/views/DailyView';
 import { NativeProfileView } from './src/native/views/ProfileView';
 import { AdBanner } from './src/native/components/AdBanner';
 import { NativeLoadingScreen } from './src/native/components/LoadingScreen';
+import { CustomAlert } from './src/native/components/CustomAlert';
+import { CenturyAchievementModal } from './src/native/components/CenturyAchievementModal';
 import { DAILY_REWARDS, INITIAL_LEVELS } from './src/data/gameData';
 import { nativeAudio } from './src/native/audio';
-import { initAdMob, showSmartInterstitialAd } from './src/utils/admobService';
+import {
+  completeDailySpin,
+  claimDailyReward,
+  rewardAvailability,
+  spendHint,
+  startDailySpin,
+} from './src/native/rewardLogic';
+import { initAdMob, showRewardedAd, showSmartInterstitialAd } from './src/utils/admobService';
 
 const getTodayDateString = () => new Date().toISOString().split('T')[0];
 const getYesterdayDateString = () => {
@@ -40,6 +49,7 @@ const START_DEV_COINS = 100;
 
 export default function App() {
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
+  const [hasLoadedPlayer, setHasLoadedPlayer] = useState(false);
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
   const [activeLevelId, setActiveLevelId] = useState<number>(DEFAULT_START_LEVEL);
   const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
@@ -53,6 +63,7 @@ export default function App() {
     icon?: keyof typeof MaterialIcons.glyphMap;
   } | null>(null);
   const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
+  const saveQueue = useRef(Promise.resolve());
 
   const [playerState, setPlayerState] = useState<PlayerState>({
     coins: START_DEV_COINS,
@@ -78,12 +89,14 @@ export default function App() {
     strike: 10,
     strikeZeroFails: 0,
   });
+  const playerStateRef = useRef(playerState);
 
   const todayDateStr = getTodayDateString();
   const yesterdayDateStr = getYesterdayDateString();
   const hasClaimedToday = playerState.lastDailyClaimDate === todayDateStr;
   const canClaimDaily = !hasClaimedToday;
   const canSpinToday = playerState.lastSpinDate !== todayDateStr;
+  const availability = rewardAvailability(playerState);
 
   // Active claimed days in current 7-day cycle
   // If user completed 7 days and a new day arrived, start a fresh 7-day cycle!
@@ -127,8 +140,17 @@ export default function App() {
       } else {
         setActiveLevelId(DEFAULT_START_LEVEL);
       }
+    }).catch((error) => {
+      console.warn('Could not load player progress:', error);
+    }).finally(() => {
+      if (mounted) setHasLoadedPlayer(true);
     });
+    return () => { mounted = false; };
   }, []);
+
+  useEffect(() => {
+    playerStateRef.current = playerState;
+  }, [playerState]);
 
   // Save state on change
   useEffect(() => {
@@ -229,7 +251,7 @@ export default function App() {
     setActiveLevelId((prev) => Math.max(prev, nextLevel));
     setCurrentScreen('worlds');
 
-    if (isCompletingLevel100) {
+    if (levelId === 100 && !playerState.hasClaimedCenturyAchievement) {
       setTimeout(() => {
         setShowCenturyModal(true);
       }, 450);
@@ -252,6 +274,40 @@ export default function App() {
 
   const handleAddCoins = (amount: number) => {
     setPlayerState((prev) => ({ ...prev, coins: prev.coins + amount }));
+  };
+
+  const handleClaimMilestoneChest = (levelId: number) => {
+    setPlayerState((prev) => {
+      const claimedChests = prev.claimedChests ?? [];
+      if (claimedChests.includes(levelId)) return prev;
+      return {
+        ...prev,
+        claimedChests: [...claimedChests, levelId],
+        coins: prev.coins + 1000,
+        strike: (prev.strike ?? 0) + 50,
+      };
+    });
+  };
+
+  const handleWatchAdForCoins = () => {
+    showRewardedAd(
+      () => {
+        handleAddCoins(100);
+        setShowFreeCoinsModal(false);
+        setFreeCoinsAlert({
+          title: 'COINS EARNED!',
+          message: '100 coins were added to your balance.',
+          icon: 'monetization-on',
+        });
+      },
+      () => {
+        setFreeCoinsAlert({
+          title: 'AD UNAVAILABLE',
+          message: 'Could not load an ad. Please try again in a moment.',
+          icon: 'error-outline',
+        });
+      }
+    );
   };
 
   const handleDeductCoins = (amount: number): boolean => {
@@ -372,19 +428,21 @@ export default function App() {
           level={activeLevelId}
           strike={playerState.strike ?? 10}
           onPressStrike={() => {
-            setShowRestoreStrikeModal(true);
-          } else {
-            Alert.alert(
-              '🔥 Snapchat Strike',
-              `Current Strike: ${playerState.strike}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`
-            );
-          }
-        }}
+            if ((playerState.strike ?? 10) <= 0) {
+              setShowRestoreStrikeModal(true);
+            } else {
+              Alert.alert(
+                '🔥 Snapchat Strike',
+                `Current Strike: ${playerState.strike}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`
+              );
+            }
+          }}
         onOpenShop={() => {}}
         onRefillHearts={() => setShowRefillHeartsModal(true)}
         musicEnabled={playerState.musicEnabled}
         onToggleMusic={handleToggleMusic}
       />
+      )}
 
       {/* Screen Views */}
       <View style={styles.screenContainer}>

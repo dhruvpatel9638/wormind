@@ -22,6 +22,10 @@ import Svg, {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { nativeAudio } from '../audio';
+import { SPIN_PRIZES as PRIZES, spinTargetAngle } from '../../data/spinPrizes';
+import type { WheelPrize } from '../../data/spinPrizes';
+import type { SpinTicket } from '../../types';
+import { CustomAlert } from './CustomAlert';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -56,12 +60,26 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
 }) => {
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [wonPrize, setWonPrize] = useState<WheelPrize | null>(null);
+  const [showAlreadySpunAlert, setShowAlreadySpunAlert] = useState(false);
 
   // Rotation value in degrees
   const spinAnim = useRef(new Animated.Value(0)).current;
   const currentRotation = useRef<number>(0);
   const needleWobbleAnim = useRef(new Animated.Value(0)).current;
   const bannerScale = useRef(new Animated.Value(0)).current;
+  const spinningRef = useRef(false);
+  const mountedRef = useRef(true);
+  const spinAnimationRef = useRef<Animated.CompositeAnimation | null>(null);
+  const needleAnimationRef = useRef<Animated.CompositeAnimation | null>(null);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      spinAnimationRef.current?.stop();
+      needleAnimationRef.current?.stop();
+    };
+  }, []);
 
   const handleSpin = () => {
     if (spinningRef.current) return;
