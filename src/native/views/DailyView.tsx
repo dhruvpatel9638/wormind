@@ -44,8 +44,6 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
     nativeAudio.playCoin();
     const parts = [
       reward.coins > 0 && `+${reward.coins} Coins`,
-      reward.hints > 0 && `+${reward.hints} Free Hints`,
-      reward.xp && `+${reward.xp} XP`,
       reward.hat && reward.hatLabel,
     ].filter(Boolean);
     setClaimedMessage(`You received ${parts.join(', ')}!`);

@@ -35,7 +35,6 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
           <View style={[styles.card, styles.rewardsCard]}>
             <Text style={styles.cardTitle}>Your Rewards</Text>
             <Text style={styles.settingLabel}>⭐ {playerState.xp ?? 0} XP</Text>
-            <Text style={styles.settingLabel}>💡 {playerState.hintsAvailable} free hints</Text>
             <Text style={styles.settingLabel}>
               {playerState.unlockedHats.includes('loki') ? '🎩 Loki Hat — Unlocked' : '🎩 Loki Hat — Day 7 reward'}
             </Text>

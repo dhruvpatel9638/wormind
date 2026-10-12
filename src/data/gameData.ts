@@ -27,13 +27,13 @@ import { OCEAN_LEVELS } from './oceanLevels';
 export const INITIAL_LEVELS: LevelData[] = [...GENERATED_LEVELS, ...OCEAN_LEVELS];
 
 export const DAILY_REWARDS: DailyReward[] = [
-  { day: 1, rewardText: '+50 Coins', coins: 50, hints: 0, status: 'claimed' },
-  { day: 2, rewardText: '+80 Coins', coins: 80, hints: 0, status: 'claimed' },
-  { day: 3, rewardText: '1 Hint Bulb', coins: 0, hints: 1, status: 'claimed' },
-  { day: 4, rewardText: '+100 Coins', coins: 100, hints: 0, status: 'claimed' },
-  { day: 5, rewardText: '+150 Coins + 2 Hints', coins: 150, hints: 2, status: 'ready' },
-  { day: 6, rewardText: '+200 Coins + 50 XP', coins: 200, hints: 0, xp: 50, status: 'locked' },
-  { day: 7, rewardText: 'Ultra Word Chest (+500 Coins, 3 Hints, 300 XP, Loki Hat)', coins: 500, hints: 3, xp: 300, hat: 'loki', hatLabel: 'Loki Hat', isJackpot: true, status: 'locked' },
+  { day: 1, rewardText: '+50 Coins', coins: 50, status: 'claimed' },
+  { day: 2, rewardText: '+80 Coins', coins: 80, status: 'claimed' },
+  { day: 3, rewardText: '+100 Coins', coins: 100, status: 'claimed' },
+  { day: 4, rewardText: '+100 Coins', coins: 100, status: 'claimed' },
+  { day: 5, rewardText: '+150 Coins', coins: 150, status: 'ready' },
+  { day: 6, rewardText: '+200 Coins', coins: 200, status: 'locked' },
+  { day: 7, rewardText: 'Ultra Word Chest (+500 Coins, Loki Hat)', coins: 500, hat: 'loki', hatLabel: 'Loki Hat', isJackpot: true, status: 'locked' },
 ];
 
 export const LOKI_QUOTES = [

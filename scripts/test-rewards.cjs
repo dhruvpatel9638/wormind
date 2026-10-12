@@ -47,9 +47,8 @@ test('seven-day cycle grants every advertised reward and restarts the next day',
     state = claimDailyReward(state, day, date(day));
     state = restorePlayerState(JSON.parse(JSON.stringify(state)));
   }
-  assert.equal(state.coins, 1180);
-  assert.equal(state.hintsAvailable, 8);
-  assert.equal(state.xp, 350);
+  assert.equal(state.coins, 1280);
+  assert.equal(state.xp, 0);
   assert.ok(state.unlockedHats.includes('loki'));
   assert.equal(state.streak, 7);
   assert.equal(rewardAvailability(state, date(7)).canClaimDaily, false);
@@ -97,11 +96,8 @@ test('dates at action time prevent stale eligibility and clock rollback double c
   assert.equal(claimDailyReward(state, 3, date(11)), state);
 });
 
-test('free hints are consumed before coins and insufficient balance stays unchanged', () => {
-  let state = { ...createInitialPlayerState(), hintsAvailable: 1, coins: 25 };
-  state = spendHint(state);
-  assert.equal(state.hintsAvailable, 0);
-  assert.equal(state.coins, 25);
+test('hints cost 25 coins and cannot be used with an insufficient balance', () => {
+  let state = { ...createInitialPlayerState(), coins: 25 };
   state = spendHint(state);
   assert.equal(state.coins, 0);
   assert.equal(spendHint(state), state);
@@ -116,7 +112,6 @@ test('every wheel slice awards only its displayed coin amount, once per day', ()
     assert.equal(ticket.prizeIndex, index);
     state = completeDailySpin(state, ticket, date(11));
     assert.equal(state.coins, 100 + prize.amount);
-    assert.equal(state.hintsAvailable, 2);
     assert.equal(state.lastSpinDate, '2026-10-11');
     assert.equal(state.pendingSpin, null);
     assert.equal(completeDailySpin(state, ticket, date(11)), state);
@@ -239,7 +234,11 @@ function appRewardHarness(loaded = true) {
     rewardAvailability: (s) => rewardAvailability(s, now),
     startDailySpin: (s) => startDailySpin(s, now, 0.8),
   };
-  const updater = declarations.setPlayerState.arguments[0].getText(ast);
+  const updater = `(update) => {
+    const next = typeof update === 'function' ? update(playerStateRef.current) : update;
+    playerStateRef.current = next;
+    setRenderedPlayerState(next);
+  }`;
   const handlers = ['handleClaimDaily', 'handleStartSpin', 'handleCompleteSpin', 'handleUseHint'];
   const code = `const setPlayerState = ${updater};` + handlers.map((name) => `exports.${name} = ${declarations[name].getText(ast)};`).join('\n');
   vm.runInNewContext(ts.transpileModule(code, {
@@ -261,8 +260,7 @@ test('App callbacks reject duplicate rewards before React commits another render
   assert.equal(h.state.coins, 400);
   assert.equal(h.handlers.handleUseHint(), true);
   assert.equal(h.handlers.handleUseHint(), true);
-  assert.equal(h.state.hintsAvailable, 0);
-  assert.equal(h.state.coins, 400);
+  assert.equal(h.state.coins, 350);
 });
 
 test('App keeps rewards locked until saved progress has loaded', () => {

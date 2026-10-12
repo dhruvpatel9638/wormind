@@ -36,13 +36,6 @@ import {
 } from './src/native/rewardLogic';
 import { initAdMob, showRewardedAd, showSmartInterstitialAd } from './src/utils/admobService';
 
-const getTodayDateString = () => new Date().toISOString().split('T')[0];
-const getYesterdayDateString = () => {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return d.toISOString().split('T')[0];
-};
-
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 const DEFAULT_START_LEVEL = 1;
 const START_DEV_COINS = 500;
@@ -71,12 +64,11 @@ export default function App() {
     hearts: 5,
     maxHearts: 5,
     heartSeconds: 252,
-    streak: 5,
+    streak: 0,
     streakLvl: 2,
     streakMax: 7,
-    claimedDays: [1, 2, 3, 4],
+    claimedDays: [],
     hasClaimedDay5: false,
-    hintsAvailable: 2,
     equippedHat: 'none',
     unlockedHats: ['none', 'sunglasses'],
     solvedCount: 23,
@@ -93,21 +85,13 @@ export default function App() {
   });
   const playerStateRef = useRef(playerState);
 
-  const todayDateStr = getTodayDateString();
-  const yesterdayDateStr = getYesterdayDateString();
-  const hasClaimedToday = playerState.lastDailyClaimDate === todayDateStr;
-  const canClaimDaily = !hasClaimedToday;
-  const canSpinToday = playerState.lastSpinDate !== todayDateStr;
   const availability = rewardAvailability(playerState);
-
-  // Active claimed days in current 7-day cycle
-  // If user completed 7 days and a new day arrived, start a fresh 7-day cycle!
-  const activeClaimedDays =
-    (playerState.claimedDays || []).length >= 7 && canClaimDaily
-      ? []
-      : (playerState.claimedDays || []);
-
-  const currentDailyDay = Math.min(7, (activeClaimedDays.length % 7) + 1);
+  // The UI and claim handler use this same local-date calculation, so the
+  // displayed claimable day always matches the reward that can be claimed.
+  const canClaimDaily = availability.canClaimDaily;
+  const canSpinToday = availability.canSpinToday;
+  const activeClaimedDays = availability.claimedDays;
+  const currentDailyDay = availability.currentDay;
 
   // Initialize Google Mobile Ads SDK on app startup
   useEffect(() => {
@@ -131,6 +115,12 @@ export default function App() {
           const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
           const savedClaimedChests = Array.isArray(parsed.claimedChests) ? parsed.claimedChests : [];
           const savedHasClaimedCentury = Boolean(parsed.hasClaimedCenturyAchievement);
+          // Older builds saved placeholder claims for Days 1–4 without a
+          // claim date. Those were never real rewards, so restart that old
+          // demo state at Day 1 instead of displaying an unclaimable Day 5.
+          const hasLegacyDemoClaims = !parsed.lastDailyClaimDate
+            && Array.isArray(parsed.claimedDays)
+            && parsed.claimedDays.length > 0;
           setPlayerState((prev) => ({
             ...prev,
             ...parsed,
@@ -140,6 +130,9 @@ export default function App() {
             strikeZeroFails: savedZeroFails,
             claimedChests: savedClaimedChests,
             hasClaimedCenturyAchievement: savedHasClaimedCentury,
+            claimedDays: hasLegacyDemoClaims ? [] : (Array.isArray(parsed.claimedDays) ? parsed.claimedDays : []),
+            streak: hasLegacyDemoClaims ? 0 : (typeof parsed.streak === 'number' ? parsed.streak : 0),
+            hasClaimedDay5: hasLegacyDemoClaims ? false : Boolean(parsed.hasClaimedDay5),
           }));
           setActiveLevelId(savedLevel);
           nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
@@ -392,12 +385,11 @@ export default function App() {
       hearts: 5,
       maxHearts: 5,
       heartSeconds: 252,
-      streak: 5,
+      streak: 0,
       streakLvl: 2,
       streakMax: 7,
       claimedDays: [],
       hasClaimedDay5: false,
-      hintsAvailable: 2,
       equippedHat: 'none',
       unlockedHats: ['none', 'sunglasses'],
       solvedCount: 23,
@@ -464,7 +456,6 @@ export default function App() {
             onCompleteLevel={handleCompleteLevel}
             coins={playerState.coins}
             onDeductCoins={handleDeductCoins}
-            hintsAvailable={playerState.hintsAvailable}
             onUseHint={handleUseHint}
             strike={playerState.strike ?? 10}
             strikeZeroFails={playerState.strikeZeroFails ?? 0}

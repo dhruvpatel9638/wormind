@@ -21,7 +21,7 @@ export function createInitialPlayerState(): PlayerState {
   return {
     coins: 100, xp: 0, stars: 380, hearts: 5, maxHearts: 5, heartSeconds: 252,
     streak: 0, streakLvl: 2, streakMax: 7, claimedDays: [], hasClaimedDay5: false,
-    hintsAvailable: 2, equippedHat: 'none', unlockedHats: ['none', 'sunglasses'],
+    equippedHat: 'none', unlockedHats: ['none', 'sunglasses'],
     solvedCount: 23, wordsDiscovered: 148,
     soundEnabled: true, musicEnabled: true, hapticsEnabled: true,
     currentLevel: 1, lastDailyClaimDate: null, lastSpinDate: null, pendingSpin: null,
@@ -57,7 +57,6 @@ export function restorePlayerState(value: unknown): PlayerState {
     ...defaults, ...saved,
     coins: nonnegative(saved.coins, defaults.coins),
     xp: nonnegative(saved.xp, 0),
-    hintsAvailable: nonnegative(saved.hintsAvailable, defaults.hintsAvailable),
     currentLevel: Math.max(1, nonnegative(saved.currentLevel, 1)),
     strike: nonnegative(saved.strike, defaults.strike),
     strikeZeroFails: nonnegative(saved.strikeZeroFails, 0),
@@ -90,8 +89,6 @@ export function claimDailyReward(state: PlayerState, day: number, now = new Date
   return {
     ...state,
     coins: state.coins + reward.coins,
-    hintsAvailable: state.hintsAvailable + reward.hints,
-    xp: (state.xp ?? 0) + (reward.xp ?? 0),
     unlockedHats: reward.hat ? [...new Set([...state.unlockedHats, reward.hat])] : state.unlockedHats,
     claimedDays, lastDailyClaimDate: localDayKey(now), hasClaimedDay5: claimedDays.includes(5),
     streak: state.lastDailyClaimDate === previousDayKey(now) ? state.streak + 1 : 1,
@@ -119,7 +116,6 @@ export function completeDailySpin(state: PlayerState, ticket: SpinTicket, now = 
 }
 
 export function spendHint(state: PlayerState): PlayerState {
-  if (state.hintsAvailable > 0) return { ...state, hintsAvailable: state.hintsAvailable - 1 };
   if (state.coins >= 25) return { ...state, coins: state.coins - 25 };
   return state;
 }

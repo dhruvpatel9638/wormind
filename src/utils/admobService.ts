@@ -16,96 +16,85 @@ export const initAdMob = async () => {
   }
 };
 
-// Tracking state for Interstitial Ad Frequency & Time Capping
-let lastAdTimestamp = 0;
-let levelsCompletedSinceLastAd = 0;
+// Tracking state for interstitial timing. Ads are never displayed in the
+// middle of a level: a level completion is the only place that can consume a
+// pending ad slot.
+let lastInterstitialShownAt = Date.now();
+let isInterstitialLoading = false;
 
-// Smart Ad Parameters
-const MIN_AD_INTERVAL_MS = 45 * 1000;     // 45 seconds min cooldown
-const MAX_AD_INTERVAL_MS = 3 * 60 * 1000; // 3 minutes max interval (forced trigger)
-const MIN_LEVELS_BETWEEN_ADS = 2;         // At least 2 levels completed
-const RANDOM_SHOW_PROBABILITY = 0.5;      // 50% random chance
+// Keep a full two-minute gap between random interstitials. If this interval
+// expires while the player is solving a level, the next completed level shows
+// the pending ad instead of interrupting their game.
+const INTERSTITIAL_GAP_MS = 3 * 60 * 1000;
 
 // Show Google Interstitial Ad (Full Screen)
-export const showInterstitialAd = (onClosed?: () => void) => {
+export const showInterstitialAd = (onClosed?: () => void, onShown?: () => void) => {
   const interstitial = InterstitialAd.createForAdRequest(ADMOB_CONFIG.INTERSTITIAL_ID, {
     requestNonPersonalizedAdsOnly: true,
   });
 
+  let hasCleanedUp = false;
+  const cleanup = () => {
+    if (hasCleanedUp) return;
+    hasCleanedUp = true;
+    unsubscribeLoaded();
+    unsubscribeClosed();
+    unsubscribeError();
+  };
+
   const unsubscribeLoaded = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+    onShown?.();
     interstitial.show();
   });
 
   const unsubscribeClosed = interstitial.addAdEventListener(AdEventType.CLOSED, () => {
-    unsubscribeLoaded();
-    unsubscribeClosed();
+    cleanup();
     if (onClosed) onClosed();
   });
 
   const unsubscribeError = interstitial.addAdEventListener(AdEventType.ERROR, (error) => {
     console.warn('[AdMob Interstitial] Error loading ad:', error);
-    unsubscribeLoaded();
-    unsubscribeClosed();
-    unsubscribeError();
+    cleanup();
     if (onClosed) onClosed();
   });
 
   interstitial.load();
 };
 
-// Smart Interstitial Ad Trigger (Randomized on win + Auto-run after 3 mins)
+// Random interstitial trigger. This is deliberately called only after a level
+// has been completed, so a due ad waits safely for that completion.
 export const showSmartInterstitialAd = (onClosed?: () => void) => {
   const now = Date.now();
-  levelsCompletedSinceLastAd++;
+  const elapsed = now - lastInterstitialShownAt;
 
-  const timeElapsed = now - lastAdTimestamp;
-  const isTimeForceTrigger = lastAdTimestamp > 0 && timeElapsed >= MAX_AD_INTERVAL_MS;
-  const isCooldownActive = lastAdTimestamp > 0 && timeElapsed < MIN_AD_INTERVAL_MS;
-
-  // 1. Force show if 3+ minutes passed since last ad
-  if (isTimeForceTrigger) {
-    console.log(
-      `[AdMob Smart Interstitial] ⏰ Forced ad display! Elapsed: ${Math.round(timeElapsed / 1000)}s >= 180s`
-    );
-    displayAndTrackAd(onClosed);
+  if (isInterstitialLoading) {
+    console.log('[AdMob Smart Interstitial] An interstitial is already loading.');
+    onClosed?.();
     return;
   }
 
-  // 2. Skip if ad was shown less than 45 seconds ago
-  if (isCooldownActive) {
+  if (elapsed < INTERSTITIAL_GAP_MS) {
     console.log(
-      `[AdMob Smart Interstitial] ⏳ Skipped ad (Cooldown: ${Math.round(timeElapsed / 1000)}s < 45s)`
+      `[AdMob Smart Interstitial] Waiting for two-minute gap (${Math.ceil((INTERSTITIAL_GAP_MS - elapsed) / 1000)}s remaining).`
     );
-    if (onClosed) onClosed();
+    onClosed?.();
     return;
   }
 
-  // 3. Skip if fewer than 2 levels completed since last ad
-  if (levelsCompletedSinceLastAd < MIN_LEVELS_BETWEEN_ADS) {
-    console.log(
-      `[AdMob Smart Interstitial] 🎮 Skipped ad (${levelsCompletedSinceLastAd}/${MIN_LEVELS_BETWEEN_ADS} levels completed)`
-    );
-    if (onClosed) onClosed();
-    return;
-  }
-
-  // 4. Random 50% chance trigger on level win
-  if (Math.random() < RANDOM_SHOW_PROBABILITY) {
-    console.log('[AdMob Smart Interstitial] 🎲 Randomized ad trigger hit! Showing ad...');
-    displayAndTrackAd(onClosed);
-  } else {
-    console.log('[AdMob Smart Interstitial] 🎲 Random check missed. Skipping ad.');
-    if (onClosed) onClosed();
-  }
+  console.log('[AdMob Smart Interstitial] Two-minute gap reached; showing after level completion.');
+  isInterstitialLoading = true;
+  showInterstitialAd(
+    () => {
+      isInterstitialLoading = false;
+      onClosed?.();
+    },
+    () => {
+      lastInterstitialShownAt = Date.now();
+    }
+  );
 };
 
-const displayAndTrackAd = (onClosed?: () => void) => {
-  lastAdTimestamp = Date.now();
-  levelsCompletedSinceLastAd = 0;
-  showInterstitialAd(onClosed);
-};
-
-// Show Google Rewarded Video Ad (Free Hint)
+// Show Google Rewarded Video Ad (Hint reward)
 export const showRewardedAd = (onRewardGranted: () => void, onError?: () => void) => {
   const rewarded = RewardedAd.createForAdRequest(ADMOB_CONFIG.REWARDED_ID, {
     requestNonPersonalizedAdsOnly: true,

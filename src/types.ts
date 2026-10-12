@@ -38,7 +38,6 @@ export interface PlayerState {
   streakMax: number;
   claimedDays: number[];
   hasClaimedDay5: boolean;
-  hintsAvailable: number;
   equippedHat: 'none' | 'explorer' | 'crown' | 'sunglasses';
   unlockedHats: string[];
   solvedCount: number;
@@ -66,8 +65,6 @@ export interface DailyReward {
   day: number;
   rewardText: string;
   coins: number;
-  hints: number;
-  xp?: number;
   hat?: string;
   hatLabel?: string;
   isJackpot?: boolean;

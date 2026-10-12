@@ -118,7 +118,7 @@ export const AdModal: React.FC<AdModalProps> = ({
             </View>
 
             <Text style={styles.adTitle}>
-              {type === 'rewarded' ? '🎬 WATCH AD FOR FREE HINT' : '✨ LEVEL COMPLETED!'}
+              {type === 'rewarded' ? '🎬 WATCH AD FOR A HINT' : '✨ LEVEL COMPLETED!'}
             </Text>
 
             <Text style={styles.adSub}>
@@ -136,7 +136,7 @@ export const AdModal: React.FC<AdModalProps> = ({
             {canReward && type === 'rewarded' && (
               <View style={styles.rewardGrantedBadge}>
                 <MaterialIcons name="check-circle" size={22} color="#16A34A" />
-                <Text style={styles.rewardGrantedText}>🎁 FREE HINT REWARD UNLOCKED!</Text>
+                <Text style={styles.rewardGrantedText}>🎁 AD HINT REWARD UNLOCKED!</Text>
               </View>
             )}
           </View>
@@ -147,7 +147,7 @@ export const AdModal: React.FC<AdModalProps> = ({
           {canReward ? (
             <Pressable onPress={onClose} style={styles.actionBtnActive}>
               <Text style={styles.actionBtnText}>
-                {type === 'rewarded' ? 'CLAIM FREE HINT & CLOSE' : 'CONTINUE TO GAME'}
+                {type === 'rewarded' ? 'CLAIM AD HINT & CLOSE' : 'CONTINUE TO GAME'}
               </Text>
               <MaterialIcons name="arrow-forward" size={20} color="#FFFFFF" />
             </Pressable>

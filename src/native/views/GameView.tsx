@@ -27,7 +27,6 @@ interface GameViewProps {
   onCompleteLevel: (levelId: number, stars: number, coinsEarned: number) => void;
   coins: number;
   onDeductCoins: (amount: number) => boolean;
-  hintsAvailable: number;
   onUseHint: () => boolean;
   strike?: number;
   strikeZeroFails?: number;
@@ -45,7 +44,6 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   onCompleteLevel,
   coins,
   onDeductCoins,
-  hintsAvailable,
   onUseHint,
   strike = 10,
   strikeZeroFails = 0,
@@ -515,13 +513,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setSpelledWord('');
   };
 
-  // Use earned free hints first; the parent atomically checks the balance.
+  // A standard hint costs 25 coins; the parent atomically checks the balance.
   const handleHint = () => {
     const unfound = targetWords.find((tw) => !tw.found);
     if (!unfound) return;
 
     if (!onUseHint()) {
-      setAlertInfo({ title: 'Coins Needed', message: 'No free hints left. You need 25 coins for a Hint!' });
+      setAlertInfo({ title: 'Coins Needed', message: 'You need 25 coins for a Hint!' });
       return;
     }
 
@@ -530,7 +528,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setTimeout(() => setHintedCells([]), 3500);
   };
 
-  // Rewarded Ad: Free Hint by watching Ad
+  // Rewarded Ad: grant one hint directly after the ad is watched.
   const handleRewardedHint = () => {
     const unfound = targetWords.find((tw) => !tw.found);
     if (!unfound) {
@@ -540,8 +538,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
     showRewardedAd(() => {
       setAlertInfo({
-        title: '🎁 Free Hint Unlocked!',
-        message: 'You watched an ad! Tap GOT IT to show your free hint on the grid.',
+        title: '🎁 Ad Hint Unlocked!',
+        message: 'You watched an ad! Tap GOT IT to reveal a hint on the grid.',
         onConfirm: () => {
           nativeAudio.playSparkle();
           setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
@@ -871,16 +869,16 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         >
           <MaterialIcons name="lightbulb" size={20} color="#B45309" />
           <Text style={[styles.actionBtnTitle, { color: '#B45309' }]}>HINT</Text>
-          <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>{hintsAvailable > 0 ? `Free (${hintsAvailable})` : '🪙 25'}</Text>
+          <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>🪙 25</Text>
         </Pressable>
 
-        {/* Free Hint (Rewarded Ad) */}
+        {/* Ad-rewarded hint */}
         <Pressable
           onPress={handleRewardedHint}
           style={({ pressed }) => [styles.actionBtn, { backgroundColor: '#E0F2FE', borderColor: '#38BDF8' }, pressed && styles.pressed]}
         >
           <MaterialIcons name="ondemand-video" size={20} color="#0284C7" />
-          <Text style={[styles.actionBtnTitle, { color: '#0284C7' }]}>FREE HINT</Text>
+          <Text style={[styles.actionBtnTitle, { color: '#0284C7' }]}>AD HINT</Text>
           <Text style={[styles.actionBtnSub, { color: '#0284C7' }]}>🎬 Watch Ad</Text>
         </Pressable>
 
