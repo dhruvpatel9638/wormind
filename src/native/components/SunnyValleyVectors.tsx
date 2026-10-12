@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Pressable } from 'react-native';
 import Svg, {
   Path,
   G,
@@ -190,32 +190,63 @@ const signStyles = StyleSheet.create({
 });
 
 // 🎁 Milestone Treasure Chest
-export const MilestoneChest: React.FC<{ level: number; isClaimed?: boolean }> = ({
+export const MilestoneChest: React.FC<{
+  level: number;
+  status?: 'locked' | 'ready' | 'claimed';
+  isClaimed?: boolean;
+  onPress?: () => void;
+}> = ({
   level,
+  status = 'locked',
   isClaimed = false,
-}) => (
-  <View style={chestStyles.wrapper}>
-    <Svg width={48} height={42} viewBox="0 0 48 42">
-      {/* Ground Pedestal */}
-      <Ellipse cx="24" cy="38" rx="18" ry="4" fill="rgba(0, 0, 0, 0.16)" />
-      {/* Chest Base */}
-      <Rect x="8" y="18" width="32" height="18" fill="#B45309" stroke="#78350F" strokeWidth="1.5" rx="3" />
-      {/* Chest Curved Lid */}
-      <Path d="M 8 18 Q 24 6 40 18 Z" fill="#D97706" stroke="#78350F" strokeWidth="1.5" />
-      {/* Gold Trim Bands */}
-      <Rect x="14" y="10" width="4" height="26" fill="#FBBF24" />
-      <Rect x="30" y="10" width="4" height="26" fill="#FBBF24" />
-      {/* Gold Lock Plate */}
-      <Circle cx="24" cy="22" r="4" fill="#FDE047" stroke="#78350F" strokeWidth="1" />
-      <Circle cx="24" cy="22" r="1.5" fill="#451A03" />
-      {/* Shimmer Star */}
-      <Polygon points="12,8 14,13 19,13 15,16 17,21 12,18 7,21 9,16 5,13 10,13" fill="#FFFBEB" transform="scale(0.5) translate(4, 4)" />
-    </Svg>
-    <View style={chestStyles.badge}>
-      <Text style={chestStyles.badgeText}>{isClaimed ? 'OPEN' : `LVL ${level}`}</Text>
-    </View>
-  </View>
-);
+  onPress,
+}) => {
+  const resolvedStatus: 'locked' | 'ready' | 'claimed' = status || (isClaimed ? 'claimed' : 'locked');
+  const isReady = resolvedStatus === 'ready';
+  const isDone = resolvedStatus === 'claimed';
+
+  return (
+    <Pressable
+      onPress={onPress}
+      disabled={!onPress}
+      hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+      style={({ pressed }) => [
+        chestStyles.wrapper,
+        pressed && chestStyles.pressed,
+      ]}
+    >
+      <Svg width={48} height={42} viewBox="0 0 48 42">
+        {/* Ground Pedestal */}
+        <Ellipse cx="24" cy="38" rx="18" ry="4" fill="rgba(0, 0, 0, 0.16)" />
+        {/* Chest Base */}
+        <Rect x="8" y="18" width="32" height="18" fill="#B45309" stroke="#78350F" strokeWidth="1.5" rx="3" />
+        {/* Chest Curved Lid */}
+        <Path d="M 8 18 Q 24 6 40 18 Z" fill={isReady ? '#F59E0B' : '#D97706'} stroke="#78350F" strokeWidth="1.5" />
+        {/* Gold Trim Bands */}
+        <Rect x="14" y="10" width="4" height="26" fill={isReady ? '#FDE047' : '#FBBF24'} />
+        <Rect x="30" y="10" width="4" height="26" fill={isReady ? '#FDE047' : '#FBBF24'} />
+        {/* Gold Lock Plate */}
+        <Circle cx="24" cy="22" r="4" fill={isDone ? '#34D399' : '#FDE047'} stroke="#78350F" strokeWidth="1" />
+        <Circle cx="24" cy="22" r="1.5" fill="#451A03" />
+        {/* Shimmer Star */}
+        <Polygon points="12,8 14,13 19,13 15,16 17,21 12,18 7,21 9,16 5,13 10,13" fill="#FFFBEB" transform="scale(0.5) translate(4, 4)" />
+      </Svg>
+      <View style={[
+        chestStyles.badge,
+        isReady && chestStyles.badgeReady,
+        isDone && chestStyles.badgeClaimed,
+      ]}>
+        <Text style={[
+          chestStyles.badgeText,
+          isReady && chestStyles.badgeTextReady,
+          isDone && chestStyles.badgeTextClaimed,
+        ]}>
+          {isReady ? 'CLAIM 🎁' : isDone ? 'OPEN ✓' : `LVL ${level}`}
+        </Text>
+      </View>
+    </Pressable>
+  );
+};
 
 const chestStyles = StyleSheet.create({
   wrapper: {
@@ -230,10 +261,36 @@ const chestStyles = StyleSheet.create({
     borderColor: '#FEF3C7',
     marginTop: -4,
   },
+  badgeReady: {
+    backgroundColor: '#EA580C',
+    borderColor: '#FEF08A',
+    borderWidth: 1.5,
+    elevation: 4,
+    shadowColor: '#EA580C',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+  },
+  badgeClaimed: {
+    backgroundColor: '#059669',
+    borderColor: '#A7F3D0',
+  },
   badgeText: {
     fontSize: 8,
     fontWeight: '900',
     color: '#451A03',
+  },
+  badgeTextReady: {
+    color: '#FFFBEB',
+    fontSize: 8.5,
+    fontWeight: '900',
+  },
+  badgeTextClaimed: {
+    color: '#FFFFFF',
+    fontWeight: '900',
+  },
+  pressed: {
+    transform: [{ scale: 0.92 }],
   },
 });
 

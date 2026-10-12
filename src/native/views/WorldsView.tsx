@@ -36,6 +36,8 @@ import {
 interface WorldsViewProps {
   onStartLevel: (levelId: number) => void;
   activeLevelId: number;
+  claimedChests?: number[];
+  onClaimChest?: (levelId: number) => void;
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -43,6 +45,8 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   onStartLevel,
   activeLevelId = 4,
+  claimedChests = [],
+  onClaimChest,
 }) => {
   const [selectedChapter, setSelectedChapter] = useState<'sunny' | 'ocean'>(
     activeLevelId > 100 ? 'ocean' : 'sunny'
@@ -50,6 +54,28 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   const [selectedModalLevel, setSelectedModalLevel] = useState<number | null>(null);
   const [alertInfo, setAlertInfo] = useState<{ title: string; message: string } | null>(null);
   const scrollRef = useRef<ScrollView>(null);
+
+  const handleChestPress = (lvlId: number, status: 'locked' | 'ready' | 'claimed') => {
+    if (status === 'claimed') {
+      nativeAudio.playLetterTap(1);
+      setAlertInfo({
+        title: 'CHEST CLAIMED',
+        message: `You already claimed the Level ${lvlId} Milestone Chest reward (+1,000 Coins & +50 Word Strike)! Continue clearing levels to unlock more chests.`,
+      });
+    } else if (status === 'locked') {
+      nativeAudio.playLetterTap(1);
+      setAlertInfo({
+        title: 'LOCKED CHEST 🔒',
+        message: `Complete Level ${lvlId} to unlock this Milestone Chest (+1,000 Coins & +50 Word Strike)!`,
+      });
+    } else if (status === 'ready') {
+      onClaimChest?.(lvlId);
+      setAlertInfo({
+        title: 'CHEST UNLOCKED! 🎁',
+        message: `Congratulations! You claimed the Level ${lvlId} Milestone Chest!\n\n🪙 +1,000 Coins added\n🔥 +50 Word Strike added`,
+      });
+    }
+  };
 
   useEffect(() => {
     if (activeLevelId > 100) {
@@ -129,19 +155,27 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     }
 
     if (lvlId % 5 === 0) {
-      const isClaimed = activeLevelId > lvlId;
+      const isClaimed = (claimedChests || []).includes(lvlId);
+      const isReady = !isClaimed && activeLevelId > lvlId;
+      const status: 'locked' | 'ready' | 'claimed' = isClaimed ? 'claimed' : isReady ? 'ready' : 'locked';
+
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={styles.landmarkWrapper}>
-          <View style={[styles.landmarkItem, { bottom: bottom + 2, left: meadowX }]}>
-            <MilestoneChest level={lvlId} isClaimed={isClaimed} />
+        <View key={`landmark-${lvlId}`} pointerEvents="box-none" style={styles.landmarkWrapper}>
+          <View pointerEvents="box-none" style={[styles.landmarkItem, { bottom: bottom + 2, left: meadowX, zIndex: 25 }]}>
+            <MilestoneChest
+              level={lvlId}
+              status={status}
+              isClaimed={isClaimed}
+              onPress={() => handleChestPress(lvlId, status)}
+            />
           </View>
           {lvlId === 5 && (
-            <View style={[styles.landmarkItem, { bottom: bottom + 35, left: 22 }]}>
+            <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 35, left: 22 }]}>
               <ValleyTree type="pine" scale={0.9} />
             </View>
           )}
           {lvlId === 100 && (
-            <View style={[styles.landmarkItem, { bottom: bottom + 32, left: 236 }]}>
+            <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 32, left: 236 }]}>
               <ValleySignpost label="VALLEY PEAK" />
             </View>
           )}
@@ -215,14 +249,22 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     }
 
     if (lvlId % 5 === 0 || lvlId === 200) {
-      const isClaimed = activeLevelId > lvlId;
+      const isClaimed = (claimedChests || []).includes(lvlId);
+      const isReady = !isClaimed && activeLevelId > lvlId;
+      const status: 'locked' | 'ready' | 'claimed' = isClaimed ? 'claimed' : isReady ? 'ready' : 'locked';
+
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={styles.landmarkWrapper}>
-          <View style={[styles.landmarkItem, { bottom: bottom + 2, left: meadowX }]}>
-            <OceanChest level={lvlId} isClaimed={isClaimed} />
+        <View key={`landmark-${lvlId}`} pointerEvents="box-none" style={styles.landmarkWrapper}>
+          <View pointerEvents="box-none" style={[styles.landmarkItem, { bottom: bottom + 2, left: meadowX, zIndex: 25 }]}>
+            <OceanChest
+              level={lvlId}
+              status={status}
+              isClaimed={isClaimed}
+              onPress={() => handleChestPress(lvlId, status)}
+            />
           </View>
           {lvlId === 200 && (
-            <View style={[styles.landmarkItem, { bottom: bottom + 35, left: 236 }]}>
+            <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 35, left: 236 }]}>
               <OceanAtlantisPalace size={70} />
             </View>
           )}

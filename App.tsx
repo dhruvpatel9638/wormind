@@ -25,55 +25,74 @@ import { AdBanner } from './src/native/components/AdBanner';
 import { NativeLoadingScreen } from './src/native/components/LoadingScreen';
 import { DAILY_REWARDS, INITIAL_LEVELS } from './src/data/gameData';
 import { nativeAudio } from './src/native/audio';
-import { initAdMob, showSmartInterstitialAd, showRewardedAd } from './src/utils/admobService';
-import {
-  createInitialPlayerState, restorePlayerState, rewardAvailability, claimDailyReward,
-  startDailySpin, completeDailySpin, spendHint, localDayKey, millisecondsToNextDay,
-} from './src/native/rewardLogic';
+import { initAdMob, showSmartInterstitialAd } from './src/utils/admobService';
+
+const getTodayDateString = () => new Date().toISOString().split('T')[0];
+const getYesterdayDateString = () => {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d.toISOString().split('T')[0];
+};
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 const DEFAULT_START_LEVEL = 1;
+const START_DEV_COINS = 100;
 
 export default function App() {
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
   const [activeLevelId, setActiveLevelId] = useState<number>(DEFAULT_START_LEVEL);
   const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
+  const [showStrikeInfoModal, setShowStrikeInfoModal] = useState<boolean>(false);
+  const [showCenturyModal, setShowCenturyModal] = useState<boolean>(false);
   const [showRefillHeartsModal, setShowRefillHeartsModal] = useState<boolean>(false);
+  const [showFreeCoinsModal, setShowFreeCoinsModal] = useState<boolean>(false);
+  const [freeCoinsAlert, setFreeCoinsAlert] = useState<{
+    title: string;
+    message: string;
+    icon?: keyof typeof MaterialIcons.glyphMap;
+  } | null>(null);
   const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
 
-  const [playerState, setRenderedPlayerState] = useState<PlayerState>(createInitialPlayerState);
-  const playerStateRef = useRef(playerState);
-  const [hasLoadedPlayer, setHasLoadedPlayer] = useState(false);
-  const saveQueue = useRef<Promise<void>>(Promise.resolve());
-  // Force an eligibility refresh even when no gameplay state changes overnight.
-  const [, setToday] = useState(() => localDayKey());
-  // Synchronous ref commits make duplicate presses and animation callbacks
-  // see the latest balance/claim lock, even before React's next render.
-  const setPlayerState = useCallback((action: React.SetStateAction<PlayerState>) => {
-    const next = typeof action === 'function' ? action(playerStateRef.current) : action;
-    playerStateRef.current = next;
-    setRenderedPlayerState(next);
-  }, []);
-  const availability = rewardAvailability(playerState);
-  const canClaimDaily = hasLoadedPlayer && availability.canClaimDaily;
-  const canSpinToday = hasLoadedPlayer && availability.canSpinToday;
-  const activeClaimedDays = availability.claimedDays;
-  const currentDailyDay = availability.currentDay;
+  const [playerState, setPlayerState] = useState<PlayerState>({
+    coins: START_DEV_COINS,
+    stars: 380,
+    hearts: 5,
+    maxHearts: 5,
+    heartSeconds: 252,
+    streak: 5,
+    streakLvl: 2,
+    streakMax: 7,
+    claimedDays: [1, 2, 3, 4],
+    hasClaimedDay5: false,
+    hintsAvailable: 2,
+    equippedHat: 'none',
+    unlockedHats: ['none', 'sunglasses'],
+    solvedCount: 23,
+    wordsDiscovered: 148,
+    soundEnabled: true,
+    musicEnabled: true,
+    hapticsEnabled: true,
+    currentLevel: DEFAULT_START_LEVEL,
+    lastDailyClaimDate: null,
+    strike: 10,
+    strikeZeroFails: 0,
+  });
 
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-    const refreshDay = () => {
-      clearTimeout(timer);
-      setToday(localDayKey());
-      timer = setTimeout(refreshDay, millisecondsToNextDay() + 50);
-    };
-    refreshDay();
-    const subscription = AppState.addEventListener('change', (status) => {
-      if (status === 'active') refreshDay();
-    });
-    return () => { clearTimeout(timer); subscription.remove(); };
-  }, []);
+  const todayDateStr = getTodayDateString();
+  const yesterdayDateStr = getYesterdayDateString();
+  const hasClaimedToday = playerState.lastDailyClaimDate === todayDateStr;
+  const canClaimDaily = !hasClaimedToday;
+  const canSpinToday = playerState.lastSpinDate !== todayDateStr;
+
+  // Active claimed days in current 7-day cycle
+  // If user completed 7 days and a new day arrived, start a fresh 7-day cycle!
+  const activeClaimedDays =
+    (playerState.claimedDays || []).length >= 7 && canClaimDaily
+      ? []
+      : (playerState.claimedDays || []);
+
+  const currentDailyDay = Math.min(7, (activeClaimedDays.length % 7) + 1);
 
   // Initialize Google Mobile Ads SDK on app startup
   useEffect(() => {
@@ -84,16 +103,31 @@ export default function App() {
   useEffect(() => {
     let mounted = true;
     AsyncStorage.getItem(STORAGE_KEY).then((data) => {
-      if (!mounted) return;
-      const restored = restorePlayerState(data ? JSON.parse(data) : null);
-      setPlayerState(restored);
-      setActiveLevelId(restored.currentLevel ?? DEFAULT_START_LEVEL);
-      setHasLoadedPlayer(true);
-    }).catch((error) => {
-      console.warn('Could not load saved progress:', error);
-      if (mounted) Alert.alert('Progress unavailable', 'Please restart the app to load your saved progress. Rewards are disabled until it loads.');
+      if (data) {
+        try {
+          const parsed = JSON.parse(data);
+          const savedLevel = typeof parsed.currentLevel === 'number' && parsed.currentLevel >= 1
+            ? parsed.currentLevel
+            : DEFAULT_START_LEVEL;
+          const savedCoins = typeof parsed.coins === 'number' && parsed.coins <= 1000 ? parsed.coins : 100;
+          const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
+          const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
+          setPlayerState((prev) => ({
+            ...prev,
+            ...parsed,
+            coins: savedCoins,
+            currentLevel: savedLevel,
+            strike: savedStrike,
+            strikeZeroFails: savedZeroFails,
+          }));
+          setActiveLevelId(savedLevel);
+          nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
+          nativeAudio.setMusicEnabled(parsed.musicEnabled ?? true);
+        } catch {}
+      } else {
+        setActiveLevelId(DEFAULT_START_LEVEL);
+      }
     });
-    return () => { mounted = false; };
   }, []);
 
   // Save state on change
@@ -175,8 +209,7 @@ export default function App() {
     // 🔹 Smart AdMob Interstitial Ad (Randomized Win + 3-min Time Auto-Trigger)
     showSmartInterstitialAd();
 
-    const maxLevels = INITIAL_LEVELS.length || 200;
-    const nextLevel = levelId < maxLevels ? levelId + 1 : maxLevels;
+    const nextLevel = levelId < 100 ? levelId + 1 : 100;
 
     setPlayerState((prev) => {
       const currentHighest = prev.currentLevel || 1;
@@ -195,6 +228,30 @@ export default function App() {
 
     setActiveLevelId((prev) => Math.max(prev, nextLevel));
     setCurrentScreen('worlds');
+
+    if (isCompletingLevel100) {
+      setTimeout(() => {
+        setShowCenturyModal(true);
+      }, 450);
+    }
+  };
+
+  const handleClaimCenturyAchievement = () => {
+    setPlayerState((prev) => {
+      if (prev.hasClaimedCenturyAchievement) return prev;
+      return {
+        ...prev,
+        coins: prev.coins + 200,
+        strike: (prev.strike || 0) + 100,
+        hasClaimedCenturyAchievement: true,
+      };
+    });
+    nativeAudio.playVictory();
+    setShowCenturyModal(false);
+  };
+
+  const handleAddCoins = (amount: number) => {
+    setPlayerState((prev) => ({ ...prev, coins: prev.coins + amount }));
   };
 
   const handleDeductCoins = (amount: number): boolean => {
@@ -263,10 +320,42 @@ export default function App() {
   };
 
   const handleResetProgress = () => {
-    if (!hasLoadedPlayer) return;
-    setPlayerState(createInitialPlayerState());
+    AsyncStorage.removeItem(STORAGE_KEY).catch(() => {});
+    setPlayerState({
+      coins: 100,
+      stars: 380,
+      hearts: 5,
+      maxHearts: 5,
+      heartSeconds: 252,
+      streak: 5,
+      streakLvl: 2,
+      streakMax: 7,
+      claimedDays: [],
+      hasClaimedDay5: false,
+      hintsAvailable: 2,
+      equippedHat: 'none',
+      unlockedHats: ['none', 'sunglasses'],
+      solvedCount: 23,
+      wordsDiscovered: 148,
+      soundEnabled: true,
+      musicEnabled: true,
+      hapticsEnabled: true,
+      currentLevel: DEFAULT_START_LEVEL,
+      lastDailyClaimDate: null,
+      strike: 10,
+      strikeZeroFails: 0,
+    });
     setActiveLevelId(DEFAULT_START_LEVEL);
   };
+
+  if (isAppLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+        <NativeLoadingScreen onFinish={() => setIsAppLoading(false)} />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -284,13 +373,18 @@ export default function App() {
           strike={playerState.strike ?? 10}
           onPressStrike={() => {
             setShowRestoreStrikeModal(true);
-          }}
-          onOpenShop={() => {}}
-          onRefillHearts={() => setShowRefillHeartsModal(true)}
-          musicEnabled={playerState.musicEnabled}
-          onToggleMusic={handleToggleMusic}
-        />
-      )}
+          } else {
+            Alert.alert(
+              '🔥 Snapchat Strike',
+              `Current Strike: ${playerState.strike}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`
+            );
+          }
+        }}
+        onOpenShop={() => {}}
+        onRefillHearts={() => setShowRefillHeartsModal(true)}
+        musicEnabled={playerState.musicEnabled}
+        onToggleMusic={handleToggleMusic}
+      />
 
       {/* Screen Views */}
       <View style={styles.screenContainer}>
@@ -298,6 +392,8 @@ export default function App() {
           <NativeWorldsView
             onStartLevel={handleStartLevel}
             activeLevelId={playerState.currentLevel || activeLevelId}
+            claimedChests={playerState.claimedChests || []}
+            onClaimChest={handleClaimMilestoneChest}
           />
         )}
 
@@ -351,11 +447,6 @@ export default function App() {
           onNavigate={setCurrentScreen}
           hasClaimableDaily={canClaimDaily}
         />
-      )}
-
-      {/* Starting Loading Screen with Active Neon Animation */}
-      {isAppLoading && (
-        <NativeLoadingScreen onFinish={() => setIsAppLoading(false)} />
       )}
 
       {/* Refill Hearts Modal */}
@@ -634,11 +725,85 @@ export default function App() {
           </View>
         </View>
       </Modal>
+
+      {/* Free Coins Rewarded Ad Modal */}
+      <Modal visible={showFreeCoinsModal} transparent animationType="fade">
+        <View style={styles.modalBackdrop}>
+          <View style={styles.restoreCard}>
+            <View style={[styles.fireHeaderCircle, { backgroundColor: '#FEF3C7', borderColor: '#F59E0B' }]}>
+              <MaterialIcons name="monetization-on" size={44} color="#D97706" />
+            </View>
+            <Text style={styles.restoreTitle}>GET FREE COINS! 🪙</Text>
+            <Text style={styles.restoreSub}>
+              Watch a short video ad to earn +100 Coins for free to use on hints, restores, and reveals!
+            </Text>
+
+            <View style={styles.restorePriceBox}>
+              <Text style={styles.restorePriceLabel}>REWARD:</Text>
+              <View style={styles.priceRow}>
+                <MaterialIcons name="monetization-on" size={24} color="#F59E0B" />
+                <Text style={styles.priceText}>+100 Coins</Text>
+              </View>
+              <Text style={styles.currentCoinsText}>
+                Your Coins: {playerState.coins.toLocaleString()}
+              </Text>
+            </View>
+
+            <View style={styles.restoreBtnRow}>
+              <Pressable
+                onPress={() => setShowFreeCoinsModal(false)}
+                style={({ pressed }) => [styles.restoreCancelBtn, pressed && styles.pressed]}
+              >
+                <Text style={styles.restoreCancelText}>CANCEL</Text>
+              </Pressable>
+
+              <Pressable
+                onPress={handleWatchAdForCoins}
+                style={({ pressed }) => [styles.restoreConfirmBtn, { backgroundColor: '#059669' }, pressed && styles.pressed]}
+              >
+                <Text style={styles.restoreConfirmText}>WATCH AD 🎬</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Free Coins Result Alert */}
+      {freeCoinsAlert && (
+        <CustomAlert
+          visible={!!freeCoinsAlert}
+          title={freeCoinsAlert.title}
+          message={freeCoinsAlert.message}
+          icon={freeCoinsAlert.icon}
+          btnText="AWESOME"
+          onClose={() => setFreeCoinsAlert(null)}
+        />
+      )}
+
+      {/* Word Strike Info Modal */}
+      <CustomAlert
+        visible={showStrikeInfoModal}
+        title="WORD STRIKE"
+        message={`Current Strike: ${playerState.strike ?? 10}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`}
+        icon="local-fire-department"
+        btnText="GOT IT"
+        onClose={() => setShowStrikeInfoModal(false)}
+      />
+
+      {/* Century Milestone Achievement Modal (Level 100 Completion) */}
+      <CenturyAchievementModal
+        visible={showCenturyModal}
+        onClaim={handleClaimCenturyAchievement}
+      />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: '#16022B',
+  },
   safeArea: {
     flex: 1,
     backgroundColor: '#FAF8FF',

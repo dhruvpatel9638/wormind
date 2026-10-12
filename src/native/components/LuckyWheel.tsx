@@ -22,8 +22,6 @@ import Svg, {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { nativeAudio } from '../audio';
-import { SPIN_PRIZES as PRIZES, spinTargetAngle, WheelPrize } from '../../data/spinPrizes';
-import type { SpinTicket } from '../../types';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -64,32 +62,11 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
   const currentRotation = useRef<number>(0);
   const needleWobbleAnim = useRef(new Animated.Value(0)).current;
   const bannerScale = useRef(new Animated.Value(0)).current;
-  const mountedRef = useRef(true);
-  const spinningRef = useRef(false);
-  const spinAnimationRef = useRef<Animated.CompositeAnimation | null>(null);
-  const needleAnimationRef = useRef<Animated.CompositeAnimation | null>(null);
-
-  useEffect(() => {
-    mountedRef.current = true;
-    return () => {
-      mountedRef.current = false;
-      spinningRef.current = false;
-      spinAnimationRef.current?.stop();
-      needleAnimationRef.current?.stop();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (canSpinToday && !spinningRef.current) setWonPrize(null);
-  }, [canSpinToday]);
 
   const handleSpin = () => {
     if (spinningRef.current) return;
     if (!canSpinToday) {
-      Alert.alert(
-        '🎰 Already Spun Today!',
-        'You have already claimed your Lucky Spin for today.\n\nCome back tomorrow for your next free spin!'
-      );
+      setShowAlreadySpunAlert(true);
       return;
     }
     spinningRef.current = true;
@@ -366,6 +343,15 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
           ]}
         />
       </Pressable>
+
+      <CustomAlert
+        visible={showAlreadySpunAlert}
+        title="ALREADY SPUN TODAY"
+        message="You have already claimed your Lucky Spin for today.\n\n• Come back tomorrow for your next free spin!"
+        icon="auto-awesome"
+        btnText="GOT IT"
+        onClose={() => setShowAlreadySpunAlert(false)}
+      />
     </View>
   );
 };

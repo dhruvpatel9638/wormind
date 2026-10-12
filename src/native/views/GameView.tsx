@@ -73,7 +73,27 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isVictory, setIsVictory] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
-  const [timeLeft, setTimeLeft] = useState<number>(120);
+  const getLevelInitialTime = (lvl: typeof currentLevel) => {
+    if (lvl.timeLimit && lvl.timeLimit > 0 && lvl.timeLimit <= 130) {
+      return lvl.timeLimit;
+    }
+    const count = lvl.targetWords?.length || 5;
+    const isHardest = Boolean(
+      lvl.subtitle && (lvl.subtitle.includes('HARDEST') || lvl.subtitle.includes('BOSS') || lvl.subtitle.includes('CLIMAX'))
+    );
+    const isHard = Boolean(lvl.subtitle && lvl.subtitle.includes('HARD')) || isHardest;
+
+    // Dynamically reduced timer so hard levels feel genuinely fast-paced and challenging:
+    if (count <= 4) return 80;
+    if (count === 5) return 85;
+    if (count === 6) return isHard ? 90 : 95;
+    if (count === 7) return isHard ? 95 : 100;
+    if (count === 8) return isHardest ? 100 : 105;
+    if (count === 9) return isHardest ? 110 : 115;
+    return 120; // 10 words: max 120s for intense boss feel!
+  };
+
+  const [timeLeft, setTimeLeft] = useState<number>(() => getLevelInitialTime(currentLevel));
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
   const [isScrollingEnabled, setIsScrollingEnabled] = useState<boolean>(true);
 
@@ -282,7 +302,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setIsVictory(false);
     setIsPaused(false);
     setIsGameOver(false);
-    setTimeLeft(120);
+    setTimeLeft(getLevelInitialTime(lvl));
     setHintedCells([]);
     setLastFoundMessage(null);
   }, [levelId]);

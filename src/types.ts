@@ -23,6 +23,7 @@ export interface LevelData {
   stars: number;
   completed: boolean;
   locked: boolean;
+  timeLimit?: number;
 }
 
 export interface PlayerState {
@@ -51,6 +52,8 @@ export interface PlayerState {
   pendingSpin?: SpinTicket | null;
   strike: number;
   strikeZeroFails?: number;
+  claimedChests?: number[];
+  hasClaimedCenturyAchievement?: boolean;
 }
 
 export interface SpinTicket {

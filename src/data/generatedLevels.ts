@@ -125,7 +125,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 3,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 2,
@@ -251,7 +252,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 3,
         "colEnd": 4
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 3,
@@ -377,7 +379,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 7
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 4,
@@ -519,7 +522,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 5,
@@ -645,7 +649,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 4,
         "colEnd": 7
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 6,
@@ -771,7 +776,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 7,
@@ -897,7 +903,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 8,
@@ -1023,7 +1030,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 1
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 9,
@@ -1149,7 +1157,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 6,
         "colEnd": 4
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 10,
@@ -1291,7 +1300,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 11,
@@ -1425,7 +1435,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 4,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 12,
@@ -1559,7 +1570,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 1,
         "colEnd": 4
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 13,
@@ -1693,7 +1705,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 2,
         "colEnd": 7
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 14,
@@ -1827,7 +1840,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 7,
         "colEnd": 4
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 15,
@@ -1969,7 +1983,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 7,
         "colEnd": 2
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 16,
@@ -2103,7 +2118,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 7,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 17,
@@ -2237,7 +2253,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 4,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 18,
@@ -2363,7 +2380,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 1,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 19,
@@ -2497,7 +2515,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 3
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 20,
@@ -2639,7 +2658,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 21,
@@ -2773,7 +2793,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 6,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 22,
@@ -2899,7 +2920,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 3,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 23,
@@ -3033,7 +3055,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 3,
         "colEnd": 7
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 24,
@@ -3167,7 +3190,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 25,
@@ -3309,7 +3333,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 3,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 26,
@@ -3435,7 +3460,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 2,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 27,
@@ -3569,7 +3595,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 28,
@@ -3703,7 +3730,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 29,
@@ -3837,7 +3865,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 1,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 30,
@@ -3971,7 +4000,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 4,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 31,
@@ -4105,7 +4135,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 1,
         "colEnd": 4
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 32,
@@ -4239,7 +4270,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 33,
@@ -4373,7 +4405,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 6,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 34,
@@ -4507,7 +4540,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 4
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 35,
@@ -4649,7 +4683,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 36,
@@ -4783,7 +4818,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 3
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 37,
@@ -4917,7 +4953,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 6,
         "colEnd": 1
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 38,
@@ -5043,7 +5080,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 3
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 39,
@@ -5177,7 +5215,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 4
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 40,
@@ -5319,7 +5358,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 3,
         "colEnd": 0
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 41,
@@ -5453,7 +5493,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 7,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 42,
@@ -5579,7 +5620,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 80
   },
   {
     "id": 43,
@@ -5713,7 +5755,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 5,
         "colEnd": 6
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 44,
@@ -5847,7 +5890,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 7
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 45,
@@ -5989,7 +6033,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 4,
         "colEnd": 4
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 46,
@@ -6123,7 +6168,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 3,
         "colEnd": 3
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 47,
@@ -6257,7 +6303,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 3,
         "colEnd": 2
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 48,
@@ -6391,7 +6438,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 0,
         "colEnd": 5
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 49,
@@ -6525,7 +6573,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 4,
         "colEnd": 7
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 50,
@@ -6667,228 +6716,235 @@ export const GENERATED_LEVELS: LevelData[] = [
         "rowEnd": 4,
         "colEnd": 1
       }
-    ]
+    ],
+    "timeLimit": 85
   },
   {
     "id": 51,
     "title": "Level 51",
-    "subtitle": "WORD FOREST - HARD (DIAMOND)",
-    "world": "forest",
-    "themeIcon": "local_florist",
+    "subtitle": "SUNNY VALLEY - EASY TIER",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Sun Diamond",
+    "maskIcon": "💎",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 85,
     "grid": [
       [
         " ",
         " ",
-        " ",
-        "C",
-        "A",
-        " ",
+        "F",
+        "B",
+        "M",
+        "G",
         " ",
         " "
       ],
       [
         " ",
-        " ",
+        "L",
         "N",
         "R",
-        "L",
-        "B",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "A",
-        "O",
-        "Y",
-        "U",
-        "S",
-        "L",
-        " "
-      ],
-      [
-        "D",
-        "P",
-        "C",
-        "S",
-        "B",
-        "P",
-        "F",
-        "A"
-      ],
-      [
-        "B",
         "E",
+        "F",
+        "C",
+        " "
+      ],
+      [
+        "A",
+        "S",
+        "P",
+        "R",
+        "I",
+        "N",
+        "G",
+        "X"
+      ],
+      [
+        "N",
         "A",
         "T",
-        "E",
-        "A",
-        "K",
-        "L"
-      ],
-      [
-        " ",
-        "X",
-        "E",
-        "A",
-        "N",
+        "U",
         "R",
-        "H",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "B",
-        "L",
         "E",
-        "K",
+        "J",
+        "W"
+      ],
+      [
+        "M",
+        "L",
+        "A",
+        "T",
+        "S",
+        "Y",
+        "R",
+        "C"
+      ],
+      [
+        "Y",
+        "R",
+        "O",
+        "L",
+        "G",
+        "Z",
+        "G",
+        "N"
+      ],
+      [
         " ",
+        "J",
+        "B",
+        "T",
+        "C",
+        "R",
+        "Z",
         " "
       ],
       [
         " ",
         " ",
-        " ",
-        "H",
-        "X",
-        " ",
+        "R",
+        "T",
+        "W",
+        "K",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "NEBULA",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
         "word": "CRYSTAL",
         "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 1
       },
       {
-        "word": "BEACON",
+        "word": "NATURE",
         "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "SPARK",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 6,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
         "colEnd": 5
       },
       {
-        "word": "APEX",
+        "word": "GLORY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "SPRING",
         "found": false,
         "rowStart": 2,
         "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 1
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "FERN",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 2
       }
     ]
   },
   {
     "id": 52,
     "title": "Level 52",
-    "subtitle": "DREAMY ISLAND - HARD (CROSS)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
+    "subtitle": "SUNNY VALLEY - EASY TIER",
+    "world": "forest",
+    "themeIcon": "local_florist",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 85,
     "grid": [
       [
+        "F",
         " ",
-        " ",
-        "L",
-        "A",
-        "Q",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "P",
-        "P",
-        "H",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        "U",
+        "G",
         "E",
-        "C",
-        "Y",
+        "O",
         "A",
-        "A",
-        "V",
-        "U"
+        " ",
+        "R"
       ],
       [
-        "X",
-        "J",
-        "I",
+        "O",
+        "W",
+        "A",
         "R",
         "R",
         "I",
-        "Q",
+        "O",
+        "R"
+      ],
+      [
+        "R",
+        "T",
+        "B",
+        "U",
+        "V",
+        "S",
+        "V",
         "Z"
       ],
       [
-        "R",
+        "E",
+        "C",
+        "A",
+        "T",
+        "E",
         "V",
+        "A",
+        "H"
+      ],
+      [
+        "S",
+        "Z",
         "T",
         "A",
-        "M",
-        "L",
-        "M",
-        "K"
-      ],
-      [
-        "X",
-        "Q",
-        "S",
-        "M",
-        "O",
-        "A",
-        "W",
-        "F"
-      ],
-      [
-        " ",
-        " ",
-        "Y",
-        "I",
-        "N",
         "V",
+        "G",
+        "Y",
+        "L"
+      ],
+      [
+        "T",
+        "D",
+        "Y",
+        "N",
+        "A",
+        "M",
+        "I",
+        "C"
+      ],
+      [
         " ",
+        "F",
+        "M",
+        "B",
+        "F",
+        "M",
+        "N",
         " "
       ],
       [
         " ",
         " ",
-        "M",
+        "A",
         "D",
-        "Y",
+        "W",
         "R",
         " ",
         " "
@@ -6896,43 +6952,43 @@ export const GENERATED_LEVELS: LevelData[] = [
     ],
     "targetWords": [
       {
-        "word": "MYSTIC",
+        "word": "NATURE",
         "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 2
-      },
-      {
-        "word": "HARMONY",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "PYRAMID",
-        "found": false,
-        "rowStart": 1,
+        "rowStart": 5,
         "colStart": 3,
-        "rowEnd": 7,
+        "rowEnd": 0,
         "colEnd": 3
       },
       {
-        "word": "VALIANT",
+        "word": "WARRIOR",
         "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 7
       },
       {
-        "word": "APEX",
+        "word": "ROSE",
         "found": false,
         "rowStart": 0,
-        "colStart": 3,
+        "colStart": 7,
         "rowEnd": 3,
+        "colEnd": 4
+      },
+      {
+        "word": "DYNAMIC",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "FOREST",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 5,
         "colEnd": 0
       }
     ]
@@ -6940,489 +6996,525 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 53,
     "title": "Level 53",
-    "subtitle": "BRAIN BOULEVARD - HARD (PYRAMID)",
+    "subtitle": "SUNNY VALLEY - MEDIUM TIER",
     "world": "boulevard",
     "themeIcon": "psychology",
+    "maskName": "Meadow Hexagon",
+    "maskIcon": "⬡",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 95,
     "grid": [
       [
         " ",
         " ",
-        " ",
-        "K",
-        "X",
-        " ",
+        "H",
+        "O",
+        "B",
+        "O",
         " ",
         " "
       ],
       [
-        " ",
-        " ",
-        " ",
+        "O",
+        "T",
+        "V",
+        "R",
+        "N",
+        "I",
+        "D",
+        "B"
+      ],
+      [
+        "P",
+        "Z",
+        "A",
+        "S",
+        "A",
+        "H",
+        "D",
+        "V"
+      ],
+      [
+        "M",
+        "I",
+        "N",
+        "D",
+        "U",
+        "L",
+        "F",
+        "T"
+      ],
+      [
+        "N",
+        "S",
         "R",
         "E",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "S",
-        "A",
-        "P",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "H",
-        "P",
-        "A",
-        "K",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "M",
-        "Y",
-        "S",
-        "T",
-        "I",
-        "C",
-        " "
-      ],
-      [
-        "C",
-        "I",
+        "D",
         "N",
-        "A",
-        "T",
-        "I",
-        "T",
-        "O"
+        "O",
+        "W"
       ],
       [
+        "X",
+        "A",
+        "S",
+        "U",
+        "N",
+        "E",
         "V",
-        "O",
-        "L",
-        "C",
-        "A",
-        "N",
-        "O",
-        "D"
+        "S"
       ],
       [
-        "Z",
-        "C",
-        "I",
-        "M",
+        "R",
+        "G",
         "S",
-        "O",
-        "C",
-        "K"
+        "T",
+        "U",
+        "D",
+        "Y",
+        "M"
+      ],
+      [
+        " ",
+        " ",
+        "Z",
+        "B",
+        "V",
+        "S",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "TITANIC",
+        "word": "SOLAR",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "VENUS",
         "found": false,
         "rowStart": 5,
         "colStart": 6,
         "rowEnd": 5,
-        "colEnd": 0
+        "colEnd": 2
       },
       {
-        "word": "VOLCANO",
+        "word": "WONDERS",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "MIND",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 3
+      },
+      {
+        "word": "STUDY",
         "found": false,
         "rowStart": 6,
-        "colStart": 0,
+        "colStart": 2,
         "rowEnd": 6,
         "colEnd": 6
       },
       {
-        "word": "COSMIC",
+        "word": "BRAIN",
         "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "MYSTIC",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "SPARK",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 3,
+        "rowStart": 0,
         "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
+        "rowEnd": 4,
+        "colEnd": 0
       }
     ]
   },
   {
     "id": 54,
     "title": "Level 54",
-    "subtitle": "COSMIC SPACE - HARD (DONUT)",
+    "subtitle": "SUNNY VALLEY - MEDIUM TIER",
     "world": "space",
     "themeIcon": "rocket",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 95,
     "grid": [
       [
-        "T",
-        "G",
+        "I",
         "L",
-        "A",
-        "C",
-        "I",
         "E",
-        "R"
-      ],
-      [
-        "I",
-        "W",
-        "C",
-        "P",
-        "B",
+        "G",
+        "E",
         "N",
-        "K",
-        "T"
-      ],
-      [
-        "R",
-        "A",
-        "I",
-        "A",
-        "S",
-        "K",
-        "X",
-        "N"
-      ],
-      [
-        "I",
-        "R",
-        "P",
-        " ",
-        " ",
-        "Q",
-        "Y",
+        "D",
         "A"
       ],
       [
-        "P",
-        "R",
         "O",
-        " ",
-        " ",
         "C",
-        "E",
+        "S",
+        "K",
+        "U",
+        "S",
+        "Z",
+        "Q"
+      ],
+      [
+        "J",
+        "R",
+        "F",
+        "C",
+        "W",
+        "H",
+        "P",
         "I"
       ],
       [
-        "S",
-        "I",
-        "R",
-        "O",
-        "L",
         "E",
-        "R",
-        "D"
-      ],
-      [
-        "F",
         "O",
-        "T",
-        "V",
-        "A",
-        "U",
-        "R",
-        "A"
+        "B",
+        "J",
+        "H",
+        "I",
+        "L",
+        "L"
       ],
       [
-        "T",
-        "R",
+        "C",
+        "W",
+        "Y",
         "I",
-        "U",
-        "M",
+        "E",
         "P",
-        "H",
+        "A",
+        "B"
+      ],
+      [
+        "A",
+        "N",
+        "L",
+        "O",
+        "R",
+        "O",
+        "N",
+        "B"
+      ],
+      [
+        "P",
+        "W",
+        "B",
+        "X",
+        "O",
+        "G",
+        "E",
+        "E"
+      ],
+      [
+        "S",
+        "D",
+        "M",
+        "L",
+        "X",
+        "S",
+        "T",
         "R"
       ]
     ],
     "targetWords": [
       {
-        "word": "SPIRIT",
+        "word": "HERO",
         "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 0
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
       },
       {
-        "word": "TRIUMPH",
+        "word": "SHIP",
         "found": false,
-        "rowStart": 7,
-        "colStart": 0,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "PLANET",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
         "rowEnd": 7,
         "colEnd": 6
       },
       {
-        "word": "RADIANT",
+        "word": "SPACE",
         "found": false,
         "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 7
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 0
       },
       {
-        "word": "TROPIC",
+        "word": "CROWN",
         "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 1
       },
       {
-        "word": "GLACIER",
+        "word": "LEGEND",
         "found": false,
         "rowStart": 0,
         "colStart": 1,
         "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "WARRIOR",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 1
+        "colEnd": 6
       }
     ]
   },
   {
     "id": 55,
     "title": "Level 55",
-    "subtitle": "WORD FOREST - HARD (HOURGLASS)",
-    "world": "forest",
-    "themeIcon": "local_florist",
+    "subtitle": "SUNNY VALLEY - HARD TIER",
+    "world": "island",
+    "themeIcon": "emoji_events",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 95,
     "grid": [
       [
-        "O",
-        "L",
-        "A",
-        "T",
-        "I",
-        "B",
-        "R",
-        "O"
-      ],
-      [
         " ",
-        "R",
-        "D",
-        "H",
-        "X",
-        "B",
-        "U",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "U",
-        "E",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "N",
-        "T",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "D",
-        "R",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "T",
-        "E",
-        "O",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "X",
         "F",
-        "R",
-        "V",
-        "E",
+        "S",
+        "T",
         "H",
+        "E",
+        "I",
         " "
       ],
       [
-        "O",
-        "N",
+        "X",
+        "D",
         "A",
+        "U",
+        "Z",
         "C",
-        "L",
-        "O",
         "V",
-        "S"
+        "D"
+      ],
+      [
+        "S",
+        "E",
+        "L",
+        "E",
+        "N",
+        "L",
+        "I",
+        "G"
+      ],
+      [
+        "H",
+        "C",
+        "E",
+        "O",
+        "P",
+        "E",
+        "B",
+        "E"
+      ],
+      [
+        "D",
+        "R",
+        "Y",
+        "T",
+        "G",
+        "A",
+        "O",
+        "D"
+      ],
+      [
+        "B",
+        "T",
+        "H",
+        "G",
+        "I",
+        "R",
+        "B",
+        "B"
+      ],
+      [
+        "I",
+        "M",
+        "S",
+        "U",
+        "M",
+        "M",
+        "E",
+        "R"
+      ],
+      [
+        " ",
+        "N",
+        "Z",
+        "U",
+        "V",
+        "J",
+        "C",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "THUNDER",
+        "word": "CLEAR",
         "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 6,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "HEAT",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 0,
         "colEnd": 3
       },
       {
-        "word": "VORTEX",
+        "word": "BREEZE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "SUMMER",
         "found": false,
         "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "BRIGHT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 4,
         "colStart": 4,
         "rowEnd": 1,
-        "colEnd": 4
+        "colEnd": 1
       },
       {
-        "word": "VOLCANO",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "ORBITAL",
+        "word": "SUN",
         "found": false,
         "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 1
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 4
       }
     ]
   },
   {
     "id": 56,
     "title": "Level 56",
-    "subtitle": "DREAMY ISLAND - HARD (SHIELD)",
+    "subtitle": "SUNNY VALLEY - HARD TIER",
     "world": "island",
     "themeIcon": "wb_sunny",
+    "maskName": "Knight Shield",
+    "maskIcon": "🛡️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 95,
     "grid": [
       [
-        " ",
-        " ",
+        "V",
         "E",
-        "C",
-        "E",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
+        "V",
+        "P",
+        "O",
         "K",
-        "C",
-        "O",
-        "H",
-        "C",
-        "N",
-        " "
+        "U",
+        "S"
       ],
       [
+        "P",
+        "N",
         "M",
-        "R",
+        "N",
         "L",
-        "M",
-        "T",
-        "I",
-        "I",
-        "O"
-      ],
-      [
-        "I",
-        "A",
-        "I",
-        "P",
-        "I",
-        "P",
-        "A",
-        "K"
-      ],
-      [
-        "I",
-        "P",
-        "P",
-        "A",
-        "N",
+        "Y",
         "O",
+        "T"
+      ],
+      [
+        "Z",
+        "I",
+        "A",
+        "Y",
+        "A",
+        "L",
+        "H",
+        "T"
+      ],
+      [
+        "T",
+        "P",
+        "E",
+        "D",
+        "A",
+        "G",
         "R",
-        "L"
+        "Y"
+      ],
+      [
+        "I",
+        "N",
+        "B",
+        "R",
+        "I",
+        "E",
+        "D",
+        "F"
       ],
       [
         " ",
-        "S",
-        "S",
-        "S",
+        "H",
+        "F",
+        "L",
         "E",
-        "R",
-        "B",
+        "Q",
+        "L",
         " "
       ],
       [
         " ",
         " ",
+        "H",
         "E",
-        "S",
-        "Z",
+        "A",
         "T",
         " ",
         " "
@@ -7431,8 +7523,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         " ",
         " ",
         " ",
-        "P",
-        "E",
+        "S",
+        "X",
         " ",
         " ",
         " "
@@ -7440,1249 +7532,1452 @@ export const GENERATED_LEVELS: LevelData[] = [
     ],
     "targetWords": [
       {
-        "word": "COMPASS",
+        "word": "PINE",
         "found": false,
-        "rowStart": 0,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 1
+      },
+      {
+        "word": "DAY",
+        "found": false,
+        "rowStart": 3,
         "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "ZENITH",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "TROPIC",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
         "rowEnd": 1,
         "colEnd": 5
       },
       {
-        "word": "ECLIPSE",
+        "word": "TREE",
         "found": false,
-        "rowStart": 0,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "HEAT",
+        "found": false,
+        "rowStart": 6,
         "colStart": 2,
         "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "LIGHT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 7
+      },
+      {
+        "word": "BEAM",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 2,
+        "rowEnd": 1,
         "colEnd": 2
       },
       {
-        "word": "SPARK",
+        "word": "SOLAR",
         "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "BRAIN",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
+        "rowStart": 0,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 3
       }
     ]
   },
   {
     "id": 57,
     "title": "Level 57",
-    "subtitle": "BRAIN BOULEVARD - HARD (STAIRCASE)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
+    "subtitle": "SUNNY VALLEY - HARD TIER",
+    "world": "forest",
+    "themeIcon": "local_florist",
+    "maskName": "Sun Diamond",
+    "maskIcon": "💎",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 95,
     "grid": [
       [
-        "R",
-        "A",
-        "Y",
+        " ",
+        " ",
         "K",
-        "C",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "D",
-        "E",
-        "U",
-        "X",
-        "K",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "N",
         "I",
+        "J",
+        "P",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "G",
+        "R",
+        "R",
+        "R",
+        "R",
+        "T",
+        " "
+      ],
+      [
+        "T",
         "R",
         "E",
+        "E",
+        "A",
         "O",
-        " ",
-        " "
+        "R",
+        "J"
       ],
       [
-        " ",
         "S",
-        "O",
+        "S",
+        "A",
+        "R",
+        "G",
+        "P",
+        "S",
+        "B"
+      ],
+      [
+        "I",
         "C",
-        "O",
-        "P",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "P",
-        "M",
-        "A",
-        "R",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "X",
-        "A",
-        "A",
-        "L",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "J",
-        "R",
         "I",
         "G",
-        "W"
+        "O",
+        "L",
+        "S",
+        "E"
+      ],
+      [
+        "M",
+        "D",
+        "M",
+        "O",
+        "O",
+        "L",
+        "B",
+        "A"
+      ],
+      [
+        " ",
+        "J",
+        "C",
+        "S",
+        "T",
+        "E",
+        "M",
+        " "
       ],
       [
         " ",
         " ",
+        "X",
+        "N",
+        "A",
+        "A",
         " ",
-        "R",
-        "Y",
-        "K",
-        "D",
-        "T"
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "GLACIER",
+        "word": "STEM",
         "found": false,
         "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "DIAMOND",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "AURORA",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 5,
+        "colStart": 3,
+        "rowEnd": 6,
         "colEnd": 6
       },
       {
-        "word": "APEX",
+        "word": "ROSE",
         "found": false,
-        "rowStart": 4,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "BLOOM",
+        "found": false,
+        "rowStart": 5,
         "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 3
+        "rowEnd": 5,
+        "colEnd": 2
       },
       {
         "word": "SPARK",
         "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "GRASS",
+        "found": false,
         "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 5
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "LOGIC",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "TREE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 3
       }
     ]
   },
   {
     "id": 58,
     "title": "Level 58",
-    "subtitle": "COSMIC SPACE - HARD (HEART)",
-    "world": "space",
-    "themeIcon": "rocket",
+    "subtitle": "SUNNY VALLEY - HARDEST (VALLEY BOSS)",
+    "world": "boulevard",
+    "themeIcon": "psychology",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 100,
     "grid": [
       [
-        " ",
-        "K",
-        "N",
-        " ",
-        " ",
-        "X",
         "E",
-        " "
-      ],
-      [
-        "X",
-        "R",
-        "O",
-        "Y",
-        "D",
-        "E",
-        "S",
-        "Y"
-      ],
-      [
-        "K",
-        "A",
-        "C",
-        "C",
-        "N",
-        "T",
+        " ",
         "L",
-        "X"
-      ],
-      [
+        "J",
         "D",
-        "P",
-        "A",
-        "I",
-        "O",
-        "R",
-        "U",
-        "P"
+        "S",
+        " ",
+        "W"
       ],
       [
-        " ",
-        "S",
+        "L",
+        "H",
+        "M",
         "E",
         "T",
+        "E",
+        "O",
+        "R"
+      ],
+      [
+        "Z",
+        "D",
+        "T",
+        "Y",
+        "G",
+        "V",
+        "V",
+        "O"
+      ],
+      [
+        "Z",
+        "Y",
+        "L",
+        "R",
+        "A",
+        "E",
+        "E",
+        "T"
+      ],
+      [
+        "U",
+        "O",
         "M",
         "O",
-        "P",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "B",
-        "S",
         "A",
+        "E",
+        "N",
+        "U"
+      ],
+      [
+        "P",
+        "W",
+        "N",
+        "O",
+        "G",
+        "E",
+        "U",
+        "D"
+      ],
+      [
+        " ",
+        "E",
         "V",
-        " ",
+        "L",
+        "O",
+        "S",
+        "S",
         " "
       ],
       [
         " ",
         " ",
-        " ",
-        "Y",
-        "I",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "M",
-        "D",
-        " ",
+        "E",
+        "R",
+        "V",
+        "N",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "DIAMOND",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "MYSTIC",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "BEACON",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "PULSE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "VORTEX",
+        "word": "EARTH",
         "found": false,
         "rowStart": 5,
         "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "METEOR",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 7
+      },
+      {
+        "word": "PUZZLE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
         "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "MOON",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 2,
+        "rowEnd": 7,
         "colEnd": 5
       },
       {
-        "word": "SPARK",
+        "word": "LEGEND",
         "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 0,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "SOLVE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
         "colEnd": 1
+      },
+      {
+        "word": "VENUS",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 6
       }
     ]
   },
   {
     "id": 59,
     "title": "Level 59",
-    "subtitle": "WORD FOREST - HARD (LIGHTNING)",
-    "world": "forest",
-    "themeIcon": "local_florist",
+    "subtitle": "SUNNY VALLEY - HARDEST (VALLEY BOSS)",
+    "world": "space",
+    "themeIcon": "rocket",
+    "maskName": "Meadow Hexagon",
+    "maskIcon": "⬡",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 100,
     "grid": [
       [
         " ",
         " ",
-        " ",
-        "K",
-        "W",
-        "C",
-        "L",
-        "W"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "E",
-        "I",
-        "B",
-        "O",
-        "S"
-      ],
-      [
-        " ",
-        " ",
-        "J",
-        "G",
-        "R",
-        "N",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "E",
-        "D",
-        "L",
-        "N",
-        " "
-      ],
-      [
-        " ",
         "M",
-        "E",
-        "E",
+        "S",
+        "G",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        "G",
+        "H",
+        "Y",
+        "O",
+        "P",
+        "U",
+        "C",
+        "N"
+      ],
+      [
+        "A",
+        "S",
+        "L",
+        "D",
+        "U",
+        "R",
+        "R",
+        "O"
+      ],
+      [
+        "L",
+        "D",
         "U",
         "I",
-        " ",
-        " "
+        "L",
+        "O",
+        "O",
+        "G"
       ],
       [
-        " ",
-        "Z",
-        "R",
-        "B",
         "A",
         "U",
-        " ",
-        " "
-      ],
-      [
-        "E",
-        "S",
-        "E",
         "R",
-        "C",
-        " ",
-        " ",
-        " "
+        "A",
+        "S",
+        "R",
+        "W",
+        "A"
       ],
       [
-        "K",
+        "X",
+        "Y",
+        "J",
+        "E",
+        "E",
+        "A",
         "N",
-        "B",
+        "R"
+      ],
+      [
+        "Y",
+        "D",
         "N",
-        "H",
+        "O",
+        "M",
+        "A",
+        "I",
+        "D"
+      ],
+      [
         " ",
+        " ",
+        "O",
+        "L",
+        "L",
+        "P",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "NEBULA",
+        "word": "DIAMOND",
         "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "WONDERS",
-        "found": false,
-        "rowStart": 0,
+        "rowStart": 6,
         "colStart": 7,
         "rowEnd": 6,
         "colEnd": 1
       },
       {
-        "word": "BREEZE",
+        "word": "PULSE",
         "found": false,
         "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "AURORA",
+        "found": false,
+        "rowStart": 0,
         "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "AURA",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "GALAXY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
         "rowEnd": 6,
         "colEnd": 0
       },
       {
-        "word": "BRAIN",
+        "word": "DRAGON",
         "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 6
+        "rowStart": 6,
+        "colStart": 7,
+        "rowEnd": 1,
+        "colEnd": 7
       },
       {
-        "word": "MAGIC",
+        "word": "GOLD",
         "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 5
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 1
       }
     ]
   },
   {
     "id": 60,
     "title": "Level 60",
-    "subtitle": "DREAMY ISLAND - HARD (CASTLE)",
+    "subtitle": "SUNNY VALLEY - HARDEST (VALLEY BOSS)",
     "world": "island",
-    "themeIcon": "wb_sunny",
+    "themeIcon": "emoji_events",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 100,
     "grid": [
       [
-        "S",
-        "V",
-        " ",
-        " ",
-        " ",
-        " ",
-        "M",
-        "J"
-      ],
-      [
-        "W",
-        "G",
-        " ",
-        " ",
-        " ",
-        " ",
-        "O",
-        "Y"
-      ],
-      [
-        "Z",
-        "O",
-        " ",
-        " ",
-        " ",
-        " ",
-        "T",
-        "E"
-      ],
-      [
         "E",
         "I",
+        "M",
+        "O",
+        "J",
+        "F",
+        "O",
+        "V"
+      ],
+      [
+        "S",
+        "W",
         "D",
-        "J",
-        "Q",
-        "S",
-        "N",
-        "N"
+        "C",
+        "T",
+        "R",
+        "P",
+        "V"
       ],
       [
-        "N",
-        "S",
-        "J",
+        "D",
+        "O",
+        "Y",
         "A",
+        "R",
+        "A",
+        "H",
+        "D"
+      ],
+      [
+        "A",
+        "D",
+        "V",
+        "S",
+        "I",
         "E",
+        "O",
+        "A"
+      ],
+      [
         "W",
         "A",
-        "E"
-      ],
-      [
-        "I",
-        "R",
-        "L",
-        "J",
-        "H",
-        "B",
-        "H",
-        "R"
-      ],
-      [
         "T",
-        "B",
-        "A",
+        "T",
         "U",
-        "S",
-        "S",
-        "P",
-        "G"
+        "L",
+        "E",
+        "Y"
       ],
       [
-        "H",
-        "M",
-        "R",
-        "A",
-        "P",
-        "C",
+        "N",
+        "E",
         "O",
-        "Y"
+        "L",
+        "M",
+        "C",
+        "N",
+        "Z"
+      ],
+      [
+        "K",
+        "M",
+        "C",
+        "E",
+        "P",
+        "B",
+        "I",
+        "S"
+      ],
+      [
+        "L",
+        "Z",
+        "Z",
+        "P",
+        "H",
+        "D",
+        "X",
+        "O"
       ]
     ],
     "targetWords": [
       {
-        "word": "SHADOW",
+        "word": "TRIUMPH",
         "found": false,
-        "rowStart": 6,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "CLEAR",
+        "found": false,
+        "rowStart": 5,
         "colStart": 5,
         "rowEnd": 1,
-        "colEnd": 0
+        "colEnd": 5
       },
       {
-        "word": "PULSE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "MAJESTY",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "ENERGY",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "PHANTOM",
+        "word": "MEADOW",
         "found": false,
         "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 6
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 1
       },
       {
-        "word": "ZENITH",
+        "word": "DAWN",
         "found": false,
         "rowStart": 2,
         "colStart": 0,
-        "rowEnd": 7,
+        "rowEnd": 5,
         "colEnd": 0
+      },
+      {
+        "word": "DAY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "PHOENIX",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 7,
+        "colEnd": 6
+      },
+      {
+        "word": "RAY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 2
+      },
+      {
+        "word": "CASTLE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 3
       }
     ]
   },
   {
     "id": 61,
     "title": "Level 61",
-    "subtitle": "BRAIN BOULEVARD - HARD (ARROW)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
+    "subtitle": "SUNNY VALLEY - ADVANCED BREATHER",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 95,
     "grid": [
       [
         " ",
-        " ",
-        " ",
-        " ",
         "S",
-        "X",
-        "B",
+        "W",
+        "U",
+        "V",
+        "G",
+        "J",
+        " "
+      ],
+      [
+        "S",
+        "G",
+        "H",
+        "D",
+        "Y",
+        "K",
+        "O",
         "T"
       ],
       [
-        " ",
-        " ",
-        " ",
-        " ",
         "E",
+        "U",
+        "K",
+        "I",
+        "S",
+        "S",
+        "O",
+        "M"
+      ],
+      [
+        "F",
+        "P",
+        "M",
+        "Y",
+        "N",
+        "P",
+        "D",
+        "B"
+      ],
+      [
+        "W",
+        "E",
+        "E",
+        "M",
+        "A",
+        "E",
+        "T",
+        "A"
+      ],
+      [
+        "Q",
+        "L",
+        "R",
+        "T",
+        "E",
+        "S",
+        "R",
+        "S"
+      ],
+      [
+        "O",
+        "A",
+        "M",
+        "N",
+        "A",
         "R",
         "E",
-        "D"
+        "X"
       ],
       [
         " ",
-        " ",
-        "Y",
-        "P",
-        "A",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
+        "K",
         "I",
-        "G",
-        "O",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "N",
-        "N",
-        "C",
-        "Y",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "U",
+        "S",
+        "L",
+        "L",
         "E",
-        "Y",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        "B",
-        "J",
-        "A",
-        "X",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "V",
-        "N",
-        "H",
-        "Z",
-        " ",
-        " ",
-        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "JUNGLE",
+        "word": "PETAL",
         "found": false,
-        "rowStart": 6,
+        "rowStart": 3,
         "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 6
+        "rowEnd": 7,
+        "colEnd": 5
       },
       {
-        "word": "BRAIN",
+        "word": "FERN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "SHINE",
         "found": false,
         "rowStart": 0,
-        "colStart": 6,
+        "colStart": 1,
         "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 0,
         "colEnd": 5
+      },
+      {
+        "word": "MOSS",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "SUMMER",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "TREE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 7,
+        "colEnd": 6
       }
     ]
   },
   {
     "id": 62,
     "title": "Level 62",
-    "subtitle": "COSMIC SPACE - HARD (CROWN)",
-    "world": "space",
-    "themeIcon": "rocket",
+    "subtitle": "SUNNY VALLEY - ADVANCED BREATHER",
+    "world": "forest",
+    "themeIcon": "local_florist",
+    "maskName": "Knight Shield",
+    "maskIcon": "🛡️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 95,
     "grid": [
       [
-        " ",
-        "E",
-        " ",
-        " ",
-        "R",
-        " ",
-        "S",
-        " "
-      ],
-      [
-        "P",
-        "U",
-        "Y",
-        "L",
-        "L",
-        "S",
-        "M",
-        "P"
-      ],
-      [
-        "A",
-        "N",
-        "B",
-        "S",
-        "A",
-        "O",
-        "U",
-        "V"
-      ],
-      [
+        "C",
         "W",
-        "N",
-        "F",
-        "P",
+        "K",
+        "Q",
+        "J",
+        "Q",
         "T",
-        "L",
-        "G",
-        "O"
+        "C"
       ],
       [
-        "W",
-        "L",
-        "M",
+        "V",
+        "A",
         "N",
-        "S",
-        "L",
-        "Y",
+        "I",
+        "D",
+        "T",
+        "E",
         "R"
       ],
       [
-        "X",
-        "O",
-        "A",
-        "E",
-        "Y",
-        "B",
-        "B",
-        "T"
-      ],
-      [
-        "C",
-        "H",
-        "Y",
-        "G",
-        "R",
-        "E",
+        "L",
+        "I",
+        "S",
+        "F",
         "N",
-        "E"
+        "B",
+        "M",
+        "O"
       ],
       [
+        "Z",
+        "E",
+        "S",
+        "T",
+        "W",
+        "G",
         "P",
+        "W"
+      ],
+      [
+        "V",
+        "Y",
+        "A",
+        "I",
+        "L",
+        "J",
+        "L",
+        "N"
+      ],
+      [
+        " ",
+        "S",
         "G",
         "R",
-        "J",
-        "C",
-        "Y",
+        "O",
+        "E",
+        "E",
+        " "
+      ],
+      [
+        " ",
+        " ",
         "G",
-        "X"
+        "R",
+        "N",
+        "N",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "A",
+        "F",
+        " ",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "CRYSTAL",
+        "word": "VISION",
         "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 1,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "CASTLE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "TEMPLE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "LEARN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 6,
         "colEnd": 4
       },
       {
-        "word": "PHANTOM",
+        "word": "CROWN",
         "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "COMPASS",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "ENERGY",
-        "found": false,
-        "rowStart": 6,
+        "rowStart": 0,
         "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "VORTEX",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 7,
+        "rowEnd": 4,
         "colEnd": 7
-      },
-      {
-        "word": "PULSE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 3
       }
     ]
   },
   {
     "id": 63,
     "title": "Level 63",
-    "subtitle": "WORD FOREST - HARD (SPIRAL)",
-    "world": "forest",
-    "themeIcon": "local_florist",
+    "subtitle": "SUNNY VALLEY - ADVANCED MEDIUM",
+    "world": "boulevard",
+    "themeIcon": "psychology",
+    "maskName": "Sun Diamond",
+    "maskIcon": "💎",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 100,
     "grid": [
       [
+        " ",
+        " ",
+        "I",
+        "D",
+        "X",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "Y",
+        "O",
+        "L",
+        "E",
+        "M",
+        "D",
+        " "
+      ],
+      [
+        "A",
+        "X",
         "R",
         "E",
-        "D",
-        "N",
-        "U",
-        "H",
         "T",
-        "S"
+        "D",
+        "R",
+        "K"
       ],
       [
         "E",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+        "A",
+        "B",
+        "I",
+        "R",
+        "N",
+        "A",
+        "X"
+      ],
+      [
+        "D",
+        "L",
+        "I",
+        "H",
+        "O",
+        "E",
+        "G",
         "T"
       ],
       [
-        "R",
-        " ",
-        "A",
-        "P",
-        "E",
-        "X",
-        " ",
-        "N"
-      ],
-      [
-        "O",
-        " ",
-        " ",
-        "S",
-        " ",
-        "S",
-        " ",
-        "A"
-      ],
-      [
-        "L",
-        " ",
-        " ",
-        "W",
-        " ",
-        "Q",
-        " ",
-        "I"
-      ],
-      [
-        "P",
-        " ",
-        " ",
         "I",
+        "A",
+        "T",
+        "S",
+        "V",
+        "G",
+        "O",
+        "X"
+      ],
+      [
+        " ",
+        "G",
+        "A",
         "J",
-        "C",
-        " ",
-        "D"
-      ],
-      [
-        "X",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "A"
-      ],
-      [
+        "P",
         "E",
         "N",
-        "M",
-        "A",
-        "G",
-        "I",
-        "C",
-        "R"
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "L",
+        "Q",
+        "O",
+        "L",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "EXPLORE",
+        "word": "VORTEX",
         "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "RADIANT",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "THUNDER",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
+        "rowStart": 5,
+        "colStart": 4,
         "rowEnd": 0,
-        "colEnd": 0
+        "colEnd": 4
       },
       {
-        "word": "MAGIC",
+        "word": "SHIELD",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "LEGEND",
         "found": false,
         "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 5
+      },
+      {
+        "word": "GALAXY",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "ORBITAL",
+        "found": false,
+        "rowStart": 1,
         "colStart": 2,
         "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "DRAGON",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 6,
         "colEnd": 6
       },
       {
-        "word": "APEX",
+        "word": "IDEA",
         "found": false,
-        "rowStart": 2,
-        "colStart": 2,
+        "rowStart": 5,
+        "colStart": 0,
         "rowEnd": 2,
-        "colEnd": 5
+        "colEnd": 0
       }
     ]
   },
   {
     "id": 64,
     "title": "Level 64",
-    "subtitle": "DREAMY ISLAND - HARD (PINETREE)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
+    "subtitle": "SUNNY VALLEY - ADVANCED MEDIUM",
+    "world": "space",
+    "themeIcon": "rocket",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 100,
     "grid": [
       [
-        " ",
-        " ",
-        " ",
-        "M",
         "D",
         " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
+        "L",
+        "O",
         "J",
+        "O",
+        " ",
+        "M"
+      ],
+      [
+        "R",
+        "Z",
         "A",
-        "N",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "G",
-        "O",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "U",
-        "I",
-        "M",
-        "W",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "N",
-        "O",
-        "C",
-        "A",
-        "E",
-        "B",
-        " "
-      ],
-      [
-        "H",
-        "O",
         "R",
         "B",
-        "I",
-        "T",
         "A",
-        "L"
+        "W",
+        "A"
+      ],
+      [
+        "A",
+        "M",
+        "T",
+        "B",
+        "O",
+        "P",
+        "W",
+        "G"
+      ],
+      [
+        "G",
+        "J",
+        "S",
+        "I",
+        "R",
+        "I",
+        "K",
+        "I"
+      ],
+      [
+        "O",
+        "Z",
+        "Y",
+        "T",
+        "B",
+        "H",
+        "I",
+        "C"
+      ],
+      [
+        "N",
+        "G",
+        "R",
+        "A",
+        "I",
+        "S",
+        "N",
+        "D"
       ],
       [
         " ",
-        " ",
-        " ",
-        "X",
-        "D",
-        " ",
-        " ",
+        "I",
+        "C",
+        "L",
+        "T",
+        "C",
+        "G",
         " "
       ],
       [
         " ",
         " ",
-        " ",
-        "W",
-        "Y",
-        " ",
+        "F",
+        "X",
+        "G",
+        "D",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "ORBITAL",
+        "word": "SHIP",
         "found": false,
         "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 7
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 5
       },
       {
-        "word": "BEACON",
+        "word": "ORBITAL",
         "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 1
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 3
       },
       {
-        "word": "DIAMOND",
+        "word": "CRYSTAL",
         "found": false,
         "rowStart": 6,
-        "colStart": 4,
+        "colStart": 2,
         "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "ORBIT",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 6,
         "colEnd": 4
+      },
+      {
+        "word": "DRAGON",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 0
       },
       {
         "word": "MAGIC",
         "found": false,
         "rowStart": 0,
-        "colStart": 3,
+        "colStart": 7,
         "rowEnd": 4,
-        "colEnd": 3
+        "colEnd": 7
+      },
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 6
       }
     ]
   },
   {
     "id": 65,
     "title": "Level 65",
-    "subtitle": "BRAIN BOULEVARD - HARD (ANCHOR)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
+    "subtitle": "SUNNY VALLEY - ADVANCED HARD",
+    "world": "island",
+    "themeIcon": "emoji_events",
+    "maskName": "Meadow Hexagon",
+    "maskIcon": "⬡",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 105,
     "grid": [
       [
         " ",
         " ",
-        " ",
         "M",
-        "N",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "A",
-        "I",
-        " ",
+        "Y",
+        "K",
+        "S",
         " ",
         " "
       ],
       [
-        " ",
-        " ",
-        " ",
+        "X",
         "G",
-        "A",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "I",
+        "K",
         "R",
-        " ",
-        " ",
-        " "
+        "G",
+        "S",
+        "P",
+        "P"
       ],
       [
-        " ",
+        "N",
+        "D",
+        "R",
+        "I",
+        "A",
+        "B",
+        "U",
+        "U"
+      ],
+      [
+        "W",
+        "X",
+        "C",
+        "L",
+        "N",
+        "W",
+        "Q",
+        "N"
+      ],
+      [
+        "O",
+        "B",
+        "B",
+        "R",
+        "I",
+        "G",
+        "H",
+        "T"
+      ],
+      [
+        "R",
+        "X",
+        "I",
+        "N",
+        "E",
+        "O",
+        "H",
+        "P"
+      ],
+      [
+        "C",
+        "C",
+        "Y",
+        "A",
+        "D",
+        "R",
+        "M",
+        "T"
+      ],
+      [
         " ",
         " ",
         "C",
+        "X",
         "B",
-        " ",
+        "O",
         " ",
         " "
-      ],
-      [
-        " ",
-        "A",
-        "S",
-        "P",
-        "A",
-        "R",
-        "K",
-        " "
-      ],
-      [
-        "D",
-        "E",
-        " ",
-        " ",
-        " ",
-        " ",
-        "Z",
-        "L"
-      ],
-      [
-        "A",
-        "S",
-        " ",
-        " ",
-        " ",
-        " ",
-        "E",
-        "I"
       ]
     ],
     "targetWords": [
       {
-        "word": "SPARK",
+        "word": "KING",
         "found": false,
-        "rowStart": 5,
+        "rowStart": 1,
         "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 6
+        "rowEnd": 4,
+        "colEnd": 5
       },
       {
-        "word": "BRAIN",
+        "word": "BRIGHT",
         "found": false,
         "rowStart": 4,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 7
       },
       {
-        "word": "MAGIC",
+        "word": "PHOENIX",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "SUN",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "WARM",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "DAY",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "SKY",
         "found": false,
         "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 4,
+        "colStart": 5,
+        "rowEnd": 0,
         "colEnd": 3
       }
     ]
@@ -8690,1789 +8985,2068 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 66,
     "title": "Level 66",
-    "subtitle": "COSMIC SPACE - HARD (DIAMOND)",
-    "world": "space",
-    "themeIcon": "rocket",
+    "subtitle": "SUNNY VALLEY - ADVANCED HARD",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 105,
     "grid": [
       [
-        " ",
-        " ",
-        " ",
-        "W",
-        "V",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "M",
-        "R",
+        "D",
         "L",
+        "E",
+        "I",
+        "H",
+        "S",
         "B",
-        " ",
-        " "
+        "V"
       ],
       [
-        " ",
+        "D",
+        "R",
+        "A",
+        "D",
+        "I",
+        "A",
         "N",
-        "O",
-        "G",
-        "A",
-        "R",
-        "D",
-        " "
+        "T"
       ],
       [
-        "I",
-        "X",
-        "D",
-        "C",
-        "T",
-        "E",
-        "Y",
-        "J"
-      ],
-      [
-        "C",
-        "V",
-        "S",
-        "I",
-        "S",
-        "E",
-        "P",
-        "G"
-      ],
-      [
-        " ",
-        "V",
-        "I",
-        "G",
-        "Y",
-        "Z",
         "L",
-        " "
+        "Q",
+        "N",
+        "W",
+        "O",
+        "R",
+        "C",
+        "E"
       ],
       [
-        " ",
-        " ",
+        "O",
+        "E",
+        "L",
+        "M",
+        "L",
+        "P",
+        "Q",
+        "M"
+      ],
+      [
+        "G",
+        "U",
         "W",
+        "I",
         "A",
+        "W",
+        "U",
+        "P"
+      ],
+      [
+        "Z",
+        "S",
+        "G",
+        "S",
+        "V",
+        "Z",
+        "K",
+        "L"
+      ],
+      [
+        "L",
+        "H",
+        "U",
+        "N",
         "R",
         "E",
-        " ",
-        " "
+        "F",
+        "E"
       ],
       [
-        " ",
-        " ",
-        " ",
+        "T",
+        "Y",
+        "D",
+        "N",
         "M",
-        "C",
-        " ",
-        " ",
-        " "
+        "T",
+        "A",
+        "Y"
       ]
     ],
     "targetWords": [
       {
-        "word": "CRYSTAL",
+        "word": "LIGHT",
         "found": false,
-        "rowStart": 7,
+        "rowStart": 3,
         "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 4
+        "rowEnd": 7,
+        "colEnd": 0
       },
       {
-        "word": "DRAGON",
+        "word": "SUN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "CROWN",
         "found": false,
         "rowStart": 2,
         "colStart": 6,
         "rowEnd": 2,
-        "colEnd": 1
+        "colEnd": 2
       },
       {
-        "word": "MAGIC",
+        "word": "SHIELD",
         "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 3,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "RADIANT",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 7
+      },
+      {
+        "word": "TEMPLE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "FERN",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
         "colEnd": 3
       },
       {
-        "word": "BREEZE",
+        "word": "GOLD",
         "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "WISDOM",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
+        "rowStart": 4,
+        "colStart": 0,
         "rowEnd": 1,
-        "colEnd": 2
+        "colEnd": 0
       }
     ]
   },
   {
     "id": 67,
     "title": "Level 67",
-    "subtitle": "WORD FOREST - HARD (CROSS)",
+    "subtitle": "SUNNY VALLEY - ADVANCED HARD",
     "world": "forest",
     "themeIcon": "local_florist",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 105,
     "grid": [
       [
         " ",
-        " ",
         "T",
-        "W",
+        "R",
+        "A",
+        "M",
+        "S",
+        "J",
+        " "
+      ],
+      [
+        "N",
+        "S",
         "L",
-        "Z",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
+        "D",
         "N",
-        "O",
-        "E",
-        "Q",
-        " ",
-        " "
+        "T",
+        "M",
+        "T"
       ],
       [
-        "X",
+        "O",
+        "U",
+        "M",
+        "T",
         "C",
+        "E",
+        "W",
+        "V"
+      ],
+      [
+        "G",
+        "I",
+        "M",
+        "J",
+        "S",
+        "M",
+        "G",
+        "S"
+      ],
+      [
         "A",
         "N",
-        "C",
+        "A",
         "S",
-        "H",
-        "A"
-      ],
-      [
-        "Q",
-        "F",
-        "I",
-        "D",
+        "U",
+        "C",
         "O",
-        "P",
-        "M",
-        "P"
+        "F"
       ],
       [
-        "A",
-        "T",
-        "D",
+        "R",
         "E",
-        "S",
-        "I",
-        "S",
-        "E"
-      ],
-      [
         "H",
+        "L",
+        "O",
+        "G",
+        "I",
+        "C"
+      ],
+      [
         "D",
-        "A",
+        "G",
         "R",
+        "E",
+        "W",
+        "O",
+        "L",
+        "F"
+      ],
+      [
+        " ",
+        "G",
+        "B",
+        "L",
+        "O",
+        "O",
         "M",
-        "R",
-        "V",
-        "X"
-      ],
-      [
-        " ",
-        " ",
-        "R",
-        "S",
-        "I",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "Q",
-        "V",
-        "C",
-        "T",
-        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "COSMIC",
+        "word": "LOGIC",
         "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 7
       },
       {
-        "word": "WONDERS",
+        "word": "STEM",
         "found": false,
         "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "RADIANT",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "SPIRIT",
-        "found": false,
-        "rowStart": 2,
         "colStart": 5,
-        "rowEnd": 7,
+        "rowEnd": 3,
         "colEnd": 5
       },
       {
-        "word": "ZENITH",
+        "word": "DRAGON",
         "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 5,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 1,
         "colEnd": 0
       },
       {
-        "word": "APEX",
+        "word": "FLOWER",
         "found": false,
-        "rowStart": 2,
+        "rowStart": 6,
         "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 7
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "FOCUS",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "GENIUS",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "BLOOM",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 6
+      },
+      {
+        "word": "SMART",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 1
       }
     ]
   },
   {
     "id": 68,
     "title": "Level 68",
-    "subtitle": "DREAMY ISLAND - HARD (PYRAMID)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
+    "subtitle": "SUNNY VALLEY - HARDEST (MEADOW BOSS)",
+    "world": "boulevard",
+    "themeIcon": "psychology",
+    "maskName": "Knight Shield",
+    "maskIcon": "🛡️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 100,
     "grid": [
       [
-        " ",
-        " ",
-        " ",
-        "S",
-        "T",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "M",
+        "Y",
         "R",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
         "O",
+        "T",
+        "C",
         "I",
-        "W",
-        " ",
-        " "
+        "V",
+        "P"
       ],
       [
-        " ",
-        " ",
+        "S",
+        "P",
+        "A",
+        "C",
+        "E",
+        "S",
+        "D",
+        "P"
+      ],
+      [
+        "R",
+        "G",
+        "O",
         "L",
         "D",
-        "U",
-        "I",
-        " ",
-        " "
+        "C",
+        "R",
+        "G"
       ],
       [
-        " ",
-        "X",
-        "T",
-        "G",
-        "M",
-        "S",
-        "D",
-        " "
-      ],
-      [
-        "G",
-        "E",
-        "S",
-        "N",
-        "P",
-        "D",
-        "S",
-        "L"
-      ],
-      [
-        "M",
-        "P",
         "A",
+        "Y",
+        "C",
         "I",
-        "H",
+        "M",
+        "S",
         "O",
-        "G",
-        "V"
+        "C"
       ],
       [
-        "C",
-        "A",
-        "C",
-        "K",
-        "U",
         "M",
+        "C",
+        "L",
+        "A",
+        "R",
+        "I",
+        "T",
+        "Y"
+      ],
+      [
+        " ",
+        "A",
+        "R",
+        "O",
+        "R",
+        "U",
+        "A",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "W",
+        "I",
+        "S",
         "E",
-        "O"
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "E",
+        "K",
+        " ",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "KINGDOM",
+        "word": "SPACE",
         "found": false,
-        "rowStart": 7,
-        "colStart": 3,
+        "rowStart": 1,
+        "colStart": 0,
         "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "TRIUMPH",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 6,
         "colEnd": 4
       },
       {
-        "word": "CASTLE",
+        "word": "CLARITY",
         "found": false,
-        "rowStart": 7,
-        "colStart": 2,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
         "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "VICTORY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 6,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "COSMIC",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
         "colEnd": 2
       },
       {
-        "word": "WISDOM",
+        "word": "AURORA",
         "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 7,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "WISE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 6,
         "colEnd": 5
       },
       {
-        "word": "APEX",
+        "word": "MARS",
         "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 1
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 0
       }
     ]
   },
   {
     "id": 69,
     "title": "Level 69",
-    "subtitle": "BRAIN BOULEVARD - HARD (DONUT)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
+    "subtitle": "SUNNY VALLEY - HARDEST (MEADOW BOSS)",
+    "world": "space",
+    "themeIcon": "rocket",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 110,
     "grid": [
       [
-        "S",
-        "P",
-        "H",
-        "O",
-        "E",
-        "N",
-        "I",
-        "X"
-      ],
-      [
-        "P",
-        "P",
-        "B",
-        "E",
-        "Z",
-        "M",
-        "N",
-        "D"
-      ],
-      [
-        "I",
-        "D",
-        "R",
-        "Z",
-        "F",
-        "A",
-        "U",
-        "N"
-      ],
-      [
-        "R",
-        "P",
-        "N",
-        " ",
-        " ",
-        "G",
         "V",
+        "O",
+        "R",
+        "T",
+        "E",
+        "X",
+        "M",
         "O"
       ],
       [
-        "I",
-        "K",
-        "J",
-        " ",
-        " ",
-        "I",
-        "Y",
-        "M"
-      ],
-      [
-        "T",
-        "K",
-        "A",
-        "L",
+        "E",
         "G",
+        "L",
+        "O",
+        "R",
+        "Y",
         "C",
-        "K",
-        "A"
+        "D"
       ],
       [
-        "R",
-        "A",
-        "D",
-        "I",
-        "A",
-        "N",
         "T",
+        "C",
+        "C",
+        "I",
+        "H",
+        "S",
+        "I",
         "I"
       ],
       [
-        "V",
-        "E",
-        "N",
-        "E",
         "R",
-        "G",
-        "Y",
-        "D"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "MAGIC",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "DIAMOND",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "RADIANT",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "SPIRIT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 5,
-        "colEnd": 0
-      },
-      {
-        "word": "ENERGY",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "PHOENIX",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 70,
-    "title": "Level 70",
-    "subtitle": "COSMIC SPACE - HARD (HOURGLASS)",
-    "world": "space",
-    "themeIcon": "rocket",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        "V",
-        "O",
-        "L",
-        "C",
+        "E",
         "A",
-        "N",
-        "O",
-        "L"
-      ],
-      [
-        " ",
-        "A",
-        "R",
-        "O",
-        "R",
-        "U",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "D",
-        "U",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "I",
-        "S",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "Y",
-        "A",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "R",
-        "Y",
-        "O",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "C",
-        "I",
-        "P",
-        "O",
-        "R",
-        "T",
-        " "
-      ],
-      [
-        "I",
-        "G",
-        "L",
-        "A",
-        "C",
-        "I",
-        "E",
-        "R"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CRYSTAL",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "VALIANT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "GLACIER",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "VOLCANO",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "TROPIC",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 1
-      },
-      {
-        "word": "AURORA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 71,
-    "title": "Level 71",
-    "subtitle": "WORD FOREST - HARD (SHIELD)",
-    "world": "forest",
-    "themeIcon": "local_florist",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        " ",
-        "I",
-        "P",
-        "G",
-        "W",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "E",
-        "L",
-        "G",
-        "N",
-        "U",
-        "J",
-        " "
-      ],
-      [
-        "W",
-        "E",
-        "M",
-        "E",
-        "R",
-        "A",
-        "L",
-        "D"
-      ],
-      [
-        "R",
-        "M",
-        "D",
-        "N",
-        "E",
-        "G",
-        "E",
-        "L"
-      ],
-      [
-        "R",
-        "E",
-        "D",
-        "N",
-        "U",
-        "H",
-        "T",
-        "X"
-      ],
-      [
-        " ",
         "Q",
-        "C",
-        "I",
-        "G",
-        "A",
-        "M",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "P",
-        "E",
-        "X",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "M",
-        "C",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "THUNDER",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "MAGIC",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "LEGEND",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "JUNGLE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "EMERALD",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 72,
-    "title": "Level 72",
-    "subtitle": "DREAMY ISLAND - HARD (STAIRCASE)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        "G",
-        "L",
-        "G",
-        "T",
-        "K",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "E",
-        "G",
-        "X",
-        "N",
-        "I",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "X",
-        "E",
-        "A",
-        "N",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "I",
-        "P",
-        "I",
-        "G",
-        "U",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "L",
-        "D",
-        "R",
-        "X",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "N",
-        "A",
-        "O",
-        "O",
-        "Z",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
         "V",
-        "M",
-        "R",
         "T",
-        "W"
+        "G",
+        "A"
       ],
       [
-        " ",
-        " ",
-        " ",
-        "H",
-        "W",
-        "A",
-        "E",
-        "F"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "KINGDOM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "VALIANT",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "EXPLORE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "AURORA",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 73,
-    "title": "Level 73",
-    "subtitle": "BRAIN BOULEVARD - HARD (HEART)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        "E",
-        "W",
-        " ",
-        " ",
-        "U",
-        "T",
-        " "
-      ],
-      [
-        "H",
-        "A",
-        "R",
-        "M",
-        "O",
-        "N",
         "Y",
+        "U",
+        "M",
+        "P",
+        "X",
+        "A",
+        "A",
+        "M"
+      ],
+      [
+        "C",
+        "I",
+        "F",
+        "P",
+        "S",
+        "R",
+        "M",
+        "O"
+      ],
+      [
+        "E",
+        "S",
+        "P",
+        "I",
+        "L",
+        "C",
+        "E",
+        "N"
+      ],
+      [
+        "V",
+        "E",
+        "N",
+        "U",
+        "S",
+        "E",
+        "F",
         "D"
-      ],
-      [
-        "D",
-        "Y",
-        "N",
-        "A",
-        "M",
-        "I",
-        "C",
-        "W"
-      ],
-      [
-        "E",
-        "X",
-        "P",
-        "L",
-        "O",
-        "R",
-        "E",
-        "Z"
-      ],
-      [
-        " ",
-        "D",
-        "N",
-        "E",
-        "G",
-        "E",
-        "L",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "P",
-        "E",
-        "X",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "O",
-        "H",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "K",
-        "A",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "EXPLORE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "HARMONY",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "DYNAMIC",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "LEGEND",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 74,
-    "title": "Level 74",
-    "subtitle": "COSMIC SPACE - HARD (LIGHTNING)",
-    "world": "space",
-    "themeIcon": "rocket",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "U",
-        "C",
-        "B",
-        "R",
-        "T"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "G",
-        "R",
-        "E",
-        "I",
-        "D"
-      ],
-      [
-        " ",
-        " ",
-        "V",
-        "A",
-        "T",
-        "R",
-        "Y",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "I",
-        "L",
-        "I",
-        "N",
-        "E",
-        " "
-      ],
-      [
-        " ",
-        "N",
-        "E",
-        "P",
-        "A",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "H",
-        "S",
-        "M",
-        "L",
-        "Q",
-        " ",
-        " "
-      ],
-      [
-        "S",
-        "I",
-        "I",
-        "U",
-        "D",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "N",
-        "C",
-        "P",
-        "Q",
-        "Q",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SHELTER",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "DYNAMIC",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "SPIRIT",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "BRAIN",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "PULSE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 75,
-    "title": "Level 75",
-    "subtitle": "WORD FOREST - HARD (CASTLE)",
-    "world": "forest",
-    "themeIcon": "local_florist",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        "T",
-        "O",
-        " ",
-        " ",
-        " ",
-        " ",
-        "X",
-        "U"
-      ],
-      [
-        "T",
-        "R",
-        " ",
-        " ",
-        " ",
-        " ",
-        "P",
-        "T"
-      ],
-      [
-        "I",
-        "B",
-        " ",
-        " ",
-        " ",
-        " ",
-        "S",
-        "H"
-      ],
-      [
-        "T",
-        "I",
-        "K",
-        "G",
-        "B",
-        "E",
-        "Z",
-        "Z"
-      ],
-      [
-        "A",
-        "T",
-        "H",
-        "S",
-        "P",
-        "A",
-        "R",
-        "K"
-      ],
-      [
-        "N",
-        "A",
-        "T",
-        "M",
-        "B",
-        "H",
-        "K",
-        "X"
-      ],
-      [
-        "I",
-        "L",
-        "E",
-        "P",
-        "U",
-        "L",
-        "S",
-        "E"
-      ],
-      [
-        "C",
-        "T",
-        "E",
-        "L",
-        "G",
-        "N",
-        "U",
-        "J"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "TEMPEST",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "TITANIC",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "PULSE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "ORBITAL",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 1
-      },
-      {
-        "word": "JUNGLE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "SPARK",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 76,
-    "title": "Level 76",
-    "subtitle": "DREAMY ISLAND - HARD (ARROW)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "A",
-        "P",
-        "E",
-        "X"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "N",
-        "W",
-        "H",
-        "S"
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "E",
-        "A",
-        "X",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "R",
-        "L",
-        "E",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "T",
-        "C",
-        "H",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "R",
-        "S",
-        "O",
-        "P",
-        " ",
-        " "
-      ],
-      [
-        "N",
-        "O",
-        "U",
-        "A",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "V",
-        "W",
-        "A",
-        "C",
-        " ",
-        " ",
-        " ",
-        " "
       ]
     ],
     "targetWords": [
       {
         "word": "VORTEX",
         "found": false,
-        "rowStart": 7,
+        "rowStart": 0,
         "colStart": 0,
-        "rowEnd": 2,
+        "rowEnd": 0,
         "colEnd": 5
       },
       {
-        "word": "AURORA",
+        "word": "TEMPLE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "GLORY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "ECLIPSE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 0
+      },
+      {
+        "word": "DIAMOND",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 7
+      },
+      {
+        "word": "SPACE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 0
+      },
+      {
+        "word": "MAGIC",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "STAR",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "VENUS",
         "found": false,
         "rowStart": 7,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "title": "Level 70",
+    "subtitle": "SUNNY VALLEY - HARDEST (MEADOW BOSS)",
+    "world": "island",
+    "themeIcon": "emoji_events",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 110,
+    "grid": [
+      [
+        " ",
+        "E",
+        "O",
+        "Z",
+        "G",
+        "B",
+        "R",
+        " "
+      ],
+      [
+        "H",
+        "X",
+        "Z",
+        "K",
+        "I",
+        "N",
+        "G",
+        "N"
+      ],
+      [
+        "Z",
+        "P",
+        "S",
+        "E",
+        "L",
+        "Y",
+        "R",
+        "W"
+      ],
+      [
+        "X",
+        "H",
+        "M",
+        "I",
+        "E",
+        "A",
+        "N",
+        "S"
+      ],
+      [
+        "T",
+        "S",
+        "G",
+        "U",
+        "L",
+        "R",
+        "A",
+        "K"
+      ],
+      [
+        "E",
+        "H",
+        "I",
+        "O",
+        "I",
+        "P",
+        "B",
+        "Y"
+      ],
+      [
+        "T",
+        "X",
+        "S",
+        "W",
+        "E",
+        "R",
+        "A",
+        "O"
+      ],
+      [
+        " ",
+        "Q",
+        "P",
+        "X",
+        "V",
+        "D",
+        "T",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "TRIUMPH",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 0
+      },
+      {
+        "word": "BREEZE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 0,
+        "colEnd": 1
+      },
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "DAY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "SOLAR",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "LIGHT",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 0
+      },
+      {
+        "word": "APEX",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "SKY",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "RAY",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "title": "Level 71",
+    "subtitle": "SUNNY VALLEY - EXPERT BREATHER",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Meadow Hexagon",
+    "maskIcon": "⬡",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 95,
+    "grid": [
+      [
+        " ",
+        " ",
+        "E",
+        "A",
+        "O",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        "G",
+        "L",
+        "O",
+        "R",
+        "Y",
+        "O",
+        "U",
+        "T"
+      ],
+      [
+        "P",
+        "P",
+        "E",
+        "F",
+        "O",
+        "S",
+        "J",
+        "W"
+      ],
+      [
+        "Y",
+        "H",
+        "C",
+        "V",
+        "K",
+        "S",
+        "I",
+        "O"
+      ],
+      [
+        "D",
+        "I",
+        "A",
+        "M",
+        "O",
+        "N",
+        "D",
+        "Z"
+      ],
+      [
+        "P",
+        "Q",
+        "S",
+        "N",
+        "W",
+        "O",
+        "R",
+        "C"
+      ],
+      [
+        "F",
+        "I",
+        "D",
+        "N",
+        "E",
+        "G",
+        "E",
+        "L"
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "Z",
+        "U",
+        "K",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "HERO",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "MOSS",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "LEGEND",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 7,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "DIAMOND",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "GLORY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "title": "Level 72",
+    "subtitle": "SUNNY VALLEY - EXPERT BREATHER",
+    "world": "forest",
+    "themeIcon": "local_florist",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 95,
+    "grid": [
+      [
+        "S",
+        "W",
+        "D",
+        "S",
+        "Z",
+        "M",
+        "H",
+        "T"
+      ],
+      [
+        "S",
+        "S",
+        "O",
+        "M",
+        "I",
+        "D",
+        "E",
+        "A"
+      ],
+      [
+        "L",
+        "M",
+        "J",
+        "O",
+        "U",
+        "D",
+        "J",
+        "E"
+      ],
+      [
+        "R",
+        "A",
+        "A",
+        "D",
+        "D",
+        "P",
+        "O",
+        "R"
+      ],
+      [
+        "N",
+        "Z",
+        "T",
+        "E",
+        "P",
+        "S",
+        "U",
+        "U"
+      ],
+      [
+        "U",
+        "D",
+        "C",
+        "E",
+        "R",
+        "Q",
+        "Y",
+        "T"
+      ],
+      [
+        "L",
+        "E",
+        "C",
+        "B",
+        "P",
+        "T",
+        "E",
+        "A"
+      ],
+      [
+        "A",
+        "O",
+        "C",
+        "K",
+        "T",
+        "P",
+        "S",
+        "N"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "MOSS",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 0
+      },
+      {
+        "word": "WOODS",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "STREAM",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "PETAL",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "IDEA",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 7
+      },
+      {
+        "word": "NATURE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "title": "Level 73",
+    "subtitle": "SUNNY VALLEY - EXPERT MEDIUM",
+    "world": "boulevard",
+    "themeIcon": "psychology",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 100,
+    "grid": [
+      [
+        " ",
+        "Y",
+        "S",
+        "F",
+        "L",
+        "P",
+        "V",
+        " "
+      ],
+      [
+        "T",
+        "R",
+        "I",
+        "U",
+        "M",
+        "P",
+        "H",
+        "B"
+      ],
+      [
+        "A",
+        "O",
+        "T",
+        "S",
+        "D",
+        "P",
+        "S",
+        "E"
+      ],
+      [
+        "G",
+        "T",
+        "E",
+        "H",
+        "R",
+        "C",
+        "T",
+        "A"
+      ],
+      [
+        "F",
+        "C",
+        "M",
+        "I",
+        "A",
+        "T",
+        "A",
+        "C"
+      ],
+      [
+        "V",
+        "I",
+        "P",
+        "E",
+        "G",
+        "O",
+        "R",
+        "O"
+      ],
+      [
+        "O",
+        "V",
+        "L",
+        "L",
+        "O",
+        "R",
+        "G",
+        "N"
+      ],
+      [
+        " ",
+        "X",
+        "E",
+        "D",
+        "N",
+        "Q",
+        "H",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SHIELD",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "TRIUMPH",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "DRAGON",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "BEACON",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "TEMPLE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "VICTORY",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 1
+      },
+      {
+        "word": "STAR",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "title": "Level 74",
+    "subtitle": "SUNNY VALLEY - EXPERT MEDIUM",
+    "world": "space",
+    "themeIcon": "rocket",
+    "maskName": "Knight Shield",
+    "maskIcon": "🛡️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 100,
+    "grid": [
+      [
+        "R",
+        "R",
+        "J",
+        "Q",
+        "N",
+        "V",
+        "M",
+        "E"
+      ],
+      [
+        "S",
+        "V",
+        "X",
+        "O",
+        "E",
+        "C",
+        "C",
+        "X"
+      ],
+      [
+        "H",
+        "L",
+        "O",
+        "N",
+        "R",
+        "A",
+        "E",
+        "R"
+      ],
+      [
+        "I",
+        "M",
+        "U",
+        "O",
+        "P",
+        "P",
+        "I",
+        "Q"
+      ],
+      [
+        "P",
+        "S",
+        "W",
+        "S",
+        "A",
+        "L",
+        "B",
+        "J"
+      ],
+      [
+        " ",
+        "N",
+        "O",
+        "R",
+        "B",
+        "I",
+        "T",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "G",
+        "D",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "L",
+        "T",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SPACE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 7
+      },
+      {
+        "word": "VENUS",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "SHIP",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "ORBIT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "MOON",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "APEX",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "title": "Level 75",
+    "subtitle": "SUNNY VALLEY - EXPERT HARD",
+    "world": "island",
+    "themeIcon": "emoji_events",
+    "maskName": "Sun Diamond",
+    "maskIcon": "💎",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 105,
+    "grid": [
+      [
+        " ",
+        " ",
+        "G",
+        "G",
+        "X",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "O",
+        "L",
+        "G",
+        "Y",
+        "A",
+        "R",
+        " "
+      ],
+      [
+        "A",
+        "O",
+        "W",
+        "P",
+        "D",
+        "L",
+        "O",
+        "G"
+      ],
+      [
+        "W",
+        "H",
+        "O",
+        "R",
+        "I",
+        "Z",
+        "O",
+        "N"
+      ],
+      [
+        "H",
+        "P",
+        "M",
+        "U",
+        "I",
+        "R",
+        "T",
+        "I"
+      ],
+      [
+        "T",
+        "N",
+        "A",
+        "I",
+        "L",
+        "A",
+        "V",
+        "C"
+      ],
+      [
+        " ",
+        "C",
+        "I",
+        "T",
+        "S",
+        "Y",
+        "M",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "W",
+        "A",
+        "D",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VALIANT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "MYSTIC",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 1
+      },
+      {
+        "word": "GLOW",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "TRIUMPH",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "DAWN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "HORIZON",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "RAY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "title": "Level 76",
+    "subtitle": "SUNNY VALLEY - EXPERT HARD",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 105,
+    "grid": [
+      [
+        "E",
+        " ",
+        "V",
+        "Z",
+        "N",
+        "M",
+        " ",
+        "T"
+      ],
+      [
+        "L",
+        "P",
+        "X",
+        "N",
+        "R",
+        "O",
+        "H",
+        "E"
+      ],
+      [
+        "G",
+        "E",
+        "E",
+        "E",
+        "E",
+        "O",
+        "G",
+        "M"
+      ],
+      [
+        "N",
+        "T",
+        "N",
+        "D",
+        "F",
+        "L",
+        "U",
+        "P"
+      ],
+      [
+        "U",
+        "A",
+        "I",
+        "R",
+        "A",
+        "B",
+        "J",
+        "L"
+      ],
+      [
+        "J",
+        "L",
+        "P",
+        "A",
+        "H",
+        "W",
+        "W",
+        "E"
+      ],
+      [
+        " ",
+        "Y",
+        "B",
+        "G",
+        "T",
+        "D",
+        "N",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "H",
+        "W",
+        "W",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "GARDEN",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "TEMPLE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "DAWN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "BLOOM",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "PINE",
+        "found": false,
+        "rowStart": 5,
         "colStart": 2,
         "rowEnd": 2,
         "colEnd": 2
       },
       {
-        "word": "OCEAN",
+        "word": "JUNGLE",
         "found": false,
         "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "FERN",
+        "found": false,
+        "rowStart": 3,
         "colStart": 4,
-        "rowEnd": 1,
+        "rowEnd": 0,
         "colEnd": 4
       },
       {
-        "word": "CASTLE",
+        "word": "PETAL",
         "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 7
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 1
       }
     ]
   },
   {
     "id": 77,
     "title": "Level 77",
-    "subtitle": "BRAIN BOULEVARD - HARD (CROWN)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
+    "subtitle": "SUNNY VALLEY - EXPERT HARD",
+    "world": "forest",
+    "themeIcon": "local_florist",
+    "maskName": "Meadow Hexagon",
+    "maskIcon": "⬡",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 105,
     "grid": [
       [
         " ",
+        " ",
         "Z",
+        "Y",
+        "S",
+        "A",
         " ",
-        " ",
-        "O",
-        " ",
-        "C",
         " "
       ],
       [
+        "A",
+        "R",
         "E",
+        "W",
+        "O",
+        "L",
+        "F",
+        "S"
+      ],
+      [
         "B",
-        "S",
-        "P",
-        "I",
-        "R",
-        "I",
-        "T"
-      ],
-      [
-        "C",
-        "Z",
-        "S",
-        "E",
-        "K",
-        "R",
+        "L",
+        "O",
+        "O",
         "M",
-        "A"
+        "S",
+        "I",
+        "M"
       ],
       [
+        "N",
+        "B",
+        "U",
         "S",
         "H",
-        "E",
-        "L",
-        "T",
-        "E",
-        "R",
-        "U"
-      ],
-      [
-        "Y",
-        "G",
-        "R",
-        "E",
-        "N",
-        "E",
-        "F",
-        "R"
+        "D",
+        "S",
+        "A"
       ],
       [
         "D",
-        "A",
-        "X",
-        "J",
-        "R",
-        "B",
-        "V",
-        "O"
-      ],
-      [
+        "I",
+        "D",
         "H",
-        "Q",
-        "M",
-        "L",
-        "G",
-        "B",
+        "E",
+        "V",
         "I",
-        "R"
+        "G"
       ],
       [
-        "G",
-        "L",
+        "T",
+        "N",
         "A",
-        "C",
+        "A",
+        "G",
         "I",
-        "E",
+        "P",
+        "I"
+      ],
+      [
+        "Q",
+        "Z",
+        "I",
         "R",
-        "A"
+        "Z",
+        "N",
+        "M",
+        "C"
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "M",
+        "B",
+        "E",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "SHELTER",
+        "word": "MAGIC",
         "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 6
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 6,
+        "colEnd": 7
       },
       {
-        "word": "ENERGY",
+        "word": "IDEA",
         "found": false,
-        "rowStart": 4,
-        "colStart": 5,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "BRAIN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "BLOOM",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "BUSH",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 4
+      },
+      {
+        "word": "FLOWER",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "MIND",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
         "rowEnd": 4,
         "colEnd": 0
       },
       {
-        "word": "SPIRIT",
+        "word": "VINE",
         "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "BREEZE",
-        "found": false,
-        "rowStart": 6,
+        "rowStart": 4,
         "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "GLACIER",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
         "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "AURORA",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 7
+        "colEnd": 5
       }
     ]
   },
   {
     "id": 78,
     "title": "Level 78",
-    "subtitle": "COSMIC SPACE - HARD (SPIRAL)",
-    "world": "space",
-    "themeIcon": "rocket",
+    "subtitle": "SUNNY VALLEY - HARDEST (PEAK BOSS)",
+    "world": "boulevard",
+    "themeIcon": "psychology",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 110,
     "grid": [
       [
-        "P",
-        "Y",
-        "R",
-        "A",
+        "L",
         "M",
+        "T",
+        "U",
+        "M",
+        "N",
         "I",
-        "D",
-        "H"
+        "C"
       ],
       [
-        "Z",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "A"
-      ],
-      [
-        "A",
-        " ",
-        "A",
-        "P",
+        "W",
         "E",
-        "X",
-        " ",
-        "R"
+        "R",
+        "D",
+        "I",
+        "O",
+        "S",
+        "L"
+      ],
+      [
+        "E",
+        "O",
+        "G",
+        "R",
+        "N",
+        "G",
+        "U",
+        "E"
+      ],
+      [
+        "S",
+        "E",
+        "N",
+        "E",
+        "D",
+        "A",
+        "N",
+        "V"
       ],
       [
         "L",
-        " ",
-        " ",
-        "A",
-        " ",
-        "Q",
-        " ",
-        "M"
+        "V",
+        "M",
+        "D",
+        "N",
+        "R",
+        "E",
+        "E"
       ],
       [
         "U",
-        " ",
-        " ",
+        "L",
         "I",
-        " ",
-        "M",
-        " ",
-        "O"
-      ],
-      [
-        "B",
-        " ",
-        " ",
-        "F",
-        "R",
-        "F",
-        " ",
-        "N"
-      ],
-      [
+        "O",
         "E",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+        "D",
+        "V",
+        "R"
+      ],
+      [
+        "P",
+        "O",
+        "Q",
+        "W",
+        "O",
+        "R",
+        "W",
         "Y"
       ],
       [
+        "K",
+        "S",
+        "I",
+        "Y",
+        "O",
         "N",
-        "I",
-        "Q",
-        "B",
-        "R",
-        "A",
-        "I",
-        "N"
+        "S",
+        "I"
       ]
     ],
     "targetWords": [
       {
-        "word": "BRAIN",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "PYRAMID",
+        "word": "MIND",
         "found": false,
         "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 6
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 4
       },
       {
-        "word": "HARMONY",
+        "word": "CLEVER",
         "found": false,
         "rowStart": 0,
         "colStart": 7,
-        "rowEnd": 6,
+        "rowEnd": 5,
         "colEnd": 7
       },
       {
-        "word": "NEBULA",
+        "word": "SOLVE",
         "found": false,
         "rowStart": 7,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 1
+      },
+      {
+        "word": "VENUS",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "WONDERS",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 6
+      },
+      {
+        "word": "LEGEND",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "MOON",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "PULSE",
+        "found": false,
+        "rowStart": 6,
         "colStart": 0,
         "rowEnd": 2,
         "colEnd": 0
       },
       {
-        "word": "APEX",
+        "word": "DRAGON",
         "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 2,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 0,
         "colEnd": 5
       }
     ]
@@ -10480,641 +11054,293 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 79,
     "title": "Level 79",
-    "subtitle": "WORD FOREST - HARD (PINETREE)",
-    "world": "forest",
-    "themeIcon": "local_florist",
+    "subtitle": "SUNNY VALLEY - HARDEST (PEAK BOSS)",
+    "world": "space",
+    "themeIcon": "rocket",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 110,
     "grid": [
       [
         " ",
-        " ",
-        " ",
-        "C",
+        "G",
         "O",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "Q",
-        "I",
-        "N",
+        "L",
         "D",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "G",
-        "A",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "A",
-        "C",
-        "G",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "A",
         "B",
-        "M",
-        "L",
-        "B",
-        "V",
-        " "
-      ],
-      [
-        "W",
         "S",
-        "C",
-        "H",
+        " "
+      ],
+      [
+        "B",
+        "N",
         "O",
-        "L",
+        "C",
         "A",
+        "E",
+        "B",
+        "G"
+      ],
+      [
+        "D",
+        "N",
+        "O",
+        "O",
+        "M",
+        "H",
+        "P",
         "R"
       ],
       [
-        " ",
-        " ",
-        " ",
+        "M",
+        "Y",
+        "S",
+        "T",
+        "I",
+        "C",
+        "I",
+        "O"
+      ],
+      [
         "W",
-        "V",
-        " ",
-        " ",
-        " "
+        "X",
+        "I",
+        "N",
+        "E",
+        "O",
+        "H",
+        "P"
+      ],
+      [
+        "D",
+        "R",
+        "A",
+        "G",
+        "O",
+        "N",
+        "S",
+        "F"
+      ],
+      [
+        "S",
+        "P",
+        "A",
+        "C",
+        "E",
+        "W",
+        "O",
+        "S"
       ],
       [
         " ",
-        " ",
-        " ",
-        "A",
+        "Q",
+        "D",
+        "O",
         "R",
-        " ",
-        " ",
+        "E",
+        "H",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "SCHOLAR",
+        "word": "MYSTIC",
         "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 7
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 5
       },
       {
-        "word": "VOLCANO",
+        "word": "DRAGON",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "MOON",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "SPACE",
         "found": false,
         "rowStart": 6,
-        "colStart": 4,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "PHOENIX",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "BEACON",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 1,
         "rowEnd": 0,
         "colEnd": 4
       },
       {
-        "word": "MAGIC",
+        "word": "HERO",
         "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 0,
+        "rowStart": 7,
+        "colStart": 6,
+        "rowEnd": 7,
         "colEnd": 3
+      },
+      {
+        "word": "SHIP",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 6
       }
     ]
   },
   {
     "id": 80,
     "title": "Level 80",
-    "subtitle": "DREAMY ISLAND - HARD (ANCHOR)",
+    "subtitle": "SUNNY VALLEY - HARDEST (PEAK BOSS)",
     "world": "island",
-    "themeIcon": "wb_sunny",
+    "themeIcon": "emoji_events",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 110,
     "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "E",
-        "H",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "L",
-        "T",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "T",
-        "I",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "S",
-        "N",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "A",
-        "E",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "L",
-        "P",
-        "C",
-        "Z",
-        "J",
-        "Y",
-        " "
-      ],
-      [
-        "U",
-        "E",
-        " ",
-        " ",
-        " ",
-        " ",
-        "P",
-        "F"
-      ],
-      [
-        "X",
-        "O",
-        " ",
-        " ",
-        " ",
-        " ",
-        "E",
-        "R"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CASTLE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "ZENITH",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 81,
-    "title": "Level 81",
-    "subtitle": "BRAIN BOULEVARD - HARD (DIAMOND)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "L",
-        "M",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "I",
-        "A",
-        "E",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "N",
-        "G",
-        "T",
-        "M",
-        "O",
-        "W",
-        " "
-      ],
-      [
-        "F",
-        "I",
-        "A",
-        "I",
-        "E",
-        "C",
-        "E",
-        "D"
-      ],
-      [
-        "C",
-        "O",
-        "P",
-        "B",
-        "R",
-        "A",
-        "I",
-        "N"
-      ],
-      [
-        " ",
-        "N",
-        "E",
-        "R",
-        "A",
-        "E",
-        "P",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "X",
-        "O",
-        "L",
-        "B",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "W",
-        "D",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ORBITAL",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "EMERALD",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "MAGIC",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "BRAIN",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 7
-      },
-      {
-        "word": "BEACON",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 82,
-    "title": "Level 82",
-    "subtitle": "COSMIC SPACE - HARD (CROSS)",
-    "world": "space",
-    "themeIcon": "rocket",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        " ",
-        "N",
-        "K",
-        "G",
-        "B",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "L",
-        "R",
-        "K",
-        " ",
-        " "
-      ],
-      [
-        "B",
-        "U",
-        "Z",
-        "A",
-        "E",
-        "E",
-        "K",
-        "X"
-      ],
-      [
-        "Q",
-        "U",
-        "I",
-        "T",
-        "L",
-        "L",
-        "A",
-        "E"
-      ],
-      [
-        "Q",
-        "N",
-        "R",
-        "I",
-        "G",
-        "T",
-        "N",
-        "P"
-      ],
-      [
-        "X",
-        "E",
-        "O",
-        "B",
-        "N",
-        "S",
-        "I",
-        "A"
-      ],
-      [
-        " ",
-        " ",
-        "H",
-        "R",
-        "U",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "O",
-        "J",
-        "C",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "HORIZON",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "CASTLE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 5
-      },
-      {
-        "word": "JUNGLE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "ORBITAL",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "BRAIN",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 83,
-    "title": "Level 83",
-    "subtitle": "WORD FOREST - HARD (PYRAMID)",
-    "world": "forest",
-    "themeIcon": "local_florist",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "Z",
-        "Q",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "T",
-        "R",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "S",
-        "E",
-        "K",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "N",
-        "U",
-        "I",
-        "R",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "D",
-        "E",
-        "N",
-        "C",
-        "A",
-        "S",
-        " "
-      ],
       [
         "Y",
-        "M",
+        " ",
         "R",
-        "A",
-        "A",
-        "P",
+        "Y",
         "E",
-        "X"
-      ],
-      [
-        "W",
-        "E",
-        "G",
-        "M",
-        "L",
-        "S",
-        "W",
+        "R",
+        " ",
         "C"
       ],
       [
-        "U",
-        "S",
+        "E",
         "Y",
+        "A",
+        "R",
+        "Z",
+        "O",
+        "K",
+        "R"
+      ],
+      [
+        "L",
+        "L",
+        "S",
+        "B",
+        "E",
         "I",
         "G",
-        "S",
+        "O"
+      ],
+      [
+        "L",
         "I",
-        "V"
+        "U",
+        "G",
+        "E",
+        "R",
+        "L",
+        "W"
+      ],
+      [
+        "A",
+        "G",
+        "M",
+        "N",
+        "R",
+        "R",
+        "O",
+        "N"
+      ],
+      [
+        "V",
+        "H",
+        "M",
+        "I",
+        "B",
+        "A",
+        "W",
+        "Z"
+      ],
+      [
+        " ",
+        "T",
+        "E",
+        "K",
+        "R",
+        "W",
+        "S",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "X",
+        "U",
+        "L",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "GLACIER",
+        "word": "WARRIOR",
         "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 4
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 5
       },
       {
-        "word": "TSUNAMI",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "APEX",
+        "word": "BREEZE",
         "found": false,
         "rowStart": 5,
         "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 7
+        "rowEnd": 0,
+        "colEnd": 4
       },
       {
-        "word": "ENERGY",
+        "word": "LIGHT",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 1
+      },
+      {
+        "word": "SUMMER",
         "found": false,
         "rowStart": 2,
         "colStart": 2,
@@ -11122,87 +11348,1873 @@ export const GENERATED_LEVELS: LevelData[] = [
         "colEnd": 2
       },
       {
-        "word": "SPARK",
+        "word": "VALLEY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "GLOW",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "RAY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "KING",
         "found": false,
         "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "title": "Level 81",
+    "subtitle": "SUNNY VALLEY - MASTER BREATHER",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Sun Diamond",
+    "maskIcon": "💎",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 100,
+    "grid": [
+      [
+        " ",
+        " ",
+        "R",
+        "A",
+        "Y",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "A",
+        "W",
+        "X",
+        "L",
+        "V",
+        "N",
+        " "
+      ],
+      [
+        "H",
+        "Z",
+        "O",
+        "D",
+        "L",
+        "O",
+        "G",
+        "D"
+      ],
+      [
+        "N",
+        "G",
+        "L",
+        "K",
+        "X",
+        "E",
+        "P",
+        "A"
+      ],
+      [
+        "L",
+        "E",
+        "G",
+        "E",
+        "N",
+        "D",
+        "R",
+        "Z"
+      ],
+      [
+        "F",
+        "R",
+        "O",
+        "I",
+        "R",
+        "R",
+        "A",
+        "W"
+      ],
+      [
+        " ",
+        "B",
+        "R",
+        "I",
+        "G",
+        "H",
+        "T",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "V",
+        "F",
+        "G",
+        "U",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "GLOW",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "RAY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "WARRIOR",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "LEGEND",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "BRIGHT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 3
+      },
+      {
+        "word": "APEX",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "title": "Level 82",
+    "subtitle": "SUNNY VALLEY - MASTER BREATHER",
+    "world": "forest",
+    "themeIcon": "local_florist",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 100,
+    "grid": [
+      [
+        "E",
+        " ",
+        "H",
+        "O",
+        "B",
+        "Z",
+        " ",
+        "E"
+      ],
+      [
+        "I",
+        "M",
+        "V",
+        "L",
+        "I",
+        "W",
+        "L",
+        "L"
+      ],
+      [
+        "E",
+        "M",
+        "E",
+        "K",
+        "R",
+        "A",
+        "E",
+        "G"
+      ],
+      [
+        "N",
+        "O",
+        "R",
+        "R",
+        "D",
+        "K",
+        "A",
+        "N"
+      ],
+      [
+        "I",
+        "S",
+        "D",
+        "F",
+        "A",
+        "V",
+        "R",
+        "U"
+      ],
+      [
+        "V",
+        "S",
+        "A",
+        "Z",
+        "D",
+        "L",
+        "N",
+        "J"
+      ],
+      [
+        " ",
+        "L",
+        "O",
+        "G",
+        "I",
+        "C",
+        "D",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "A",
+        "V",
+        "V",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "LEARN",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "LOGIC",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "MOSS",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "BIRD",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 4
+      },
+      {
+        "word": "EMERALD",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "JUNGLE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 7
+      },
+      {
+        "word": "VINE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "title": "Level 83",
+    "subtitle": "SUNNY VALLEY - MASTER MEDIUM",
+    "world": "boulevard",
+    "themeIcon": "psychology",
+    "maskName": "Meadow Hexagon",
+    "maskIcon": "⬡",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 105,
+    "grid": [
+      [
+        " ",
+        " ",
+        "C",
+        "W",
+        "C",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        "N",
+        "R",
+        "E",
+        "A",
+        "S",
+        "O",
+        "N",
+        "N"
+      ],
+      [
+        "T",
+        "N",
+        "E",
+        "L",
+        "A",
+        "T",
+        "R",
+        "L"
+      ],
+      [
+        "O",
+        "Y",
+        "R",
+        "O",
+        "T",
+        "C",
+        "I",
+        "V"
+      ],
+      [
+        "D",
+        "R",
+        "C",
+        "C",
+        "I",
+        "G",
+        "O",
+        "L"
+      ],
+      [
+        "D",
+        "L",
+        "B",
+        "D",
+        "N",
+        "I",
+        "M",
+        "U"
+      ],
+      [
+        "V",
+        "Z",
+        "O",
+        "I",
+        "S",
+        "T",
+        "A",
+        "R"
+      ],
+      [
+        " ",
+        " ",
+        "Q",
+        "G",
+        "T",
+        "D",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VICTORY",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 1
+      },
+      {
+        "word": "ORBIT",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "MIND",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "TALENT",
+        "found": false,
+        "rowStart": 2,
         "colStart": 5,
         "rowEnd": 2,
-        "colEnd": 5
+        "colEnd": 0
+      },
+      {
+        "word": "LOGIC",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "REASON",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "STAR",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 0
       }
     ]
   },
   {
     "id": 84,
     "title": "Level 84",
-    "subtitle": "DREAMY ISLAND - HARD (DONUT)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
+    "subtitle": "SUNNY VALLEY - MASTER MEDIUM",
+    "world": "space",
+    "themeIcon": "rocket",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 105,
     "grid": [
       [
-        "R",
-        "C",
-        "O",
-        "M",
-        "P",
-        "A",
-        "S",
-        "S"
-      ],
-      [
-        "C",
-        "C",
-        "I",
-        "N",
-        "A",
-        "T",
-        "I",
-        "T"
-      ],
-      [
-        "I",
         "G",
-        "M",
-        "Z",
-        "O",
-        "P",
         "S",
+        "H",
+        "I",
+        "P",
+        "B",
+        "R",
+        "E"
+      ],
+      [
+        "T",
+        "N",
+        "G",
+        "B",
+        "E",
+        "Y",
+        "O",
+        "L"
+      ],
+      [
+        "X",
+        "E",
+        "I",
+        "U",
+        "Y",
+        "O",
+        "I",
+        "I"
+      ],
+      [
+        "E",
+        "D",
+        "M",
+        "K",
+        "S",
+        "R",
+        "R",
+        "E"
+      ],
+      [
+        "T",
+        "A",
+        "V",
+        "P",
+        "D",
+        "E",
+        "R",
         "S"
       ],
       [
-        "P",
-        "K",
-        "Z",
-        " ",
-        " ",
+        "R",
+        "V",
+        "R",
+        "E",
+        "L",
+        "H",
+        "A",
+        "L"
+      ],
+      [
+        "O",
+        "E",
         "N",
         "T",
+        "W",
+        "E",
+        "W",
+        "U"
+      ],
+      [
+        "V",
+        "U",
+        "S",
+        "N",
+        "H",
+        "W",
+        "E",
+        "P"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "TEMPLE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "PULSE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "WARRIOR",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 0,
+        "colEnd": 6
+      },
+      {
+        "word": "HERO",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 5
+      },
+      {
+        "word": "VORTEX",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "EARTH",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "SHIP",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "title": "Level 85",
+    "subtitle": "SUNNY VALLEY - MASTER HARD",
+    "world": "island",
+    "themeIcon": "emoji_events",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 115,
+    "grid": [
+      [
+        " ",
+        "Y",
+        "Q",
+        "R",
+        "G",
+        "S",
+        "K",
+        " "
+      ],
+      [
+        "D",
+        "X",
+        "G",
+        "N",
+        "A",
+        "E",
+        "V",
+        "W"
+      ],
+      [
+        "M",
+        "W",
+        "I",
+        "N",
+        "L",
+        "E",
+        "A",
         "O"
       ],
       [
+        "R",
+        "K",
         "O",
-        "O",
-        "G",
-        " ",
-        " ",
-        "I",
-        "O",
-        "R"
+        "T",
+        "S",
+        "R",
+        "L",
+        "Y"
       ],
       [
-        "R",
-        "A",
-        "D",
-        "I",
         "A",
         "N",
+        "S",
+        "D",
+        "R",
+        "K",
+        "X",
+        "C"
+      ],
+      [
+        "W",
+        "A",
+        "L",
+        "I",
+        "A",
+        "V",
+        "Y",
+        "W"
+      ],
+      [
+        "C",
+        "R",
+        "O",
+        "W",
+        "N",
+        "E",
         "T",
+        "U"
+      ],
+      [
+        " ",
+        "R",
+        "C",
+        "S",
+        "U",
+        "N",
+        "M",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SKY",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "CASTLE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "MEADOW",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "WARRIOR",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 1
+      },
+      {
+        "word": "CLEAR",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "SUN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "WARM",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "title": "Level 86",
+    "subtitle": "SUNNY VALLEY - MASTER HARD",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 115,
+    "grid": [
+      [
+        "G",
+        " ",
+        "A",
+        "P",
+        "E",
+        "X",
+        " ",
+        "Q"
+      ],
+      [
+        "M",
+        "E",
+        "M",
+        "E",
+        "R",
+        "A",
+        "L",
+        "D"
+      ],
+      [
+        "A",
+        "R",
+        "Y",
+        "A",
+        "D",
+        "W",
+        "P",
+        "E"
+      ],
+      [
+        "T",
+        "I",
+        "A",
+        "Y",
+        "C",
+        "N",
+        "N",
+        "W"
+      ],
+      [
+        "L",
+        "R",
+        "K",
+        "W",
+        "U",
+        "I",
+        "O",
         "G"
       ],
       [
+        "B",
+        "S",
+        "E",
+        "S",
+        "P",
+        "O",
+        "Q",
+        "C"
+      ],
+      [
+        " ",
+        "K",
+        "Z",
+        "E",
+        "D",
+        "V",
+        "M",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "P",
+        "S",
+        "U",
+        "B",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "WOODS",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "EMERALD",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 7
+      },
+      {
+        "word": "WARM",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 0
+      },
+      {
+        "word": "APEX",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "SUN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "TREE",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "PINE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "DAY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 2
+      },
+      {
+        "word": "SKY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "title": "Level 87",
+    "subtitle": "SUNNY VALLEY - MASTER HARD",
+    "world": "forest",
+    "themeIcon": "local_florist",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 115,
+    "grid": [
+      [
+        "Q",
+        "H",
+        "L",
+        "P",
+        "I",
+        "N",
+        "E",
+        "G"
+      ],
+      [
+        "L",
+        "A",
         "T",
+        "E",
+        "P",
+        "S",
+        "S",
+        "B"
+      ],
+      [
+        "B",
+        "U",
+        "S",
+        "H",
+        "A",
+        "L",
+        "M",
+        "B"
+      ],
+      [
+        "W",
+        "O",
+        "O",
+        "D",
+        "S",
+        "F",
+        "J",
+        "B"
+      ],
+      [
+        "N",
+        "W",
+        "Y",
+        "E",
+        "L",
+        "L",
+        "A",
+        "V"
+      ],
+      [
+        "V",
+        "I",
+        "C",
+        "T",
+        "O",
+        "R",
+        "Y",
+        "X"
+      ],
+      [
+        "Z",
+        "E",
+        "R",
+        "E",
+        "V",
+        "E",
+        "L",
+        "C"
+      ],
+      [
+        "Q",
+        "S",
+        "U",
+        "C",
+        "O",
+        "F",
+        "B",
+        "Y"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VICTORY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "LEAF",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "PINE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 6
+      },
+      {
+        "word": "CLEVER",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 7,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "VALLEY",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "BUSH",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 3
+      },
+      {
+        "word": "FOCUS",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 1
+      },
+      {
+        "word": "WOODS",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 4
+      },
+      {
+        "word": "PETAL",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "title": "Level 88",
+    "subtitle": "SUNNY VALLEY - HARDEST (MYSTIC BOSS)",
+    "world": "boulevard",
+    "themeIcon": "psychology",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 110,
+    "grid": [
+      [
+        " ",
+        "I",
+        "D",
+        "E",
+        "A",
+        "R",
+        "Y",
+        " "
+      ],
+      [
+        "G",
+        "X",
+        "I",
+        "N",
+        "E",
+        "O",
+        "H",
+        "P"
+      ],
+      [
+        "O",
+        "J",
+        "H",
+        "P",
+        "U",
+        "L",
+        "S",
+        "E"
+      ],
+      [
+        "L",
+        "Z",
+        "L",
+        "L",
+        "O",
+        "G",
+        "I",
+        "C"
+      ],
+      [
+        "D",
+        "A",
+        "S",
+        "T",
+        "R",
+        "A",
+        "L",
+        "N"
+      ],
+      [
+        "T",
+        "E",
+        "N",
+        "A",
+        "L",
+        "P",
+        "U",
+        "R"
+      ],
+      [
+        "G",
+        "N",
+        "V",
+        "O",
+        "R",
+        "T",
+        "E",
+        "X"
+      ],
+      [
+        " ",
+        "M",
+        "A",
+        "G",
+        "I",
+        "C",
+        "Y",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "LOGIC",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "MAGIC",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 1,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "PLANET",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "PHOENIX",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "ASTRAL",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "VORTEX",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "PULSE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "IDEA",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "title": "Level 89",
+    "subtitle": "SUNNY VALLEY - HARDEST (MYSTIC BOSS)",
+    "world": "space",
+    "themeIcon": "rocket",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 120,
+    "grid": [
+      [
+        "C",
+        " ",
+        "L",
+        "Z",
+        "B",
+        "P",
+        " ",
+        "M"
+      ],
+      [
+        "O",
+        "N",
+        "A",
+        "E",
+        "C",
+        "A",
+        "P",
+        "S"
+      ],
+      [
+        "M",
+        "O",
+        "T",
+        "E",
+        "N",
+        "A",
+        "L",
+        "P"
+      ],
+      [
+        "E",
+        "O",
+        "I",
+        "R",
+        "A",
+        "T",
+        "S",
+        "E"
+      ],
+      [
+        "T",
+        "M",
+        "B",
+        "D",
+        "L",
+        "O",
+        "G",
+        "S"
+      ],
+      [
+        "L",
+        "A",
+        "R",
+        "O",
+        "R",
+        "U",
+        "A",
+        "W"
+      ],
+      [
+        " ",
+        "N",
+        "O",
+        "G",
+        "A",
+        "R",
+        "D",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "E",
+        "R",
+        "O",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "AURORA",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "SPACE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "COMET",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "ORBITAL",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "PLANET",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 2
+      },
+      {
+        "word": "DRAGON",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 1
+      },
+      {
+        "word": "STAR",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 3,
+        "colEnd": 3
+      },
+      {
+        "word": "MOON",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "HERO",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "title": "Level 90",
+    "subtitle": "SUNNY VALLEY - HARDEST (MYSTIC BOSS)",
+    "world": "island",
+    "themeIcon": "emoji_events",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 120,
+    "grid": [
+      [
+        "D",
+        "L",
+        "O",
+        "G",
+        "P",
+        "O",
+        "R",
+        "H"
+      ],
+      [
+        "M",
+        "R",
+        "E",
+        "R",
+        "H",
+        "R",
+        "W",
+        "Y"
+      ],
+      [
+        "R",
+        "U",
+        "B",
+        "A",
+        "O",
+        "E",
+        "O",
+        "T"
+      ],
+      [
+        "A",
+        "M",
+        "N",
+        "E",
+        "E",
+        "H",
+        "D",
+        "S"
+      ],
+      [
+        "W",
+        "G",
+        "W",
+        "L",
+        "N",
+        "N",
+        "A",
+        "E"
+      ],
+      [
+        "M",
+        "N",
+        "O",
+        "C",
+        "I",
+        "W",
+        "E",
+        "J"
+      ],
+      [
+        "D",
+        "I",
+        "R",
+        "G",
+        "X",
+        "A",
+        "M",
+        "A"
+      ],
+      [
+        "Z",
+        "K",
+        "C",
+        "V",
+        "P",
+        "D",
+        "K",
+        "M"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "DAWN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "PHOENIX",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 2
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "MAJESTY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 7,
+        "rowEnd": 1,
+        "colEnd": 7
+      },
+      {
+        "word": "CLEAR",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "HERO",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "MEADOW",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "WARM",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "title": "Level 91",
+    "subtitle": "SUNNY VALLEY - GRAND BREATHER",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 100,
+    "grid": [
+      [
+        " ",
+        "K",
+        "U",
+        "H",
+        "M",
+        "R",
+        "W",
+        " "
+      ],
+      [
+        "M",
+        "G",
+        "V",
+        "G",
+        "R",
+        "A",
+        "B",
+        "B"
+      ],
+      [
+        "P",
+        "V",
+        "E",
+        "O",
+        "A",
+        "D",
+        "L",
+        "P"
+      ],
+      [
+        "N",
+        "U",
+        "S",
+        "L",
+        "W",
+        "I",
+        "O",
+        "C"
+      ],
+      [
+        "O",
+        "R",
+        "Y",
+        "D",
+        "K",
+        "A",
+        "S",
+        "V"
+      ],
+      [
+        "W",
+        "S",
+        "I",
+        "Y",
+        "I",
+        "N",
+        "S",
+        "M"
+      ],
+      [
+        "H",
+        "W",
+        "T",
+        "K",
+        "N",
+        "T",
+        "O",
+        "H"
+      ],
+      [
+        " ",
+        "Z",
+        "B",
+        "S",
+        "G",
+        "P",
+        "M",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "SUN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "SKY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "BLOSSOM",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 7,
+        "colEnd": 6
+      },
+      {
+        "word": "WARM",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "RADIANT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "title": "Level 92",
+    "subtitle": "SUNNY VALLEY - GRAND BREATHER",
+    "world": "forest",
+    "themeIcon": "local_florist",
+    "maskName": "Knight Shield",
+    "maskIcon": "🛡️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 100,
+    "grid": [
+      [
+        "E",
         "H",
         "A",
         "R",
@@ -11212,562 +13224,62 @@ export const GENERATED_LEVELS: LevelData[] = [
         "Y"
       ],
       [
-        "Z",
+        "R",
+        "E",
         "A",
-        "R",
-        "O",
-        "R",
-        "U",
-        "A",
-        "P"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "COMPASS",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "AURORA",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "HARMONY",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "RADIANT",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "TITANIC",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "TROPIC",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 85,
-    "title": "Level 85",
-    "subtitle": "BRAIN BOULEVARD - HARD (HOURGLASS)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        "E",
-        "C",
-        "L",
-        "I",
-        "P",
         "S",
-        "E",
-        "O"
-      ],
-      [
-        " ",
-        "T",
-        "S",
-        "E",
-        "R",
         "O",
-        "F",
-        " "
-      ],
-      [
-        " ",
-        " ",
         "N",
-        "X",
-        "L",
-        "V",
-        " ",
-        " "
+        "C",
+        "T"
       ],
       [
-        " ",
-        " ",
-        " ",
-        "E",
-        "S",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
         "P",
-        "Q",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "A",
-        "P",
-        "F",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "R",
-        "P",
-        "U",
-        "L",
-        "S",
-        "E",
-        " "
-      ],
-      [
-        "K",
-        "S",
-        "S",
-        "A",
-        "P",
-        "M",
-        "O",
-        "C"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ECLIPSE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "PULSE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "SPARK",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "COMPASS",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "FOREST",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 86,
-    "title": "Level 86",
-    "subtitle": "COSMIC SPACE - HARD (SHIELD)",
-    "world": "space",
-    "themeIcon": "rocket",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        " ",
-        "P",
-        "D",
-        "R",
-        "R",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "P",
-        "H",
         "I",
-        "Y",
+        "N",
         "E",
         "B",
-        " "
-      ],
-      [
-        "W",
-        "U",
-        "A",
-        "D",
-        "M",
         "I",
         "R",
-        "Z"
+        "D"
       ],
       [
+        "D",
         "V",
-        "L",
         "N",
-        "R",
         "O",
-        "C",
-        "A",
-        "J"
-      ],
-      [
-        "D",
+        "I",
         "S",
-        "T",
-        "A",
-        "D",
-        "A",
         "I",
-        "O"
-      ],
-      [
-        " ",
-        "E",
-        "O",
-        "G",
-        "S",
-        "L",
-        "N",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "M",
-        "O",
-        "I",
-        "G",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "N",
-        "W",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "DRAGON",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "GLACIER",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "PHANTOM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "WISDOM",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "PULSE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "BRAIN",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 87,
-    "title": "Level 87",
-    "subtitle": "WORD FOREST - HARD (STAIRCASE)",
-    "world": "forest",
-    "themeIcon": "local_florist",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        "P",
-        "T",
-        "O",
-        "Y",
-        "J",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "Y",
-        "H",
-        "I",
-        "C",
-        "I",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "X",
-        "A",
-        "T",
-        "E",
-        "X",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "S",
-        "A",
-        "N",
-        "A",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "P",
-        "L",
-        "T",
-        "N",
-        "N",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "R",
-        "A",
-        "A",
-        "O",
-        "I",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "X",
-        "R",
-        "G",
-        "M",
-        "C"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "H",
-        "Z",
-        "K",
-        "U",
-        "K"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "PHANTOM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "TITANIC",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "GALAXY",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "SPARK",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 88,
-    "title": "Level 88",
-    "subtitle": "DREAMY ISLAND - HARD (HEART)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        "S",
-        "N",
-        " ",
-        " ",
-        "C",
-        "L",
-        " "
-      ],
-      [
-        "M",
-        "P",
-        "X",
-        "E",
-        "T",
-        "R",
-        "O",
         "V"
       ],
       [
-        "U",
-        "A",
-        "W",
-        "I",
-        "S",
-        "D",
-        "O",
-        "M"
-      ],
-      [
-        "G",
-        "R",
-        "T",
-        "S",
-        "E",
-        "R",
-        "O",
-        "F"
-      ],
-      [
-        " ",
-        "K",
-        "E",
-        "L",
-        "P",
-        "V",
-        "V",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "W",
-        "A",
+        "J",
         "M",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "N",
+        "A",
+        "J",
         "E",
+        "S",
+        "T",
+        "Y"
+      ],
+      [
         " ",
+        "M",
+        "Y",
+        "S",
+        "T",
+        "I",
+        "C",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "Q",
+        "M",
+        "G",
         " ",
         " "
       ],
@@ -11775,8 +13287,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         " ",
         " ",
         " ",
-        "D",
-        "T",
+        "M",
+        "A",
         " ",
         " ",
         " "
@@ -11784,721 +13296,220 @@ export const GENERATED_LEVELS: LevelData[] = [
     ],
     "targetWords": [
       {
-        "word": "TEMPEST",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "WISDOM",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "ISLAND",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "SPARK",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "VORTEX",
+        "word": "REASON",
         "found": false,
         "rowStart": 1,
-        "colStart": 7,
+        "colStart": 0,
         "rowEnd": 1,
-        "colEnd": 2
+        "colEnd": 5
       },
       {
-        "word": "FOREST",
+        "word": "VISION",
         "found": false,
         "rowStart": 3,
         "colStart": 7,
         "rowEnd": 3,
         "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 89,
-    "title": "Level 89",
-    "subtitle": "BRAIN BOULEVARD - HARD (LIGHTNING)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "K",
-        "Y",
-        "D",
-        "C",
-        "R"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "C",
-        "R",
-        "N",
-        "L",
-        "B"
-      ],
-      [
-        " ",
-        " ",
-        "Z",
-        "I",
-        "H",
-        "A",
-        "N",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "W",
-        "M",
-        "T",
-        "L",
-        "X",
-        " "
-      ],
-      [
-        " ",
-        "H",
-        "Y",
-        "S",
-        "I",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "E",
-        "Y",
-        "O",
-        "N",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        "F",
-        "R",
-        "L",
-        "C",
-        "E",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "C",
-        "L",
-        "A",
-        "Q",
-        "Z",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CRYSTAL",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 6
       },
       {
-        "word": "ISLAND",
+        "word": "MAJESTY",
         "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 7
       },
       {
-        "word": "COSMIC",
+        "word": "BIRD",
         "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "ZENITH",
-        "found": false,
-        "rowStart": 7,
+        "rowStart": 2,
         "colStart": 4,
         "rowEnd": 2,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 90,
-    "title": "Level 90",
-    "subtitle": "COSMIC SPACE - HARD (CASTLE)",
-    "world": "space",
-    "themeIcon": "rocket",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        "S",
-        "E",
-        " ",
-        " ",
-        " ",
-        " ",
-        "G",
-        "O"
-      ],
-      [
-        "H",
-        "R",
-        " ",
-        " ",
-        " ",
-        " ",
-        "A",
-        "J"
-      ],
-      [
-        "A",
-        "O",
-        " ",
-        " ",
-        " ",
-        " ",
-        "U",
-        "X"
-      ],
-      [
-        "D",
-        "L",
-        "J",
-        "X",
-        "I",
-        "N",
-        "R",
-        "E"
-      ],
-      [
-        "O",
-        "P",
-        "J",
-        "S",
-        "G",
-        "B",
-        "O",
-        "P"
-      ],
-      [
-        "W",
-        "X",
-        "N",
-        "L",
-        "L",
-        "U",
-        "R",
-        "A"
-      ],
-      [
-        "I",
-        "E",
-        "E",
-        "V",
-        "N",
-        "B",
-        "A",
-        "A"
-      ],
-      [
-        "W",
-        "C",
-        "I",
-        "M",
-        "A",
-        "N",
-        "Y",
-        "D"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "JUNGLE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "SHADOW",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 5,
-        "colEnd": 0
-      },
-      {
-        "word": "EXPLORE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "DYNAMIC",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "AURORA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 91,
-    "title": "Level 91",
-    "subtitle": "WORD FOREST - HARD (ARROW)",
-    "world": "forest",
-    "themeIcon": "local_florist",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "Z",
-        "G",
-        "M",
-        "R"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "H",
-        "A",
-        "A",
-        "L"
-      ],
-      [
-        " ",
-        " ",
-        "K",
-        "L",
-        "G",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "R",
-        "I",
-        "O",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "H",
-        "X",
-        "X",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "E",
-        "C",
-        "Y",
-        " ",
-        " "
-      ],
-      [
-        "I",
-        "S",
-        "P",
-        "F",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "T",
-        "A",
-        "Z",
-        "W",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SCHOLAR",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 0,
         "colEnd": 7
       },
       {
-        "word": "MAGIC",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 4
-      },
-      {
-        "word": "GALAXY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 92,
-    "title": "Level 92",
-    "subtitle": "DREAMY ISLAND - HARD (CROWN)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "grid": [
-      [
-        " ",
-        "P",
-        " ",
-        " ",
-        "J",
-        " ",
-        "F",
-        " "
-      ],
-      [
-        "N",
-        "O",
-        "G",
-        "A",
-        "R",
-        "D",
-        "T",
-        "R"
-      ],
-      [
-        "B",
-        "R",
-        "E",
-        "E",
-        "Z",
-        "E",
-        "N",
-        "E"
-      ],
-      [
-        "B",
-        "C",
-        "D",
-        "M",
-        "M",
-        "O",
-        "M",
-        "D"
-      ],
-      [
-        "I",
-        "E",
-        "Z",
-        "P",
-        "C",
-        "M",
-        "C",
-        "N"
-      ],
-      [
-        "G",
-        "N",
-        "E",
-        "A",
-        "F",
-        "E",
-        "P",
-        "U"
-      ],
-      [
-        "A",
-        "S",
-        "E",
-        "S",
-        "L",
-        "U",
-        "P",
-        "H"
-      ],
-      [
-        "T",
-        "B",
-        "I",
-        "A",
-        "N",
-        "G",
-        "Q",
-        "T"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "BEACON",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "BREEZE",
+        "word": "PINE",
         "found": false,
         "rowStart": 2,
         "colStart": 0,
         "rowEnd": 2,
-        "colEnd": 5
+        "colEnd": 3
       },
       {
-        "word": "THUNDER",
+        "word": "HARMONY",
         "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 1,
+        "rowStart": 0,
+        "colStart": 1,
+        "rowEnd": 0,
         "colEnd": 7
       },
       {
-        "word": "TEMPEST",
+        "word": "MYSTIC",
         "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "DRAGON",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "PULSE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 2
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 6
       }
     ]
   },
   {
     "id": 93,
     "title": "Level 93",
-    "subtitle": "BRAIN BOULEVARD - HARD (SPIRAL)",
+    "subtitle": "SUNNY VALLEY - GRAND MEDIUM",
     "world": "boulevard",
     "themeIcon": "psychology",
+    "maskName": "Sun Diamond",
+    "maskIcon": "💎",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 105,
     "grid": [
       [
-        "Y",
-        "F",
-        "O",
+        " ",
+        " ",
+        "M",
+        "A",
         "R",
-        "E",
         "S",
-        "T",
-        "T"
+        " ",
+        " "
       ],
       [
-        "G",
         " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "S"
-      ],
-      [
-        "R",
-        " ",
-        "A",
-        "P",
-        "E",
-        "X",
-        " ",
-        "U"
-      ],
-      [
-        "E",
-        " ",
-        " ",
-        "A",
-        " ",
+        "K",
+        "N",
+        "I",
         "H",
-        " ",
-        "N"
+        "T",
+        "Z",
+        " "
       ],
       [
+        "Q",
+        "H",
+        "A",
+        "R",
+        "M",
+        "O",
+        "N",
+        "Y"
+      ],
+      [
+        "C",
+        "I",
+        "M",
+        "A",
+        "N",
+        "Y",
+        "D",
+        "B"
+      ],
+      [
+        "I",
+        "K",
+        "N",
+        "O",
+        "S",
+        "A",
+        "E",
+        "R"
+      ],
+      [
+        "Z",
+        "T",
+        "Z",
+        "P",
+        "I",
+        "H",
+        "S",
+        "G"
+      ],
+      [
+        " ",
+        "A",
+        "S",
+        "U",
+        "N",
+        "E",
+        "V",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "M",
+        "O",
+        "O",
         "N",
         " ",
-        " ",
-        "L",
-        " ",
-        "K",
-        " ",
-        "A"
-      ],
-      [
-        "E",
-        " ",
-        " ",
-        "M",
-        "D",
-        "W",
-        " ",
-        "M"
-      ],
-      [
-        "J",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "I"
-      ],
-      [
-        "M",
-        "A",
-        "G",
-        "I",
-        "C",
-        "K",
-        "E",
-        "K"
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "TSUNAMI",
+        "word": "DYNAMIC",
         "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "ENERGY",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 0,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 3,
         "colEnd": 0
       },
       {
-        "word": "MAGIC",
+        "word": "SHIP",
         "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 4
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 3
       },
       {
-        "word": "FOREST",
+        "word": "REASON",
         "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 6
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 2
       },
       {
-        "word": "APEX",
+        "word": "THINK",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "HARMONY",
         "found": false,
         "rowStart": 2,
-        "colStart": 2,
+        "colStart": 1,
         "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "VENUS",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "MOON",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "MARS",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 0,
         "colEnd": 5
       }
     ]
@@ -12506,368 +13517,497 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 94,
     "title": "Level 94",
-    "subtitle": "COSMIC SPACE - HARD (PINETREE)",
+    "subtitle": "SUNNY VALLEY - GRAND MEDIUM",
     "world": "space",
     "themeIcon": "rocket",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 105,
     "grid": [
       [
-        " ",
-        " ",
-        " ",
-        "K",
-        "T",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
+        "M",
         " ",
         "A",
-        "P",
-        "E",
-        "X",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "S",
-        "Z",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "C",
-        "M",
-        "F",
-        " ",
-        " "
-      ],
-      [
-        " ",
+        "R",
         "U",
         "M",
-        "A",
-        "G",
-        "I",
-        "C",
-        " "
+        " ",
+        "H"
       ],
       [
-        "P",
-        "G",
-        "L",
         "A",
-        "C",
-        "I",
-        "E",
+        "K",
+        "A",
+        "V",
+        "A",
+        "Y",
+        "V",
         "R"
       ],
       [
-        " ",
-        " ",
-        " ",
+        "R",
+        "T",
+        "U",
+        "A",
+        "U",
+        "S",
+        "O",
+        "H"
+      ],
+      [
+        "S",
+        "Z",
+        "N",
+        "L",
+        "R",
+        "T",
+        "R",
+        "Y"
+      ],
+      [
+        "D",
+        "U",
+        "W",
         "I",
+        "O",
+        "I",
+        "T",
+        "H"
+      ],
+      [
+        "H",
         "F",
+        "O",
+        "A",
+        "R",
+        "C",
+        "E",
+        "P"
+      ],
+      [
         " ",
-        " ",
+        "X",
+        "R",
+        "N",
+        "A",
+        "R",
+        "X",
         " "
       ],
       [
         " ",
         " ",
-        " ",
-        "M",
         "C",
-        " ",
+        "T",
+        "O",
+        "Z",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "GLACIER",
+        "word": "CROWN",
         "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 7
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 2
       },
       {
-        "word": "MAGIC",
+        "word": "HERO",
         "found": false,
         "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 6
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 4
       },
       {
-        "word": "APEX",
+        "word": "VALIANT",
         "found": false,
         "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 1,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "AURORA",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "STAR",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "MYSTIC",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 5,
         "colEnd": 5
       },
       {
-        "word": "PULSE",
+        "word": "VORTEX",
         "found": false,
-        "rowStart": 5,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "MARS",
+        "found": false,
+        "rowStart": 0,
         "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 4
+        "rowEnd": 3,
+        "colEnd": 0
       }
     ]
   },
   {
     "id": 95,
     "title": "Level 95",
-    "subtitle": "WORD FOREST - HARD (ANCHOR)",
-    "world": "forest",
-    "themeIcon": "local_florist",
+    "subtitle": "SUNNY VALLEY - GRAND HARD",
+    "world": "island",
+    "themeIcon": "emoji_events",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 115,
     "grid": [
       [
+        "K",
         " ",
-        " ",
-        " ",
-        "C",
-        "X",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "A",
-        "E",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "S",
-        "T",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "T",
-        "R",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "L",
-        "O",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "Q",
-        "F",
-        "E",
-        "V",
-        "Q",
-        "L",
-        " "
-      ],
-      [
-        "O",
-        "D",
-        " ",
-        " ",
-        " ",
-        " ",
-        "Z",
-        "F"
-      ],
-      [
         "W",
+        "U",
+        "S",
+        "G",
+        " ",
+        "X"
+      ],
+      [
+        "M",
+        "X",
+        "E",
         "P",
-        " ",
-        " ",
-        " ",
-        " ",
+        "A",
+        "N",
+        "W",
+        "O"
+      ],
+      [
+        "A",
+        "W",
+        "A",
+        "R",
+        "R",
+        "I",
         "O",
+        "R"
+      ],
+      [
+        "E",
+        "Y",
+        "A",
+        "R",
+        "F",
+        "K",
+        "L",
         "E"
+      ],
+      [
+        "B",
+        "N",
+        "Z",
+        "L",
+        "R",
+        "F",
+        "G",
+        "H"
+      ],
+      [
+        "H",
+        "P",
+        "M",
+        "U",
+        "I",
+        "R",
+        "T",
+        "V"
+      ],
+      [
+        " ",
+        "M",
+        "A",
+        "G",
+        "I",
+        "C",
+        "M",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "X",
+        "B",
+        "M",
+        "O",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "VORTEX",
+        "word": "MAGIC",
         "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 5
       },
       {
-        "word": "CASTLE",
+        "word": "TRIUMPH",
         "found": false,
-        "rowStart": 0,
-        "colStart": 3,
+        "rowStart": 5,
+        "colStart": 6,
         "rowEnd": 5,
-        "colEnd": 3
+        "colEnd": 0
+      },
+      {
+        "word": "GLOW",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "WARRIOR",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "BEAM",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 0
+      },
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "APEX",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "RAY",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 1
+      },
+      {
+        "word": "HERO",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 1,
+        "colEnd": 7
       }
     ]
   },
   {
     "id": 96,
     "title": "Level 96",
-    "subtitle": "DREAMY ISLAND - HARD (DIAMOND)",
+    "subtitle": "SUNNY VALLEY - GRAND HARD",
     "world": "island",
     "themeIcon": "wb_sunny",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 115,
     "grid": [
       [
-        " ",
-        " ",
-        " ",
-        "P",
-        "V",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "V",
-        "H",
-        "O",
-        "Q",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "T",
-        "B",
-        "O",
-        "L",
-        "A",
-        "J",
-        " "
+        "Y",
+        "M",
+        "Z",
+        "S",
+        "E",
+        "N",
+        "U",
+        "S"
       ],
       [
         "X",
-        "N",
-        "A",
-        "E",
-        "C",
-        "O",
-        "I",
-        "O"
-      ],
-      [
-        "A",
-        "D",
         "Y",
-        "N",
-        "A",
-        "M",
-        "I",
+        "S",
+        "Z",
+        "P",
+        "P",
+        "O",
         "C"
       ],
       [
-        " ",
-        "P",
-        "A",
+        "E",
+        "E",
+        "U",
+        "S",
+        "X",
         "I",
+        "I",
+        "M"
+      ],
+      [
+        "P",
+        "L",
+        "S",
         "N",
         "A",
+        "N",
+        "N",
+        "A"
+      ],
+      [
         "A",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "X",
-        "O",
-        "O",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "X",
+        "L",
+        "T",
+        "P",
+        "A",
+        "R",
         "M",
-        " ",
-        " ",
-        " "
+        "E"
+      ],
+      [
+        "O",
+        "A",
+        "I",
+        "T",
+        "A",
+        "O",
+        "G",
+        "B"
+      ],
+      [
+        "L",
+        "V",
+        "I",
+        "N",
+        "S",
+        "R",
+        "Z",
+        "Q"
+      ],
+      [
+        "X",
+        "T",
+        "P",
+        "S",
+        "J",
+        "E",
+        "K",
+        "O"
       ]
     ],
     "targetWords": [
       {
-        "word": "PHOENIX",
+        "word": "GRASS",
         "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 2
       },
       {
-        "word": "DYNAMIC",
+        "word": "SUN",
         "found": false,
-        "rowStart": 4,
+        "rowStart": 0,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "TITANIC",
+        "found": false,
+        "rowStart": 7,
         "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 7
+      },
+      {
+        "word": "PINE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
         "rowEnd": 4,
         "colEnd": 7
       },
       {
-        "word": "VOLCANO",
+        "word": "VALLEY",
         "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 4
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 1
       },
       {
-        "word": "OCEAN",
+        "word": "SPARK",
         "found": false,
         "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 1
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 6
       },
       {
         "word": "APEX",
         "found": false,
         "rowStart": 4,
         "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 0
+      },
+      {
+        "word": "BEAM",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "MOSS",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
         "rowEnd": 7,
         "colEnd": 3
       }
@@ -12876,560 +14016,684 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 97,
     "title": "Level 97",
-    "subtitle": "BRAIN BOULEVARD - HARD (CROSS)",
-    "world": "boulevard",
-    "themeIcon": "psychology",
+    "subtitle": "SUNNY VALLEY - GRAND HARD",
+    "world": "forest",
+    "themeIcon": "local_florist",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 115,
     "grid": [
       [
         " ",
-        " ",
-        "M",
-        "X",
-        "L",
-        "F",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
+        "T",
         "A",
-        "W",
-        "O",
-        "Y",
-        " ",
-        " "
-      ],
-      [
-        "Z",
-        "P",
-        "J",
-        "R",
-        "M",
-        "S",
-        "B",
-        "K"
-      ],
-      [
         "L",
-        "R",
         "E",
-        "D",
         "N",
+        "T",
+        " "
+      ],
+      [
         "U",
-        "H",
-        "T"
+        "L",
+        "Y",
+        "T",
+        "D",
+        "Y",
+        "A",
+        "L"
       ],
       [
-        "A",
-        "S",
-        "S",
-        "P",
-        "A",
+        "M",
+        "C",
         "R",
-        "K",
-        "X"
-      ],
-      [
-        "T",
-        "T",
-        "T",
-        "I",
-        "R",
-        "I",
-        "P",
+        "W",
+        "D",
+        "U",
+        "D",
         "S"
       ],
       [
-        " ",
-        " ",
-        "Y",
         "O",
-        "Y",
+        "V",
+        "O",
+        "U",
+        "H",
+        "A",
+        "S",
+        "S"
+      ],
+      [
+        "O",
+        "E",
+        "T",
+        "O",
+        "O",
+        "R",
+        "P",
+        "A"
+      ],
+      [
         "L",
-        " ",
-        " "
+        "S",
+        "C",
+        "H",
+        "O",
+        "L",
+        "A",
+        "R"
+      ],
+      [
+        "B",
+        "O",
+        "I",
+        "O",
+        "T",
+        "O",
+        "R",
+        "G"
       ],
       [
         " ",
-        " ",
-        "X",
-        "E",
-        "P",
-        "A",
-        " ",
+        "R",
+        "V",
+        "G",
+        "G",
+        "C",
+        "K",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "MAJESTY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "SPIRIT",
+        "word": "STUDY",
         "found": false,
         "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 2
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 5
       },
       {
-        "word": "THUNDER",
+        "word": "SCHOLAR",
         "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 1
-      },
-      {
-        "word": "FOREST",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
+        "rowStart": 5,
+        "colStart": 1,
         "rowEnd": 5,
-        "colEnd": 0
+        "colEnd": 7
       },
       {
         "word": "SPARK",
         "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 4,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 7,
         "colEnd": 6
       },
       {
-        "word": "APEX",
+        "word": "VICTORY",
         "found": false,
         "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
+        "colStart": 2,
+        "rowEnd": 1,
         "colEnd": 2
+      },
+      {
+        "word": "TALENT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 6
+      },
+      {
+        "word": "GRASS",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "ROOT",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "BLOOM",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "ROSE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 1
       }
     ]
   },
   {
     "id": 98,
     "title": "Level 98",
-    "subtitle": "COSMIC SPACE - HARD (PYRAMID)",
-    "world": "space",
-    "themeIcon": "rocket",
+    "subtitle": "SUNNY VALLEY - HARDEST (SUMMIT PEAK)",
+    "world": "boulevard",
+    "themeIcon": "psychology",
+    "maskName": "Castle Crest",
+    "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 110,
     "grid": [
       [
+        "V",
         " ",
-        " ",
-        " ",
-        "I",
-        "I",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "C",
-        "N",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "F",
-        "Q",
-        "I",
-        "Y",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "S",
-        "N",
-        "X",
-        "G",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "S",
         "P",
+        "Q",
+        "W",
+        "R",
+        " ",
+        "N"
+      ],
+      [
+        "I",
+        "C",
+        "H",
+        "L",
+        "A",
+        "O",
+        "Y",
+        "O"
+      ],
+      [
+        "S",
+        "L",
+        "O",
         "A",
         "R",
-        "K",
-        "A",
-        " "
+        "E",
+        "R",
+        "S"
+      ],
+      [
+        "I",
+        "E",
+        "E",
+        "T",
+        "R",
+        "T",
+        "O",
+        "A"
+      ],
+      [
+        "O",
+        "V",
+        "N",
+        "I",
+        "I",
+        "E",
+        "L",
+        "E"
       ],
       [
         "N",
         "E",
-        "L",
+        "I",
+        "B",
+        "O",
+        "M",
         "G",
-        "N",
-        "U",
-        "J",
-        "M"
+        "R"
       ],
       [
-        "H",
-        "A",
+        " ",
         "R",
+        "X",
+        "R",
+        "R",
+        "V",
+        "B",
+        " "
+      ],
+      [
+        " ",
+        " ",
         "M",
         "O",
-        "N",
-        "Y",
-        "H"
-      ],
-      [
-        "G",
         "O",
         "N",
-        "E",
-        "B",
-        "U",
-        "L",
-        "A"
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "GALAXY",
+        "word": "METEOR",
         "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 2,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 0,
         "colEnd": 5
       },
       {
-        "word": "NEBULA",
+        "word": "PHOENIX",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "VISION",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "WARRIOR",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "ORBITAL",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "REASON",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 7
+      },
+      {
+        "word": "CLEVER",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 1
+      },
+      {
+        "word": "GLORY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "MOON",
         "found": false,
         "rowStart": 7,
         "colStart": 2,
         "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "HARMONY",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "JUNGLE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "SPARK",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 4,
         "colEnd": 5
-      },
-      {
-        "word": "MAGIC",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 3
       }
     ]
   },
   {
     "id": 99,
     "title": "Level 99",
-    "subtitle": "WORD FOREST - HARD (DONUT)",
-    "world": "forest",
-    "themeIcon": "local_florist",
+    "subtitle": "SUNNY VALLEY - HARDEST (SUMMIT PEAK)",
+    "world": "space",
+    "themeIcon": "rocket",
+    "maskName": "Square Field",
+    "maskIcon": "⏹️",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 110,
     "grid": [
       [
-        "G",
-        "A",
-        "L",
-        "A",
-        "X",
-        "Y",
-        "V",
-        "T"
-      ],
-      [
-        "C",
-        "A",
-        "S",
         "T",
-        "L",
-        "E",
-        "O",
-        "D"
-      ],
-      [
         "I",
-        "K",
-        "S",
         "B",
-        "Q",
-        "D",
         "R",
+        "O",
+        "W",
+        "F",
         "R"
       ],
       [
-        "M",
-        "C",
-        "P",
-        " ",
-        " ",
-        "X",
-        "T",
-        "A"
-      ],
-      [
-        "S",
-        "O",
-        "L",
-        " ",
-        " ",
-        "C",
-        "E",
-        "G"
-      ],
-      [
-        "O",
-        "N",
-        "J",
-        "T",
-        "N",
-        "Q",
-        "X",
-        "O"
-      ],
-      [
         "C",
         "R",
-        "V",
-        "U",
-        "X",
-        "O",
-        "K",
+        "Y",
+        "S",
+        "T",
+        "A",
+        "L",
+        "C"
+      ],
+      [
+        "L",
+        "I",
+        "L",
+        "C",
+        "D",
+        "R",
+        "J",
+        "I"
+      ],
+      [
+        "B",
+        "G",
+        "C",
+        "I",
+        "R",
+        "R",
+        "D",
         "N"
       ],
       [
-        "Y",
+        "D",
         "N",
         "O",
         "M",
-        "R",
         "A",
+        "I",
+        "D",
+        "A"
+      ],
+      [
         "H",
-        "F"
+        "I",
+        "M",
+        "S",
+        "G",
+        "O",
+        "A",
+        "T"
+      ],
+      [
+        "N",
+        "K",
+        "E",
+        "O",
+        "O",
+        "R",
+        "F",
+        "I"
+      ],
+      [
+        "N",
+        "V",
+        "T",
+        "C",
+        "N",
+        "O",
+        "W",
+        "T"
       ]
     ],
     "targetWords": [
       {
-        "word": "DRAGON",
+        "word": "CRYSTAL",
         "found": false,
         "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 1
+      },
+      {
+        "word": "TITANIC",
+        "found": false,
+        "rowStart": 7,
         "colStart": 7,
-        "rowEnd": 6,
+        "rowEnd": 1,
         "colEnd": 7
+      },
+      {
+        "word": "ORBIT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "DIAMOND",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 0
       },
       {
         "word": "COSMIC",
         "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "HARMONY",
-        "found": false,
         "rowStart": 7,
-        "colStart": 6,
+        "colStart": 3,
+        "rowEnd": 2,
+        "colEnd": 3
+      },
+      {
+        "word": "WARRIOR",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "DRAGON",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
         "rowEnd": 7,
-        "colEnd": 0
+        "colEnd": 4
       },
       {
-        "word": "CASTLE",
+        "word": "COMET",
         "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "VORTEX",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "GALAXY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 5
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
       }
     ]
   },
   {
     "id": 100,
     "title": "Level 100",
-    "subtitle": "DREAMY ISLAND - HARD (HOURGLASS)",
+    "subtitle": "SUNNY VALLEY - CENTURY CLIMAX (LEVEL 100)",
     "world": "island",
-    "themeIcon": "wb_sunny",
+    "themeIcon": "emoji_events",
+    "maskName": "Valley Octagon",
+    "maskIcon": "🛑",
     "stars": 0,
     "completed": false,
     "locked": false,
+    "timeLimit": 120,
     "grid": [
       [
-        "E",
-        "O",
-        "N",
-        "A",
-        "C",
-        "L",
-        "O",
-        "V"
-      ],
-      [
         " ",
-        "M",
-        "X",
-        "E",
-        "P",
-        "A",
-        "H",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "T",
-        "R",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "R",
+        "B",
         "Z",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "E",
+        "S",
+        "T",
         "A",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "R",
-        "V",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "R",
-        "L",
-        "C",
-        "O",
-        "E",
-        "D",
+        "G",
         " "
       ],
       [
         "B",
-        "R",
-        "A",
+        "X",
+        "Y",
+        "H",
+        "H",
+        "O",
+        "L",
+        "P"
+      ],
+      [
+        "X",
+        "K",
         "D",
         "I",
+        "G",
+        "R",
+        "O",
+        "M"
+      ],
+      [
+        "S",
         "A",
+        "Y",
         "N",
-        "T"
+        "I",
+        "E",
+        "R",
+        "R"
+      ],
+      [
+        "V",
+        "A",
+        "T",
+        "E",
+        "L",
+        "H",
+        "Y",
+        "A"
+      ],
+      [
+        "D",
+        "B",
+        "R",
+        "I",
+        "G",
+        "H",
+        "T",
+        "W"
+      ],
+      [
+        "C",
+        "A",
+        "S",
+        "T",
+        "L",
+        "E",
+        "K",
+        "X"
+      ],
+      [
+        " ",
+        "L",
+        "E",
+        "G",
+        "E",
+        "N",
+        "D",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "EMERALD",
+        "word": "CASTLE",
         "found": false,
-        "rowStart": 0,
+        "rowStart": 6,
         "colStart": 0,
         "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "HERO",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "SHINE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "WARM",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "DAY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 2
+      },
+      {
+        "word": "BRIGHT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
         "colEnd": 6
       },
       {
-        "word": "RADIANT",
+        "word": "LIGHT",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "SKY",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "GLORY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "LEGEND",
         "found": false,
         "rowStart": 7,
         "colStart": 1,
         "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "BREEZE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 5
-      },
-      {
-        "word": "VOLCANO",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "APEX",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 2
+        "colEnd": 6
       }
     ]
   }
