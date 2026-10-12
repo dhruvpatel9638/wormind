@@ -45,7 +45,7 @@ const getYesterdayDateString = () => {
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 const DEFAULT_START_LEVEL = 1;
-const START_DEV_COINS = 100;
+const START_DEV_COINS = 500;
 
 export default function App() {
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
@@ -88,6 +88,8 @@ export default function App() {
     lastDailyClaimDate: null,
     strike: 10,
     strikeZeroFails: 0,
+    claimedChests: [],
+    hasClaimedCenturyAchievement: false,
   });
   const playerStateRef = useRef(playerState);
 
@@ -122,9 +124,13 @@ export default function App() {
           const savedLevel = typeof parsed.currentLevel === 'number' && parsed.currentLevel >= 1
             ? parsed.currentLevel
             : DEFAULT_START_LEVEL;
-          const savedCoins = typeof parsed.coins === 'number' && parsed.coins <= 1000 ? parsed.coins : 100;
+          const savedCoins = typeof parsed.coins === 'number' && parsed.coins >= 0
+            ? parsed.coins
+            : START_DEV_COINS;
           const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
           const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
+          const savedClaimedChests = Array.isArray(parsed.claimedChests) ? parsed.claimedChests : [];
+          const savedHasClaimedCentury = Boolean(parsed.hasClaimedCenturyAchievement);
           setPlayerState((prev) => ({
             ...prev,
             ...parsed,
@@ -132,6 +138,8 @@ export default function App() {
             currentLevel: savedLevel,
             strike: savedStrike,
             strikeZeroFails: savedZeroFails,
+            claimedChests: savedClaimedChests,
+            hasClaimedCenturyAchievement: savedHasClaimedCentury,
           }));
           setActiveLevelId(savedLevel);
           nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
@@ -231,7 +239,7 @@ export default function App() {
     // 🔹 Smart AdMob Interstitial Ad (Randomized Win + 3-min Time Auto-Trigger)
     showSmartInterstitialAd();
 
-    const nextLevel = levelId < 100 ? levelId + 1 : 100;
+    const nextLevel = levelId < 200 ? levelId + 1 : 200;
 
     setPlayerState((prev) => {
       const currentHighest = prev.currentLevel || 1;
@@ -287,6 +295,7 @@ export default function App() {
         strike: (prev.strike ?? 0) + 50,
       };
     });
+    nativeAudio.playVictory();
   };
 
   const handleWatchAdForCoins = () => {
@@ -378,7 +387,7 @@ export default function App() {
   const handleResetProgress = () => {
     AsyncStorage.removeItem(STORAGE_KEY).catch(() => {});
     setPlayerState({
-      coins: 100,
+      coins: START_DEV_COINS,
       stars: 380,
       hearts: 5,
       maxHearts: 5,
@@ -400,6 +409,8 @@ export default function App() {
       lastDailyClaimDate: null,
       strike: 10,
       strikeZeroFails: 0,
+      claimedChests: [],
+      hasClaimedCenturyAchievement: false,
     });
     setActiveLevelId(DEFAULT_START_LEVEL);
   };
@@ -428,7 +439,7 @@ export default function App() {
           level={activeLevelId}
           strike={playerState.strike ?? 10}
           onPressStrike={() => setShowRestoreStrikeModal(true)}
-        onOpenShop={() => {}}
+        onOpenShop={() => setShowFreeCoinsModal(true)}
         onRefillHearts={() => setShowRefillHeartsModal(true)}
         musicEnabled={playerState.musicEnabled}
         onToggleMusic={handleToggleMusic}
