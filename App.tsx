@@ -23,8 +23,9 @@ import { AdBanner } from './src/native/components/AdBanner';
 import { NativeLoadingScreen } from './src/native/components/LoadingScreen';
 import { DAILY_REWARDS } from './src/data/gameData';
 import { nativeAudio } from './src/native/audio';
-import { initAdMob, showSmartInterstitialAd } from './src/utils/admobService';
+import { initAdMob, showSmartInterstitialAd, showRewardedAd } from './src/utils/admobService';
 import { CustomAlert } from './src/native/components/CustomAlert';
+import { CenturyAchievementModal } from './src/native/components/CenturyAchievementModal';
 
 const getTodayDateString = () => new Date().toISOString().split('T')[0];
 const getYesterdayDateString = () => {
@@ -35,7 +36,7 @@ const getYesterdayDateString = () => {
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 const DEFAULT_START_LEVEL = 1;
-const START_DEV_COINS = 100;
+const START_DEV_COINS = 500;
 
 export default function App() {
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
@@ -43,7 +44,14 @@ export default function App() {
   const [activeLevelId, setActiveLevelId] = useState<number>(DEFAULT_START_LEVEL);
   const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
   const [showStrikeInfoModal, setShowStrikeInfoModal] = useState<boolean>(false);
+  const [showCenturyModal, setShowCenturyModal] = useState<boolean>(false);
   const [showRefillHeartsModal, setShowRefillHeartsModal] = useState<boolean>(false);
+  const [showFreeCoinsModal, setShowFreeCoinsModal] = useState<boolean>(false);
+  const [freeCoinsAlert, setFreeCoinsAlert] = useState<{
+    title: string;
+    message: string;
+    icon?: keyof typeof MaterialIcons.glyphMap;
+  } | null>(null);
   const [pendingLevelToStart, setPendingLevelToStart] = useState<number | null>(null);
 
   const [playerState, setPlayerState] = useState<PlayerState>({
@@ -70,6 +78,7 @@ export default function App() {
     strike: 10,
     strikeZeroFails: 0,
     claimedChests: [],
+    hasClaimedCenturyAchievement: false,
   });
 
   const todayDateStr = getTodayDateString();
@@ -101,10 +110,11 @@ export default function App() {
           const savedLevel = typeof parsed.currentLevel === 'number' && parsed.currentLevel >= 1
             ? parsed.currentLevel
             : DEFAULT_START_LEVEL;
-          const savedCoins = typeof parsed.coins === 'number' && parsed.coins >= 0 ? parsed.coins : 100;
+          const savedCoins = typeof parsed.coins === 'number' && parsed.coins >= 0 ? parsed.coins : START_DEV_COINS;
           const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
           const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
           const savedClaimedChests = Array.isArray(parsed.claimedChests) ? parsed.claimedChests : [];
+          const savedHasClaimedCentury = Boolean(parsed.hasClaimedCenturyAchievement);
           setPlayerState((prev) => ({
             ...prev,
             ...parsed,
@@ -113,6 +123,7 @@ export default function App() {
             strike: savedStrike,
             strikeZeroFails: savedZeroFails,
             claimedChests: savedClaimedChests,
+            hasClaimedCenturyAchievement: savedHasClaimedCentury,
           }));
           setActiveLevelId(savedLevel);
           nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
@@ -190,7 +201,8 @@ export default function App() {
     // 🔹 Smart AdMob Interstitial Ad (Randomized Win + 3-min Time Auto-Trigger)
     showSmartInterstitialAd();
 
-    const nextLevel = levelId < 100 ? levelId + 1 : 100;
+    const nextLevel = levelId < 200 ? levelId + 1 : 200;
+    const isCompletingLevel100 = levelId === 100 && !playerState.hasClaimedCenturyAchievement;
 
     setPlayerState((prev) => {
       const currentHighest = prev.currentLevel || 1;
@@ -208,10 +220,56 @@ export default function App() {
 
     setActiveLevelId((prev) => Math.max(prev, nextLevel));
     setCurrentScreen('worlds');
+
+    if (isCompletingLevel100) {
+      setTimeout(() => {
+        setShowCenturyModal(true);
+      }, 450);
+    }
+  };
+
+  const handleClaimCenturyAchievement = () => {
+    setPlayerState((prev) => {
+      if (prev.hasClaimedCenturyAchievement) return prev;
+      return {
+        ...prev,
+        coins: prev.coins + 200,
+        strike: (prev.strike || 0) + 100,
+        hasClaimedCenturyAchievement: true,
+      };
+    });
+    nativeAudio.playVictory();
+    setShowCenturyModal(false);
   };
 
   const handleAddCoins = (amount: number) => {
     setPlayerState((prev) => ({ ...prev, coins: prev.coins + amount }));
+  };
+
+  const handleWatchAdForCoins = () => {
+    setShowFreeCoinsModal(false);
+    showRewardedAd(
+      () => {
+        setPlayerState((prev) => ({ ...prev, coins: prev.coins + 100 }));
+        nativeAudio.playVictory();
+        setTimeout(() => {
+          setFreeCoinsAlert({
+            title: 'COINS ADDED! 🎉',
+            message: 'Congratulations! You earned +100 Coins for watching the video ad!',
+            icon: 'monetization-on',
+          });
+        }, 350);
+      },
+      () => {
+        setTimeout(() => {
+          setFreeCoinsAlert({
+            title: 'AD UNAVAILABLE',
+            message: 'No video ad is available right now. Please check your connection and try again!',
+            icon: 'ondemand-video',
+          });
+        }, 350);
+      }
+    );
   };
 
   const handleClaimMilestoneChest = (levelId: number) => {
@@ -298,7 +356,7 @@ export default function App() {
   const handleResetProgress = () => {
     AsyncStorage.removeItem(STORAGE_KEY).catch(() => {});
     setPlayerState({
-      coins: 100,
+      coins: 500,
       stars: 380,
       hearts: 5,
       maxHearts: 5,
@@ -353,7 +411,7 @@ export default function App() {
             setShowStrikeInfoModal(true);
           }
         }}
-        onOpenShop={() => {}}
+        onOpenShop={() => setShowFreeCoinsModal(true)}
         onRefillHearts={() => setShowRefillHeartsModal(true)}
         musicEnabled={playerState.musicEnabled}
         onToggleMusic={handleToggleMusic}
@@ -532,6 +590,60 @@ export default function App() {
         </View>
       </Modal>
 
+      {/* Free Coins Rewarded Ad Modal */}
+      <Modal visible={showFreeCoinsModal} transparent animationType="fade">
+        <View style={styles.modalBackdrop}>
+          <View style={styles.restoreCard}>
+            <View style={[styles.fireHeaderCircle, { backgroundColor: '#FEF3C7', borderColor: '#F59E0B' }]}>
+              <MaterialIcons name="monetization-on" size={44} color="#D97706" />
+            </View>
+            <Text style={styles.restoreTitle}>GET FREE COINS! 🪙</Text>
+            <Text style={styles.restoreSub}>
+              Watch a short video ad to earn +100 Coins for free to use on hints, restores, and reveals!
+            </Text>
+
+            <View style={styles.restorePriceBox}>
+              <Text style={styles.restorePriceLabel}>REWARD:</Text>
+              <View style={styles.priceRow}>
+                <MaterialIcons name="monetization-on" size={24} color="#F59E0B" />
+                <Text style={styles.priceText}>+100 Coins</Text>
+              </View>
+              <Text style={styles.currentCoinsText}>
+                Your Coins: {playerState.coins.toLocaleString()}
+              </Text>
+            </View>
+
+            <View style={styles.restoreBtnRow}>
+              <Pressable
+                onPress={() => setShowFreeCoinsModal(false)}
+                style={({ pressed }) => [styles.restoreCancelBtn, pressed && styles.pressed]}
+              >
+                <Text style={styles.restoreCancelText}>CANCEL</Text>
+              </Pressable>
+
+              <Pressable
+                onPress={handleWatchAdForCoins}
+                style={({ pressed }) => [styles.restoreConfirmBtn, { backgroundColor: '#059669' }, pressed && styles.pressed]}
+              >
+                <Text style={styles.restoreConfirmText}>WATCH AD 🎬</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Free Coins Result Alert */}
+      {freeCoinsAlert && (
+        <CustomAlert
+          visible={!!freeCoinsAlert}
+          title={freeCoinsAlert.title}
+          message={freeCoinsAlert.message}
+          icon={freeCoinsAlert.icon}
+          btnText="AWESOME"
+          onClose={() => setFreeCoinsAlert(null)}
+        />
+      )}
+
       {/* Word Strike Info Modal */}
       <CustomAlert
         visible={showStrikeInfoModal}
@@ -540,6 +652,12 @@ export default function App() {
         icon="local-fire-department"
         btnText="GOT IT"
         onClose={() => setShowStrikeInfoModal(false)}
+      />
+
+      {/* Century Milestone Achievement Modal (Level 100 Completion) */}
+      <CenturyAchievementModal
+        visible={showCenturyModal}
+        onClaim={handleClaimCenturyAchievement}
       />
     </SafeAreaView>
   );

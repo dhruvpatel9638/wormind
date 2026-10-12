@@ -23,6 +23,7 @@ export interface LevelData {
   stars: number;
   completed: boolean;
   locked: boolean;
+  timeLimit?: number;
 }
 
 export interface PlayerState {
@@ -50,6 +51,7 @@ export interface PlayerState {
   strike: number;
   strikeZeroFails?: number;
   claimedChests?: number[];
+  hasClaimedCenturyAchievement?: boolean;
 }
 
 export interface DailyReward {
