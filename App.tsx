@@ -427,16 +427,7 @@ export default function App() {
           heartCountdown={formatCountdown(playerState.heartSeconds)}
           level={activeLevelId}
           strike={playerState.strike ?? 10}
-          onPressStrike={() => {
-            if ((playerState.strike ?? 10) <= 0) {
-              setShowRestoreStrikeModal(true);
-            } else {
-              Alert.alert(
-                '🔥 Snapchat Strike',
-                `Current Strike: ${playerState.strike}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`
-              );
-            }
-          }}
+          onPressStrike={() => setShowRestoreStrikeModal(true)}
         onOpenShop={() => {}}
         onRefillHearts={() => setShowRefillHeartsModal(true)}
         musicEnabled={playerState.musicEnabled}
