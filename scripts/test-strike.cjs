@@ -14,6 +14,8 @@ const gameAst = parse('src/native/views/GameView.tsx');
 const appAst = parse('App.tsx');
 const constants = { exports: {} };
 vm.runInNewContext(compile(read('src/config/strike.ts')), constants);
+const economy = { exports: {} };
+vm.runInNewContext(compile(read('src/config/economy.ts')), economy);
 
 function declaration(ast, name) {
   let found;
@@ -36,10 +38,10 @@ const gameReturn = gameInitializer.body.statements.find((node) => ts.isReturnSta
 assert.ok(gameReturn);
 const gameCode = gameAst.text.slice(gameInitializer.getStart(gameAst), gameReturn.getStart(gameAst)) + `
   return {
-    checkSelection, handleReveal, handlePause, handleResume, handleExit,
+    checkSelection, handleHint, handleReveal, handlePause, handleResume, handleExit,
     handleRetry, handleCompleteAttempt, resetLevelState,
     grid, targetWords, solvedCells, selectedCells, timeLeft, isPaused,
-    isVictory, isGameOver, strikeLost, wordStreak, maxWordStreak,
+    isVictory, isGameOver, strikeLost, wordStreak, maxWordStreak, hasUsedCoinHint,
     attemptStatusRef, completionClaimedRef, victoryTimeoutRef,
   };
 }`;
@@ -172,7 +174,7 @@ function harness({ strike = 30, hearts = 5, wordCount = 1, timeLimit = 1 } = {})
   const audio = [];
   const ads = [];
   const alerts = [];
-  let failures = 0, completions = 0, exits = 0, deductions = 0;
+  let failures = 0, completions = 0, exits = 0, deductions = 0, hintUses = 0;
   const words = ['AB', 'CD'].slice(0, wordCount);
   const level = {
     id: 1, timeLimit, grid: [['A', 'B', 'C', 'D']],
@@ -180,7 +182,7 @@ function harness({ strike = 30, hearts = 5, wordCount = 1, timeLimit = 1 } = {})
   };
   const animation = () => ({ start() {}, stop() {} });
   const env = {
-    ...timers, ...constants.exports, START_DEV_COINS: 500, DEFAULT_START_LEVEL: 1,
+    ...timers, ...constants.exports, ...economy.exports, START_DEV_COINS: 500, DEFAULT_START_LEVEL: 1,
     console, INITIAL_LEVELS: [level],
     nativeAudio: new Proxy({}, { get: (_, method) => () => audio.push(method) }),
     Animated: {
@@ -188,6 +190,7 @@ function harness({ strike = 30, hearts = 5, wordCount = 1, timeLimit = 1 } = {})
       spring: animation, sequence: animation, parallel: animation, timing: animation, loop: animation,
     },
     PanResponder: { create: (handlers) => ({ panHandlers: handlers }) },
+    useWindowDimensions: () => ({ width: 390, height: 844 }),
     showRewardedAd: (...callbacks) => ads.push(callbacks),
     showSmartInterstitialAd() {}, Alert: { alert: (...args) => alerts.push(args) },
   };
@@ -202,7 +205,7 @@ function harness({ strike = 30, hearts = 5, wordCount = 1, timeLimit = 1 } = {})
     onFailLevel: () => { failures++; app.value.handleFailLevel(); },
     onCompleteLevel: (...args) => { completions++; app.value.handleCompleteLevel(...args); },
     onRestoreStrike: (...args) => app.value.handleRestoreStrike(...args),
-    onExit: () => { exits++; }, onUseHint: () => true,
+    onExit: () => { exits++; }, onUseHint: () => { hintUses++; return true; },
     onDeductCoins: (amount) => {
       deductions++;
       app.value.setPlayerState((prev) => ({ ...prev, coins: prev.coins - amount }));
@@ -218,12 +221,24 @@ function harness({ strike = 30, hearts = 5, wordCount = 1, timeLimit = 1 } = {})
     unmount: () => game.unmount(),
     get game() { return game.value; }, get app() { return app.value; },
     get state() { return app.value.playerState; },
-    get counts() { return { failures, completions, exits, deductions }; },
+    get counts() { return { failures, completions, exits, deductions, hintUses }; },
   };
 }
 
 const firstWord = [{ r: 0, c: 0 }, { r: 0, c: 1 }];
 const secondWord = [{ r: 0, c: 2 }, { r: 0, c: 3 }];
+
+test('only one coin-funded hint is allowed during a level attempt', () => {
+  const h = harness({ wordCount: 2 });
+  h.game.handleHint();
+  h.flush();
+  assert.equal(h.game.hasUsedCoinHint, true);
+  assert.equal(h.counts.hintUses, 1);
+  h.game.handleHint();
+  h.flush();
+  assert.equal(h.counts.hintUses, 1);
+  assert.equal(h.alerts.length, 0);
+});
 
 for (const action of ['word', 'reveal']) {
   test(`${action}: solving just before timeout protects victory during its 450ms delay`, () => {

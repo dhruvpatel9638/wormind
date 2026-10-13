@@ -6,12 +6,9 @@ import {
   StyleSheet,
   Pressable,
   Animated,
-  Dimensions,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ADMOB_CONFIG } from '../../config/admob';
-
-const { width, height } = Dimensions.get('window');
 
 interface AdModalProps {
   visible: boolean;

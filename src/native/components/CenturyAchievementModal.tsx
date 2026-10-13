@@ -7,14 +7,12 @@ import {
   Pressable,
   Animated,
   Easing,
-  Dimensions,
+  ScrollView,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { PartyConfetti } from './PartyConfetti';
 import { nativeAudio } from '../audio';
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface CenturyAchievementModalProps {
   visible: boolean;
@@ -102,7 +100,11 @@ export const CenturyAchievementModal: React.FC<CenturyAchievementModalProps> = (
 
   return (
     <Modal visible={visible} transparent animationType="fade">
-      <View style={styles.backdrop}>
+      <ScrollView
+        style={styles.modalScroll}
+        contentContainerStyle={styles.backdrop}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Confetti & Streamers Shower */}
         {visible && <PartyConfetti active={visible} />}
 
@@ -238,18 +240,22 @@ export const CenturyAchievementModal: React.FC<CenturyAchievementModalProps> = (
             </Animated.View>
           </LinearGradient>
         </Animated.View>
-      </View>
+      </ScrollView>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   backdrop: {
-    flex: 1,
-    backgroundColor: 'rgba(15, 7, 36, 0.88)',
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    paddingHorizontal: 18,
+    paddingVertical: 30,
+  },
+  modalScroll: {
+    flex: 1,
+    backgroundColor: 'rgba(15, 7, 36, 0.88)',
   },
   sunburstWrapper: {
     position: 'absolute',
@@ -266,7 +272,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   card: {
-    width: Math.min(SCREEN_WIDTH - 36, 380),
+    width: '100%',
+    maxWidth: 380,
     borderRadius: 28,
     overflow: 'hidden',
     elevation: 24,

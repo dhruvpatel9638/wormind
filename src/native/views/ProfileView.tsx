@@ -142,6 +142,9 @@ const styles = StyleSheet.create({
     paddingBottom: 160,
   },
   card: {
+    width: '100%',
+    maxWidth: 600,
+    alignSelf: 'center',
     backgroundColor: '#2E1065',
     borderRadius: 20,
     padding: 18,
@@ -200,7 +203,8 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   resetPopup: {
-    width: 290,
+    width: '100%',
+    maxWidth: 290,
     backgroundColor: '#FFFFFF',
     borderRadius: 24,
     padding: 24,

@@ -96,8 +96,8 @@ test('dates at action time prevent stale eligibility and clock rollback double c
   assert.equal(claimDailyReward(state, 3, date(11)), state);
 });
 
-test('hints cost 25 coins and cannot be used with an insufficient balance', () => {
-  let state = { ...createInitialPlayerState(), coins: 25 };
+test('hints cost 100 coins and cannot be used with an insufficient balance', () => {
+  let state = { ...createInitialPlayerState(), coins: 100 };
   state = spendHint(state);
   assert.equal(state.coins, 0);
   assert.equal(spendHint(state), state);
@@ -260,7 +260,7 @@ test('App callbacks reject duplicate rewards before React commits another render
   assert.equal(h.state.coins, 400);
   assert.equal(h.handlers.handleUseHint(), true);
   assert.equal(h.handlers.handleUseHint(), true);
-  assert.equal(h.state.coins, 350);
+  assert.equal(h.state.coins, 200);
 });
 
 test('App keeps rewards locked until saved progress has loaded', () => {

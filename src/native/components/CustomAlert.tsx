@@ -7,12 +7,10 @@ import {
   Pressable,
   Animated,
   Easing,
-  Dimensions,
+  ScrollView,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export interface CustomAlertProps {
   visible: boolean;
@@ -132,7 +130,11 @@ export const CustomAlert: React.FC<CustomAlertProps> = ({
 
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
-      <View style={styles.modalBackdrop}>
+      <ScrollView
+        style={styles.modalScroll}
+        contentContainerStyle={styles.modalBackdrop}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Central Royal Card */}
         <Animated.View style={[styles.cardContainer, { transform: [{ scale: cardScale }] }]}>
           
@@ -257,21 +259,27 @@ export const CustomAlert: React.FC<CustomAlertProps> = ({
             </LinearGradient>
           </Pressable>
         </Animated.View>
-      </View>
+      </ScrollView>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   modalBackdrop: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: 'rgba(10, 3, 24, 0.82)',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    paddingVertical: 70,
+  },
+  modalScroll: {
+    flex: 1,
+    backgroundColor: 'rgba(10, 3, 24, 0.82)',
   },
   cardContainer: {
-    width: Math.min(SCREEN_WIDTH - 44, 330),
+    width: '100%',
+    maxWidth: 330,
     backgroundColor: '#1E0B40', // Deep Royal Loki Violet
     borderRadius: 28,
     borderWidth: 2.5,
@@ -285,7 +293,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.6,
     shadowRadius: 20,
-    marginTop: 36,
   },
 
   /* Crest & Wings Header */

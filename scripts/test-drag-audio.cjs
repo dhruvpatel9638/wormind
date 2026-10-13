@@ -191,7 +191,7 @@ function gestureHarness(audio) {
   };
   let selection = [], word = '', scrolling = true;
   const context = {
-    exports: {}, TILE_SIZE: 10, gameStateRef: { current: state }, dragSelectionRef: { current: [] }, dragActiveRef: { current: false },
+    exports: {}, tileSizeRef: { current: 10 }, gameStateRef: { current: state }, dragSelectionRef: { current: [] }, dragActiveRef: { current: false },
     nativeAudio: {
       playLetterTaps: (count) => { taps.push(count); audio?.playLetterTaps(count); },
       cancelLetterTaps: () => audio?.cancelLetterTaps(),

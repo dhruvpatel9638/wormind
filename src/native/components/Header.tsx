@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -28,6 +28,8 @@ export const NativeHeader: React.FC<HeaderProps> = ({
   onOpenShop,
   onRefillHearts,
 }) => {
+  const { width } = useWindowDimensions();
+  const compact = width <= 360;
 
   const formatCoins = (num: number) => {
     if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1)}M`;
@@ -38,9 +40,9 @@ export const NativeHeader: React.FC<HeaderProps> = ({
   return (
     <LinearGradient
       colors={['#8B5CF6', '#7C3AED']}
-      style={styles.headerContainer}
+      style={[styles.headerContainer, compact && styles.headerContainerCompact]}
     >
-      <View style={styles.row}>
+      <View style={[styles.row, compact && styles.rowCompact]}>
         {/* 1. Snapchat Fire Strike Badge */}
         <Pressable
           onPress={onPressStrike}
@@ -53,14 +55,14 @@ export const NativeHeader: React.FC<HeaderProps> = ({
         >
           <MaterialIcons
             name="local-fire-department"
-            size={18}
+            size={compact ? 16 : 18}
             color={strike > 0 ? '#FF4500' : '#DC2626'}
           />
           <Text
             numberOfLines={1}
             style={[styles.badgeText, styles.strikeText, strike <= 0 && styles.strikeTextZero]}
           >
-            {strike > 0 ? strike : 'REVIVE 🔥'}
+            {strike > 0 ? strike : compact ? '0' : 'REVIVE 🔥'}
           </Text>
         </Pressable>
 
@@ -69,11 +71,11 @@ export const NativeHeader: React.FC<HeaderProps> = ({
           onPress={onRefillHearts}
           style={({ pressed }) => [styles.badge, styles.heartBadge, pressed && styles.pressed]}
         >
-          <MaterialIcons name="favorite" size={16} color="#EF4444" />
+          <MaterialIcons name="favorite" size={compact ? 14 : 16} color="#EF4444" />
           <Text numberOfLines={1} style={[styles.badgeText, styles.heartText]}>
-            {hearts}/{maxHearts}
+            {compact ? hearts : `${hearts}/${maxHearts}`}
           </Text>
-          {hearts < maxHearts && (
+          {hearts < maxHearts && !compact && (
             <Text numberOfLines={1} style={styles.countdownText}>
               {heartCountdown}
             </Text>
@@ -82,7 +84,7 @@ export const NativeHeader: React.FC<HeaderProps> = ({
 
         {/* 3. Coins Money Badge (Gold Rewards) */}
         <View style={[styles.badge, styles.coinBadge]}>
-          <MaterialIcons name="monetization-on" size={17} color="#F59E0B" />
+          <MaterialIcons name="monetization-on" size={compact ? 15 : 17} color="#F59E0B" />
           <Text
             numberOfLines={1}
             adjustsFontSizeToFit
@@ -102,9 +104,9 @@ export const NativeHeader: React.FC<HeaderProps> = ({
 
         {/* 4. Level Badge (Teal Secondary) */}
         <View style={[styles.badge, styles.levelBadge]}>
-          <MaterialIcons name="military-tech" size={18} color="#0D9488" />
+          <MaterialIcons name="military-tech" size={compact ? 16 : 18} color="#0D9488" />
           <Text numberOfLines={1} style={[styles.badgeText, styles.levelText]}>
-            Lv. {level}
+            {compact ? `L${level}` : `Lv. ${level}`}
           </Text>
         </View>
       </View>
@@ -121,11 +123,21 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.5,
     borderBottomColor: 'rgba(255, 255, 255, 0.25)',
   },
+  headerContainerCompact: {
+    paddingHorizontal: 6,
+    paddingVertical: 6,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: 6,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
+  },
+  rowCompact: {
+    gap: 4,
   },
   badge: {
     height: 38,
@@ -135,6 +147,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 7,
+    minWidth: 0,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -160,6 +173,7 @@ const styles = StyleSheet.create({
     color: '#EA580C',
     fontWeight: '900',
     fontSize: 13,
+    flexShrink: 1,
   },
   strikeTextZero: {
     color: '#DC2626',
@@ -175,6 +189,7 @@ const styles = StyleSheet.create({
   },
   heartText: {
     color: '#EF4444',
+    flexShrink: 1,
   },
   countdownText: {
     color: '#F87171',
@@ -219,6 +234,7 @@ const styles = StyleSheet.create({
   levelText: {
     color: '#0F766E',
     fontWeight: '900',
+    flexShrink: 1,
   },
   pressed: {
     transform: [{ scale: 0.94 }],

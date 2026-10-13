@@ -6,7 +6,7 @@ import {
   Pressable,
   Animated,
   Easing,
-  Dimensions,
+  useWindowDimensions,
   Alert,
 } from 'react-native';
 import Svg, {
@@ -26,8 +26,6 @@ import { SPIN_PRIZES as PRIZES, spinTargetAngle } from '../../data/spinPrizes';
 import type { WheelPrize } from '../../data/spinPrizes';
 import type { SpinTicket } from '../../types';
 import { CustomAlert } from './CustomAlert';
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const NUM_SLICES = PRIZES.length;
 const SLICE_ANGLE = (2 * Math.PI) / NUM_SLICES; // 45 deg in rad
@@ -58,6 +56,9 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
   onStartSpin,
   onCompleteSpin,
 }) => {
+  const { width } = useWindowDimensions();
+  const wheelScale = Math.min(1, Math.max(0.76, (width - 72) / 256));
+  const wheelVisualSize = 256 * wheelScale;
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [wonPrize, setWonPrize] = useState<WheelPrize | null>(null);
   const [showAlreadySpunAlert, setShowAlreadySpunAlert] = useState(false);
@@ -164,7 +165,17 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
       <Text style={styles.subtitle}>Spin daily for free bonus coins!</Text>
 
       {/* Main Wheel Bezel Container */}
-      <View style={styles.outerBezel}>
+      <View style={[styles.wheelScaleFrame, { width: wheelVisualSize, height: wheelVisualSize }]}>
+      <View
+        style={[
+          styles.outerBezel,
+          {
+            top: (wheelVisualSize - 256) / 2,
+            left: (wheelVisualSize - 256) / 2,
+            transform: [{ scale: wheelScale }],
+          },
+        ]}
+      >
         {/* Decorative Studded Lights along the rim */}
         {STUDS.map((stud, idx) => (
           <View
@@ -292,6 +303,7 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
           </Svg>
         </Animated.View>
       </View>
+      </View>
 
       {/* Daily Limit Notice when already spun today */}
       {!canSpinToday && !wonPrize && (
@@ -376,6 +388,9 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
 
 const styles = StyleSheet.create({
   cardContainer: {
+    width: '100%',
+    maxWidth: 600,
+    alignSelf: 'center',
     backgroundColor: '#1E0B40', // Loki Deep Violet
     borderRadius: 24,
     borderWidth: 2,
@@ -410,6 +425,10 @@ const styles = StyleSheet.create({
   },
 
   /* Outer Bezel with LED Studs */
+  wheelScaleFrame: {
+    position: 'relative',
+    marginBottom: 20,
+  },
   outerBezel: {
     width: 256,
     height: 256,
@@ -419,13 +438,12 @@ const styles = StyleSheet.create({
     borderColor: '#F59E0B',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative',
     elevation: 12,
     shadowColor: '#F59E0B',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.5,
     shadowRadius: 12,
-    marginBottom: 20,
+    position: 'absolute',
   },
   studDot: {
     position: 'absolute',

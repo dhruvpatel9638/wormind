@@ -7,13 +7,11 @@ import {
   Pressable,
   Animated,
   Easing,
-  Dimensions,
+  ScrollView,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { PartyConfetti } from './PartyConfetti';
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface VictoryModalProps {
   visible: boolean;
@@ -118,7 +116,12 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
         <PartyConfetti active={visible} />
 
         {/* Central Victory Card */}
-        <Animated.View style={[styles.cardContainer, { transform: [{ scale: cardScale }] }]}>
+        <ScrollView
+          style={styles.modalScroll}
+          contentContainerStyle={styles.modalScrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <Animated.View style={[styles.cardContainer, { transform: [{ scale: cardScale }] }]}>
           
           {/* Top Winged Crest with Sunburst Aura */}
           <View style={styles.crestWrapper}>
@@ -265,7 +268,8 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
             <Text style={styles.tapPromptText}>TAP ANYWHERE TO CONTINUE</Text>
             <MaterialIcons name="touch-app" size={16} color="#DDD6FE" />
           </View>
-        </Animated.View>
+          </Animated.View>
+        </ScrollView>
       </Pressable>
     </Modal>
   );
@@ -275,12 +279,20 @@ const styles = StyleSheet.create({
   modalBackdrop: {
     flex: 1,
     backgroundColor: 'rgba(10, 3, 24, 0.78)',
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingHorizontal: 20,
   },
+  modalScroll: {
+    width: '100%',
+  },
+  modalScrollContent: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 70,
+  },
   cardContainer: {
-    width: Math.min(SCREEN_WIDTH - 40, 340),
+    width: '100%',
+    maxWidth: 340,
     backgroundColor: '#1E0B40', // Loki Deep Violet
     borderRadius: 28,
     borderWidth: 2.5,
@@ -294,7 +306,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.6,
     shadowRadius: 20,
-    marginTop: 40,
   },
 
   /* Crest & Wings Header */

@@ -5,12 +5,16 @@ import {
   Text,
   Pressable,
   Modal,
-  SafeAreaView,
+  ScrollView,
   StatusBar,
-  Platform,
   Alert,
   AppState,
 } from 'react-native';
+import {
+  SafeAreaProvider,
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -36,12 +40,19 @@ import {
 } from './src/native/rewardLogic';
 import { initAdMob, showRewardedAd, showSmartInterstitialAd } from './src/utils/admobService';
 import { STRIKE_LOSS_PENALTY, STRIKE_RESTORE_AMOUNT, STRIKE_WIN_REWARD } from './src/config/strike';
+import {
+  FREE_COINS_AD_REWARD,
+  MILESTONE_CHEST_COINS,
+  STARTING_COINS,
+} from './src/config/economy';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 const DEFAULT_START_LEVEL = 1;
-const START_DEV_COINS = 500;
+const START_DEV_COINS = STARTING_COINS;
 
-export default function App() {
+function AppContent() {
+  const insets = useSafeAreaInsets();
+  const [bannerHeight, setBannerHeight] = useState(54);
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
   const [hasLoadedPlayer, setHasLoadedPlayer] = useState(false);
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
@@ -306,7 +317,7 @@ export default function App() {
       return {
         ...prev,
         claimedChests: [...claimedChests, levelId],
-        coins: prev.coins + 1000,
+        coins: prev.coins + MILESTONE_CHEST_COINS,
         strike: (prev.strike ?? 0) + 50,
       };
     });
@@ -316,11 +327,11 @@ export default function App() {
   const handleWatchAdForCoins = () => {
     showRewardedAd(
       () => {
-        handleAddCoins(100);
+        handleAddCoins(FREE_COINS_AD_REWARD);
         setShowFreeCoinsModal(false);
         setFreeCoinsAlert({
           title: 'COINS EARNED!',
-          message: '100 coins were added to your balance.',
+          message: `${FREE_COINS_AD_REWARD} coins were added to your balance.`,
           icon: 'monetization-on',
         });
       },
@@ -336,7 +347,9 @@ export default function App() {
 
   const handleDeductCoins = (amount: number): boolean => {
     if (!hasLoadedPlayer || !Number.isFinite(amount) || amount < 0 || playerStateRef.current.coins < amount) return false;
-    setPlayerState((prev) => ({ ...prev, coins: prev.coins - amount }));
+    const next = { ...playerStateRef.current, coins: playerStateRef.current.coins - amount };
+    playerStateRef.current = next;
+    setPlayerState(next);
     return true;
   };
 
@@ -344,6 +357,7 @@ export default function App() {
     if (!hasLoadedPlayer) return false;
     const next = spendHint(playerStateRef.current);
     if (next === playerStateRef.current) return false;
+    playerStateRef.current = next;
     setPlayerState(next);
     return true;
   };
@@ -439,7 +453,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
       <StatusBar barStyle="light-content" backgroundColor="#7C3AED" />
 
       {/* Keep the gameplay HUD out of the startup loading screen. On Android,
@@ -461,7 +475,16 @@ export default function App() {
       )}
 
       {/* Screen Views */}
-      <View style={styles.screenContainer}>
+      <View
+        style={[
+          styles.screenContainer,
+          {
+            paddingBottom:
+              (bannerHeight > 0 ? bannerHeight : insets.bottom) +
+              (currentScreen === 'game' ? 0 : 66),
+          },
+        ]}
+      >
         {currentScreen === 'worlds' && (
           <NativeWorldsView
             onStartLevel={handleStartLevel}
@@ -512,7 +535,7 @@ export default function App() {
       </View>
 
       {/* Bottom AdMob Banner Ad */}
-      <AdBanner />
+      <AdBanner bottomInset={insets.bottom} onHeightChange={setBannerHeight} />
 
       {/* Bottom Floating Navigation (shown outside game view) */}
       {currentScreen !== 'game' && (
@@ -520,12 +543,17 @@ export default function App() {
           currentScreen={currentScreen}
           onNavigate={setCurrentScreen}
           hasClaimableDaily={canClaimDaily}
+          bottomOffset={(bannerHeight > 0 ? bannerHeight : insets.bottom) + 4}
         />
       )}
 
       {/* Refill Hearts Modal */}
       <Modal visible={showRefillHeartsModal} transparent animationType="fade">
-        <View style={styles.modalBackdrop}>
+        <ScrollView
+          style={styles.modalScroll}
+          contentContainerStyle={styles.modalBackdrop}
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.restoreCard}>
             <View style={[styles.fireHeaderCircle, { backgroundColor: '#FEF2F2', borderColor: '#FCA5A5' }]}>
               <MaterialIcons name="favorite" size={44} color="#EF4444" />
@@ -587,7 +615,7 @@ export default function App() {
               </Pressable>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </Modal>
 
       {/* Snapchat Strike Restore & Info Modal (Modern Game UI/UX) */}
@@ -601,7 +629,11 @@ export default function App() {
           setPendingLevelToStart(null);
         }}
       >
-        <View style={styles.modalBackdrop}>
+        <ScrollView
+          style={styles.modalScroll}
+          contentContainerStyle={styles.modalBackdrop}
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.strikeCard}>
             {/* Top Close Button */}
             <Pressable
@@ -815,26 +847,30 @@ export default function App() {
               </Pressable>
             )}
           </View>
-        </View>
+        </ScrollView>
       </Modal>
 
       {/* Free Coins Rewarded Ad Modal */}
       <Modal visible={showFreeCoinsModal} transparent animationType="fade">
-        <View style={styles.modalBackdrop}>
+        <ScrollView
+          style={styles.modalScroll}
+          contentContainerStyle={styles.modalBackdrop}
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.restoreCard}>
             <View style={[styles.fireHeaderCircle, { backgroundColor: '#FEF3C7', borderColor: '#F59E0B' }]}>
               <MaterialIcons name="monetization-on" size={44} color="#D97706" />
             </View>
             <Text style={styles.restoreTitle}>GET FREE COINS! 🪙</Text>
             <Text style={styles.restoreSub}>
-              Watch a short video ad to earn +100 Coins for free to use on hints, restores, and reveals!
+              Watch a short video ad to earn +{FREE_COINS_AD_REWARD} Coins for hints, restores, and reveals!
             </Text>
 
             <View style={styles.restorePriceBox}>
               <Text style={styles.restorePriceLabel}>REWARD:</Text>
               <View style={styles.priceRow}>
                 <MaterialIcons name="monetization-on" size={24} color="#F59E0B" />
-                <Text style={styles.priceText}>+100 Coins</Text>
+                <Text style={styles.priceText}>+{FREE_COINS_AD_REWARD} Coins</Text>
               </View>
               <Text style={styles.currentCoinsText}>
                 Your Coins: {playerState.coins.toLocaleString()}
@@ -857,7 +893,7 @@ export default function App() {
               </Pressable>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </Modal>
 
       {/* Free Coins Result Alert */}
@@ -891,6 +927,14 @@ export default function App() {
   );
 }
 
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <AppContent />
+    </SafeAreaProvider>
+  );
+}
+
 const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
@@ -899,17 +943,21 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#FAF8FF',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   screenContainer: {
     flex: 1,
   },
   modalBackdrop: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: 'rgba(26, 11, 46, 0.75)',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 24,
+  },
+  modalScroll: {
+    flex: 1,
+    backgroundColor: 'rgba(26, 11, 46, 0.75)',
   },
   restoreCard: {
     width: '100%',

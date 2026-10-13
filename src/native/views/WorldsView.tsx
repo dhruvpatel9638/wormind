@@ -6,7 +6,7 @@ import {
   Pressable,
   ScrollView,
   Modal,
-  Dimensions,
+  LayoutChangeEvent,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -14,6 +14,7 @@ import Svg, { Path } from 'react-native-svg';
 import { nativeAudio } from '../audio';
 import { INITIAL_LEVELS } from '../../data/gameData';
 import { CustomAlert } from '../components/CustomAlert';
+import { MILESTONE_CHEST_COINS } from '../../config/economy';
 import {
   ValleySun,
   ValleyTree,
@@ -40,8 +41,6 @@ interface WorldsViewProps {
   onClaimChest?: (levelId: number) => void;
 }
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-
 export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   onStartLevel,
   activeLevelId = 4,
@@ -53,26 +52,35 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   );
   const [selectedModalLevel, setSelectedModalLevel] = useState<number | null>(null);
   const [alertInfo, setAlertInfo] = useState<{ title: string; message: string } | null>(null);
+  const [mapWidth, setMapWidth] = useState(360);
   const scrollRef = useRef<ScrollView>(null);
+
+  const handleMapLayout = (event: LayoutChangeEvent) => {
+    const nextWidth = event.nativeEvent.layout.width;
+    if (Math.abs(nextWidth - mapWidth) > 1) setMapWidth(nextWidth);
+  };
+
+  const mapLeft = (designLeft: number, itemWidth = 70) =>
+    Math.max(4, Math.min(mapWidth - itemWidth - 4, designLeft * (mapWidth / 360)));
 
   const handleChestPress = (lvlId: number, status: 'locked' | 'ready' | 'claimed') => {
     if (status === 'claimed') {
       nativeAudio.playLetterTap(1);
       setAlertInfo({
         title: 'CHEST CLAIMED',
-        message: `You already claimed the Level ${lvlId} Milestone Chest reward (+1,000 Coins & +50 Word Strike)! Continue clearing levels to unlock more chests.`,
+        message: `You already claimed the Level ${lvlId} Milestone Chest reward (+${MILESTONE_CHEST_COINS} Coins & +50 Word Strike)! Continue clearing levels to unlock more chests.`,
       });
     } else if (status === 'locked') {
       nativeAudio.playLetterTap(1);
       setAlertInfo({
         title: 'LOCKED CHEST 🔒',
-        message: `Complete Level ${lvlId} to unlock this Milestone Chest (+1,000 Coins & +50 Word Strike)!`,
+        message: `Complete Level ${lvlId} to unlock this Milestone Chest (+${MILESTONE_CHEST_COINS} Coins & +50 Word Strike)!`,
       });
     } else if (status === 'ready') {
       onClaimChest?.(lvlId);
       setAlertInfo({
         title: 'CHEST UNLOCKED! 🎁',
-        message: `Congratulations! You claimed the Level ${lvlId} Milestone Chest!\n\n🪙 +1,000 Coins added\n🔥 +50 Word Strike added`,
+        message: `Congratulations! You claimed the Level ${lvlId} Milestone Chest!\n\n🪙 +${MILESTONE_CHEST_COINS} Coins added\n🔥 +50 Word Strike added`,
       });
     }
   };
@@ -144,10 +152,10 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     if (lvlId === 1) {
       return (
         <View key={`landmark-${lvlId}`} pointerEvents="none" style={styles.landmarkWrapper}>
-          <View style={[styles.landmarkItem, { bottom: bottom - 8, left: 24 }]}>
+          <View style={[styles.landmarkItem, { bottom: bottom - 8, left: mapLeft(24) }]}>
             <ValleyFlowerPatch scale={1.25} />
           </View>
-          <View style={[styles.landmarkItem, { bottom: bottom + 12, left: 232 }]}>
+          <View style={[styles.landmarkItem, { bottom: bottom + 12, left: mapLeft(232, 90) }]}>
             <ValleySignpost label="START" />
           </View>
         </View>
@@ -161,7 +169,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
 
       return (
         <View key={`landmark-${lvlId}`} pointerEvents="box-none" style={styles.landmarkWrapper}>
-          <View pointerEvents="box-none" style={[styles.landmarkItem, { bottom: bottom + 2, left: meadowX, zIndex: 25 }]}>
+          <View pointerEvents="box-none" style={[styles.landmarkItem, { bottom: bottom + 2, left: mapLeft(meadowX), zIndex: 25 }]}>
             <MilestoneChest
               level={lvlId}
               status={status}
@@ -170,12 +178,12 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             />
           </View>
           {lvlId === 5 && (
-            <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 35, left: 22 }]}>
+            <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 35, left: mapLeft(22) }]}>
               <ValleyTree type="pine" scale={0.9} />
             </View>
           )}
           {lvlId === 100 && (
-            <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 32, left: 236 }]}>
+            <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 32, left: mapLeft(236, 100) }]}>
               <ValleySignpost label="VALLEY PEAK" />
             </View>
           )}
@@ -186,7 +194,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     const cycle = lvlId % 7;
     if (cycle === 1) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: mapLeft(meadowX) }]}>
           <ValleyTree type="oak" scale={1.08} />
           <View style={styles.butterflyPin}>
             <ValleyButterfly color="#EC4899" />
@@ -195,25 +203,25 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
       );
     } else if (cycle === 2) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX - 4 }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: mapLeft(meadowX - 4) }]}>
           <ValleyWindmill size={68} />
         </View>
       );
     } else if (cycle === 3) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: mapLeft(meadowX) }]}>
           <ValleyFlowerPatch scale={1.2} />
         </View>
       );
     } else if (cycle === 4) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: mapLeft(meadowX) }]}>
           <ValleyTree type="pine" scale={1.1} />
         </View>
       );
     } else if (cycle === 6) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: mapLeft(meadowX) }]}>
           <ValleyFlowerPatch scale={1.3} />
           <View style={styles.butterflyPin}>
             <ValleyButterfly color="#F59E0B" />
@@ -223,7 +231,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     }
 
     return (
-      <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+      <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: mapLeft(meadowX) }]}>
         <ValleyTree type="oak" scale={1.05} />
       </View>
     );
@@ -238,10 +246,10 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     if (lvlId === 101) {
       return (
         <View key={`landmark-${lvlId}`} pointerEvents="none" style={styles.landmarkWrapper}>
-          <View style={[styles.landmarkItem, { bottom: bottom - 8, left: 24 }]}>
+          <View style={[styles.landmarkItem, { bottom: bottom - 8, left: mapLeft(24) }]}>
             <OceanShipwreck size={58} />
           </View>
-          <View style={[styles.landmarkItem, { bottom: bottom + 12, left: 232 }]}>
+          <View style={[styles.landmarkItem, { bottom: bottom + 12, left: mapLeft(232, 90) }]}>
             <ValleySignpost label="ABYSS START" />
           </View>
         </View>
@@ -255,7 +263,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
 
       return (
         <View key={`landmark-${lvlId}`} pointerEvents="box-none" style={styles.landmarkWrapper}>
-          <View pointerEvents="box-none" style={[styles.landmarkItem, { bottom: bottom + 2, left: meadowX, zIndex: 25 }]}>
+          <View pointerEvents="box-none" style={[styles.landmarkItem, { bottom: bottom + 2, left: mapLeft(meadowX), zIndex: 25 }]}>
             <OceanChest
               level={lvlId}
               status={status}
@@ -264,7 +272,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             />
           </View>
           {lvlId === 200 && (
-            <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 35, left: 236 }]}>
+            <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 35, left: mapLeft(236, 100) }]}>
               <OceanAtlantisPalace size={70} />
             </View>
           )}
@@ -275,31 +283,31 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     const cycle = lvlId % 6;
     if (cycle === 1) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: mapLeft(meadowX) }]}>
           <OceanCoral scale={1.1} color="#EC4899" />
         </View>
       );
     } else if (cycle === 2) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: meadowX - 4 }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom - 10, left: mapLeft(meadowX - 4) }]}>
           <OceanBubble size={32} />
         </View>
       );
     } else if (cycle === 3) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: mapLeft(meadowX) }]}>
           <OceanSeaweed height={48} />
         </View>
       );
     } else if (cycle === 4) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: mapLeft(meadowX) }]}>
           <OceanCoral scale={1.2} color="#F59E0B" />
         </View>
       );
     } else if (cycle === 5) {
       return (
-        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: meadowX }]}>
+        <View key={`landmark-${lvlId}`} pointerEvents="none" style={[styles.landmarkItem, { bottom, left: mapLeft(meadowX) }]}>
           <OceanBubble size={36} opacity={0.9} />
         </View>
       );
@@ -327,7 +335,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                 size={20}
                 color={isOcean ? '#00F2FE' : '#F59E0B'}
               />
-              <View>
+              <View style={styles.chapterTextBlock}>
                 <Text style={[styles.chapterTitle, isOcean && styles.chapterTitleOcean]}>
                   {isOcean ? 'CHAPTER 2: BUBBLE OCEAN' : 'CHAPTER 1: SUNNY VALLEY'}
                 </Text>
@@ -426,7 +434,10 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         </View>
 
         {/* Dynamic Winding Road Map Container */}
-        <View style={[styles.mapCard, isOcean && styles.mapCardOcean, { height: mapHeight }]}>
+        <View
+          onLayout={handleMapLayout}
+          style={[styles.mapCard, isOcean && styles.mapCardOcean, { height: mapHeight }]}
+        >
           {/* Meadow / Ocean Background Gradient */}
           <LinearGradient
             colors={
@@ -577,13 +588,19 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
           {/* Level Nodes Placed Along the Winding Road (Preserving existing button styles!) */}
           {activeLevelsList.map((lvl, index) => {
             const bottom = index * 110 + 100;
-            const left = 150 + Math.sin(index * 0.8) * 100;
+            const designLeft = 150 + Math.sin(index * 0.8) * 100;
             const isLocked = lvl.id > activeLevelId;
             const isDone = lvl.id < activeLevelId;
             const isActive = lvl.id === activeLevelId;
 
             return (
-              <View key={`node-${lvl.id}`} style={[styles.nodeAbsolute, { bottom, left }]}>
+              <View
+                key={`node-${lvl.id}`}
+                style={[
+                  styles.nodeAbsolute,
+                  { bottom, left: mapLeft(designLeft, isActive ? 60 : 50) },
+                ]}
+              >
                 {isActive && (
                   <View style={[styles.letsGoBubble, isOcean && styles.letsGoBubbleOcean]}>
                     <MaterialIcons
@@ -736,6 +753,7 @@ const styles = StyleSheet.create({
   },
   chapterCard: {
     width: '100%',
+    maxWidth: 600,
     backgroundColor: '#FFFBEB',
     borderRadius: 20,
     borderWidth: 2.5,
@@ -763,6 +781,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    flex: 1,
+    minWidth: 0,
+  },
+  chapterTextBlock: {
+    flex: 1,
+    minWidth: 0,
   },
   chapterTitle: {
     fontSize: 13,
@@ -791,6 +815,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 2,
     gap: 4,
+    flexShrink: 0,
+    marginLeft: 6,
   },
   chapterStarsOcean: {
     backgroundColor: '#E0F2FE',
@@ -851,6 +877,7 @@ const styles = StyleSheet.create({
   },
   mapCard: {
     width: '100%',
+    maxWidth: 600,
     borderRadius: 24,
     borderWidth: 3,
     borderColor: '#86EFAC',
@@ -1047,7 +1074,7 @@ const styles = StyleSheet.create({
   },
   stickyFooter: {
     position: 'absolute',
-    bottom: 126,
+    bottom: 8,
     left: 14,
     right: 14,
     alignItems: 'center',
@@ -1055,6 +1082,7 @@ const styles = StyleSheet.create({
   },
   continueBtn: {
     width: '100%',
+    maxWidth: 600,
     height: 52,
     borderRadius: 26,
     backgroundColor: '#F59E0B',

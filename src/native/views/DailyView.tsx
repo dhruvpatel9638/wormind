@@ -6,6 +6,7 @@ import {
   Pressable,
   ScrollView,
   Modal,
+  useWindowDimensions,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { DAILY_REWARDS } from '../../data/gameData';
@@ -34,6 +35,9 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
   onStartSpin,
   onCompleteSpin,
 }) => {
+  const { width } = useWindowDimensions();
+  const compact = width <= 360;
+  const contentWidthStyle = { width: '100%' as const, maxWidth: 600, alignSelf: 'center' as const };
   const [showClaimModal, setShowClaimModal] = useState<boolean>(false);
   const [claimedMessage, setClaimedMessage] = useState<string>('You received your daily reward!');
 
@@ -57,7 +61,7 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
         showsVerticalScrollIndicator={false}
       >
         {/* Streak Status Banner */}
-        <View style={styles.streakBanner}>
+        <View style={[styles.streakBanner, contentWidthStyle]}>
           <View style={styles.streakRow}>
             <View style={styles.fireCircle}>
               <MaterialIcons name="local-fire-department" size={26} color="#EF3B3B" />
@@ -79,8 +83,8 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
         </View>
 
         {/* 7-Day Reward Track */}
-        <Text style={styles.sectionTitle}>7-DAY LOGIN REWARDS</Text>
-        <View style={styles.rewardsGrid}>
+        <Text style={[styles.sectionTitle, contentWidthStyle]}>7-DAY LOGIN REWARDS</Text>
+        <View style={[styles.rewardsGrid, contentWidthStyle]}>
           {DAILY_REWARDS.map((reward) => {
             const isClaimed = claimedDays.includes(reward.day);
             const isReady = canClaimToday && reward.day === currentDayToClaim;
@@ -90,6 +94,7 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
                 key={reward.day}
                 style={[
                   styles.rewardCard,
+                  compact && styles.rewardCardCompact,
                   isReady && styles.rewardCardReady,
                   isClaimed && styles.rewardCardClaimed,
                 ]}
@@ -227,6 +232,9 @@ const styles = StyleSheet.create({
     borderColor: '#EDE9FE',
     elevation: 2,
   },
+  rewardCardCompact: {
+    width: '48%',
+  },
   rewardCardReady: {
     borderColor: '#F59E0B',
     borderWidth: 2,
@@ -284,7 +292,8 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   claimPopup: {
-    width: 270,
+    width: '100%',
+    maxWidth: 270,
     backgroundColor: '#FFFFFF',
     borderRadius: 24,
     padding: 22,

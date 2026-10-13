@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Pressable,
   Modal,
-  Dimensions,
+  useWindowDimensions,
   Alert,
   Animated,
   Easing,
@@ -21,6 +21,7 @@ import { CustomAlert } from '../components/CustomAlert';
 import { VictoryModal } from '../components/VictoryModal';
 import { showRewardedAd } from '../../utils/admobService';
 import { STRIKE_LOSS_PENALTY, STRIKE_WIN_REWARD } from '../../config/strike';
+import { HINT_COST, REVEAL_COST } from '../../config/economy';
 
 interface GameViewProps {
   levelId: number;
@@ -36,10 +37,6 @@ interface GameViewProps {
   isRestoringStrike?: boolean;
 }
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const GRID_SIZE = Math.min(SCREEN_WIDTH - 28, 380);
-const TILE_SIZE = GRID_SIZE / 8;
-
 export const NativeGameView: React.FC<GameViewProps> = ({
   levelId,
   onExit,
@@ -53,6 +50,16 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   onRestoreStrike,
   isRestoringStrike = false,
 }) => {
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const compactLayout = windowWidth <= 360;
+  const gridSize = Math.max(
+    232,
+    Math.min(windowWidth - 28, 380, windowHeight <= 700 ? windowHeight * 0.43 : 380)
+  );
+  const tileSize = gridSize / 8;
+  const tileSizeRef = useRef(tileSize);
+  tileSizeRef.current = tileSize;
+  const contentWidthStyle = { width: '100%' as const, maxWidth: 600 };
   const currentLevel =
     INITIAL_LEVELS.find((l) => l.id === levelId) ||
     INITIAL_LEVELS.find((l) => l.id === 4) ||
@@ -105,6 +112,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [timeLeft, setTimeLeft] = useState<number>(() => getLevelInitialTime(currentLevel));
   const timeLeftRef = useRef(timeLeft);
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
+  const [hasUsedCoinHint, setHasUsedCoinHint] = useState(false);
+  const hasUsedCoinHintRef = useRef(false);
   const [isScrollingEnabled, setIsScrollingEnabled] = useState<boolean>(true);
 
   const scaleAnim = useRef(new Animated.Value(0)).current;
@@ -352,6 +361,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   }, [levelId]);
 
   useEffect(() => {
+    hasUsedCoinHintRef.current = false;
+    setHasUsedCoinHint(false);
     resetLevelState(currentLevel);
   }, [levelId]);
 
@@ -465,8 +476,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const updateDragSelection = (locationX: number, locationY: number) => {
     const state = gameStateRef.current;
     if (!dragActiveRef.current || state.isPaused || state.isVictory || state.isGameOver) return;
-    const c = Math.floor(locationX / TILE_SIZE);
-    const r = Math.floor(locationY / TILE_SIZE);
+    const c = Math.floor(locationX / tileSizeRef.current);
+    const r = Math.floor(locationY / tileSizeRef.current);
     if (r < 0 || r >= 8 || c < 0 || c >= 8 || !state.grid[r]?.[c] || state.grid[r][c] === ' ') return;
 
     const prev = dragSelectionRef.current;
@@ -594,17 +605,27 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setSpelledWord('');
   };
 
-  // A standard hint costs 25 coins; the parent atomically checks the balance.
+  // One coin-funded hint is allowed per level; further hints use rewarded ads.
   const handleHint = () => {
     if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
     const unfound = targetWords.find((tw) => !tw.found);
     if (!unfound) return;
 
-    if (!onUseHint()) {
-      setAlertInfo({ title: 'Coins Needed', message: 'You need 25 coins for a Hint!' });
+    if (hasUsedCoinHintRef.current) {
+      setAlertInfo({
+        title: 'Ad Hint Required',
+        message: 'Your coin hint for this level is already used. Watch an ad to unlock another hint.',
+      });
       return;
     }
 
+    if (!onUseHint()) {
+      setAlertInfo({ title: 'Coins Needed', message: `You need ${HINT_COST} coins for a Hint!` });
+      return;
+    }
+
+    hasUsedCoinHintRef.current = true;
+    setHasUsedCoinHint(true);
     nativeAudio.playSparkle();
     setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
     setTimeout(() => setHintedCells([]), 3500);
@@ -632,18 +653,18 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     });
   };
 
-  // Power-up: Reveal (50 Coins)
+  // Power-up: reveal an entire word at a premium over a single-cell hint.
   const handleReveal = () => {
     if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
     const unfoundIdx = targetWords.findIndex((tw) => !tw.found);
     if (unfoundIdx === -1) return;
 
-    if (coins < 50) {
-      setAlertInfo({ title: 'Coins Needed', message: 'You need 50 coins to Reveal a word!' });
+    if (coins < REVEAL_COST) {
+      setAlertInfo({ title: 'Coins Needed', message: `You need ${REVEAL_COST} coins to Reveal a word!` });
       return;
     }
 
-    if (!onDeductCoins(50)) return;
+    if (!onDeductCoins(REVEAL_COST)) return;
 
     nativeAudio.playWordFound();
     const unfoundWord = targetWords[unfoundIdx];
@@ -685,7 +706,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
 
       {/* Target Words Drawer */}
-      <View style={styles.wordsCard}>
+      <View style={[styles.wordsCard, contentWidthStyle]}>
         <View style={styles.wordsHeader}>
           <View style={styles.wordsTitleRow}>
             <MaterialIcons name="search" size={16} color="#4D8AFF" />
@@ -724,7 +745,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       </View>
 
       {/* Spelled Word Active Banner */}
-      <View style={styles.spellingBar}>
+      <View style={[styles.spellingBar, contentWidthStyle]}>
         <View style={styles.spellingLeft}>
           <Text style={styles.spellingLabel}>SPELLING:</Text>
           {spelledWord ? (
@@ -746,7 +767,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       </View>
 
       {/* Timer & Streak Row (Below Spelling Bar) */}
-      <View style={styles.timerControlRow}>
+      <View style={[styles.timerControlRow, contentWidthStyle]}>
         <View style={styles.timerStreakGroup}>
           <Animated.View
             style={[
@@ -857,11 +878,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
       {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
       <View
-        style={[styles.matrixCard, { width: GRID_SIZE, height: GRID_SIZE }]}
+        style={[styles.matrixCard, { width: gridSize, height: gridSize }]}
       >
         <View
           {...panResponder.panHandlers}
-          style={[styles.gridContainer, { width: GRID_SIZE, height: GRID_SIZE }]}
+          style={[styles.gridContainer, { width: gridSize, height: gridSize }]}
         >
           {grid.map((row, r) => (
             <View key={`row-${r}`} style={styles.gridRow} pointerEvents="none">
@@ -878,8 +899,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                       style={[
                         styles.tile,
                         {
-                          width: TILE_SIZE,
-                          height: TILE_SIZE,
+                          width: tileSize,
+                          height: tileSize,
                           backgroundColor: 'transparent',
                         },
                       ]}
@@ -907,8 +928,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                     style={[
                       styles.tile,
                       {
-                        width: TILE_SIZE - 4,
-                        height: TILE_SIZE - 4,
+                        width: tileSize - 4,
+                        height: tileSize - 4,
                         margin: 2,
                         backgroundColor: tileBg,
                         borderRadius: 10,
@@ -920,7 +941,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                       },
                     ]}
                   >
-                    <Text style={[styles.tileLetter, { color: tileColor }]}>
+                    <Text
+                      style={[
+                        styles.tileLetter,
+                        compactLayout && styles.tileLetterCompact,
+                        { color: tileColor },
+                      ]}
+                    >
                       {letter}
                     </Text>
                   </View>
@@ -932,11 +959,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       </View>
 
       {/* 3 Action Power-up Buttons */}
-      <View style={styles.actionRow}>
+      <View style={[styles.actionRow, contentWidthStyle, compactLayout && styles.actionRowCompact]}>
         {/* Shuffle */}
         <Pressable
           onPress={handleShuffle}
-          style={({ pressed }) => [styles.actionBtn, styles.shuffleBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, styles.shuffleBtn, pressed && styles.pressed]}
         >
           <MaterialIcons name="refresh" size={20} color="#7C3AED" />
           <Text style={[styles.actionBtnTitle, { color: '#7C3AED' }]}>CLEAR</Text>
@@ -946,17 +973,19 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         {/* Hint */}
         <Pressable
           onPress={handleHint}
-          style={({ pressed }) => [styles.actionBtn, styles.hintBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, styles.hintBtn, pressed && styles.pressed]}
         >
           <MaterialIcons name="lightbulb" size={20} color="#B45309" />
           <Text style={[styles.actionBtnTitle, { color: '#B45309' }]}>HINT</Text>
-          <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>🪙 25</Text>
+          <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>
+            {hasUsedCoinHint ? 'Ad only' : `🪙 ${HINT_COST}`}
+          </Text>
         </Pressable>
 
         {/* Ad-rewarded hint */}
         <Pressable
           onPress={handleRewardedHint}
-          style={({ pressed }) => [styles.actionBtn, { backgroundColor: '#E0F2FE', borderColor: '#38BDF8' }, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, { backgroundColor: '#E0F2FE', borderColor: '#38BDF8' }, pressed && styles.pressed]}
         >
           <MaterialIcons name="ondemand-video" size={20} color="#0284C7" />
           <Text style={[styles.actionBtnTitle, { color: '#0284C7' }]}>AD HINT</Text>
@@ -966,11 +995,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         {/* Reveal */}
         <Pressable
           onPress={handleReveal}
-          style={({ pressed }) => [styles.actionBtn, styles.revealBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, styles.revealBtn, pressed && styles.pressed]}
         >
           <MaterialIcons name="auto-fix-high" size={20} color="#0D9488" />
           <Text style={[styles.actionBtnTitle, { color: '#0D9488' }]}>REVEAL</Text>
-          <Text style={[styles.actionBtnSub, { color: '#0D9488' }]}>🪙 50</Text>
+          <Text style={[styles.actionBtnSub, { color: '#0D9488' }]}>🪙 {REVEAL_COST}</Text>
         </Pressable>
       </View>
 
@@ -1441,11 +1470,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '900',
   },
+  tileLetterCompact: {
+    fontSize: 20,
+  },
   actionRow: {
     flexDirection: 'row',
     width: '100%',
     gap: 8,
     marginTop: 8,
+  },
+  actionRowCompact: {
+    flexWrap: 'wrap',
   },
   actionBtn: {
     flex: 1,
@@ -1457,6 +1492,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
+  },
+  actionBtnCompact: {
+    flexBasis: '47%',
   },
   shuffleBtn: {
     backgroundColor: '#F5F3FF',
@@ -1491,7 +1529,8 @@ const styles = StyleSheet.create({
   },
 
   gameOverCard: {
-    width: 280,
+    width: '100%',
+    maxWidth: 280,
     backgroundColor: '#172858',
     borderRadius: 20,
     borderWidth: 2,
@@ -1559,7 +1598,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   pauseCard: {
-    width: 270,
+    width: '100%',
+    maxWidth: 270,
     backgroundColor: '#2E1065',
     borderRadius: 20,
     borderWidth: 2,

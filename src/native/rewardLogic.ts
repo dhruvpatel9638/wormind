@@ -1,5 +1,6 @@
 import { DAILY_REWARDS } from '../data/gameData';
 import { SPIN_PRIZES } from '../data/spinPrizes';
+import { HINT_COST } from '../config/economy';
 import type { PlayerState, SpinTicket } from '../types';
 
 export const localDayKey = (date = new Date()): string =>
@@ -116,6 +117,6 @@ export function completeDailySpin(state: PlayerState, ticket: SpinTicket, now = 
 }
 
 export function spendHint(state: PlayerState): PlayerState {
-  if (state.coins >= 25) return { ...state, coins: state.coins - 25 };
+  if (state.coins >= HINT_COST) return { ...state, coins: state.coins - HINT_COST };
   return state;
 }
