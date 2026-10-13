@@ -1,6 +1,6 @@
 import MobileAds, {
   InterstitialAd,
-  RewardedAd,
+  RewardedInterstitialAd,
   AdEventType,
   RewardedAdEventType,
 } from 'react-native-google-mobile-ads';
@@ -21,6 +21,7 @@ export const initAdMob = async () => {
 // pending ad slot.
 let lastInterstitialShownAt = Date.now();
 let isInterstitialLoading = false;
+let isRewardedInterstitialLoadingOrShowing = false;
 
 // Keep a full two-minute gap between random interstitials. If this interval
 // expires while the player is solving a level, the next completed level shows
@@ -101,6 +102,14 @@ export const showRewardedAd = (
   onError?: () => void,
   onFinished?: () => void
 ) => {
+  if (isRewardedInterstitialLoadingOrShowing) {
+    console.log('[AdMob Rewarded Interstitial] An ad is already loading or showing.');
+    onError?.();
+    onFinished?.();
+    return;
+  }
+
+  isRewardedInterstitialLoadingOrShowing = true;
   const subscriptions: Array<() => void> = [];
   let rewardEarned = false;
   let finished = false;
@@ -109,6 +118,7 @@ export const showRewardedAd = (
   const finish = (failed: boolean) => {
     if (finished) return;
     finished = true;
+    isRewardedInterstitialLoadingOrShowing = false;
     for (const unsubscribe of subscriptions.splice(0)) unsubscribe();
     try {
       if (failed) onError?.();
@@ -120,14 +130,17 @@ export const showRewardedAd = (
 
   const fail = (error: unknown) => {
     if (finished) return;
-    console.warn('[AdMob Rewarded] Ad failed:', error);
+    console.warn('[AdMob Rewarded Interstitial] Ad failed:', error);
     finish(true);
   };
 
   try {
-    const rewarded = RewardedAd.createForAdRequest(ADMOB_CONFIG.REWARDED_ID, {
-      requestNonPersonalizedAdsOnly: true,
-    });
+    const rewarded = RewardedInterstitialAd.createForAdRequest(
+      ADMOB_CONFIG.REWARDED_INTERSTITIAL_ID,
+      {
+        requestNonPersonalizedAdsOnly: true,
+      }
+    );
 
     subscriptions.push(
       rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {

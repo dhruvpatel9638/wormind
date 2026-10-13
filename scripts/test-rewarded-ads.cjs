@@ -36,7 +36,7 @@ function harness(options = {}) {
     },
   };
   const sdk = {
-    RewardedAd: { createForAdRequest() {
+    RewardedInterstitialAd: { createForAdRequest() {
       if (options.createError) throw failure;
       return ad;
     } },
@@ -47,7 +47,7 @@ function harness(options = {}) {
     exports: {},
     require(name) {
       if (name === 'react-native-google-mobile-ads') return sdk;
-      if (name === '../config/admob') return { ADMOB_CONFIG: { REWARDED_ID: 'test' } };
+      if (name === '../config/admob') return { ADMOB_CONFIG: { REWARDED_INTERSTITIAL_ID: 'test' } };
       throw new Error(`Unexpected import: ${name}`);
     },
     console: { log() {}, warn() {} },
