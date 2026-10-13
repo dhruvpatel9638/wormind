@@ -1,4 +1,4 @@
-package com.dhruvpatel.wormind
+package com.amyaastudio.wormind
 
 import android.app.Application
 import android.content.res.Configuration

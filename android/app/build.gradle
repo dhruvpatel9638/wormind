@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.dhruvpatel.wormind'
+    namespace 'com.amyaastudio.wormind'
     defaultConfig {
-        applicationId 'com.dhruvpatel.wormind'
+        applicationId 'com.amyaastudio.wormind'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
