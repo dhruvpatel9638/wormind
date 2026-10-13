@@ -94,43 +94,66 @@ export const showSmartInterstitialAd = (onClosed?: () => void) => {
   );
 };
 
-// Show Google Rewarded Video Ad (Hint reward)
-export const showRewardedAd = (onRewardGranted: () => void, onError?: () => void) => {
-  const rewarded = RewardedAd.createForAdRequest(ADMOB_CONFIG.REWARDED_ID, {
-    requestNonPersonalizedAdsOnly: true,
-  });
-
+// Reward callbacks run after the ad closes. Finished also runs for cancellation
+// or failure so callers can release their loading/double-tap locks.
+export const showRewardedAd = (
+  onRewardGranted: () => void,
+  onError?: () => void,
+  onFinished?: () => void
+) => {
+  const subscriptions: Array<() => void> = [];
   let rewardEarned = false;
+  let finished = false;
+  let showing = false;
 
-  const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
-    rewarded.show();
-  });
-
-  const unsubscribeEarned = rewarded.addAdEventListener(
-    RewardedAdEventType.EARNED_REWARD,
-    (reward) => {
-      console.log('[AdMob Rewarded] User earned reward:', reward);
-      rewardEarned = true;
+  const finish = (failed: boolean) => {
+    if (finished) return;
+    finished = true;
+    for (const unsubscribe of subscriptions.splice(0)) unsubscribe();
+    try {
+      if (failed) onError?.();
+      else if (rewardEarned) onRewardGranted();
+    } finally {
+      onFinished?.();
     }
-  );
+  };
 
-  const unsubscribeClosed = rewarded.addAdEventListener(AdEventType.CLOSED, () => {
-    unsubscribeLoaded();
-    unsubscribeEarned();
-    unsubscribeClosed();
-    if (rewardEarned) {
-      onRewardGranted();
-    }
-  });
+  const fail = (error: unknown) => {
+    if (finished) return;
+    console.warn('[AdMob Rewarded] Ad failed:', error);
+    finish(true);
+  };
 
-  const unsubscribeError = rewarded.addAdEventListener(AdEventType.ERROR, (error) => {
-    console.warn('[AdMob Rewarded] Error loading ad:', error);
-    unsubscribeLoaded();
-    unsubscribeEarned();
-    unsubscribeClosed();
-    unsubscribeError();
-    if (onError) onError();
-  });
+  try {
+    const rewarded = RewardedAd.createForAdRequest(ADMOB_CONFIG.REWARDED_ID, {
+      requestNonPersonalizedAdsOnly: true,
+    });
 
-  rewarded.load();
+    subscriptions.push(
+      rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
+        if (finished || showing) return;
+        showing = true;
+        try {
+          void Promise.resolve(rewarded.show()).catch(fail);
+        } catch (error) {
+          fail(error);
+        }
+      })
+    );
+    subscriptions.push(
+      rewarded.addAdEventListener(RewardedAdEventType.EARNED_REWARD, () => {
+        if (!finished) rewardEarned = true;
+      })
+    );
+    subscriptions.push(
+      rewarded.addAdEventListener(AdEventType.CLOSED, () => finish(false))
+    );
+    subscriptions.push(
+      rewarded.addAdEventListener(AdEventType.ERROR, fail)
+    );
+
+    void Promise.resolve(rewarded.load()).catch(fail);
+  } catch (error) {
+    fail(error);
+  }
 };

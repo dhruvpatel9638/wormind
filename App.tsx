@@ -35,6 +35,7 @@ import {
   startDailySpin,
 } from './src/native/rewardLogic';
 import { initAdMob, showRewardedAd, showSmartInterstitialAd } from './src/utils/admobService';
+import { STRIKE_LOSS_PENALTY, STRIKE_RESTORE_AMOUNT, STRIKE_WIN_REWARD } from './src/config/strike';
 
 const STORAGE_KEY = '@wormind_player_state_native_v1';
 const DEFAULT_START_LEVEL = 1;
@@ -46,6 +47,8 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('worlds');
   const [activeLevelId, setActiveLevelId] = useState<number>(DEFAULT_START_LEVEL);
   const [showRestoreStrikeModal, setShowRestoreStrikeModal] = useState<boolean>(false);
+  const [isRestoringStrike, setIsRestoringStrike] = useState(false);
+  const restoreStrikeInFlight = useRef(false);
   const [showStrikeInfoModal, setShowStrikeInfoModal] = useState<boolean>(false);
   const [showCenturyModal, setShowCenturyModal] = useState<boolean>(false);
   const [showRefillHeartsModal, setShowRefillHeartsModal] = useState<boolean>(false);
@@ -207,23 +210,42 @@ export default function App() {
     setPlayerState((prev) => ({
       ...prev,
       hearts: Math.max(0, prev.hearts - 1),
-      strike: Math.max(0, (prev.strike || 0) - 50),
+      strike: Math.max(0, (prev.strike ?? 0) - STRIKE_LOSS_PENALTY),
     }));
   };
 
   const handleRestoreStrike = (onSuccess?: () => void) => {
+    if (!hasLoadedPlayer || restoreStrikeInFlight.current || (playerStateRef.current.strike ?? 10) > 0) return;
+    restoreStrikeInFlight.current = true;
+    setIsRestoringStrike(true);
+    let rewardGranted = false;
+    let finished = false;
+
     showRewardedAd(
       () => {
-        setPlayerState((prev) => ({
-          ...prev,
-          strike: 10,
-          strikeZeroFails: 0,
-        }));
-        Alert.alert('🔥 Strike Restored!', 'You watched an ad! Your strike is back to 10 🔥');
+        if (finished || rewardGranted) return;
+        rewardGranted = true;
+        setPlayerState((prev) => {
+          // Preserve strike earned elsewhere while the ad was open.
+          if ((prev.strike ?? 10) > 0) return prev;
+          return {
+            ...prev,
+            strike: STRIKE_RESTORE_AMOUNT,
+            strikeZeroFails: 0,
+          };
+        });
+        Alert.alert('🔥 Strike Restored!', 'Your flame is ready! Keep playing.');
         if (onSuccess) onSuccess();
       },
       () => {
+        if (finished) return;
         Alert.alert('Ad Unavailable', 'Could not load rewarded ad. Please try again in a moment.');
+      },
+      () => {
+        if (finished) return;
+        finished = true;
+        restoreStrikeInFlight.current = false;
+        setIsRestoringStrike(false);
       }
     );
   };
@@ -245,7 +267,7 @@ export default function App() {
         solvedCount: prev.solvedCount + 1,
         wordsDiscovered: prev.wordsDiscovered + 5,
         currentLevel: updatedHighest,
-        strike: (prev.strike || 0) + 10, // 🔥 +10 Strike on win!
+        strike: (prev.strike ?? 0) + STRIKE_WIN_REWARD,
       };
     });
 
@@ -461,6 +483,7 @@ export default function App() {
             strikeZeroFails={playerState.strikeZeroFails ?? 0}
             onFailLevel={handleFailLevel}
             onRestoreStrike={handleRestoreStrike}
+            isRestoringStrike={isRestoringStrike}
           />
         )}
 
@@ -568,17 +591,28 @@ export default function App() {
       </Modal>
 
       {/* Snapchat Strike Restore & Info Modal (Modern Game UI/UX) */}
-      <Modal visible={showRestoreStrikeModal} transparent animationType="fade">
+      <Modal
+        visible={showRestoreStrikeModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => {
+          if (restoreStrikeInFlight.current) return;
+          setShowRestoreStrikeModal(false);
+          setPendingLevelToStart(null);
+        }}
+      >
         <View style={styles.modalBackdrop}>
           <View style={styles.strikeCard}>
             {/* Top Close Button */}
             <Pressable
+              disabled={isRestoringStrike}
               onPress={() => {
+                if (restoreStrikeInFlight.current) return;
                 setShowRestoreStrikeModal(false);
                 setPendingLevelToStart(null);
               }}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              style={styles.modalCloseCornerBtn}
+              style={[styles.modalCloseCornerBtn, isRestoringStrike && styles.disabled]}
             >
               <MaterialIcons name="close" size={20} color="#94A3B8" />
             </Pressable>
@@ -696,7 +730,7 @@ export default function App() {
                     <MaterialIcons name="add" size={12} color="#15803D" />
                   </View>
                   <Text style={styles.ruleItemText}>
-                    <Text style={styles.ruleBoldText}>+10 Strike</Text> added on each level won
+                    <Text style={styles.ruleBoldText}>+{STRIKE_WIN_REWARD} Strike</Text> added on each level won
                   </Text>
                 </View>
 
@@ -705,7 +739,7 @@ export default function App() {
                     <MaterialIcons name="remove" size={12} color="#DC2626" />
                   </View>
                   <Text style={styles.ruleItemText}>
-                    <Text style={styles.ruleBoldText}>-50 Strike</Text> deducted if level timer runs out
+                    <Text style={styles.ruleBoldText}>-{STRIKE_LOSS_PENALTY} Strike</Text> deducted if level timer runs out
                   </Text>
                 </View>
 
@@ -714,7 +748,7 @@ export default function App() {
                     <MaterialIcons name="ondemand-video" size={12} color="#D97706" />
                   </View>
                   <Text style={styles.ruleItemText}>
-                    <Text style={styles.ruleBoldText}>Watch 1 Video Ad</Text> restores back to 10 🔥 free
+                    <Text style={styles.ruleBoldText}>Watch 1 Video Ad</Text> restores back to {STRIKE_RESTORE_AMOUNT} 🔥 free
                   </Text>
                 </View>
               </View>
@@ -724,16 +758,19 @@ export default function App() {
             {(playerState.strike ?? 10) <= 0 ? (
               <View style={styles.strikeActionRow}>
                 <Pressable
+                  disabled={isRestoringStrike}
                   onPress={() => {
+                    if (restoreStrikeInFlight.current) return;
                     setShowRestoreStrikeModal(false);
                     setPendingLevelToStart(null);
                   }}
-                  style={({ pressed }) => [styles.strikeCancelBtn, pressed && styles.pressed]}
+                  style={({ pressed }) => [styles.strikeCancelBtn, isRestoringStrike && styles.disabled, pressed && styles.pressed]}
                 >
                   <Text style={styles.strikeCancelText}>CANCEL</Text>
                 </Pressable>
 
                 <Pressable
+                  disabled={isRestoringStrike}
                   onPress={() => {
                     handleRestoreStrike(() => {
                       setShowRestoreStrikeModal(false);
@@ -744,7 +781,7 @@ export default function App() {
                       }
                     });
                   }}
-                  style={({ pressed }) => [styles.strikeAdBtnWrapper, pressed && styles.pressed]}
+                  style={({ pressed }) => [styles.strikeAdBtnWrapper, isRestoringStrike && styles.disabled, pressed && styles.pressed]}
                 >
                   <LinearGradient
                     colors={['#FF512F', '#F09819']}
@@ -753,14 +790,18 @@ export default function App() {
                     style={styles.strikeAdBtnGradient}
                   >
                     <MaterialIcons name="ondemand-video" size={18} color="#FFFFFF" style={{ marginRight: 6 }} />
-                    <Text style={styles.strikeAdBtnText}>WATCH AD 🎬</Text>
+                    <Text style={styles.strikeAdBtnText}>{isRestoringStrike ? 'LOADING...' : 'WATCH AD 🎬'}</Text>
                   </LinearGradient>
                 </Pressable>
               </View>
             ) : (
               <Pressable
-                onPress={() => setShowRestoreStrikeModal(false)}
-                style={({ pressed }) => [styles.strikeAwesomeBtn, pressed && styles.pressed]}
+                disabled={isRestoringStrike}
+                onPress={() => {
+                  if (restoreStrikeInFlight.current) return;
+                  setShowRestoreStrikeModal(false);
+                }}
+                style={({ pressed }) => [styles.strikeAwesomeBtn, isRestoringStrike && styles.disabled, pressed && styles.pressed]}
               >
                 <LinearGradient
                   colors={['#FF7A00', '#FF3D00']}
@@ -835,7 +876,7 @@ export default function App() {
       <CustomAlert
         visible={showStrikeInfoModal}
         title="WORD STRIKE"
-        message={`Current Strike: ${playerState.strike ?? 10}!\n\n• Each level win gives +10 Strike!\n• Failing a level loses -50 Strike.\n• If Strike hits 0, restore it for 100 Coins!`}
+        message={`Current Strike: ${playerState.strike ?? 10}!\n\n• Each level win gives +${STRIKE_WIN_REWARD} Strike!\n• Failing a level loses ${STRIKE_LOSS_PENALTY} Strike, down to 0.\n• If Strike hits 0, watch a rewarded ad to restore it to ${STRIKE_RESTORE_AMOUNT}!`}
         icon="local-fire-department"
         btnText="GOT IT"
         onClose={() => setShowStrikeInfoModal(false)}
@@ -971,6 +1012,9 @@ const styles = StyleSheet.create({
   },
   pressed: {
     transform: [{ scale: 0.96 }],
+  },
+  disabled: {
+    opacity: 0.6,
   },
   strikeCard: {
     width: '100%',

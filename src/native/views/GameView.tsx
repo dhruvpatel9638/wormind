@@ -20,6 +20,7 @@ import { nativeAudio } from '../audio';
 import { CustomAlert } from '../components/CustomAlert';
 import { VictoryModal } from '../components/VictoryModal';
 import { showRewardedAd } from '../../utils/admobService';
+import { STRIKE_LOSS_PENALTY, STRIKE_WIN_REWARD } from '../../config/strike';
 
 interface GameViewProps {
   levelId: number;
@@ -32,6 +33,7 @@ interface GameViewProps {
   strikeZeroFails?: number;
   onFailLevel?: () => void;
   onRestoreStrike?: (onSuccess?: () => void) => void;
+  isRestoringStrike?: boolean;
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -49,6 +51,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   strikeZeroFails = 0,
   onFailLevel,
   onRestoreStrike,
+  isRestoringStrike = false,
 }) => {
   const currentLevel =
     INITIAL_LEVELS.find((l) => l.id === levelId) ||
@@ -71,6 +74,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isVictory, setIsVictory] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const attemptStatusRef = useRef<'playing' | 'won' | 'lost' | 'exited'>('playing');
+  const completionClaimedRef = useRef(false);
+  const pausedRef = useRef(false);
+  const mountedRef = useRef(true);
+  const victoryTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [strikeLost, setStrikeLost] = useState(0);
+  const strikeRef = useRef(strike);
+  useEffect(() => { strikeRef.current = strike; }, [strike]);
   const getLevelInitialTime = (lvl: typeof currentLevel) => {
     if (lvl.timeLimit && lvl.timeLimit > 0 && lvl.timeLimit <= 130) {
       return lvl.timeLimit;
@@ -92,6 +103,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   };
 
   const [timeLeft, setTimeLeft] = useState<number>(() => getLevelInitialTime(currentLevel));
+  const timeLeftRef = useRef(timeLeft);
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
   const [isScrollingEnabled, setIsScrollingEnabled] = useState<boolean>(true);
 
@@ -252,25 +264,50 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   }, [wordStreak, isPaused, isVictory, isGameOver, activeStreakPulse]);
 
   const onFailLevelRef = useRef(onFailLevel);
+  const onCompleteLevelRef = useRef(onCompleteLevel);
   useEffect(() => {
     onFailLevelRef.current = onFailLevel;
-  }, [onFailLevel]);
+    onCompleteLevelRef.current = onCompleteLevel;
+  }, [onFailLevel, onCompleteLevel]);
 
-  // Level Countdown Timer (120 seconds)
+  // Finish an attempt synchronously, before the victory animation delay. Both
+  // the timer and touch callbacks consult this ref even before React renders.
+  const finishVictory = useCallback(() => {
+    if (attemptStatusRef.current !== 'playing' || pausedRef.current) return;
+    attemptStatusRef.current = 'won';
+    victoryTimeoutRef.current = setTimeout(() => {
+      victoryTimeoutRef.current = null;
+      if (!mountedRef.current || attemptStatusRef.current !== 'won') return;
+      setIsVictory(true);
+      nativeAudio.playVictory();
+    }, 450);
+  }, []);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      attemptStatusRef.current = 'exited';
+      if (victoryTimeoutRef.current !== null) clearTimeout(victoryTimeoutRef.current);
+    };
+  }, []);
+
+  // Keep side effects outside React state updaters, which may be replayed.
   useEffect(() => {
     if (isPaused || isVictory || isGameOver) return;
 
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          setIsGameOver(true);
-          nativeAudio.playGameOver();
-          if (onFailLevelRef.current) onFailLevelRef.current();
-          return 0;
-        }
-        return prev - 1;
-      });
+      if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
+      timeLeftRef.current = Math.max(0, timeLeftRef.current - 1);
+      setTimeLeft(timeLeftRef.current);
+      if (timeLeftRef.current === 0) {
+        attemptStatusRef.current = 'lost';
+        clearInterval(timer);
+        setStrikeLost(Math.min(Math.max(0, strikeRef.current), STRIKE_LOSS_PENALTY));
+        setIsGameOver(true);
+        nativeAudio.playGameOver();
+        onFailLevelRef.current?.();
+      }
     }, 1000);
 
     return () => clearInterval(timer);
@@ -289,6 +326,12 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   }, [timeLeft, isPaused, isVictory, isGameOver, pulseAnim]);
 
   const resetLevelState = useCallback((lvl: typeof currentLevel) => {
+    if (victoryTimeoutRef.current !== null) clearTimeout(victoryTimeoutRef.current);
+    victoryTimeoutRef.current = null;
+    attemptStatusRef.current = 'playing';
+    completionClaimedRef.current = false;
+    pausedRef.current = false;
+    timeLeftRef.current = getLevelInitialTime(lvl);
     nativeAudio.cancelLetterTaps();
     dragActiveRef.current = false;
     dragSelectionRef.current = [];
@@ -300,9 +343,12 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setIsVictory(false);
     setIsPaused(false);
     setIsGameOver(false);
-    setTimeLeft(getLevelInitialTime(lvl));
+    setTimeLeft(timeLeftRef.current);
     setHintedCells([]);
     setLastFoundMessage(null);
+    setStrikeLost(0);
+    setWordStreak(0);
+    setMaxWordStreak(0);
   }, [levelId]);
 
   useEffect(() => {
@@ -312,9 +358,47 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const foundCount = targetWords.filter((w) => w.found).length;
   const totalCount = targetWords.length;
 
+  const handlePause = () => {
+    if (attemptStatusRef.current !== 'playing') return;
+    pausedRef.current = true;
+    setIsPaused(true);
+  };
+
+  const handleResume = () => {
+    if (attemptStatusRef.current !== 'playing') return;
+    pausedRef.current = false;
+    setIsPaused(false);
+  };
+
+  const handleExit = () => {
+    if (isRestoringStrike) return;
+    attemptStatusRef.current = 'exited';
+    onExit();
+  };
+
+  const handleRetry = () => {
+    if (isRestoringStrike || attemptStatusRef.current !== 'lost') return;
+    if (strike <= 0) {
+      onRestoreStrike?.(() => {
+        if (mountedRef.current && attemptStatusRef.current === 'lost') resetLevelState(currentLevel);
+      });
+      return;
+    }
+    resetLevelState(currentLevel);
+  };
+
+  const handleCompleteAttempt = useCallback(() => {
+    // Tapping the celebration and its auto-advance timer can both fire.
+    if (attemptStatusRef.current !== 'won' || completionClaimedRef.current) return;
+    completionClaimedRef.current = true;
+    nativeAudio.stopVictory();
+    onCompleteLevelRef.current(levelId, 3, 50);
+  }, [levelId]);
+
   // Check if given cells spell any unfound target word
   const checkSelection = useCallback(
     (cells: { r: number; c: number }[]): boolean => {
+      if (attemptStatusRef.current !== 'playing' || pausedRef.current) return false;
       if (cells.length < 2) return false;
       const letters = cells.map((cell) => grid[cell.r]?.[cell.c] || '').join('');
       const reversed = letters.split('').reverse().join('');
@@ -360,16 +444,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
         // Check if all found
         if (updatedWords.every((w) => w.found)) {
-          setTimeout(() => {
-            setIsVictory(true);
-            nativeAudio.playVictory();
-          }, 450);
+          finishVictory();
         }
         return true;
       }
       return false;
     },
-    [grid, targetWords]
+    [grid, targetWords, finishVictory]
   );
 
   // Fix stale closures in PanResponder by using a ref for current state values
@@ -473,7 +554,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   // Tap-to-select support (tap letters one by one)
   const handleTileClick = (r: number, c: number) => {
-    if (isPaused || isVictory || isGameOver) return;
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
     if (!grid[r]?.[c] || grid[r][c] === ' ') return;
 
     const existingIdx = selectedCells.findIndex((cell) => cell.r === r && cell.c === c);
@@ -515,6 +596,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   // A standard hint costs 25 coins; the parent atomically checks the balance.
   const handleHint = () => {
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
     const unfound = targetWords.find((tw) => !tw.found);
     if (!unfound) return;
 
@@ -530,6 +612,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   // Rewarded Ad: grant one hint directly after the ad is watched.
   const handleRewardedHint = () => {
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
     const unfound = targetWords.find((tw) => !tw.found);
     if (!unfound) {
       setAlertInfo({ title: 'No Words Left', message: 'All words are already found!' });
@@ -551,6 +634,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   // Power-up: Reveal (50 Coins)
   const handleReveal = () => {
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
     const unfoundIdx = targetWords.findIndex((tw) => !tw.found);
     if (unfoundIdx === -1) return;
 
@@ -592,10 +676,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setTimeout(() => setLastFoundMessage(null), 2000);
 
     if (newTargetWords.every((w) => w.found)) {
-      setTimeout(() => {
-        setIsVictory(true);
-        nativeAudio.playVictory();
-      }, 450);
+      finishVictory();
     }
   };
 
@@ -765,7 +846,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         </View>
 
         <Pressable
-          onPress={() => setIsPaused(true)}
+          onPress={handlePause}
           style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
         >
           <MaterialIcons name="pause" size={20} color="#172858" />
@@ -899,63 +980,32 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         levelId={levelId}
         maxWordStreak={maxWordStreak}
         coinsEarned={50}
-        strikeEarned={10}
+        strikeEarned={STRIKE_WIN_REWARD}
         xpEarned={100}
-        onNextLevel={() => {
-          nativeAudio.stopVictory();
-          onCompleteLevel(levelId, 3, 50);
-        }}
+        onNextLevel={handleCompleteAttempt}
       />
 
       {/* Pause Modal */}
-      <Modal visible={isPaused} transparent animationType="fade">
+      <Modal visible={isPaused} transparent animationType="fade" onRequestClose={handleResume}>
         <View style={styles.modalBackdrop}>
           <View style={styles.gameOverCard}>
             <View style={styles.timerCircle}>
-              <MaterialIcons name="timer-off" size={38} color="#EF3B3B" />
+              <MaterialIcons name="pause-circle-filled" size={38} color="#7C3AED" />
             </View>
-            <Text style={styles.gameOverTitle}>TIME'S UP!</Text>
+            <Text style={styles.gameOverTitle}>GAME PAUSED</Text>
             <Text style={styles.gameOverSubtitle}>
-              You ran out of time on Level {levelId}!
+              Level {levelId} • {formatTime(timeLeft)} remaining
             </Text>
 
-            {/* Strike Penalty Banner */}
-            <View style={styles.strikePenaltyBox}>
-              <MaterialIcons name="local-fire-department" size={24} color="#EF4444" />
-              <View style={{ marginLeft: 8, flex: 1 }}>
-                <Text style={styles.strikePenaltyTitle}>-50 STRIKE PENALTY 💔</Text>
-                <Text style={styles.strikePenaltySub}>
-                  {strike > 0
-                    ? `Current Strike: 🔥 ${strike}`
-                    : 'Strike is 0! Watch a short ad to restore your strike to 10!'}
-                </Text>
-              </View>
-            </View>
-
             <Pressable
-              onPress={() => {
-                if (strike <= 0) {
-                  if (onRestoreStrike) {
-                    onRestoreStrike(() => {
-                      resetLevelState(currentLevel);
-                    });
-                  }
-                  return;
-                }
-                resetLevelState(currentLevel);
-              }}
+              onPress={handleResume}
               style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
             >
-              <Text style={styles.retryBtnText}>
-                {strike <= 0 ? 'WATCH AD TO RESTORE 🔥 & RETRY' : 'TRY AGAIN'}
-              </Text>
+              <Text style={styles.retryBtnText}>RESUME</Text>
             </Pressable>
 
             <Pressable
-              onPress={() => {
-                setIsPaused(false);
-                onExit();
-              }}
+              onPress={handleExit}
               style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
             >
               <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
@@ -965,7 +1015,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       </Modal>
 
       {/* Game Over Time-Out Modal */}
-      <Modal visible={isGameOver} transparent animationType="fade">
+      <Modal visible={isGameOver} transparent animationType="fade" onRequestClose={handleExit}>
         <View style={styles.modalBackdrop}>
           <Animated.View
             style={[
@@ -985,7 +1035,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
             <Text style={[styles.pauseTitle, { color: '#EF4444' }]}>TIME'S UP! ⏰</Text>
             <Text style={styles.pauseSub}>Level {levelId} Failed</Text>
 
-            {/* Loss Animations: -1 Heart & Strike Reset */}
+            {/* Loss Animations: -1 Heart & actual Strike deduction */}
             <View style={styles.lossBadgeContainer}>
               {/* -1 Heart Box */}
               <Animated.View
@@ -1027,7 +1077,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                 <Text style={styles.lossBadgeLabel}>LIFE MINUS</Text>
               </Animated.View>
 
-              {/* Strike Reset Box */}
+              {/* Strike Penalty Box */}
               <Animated.View
                 style={[
                   styles.lossBadgeBox,
@@ -1047,37 +1097,25 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                 ]}
               >
                 <MaterialIcons name="whatshot" size={26} color="#EA580C" />
-                <Text style={[styles.lossBadgeValue, { color: '#EA580C' }]}>Reset 🔥</Text>
-                <Text style={[styles.lossBadgeLabel, { color: '#C2410C' }]}>STRIKE MINUS</Text>
+                <Text style={[styles.lossBadgeValue, { color: '#EA580C' }]}>-{strikeLost} 🔥</Text>
+                <Text style={[styles.lossBadgeLabel, { color: '#C2410C' }]}>STRIKE LOST</Text>
               </Animated.View>
             </View>
+            <Text style={styles.pauseSub}>Strike remaining: {strike} 🔥</Text>
 
             <Pressable
-              onPress={() => {
-                if (strike <= 0) {
-                  if (onRestoreStrike) {
-                    onRestoreStrike(() => {
-                      setIsGameOver(false);
-                      resetLevelState(currentLevel);
-                    });
-                  }
-                  return;
-                }
-                setIsGameOver(false);
-                resetLevelState(currentLevel);
-              }}
-              style={({ pressed }) => [styles.resumeBtn, { backgroundColor: '#EF4444' }, pressed && styles.pressed]}
+              disabled={isRestoringStrike}
+              onPress={handleRetry}
+              style={({ pressed }) => [styles.resumeBtn, { backgroundColor: '#EF4444', opacity: isRestoringStrike ? 0.6 : 1 }, pressed && styles.pressed]}
             >
               <Text style={styles.resumeBtnText}>
-                {strike <= 0 ? 'WATCH AD TO RESTORE 🔥 & RETRY' : 'TRY AGAIN'}
+                {isRestoringStrike ? 'LOADING AD…' : strike <= 0 ? 'WATCH AD TO RESTORE 🔥 & RETRY' : 'TRY AGAIN'}
               </Text>
             </Pressable>
 
             <Pressable
-              onPress={() => {
-                setIsGameOver(false);
-                onExit();
-              }}
+              disabled={isRestoringStrike}
+              onPress={handleExit}
               style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
             >
               <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
