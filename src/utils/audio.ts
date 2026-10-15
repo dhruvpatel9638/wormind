@@ -1,6 +1,6 @@
 // Professional Game Audio Engine with Royalty-Free CC0/CC-BY Audio & Background Music
 // Music: "Carefree" by Kevin MacLeod (incompetech.com, CC-BY 3.0)
-// SFX: Public Domain (CC0) tactile sounds (Tap, Chime, Coin, Applause)
+// SFX: Public Domain (CC0) tactile sounds (Tap, Chime, Coin, Applause )
 
 class SoundEngine {
   private ctx: AudioContext | null = null;
@@ -51,7 +51,7 @@ class SoundEngine {
       }
     }
     if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume().catch(() => {});
+      this.ctx.resume().catch(() => { });
     }
   }
 
@@ -74,7 +74,7 @@ class SoundEngine {
             this.ctx.decodeAudioData(
               arrayBuffer,
               (decoded) => this.bufferCache.set(key, decoded),
-              () => {}
+              () => { }
             );
           }
         }
@@ -115,7 +115,7 @@ class SoundEngine {
     try {
       const audio = new Audio(url);
       audio.volume = volume;
-      audio.play().catch(() => {});
+      audio.play().catch(() => { });
     } catch {
       // Fallback
     }
@@ -208,7 +208,7 @@ class SoundEngine {
         gain.connect(this.ctx.destination);
         osc.start();
         osc.stop(this.ctx.currentTime + 0.1);
-      } catch {}
+      } catch { }
     }
   }
 
@@ -265,7 +265,7 @@ class SoundEngine {
           osc.start(now + i * 0.05);
           osc.stop(now + i * 0.05 + 0.2);
         });
-      } catch {}
+      } catch { }
     }
   }
 

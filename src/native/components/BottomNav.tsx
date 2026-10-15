@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+﻿import React from 'react';
+import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Screen } from '../../types';
 
@@ -7,22 +7,27 @@ interface BottomNavProps {
   currentScreen: Screen;
   onNavigate: (screen: Screen) => void;
   hasClaimableDaily?: boolean;
+  bottomOffset?: number;
 }
 
 export const NativeBottomNav: React.FC<BottomNavProps> = ({
   currentScreen,
   onNavigate,
   hasClaimableDaily = false,
+  bottomOffset = 58,
 }) => {
+  const { width } = useWindowDimensions();
+  const compact = width <= 360;
+
   const navItems: { id: Screen; label: string; icon: keyof typeof MaterialIcons.glyphMap; color: string }[] = [
-    { id: 'worlds', label: 'Map', icon: 'map', color: '#35C94A' },
-    { id: 'daily', label: 'Daily Reward', icon: 'card-giftcard', color: '#EF3B3B' },
-    { id: 'profile', label: 'Profile', icon: 'person', color: '#7652D9' },
+    { id: 'worlds', label: 'Map', icon: 'map', color: '#7C3AED' },
+    { id: 'daily', label: 'Daily Reward', icon: 'card-giftcard', color: '#F59E0B' },
+    { id: 'profile', label: 'Profile', icon: 'person', color: '#0D9488' },
   ];
 
   return (
-    <View style={styles.container}>
-      <View style={styles.pillContainer}>
+    <View style={[styles.container, { bottom: bottomOffset }]}>
+      <View style={[styles.pillContainer, compact && styles.pillContainerCompact]}>
         {navItems.map((item) => {
           const isActive = currentScreen === item.id;
           return (
@@ -31,17 +36,25 @@ export const NativeBottomNav: React.FC<BottomNavProps> = ({
               onPress={() => onNavigate(item.id)}
               style={({ pressed }) => [
                 styles.navBtn,
+                compact && styles.navBtnCompact,
                 isActive && { backgroundColor: item.color },
                 pressed && styles.pressed,
               ]}
             >
               <MaterialIcons
                 name={item.icon}
-                size={22}
-                color={isActive ? '#FFFFFF' : '#9B8EC0'}
+                size={compact ? 20 : 22}
+                color={isActive ? '#FFFFFF' : '#8B7FB0'}
               />
-              <Text style={[styles.navLabel, isActive && styles.navLabelActive]}>
-                {item.label}
+              <Text
+                numberOfLines={1}
+                style={[
+                  styles.navLabel,
+                  compact && styles.navLabelCompact,
+                  isActive && styles.navLabelActive,
+                ]}
+              >
+                {compact && item.id === 'daily' ? 'Daily' : item.label}
               </Text>
 
               {item.id === 'daily' && hasClaimableDaily && (
@@ -58,11 +71,11 @@ export const NativeBottomNav: React.FC<BottomNavProps> = ({
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 12,
     left: 0,
     right: 0,
     alignItems: 'center',
     paddingHorizontal: 16,
+    zIndex: 100,
   },
   pillContainer: {
     flexDirection: 'row',
@@ -72,15 +85,18 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     height: 58,
     borderRadius: 29,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backgroundColor: 'rgba(255, 255, 255, 0.96)',
     borderWidth: 2,
-    borderColor: 'rgba(212, 181, 255, 0.6)',
+    borderColor: '#DDD6FE',
     elevation: 8,
-    shadowColor: '#7652D9',
+    shadowColor: '#7C3AED',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.18,
     shadowRadius: 12,
     paddingHorizontal: 8,
+  },
+  pillContainerCompact: {
+    paddingHorizontal: 5,
   },
   navBtn: {
     flexDirection: 'row',
@@ -91,10 +107,17 @@ const styles = StyleSheet.create({
     gap: 6,
     position: 'relative',
   },
+  navBtnCompact: {
+    paddingHorizontal: 9,
+    gap: 4,
+  },
   navLabel: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#9B8EC0',
+    color: '#8B7FB0',
+  },
+  navLabelCompact: {
+    fontSize: 11,
   },
   navLabelActive: {
     color: '#FFFFFF',
@@ -107,7 +130,7 @@ const styles = StyleSheet.create({
     width: 9,
     height: 9,
     borderRadius: 4.5,
-    backgroundColor: '#EF3B3B',
+    backgroundColor: '#F59E0B',
     borderWidth: 1.5,
     borderColor: '#FFFFFF',
   },

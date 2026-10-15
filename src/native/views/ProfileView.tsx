@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { PlayerState } from '../../types';
-import { VOCABULARY_JOURNAL } from '../../data/gameData';
 import { nativeAudio } from '../audio';
 
 interface ProfileViewProps {
@@ -28,40 +27,18 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
   onToggleHaptics,
   onResetProgress,
 }) => {
-  const [activeTab, setActiveTab] = useState<'settings' | 'journal'>('settings');
   const [showResetModal, setShowResetModal] = useState<boolean>(false);
 
   return (
     <View style={styles.container}>
-      {/* Tab Switcher */}
-      <View style={styles.tabBar}>
-        <Pressable
-          onPress={() => {
-            nativeAudio.playLetterTap(1);
-            setActiveTab('settings');
-          }}
-          style={[styles.tabBtn, activeTab === 'settings' && styles.tabBtnActive]}
-        >
-          <Text style={[styles.tabBtnText, activeTab === 'settings' && styles.tabBtnTextActive]}>
-            Settings
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => {
-            nativeAudio.playLetterTap(2);
-            setActiveTab('journal');
-          }}
-          style={[styles.tabBtn, activeTab === 'journal' && styles.tabBtnActive]}
-        >
-          <Text style={[styles.tabBtnText, activeTab === 'journal' && styles.tabBtnTextActive]}>
-            Dictionary Journal
-          </Text>
-        </Pressable>
-      </View>
-
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {activeTab === 'settings' && (
+          <View style={[styles.card, styles.rewardsCard]}>
+            <Text style={styles.cardTitle}>Your Rewards</Text>
+            <Text style={styles.settingLabel}>⭐ {playerState.xp ?? 0} XP</Text>
+            <Text style={styles.settingLabel}>
+              {playerState.unlockedHats.includes('loki') ? '🎩 Loki Hat — Unlocked' : '🎩 Loki Hat — Day 7 reward'}
+            </Text>
+          </View>
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Audio & Preferences</Text>
 
@@ -74,8 +51,8 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               <Switch
                 value={playerState.soundEnabled}
                 onValueChange={onToggleSound}
-                trackColor={{ false: '#253D75', true: '#35C94A' }}
-                thumbColor="#FFFFFF"
+                trackColor={{ false: '#4B5563', true: '#7C3AED' }}
+                thumbColor="#C4B5FD"
               />
             </View>
 
@@ -88,8 +65,8 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               <Switch
                 value={playerState.musicEnabled}
                 onValueChange={onToggleMusic}
-                trackColor={{ false: '#253D75', true: '#35C94A' }}
-                thumbColor="#FFFFFF"
+                trackColor={{ false: '#4B5563', true: '#7C3AED' }}
+                thumbColor="#C4B5FD"
               />
             </View>
 
@@ -102,8 +79,8 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               <Switch
                 value={playerState.hapticsEnabled}
                 onValueChange={onToggleHaptics}
-                trackColor={{ false: '#253D75', true: '#35C94A' }}
-                thumbColor="#FFFFFF"
+                trackColor={{ false: '#4B5563', true: '#7C3AED' }}
+                thumbColor="#C4B5FD"
               />
             </View>
 
@@ -115,26 +92,6 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               <Text style={styles.resetBtnText}>Reset Progress</Text>
             </Pressable>
           </View>
-        )}
-
-        {activeTab === 'journal' && (
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Word Collector's Dictionary</Text>
-            <Text style={styles.cardSub}>Words discovered along your word journey:</Text>
-
-            {VOCABULARY_JOURNAL.map((item) => (
-              <View key={item.word} style={styles.journalItem}>
-                <View style={styles.journalHeader}>
-                  <Text style={styles.journalWord}>{item.word}</Text>
-                  <View style={styles.worldTag}>
-                    <Text style={styles.worldTagText}>{item.world}</Text>
-                  </View>
-                </View>
-                <Text style={styles.journalDef}>{item.definition}</Text>
-              </View>
-            ))}
-          </View>
-        )}
       </ScrollView>
 
       {/* Reset Confirmation Modal */}
@@ -171,46 +128,28 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
 };
 
 const styles = StyleSheet.create({
+  rewardsCard: {
+    marginBottom: 16,
+    gap: 8,
+  },
   container: {
     flex: 1,
+    backgroundColor: '#FAF8FF',
     paddingHorizontal: 16,
     paddingTop: 12,
   },
-  tabBar: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 4,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: '#E8DDFF',
-  },
-  tabBtn: {
-    flex: 1,
-    paddingVertical: 8,
-    alignItems: 'center',
-    borderRadius: 12,
-  },
-  tabBtnActive: {
-    backgroundColor: '#286BEA',
-  },
-  tabBtnText: {
-    fontSize: 13,
-    fontWeight: '800',
-    color: '#9B8EC0',
-  },
-  tabBtnTextActive: {
-    color: '#FFFFFF',
-  },
   scrollContent: {
-    paddingBottom: 120,
+    paddingBottom: 160,
   },
   card: {
-    backgroundColor: '#1E3468',
+    width: '100%',
+    maxWidth: 600,
+    alignSelf: 'center',
+    backgroundColor: '#2E1065',
     borderRadius: 20,
     padding: 18,
     borderWidth: 1,
-    borderColor: 'rgba(40, 107, 234, 0.25)',
+    borderColor: 'rgba(124, 58, 237, 0.25)',
   },
   cardTitle: {
     fontSize: 16,
@@ -229,7 +168,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(40, 107, 234, 0.15)',
+    borderBottomColor: 'rgba(124, 58, 237, 0.2)',
   },
   settingLeft: {
     flexDirection: 'row',
@@ -256,50 +195,16 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 13,
   },
-  journalItem: {
-    backgroundColor: 'rgba(30, 52, 104, 0.6)',
-    borderRadius: 14,
-    padding: 12,
-    marginTop: 8,
-    borderWidth: 1,
-    borderColor: 'rgba(40, 107, 234, 0.15)',
-  },
-  journalHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 4,
-  },
-  journalWord: {
-    color: '#4D8AFF',
-    fontSize: 14,
-    fontWeight: '900',
-  },
-  worldTag: {
-    backgroundColor: 'rgba(118, 82, 217, 0.2)',
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 8,
-  },
-  worldTagText: {
-    color: '#9B7EFF',
-    fontSize: 10,
-    fontWeight: '700',
-  },
-  journalDef: {
-    color: '#7B8AB8',
-    fontSize: 12,
-    lineHeight: 16,
-  },
   modalBackdrop: {
     flex: 1,
-    backgroundColor: 'rgba(10, 18, 42, 0.75)',
+    backgroundColor: 'rgba(46, 16, 101, 0.75)',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
   },
   resetPopup: {
-    width: 290,
+    width: '100%',
+    maxWidth: 290,
     backgroundColor: '#FFFFFF',
     borderRadius: 24,
     padding: 24,
@@ -331,13 +236,15 @@ const styles = StyleSheet.create({
   modalCancelBtn: {
     flex: 1,
     height: 44,
-    backgroundColor: '#F0F4FC',
+    backgroundColor: '#F5F3FF',
+    borderWidth: 1,
+    borderColor: '#DDD6FE',
     borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
   },
   modalCancelText: {
-    color: '#7B8AB8',
+    color: '#7C3AED',
     fontWeight: '900',
     fontSize: 13,
   },

@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   View,
+  ScrollView,
   Text,
   StyleSheet,
   Pressable,
   Modal,
-  Dimensions,
+  useWindowDimensions,
   Alert,
+  Animated,
+  Easing,
   PanResponder,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -15,6 +18,10 @@ import { TargetWord } from '../../types';
 import { INITIAL_LEVELS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
 import { CustomAlert } from '../components/CustomAlert';
+import { VictoryModal } from '../components/VictoryModal';
+import { showRewardedAd } from '../../utils/admobService';
+import { STRIKE_LOSS_PENALTY, STRIKE_WIN_REWARD } from '../../config/strike';
+import { HINT_COST, REVEAL_COST } from '../../config/economy';
 
 interface GameViewProps {
   levelId: number;
@@ -22,11 +29,13 @@ interface GameViewProps {
   onCompleteLevel: (levelId: number, stars: number, coinsEarned: number) => void;
   coins: number;
   onDeductCoins: (amount: number) => boolean;
+  onUseHint: () => boolean;
+  strike?: number;
+  strikeZeroFails?: number;
+  onFailLevel?: () => void;
+  onRestoreStrike?: (onSuccess?: () => void) => void;
+  isRestoringStrike?: boolean;
 }
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const GRID_SIZE = Math.min(SCREEN_WIDTH - 28, 380);
-const TILE_SIZE = GRID_SIZE / 8;
 
 export const NativeGameView: React.FC<GameViewProps> = ({
   levelId,
@@ -34,7 +43,23 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   onCompleteLevel,
   coins,
   onDeductCoins,
+  onUseHint,
+  strike = 10,
+  strikeZeroFails = 0,
+  onFailLevel,
+  onRestoreStrike,
+  isRestoringStrike = false,
 }) => {
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const compactLayout = windowWidth <= 360;
+  const gridSize = Math.max(
+    232,
+    Math.min(windowWidth - 28, 380, windowHeight <= 700 ? windowHeight * 0.43 : 380)
+  );
+  const tileSize = gridSize / 8;
+  const tileSizeRef = useRef(tileSize);
+  tileSizeRef.current = tileSize;
+  const contentWidthStyle = { width: '100%' as const, maxWidth: 600 };
   const currentLevel =
     INITIAL_LEVELS.find((l) => l.id === levelId) ||
     INITIAL_LEVELS.find((l) => l.id === 4) ||
@@ -48,19 +73,277 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   // Stores { r, c } cells that belong to found words
   const [solvedCells, setSolvedCells] = useState<{ r: number; c: number }[]>([]);
   const [selectedCells, setSelectedCells] = useState<{ r: number; c: number }[]>([]);
+  // Gesture events can arrive before React renders the previous selection.
+  const dragSelectionRef = useRef<{ r: number; c: number }[]>([]);
+  const dragActiveRef = useRef(false);
   const [spelledWord, setSpelledWord] = useState<string>('');
-  const [alertInfo, setAlertInfo] = useState<{title: string, message: string} | null>(null);
+  const [alertInfo, setAlertInfo] = useState<{ title: string; message: string; onConfirm?: () => void } | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isVictory, setIsVictory] = useState<boolean>(false);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const attemptStatusRef = useRef<'playing' | 'won' | 'lost' | 'exited'>('playing');
+  const completionClaimedRef = useRef(false);
+  const pausedRef = useRef(false);
+  const mountedRef = useRef(true);
+  const victoryTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [strikeLost, setStrikeLost] = useState(0);
+  const strikeRef = useRef(strike);
+  useEffect(() => { strikeRef.current = strike; }, [strike]);
+  const getLevelInitialTime = (lvl: typeof currentLevel) => {
+    if (lvl.timeLimit && lvl.timeLimit > 0 && lvl.timeLimit <= 130) {
+      return lvl.timeLimit;
+    }
+    const count = lvl.targetWords?.length || 5;
+    const isHardest = Boolean(
+      lvl.subtitle && (lvl.subtitle.includes('HARDEST') || lvl.subtitle.includes('BOSS') || lvl.subtitle.includes('CLIMAX'))
+    );
+    const isHard = Boolean(lvl.subtitle && lvl.subtitle.includes('HARD')) || isHardest;
+
+    // Dynamically reduced timer so hard levels feel genuinely fast-paced and challenging:
+    if (count <= 4) return 80;
+    if (count === 5) return 85;
+    if (count === 6) return isHard ? 90 : 95;
+    if (count === 7) return isHard ? 95 : 100;
+    if (count === 8) return isHardest ? 100 : 105;
+    if (count === 9) return isHardest ? 110 : 115;
+    return 120; // 10 words: max 120s for intense boss feel!
+  };
+
+  const [timeLeft, setTimeLeft] = useState<number>(() => getLevelInitialTime(currentLevel));
+  const timeLeftRef = useRef(timeLeft);
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
+  const [hasUsedCoinHint, setHasUsedCoinHint] = useState(false);
+  const hasUsedCoinHintRef = useRef(false);
+  const [isScrollingEnabled, setIsScrollingEnabled] = useState<boolean>(true);
+
+  const scaleAnim = useRef(new Animated.Value(0)).current;
+  const star1Anim = useRef(new Animated.Value(0)).current;
+  const star2Anim = useRef(new Animated.Value(0)).current;
+  const star3Anim = useRef(new Animated.Value(0)).current;
+
+  // Loss animation refs
+  const lossScaleAnim = useRef(new Animated.Value(1)).current;
+  const lossShakeAnim = useRef(new Animated.Value(0)).current;
+  const lossHeartAnim = useRef(new Animated.Value(1)).current;
+  const lossStrikeAnim = useRef(new Animated.Value(1)).current;
+  const floatMinusOneAnim = useRef(new Animated.Value(0)).current;
+  const floatMinusOneY = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (isGameOver) {
+      lossScaleAnim.setValue(0.7);
+      lossShakeAnim.setValue(0);
+      lossHeartAnim.setValue(0);
+      lossStrikeAnim.setValue(0);
+      floatMinusOneAnim.setValue(0);
+      floatMinusOneY.setValue(0);
+
+      Animated.sequence([
+        Animated.spring(lossScaleAnim, { toValue: 1, friction: 5, tension: 50, useNativeDriver: true }),
+        Animated.parallel([
+          Animated.spring(lossHeartAnim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+          Animated.spring(lossStrikeAnim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+          Animated.sequence([
+            Animated.timing(floatMinusOneAnim, { toValue: 1, duration: 300, useNativeDriver: true }),
+            Animated.timing(floatMinusOneY, { toValue: -20, duration: 600, useNativeDriver: true }),
+          ]),
+        ]),
+      ]).start();
+    }
+  }, [isGameOver]);
+
+  useEffect(() => {
+    if (isVictory) {
+      Animated.sequence([
+        Animated.spring(scaleAnim, { toValue: 1, friction: 5, tension: 40, useNativeDriver: true }),
+        Animated.spring(star1Anim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+        Animated.spring(star2Anim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+        Animated.spring(star3Anim, { toValue: 1, friction: 4, tension: 50, useNativeDriver: true }),
+      ]).start();
+    } else {
+      scaleAnim.setValue(0);
+      star1Anim.setValue(0);
+      star2Anim.setValue(0);
+      star3Anim.setValue(0);
+    }
+  }, [isVictory]);
+
+  // Pause BGM when entering GameView, resume when exiting
+  useEffect(() => {
+    nativeAudio.setInGame(true);
+    return () => {
+      nativeAudio.setInGame(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || isGameOver) {
+      dragActiveRef.current = false;
+      nativeAudio.cancelLetterTaps();
+      setIsScrollingEnabled(true);
+      setSelectedCells([]);
+      setSpelledWord('');
+    }
+  }, [isPaused, isGameOver]);
+
   const [lastFoundMessage, setLastFoundMessage] = useState<string | null>(null);
 
-  // Sync level on levelId change
+  // 🔥 STREAK STATE & ANIMATION REFS
+  const [wordStreak, setWordStreak] = useState<number>(0);
+  const [maxWordStreak, setMaxWordStreak] = useState<number>(0);
+
+  const streakScaleAnim = useRef(new Animated.Value(1)).current;
+  const streakRotateAnim = useRef(new Animated.Value(0)).current;
+  const iconScaleAnim = useRef(new Animated.Value(1)).current;
+  const iconRotateAnim = useRef(new Animated.Value(0)).current;
+  const ringScaleAnim = useRef(new Animated.Value(1)).current;
+  const ringOpacityAnim = useRef(new Animated.Value(0)).current;
+  const activeStreakPulse = useRef(new Animated.Value(1)).current;
+
+  // 6 Radial flame particles
+  const particleAnims = useRef(
+    [0, 60, 120, 180, 240, 300].map(() => ({
+      x: new Animated.Value(0),
+      y: new Animated.Value(0),
+      opacity: new Animated.Value(0),
+      scale: new Animated.Value(0.5),
+    }))
+  ).current;
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  const triggerStreakAnimation = (currentStreak: number) => {
+    streakScaleAnim.setValue(1);
+    Animated.sequence([
+      Animated.spring(streakScaleAnim, { toValue: 1.35, friction: 3, tension: 60, useNativeDriver: true }),
+      Animated.spring(streakScaleAnim, { toValue: 1, friction: 4, tension: 40, useNativeDriver: true }),
+    ]).start();
+
+    particleAnims.forEach((p, idx) => {
+      const angle = (idx * 60 * Math.PI) / 180;
+      const distance = 24;
+      p.x.setValue(0);
+      p.y.setValue(0);
+      p.opacity.setValue(1);
+      p.scale.setValue(0.5);
+
+      Animated.parallel([
+        Animated.timing(p.x, { toValue: Math.cos(angle) * distance, duration: 400, useNativeDriver: true }),
+        Animated.timing(p.y, { toValue: Math.sin(angle) * distance, duration: 400, useNativeDriver: true }),
+        Animated.timing(p.opacity, { toValue: 0, duration: 400, useNativeDriver: true }),
+        Animated.timing(p.scale, { toValue: 1.2, duration: 400, useNativeDriver: true }),
+      ]).start();
+    });
+  };
+
+  const triggerStreakReset = () => {
+    setWordStreak(0);
+  };
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+  };
+
+  const timerTheme = timeLeft <= 15
+    ? { bg: '#FEE2E2', border: '#EF4444', text: '#DC2626' }
+    : timeLeft <= 30
+    ? { bg: '#FEF3C7', border: '#F59E0B', text: '#B45309' }
+    : { bg: '#F0EAFF', border: 'rgba(40, 107, 234, 0.25)', text: '#7652D9' };
+
+  const getStreakStyle = (s: number) => {
+    if (s >= 5) return { bg: '#FEF3C7', border: '#F59E0B', icon: '#D97706', text: '#B45309' };
+    if (s >= 3) return { bg: '#FFEDD5', border: '#FB923C', icon: '#EA580C', text: '#C2410C' };
+    if (s >= 1) return { bg: '#FEF2F2', border: '#FCA5A5', icon: '#EF4444', text: '#B91C1C' };
+    return { bg: '#F3F4F6', border: '#E5E7EB', icon: '#9CA3AF', text: '#6B7280' };
+  };
+  const streakStyle = getStreakStyle(wordStreak);
+
+  // Persistent flame pulse effect when wordStreak >= 2
   useEffect(() => {
-    const lvl =
-      INITIAL_LEVELS.find((l) => l.id === levelId) ||
-      INITIAL_LEVELS.find((l) => l.id === 4) ||
-      INITIAL_LEVELS[0];
+    if (wordStreak < 2 || isPaused || isVictory || isGameOver) return;
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(activeStreakPulse, { toValue: 1.08, duration: 400, useNativeDriver: true }),
+        Animated.timing(activeStreakPulse, { toValue: 1, duration: 400, useNativeDriver: true }),
+      ])
+    );
+    loop.start();
+    return () => loop.stop();
+  }, [wordStreak, isPaused, isVictory, isGameOver, activeStreakPulse]);
+
+  const onFailLevelRef = useRef(onFailLevel);
+  const onCompleteLevelRef = useRef(onCompleteLevel);
+  useEffect(() => {
+    onFailLevelRef.current = onFailLevel;
+    onCompleteLevelRef.current = onCompleteLevel;
+  }, [onFailLevel, onCompleteLevel]);
+
+  // Finish an attempt synchronously, before the victory animation delay. Both
+  // the timer and touch callbacks consult this ref even before React renders.
+  const finishVictory = useCallback(() => {
+    if (attemptStatusRef.current !== 'playing' || pausedRef.current) return;
+    attemptStatusRef.current = 'won';
+    victoryTimeoutRef.current = setTimeout(() => {
+      victoryTimeoutRef.current = null;
+      if (!mountedRef.current || attemptStatusRef.current !== 'won') return;
+      setIsVictory(true);
+      nativeAudio.playVictory();
+    }, 450);
+  }, []);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      attemptStatusRef.current = 'exited';
+      if (victoryTimeoutRef.current !== null) clearTimeout(victoryTimeoutRef.current);
+    };
+  }, []);
+
+  // Keep side effects outside React state updaters, which may be replayed.
+  useEffect(() => {
+    if (isPaused || isVictory || isGameOver) return;
+
+    const timer = setInterval(() => {
+      if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
+      timeLeftRef.current = Math.max(0, timeLeftRef.current - 1);
+      setTimeLeft(timeLeftRef.current);
+      if (timeLeftRef.current === 0) {
+        attemptStatusRef.current = 'lost';
+        clearInterval(timer);
+        setStrikeLost(Math.min(Math.max(0, strikeRef.current), STRIKE_LOSS_PENALTY));
+        setIsGameOver(true);
+        nativeAudio.playGameOver();
+        onFailLevelRef.current?.();
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isPaused, isVictory, isGameOver]);
+
+  // Pulse timer badge on tick & urgent pulse when low time (<= 30s)
+  useEffect(() => {
+    if (isPaused || isVictory || isGameOver) return;
+    pulseAnim.setValue(1);
+    if (timeLeft <= 30 && timeLeft > 0) {
+      Animated.sequence([
+        Animated.timing(pulseAnim, { toValue: 1.18, duration: 180, useNativeDriver: true }),
+        Animated.timing(pulseAnim, { toValue: 1, duration: 220, useNativeDriver: true }),
+      ]).start();
+    }
+  }, [timeLeft, isPaused, isVictory, isGameOver, pulseAnim]);
+
+  const resetLevelState = useCallback((lvl: typeof currentLevel) => {
+    if (victoryTimeoutRef.current !== null) clearTimeout(victoryTimeoutRef.current);
+    victoryTimeoutRef.current = null;
+    attemptStatusRef.current = 'playing';
+    completionClaimedRef.current = false;
+    pausedRef.current = false;
+    timeLeftRef.current = getLevelInitialTime(lvl);
+    nativeAudio.cancelLetterTaps();
+    dragActiveRef.current = false;
+    dragSelectionRef.current = [];
     setGrid(lvl.grid);
     setTargetWords(lvl.targetWords.map((tw) => ({ ...tw, found: false })));
     setSolvedCells([]);
@@ -68,16 +351,65 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setSpelledWord('');
     setIsVictory(false);
     setIsPaused(false);
+    setIsGameOver(false);
+    setTimeLeft(timeLeftRef.current);
     setHintedCells([]);
     setLastFoundMessage(null);
+    setStrikeLost(0);
+    setWordStreak(0);
+    setMaxWordStreak(0);
+  }, [levelId]);
+
+  useEffect(() => {
+    hasUsedCoinHintRef.current = false;
+    setHasUsedCoinHint(false);
+    resetLevelState(currentLevel);
   }, [levelId]);
 
   const foundCount = targetWords.filter((w) => w.found).length;
   const totalCount = targetWords.length;
 
+  const handlePause = () => {
+    if (attemptStatusRef.current !== 'playing') return;
+    pausedRef.current = true;
+    setIsPaused(true);
+  };
+
+  const handleResume = () => {
+    if (attemptStatusRef.current !== 'playing') return;
+    pausedRef.current = false;
+    setIsPaused(false);
+  };
+
+  const handleExit = () => {
+    if (isRestoringStrike) return;
+    attemptStatusRef.current = 'exited';
+    onExit();
+  };
+
+  const handleRetry = () => {
+    if (isRestoringStrike || attemptStatusRef.current !== 'lost') return;
+    if (strike <= 0) {
+      onRestoreStrike?.(() => {
+        if (mountedRef.current && attemptStatusRef.current === 'lost') resetLevelState(currentLevel);
+      });
+      return;
+    }
+    resetLevelState(currentLevel);
+  };
+
+  const handleCompleteAttempt = useCallback(() => {
+    // Tapping the celebration and its auto-advance timer can both fire.
+    if (attemptStatusRef.current !== 'won' || completionClaimedRef.current) return;
+    completionClaimedRef.current = true;
+    nativeAudio.stopVictory();
+    onCompleteLevelRef.current(levelId, 3, 50);
+  }, [levelId]);
+
   // Check if given cells spell any unfound target word
   const checkSelection = useCallback(
     (cells: { r: number; c: number }[]): boolean => {
+      if (attemptStatusRef.current !== 'playing' || pausedRef.current) return false;
       if (cells.length < 2) return false;
       const letters = cells.map((cell) => grid[cell.r]?.[cell.c] || '').join('');
       const reversed = letters.split('').reverse().join('');
@@ -89,6 +421,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       if (matchIdx !== -1) {
         const matched = targetWords[matchIdx];
         nativeAudio.playWordFound();
+
+        // Increment Streak & trigger streak animation
+        setWordStreak((prev) => {
+          const next = prev + 1;
+          setMaxWordStreak((m) => Math.max(m, next));
+          triggerStreakAnimation(next);
+          return next;
+        });
 
         // Update targetWords
         const updatedWords = [...targetWords];
@@ -115,108 +455,117 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
         // Check if all found
         if (updatedWords.every((w) => w.found)) {
-          setTimeout(() => {
-            setIsVictory(true);
-            nativeAudio.playVictory();
-          }, 450);
+          finishVictory();
         }
         return true;
       }
       return false;
     },
-    [grid, targetWords]
+    [grid, targetWords, finishVictory]
   );
 
   // Fix stale closures in PanResponder by using a ref for current state values
-  const gameStateRef = useRef({ isPaused, isVictory, grid, checkSelection });
+  const gameStateRef = useRef({ isPaused, isVictory, isGameOver, grid, checkSelection });
   
   useEffect(() => {
-    gameStateRef.current = { isPaused, isVictory, grid, checkSelection };
-  }, [isPaused, isVictory, grid, checkSelection]);
+    gameStateRef.current = { isPaused, isVictory, isGameOver, grid, checkSelection };
+  }, [isPaused, isVictory, isGameOver, grid, checkSelection]);
+
+  // Both move and release must resolve the endpoint: native touch events can
+  // skip intermediate cells (or every move event) during a quick swipe.
+  const updateDragSelection = (locationX: number, locationY: number) => {
+    const state = gameStateRef.current;
+    if (!dragActiveRef.current || state.isPaused || state.isVictory || state.isGameOver) return;
+    const c = Math.floor(locationX / tileSizeRef.current);
+    const r = Math.floor(locationY / tileSizeRef.current);
+    if (r < 0 || r >= 8 || c < 0 || c >= 8 || !state.grid[r]?.[c] || state.grid[r][c] === ' ') return;
+
+    const prev = dragSelectionRef.current;
+    const lastCell = prev[prev.length - 1];
+    if (lastCell?.r === r && lastCell.c === c) return;
+    const startCell = prev[0];
+    const updated: { r: number; c: number }[] = [];
+    if (!startCell) {
+      updated.push({ r, c });
+    } else {
+      const dr = r - startCell.r;
+      const dc = c - startCell.c;
+      // Keep the existing horizontal, vertical and diagonal selection rules.
+      if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) return;
+      const stepR = Math.sign(dr);
+      const stepC = Math.sign(dc);
+      const len = Math.max(Math.abs(dr), Math.abs(dc));
+      for (let i = 0; i <= len; i++) {
+        updated.push({ r: startCell.r + i * stepR, c: startCell.c + i * stepC });
+      }
+    }
+
+    let sharedCells = 0;
+    while (sharedCells < prev.length && sharedCells < updated.length
+      && prev[sharedCells].r === updated[sharedCells].r
+      && prev[sharedCells].c === updated[sharedCells].c) {
+      sharedCells++;
+    }
+    // Recover clicks for each crossed cell, including coalesced moves and
+    // backtracking. Audio is paced separately; the selection updates now.
+    const crossedCells = Math.max(prev.length - sharedCells, updated.length - sharedCells);
+    dragSelectionRef.current = updated;
+    nativeAudio.playLetterTaps(crossedCells);
+    setSelectedCells(updated);
+    setSpelledWord(updated.map((cell) => state.grid[cell.r][cell.c]).join(''));
+  };
 
   // PanResponder for smooth drag / swipe selection
   const panResponder = useRef(
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
+      onPanResponderTerminationRequest: () => false,
       onPanResponderGrant: (evt) => {
         const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory) return;
+        if (state.isPaused || state.isVictory || state.isGameOver) return;
+        nativeAudio.cancelLetterTaps();
+        dragActiveRef.current = true;
+        setIsScrollingEnabled(false);
+        dragSelectionRef.current = [];
+        setSelectedCells([]);
+        setSpelledWord('');
         const { locationX, locationY } = evt.nativeEvent;
-        const c = Math.floor(locationX / TILE_SIZE);
-        const r = Math.floor(locationY / TILE_SIZE);
-        if (r >= 0 && r < 8 && c >= 0 && c < 8 && state.grid[r]?.[c] && state.grid[r][c] !== ' ') {
-          setSelectedCells([{ r, c }]);
-          setSpelledWord(state.grid[r][c]);
-          nativeAudio.playLetterTap(1);
-        }
+        updateDragSelection(locationX, locationY);
       },
       onPanResponderMove: (evt) => {
-        const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory) return;
         const { locationX, locationY } = evt.nativeEvent;
-        const c = Math.floor(locationX / TILE_SIZE);
-        const r = Math.floor(locationY / TILE_SIZE);
-
-        if (r >= 0 && r < 8 && c >= 0 && c < 8 && state.grid[r]?.[c] && state.grid[r][c] !== ' ') {
-          setSelectedCells((prev) => {
-            if (prev.length === 0) return [{ r, c }];
-            const startCell = prev[0];
-            
-            if (startCell.r === r && startCell.c === c) return [startCell];
-
-            const dr = r - startCell.r;
-            const dc = c - startCell.c;
-
-            // Must be a straight line (horizontal, vertical, or perfectly diagonal)
-            if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) {
-              return prev; // Not a valid line, ignore
-            }
-
-            const stepR = dr === 0 ? 0 : dr / Math.abs(dr);
-            const stepC = dc === 0 ? 0 : dc / Math.abs(dc);
-            const len = Math.max(Math.abs(dr), Math.abs(dc));
-
-            const updated = [];
-            for (let i = 0; i <= len; i++) {
-              updated.push({
-                r: startCell.r + i * stepR,
-                c: startCell.c + i * stepC
-              });
-            }
-
-            // Avoid unnecessary state updates
-            if (updated.length === prev.length && updated[updated.length - 1].r === prev[prev.length - 1].r && updated[updated.length - 1].c === prev[prev.length - 1].c) {
-              return prev;
-            }
-
-            const word = updated.map((cell) => state.grid[cell.r][cell.c]).join('');
-            setSpelledWord(word);
-            
-            if (updated.length !== prev.length) {
-              nativeAudio.playLetterTap(updated.length);
-            }
-            return updated;
-          });
-        }
+        updateDragSelection(locationX, locationY);
       },
-      onPanResponderRelease: () => {
+      onPanResponderRelease: (evt) => {
+        if (!dragActiveRef.current) return;
+        const { locationX, locationY } = evt.nativeEvent;
+        updateDragSelection(locationX, locationY);
+        dragActiveRef.current = false;
+        setIsScrollingEnabled(true);
         const state = gameStateRef.current;
-        if (state.isPaused || state.isVictory) return;
-        setSelectedCells((current) => {
-          const solved = state.checkSelection(current);
-          if (!solved) {
-            setSpelledWord('');
-          }
-          return [];
-        });
+        const current = dragSelectionRef.current;
+        dragSelectionRef.current = [];
+        setSelectedCells([]);
+        setSpelledWord('');
+        if (state.isPaused || state.isVictory || state.isGameOver) return;
+        const solved = state.checkSelection(current);
+        if (!solved && current.length >= 2) triggerStreakReset();
+      },
+      onPanResponderTerminate: () => {
+        nativeAudio.cancelLetterTaps();
+        dragActiveRef.current = false;
+        setIsScrollingEnabled(true);
+        dragSelectionRef.current = [];
+        setSelectedCells([]);
+        setSpelledWord('');
       },
     })
   ).current;
 
   // Tap-to-select support (tap letters one by one)
   const handleTileClick = (r: number, c: number) => {
-    if (isPaused || isVictory) return;
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
     if (!grid[r]?.[c] || grid[r][c] === ' ') return;
 
     const existingIdx = selectedCells.findIndex((cell) => cell.r === r && cell.c === c);
@@ -242,6 +591,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   };
 
   const handleClear = () => {
+    if (selectedCells.length >= 2) {
+      triggerStreakReset();
+    }
     setSelectedCells([]);
     setSpelledWord('');
   };
@@ -253,34 +605,66 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setSpelledWord('');
   };
 
-  // Power-up: Hint (25 Coins)
+  // One coin-funded hint is allowed per level; further hints use rewarded ads.
   const handleHint = () => {
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
     const unfound = targetWords.find((tw) => !tw.found);
     if (!unfound) return;
 
-    if (coins < 25) {
-      setAlertInfo({ title: 'Coins Needed', message: 'You need 25 coins for a Hint!' });
+    if (hasUsedCoinHintRef.current) {
+      setAlertInfo({
+        title: 'Ad Hint Required',
+        message: 'Your coin hint for this level is already used. Watch an ad to unlock another hint.',
+      });
       return;
     }
 
-    if (!onDeductCoins(25)) return;
+    if (!onUseHint()) {
+      setAlertInfo({ title: 'Coins Needed', message: `You need ${HINT_COST} coins for a Hint!` });
+      return;
+    }
 
+    hasUsedCoinHintRef.current = true;
+    setHasUsedCoinHint(true);
     nativeAudio.playSparkle();
     setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
     setTimeout(() => setHintedCells([]), 3500);
   };
 
-  // Power-up: Reveal (50 Coins)
-  const handleReveal = () => {
-    const unfoundIdx = targetWords.findIndex((tw) => !tw.found);
-    if (unfoundIdx === -1) return;
-
-    if (coins < 50) {
-      setAlertInfo({ title: 'Coins Needed', message: 'You need 50 coins to Reveal a word!' });
+  // Rewarded Ad: grant one hint directly after the ad is watched.
+  const handleRewardedHint = () => {
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
+    const unfound = targetWords.find((tw) => !tw.found);
+    if (!unfound) {
+      setAlertInfo({ title: 'No Words Left', message: 'All words are already found!' });
       return;
     }
 
-    if (!onDeductCoins(50)) return;
+    showRewardedAd(() => {
+      setAlertInfo({
+        title: '🎁 Ad Hint Unlocked!',
+        message: 'You watched an ad! Tap GOT IT to reveal a hint on the grid.',
+        onConfirm: () => {
+          nativeAudio.playSparkle();
+          setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
+          setTimeout(() => setHintedCells([]), 3500);
+        },
+      });
+    });
+  };
+
+  // Power-up: reveal an entire word at a premium over a single-cell hint.
+  const handleReveal = () => {
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
+    const unfoundIdx = targetWords.findIndex((tw) => !tw.found);
+    if (unfoundIdx === -1) return;
+
+    if (coins < REVEAL_COST) {
+      setAlertInfo({ title: 'Coins Needed', message: `You need ${REVEAL_COST} coins to Reveal a word!` });
+      return;
+    }
+
+    if (!onDeductCoins(REVEAL_COST)) return;
 
     nativeAudio.playWordFound();
     const unfoundWord = targetWords[unfoundIdx];
@@ -313,45 +697,27 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setTimeout(() => setLastFoundMessage(null), 2000);
 
     if (newTargetWords.every((w) => w.found)) {
-      setTimeout(() => {
-        setIsVictory(true);
-        nativeAudio.playVictory();
-      }, 450);
+      finishVictory();
     }
   };
 
   return (
-    <View style={styles.container}>
-      {/* Top Level Nav Bar */}
-      <View style={styles.topNav}>
-        <Pressable
-          onPress={onExit}
-          style={({ pressed }) => [styles.backBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="map" size={20} color="#286BEA" />
-          <Text style={styles.backBtnText}>MAP</Text>
-        </Pressable>
+    <ScrollView contentContainerStyle={styles.container} scrollEnabled={isScrollingEnabled}>
 
-        <View style={styles.levelBadge}>
-          <MaterialIcons name="star" size={16} color="#FFC928" />
-          <Text style={styles.levelBadgeText}>LEVEL {levelId}</Text>
-          <Text style={styles.levelBadgeSub}>• {currentLevel.title}</Text>
-        </View>
-
-        <Pressable
-          onPress={() => setIsPaused(true)}
-          style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="pause" size={20} color="#172858" />
-        </Pressable>
-      </View>
 
       {/* Target Words Drawer */}
-      <View style={styles.wordsCard}>
+      <View style={[styles.wordsCard, contentWidthStyle]}>
         <View style={styles.wordsHeader}>
           <View style={styles.wordsTitleRow}>
             <MaterialIcons name="search" size={16} color="#4D8AFF" />
             <Text style={styles.wordsTitle}>WORDS TO FIND</Text>
+            {currentLevel.maskName && (
+              <View style={styles.maskTagBadge}>
+                <Text style={styles.maskTagText}>
+                  {currentLevel.maskIcon} {currentLevel.maskName.toUpperCase()}
+                </Text>
+              </View>
+            )}
           </View>
           <View style={styles.foundBadge}>
             <Text style={styles.foundBadgeText}>{foundCount} / {totalCount} FOUND</Text>
@@ -379,7 +745,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       </View>
 
       {/* Spelled Word Active Banner */}
-      <View style={styles.spellingBar}>
+      <View style={[styles.spellingBar, contentWidthStyle]}>
         <View style={styles.spellingLeft}>
           <Text style={styles.spellingLabel}>SPELLING:</Text>
           {spelledWord ? (
@@ -391,21 +757,132 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           )}
         </View>
 
-        {spelledWord !== '' && (
+        {spelledWord !== '' ? (
           <Pressable onPress={handleClear} style={styles.clearBtn}>
             <MaterialIcons name="close" size={16} color="#FFFFFF" />
           </Pressable>
+        ) : (
+          <View style={{ width: 24, height: 24 }} />
         )}
       </View>
 
-      {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
+      {/* Timer & Streak Row (Below Spelling Bar) */}
+      <View style={[styles.timerControlRow, contentWidthStyle]}>
+        <View style={styles.timerStreakGroup}>
+          <Animated.View
+            style={[
+              styles.timerBadge,
+              {
+                backgroundColor: timerTheme.bg,
+                borderColor: timerTheme.border,
+                transform: [{ scale: pulseAnim }],
+              },
+            ]}
+          >
+            <MaterialIcons name="timer" size={18} color={timerTheme.text} />
+            <Text style={[styles.timerText, { color: timerTheme.text }]}>
+              {formatTime(timeLeft)}
+            </Text>
+          </Animated.View>
+
+          {/* 🔥 STREAK BADGE (Right next to Time!) */}
+          <View style={styles.streakWrapper}>
+            {/* Shockwave Aura Burst Ring */}
+            <Animated.View
+              style={[
+                styles.shockwaveRing,
+                {
+                  borderColor: streakStyle.icon,
+                  opacity: ringOpacityAnim,
+                  transform: [{ scale: ringScaleAnim }],
+                },
+              ]}
+            />
+
+            <Animated.View
+              style={[
+                styles.streakBadge,
+                {
+                  backgroundColor: streakStyle.bg,
+                  borderColor: streakStyle.border,
+                  transform: [
+                    { scale: Animated.multiply(streakScaleAnim, activeStreakPulse) },
+                    {
+                      rotate: streakRotateAnim.interpolate({
+                        inputRange: [-1, 0, 1],
+                        outputRange: ['-14deg', '0deg', '14deg'],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
+              {/* Animated Flame Icon */}
+              <Animated.View
+                style={{
+                  transform: [
+                    { scale: iconScaleAnim },
+                    {
+                      rotate: iconRotateAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: ['0deg', '360deg'],
+                      }),
+                    },
+                  ],
+                }}
+              >
+                <MaterialIcons
+                  name={wordStreak >= 4 ? 'local-fire-department' : 'whatshot'}
+                  size={20}
+                  color={streakStyle.icon}
+                />
+              </Animated.View>
+
+              <Text style={[styles.streakText, { color: streakStyle.text }]}>
+                {wordStreak > 0 ? `${wordStreak}x` : '0x'}
+              </Text>
+            </Animated.View>
+
+            {/* 6 Radial Flame Particles Bursting directly from Icon */}
+            {particleAnims.map((p, idx) => (
+              <Animated.View
+                key={`particle-${idx}`}
+                pointerEvents="none"
+                style={[
+                  styles.fireParticle,
+                  {
+                    opacity: p.opacity,
+                    transform: [
+                      { translateX: p.x },
+                      { translateY: p.y },
+                      { scale: p.scale },
+                    ],
+                  },
+                ]}
+              >
+                <MaterialIcons name="whatshot" size={13} color={streakStyle.icon} />
+              </Animated.View>
+            ))}
+          </View>
+        </View>
+
+        <Pressable
+          onPress={handlePause}
+          style={({ pressed }) => [styles.pauseBtn, pressed && styles.pressed]}
+        >
+          <MaterialIcons name="pause" size={20} color="#172858" />
+        </Pressable>
+      </View>
+
+
+
       {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
       <View
-        style={[styles.matrixCard, { width: GRID_SIZE + 24, height: GRID_SIZE + 24 }]}
+        style={[styles.matrixCard, { width: gridSize, height: gridSize }]}
       >
         <View
           {...panResponder.panHandlers}
-          style={[styles.gridContainer, { width: GRID_SIZE, height: GRID_SIZE }]}
+          style={[styles.gridContainer, { width: gridSize, height: gridSize }]}
         >
           {grid.map((row, r) => (
             <View key={`row-${r}`} style={styles.gridRow} pointerEvents="none">
@@ -422,8 +899,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                       style={[
                         styles.tile,
                         {
-                          width: TILE_SIZE,
-                          height: TILE_SIZE,
+                          width: tileSize,
+                          height: tileSize,
                           backgroundColor: 'transparent',
                         },
                       ]}
@@ -432,17 +909,17 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                 }
 
                 let tileBg = '#FFFFFF';
-                let tileColor = '#000000';
+                let tileColor = '#2E1065';
 
                 if (isSolved) {
-                  tileBg = '#E8F5E9'; // light green
-                  tileColor = '#2E7D32';
+                  tileBg = '#CCFBF1'; // Teal solved
+                  tileColor = '#0F766E';
                 } else if (isSelected) {
-                  tileBg = '#E3F2FD'; // light blue
-                  tileColor = '#1565C0';
+                  tileBg = '#EDE9FE'; // Violet selected
+                  tileColor = '#6D28D9';
                 } else if (isHinted) {
-                  tileBg = '#FFF8E1';
-                  tileColor = '#F57F17';
+                  tileBg = '#FEF3C7'; // Gold hinted
+                  tileColor = '#B45309';
                 }
 
                 return (
@@ -451,8 +928,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                     style={[
                       styles.tile,
                       {
-                        width: TILE_SIZE - 4,
-                        height: TILE_SIZE - 4,
+                        width: tileSize - 4,
+                        height: tileSize - 4,
                         margin: 2,
                         backgroundColor: tileBg,
                         borderRadius: 10,
@@ -464,7 +941,13 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                       },
                     ]}
                   >
-                    <Text style={[styles.tileLetter, { color: tileColor }]}>
+                    <Text
+                      style={[
+                        styles.tileLetter,
+                        compactLayout && styles.tileLetterCompact,
+                        { color: tileColor },
+                      ]}
+                    >
                       {letter}
                     </Text>
                   </View>
@@ -476,99 +959,82 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       </View>
 
       {/* 3 Action Power-up Buttons */}
-      <View style={styles.actionRow}>
+      <View style={[styles.actionRow, contentWidthStyle, compactLayout && styles.actionRowCompact]}>
         {/* Shuffle */}
         <Pressable
           onPress={handleShuffle}
-          style={({ pressed }) => [styles.actionBtn, styles.shuffleBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, styles.shuffleBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="refresh" size={20} color="#7652D9" />
-          <Text style={[styles.actionBtnTitle, { color: '#7652D9' }]}>CLEAR</Text>
-          <Text style={[styles.actionBtnSub, { color: '#7652D9' }]}>Free</Text>
+          <MaterialIcons name="refresh" size={20} color="#7C3AED" />
+          <Text style={[styles.actionBtnTitle, { color: '#7C3AED' }]}>CLEAR</Text>
+          <Text style={[styles.actionBtnSub, { color: '#7C3AED' }]}>Free</Text>
         </Pressable>
 
         {/* Hint */}
         <Pressable
           onPress={handleHint}
-          style={({ pressed }) => [styles.actionBtn, styles.hintBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, styles.hintBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="lightbulb" size={20} color="#5A3800" />
-          <Text style={[styles.actionBtnTitle, { color: '#5A3800' }]}>HINT</Text>
-          <Text style={[styles.actionBtnSub, { color: '#5A3800' }]}>🪙 25</Text>
+          <MaterialIcons name="lightbulb" size={20} color="#B45309" />
+          <Text style={[styles.actionBtnTitle, { color: '#B45309' }]}>HINT</Text>
+          <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>
+            {hasUsedCoinHint ? 'Ad only' : `🪙 ${HINT_COST}`}
+          </Text>
+        </Pressable>
+
+        {/* Ad-rewarded hint */}
+        <Pressable
+          onPress={handleRewardedHint}
+          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, { backgroundColor: '#E0F2FE', borderColor: '#38BDF8' }, pressed && styles.pressed]}
+        >
+          <MaterialIcons name="ondemand-video" size={20} color="#0284C7" />
+          <Text style={[styles.actionBtnTitle, { color: '#0284C7' }]}>AD HINT</Text>
+          <Text style={[styles.actionBtnSub, { color: '#0284C7' }]}>🎬 Watch Ad</Text>
         </Pressable>
 
         {/* Reveal */}
         <Pressable
           onPress={handleReveal}
-          style={({ pressed }) => [styles.actionBtn, styles.revealBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, styles.revealBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="auto-fix-high" size={20} color="#286BEA" />
-          <Text style={[styles.actionBtnTitle, { color: '#286BEA' }]}>REVEAL</Text>
-          <Text style={[styles.actionBtnSub, { color: '#286BEA' }]}>🪙 50</Text>
+          <MaterialIcons name="auto-fix-high" size={20} color="#0D9488" />
+          <Text style={[styles.actionBtnTitle, { color: '#0D9488' }]}>REVEAL</Text>
+          <Text style={[styles.actionBtnSub, { color: '#0D9488' }]}>🪙 {REVEAL_COST}</Text>
         </Pressable>
       </View>
 
-      {/* Level Victory Modal */}
-      <Modal visible={isVictory} transparent animationType="fade">
-        <View style={styles.modalBackdrop}>
-          <View style={styles.victoryCard}>
-            <View style={styles.trophyCircle}>
-              <MaterialIcons name="emoji-events" size={40} color="#172858" />
-            </View>
-            <Text style={styles.victoryTitle}>LEVEL COMPLETE!</Text>
-            <Text style={styles.victorySubtitle}>You solved all words in Level {levelId}!</Text>
-
-            <View style={styles.starsRow}>
-              <MaterialIcons name="star" size={36} color="#FFC928" />
-              <MaterialIcons name="star" size={42} color="#FFC928" />
-              <MaterialIcons name="star" size={36} color="#FFC928" />
-            </View>
-
-            <View style={styles.rewardRow}>
-              <View style={styles.rewardBox}>
-                <MaterialIcons name="monetization-on" size={22} color="#FFC928" />
-                <Text style={styles.rewardValue}>+50</Text>
-                <Text style={styles.rewardLabel}>Coins</Text>
-              </View>
-              <View style={styles.rewardBox}>
-                <MaterialIcons name="military-tech" size={22} color="#7652D9" />
-                <Text style={styles.rewardValue}>+100</Text>
-                <Text style={styles.rewardLabel}>XP</Text>
-              </View>
-            </View>
-
-            <Pressable
-              onPress={() => {
-                nativeAudio.stopVictory();
-                onCompleteLevel(levelId, 3, 50);
-              }}
-              style={({ pressed }) => [styles.continueBtn, pressed && styles.pressed]}
-            >
-              <Text style={styles.continueBtnText}>NEXT LEVEL</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
+      {/* Level Victory Modal with Winged Crest, Golden Sunburst & Party Confetti / Zario Ribbons */}
+      <VictoryModal
+        visible={isVictory}
+        levelId={levelId}
+        maxWordStreak={maxWordStreak}
+        coinsEarned={50}
+        strikeEarned={STRIKE_WIN_REWARD}
+        xpEarned={100}
+        onNextLevel={handleCompleteAttempt}
+      />
 
       {/* Pause Modal */}
-      <Modal visible={isPaused} transparent animationType="fade">
+      <Modal visible={isPaused} transparent animationType="fade" onRequestClose={handleResume}>
         <View style={styles.modalBackdrop}>
-          <View style={styles.pauseCard}>
-            <Text style={styles.pauseTitle}>GAME PAUSED</Text>
-            <Text style={styles.pauseSub}>Level {levelId} • {currentLevel.title}</Text>
+          <View style={styles.gameOverCard}>
+            <View style={styles.timerCircle}>
+              <MaterialIcons name="pause-circle-filled" size={38} color="#7C3AED" />
+            </View>
+            <Text style={styles.gameOverTitle}>GAME PAUSED</Text>
+            <Text style={styles.gameOverSubtitle}>
+              Level {levelId} • {formatTime(timeLeft)} remaining
+            </Text>
 
             <Pressable
-              onPress={() => setIsPaused(false)}
-              style={({ pressed }) => [styles.resumeBtn, pressed && styles.pressed]}
+              onPress={handleResume}
+              style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
             >
-              <Text style={styles.resumeBtnText}>RESUME</Text>
+              <Text style={styles.retryBtnText}>RESUME</Text>
             </Pressable>
 
             <Pressable
-              onPress={() => {
-                setIsPaused(false);
-                onExit();
-              }}
+              onPress={handleExit}
               style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
             >
               <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
@@ -577,38 +1043,226 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         </View>
       </Modal>
 
+      {/* Game Over Time-Out Modal */}
+      <Modal visible={isGameOver} transparent animationType="fade" onRequestClose={handleExit}>
+        <View style={styles.modalBackdrop}>
+          <Animated.View
+            style={[
+              styles.pauseCard,
+              {
+                borderColor: '#EF4444',
+                transform: [
+                  { scale: lossScaleAnim },
+                  { translateX: lossShakeAnim },
+                ],
+              },
+            ]}
+          >
+            <View style={styles.lossCircleHeader}>
+              <MaterialIcons name="heart-broken" size={38} color="#EF4444" />
+            </View>
+            <Text style={[styles.pauseTitle, { color: '#EF4444' }]}>TIME'S UP! ⏰</Text>
+            <Text style={styles.pauseSub}>Level {levelId} Failed</Text>
+
+            {/* Loss Animations: -1 Heart & actual Strike deduction */}
+            <View style={styles.lossBadgeContainer}>
+              {/* -1 Heart Box */}
+              <Animated.View
+                style={[
+                  styles.lossBadgeBox,
+                  {
+                    backgroundColor: '#FEF2F2',
+                    borderColor: '#FCA5A5',
+                    transform: [
+                      { scale: lossHeartAnim },
+                      {
+                        translateY: lossHeartAnim.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [14, 0],
+                        }),
+                      },
+                    ],
+                  },
+                ]}
+              >
+                {/* Floating "-1" animation */}
+                <Animated.View
+                  style={[
+                    styles.floatingMinusBadge,
+                    {
+                      opacity: floatMinusOneAnim.interpolate({
+                        inputRange: [0, 0.2, 0.8, 1],
+                        outputRange: [0, 1, 1, 0],
+                      }),
+                      transform: [{ translateY: floatMinusOneY }],
+                    },
+                  ]}
+                >
+                  <Text style={styles.floatingMinusText}>-1 ❤️</Text>
+                </Animated.View>
+
+                <MaterialIcons name="favorite" size={26} color="#DC2626" />
+                <Text style={styles.lossBadgeValue}>-1 Heart</Text>
+                <Text style={styles.lossBadgeLabel}>LIFE MINUS</Text>
+              </Animated.View>
+
+              {/* Strike Penalty Box */}
+              <Animated.View
+                style={[
+                  styles.lossBadgeBox,
+                  {
+                    backgroundColor: '#FFF7ED',
+                    borderColor: '#FDBA74',
+                    transform: [
+                      { scale: lossStrikeAnim },
+                      {
+                        translateY: lossStrikeAnim.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [14, 0],
+                        }),
+                      },
+                    ],
+                  },
+                ]}
+              >
+                <MaterialIcons name="whatshot" size={26} color="#EA580C" />
+                <Text style={[styles.lossBadgeValue, { color: '#EA580C' }]}>-{strikeLost} 🔥</Text>
+                <Text style={[styles.lossBadgeLabel, { color: '#C2410C' }]}>STRIKE LOST</Text>
+              </Animated.View>
+            </View>
+            <Text style={styles.pauseSub}>Strike remaining: {strike} 🔥</Text>
+
+            <Pressable
+              disabled={isRestoringStrike}
+              onPress={handleRetry}
+              style={({ pressed }) => [styles.resumeBtn, { backgroundColor: '#EF4444', opacity: isRestoringStrike ? 0.6 : 1 }, pressed && styles.pressed]}
+            >
+              <Text style={styles.resumeBtnText}>
+                {isRestoringStrike ? 'LOADING AD…' : strike <= 0 ? 'WATCH AD TO RESTORE 🔥 & RETRY' : 'TRY AGAIN'}
+              </Text>
+            </Pressable>
+
+            <Pressable
+              disabled={isRestoringStrike}
+              onPress={handleExit}
+              style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
+            >
+              <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
+            </Pressable>
+          </Animated.View>
+        </View>
+      </Modal>
+
       <CustomAlert 
         visible={!!alertInfo}
         title={alertInfo?.title || ''}
         message={alertInfo?.message || ''}
-        onClose={() => setAlertInfo(null)}
+        onClose={() => {
+          const onConfirm = alertInfo?.onConfirm;
+          setAlertInfo(null);
+          if (onConfirm) {
+            onConfirm();
+          }
+        }}
       />
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  timerStreakGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  streakWrapper: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  shockwaveRing: {
+    position: 'absolute',
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    borderWidth: 2,
+  },
+  streakBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 16,
+    borderWidth: 1.5,
+    gap: 4,
+  },
+  streakText: {
+    fontWeight: '900',
+    fontSize: 13,
+  },
+  fireParticle: {
+    position: 'absolute',
+  },
+  streakVictoryBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF7ED',
+    borderWidth: 1.5,
+    borderColor: '#FFEDD5',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+    gap: 4,
+    marginTop: 6,
+  },
+  streakVictoryText: {
+    color: '#EA580C',
+    fontWeight: '900',
+    fontSize: 12,
+  },
   container: {
-    flex: 1,
-    backgroundColor: '#EBF4FF',
+    flexGrow: 1,
+    backgroundColor: '#FAF8FF',
     alignItems: 'center',
     paddingHorizontal: 14,
     paddingTop: 8,
+    paddingBottom: 110,
   },
+  timerControlRow: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+    paddingHorizontal: 4,
+  },
+  timerBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F0EAFF',
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 18,
+    borderWidth: 2,
+    borderColor: 'rgba(40, 107, 234, 0.25)',
+    gap: 4,
+  },
+
   topNav: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 8,
+    paddingHorizontal: 4,
   },
   backBtn: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderWidth: 2,
     borderColor: 'rgba(40, 107, 234, 0.25)',
     gap: 4,
@@ -635,9 +1289,18 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   levelBadgeSub: {
-    color: '#7B8AB8',
-    fontSize: 11,
+    color: '#64748B',
     fontWeight: '600',
+    fontSize: 12,
+  },
+  timerText: {
+    color: '#7652D9',
+    fontWeight: '900',
+    fontSize: 15,
+    letterSpacing: 0.5,
+  },
+  timerTextWarning: {
+    color: '#EF3B3B',
   },
   pauseBtn: {
     width: 34,
@@ -645,7 +1308,7 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderWidth: 2,
-    borderColor: 'rgba(23, 40, 88, 0.15)',
+    borderColor: 'rgba(124, 58, 237, 0.2)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -654,7 +1317,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.92)',
     borderRadius: 16,
     borderWidth: 2,
-    borderColor: 'rgba(40, 107, 234, 0.2)',
+    borderColor: 'rgba(124, 58, 237, 0.25)',
     padding: 10,
     marginBottom: 8,
   },
@@ -675,16 +1338,31 @@ const styles = StyleSheet.create({
     color: '#286BEA',
     letterSpacing: 0.5,
   },
+  maskTagBadge: {
+    backgroundColor: '#E0F2FE',
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#BAE6FD',
+    marginLeft: 6,
+  },
+  maskTagText: {
+    fontSize: 9.5,
+    fontWeight: '900',
+    color: '#0369A1',
+    letterSpacing: 0.3,
+  },
   foundBadge: {
-    backgroundColor: '#E8F5E9',
+    backgroundColor: '#CCFBF1',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#A3F7A0',
+    borderColor: '#99F6E4',
   },
   foundBadgeText: {
-    color: '#2E7D32',
+    color: '#0F766E',
     fontWeight: '800',
     fontSize: 10,
   },
@@ -701,14 +1379,14 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   pillNormal: {
-    backgroundColor: '#F0F4FC',
+    backgroundColor: '#FAF8FF',
     borderWidth: 1.5,
-    borderColor: '#D4E2F5',
+    borderColor: '#DDD6FE',
   },
   pillFound: {
-    backgroundColor: '#E8F5E9',
+    backgroundColor: '#CCFBF1',
     borderWidth: 1.5,
-    borderColor: '#35C94A',
+    borderColor: '#14B8A6',
   },
   pillText: {
     fontWeight: '800',
@@ -719,40 +1397,41 @@ const styles = StyleSheet.create({
     color: '#4B5563',
   },
   pillTextFound: {
-    color: '#2E7D32',
+    color: '#0F766E',
     textDecorationLine: 'line-through',
   },
   spellingBar: {
     width: '100%',
+    height: 44,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#D4B5FF',
+    borderColor: '#DDD6FE',
     paddingHorizontal: 12,
-    paddingVertical: 6,
     marginBottom: 8,
   },
   spellingLeft: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
     gap: 8,
   },
   spellingLabel: {
-    color: '#7652D9',
+    color: '#7C3AED',
     fontSize: 10,
     fontWeight: '900',
   },
   spelledActive: {
-    color: '#286BEA',
+    color: '#7C3AED',
     fontSize: 17,
     fontWeight: '900',
     letterSpacing: 3,
   },
   foundAlertText: {
-    color: '#35C94A',
+    color: '#0D9488',
     fontSize: 13,
     fontWeight: '900',
   },
@@ -765,15 +1444,16 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
-    backgroundColor: '#7652D9',
+    backgroundColor: '#7C3AED',
     alignItems: 'center',
     justifyContent: 'center',
   },
   matrixCard: {
     backgroundColor: 'transparent',
-    padding: 12,
+    padding: 2,
     alignItems: 'center',
     justifyContent: 'center',
+    marginVertical: 4,
   },
   gridContainer: {
     backgroundColor: 'transparent',
@@ -790,15 +1470,21 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '900',
   },
+  tileLetterCompact: {
+    fontSize: 20,
+  },
   actionRow: {
     flexDirection: 'row',
     width: '100%',
     gap: 8,
-    marginTop: 10,
+    marginTop: 8,
+  },
+  actionRowCompact: {
+    flexWrap: 'wrap',
   },
   actionBtn: {
     flex: 1,
-    height: 52,
+    height: 50,
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
@@ -807,20 +1493,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
   },
+  actionBtnCompact: {
+    flexBasis: '47%',
+  },
   shuffleBtn: {
-    backgroundColor: '#F3E8FF',
+    backgroundColor: '#F5F3FF',
     borderWidth: 2,
-    borderColor: '#D4B5FF',
+    borderColor: '#DDD6FE',
   },
   hintBtn: {
     backgroundColor: '#FFF8E1',
     borderWidth: 2,
-    borderColor: '#FFE066',
+    borderColor: '#FDE68A',
   },
   revealBtn: {
-    backgroundColor: '#EBF4FF',
+    backgroundColor: '#F0FDFA',
     borderWidth: 2,
-    borderColor: '#B0D0FF',
+    borderColor: '#99F6E4',
   },
   actionBtnTitle: {
     fontSize: 11,
@@ -838,88 +1527,83 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 24,
   },
-  victoryCard: {
-    width: 290,
-    backgroundColor: '#172858',
-    borderRadius: 24,
-    borderWidth: 3,
-    borderColor: '#FFC928',
-    alignItems: 'center',
-    padding: 24,
-    elevation: 12,
-  },
-  trophyCircle: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#FFC928',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 3,
-    borderColor: '#FFFFFF',
-    marginTop: -48,
-  },
-  victoryTitle: {
-    color: '#FFFFFF',
-    fontSize: 20,
-    fontWeight: '900',
-    marginTop: 10,
-  },
-  victorySubtitle: {
-    color: '#B0C2E8',
-    fontSize: 12,
-    fontWeight: '600',
-    marginTop: 3,
-    textAlign: 'center',
-  },
-  starsRow: {
-    flexDirection: 'row',
-    gap: 8,
-    marginVertical: 14,
-  },
-  rewardRow: {
-    flexDirection: 'row',
-    gap: 8,
+
+  gameOverCard: {
     width: '100%',
-    marginBottom: 16,
-  },
-  rewardBox: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 12,
-    padding: 8,
-    alignItems: 'center',
-  },
-  rewardValue: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 15,
-    marginTop: 2,
-  },
-  rewardLabel: {
-    color: '#B0C2E8',
-    fontSize: 10,
-    fontWeight: '700',
-  },
-  continueBtn: {
-    width: '100%',
-    height: 46,
-    backgroundColor: '#35C94A',
-    borderRadius: 23,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  continueBtnText: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 15,
-  },
-  pauseCard: {
-    width: 270,
+    maxWidth: 280,
     backgroundColor: '#172858',
     borderRadius: 20,
     borderWidth: 2,
-    borderColor: '#286BEA',
+    borderColor: '#EF3B3B',
+    alignItems: 'center',
+    padding: 20,
+  },
+  timerCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'rgba(239, 59, 59, 0.15)',
+    borderWidth: 2,
+    borderColor: '#EF3B3B',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  gameOverTitle: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: '900',
+    letterSpacing: 1,
+  },
+  gameOverSubtitle: {
+    color: '#B0C2E8',
+    fontSize: 12,
+    marginTop: 4,
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  strikePenaltyBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(239, 68, 68, 0.3)',
+    padding: 10,
+    marginBottom: 14,
+    width: '100%',
+  },
+  strikePenaltyTitle: {
+    fontSize: 12,
+    fontWeight: '900',
+    color: '#EF4444',
+  },
+  strikePenaltySub: {
+    fontSize: 10,
+    color: '#B0C2E8',
+    marginTop: 2,
+  },
+  retryBtn: {
+    width: '100%',
+    height: 44,
+    backgroundColor: '#FFC928',
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+  },
+  retryBtnText: {
+    color: '#172858',
+    fontWeight: '900',
+    fontSize: 14,
+  },
+  pauseCard: {
+    width: '100%',
+    maxWidth: 270,
+    backgroundColor: '#2E1065',
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: '#7C3AED',
     alignItems: 'center',
     padding: 20,
   },
@@ -929,7 +1613,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   pauseSub: {
-    color: '#B0C2E8',
+    color: '#DDD6FE',
     fontSize: 11,
     marginTop: 2,
     marginBottom: 16,
@@ -937,7 +1621,7 @@ const styles = StyleSheet.create({
   resumeBtn: {
     width: '100%',
     height: 42,
-    backgroundColor: '#286BEA',
+    backgroundColor: '#7C3AED',
     borderRadius: 21,
     alignItems: 'center',
     justifyContent: 'center',
@@ -951,7 +1635,7 @@ const styles = StyleSheet.create({
   exitBtn: {
     width: '100%',
     height: 38,
-    backgroundColor: '#253D75',
+    backgroundColor: '#3B1A66',
     borderRadius: 19,
     alignItems: 'center',
     justifyContent: 'center',
@@ -961,7 +1645,66 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 13,
   },
+  lossBadgeContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    width: '100%',
+    marginVertical: 12,
+  },
+  lossBadgeBox: {
+    flex: 1,
+    borderRadius: 14,
+    borderWidth: 1.5,
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  lossBadgeValue: {
+    color: '#EF4444',
+    fontWeight: '900',
+    fontSize: 15,
+    marginTop: 2,
+  },
+  lossBadgeLabel: {
+    color: '#991B1B',
+    fontSize: 10,
+    fontWeight: '700',
+    marginTop: 1,
+  },
+  lossCircleHeader: {
+    width: 62,
+    height: 62,
+    borderRadius: 31,
+    backgroundColor: '#FEF2F2',
+    borderWidth: 2,
+    borderColor: '#EF4444',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+    marginTop: -10,
+  },
+  floatingMinusBadge: {
+    position: 'absolute',
+    top: -12,
+    backgroundColor: '#EF4444',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 10,
+    elevation: 4,
+    shadowColor: '#EF4444',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+  },
+  floatingMinusText: {
+    color: '#FFFFFF',
+    fontWeight: '900',
+    fontSize: 12,
+  },
   pressed: {
     transform: [{ scale: 0.96 }],
   },
 });
+

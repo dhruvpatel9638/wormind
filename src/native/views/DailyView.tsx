@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,70 +6,53 @@ import {
   Pressable,
   ScrollView,
   Modal,
-  Animated,
-  Easing,
+  useWindowDimensions,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { DAILY_REWARDS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
+import { LuckyWheel } from '../components/LuckyWheel';
+import type { DailyReward, SpinTicket } from '../../types';
 
 interface DailyViewProps {
-  hasClaimedDay5: boolean;
-  onClaimDay5: () => void;
-  onAddCoins: (amount: number) => void;
-  onAddHints: (amount: number) => void;
+  claimedDays: number[];
+  canClaimToday: boolean;
+  currentDayToClaim: number;
+  streak: number;
+  onClaimDaily: (day: number) => DailyReward | null;
+  canSpinToday: boolean;
+  onStartSpin: () => SpinTicket | null;
+  onCompleteSpin: (ticket: SpinTicket) => boolean;
 }
 
 export const NativeDailyView: React.FC<DailyViewProps> = ({
-  hasClaimedDay5,
-  onClaimDay5,
-  onAddCoins,
-  onAddHints,
+  claimedDays,
+  canClaimToday,
+  currentDayToClaim,
+  streak,
+  onClaimDaily,
+  canSpinToday,
+  onStartSpin,
+  onCompleteSpin,
 }) => {
+  const { width } = useWindowDimensions();
+  const compact = width <= 360;
+  const contentWidthStyle = { width: '100%' as const, maxWidth: 600, alignSelf: 'center' as const };
   const [showClaimModal, setShowClaimModal] = useState<boolean>(false);
-  const [isSpinning, setIsSpinning] = useState<boolean>(false);
-  const [wheelPrize, setWheelPrize] = useState<string | null>(null);
+  const [claimedMessage, setClaimedMessage] = useState<string>('You received your daily reward!');
 
-  const spinAnim = useRef(new Animated.Value(0)).current;
-
-  const handleClaim = () => {
-    if (hasClaimedDay5) return;
+  const handleClaim = (day: number) => {
+    if (!canClaimToday) return;
+    const reward = onClaimDaily(day);
+    if (!reward) return;
     nativeAudio.playCoin();
-    onClaimDay5();
-    onAddCoins(150);
-    onAddHints(2);
+    const parts = [
+      reward.coins > 0 && `+${reward.coins} Coins`,
+      reward.hat && reward.hatLabel,
+    ].filter(Boolean);
+    setClaimedMessage(`You received ${parts.join(', ')}!`);
     setShowClaimModal(true);
   };
-
-  const handleSpin = () => {
-    if (isSpinning) return;
-    setIsSpinning(true);
-    nativeAudio.playSparkle();
-
-    spinAnim.setValue(0);
-    Animated.timing(spinAnim, {
-      toValue: 1,
-      duration: 3000,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start(() => {
-      setIsSpinning(false);
-      const prizes = ['+50 Coins', '2x Hints', '+100 Coins', '+25 Coins'];
-      const won = prizes[Math.floor(Math.random() * prizes.length)];
-      setWheelPrize(won);
-      nativeAudio.playVictory();
-
-      if (won.includes('50')) onAddCoins(50);
-      else if (won.includes('100')) onAddCoins(100);
-      else if (won.includes('25')) onAddCoins(25);
-      else if (won.includes('Hints')) onAddHints(2);
-    });
-  };
-
-  const spinInterpolate = spinAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '1440deg'],
-  });
 
   return (
     <View style={styles.container}>
@@ -78,36 +61,40 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
         showsVerticalScrollIndicator={false}
       >
         {/* Streak Status Banner */}
-        <View style={styles.streakBanner}>
+        <View style={[styles.streakBanner, contentWidthStyle]}>
           <View style={styles.streakRow}>
             <View style={styles.fireCircle}>
               <MaterialIcons name="local-fire-department" size={26} color="#EF3B3B" />
             </View>
-            <View>
+            <View style={{ flex: 1 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                <Text style={styles.streakTitle}>5 DAY STREAK!</Text>
+                <Text style={styles.streakTitle}>{streak} DAY STREAK!</Text>
                 <View style={styles.onFireBadge}>
                   <Text style={styles.onFireText}>HOT</Text>
                 </View>
               </View>
-              <Text style={styles.streakSub}>Keep it going tomorrow for the Mega Chest!</Text>
+              <Text style={styles.streakSub}>
+                {canClaimToday
+                  ? `Day ${currentDayToClaim} login reward is ready to claim!`
+                  : `Reward claimed for today! Come back tomorrow for Day ${currentDayToClaim > 7 ? 1 : currentDayToClaim}.`}
+              </Text>
             </View>
           </View>
         </View>
 
         {/* 7-Day Reward Track */}
-        <Text style={styles.sectionTitle}>7-DAY LOGIN REWARDS</Text>
-        <View style={styles.rewardsGrid}>
+        <Text style={[styles.sectionTitle, contentWidthStyle]}>7-DAY LOGIN REWARDS</Text>
+        <View style={[styles.rewardsGrid, contentWidthStyle]}>
           {DAILY_REWARDS.map((reward) => {
-            const isDay5 = reward.day === 5;
-            const isClaimed = reward.day <= 4 || (isDay5 && hasClaimedDay5);
-            const isReady = isDay5 && !hasClaimedDay5;
+            const isClaimed = claimedDays.includes(reward.day);
+            const isReady = canClaimToday && reward.day === currentDayToClaim;
 
             return (
               <View
                 key={reward.day}
                 style={[
                   styles.rewardCard,
+                  compact && styles.rewardCardCompact,
                   isReady && styles.rewardCardReady,
                   isClaimed && styles.rewardCardClaimed,
                 ]}
@@ -128,7 +115,7 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
                   </View>
                 ) : isReady ? (
                   <Pressable
-                    onPress={handleClaim}
+                    onPress={() => handleClaim(reward.day)}
                     style={({ pressed }) => [styles.claimBtn, pressed && styles.pressed]}
                   >
                     <Text style={styles.claimBtnText}>CLAIM</Text>
@@ -141,47 +128,12 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
           })}
         </View>
 
-        {/* Lucky Spin Wheel Section */}
-        <View style={styles.wheelCard}>
-          <Text style={styles.wheelTitle}>DAILY LUCKY SPIN</Text>
-          <Text style={styles.wheelSub}>Spin the prize wheel for free bonus loot!</Text>
-
-          <View style={styles.wheelWrapper}>
-            <Animated.View style={[styles.wheelCircle, { transform: [{ rotate: spinInterpolate }] }]}>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '0deg' }] }]}>
-                <Text style={styles.segmentText}>🪙 50</Text>
-              </View>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '90deg' }] }]}>
-                <Text style={styles.segmentText}>💡 2x</Text>
-              </View>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '180deg' }] }]}>
-                <Text style={styles.segmentText}>🪙 100</Text>
-              </View>
-              <View style={[styles.wheelSegment, { transform: [{ rotate: '270deg' }] }]}>
-                <Text style={styles.segmentText}>🪙 25</Text>
-              </View>
-            </Animated.View>
-            <View style={styles.wheelCenterPin} />
-          </View>
-
-          {wheelPrize && (
-            <View style={styles.wonBanner}>
-              <Text style={styles.wonText}>🎉 You Won: {wheelPrize}!</Text>
-            </View>
-          )}
-
-          <Pressable
-            disabled={isSpinning}
-            onPress={handleSpin}
-            style={({ pressed }) => [
-              styles.spinBtn,
-              isSpinning && { opacity: 0.6 },
-              pressed && styles.pressed,
-            ]}
-          >
-            <Text style={styles.spinBtnText}>{isSpinning ? 'SPINNING...' : 'SPIN WHEEL'}</Text>
-          </Pressable>
-        </View>
+        {/* Royal Lucky Spin Wheel Component */}
+        <LuckyWheel
+          canSpinToday={canSpinToday}
+          onStartSpin={onStartSpin}
+          onCompleteSpin={onCompleteSpin}
+        />
       </ScrollView>
 
       {/* Reward Claimed Modal */}
@@ -190,7 +142,7 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
           <View style={styles.claimPopup}>
             <MaterialIcons name="celebration" size={48} color="#FFC928" />
             <Text style={styles.popupTitle}>REWARD CLAIMED!</Text>
-            <Text style={styles.popupSub}>You received +150 Coins and +2 Free Hints!</Text>
+            <Text style={styles.popupSub}>{claimedMessage}</Text>
 
             <Pressable
               onPress={() => setShowClaimModal(false)}
@@ -208,18 +160,19 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FAF8FF',
   },
   scrollContent: {
     paddingHorizontal: 16,
     paddingTop: 12,
-    paddingBottom: 120,
+    paddingBottom: 160,
   },
   streakBanner: {
-    backgroundColor: '#1E3468',
+    backgroundColor: '#2E1065',
     borderRadius: 20,
     padding: 14,
     borderWidth: 1.5,
-    borderColor: '#EF3B3B',
+    borderColor: '#F59E0B',
     marginBottom: 16,
   },
   streakRow: {
@@ -252,14 +205,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   onFireText: {
-    color: '#172858',
+    color: '#5A3800',
     fontSize: 9,
     fontWeight: '900',
   },
   sectionTitle: {
     fontSize: 12,
     fontWeight: '900',
-    color: '#286BEA',
+    color: '#7C3AED',
     letterSpacing: 0.5,
     marginBottom: 10,
   },
@@ -276,17 +229,20 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     borderWidth: 1.5,
-    borderColor: '#E8DDFF',
+    borderColor: '#EDE9FE',
     elevation: 2,
   },
+  rewardCardCompact: {
+    width: '48%',
+  },
   rewardCardReady: {
-    borderColor: '#35C94A',
+    borderColor: '#F59E0B',
     borderWidth: 2,
-    backgroundColor: '#F0FFF4',
+    backgroundColor: '#FEF3C7',
   },
   rewardCardClaimed: {
     opacity: 0.6,
-    backgroundColor: '#F8F9FD',
+    backgroundColor: '#F5F3FF',
   },
   rewardDay: {
     fontSize: 10,
@@ -297,12 +253,12 @@ const styles = StyleSheet.create({
   rewardText: {
     fontSize: 11,
     fontWeight: '800',
-    color: '#172858',
+    color: '#2E1065',
     textAlign: 'center',
     marginVertical: 4,
   },
   claimedPill: {
-    backgroundColor: '#E8DDFF',
+    backgroundColor: '#EDE9FE',
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 8,
@@ -310,10 +266,10 @@ const styles = StyleSheet.create({
   claimedPillText: {
     fontSize: 8,
     fontWeight: '800',
-    color: '#7B8AB8',
+    color: '#8B7FB0',
   },
   claimBtn: {
-    backgroundColor: '#35C94A',
+    backgroundColor: '#F59E0B',
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 12,
@@ -328,109 +284,27 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#B0B8D0',
   },
-  wheelCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 24,
-    padding: 18,
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#D4B5FF',
-    elevation: 3,
-  },
-  wheelTitle: {
-    fontSize: 16,
-    fontWeight: '900',
-    color: '#7652D9',
-  },
-  wheelSub: {
-    fontSize: 11,
-    color: '#9B8EC0',
-    marginTop: 2,
-    marginBottom: 16,
-  },
-  wheelWrapper: {
-    width: 140,
-    height: 140,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
-  },
-  wheelCircle: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    backgroundColor: '#7652D9',
-    borderWidth: 4,
-    borderColor: '#FFC928',
-    position: 'relative',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  wheelSegment: {
-    position: 'absolute',
-    alignItems: 'center',
-  },
-  segmentText: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 12,
-  },
-  wheelCenterPin: {
-    position: 'absolute',
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: '#FFC928',
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
-  },
-  wonBanner: {
-    backgroundColor: '#FFF3B0',
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#FFC928',
-    marginBottom: 12,
-  },
-  wonText: {
-    color: '#5A3800',
-    fontWeight: '800',
-    fontSize: 13,
-  },
-  spinBtn: {
-    width: '100%',
-    height: 44,
-    backgroundColor: '#7652D9',
-    borderRadius: 22,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  spinBtnText: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    fontSize: 14,
-  },
   modalBackdrop: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.45)',
+    backgroundColor: 'rgba(46, 16, 101, 0.75)',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
   },
   claimPopup: {
-    width: 270,
+    width: '100%',
+    maxWidth: 270,
     backgroundColor: '#FFFFFF',
     borderRadius: 24,
     padding: 22,
     alignItems: 'center',
     borderWidth: 3,
-    borderColor: '#35C94A',
+    borderColor: '#7C3AED',
   },
   popupTitle: {
     fontSize: 18,
     fontWeight: '900',
-    color: '#35C94A',
+    color: '#7C3AED',
     marginTop: 8,
   },
   popupSub: {
@@ -442,7 +316,7 @@ const styles = StyleSheet.create({
   popupBtn: {
     width: '100%',
     height: 42,
-    backgroundColor: '#35C94A',
+    backgroundColor: '#7C3AED',
     borderRadius: 21,
     alignItems: 'center',
     justifyContent: 'center',

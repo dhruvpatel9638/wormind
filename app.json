@@ -6,11 +6,28 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#A8E6FF"
+      "backgroundColor": "#0E0921"
     },
+    "icon": "./assets/images/Wormind logo.png",
     "android": {
-      "package": "com.dhruvpatel.wormind"
-    }
+      "package": "com.amyaastudio.wormind"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f377a021-f853-4da0-beb4-b616f62ca6f1"
+      }
+    },
+    "plugins": [
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511",
+          "androidSdk": "classic"
+        }
+      ]
+    ]
   }
 }
