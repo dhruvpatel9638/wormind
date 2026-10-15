@@ -6,3 +6,21 @@ coverage/
 *.log
 .env*
 !.env.example
+.expo/
+.idea/
+
+# Android release-signing material — keep a backed-up copy outside this repository.
+android/keystore.properties
+android/app/release.keystore
+
+android/.gradle/
+android/.gradle-user/
+**/build/
+*.class
+
+android/.gradle/
+android/.gradle-user/
+android/.cxx/
+android/app/.cxx/
+android/build/
+android/app/build/
