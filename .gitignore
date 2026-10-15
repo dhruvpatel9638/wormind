@@ -17,3 +17,10 @@ android/.gradle/
 android/.gradle-user/
 **/build/
 *.class
+
+android/.gradle/
+android/.gradle-user/
+android/.cxx/
+android/app/.cxx/
+android/build/
+android/app/build/
