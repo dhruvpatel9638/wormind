@@ -260,49 +260,84 @@ function generateLevelGrid(candidateWords, allowedDirs, mask) {
   return { grid: bestGrid, targetWords: verifiedWords };
 }
 
+// Exact Hardness Calculator based on the [4-Climb + 1-Relief Drop] Level Design Graph
+function getLevelHardness(level) {
+  if (level <= 0) return 1.0;
+  const cycle0 = [1.0, 3.5, 5.5, 7.5, 5.7];
+  if (level <= 5) return cycle0[level - 1];
+  const cycle1 = [8.5, 9.5, 10.7, 12.2, 11.0];
+  if (level <= 10) return cycle1[level - 6];
+
+  const cycleIndex = Math.floor((level - 1) / 5);
+  const stepIndex = (level - 1) % 5;
+  const cycleGrowth = 4.7;
+
+  const baseValue = cycle1[stepIndex];
+  const hardness = baseValue + (cycleIndex - 1) * cycleGrowth;
+  return Math.round(hardness * 10) / 10;
+}
+
 // ==========================================
 // 3. GENERATE SUNNY VALLEY LEVELS 1 - 50
 // ==========================================
 console.log('\n--- GENERATING SUNNY VALLEY (LEVELS 1 - 50) ---');
 const sunnyLevels = [];
 const sunnyWordUsage = {}; // word -> last level seen
-const maskKeys = ['square', 'octagon', 'diamond', 'cross'];
 
 let sunnyAvailablePool = shuffle([...CLEAN_SUNNY_WORDS]);
 
 for (let lvl = 1; lvl <= 50; lvl++) {
+  const hardness = getLevelHardness(lvl);
+  const step = ((lvl - 1) % 5) + 1;
+  const cycle = Math.floor((lvl - 1) / 5) + 1;
+  const isPeak = step === 4;
+  const isRelief = step === 5;
+
   let wordCount;
   let allowedDirs;
+  let maskName;
   let difficultyName;
 
-  if (lvl <= 5) {
+  if (hardness < 4.0) {
     wordCount = 4;
     allowedDirs = DIRS_EASY;
-    difficultyName = 'EASY';
-  } else if (lvl <= 15) {
-    wordCount = 5;
-    allowedDirs = DIRS_MEDIUM;
-    difficultyName = 'MEDIUM';
-  } else if (lvl <= 25) {
-    wordCount = 6;
-    allowedDirs = DIRS_ALL_8;
-    difficultyName = 'HARD';
-  } else if (lvl <= 40) {
-    wordCount = 6;
-    allowedDirs = DIRS_ALL_8;
-    difficultyName = 'HARDER';
-  } else if (lvl <= 49) {
-    wordCount = 7;
-    allowedDirs = DIRS_ALL_8;
-    difficultyName = 'HARDEST';
+    maskName = 'square';
+    difficultyName = `EASY (H: ${hardness})`;
+  } else if (hardness < 7.0) {
+    wordCount = isRelief ? 4 : 5;
+    allowedDirs = isRelief ? DIRS_EASY : DIRS_MEDIUM;
+    maskName = isRelief ? 'square' : 'octagon';
+    difficultyName = isRelief ? `RELIEF BREATHER 🌿 (H: ${hardness})` : `MEDIUM (H: ${hardness})`;
+  } else if (hardness < 10.0) {
+    wordCount = isRelief ? 5 : (isPeak ? 6 : 5);
+    allowedDirs = isRelief ? DIRS_MEDIUM : DIRS_ALL_8;
+    maskName = isRelief ? 'square' : (isPeak ? 'diamond' : 'octagon');
+    difficultyName = isPeak
+      ? `CYCLE ${cycle} PEAK 🔥 (H: ${hardness})`
+      : (isRelief ? `RELIEF BREATHER 🌿 (H: ${hardness})` : `HARD (H: ${hardness})`);
+  } else if (hardness < 13.0) {
+    wordCount = isRelief ? 5 : (isPeak ? 7 : 6);
+    allowedDirs = isRelief ? DIRS_MEDIUM : DIRS_ALL_8;
+    maskName = isRelief ? 'square' : (isPeak ? 'cross' : 'diamond');
+    difficultyName = isPeak
+      ? `CYCLE ${cycle} PEAK 🔥 (H: ${hardness})`
+      : (isRelief ? `RELIEF BREATHER 🌿 (H: ${hardness})` : `HARDER (H: ${hardness})`);
   } else {
-    // Level 50: Grand Climax
-    wordCount = 8;
+    wordCount = isRelief ? 6 : (isPeak ? 8 : 7);
     allowedDirs = DIRS_ALL_8;
-    difficultyName = 'CENTURY CLIMAX (BOSS)';
+    maskName = isRelief ? 'square' : 'cross';
+    difficultyName = isPeak
+      ? `CYCLE ${cycle} PEAK 🔥 (H: ${hardness})`
+      : (isRelief ? `RELIEF BREATHER 🌿 (H: ${hardness})` : `HARDEST (H: ${hardness})`);
   }
 
-  const maskName = maskKeys[(lvl - 1) % maskKeys.length];
+  if (lvl === 50) {
+    wordCount = 8;
+    allowedDirs = DIRS_ALL_8;
+    maskName = 'cross';
+    difficultyName = `VALLEY SUMMIT CLIMAX 👑 (H: ${hardness})`;
+  }
+
   const mask = MASKS[maskName];
 
   // Pick unique words for this level with cooldown of at least 20 levels
@@ -340,23 +375,20 @@ for (let lvl = 1; lvl <= 50; lvl++) {
     sunnyWordUsage[tw.word] = lvl;
   });
 
-  // Calculate dynamic timer
-  const finalCount = gen.targetWords.length;
-  let timeLimit;
-  if (finalCount <= 4) timeLimit = 80;
-  else if (finalCount === 5) timeLimit = 85;
-  else if (finalCount === 6) timeLimit = 90;
-  else if (finalCount === 7) timeLimit = 95;
-  else timeLimit = lvl === 50 ? 110 : 100;
+  // Calculate dynamic timer with relief breather bonus
+  let baseSeconds = 22 - Math.min(8, hardness * 0.45);
+  if (isRelief) baseSeconds += 3.5;
+  if (isPeak) baseSeconds -= 1.5;
+  const timeLimit = Math.max(50, Math.min(130, Math.round(gen.targetWords.length * baseSeconds)));
 
   sunnyLevels.push({
     id: lvl,
     title: `Level ${lvl}`,
-    subtitle: lvl === 50 ? 'SUNNY VALLEY - VALLEY PEAK (LEVEL 50)' : `SUNNY VALLEY - ${difficultyName} (LEVEL ${lvl})`,
+    subtitle: `SUNNY VALLEY - ${difficultyName}`,
     world: 'island',
-    themeIcon: lvl === 50 ? 'emoji_events' : (lvl % 5 === 0 ? 'card_giftcard' : 'wb_sunny'),
+    themeIcon: lvl === 50 ? 'emoji_events' : (isPeak ? 'whatshot' : (isRelief ? 'eco' : 'wb_sunny')),
     maskName: maskName.charAt(0).toUpperCase() + maskName.slice(1),
-    maskIcon: '☀️',
+    maskIcon: isPeak ? '🔥' : (isRelief ? '🌿' : '☀️'),
     stars: 0,
     completed: false,
     locked: false,
@@ -398,31 +430,52 @@ let oceanAvailablePool = shuffle([...CLEAN_OCEAN_WORDS]);
 
 for (let lvl = 51; lvl <= 150; lvl++) {
   const oceanIndex = lvl - 51; // 0 to 99
+  const hardness = getLevelHardness(lvl);
+  const step = ((lvl - 1) % 5) + 1;
+  const cycle = Math.floor((lvl - 1) / 5) + 1;
+  const isPeak = step === 4;
+  const isRelief = step === 5;
 
   let wordCount;
+  let allowedDirs;
   let difficultyName;
-  if (oceanIndex < 10) {
-    wordCount = 5;
-    difficultyName = 'EASY';
-  } else if (oceanIndex < 35) {
-    wordCount = 6;
-    difficultyName = 'MEDIUM';
-  } else if (oceanIndex < 70) {
-    wordCount = 6;
-    difficultyName = 'HARD';
-  } else if (oceanIndex < 90) {
-    wordCount = 7;
-    difficultyName = 'HARDEST';
-  } else if (oceanIndex < 99) {
-    wordCount = 7;
-    difficultyName = 'HARDEST (ABYSS)';
+
+  if (hardness < 13.0) {
+    wordCount = isRelief ? 5 : (isPeak ? 7 : 6);
+    allowedDirs = isRelief ? DIRS_MEDIUM : DIRS_ALL_8;
+    difficultyName = isPeak
+      ? `CYCLE ${cycle} PEAK 🔥 (H: ${hardness})`
+      : (isRelief ? `RELIEF BREATHER 🌿 (H: ${hardness})` : `DEEP CLIMB (H: ${hardness})`);
+  } else if (hardness < 17.0) {
+    wordCount = isRelief ? 6 : (isPeak ? 8 : 7);
+    allowedDirs = isRelief ? DIRS_MEDIUM : DIRS_ALL_8;
+    difficultyName = isPeak
+      ? `CYCLE ${cycle} PEAK 🔥 (H: ${hardness})`
+      : (isRelief ? `RELIEF BREATHER 🌿 (H: ${hardness})` : `ABYSS CLIMB (H: ${hardness})`);
   } else {
-    // Level 150: Atlantis Summit Grand Climax!
-    wordCount = 8;
-    difficultyName = 'ATLANTIS SUMMIT - ULTIMATE CLIMAX';
+    wordCount = isRelief ? 7 : (isPeak ? 8 : 8);
+    allowedDirs = DIRS_ALL_8;
+    difficultyName = isPeak
+      ? `CYCLE ${cycle} PEAK 🔥 (H: ${hardness})`
+      : (isRelief ? `RELIEF BREATHER 🌿 (H: ${hardness})` : `OCEAN TRENCH (H: ${hardness})`);
   }
 
-  const maskInfo = OCEAN_MASKS_INFO[oceanIndex % OCEAN_MASKS_INFO.length];
+  if (lvl === 150) {
+    wordCount = 8;
+    allowedDirs = DIRS_ALL_8;
+    difficultyName = `ATLANTIS SUMMIT ULTIMATE CLIMAX 👑 (H: ${hardness})`;
+  }
+
+  // Mask assignment: Relief gets open shell, Peak gets Trident/Cross
+  let maskInfo;
+  if (isRelief) {
+    maskInfo = OCEAN_MASKS_INFO[0]; // Clam shell
+  } else if (isPeak) {
+    maskInfo = OCEAN_MASKS_INFO[4]; // Neptune Trident
+  } else {
+    maskInfo = OCEAN_MASKS_INFO[oceanIndex % OCEAN_MASKS_INFO.length];
+  }
+
   const mask = maskInfo.mask;
 
   // Pick unique words for this level with cooldown of at least 15 levels
@@ -446,35 +499,30 @@ for (let lvl = 51; lvl <= 150; lvl++) {
     }
   }
 
-  let gen = generateLevelGrid(chosenWords, DIRS_ALL_8, mask);
+  let gen = generateLevelGrid(chosenWords, allowedDirs, mask);
   let attempts = 0;
   while (gen.targetWords.length < Math.min(chosenWords.length, wordCount - 1) && attempts < 10) {
     attempts++;
-    gen = generateLevelGrid(chosenWords, DIRS_ALL_8, mask);
+    gen = generateLevelGrid(chosenWords, allowedDirs, mask);
   }
 
   gen.targetWords.forEach(tw => {
     oceanWordUsage[tw.word] = lvl;
   });
 
-  const finalCount = gen.targetWords.length;
-  let timeLimit;
-  if (finalCount <= 4) timeLimit = 80;
-  else if (finalCount === 5) timeLimit = 85;
-  else if (finalCount === 6) timeLimit = 90;
-  else if (finalCount === 7) timeLimit = 95;
-  else timeLimit = lvl === 150 ? 120 : 105;
+  let baseSeconds = 22 - Math.min(8, hardness * 0.45);
+  if (isRelief) baseSeconds += 3.5;
+  if (isPeak) baseSeconds -= 1.5;
+  const timeLimit = Math.max(50, Math.min(130, Math.round(gen.targetWords.length * baseSeconds)));
 
   oceanLevels.push({
     id: lvl,
     title: `Level ${lvl}`,
-    subtitle: lvl === 150
-      ? 'ATLANTIS SUMMIT - ULTIMATE CLIMAX (LEVEL 150)'
-      : `BUBBLE OCEAN - ${difficultyName} (LEVEL ${lvl})`,
+    subtitle: `BUBBLE OCEAN - ${difficultyName}`,
     world: 'island',
-    themeIcon: lvl === 150 ? 'emoji_events' : (lvl % 5 === 0 ? 'card_giftcard' : 'water_drop'),
+    themeIcon: lvl === 150 ? 'emoji_events' : (isPeak ? 'whatshot' : (isRelief ? 'eco' : 'water_drop')),
     maskName: maskInfo.name,
-    maskIcon: maskInfo.icon,
+    maskIcon: isPeak ? '🔥' : (isRelief ? '🌿' : maskInfo.icon),
     stars: 0,
     completed: false,
     locked: false,

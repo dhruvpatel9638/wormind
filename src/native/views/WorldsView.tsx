@@ -15,6 +15,7 @@ import { nativeAudio } from '../audio';
 import { INITIAL_LEVELS } from '../../data/gameData';
 import { CustomAlert } from '../components/CustomAlert';
 import { MILESTONE_CHEST_COINS } from '../../config/economy';
+import { getLevelDifficultyConfig } from '../../config/difficultyScaling';
 import {
   ValleySun,
   ValleyTree,
@@ -674,6 +675,17 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                     Level {lvl.id}
                   </Text>
                 </View>
+
+                {lvl.id % 5 === 4 && (
+                  <View style={styles.peakNodeTag}>
+                    <Text style={styles.peakNodeTagText}>🔥 PEAK</Text>
+                  </View>
+                )}
+                {lvl.id % 5 === 0 && (
+                  <View style={styles.reliefNodeTag}>
+                    <Text style={styles.reliefNodeTagText}>🌿 RELIEF</Text>
+                  </View>
+                )}
               </View>
             );
           })}
@@ -708,12 +720,34 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             <Text style={styles.modalTitle}>LEVEL {selectedModalLevel}</Text>
             {(() => {
               const modalLevelData = INITIAL_LEVELS.find((l) => l.id === selectedModalLevel);
+              const conf = selectedModalLevel ? getLevelDifficultyConfig(selectedModalLevel) : null;
               return (
-                <Text style={styles.modalSub}>
-                  {selectedModalLevel && selectedModalLevel > 50
-                    ? `Chapter 2 • Bubble Ocean ${modalLevelData?.maskIcon ? `(${modalLevelData.maskIcon} ${modalLevelData.maskName})` : ''}`
-                    : 'Chapter 1 • Sunny Valley'}
-                </Text>
+                <View style={{ alignItems: 'center', marginBottom: 6 }}>
+                  <Text style={styles.modalSub}>
+                    {selectedModalLevel && selectedModalLevel > 50
+                      ? `Chapter 2 • Bubble Ocean ${modalLevelData?.maskIcon ? `(${modalLevelData.maskIcon} ${modalLevelData.maskName})` : ''}`
+                      : `Chapter 1 • Sunny Valley ${modalLevelData?.maskIcon ? `(${modalLevelData.maskIcon} ${modalLevelData.maskName})` : ''}`}
+                  </Text>
+                  {conf && (
+                    <View
+                      style={[
+                        styles.modalDifficultyBadge,
+                        conf.step === 4 && styles.modalBadgePeak,
+                        conf.step === 5 && styles.modalBadgeRelief,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.modalDifficultyBadgeText,
+                          conf.step === 4 && styles.modalBadgeTextPeak,
+                          conf.step === 5 && styles.modalBadgeTextRelief,
+                        ]}
+                      >
+                        {conf.titleBadge} • Hardness: {conf.hardness.toFixed(1)}
+                      </Text>
+                    </View>
+                  )}
+                </View>
               );
             })()}
 
@@ -1089,6 +1123,74 @@ const styles = StyleSheet.create({
   },
   nodeLabelTextLocked: {
     color: '#94A3B8',
+  },
+  peakNodeTag: {
+    backgroundColor: '#EF4444',
+    paddingHorizontal: 6,
+    paddingVertical: 1.5,
+    borderRadius: 8,
+    marginTop: 2,
+    borderWidth: 1,
+    borderColor: '#F87171',
+    shadowColor: '#EF4444',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  peakNodeTagText: {
+    color: '#FFFFFF',
+    fontSize: 8,
+    fontWeight: '900',
+    letterSpacing: 0.3,
+  },
+  reliefNodeTag: {
+    backgroundColor: '#10B981',
+    paddingHorizontal: 6,
+    paddingVertical: 1.5,
+    borderRadius: 8,
+    marginTop: 2,
+    borderWidth: 1,
+    borderColor: '#34D399',
+    shadowColor: '#10B981',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  reliefNodeTagText: {
+    color: '#FFFFFF',
+    fontSize: 8,
+    fontWeight: '900',
+    letterSpacing: 0.3,
+  },
+  modalDifficultyBadge: {
+    backgroundColor: '#F3F4F6',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginTop: 4,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+  modalBadgePeak: {
+    backgroundColor: '#FEF2F2',
+    borderColor: '#FCA5A5',
+  },
+  modalBadgeRelief: {
+    backgroundColor: '#F0FDF4',
+    borderColor: '#86EFAC',
+  },
+  modalDifficultyBadgeText: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#4B5563',
+  },
+  modalBadgeTextPeak: {
+    color: '#DC2626',
+  },
+  modalBadgeTextRelief: {
+    color: '#16A34A',
   },
   stickyFooter: {
     position: 'absolute',

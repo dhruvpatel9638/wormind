@@ -4,7 +4,7 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 1,
     "title": "Level 1",
-    "subtitle": "SUNNY VALLEY - EASY (LEVEL 1)",
+    "subtitle": "SUNNY VALLEY - EASY (H: 1)",
     "world": "island",
     "themeIcon": "wb_sunny",
     "maskName": "Square",
@@ -12,249 +12,249 @@ export const GENERATED_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 80,
+    "timeLimit": 86,
     "grid": [
       [
-        "H",
+        "I",
         "R",
-        "Q",
-        "U",
-        "A",
+        "E",
+        "M",
         "R",
-        "T",
-        "Z"
-      ],
-      [
-        "F",
+        "N",
         "B",
-        "Q",
-        "F",
-        "G",
-        "V",
-        "S",
         "H"
       ],
       [
-        "E",
-        "Z",
-        "L",
-        "Q",
-        "L",
-        "N",
+        "R",
+        "A",
+        "D",
+        "I",
         "S",
-        "W"
+        "H",
+        "H",
+        "F"
       ],
       [
-        "X",
-        "Z",
-        "C",
         "M",
         "I",
-        "I",
-        "P",
-        "O"
+        "U",
+        "R",
+        "G",
+        "W",
+        "X",
+        "B"
+      ],
+      [
+        "E",
+        "O",
+        "C",
+        "A",
+        "R",
+        "L",
+        "L",
+        "B"
+      ],
+      [
+        "A",
+        "N",
+        "A",
+        "C",
+        "O",
+        "A",
+        "G",
+        "U"
       ],
       [
         "D",
-        "J",
-        "W",
-        "E",
-        "M",
         "I",
-        "I",
-        "N"
-      ],
-      [
-        "M",
-        "P",
-        "M",
+        "Z",
         "L",
-        "M",
-        "A",
-        "T",
-        "D"
-      ],
-      [
-        "Y",
-        "Q",
+        "V",
+        "S",
         "U",
-        "O",
-        "E",
-        "W",
-        "I",
         "E"
       ],
       [
-        "D",
-        "D",
-        "H",
+        "O",
+        "C",
         "N",
-        "R",
-        "D",
-        "J",
+        "E",
+        "E",
+        "H",
+        "M",
         "R"
+      ],
+      [
+        "W",
+        "L",
+        "B",
+        "K",
+        "E",
+        "X",
+        "G",
+        "T"
       ]
     ],
     "targetWords": [
       {
-        "word": "GLIMMER",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "WONDER",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "QUARTZ",
+        "word": "MIRACLE",
         "found": false,
         "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 7
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 3
       },
       {
-        "word": "MELON",
+        "word": "MEADOW",
         "found": false,
-        "rowStart": 3,
-        "colStart": 3,
+        "rowStart": 2,
+        "colStart": 0,
         "rowEnd": 7,
-        "colEnd": 3
+        "colEnd": 0
+      },
+      {
+        "word": "RADISH",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "GROVE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
       }
     ]
   },
   {
     "id": 2,
     "title": "Level 2",
-    "subtitle": "SUNNY VALLEY - EASY (LEVEL 2)",
+    "subtitle": "SUNNY VALLEY - EASY (H: 3.5)",
     "world": "island",
     "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
+    "maskName": "Square",
     "maskIcon": "☀️",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 80,
+    "timeLimit": 82,
     "grid": [
       [
-        " ",
-        " ",
-        "G",
-        "S",
-        "C",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
         "N",
-        "O",
-        "P",
-        "G",
-        "F",
-        "R",
-        " "
+        "J",
+        "T",
+        "N",
+        "U",
+        "A",
+        "S",
+        "Z"
       ],
       [
-        "A",
-        "I",
-        "B",
-        "R",
-        "A",
+        "F",
+        "J",
+        "K",
         "V",
-        "E",
+        "S",
+        "O",
+        "A",
         "C"
       ],
       [
-        "U",
-        "R",
-        "Y",
+        "H",
         "I",
-        "G",
-        "O",
-        "R",
-        "H"
-      ],
-      [
-        "E",
-        "I",
-        "B",
-        "N",
-        "M",
+        "T",
+        "D",
+        "W",
         "L",
-        "S",
-        "B"
-      ],
-      [
-        "K",
-        "S",
-        "P",
         "G",
-        "U",
-        "P",
-        "K",
-        "R"
+        "Y"
       ],
       [
-        " ",
+        "B",
+        "E",
         "A",
-        "Z",
-        "U",
-        "Z",
-        "Z",
-        "Y",
-        " "
+        "V",
+        "E",
+        "R",
+        "E",
+        "G"
       ],
       [
-        " ",
-        " ",
-        "O",
-        "M",
+        "V",
+        "Y",
         "S",
+        "B",
+        "E",
+        "G",
         "N",
-        " ",
-        " "
+        "N"
+      ],
+      [
+        "J",
+        "W",
+        "L",
+        "U",
+        "T",
+        "Y",
+        "G",
+        "E"
+      ],
+      [
+        "I",
+        "T",
+        "I",
+        "Q",
+        "O",
+        "X",
+        "L",
+        "T"
+      ],
+      [
+        "F",
+        "V",
+        "W",
+        "W",
+        "Y",
+        "Z",
+        "J",
+        "B"
       ]
     ],
     "targetWords": [
       {
-        "word": "SPRING",
+        "word": "BEAVER",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "CYGNET",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "SWEET",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "SAGE",
         "found": false,
         "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "BRAVE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "IRIS",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "SKY",
-        "found": false,
-        "rowStart": 4,
         "colStart": 6,
-        "rowEnd": 6,
+        "rowEnd": 3,
         "colEnd": 6
       }
     ]
@@ -262,83 +262,220 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 3,
     "title": "Level 3",
-    "subtitle": "SUNNY VALLEY - EASY (LEVEL 3)",
+    "subtitle": "SUNNY VALLEY - MEDIUM (H: 5.5)",
     "world": "island",
     "themeIcon": "wb_sunny",
-    "maskName": "Diamond",
+    "maskName": "Octagon",
     "maskIcon": "☀️",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 80,
+    "timeLimit": 98,
+    "grid": [
+      [
+        " ",
+        " ",
+        "D",
+        "R",
+        "V",
+        "N",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "O",
+        "V",
+        "A",
+        "A",
+        "M",
+        "B",
+        " "
+      ],
+      [
+        "D",
+        "Y",
+        "I",
+        "B",
+        "L",
+        "O",
+        "L",
+        "P"
+      ],
+      [
+        "G",
+        "V",
+        "C",
+        "B",
+        "L",
+        "N",
+        "A",
+        "X"
+      ],
+      [
+        "O",
+        "S",
+        "T",
+        "I",
+        "E",
+        "A",
+        "Z",
+        "O"
+      ],
+      [
+        "H",
+        "R",
+        "O",
+        "T",
+        "Y",
+        "R",
+        "E",
+        "W"
+      ],
+      [
+        " ",
+        "G",
+        "R",
+        "T",
+        "C",
+        "C",
+        "K",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Y",
+        "U",
+        "B",
+        "H",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VICTORY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "MONARCH",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "RABBIT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "VALLEY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "BLAZE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Level 4",
+    "subtitle": "SUNNY VALLEY - CYCLE 1 PEAK 🔥 (H: 7.5)",
+    "world": "island",
+    "themeIcon": "whatshot",
+    "maskName": "Diamond",
+    "maskIcon": "🔥",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 103,
     "grid": [
       [
         " ",
         " ",
         " ",
-        "I",
-        "M",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "W",
-        "I",
-        "L",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "C",
+        "N",
         "O",
-        "P",
-        "P",
-        "E",
-        "R",
+        " ",
+        " ",
         " "
       ],
       [
-        "S",
+        " ",
+        " ",
+        "E",
+        "K",
+        "I",
         "H",
-        "R",
-        "P",
-        "O",
-        "W",
-        "E",
-        "R"
-      ],
-      [
-        "Z",
-        "G",
-        "S",
-        "C",
-        "L",
-        "O",
-        "V",
-        "E"
+        " ",
+        " "
       ],
       [
         " ",
+        "Y",
+        "R",
+        "R",
+        "E",
+        "H",
+        "C",
+        " "
+      ],
+      [
+        "M",
+        "A",
+        "L",
+        "L",
+        "A",
+        "R",
+        "D",
+        "H"
+      ],
+      [
+        "A",
+        "P",
+        "R",
+        "I",
+        "C",
         "O",
-        "V",
         "T",
-        "V",
-        "W",
-        "O",
+        "M"
+      ],
+      [
+        " ",
+        "C",
+        "R",
+        "E",
+        "E",
+        "K",
+        "U",
         " "
       ],
       [
         " ",
         " ",
+        "X",
         "D",
         "U",
-        "S",
-        "K",
+        "L",
         " ",
         " "
       ],
@@ -346,8 +483,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         " ",
         " ",
         " ",
-        "R",
-        "I",
+        "V",
+        "P",
         " ",
         " ",
         " "
@@ -355,23 +492,434 @@ export const GENERATED_LEVELS: LevelData[] = [
     ],
     "targetWords": [
       {
-        "word": "COPPER",
+        "word": "MALLARD",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "APRICOT",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "CHERRY",
         "found": false,
         "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "CREEK",
+        "found": false,
+        "rowStart": 5,
         "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "PLUM",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "HIKE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Level 5",
+    "subtitle": "SUNNY VALLEY - RELIEF BREATHER 🌿 (H: 5.7)",
+    "world": "island",
+    "themeIcon": "eco",
+    "maskName": "Square",
+    "maskIcon": "🌿",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 92,
+    "grid": [
+      [
+        "Y",
+        "R",
+        "T",
+        "O",
+        "M",
+        "A",
+        "T",
+        "O"
+      ],
+      [
+        "Y",
+        "S",
+        "U",
+        "X",
+        "O",
+        "L",
+        "O",
+        "F"
+      ],
+      [
+        "L",
+        "Y",
+        "M",
+        "T",
+        "R",
+        "D",
+        "G",
+        "O"
+      ],
+      [
+        "R",
+        "E",
+        "F",
+        "L",
+        "E",
+        "C",
+        "T",
+        "V"
+      ],
+      [
+        "V",
+        "A",
+        "P",
+        "O",
+        "R",
+        "L",
+        "V",
+        "L"
+      ],
+      [
+        "U",
+        "L",
+        "V",
+        "D",
+        "C",
+        "X",
+        "X",
+        "H"
+      ],
+      [
+        "R",
+        "A",
+        "D",
+        "I",
+        "A",
+        "N",
+        "T",
+        "L"
+      ],
+      [
+        "D",
+        "H",
+        "R",
+        "P",
+        "Y",
+        "U",
+        "K",
+        "O"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "RADIANT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "REFLECT",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "TOMATO",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 7
+      },
+      {
+        "word": "VAPOR",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Level 6",
+    "subtitle": "SUNNY VALLEY - HARD (H: 8.5)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Octagon",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 91,
+    "grid": [
+      [
+        " ",
+        " ",
+        "B",
+        "R",
+        "I",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "O",
+        "T",
+        "A",
+        "T",
+        "O",
+        "P",
+        " "
+      ],
+      [
+        "D",
+        "M",
+        "F",
+        "U",
+        "R",
+        "I",
+        "H",
+        "X"
+      ],
+      [
+        "W",
+        "U",
+        "Q",
+        "Q",
+        "E",
+        "W",
+        "C",
+        "B"
+      ],
+      [
+        "V",
+        "S",
+        "X",
+        "C",
+        "A",
+        "I",
+        "N",
+        "D"
+      ],
+      [
+        "F",
+        "O",
+        "H",
+        "X",
+        "S",
+        "K",
+        "I",
+        "V"
+      ],
+      [
+        " ",
+        "O",
+        "N",
+        "F",
+        "O",
+        "Y",
+        "F",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "X",
+        "R",
+        "N",
+        "C",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "REASON",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "POTATO",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "FINCH",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
         "rowEnd": 2,
         "colEnd": 6
       },
       {
-        "word": "POWER",
+        "word": "KIWI",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 5
+      },
+      {
+        "word": "FOX",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Level 7",
+    "subtitle": "SUNNY VALLEY - HARD (H: 9.5)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Octagon",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 89,
+    "grid": [
+      [
+        " ",
+        " ",
+        "P",
+        "T",
+        "Q",
+        "U",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "B",
+        "U",
+        "C",
+        "E",
+        "Z",
+        "C",
+        " "
+      ],
+      [
+        "P",
+        "E",
+        "R",
+        "A",
+        "L",
+        "F",
+        "U",
+        "X"
+      ],
+      [
+        "R",
+        "T",
+        "S",
+        "E",
+        "N",
+        "T",
+        "R",
+        "Y"
+      ],
+      [
+        "K",
+        "T",
+        "R",
+        "C",
+        "L",
+        "O",
+        "U",
+        "D"
+      ],
+      [
+        "G",
+        "C",
+        "Z",
+        "W",
+        "F",
+        "P",
+        "V",
+        "K"
+      ],
+      [
+        " ",
+        "K",
+        "S",
+        "U",
+        "D",
+        "G",
+        "L",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "R",
+        "O",
+        "D",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SENTRY",
         "found": false,
         "rowStart": 3,
-        "colStart": 3,
+        "colStart": 2,
         "rowEnd": 3,
         "colEnd": 7
       },
       {
-        "word": "CLOVE",
+        "word": "FLARE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "CLOUD",
         "found": false,
         "rowStart": 4,
         "colStart": 3,
@@ -382,411 +930,24 @@ export const GENERATED_LEVELS: LevelData[] = [
         "word": "DUSK",
         "found": false,
         "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "title": "Level 4",
-    "subtitle": "SUNNY VALLEY - EASY (LEVEL 4)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Cross",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 80,
-    "grid": [
-      [
-        " ",
-        " ",
-        "J",
-        "Y",
-        "F",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "A",
-        "I",
-        "D",
-        " ",
-        " "
-      ],
-      [
-        "M",
-        "O",
-        "O",
-        "S",
-        "E",
-        "S",
-        "G",
-        "U"
-      ],
-      [
-        "C",
-        "E",
-        "L",
-        "F",
-        "C",
-        "H",
-        "P",
-        "J"
-      ],
-      [
-        "U",
-        "T",
-        "T",
-        "Z",
-        "P",
-        "I",
-        "W",
-        "V"
-      ],
-      [
-        "S",
-        "Z",
-        "E",
-        "O",
-        "A",
-        "E",
-        "Q",
-        "A"
-      ],
-      [
-        " ",
-        " ",
-        "P",
-        "D",
-        "S",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "A",
-        "S",
-        "D",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SHIELD",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "MOOSE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "COLT",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "PASS",
-        "found": false,
-        "rowStart": 4,
         "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 5,
-    "title": "Level 5",
-    "subtitle": "SUNNY VALLEY - EASY (LEVEL 5)",
-    "world": "island",
-    "themeIcon": "card_giftcard",
-    "maskName": "Square",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 80,
-    "grid": [
-      [
-        "O",
-        "D",
-        "R",
-        "J",
-        "Y",
-        "J",
-        "D",
-        "K"
-      ],
-      [
-        "U",
-        "E",
-        "H",
-        "U",
-        "Q",
-        "Q",
-        "P",
-        "V"
-      ],
-      [
-        "J",
-        "S",
-        "V",
-        "P",
-        "N",
-        "Q",
-        "N",
-        "F"
-      ],
-      [
-        "J",
-        "T",
-        "G",
-        "R",
-        "O",
-        "U",
-        "S",
-        "E"
-      ],
-      [
-        "M",
-        "I",
-        "W",
-        "I",
-        "N",
-        "D",
-        "P",
-        "G"
-      ],
-      [
-        "W",
-        "N",
-        "T",
-        "I",
-        "X",
-        "B",
-        "S",
-        "A"
-      ],
-      [
-        "F",
-        "Y",
-        "J",
-        "Z",
-        "H",
-        "D",
-        "X",
-        "T"
-      ],
-      [
-        "T",
-        "Y",
-        "P",
-        "O",
-        "T",
-        "A",
-        "T",
-        "O"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "DESTINY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
         "rowEnd": 6,
         "colEnd": 1
       },
       {
-        "word": "GROUSE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "POTATO",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "WIND",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 6,
-    "title": "Level 6",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 6)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        "S",
-        "S",
-        "N",
-        "O",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "L",
-        "E",
-        "T",
-        "F",
-        "V",
-        "R",
-        " "
-      ],
-      [
-        "G",
-        "D",
-        "A",
-        "C",
-        "O",
-        "R",
-        "A",
-        "S"
-      ],
-      [
-        "I",
-        "K",
-        "S",
-        "R",
-        "L",
-        "O",
-        "Y",
-        "I"
-      ],
-      [
-        "R",
-        "T",
-        "O",
-        "O",
-        "I",
-        "S",
-        "O",
-        "J"
-      ],
-      [
-        "O",
-        "Q",
-        "N",
-        "W",
-        "A",
-        "E",
-        "M",
-        "V"
-      ],
-      [
-        " ",
-        "V",
-        "V",
-        "N",
-        "G",
-        "J",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "F",
-        "E",
-        "C",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "FOLIAGE",
+        "word": "CUB",
         "found": false,
         "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "SEASON",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "CROWN",
-        "found": false,
-        "rowStart": 2,
         "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "ROSE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "RAY",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 6
+        "rowEnd": 1,
+        "colEnd": 1
       }
     ]
   },
   {
-    "id": 7,
-    "title": "Level 7",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 7)",
+    "id": 8,
+    "title": "Level 8",
+    "subtitle": "SUNNY VALLEY - HARDER (H: 10.7)",
     "world": "island",
     "themeIcon": "wb_sunny",
     "maskName": "Diamond",
@@ -794,14 +955,14 @@ export const GENERATED_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 80,
+    "timeLimit": 86,
     "grid": [
       [
         " ",
         " ",
         " ",
-        "O",
-        "U",
+        "F",
+        "W",
         " ",
         " ",
         " "
@@ -809,60 +970,60 @@ export const GENERATED_LEVELS: LevelData[] = [
       [
         " ",
         " ",
-        "L",
-        "E",
-        "T",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "A",
-        "Z",
-        "X",
-        "H",
-        "C",
-        "R",
-        " "
-      ],
-      [
-        "H",
-        "T",
-        "X",
-        "P",
-        "O",
-        "O",
-        "G",
-        "Y"
-      ],
-      [
-        "S",
-        "O",
-        "O",
-        "L",
-        "U",
-        "R",
-        "T",
-        "N"
-      ],
-      [
-        " ",
-        "U",
-        "J",
-        "O",
-        "G",
+        "V",
+        "I",
         "N",
-        "G",
+        "E",
+        " ",
         " "
       ],
       [
         " ",
-        " ",
-        "E",
         "R",
-        "H",
-        "K",
+        "A",
+        "V",
+        "E",
+        "N",
+        "W",
+        " "
+      ],
+      [
+        "T",
+        "A",
+        "P",
+        "U",
+        "Z",
+        "Z",
+        "L",
+        "E"
+      ],
+      [
+        "Z",
+        "T",
+        "O",
+        "R",
+        "R",
+        "A",
+        "C",
+        "D"
+      ],
+      [
+        " ",
+        "T",
+        "A",
+        "L",
+        "E",
+        "N",
+        "T",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "B",
+        "G",
+        "D",
+        "X",
         " ",
         " "
       ],
@@ -870,8 +1031,8 @@ export const GENERATED_LEVELS: LevelData[] = [
         " ",
         " ",
         " ",
-        "E",
-        "T",
+        "R",
+        "F",
         " ",
         " ",
         " "
@@ -879,12 +1040,1486 @@ export const GENERATED_LEVELS: LevelData[] = [
     ],
     "targetWords": [
       {
-        "word": "THOUGHT",
+        "word": "PUZZLE",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "CARROT",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "TALENT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "RAVEN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 5
+      },
+      {
+        "word": "VINE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Level 9",
+    "subtitle": "SUNNY VALLEY - CYCLE 2 PEAK 🔥 (H: 12.2)",
+    "world": "island",
+    "themeIcon": "whatshot",
+    "maskName": "Cross",
+    "maskIcon": "🔥",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "Q",
+        "U",
+        "Z",
+        "V",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "T",
+        "E",
+        "I",
+        " ",
+        " "
+      ],
+      [
+        "Q",
+        "D",
+        "N",
+        "E",
+        "N",
+        "B",
+        "P",
+        "A"
+      ],
+      [
+        "I",
+        "A",
+        "E",
+        "L",
+        "I",
+        "R",
+        "A",
+        "Z"
+      ],
+      [
+        "U",
+        "W",
+        "R",
+        "O",
+        "T",
+        "A",
+        "T",
+        "O"
+      ],
+      [
+        "H",
+        "N",
+        "E",
+        "I",
+        "H",
+        "N",
+        "H",
+        "G"
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "V",
+        "G",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "D",
+        "H",
+        "G",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VIBRANT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "VIOLET",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "SERENE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "ZENITH",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "DAWN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "PATH",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Level 10",
+    "subtitle": "SUNNY VALLEY - RELIEF BREATHER 🌿 (H: 11)",
+    "world": "island",
+    "themeIcon": "eco",
+    "maskName": "Square",
+    "maskIcon": "🌿",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 103,
+    "grid": [
+      [
+        "W",
+        "I",
+        "T",
+        "T",
+        "Y",
+        "R",
+        "S",
+        "Y"
+      ],
+      [
+        "I",
+        "V",
+        "N",
+        "O",
+        "A",
+        "L",
+        "P",
+        "M"
+      ],
+      [
+        "M",
+        "I",
+        "N",
+        "V",
+        "E",
+        "N",
+        "T",
+        "V"
+      ],
+      [
+        "V",
+        "I",
+        "D",
+        "D",
+        "S",
+        "X",
+        "A",
+        "V"
+      ],
+      [
+        "O",
+        "P",
+        "N",
+        "S",
+        "E",
+        "V",
+        "X",
+        "J"
+      ],
+      [
+        "D",
+        "U",
+        "A",
+        "D",
+        "A",
+        "K",
+        "A",
+        "R"
+      ],
+      [
+        "N",
+        "P",
+        "Q",
+        "U",
+        "Z",
+        "E",
+        "J",
+        "V"
+      ],
+      [
+        "P",
+        "W",
+        "G",
+        "H",
+        "R",
+        "B",
+        "T",
+        "N"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "INVENT",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "GUAVA",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "WITTY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "PASS",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 4
+      },
+      {
+        "word": "MIND",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Level 11",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 13.2)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 112,
+    "grid": [
+      [
+        " ",
+        " ",
+        "R",
+        "O",
+        "S",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "P",
+        "I",
+        "N",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        "E",
+        "G",
+        "A",
+        "Y",
+        "O",
+        "V",
+        "Y",
+        "N"
+      ],
+      [
+        "C",
+        "L",
+        "E",
+        "A",
+        "R",
+        "G",
+        "M",
+        "F"
+      ],
+      [
+        "L",
+        "C",
+        "L",
+        "A",
+        "R",
+        "I",
+        "T",
+        "Y"
+      ],
+      [
+        "E",
+        "A",
+        "G",
+        "T",
+        "H",
+        "G",
+        "I",
+        "L"
+      ],
+      [
+        " ",
+        " ",
+        "W",
+        "N",
+        "L",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "J",
+        "N",
+        "D",
+        "O",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CLARITY",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "VOYAGE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "CLEAR",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 4
+      },
+      {
+        "word": "LIGHT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "ROSE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "LAWN",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "PINE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Level 12",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 14.2)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 109,
+    "grid": [
+      [
+        " ",
+        " ",
+        "O",
+        "G",
+        "N",
+        "Q",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "V",
+        "A",
+        "W",
+        " ",
+        " "
+      ],
+      [
+        "X",
+        "N",
+        "R",
+        "O",
+        "C",
+        "A",
+        "A",
+        "R"
+      ],
+      [
+        "R",
+        "E",
+        "T",
+        "S",
+        "A",
+        "M",
+        "W",
+        "F"
+      ],
+      [
+        "X",
+        "G",
+        "R",
+        "O",
+        "U",
+        "N",
+        "D",
+        "O"
+      ],
+      [
+        "R",
+        "S",
+        "U",
+        "T",
+        "O",
+        "L",
+        "H",
+        "S"
+      ],
+      [
+        " ",
+        " ",
+        "Y",
+        "B",
+        "U",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "M",
+        "I",
+        "L",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "MASTER",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "GROUND",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "LOTUS",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "ACORN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "LIME",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "FAWN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "RUBY",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Level 13",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 15.4)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 105,
+    "grid": [
+      [
+        " ",
+        " ",
+        "P",
+        "H",
+        "K",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "N",
+        "Q",
+        "O",
+        " ",
+        " "
+      ],
+      [
+        "A",
+        "O",
+        "I",
+        "U",
+        "R",
+        "S",
+        "A",
+        "C"
+      ],
+      [
+        "M",
+        "H",
+        "A",
+        "C",
+        "Y",
+        "S",
+        "W",
+        "Y"
+      ],
+      [
+        "T",
+        "I",
+        "T",
+        "E",
+        "R",
+        "O",
+        "L",
+        "F"
+      ],
+      [
+        "L",
+        "S",
+        "U",
+        "P",
+        "R",
+        "E",
+        "M",
+        "E"
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "Y",
+        "Q",
+        "C",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "M",
+        "L",
+        "A",
+        "C",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SUPREME",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "FLORET",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "THINK",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "QUAIL",
         "found": false,
         "rowStart": 1,
         "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "MOSS",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "MOTH",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "CALM",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
         "rowEnd": 7,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Level 14",
+    "subtitle": "SUNNY VALLEY - CYCLE 3 PEAK 🔥 (H: 16.9)",
+    "world": "island",
+    "themeIcon": "whatshot",
+    "maskName": "Cross",
+    "maskIcon": "🔥",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "I",
+        "D",
+        "E",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "T",
+        "T",
+        "Q",
+        " ",
+        " "
+      ],
+      [
+        "W",
+        "O",
+        "L",
+        "L",
+        "A",
+        "W",
+        "S",
+        "D"
+      ],
+      [
+        "S",
+        "H",
+        "I",
+        "M",
+        "M",
+        "E",
+        "R",
+        "Y"
+      ],
+      [
+        "B",
+        "A",
+        "M",
+        "B",
+        "O",
+        "O",
+        "K",
+        "L"
+      ],
+      [
+        "Q",
+        "W",
+        "A",
+        "R",
+        "B",
+        "L",
+        "E",
+        "R"
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "L",
+        "S",
+        "K",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "Y",
+        "A",
+        "R",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SWALLOW",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "SHIMMER",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "CLIMATE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "WARBLER",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "BAMBOO",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "IDEA",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "RAY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Level 15",
+    "subtitle": "SUNNY VALLEY - RELIEF BREATHER 🌿 (H: 15.7)",
+    "world": "island",
+    "themeIcon": "eco",
+    "maskName": "Square",
+    "maskIcon": "🌿",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 111,
+    "grid": [
+      [
+        "H",
+        "X",
+        "W",
+        "L",
+        "M",
+        "A",
+        "E",
+        "B"
+      ],
+      [
+        "K",
+        "A",
+        "I",
+        "W",
+        "R",
+        "D",
+        "D",
+        "S"
+      ],
+      [
+        "Z",
+        "L",
+        "N",
+        "V",
+        "E",
+        "X",
+        "A",
+        "H"
+      ],
+      [
+        "O",
+        "L",
+        "T",
+        "G",
+        "T",
+        "P",
+        "H",
+        "R"
+      ],
+      [
+        "Q",
+        "I",
+        "E",
+        "C",
+        "T",
+        "W",
+        "L",
+        "U"
+      ],
+      [
+        "O",
+        "N",
+        "R",
+        "F",
+        "O",
+        "H",
+        "I",
+        "B"
+      ],
+      [
+        "I",
+        "A",
+        "M",
+        "D",
+        "C",
+        "K",
+        "A",
+        "Q"
+      ],
+      [
+        "F",
+        "V",
+        "T",
+        "J",
+        "U",
+        "X",
+        "E",
+        "G"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VANILLA",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "DAHLIA",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "WINTER",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "SHRUB",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "OTTER",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 1,
         "colEnd": 4
+      },
+      {
+        "word": "BEAM",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Level 16",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 17.9)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 84,
+    "grid": [
+      [
+        " ",
+        " ",
+        "P",
+        "M",
+        "E",
+        "U",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "A",
+        "L",
+        "N",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        "J",
+        "R",
+        "P",
+        "E",
+        "I",
+        "U",
+        "W",
+        "Q"
+      ],
+      [
+        "V",
+        "A",
+        "A",
+        "N",
+        "K",
+        "O",
+        "O",
+        "Y"
+      ],
+      [
+        "M",
+        "K",
+        "Y",
+        "I",
+        "P",
+        "K",
+        "L",
+        "I"
+      ],
+      [
+        "G",
+        "U",
+        "A",
+        "G",
+        "M",
+        "O",
+        "F",
+        "W"
+      ],
+      [
+        " ",
+        " ",
+        "X",
+        "M",
+        "U",
+        "O",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "B",
+        "A",
+        "P",
+        "L",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "PUMPKIN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 4
+      },
+      {
+        "word": "LOOKOUT",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "ENIGMA",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "PAPAYA",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "MAPLE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "WOLF",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Level 17",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 18.9)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 98,
+    "grid": [
+      [
+        " ",
+        " ",
+        "P",
+        "K",
+        "R",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "G",
+        "L",
+        "A",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        "R",
+        "E",
+        "H",
+        "T",
+        "A",
+        "E",
+        "W",
+        "H"
+      ],
+      [
+        "R",
+        "O",
+        "N",
+        "O",
+        "H",
+        "N",
+        "P",
+        "S"
+      ],
+      [
+        "O",
+        "G",
+        "A",
+        "R",
+        "N",
+        "E",
+        "T",
+        "U"
+      ],
+      [
+        "E",
+        "M",
+        "E",
+        "R",
+        "A",
+        "L",
+        "D",
+        "B"
+      ],
+      [
+        " ",
+        " ",
+        "W",
+        "C",
+        "P",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "K",
+        "Z",
+        "E",
+        "A",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "WEATHER",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "EMERALD",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "GARNET",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "PLANT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "HONOR",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "BUSH",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "PEAK",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 0,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Level 18",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 20.1)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 84,
+    "grid": [
+      [
+        " ",
+        " ",
+        "T",
+        "R",
+        "C",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "E",
+        "I",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        "C",
+        "K",
+        "I",
+        "X",
+        "T",
+        "V",
+        "A",
+        "S"
+      ],
+      [
+        "O",
+        "W",
+        "U",
+        "P",
+        "I",
+        "O",
+        "E",
+        "N"
+      ],
+      [
+        "L",
+        "F",
+        "M",
+        "L",
+        "M",
+        "L",
+        "X",
+        "R"
+      ],
+      [
+        "T",
+        "L",
+        "P",
+        "O",
+        "M",
+        "C",
+        "E",
+        "L"
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "R",
+        "U",
+        "G",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "E",
+        "S",
+        "F",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "TRIUMPH",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
       },
       {
         "word": "EXPLORE",
@@ -895,684 +2530,152 @@ export const GENERATED_LEVELS: LevelData[] = [
         "colEnd": 3
       },
       {
-        "word": "ACORN",
+        "word": "SUMMIT",
         "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 5
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 4
       },
       {
-        "word": "HALO",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "title": "Level 8",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 8)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Cross",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        "Y",
-        "B",
-        "T",
-        "M",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "V",
-        "S",
-        "N",
-        "O",
-        " ",
-        " "
-      ],
-      [
-        "S",
-        "S",
-        "W",
-        "A",
-        "L",
-        "L",
-        "O",
-        "W"
-      ],
-      [
-        "E",
-        "J",
-        "J",
-        "T",
-        "X",
-        "E",
-        "L",
-        "M"
-      ],
-      [
-        "H",
-        "R",
-        "I",
-        "V",
-        "E",
-        "R",
-        "E",
-        "Z"
-      ],
-      [
-        "C",
-        "L",
-        "I",
-        "M",
-        "A",
-        "T",
-        "E",
-        "B"
-      ],
-      [
-        " ",
-        " ",
-        "G",
-        "A",
-        "P",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "V",
-        "F",
-        "S",
-        "O",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CLIMATE",
+        "word": "CLOVER",
         "found": false,
         "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "SWALLOW",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 7
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 5
       },
       {
         "word": "RIVER",
         "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "GAP",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "ELM",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "title": "Level 9",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 9)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Square",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        "M",
-        "A",
-        "J",
-        "E",
-        "S",
-        "T",
-        "Y",
-        "Z"
-      ],
-      [
-        "V",
-        "S",
-        "I",
-        "X",
-        "Y",
-        "P",
-        "K",
-        "F"
-      ],
-      [
-        "W",
-        "C",
-        "X",
-        "F",
-        "R",
-        "O",
-        "G",
-        "A"
-      ],
-      [
-        "S",
-        "X",
-        "S",
-        "U",
-        "Z",
-        "F",
-        "C",
-        "J"
-      ],
-      [
-        "A",
-        "V",
-        "A",
-        "L",
-        "I",
-        "A",
-        "N",
-        "T"
-      ],
-      [
-        "Z",
-        "H",
-        "A",
-        "R",
-        "M",
-        "O",
-        "N",
-        "Y"
-      ],
-      [
-        "T",
-        "H",
-        "E",
-        "O",
-        "R",
-        "Y",
-        "D",
-        "L"
-      ],
-      [
-        "H",
-        "A",
-        "G",
-        "A",
-        "Z",
-        "X",
-        "B",
-        "H"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "VALIANT",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
+        "rowStart": 0,
+        "colStart": 3,
         "rowEnd": 4,
         "colEnd": 7
       },
       {
-        "word": "HARMONY",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 7
-      },
-      {
-        "word": "MAJESTY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "THEORY",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "FROG",
+        "word": "COLT",
         "found": false,
         "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 6
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 0
       }
     ]
   },
   {
-    "id": 10,
-    "title": "Level 10",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 10)",
+    "id": 19,
+    "title": "Level 19",
+    "subtitle": "SUNNY VALLEY - CYCLE 4 PEAK 🔥 (H: 21.6)",
     "world": "island",
-    "themeIcon": "card_giftcard",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        "C",
-        "E",
-        "V",
-        "R",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "K",
-        "A",
-        "U",
-        "I",
-        "S",
-        "Y",
-        " "
-      ],
-      [
-        "V",
-        "J",
-        "R",
-        "B",
-        "S",
-        "U",
-        "P",
-        "N"
-      ],
-      [
-        "M",
-        "S",
-        "R",
-        "A",
-        "I",
-        "N",
-        "L",
-        "Q"
-      ],
-      [
-        "I",
-        "T",
-        "O",
-        "N",
-        "O",
-        "B",
-        "U",
-        "J"
-      ],
-      [
-        "O",
-        "N",
-        "T",
-        "A",
-        "N",
-        "E",
-        "M",
-        "D"
-      ],
-      [
-        " ",
-        "A",
-        "K",
-        "N",
-        "K",
-        "A",
-        "S",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "P",
-        "A",
-        "Q",
-        "M",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SUNBEAM",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "CARROT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "BANANA",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "VISION",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 4
-      },
-      {
-        "word": "PLUM",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 11,
-    "title": "Level 11",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 11)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Diamond",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "H",
-        "B",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "O",
-        "E",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "X",
-        "M",
-        "A",
-        "E",
-        "P",
-        "N",
-        " "
-      ],
-      [
-        "K",
-        "S",
-        "I",
-        "B",
-        "T",
-        "M",
-        "V",
-        "N"
-      ],
-      [
-        "I",
-        "X",
-        "N",
-        "Y",
-        "L",
-        "O",
-        "H",
-        "U"
-      ],
-      [
-        " ",
-        "D",
-        "D",
-        "S",
-        "E",
-        "T",
-        "K",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "S",
-        "L",
-        "H",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "A",
-        "B",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "BEETLE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 4
-      },
-      {
-        "word": "ABYSS",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "MOTH",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "MIND",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "IDEA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 12,
-    "title": "Level 12",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 12)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
+    "themeIcon": "whatshot",
     "maskName": "Cross",
-    "maskIcon": "☀️",
+    "maskIcon": "🔥",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 85,
+    "timeLimit": 88,
     "grid": [
       [
         " ",
         " ",
-        "I",
-        "W",
-        "B",
-        "O",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "Y",
-        "R",
-        "B",
-        " ",
-        " "
-      ],
-      [
-        "W",
-        "E",
-        "A",
-        "S",
         "E",
         "L",
         "A",
+        "G",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "Z",
+        "D",
+        "B",
+        " ",
+        " "
+      ],
+      [
+        "W",
+        "O",
+        "B",
+        "N",
+        "I",
+        "A",
+        "R",
         "E"
       ],
       [
+        "L",
+        "E",
+        "G",
+        "E",
+        "N",
+        "D",
+        "Z",
+        "C"
+      ],
+      [
+        "C",
+        "S",
+        "N",
+        "O",
+        "L",
+        "E",
         "M",
-        "R",
+        "G"
+      ],
+      [
+        "B",
         "A",
         "D",
-        "I",
-        "A",
-        "N",
-        "T"
-      ],
-      [
-        "P",
-        "E",
-        "T",
-        "A",
-        "L",
-        "E",
-        "L",
-        "V"
-      ],
-      [
-        "V",
-        "F",
-        "L",
-        "O",
-        "R",
-        "A",
-        "T",
-        "V"
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "E",
-        "X",
         "G",
+        "E",
+        "R",
+        "O",
+        "L"
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "R",
+        "S",
+        "L",
         " ",
         " "
       ],
       [
         " ",
         " ",
+        "B",
+        "X",
+        "D",
         "S",
-        "N",
-        "J",
-        "O",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "RADIANT",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "WEASEL",
+        "word": "RAINBOW",
         "found": false,
         "rowStart": 2,
-        "colStart": 0,
+        "colStart": 6,
         "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "LEGEND",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
         "colEnd": 5
       },
       {
-        "word": "SERENE",
+        "word": "BREEZE",
         "found": false,
         "rowStart": 7,
         "colStart": 2,
@@ -1580,141 +2683,608 @@ export const GENERATED_LEVELS: LevelData[] = [
         "colEnd": 7
       },
       {
-        "word": "FLORA",
+        "word": "BADGER",
         "found": false,
         "rowStart": 5,
-        "colStart": 1,
+        "colStart": 0,
         "rowEnd": 5,
         "colEnd": 5
       },
       {
-        "word": "PETAL",
+        "word": "MELON",
         "found": false,
         "rowStart": 4,
-        "colStart": 0,
+        "colStart": 6,
         "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "GALE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 7,
         "colEnd": 4
       }
     ]
   },
   {
-    "id": 13,
-    "title": "Level 13",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 13)",
+    "id": 20,
+    "title": "Level 20",
+    "subtitle": "SUNNY VALLEY - RELIEF BREATHER 🌿 (H: 20.4)",
     "world": "island",
-    "themeIcon": "wb_sunny",
+    "themeIcon": "eco",
     "maskName": "Square",
-    "maskIcon": "☀️",
+    "maskIcon": "🌿",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 85,
+    "timeLimit": 105,
     "grid": [
       [
+        "R",
+        "B",
         "X",
-        "U",
-        "O",
+        "D",
+        "C",
         "H",
-        "I",
-        "P",
-        "U",
-        "L"
-      ],
-      [
-        "R",
-        "O",
-        "N",
         "B",
-        "E",
-        "R",
-        "R",
-        "Y"
+        "S"
       ],
       [
-        "P",
-        "S",
-        "D",
-        "A",
-        "P",
-        "P",
+        "R",
+        "J",
         "L",
-        "E"
+        "Q",
+        "N",
+        "T",
+        "W",
+        "P"
       ],
       [
-        "P",
-        "B",
-        "P",
-        "U",
-        "I",
+        "O",
+        "S",
+        "H",
+        "O",
+        "W",
         "E",
-        "D",
+        "R",
         "R"
       ],
       [
-        "X",
-        "O",
-        "B",
-        "I",
-        "D",
-        "G",
         "A",
-        "V"
+        "O",
+        "Z",
+        "Z",
+        "S",
+        "L",
+        "T",
+        "I"
       ],
       [
-        "N",
-        "U",
-        "U",
-        "R",
-        "R",
         "D",
         "W",
-        "X"
-      ],
-      [
-        "P",
         "G",
-        "I",
-        "B",
         "E",
-        "I",
-        "Q",
-        "Y"
+        "D",
+        "S",
+        "D",
+        "N"
       ],
       [
-        "D",
-        "H",
-        "N",
-        "C",
-        "I",
+        "Y",
+        "R",
+        "O",
         "M",
+        "E",
+        "M",
+        "O",
+        "G"
+      ],
+      [
+        "V",
+        "B",
+        "J",
+        "X",
+        "F",
+        "M",
+        "X",
+        "M"
+      ],
+      [
+        "F",
+        "U",
+        "Q",
         "T",
-        "O"
+        "B",
+        "A",
+        "R",
+        "K"
       ]
     ],
     "targetWords": [
       {
-        "word": "SPIRIT",
+        "word": "BLOSSOM",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "SPRING",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "MEMORY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "SHOWER",
         "found": false,
         "rowStart": 2,
         "colStart": 1,
-        "rowEnd": 7,
+        "rowEnd": 2,
         "colEnd": 6
       },
       {
-        "word": "APPLE",
+        "word": "BARK",
         "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 2,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 7,
         "colEnd": 7
       },
       {
-        "word": "BERRY",
+        "word": "ROAD",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Level 21",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 22.6)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 98,
+    "grid": [
+      [
+        " ",
+        " ",
+        "B",
+        "C",
+        "Z",
+        "K",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "I",
+        "Y",
+        "X",
+        " ",
+        " "
+      ],
+      [
+        "D",
+        "Y",
+        "R",
+        "E",
+        "S",
+        "R",
+        "U",
+        "N"
+      ],
+      [
+        "R",
+        "I",
+        "Y",
+        "G",
+        "T",
+        "C",
+        "J",
+        "Z"
+      ],
+      [
+        "S",
+        "T",
+        "S",
+        "L",
+        "U",
+        "R",
+        "J",
+        "Y"
+      ],
+      [
+        "P",
+        "O",
+        "T",
+        "I",
+        "L",
+        "A",
+        "S",
+        "Q"
+      ],
+      [
+        " ",
+        " ",
+        "A",
+        "N",
+        "I",
+        "F",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "L",
+        "T",
+        "P",
+        "T",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CRYSTAL",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "NURSERY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "TULIP",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "CRAFT",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "GLINT",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "IRIS",
         "found": false,
         "rowStart": 1,
         "colStart": 3,
-        "rowEnd": 1,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "TOP",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Level 22",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 23.6)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 98,
+    "grid": [
+      [
+        " ",
+        " ",
+        "R",
+        "E",
+        "T",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "V",
+        "N",
+        "S",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        "D",
+        "K",
+        "U",
+        "E",
+        "K",
+        "H",
+        "U",
+        "S"
+      ],
+      [
+        "E",
+        "W",
+        "B",
+        "R",
+        "I",
+        "O",
+        "M",
+        "E"
+      ],
+      [
+        "J",
+        "A",
+        "R",
+        "G",
+        "L",
+        "N",
+        "L",
+        "E"
+      ],
+      [
+        "Y",
+        "H",
+        "A",
+        "Y",
+        "L",
+        "I",
+        "E",
+        "K"
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "M",
+        "X",
+        "O",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "D",
+        "Q",
+        "N",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "ENERGY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "BRAIN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "SKILL",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "ONION",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "SEEK",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 5,
         "colEnd": 7
+      },
+      {
+        "word": "HAWK",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "ELM",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 3,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Level 23",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 24.8)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 84,
+    "grid": [
+      [
+        " ",
+        " ",
+        "C",
+        "I",
+        "P",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "K",
+        "R",
+        "A",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        "T",
+        "P",
+        "E",
+        "C",
+        "N",
+        "O",
+        "C",
+        "B"
+      ],
+      [
+        "S",
+        "T",
+        "R",
+        "E",
+        "A",
+        "M",
+        "R",
+        "R"
+      ],
+      [
+        "B",
+        "L",
+        "A",
+        "D",
+        "E",
+        "I",
+        "A",
+        "K"
+      ],
+      [
+        "G",
+        "I",
+        "J",
+        "X",
+        "G",
+        "D",
+        "C",
+        "P"
+      ],
+      [
+        " ",
+        " ",
+        "J",
+        "H",
+        "E",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "C",
+        "U",
+        "X",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CONCEPT",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "BRIGHT",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "STREAM",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 5
       },
       {
         "word": "CEDAR",
@@ -1725,1453 +3295,333 @@ export const GENERATED_LEVELS: LevelData[] = [
         "colEnd": 7
       },
       {
-        "word": "BOUGH",
+        "word": "BLADE",
         "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 14,
-    "title": "Level 14",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 14)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        "W",
-        "H",
-        "T",
-        "H",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "U",
-        "T",
-        "O",
-        "P",
-        "A",
-        "Z",
-        " "
-      ],
-      [
-        "Q",
-        "X",
-        "R",
-        "A",
-        "B",
-        "B",
-        "I",
-        "T"
-      ],
-      [
-        "N",
-        "O",
-        "S",
-        "P",
-        "R",
-        "E",
-        "Y",
-        "M"
-      ],
-      [
-        "H",
-        "X",
-        "I",
-        "C",
-        "M",
-        "C",
-        "U",
-        "F"
-      ],
-      [
-        "Q",
-        "I",
-        "M",
-        "L",
-        "A",
-        "W",
-        "N",
-        "T"
-      ],
-      [
-        " ",
-        "H",
-        "O",
-        "N",
-        "O",
-        "R",
-        "O",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "K",
-        "M",
-        "H",
-        "M",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "OSPREY",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "RABBIT",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "TOPAZ",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "HONOR",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "LAWN",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 15,
-    "title": "Level 15",
-    "subtitle": "SUNNY VALLEY - MEDIUM (LEVEL 15)",
-    "world": "island",
-    "themeIcon": "card_giftcard",
-    "maskName": "Diamond",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "F",
-        "B",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "W",
-        "P",
-        "O",
-        "F",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "M",
-        "A",
-        "B",
-        "U",
-        "D",
-        "H",
-        " "
-      ],
-      [
-        "W",
-        "B",
-        "R",
-        "A",
-        "L",
-        "R",
-        "I",
-        "G"
-      ],
-      [
-        "H",
-        "Y",
-        "M",
-        "D",
-        "D",
-        "I",
-        "L",
-        "I"
-      ],
-      [
-        " ",
-        "W",
-        "T",
-        "G",
-        "E",
-        "F",
-        "L",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "H",
-        "E",
-        "R",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "R",
-        "D",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "BOULDER",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "WARMTH",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "BADGER",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "DRIFT",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "HILL",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 16,
-    "title": "Level 16",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 16)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Cross",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "O",
-        "C",
-        "B",
-        "Q",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "T",
-        "T",
-        "R",
-        "V",
-        " ",
-        " "
-      ],
-      [
-        "H",
-        "B",
-        "N",
-        "H",
-        "E",
-        "E",
-        "K",
-        "M"
-      ],
-      [
-        "T",
-        "Y",
-        "A",
-        "G",
-        "E",
-        "G",
-        "S",
-        "W"
-      ],
-      [
-        "A",
-        "A",
-        "R",
-        "I",
-        "Z",
-        "R",
-        "T",
-        "T"
-      ],
-      [
-        "P",
-        "A",
-        "B",
-        "S",
-        "E",
-        "O",
-        "A",
-        "G"
-      ],
-      [
-        " ",
-        " ",
-        "I",
-        "N",
-        "X",
-        "G",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "V",
-        "I",
-        "S",
-        "H",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "VIBRANT",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "INSIGHT",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "BREEZE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 4
-      },
-      {
-        "word": "GORGE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 5
-      },
-      {
-        "word": "CREST",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
+        "rowStart": 4,
+        "colStart": 0,
         "rowEnd": 4,
-        "colEnd": 7
-      },
-      {
-        "word": "PATH",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 17,
-    "title": "Level 17",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 17)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Square",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        "Y",
-        "S",
-        "K",
-        "S",
-        "E",
-        "E",
-        "K",
-        "B"
-      ],
-      [
-        "B",
-        "A",
-        "U",
-        "M",
-        "D",
-        "Q",
-        "B",
-        "Y"
-      ],
-      [
-        "I",
-        "L",
-        "Y",
-        "N",
-        "P",
-        "C",
-        "Q",
-        "P"
-      ],
-      [
-        "W",
-        "Y",
-        "O",
-        "A",
-        "S",
-        "K",
-        "D",
-        "O"
-      ],
-      [
-        "X",
-        "E",
-        "P",
-        "S",
-        "P",
-        "E",
-        "V",
-        "N"
-      ],
-      [
-        "X",
-        "K",
-        "R",
-        "P",
-        "S",
-        "A",
-        "T",
-        "A"
-      ],
-      [
-        "N",
-        "Y",
-        "F",
-        "N",
-        "O",
-        "O",
-        "P",
-        "C"
-      ],
-      [
-        "G",
-        "V",
-        "Q",
-        "Q",
-        "A",
-        "P",
-        "M",
-        "E"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "BLOSSOM",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "SUNSET",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "PAPAYA",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "CANOPY",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "POPPY",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 1
-      },
-      {
-        "word": "SEEK",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 18,
-    "title": "Level 18",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 18)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "L",
-        "B",
-        "I",
-        "K",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "I",
-        "I",
-        "E",
-        "S",
-        "F",
-        "Y",
-        " "
-      ],
-      [
-        "R",
-        "G",
-        "S",
-        "S",
-        "U",
-        "A",
-        "L",
-        "A"
-      ],
-      [
-        "A",
-        "U",
-        "A",
-        "O",
-        "M",
-        "I",
-        "I",
-        "S"
-      ],
-      [
-        "L",
-        "V",
-        "B",
-        "P",
-        "M",
-        "R",
-        "L",
-        "S"
-      ],
-      [
-        "T",
-        "Z",
-        "A",
-        "R",
-        "I",
-        "Y",
-        "V",
-        "N"
-      ],
-      [
-        " ",
-        "B",
-        "B",
-        "U",
-        "T",
-        "W",
-        "B",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "P",
-        "P",
-        "G",
-        "W",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "PURPOSE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "SUMMIT",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 6,
         "colEnd": 4
       },
       {
-        "word": "FAIRY",
+        "word": "LARK",
         "found": false,
         "rowStart": 1,
         "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "GUAVA",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "BASIL",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 0,
+        "rowEnd": 1,
         "colEnd": 2
-      },
-      {
-        "word": "LILY",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 19,
-    "title": "Level 19",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 19)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Diamond",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "E",
-        "R",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "N",
-        "N",
-        "O",
-        "M",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "L",
-        "G",
-        "T",
-        "D",
-        "R",
-        "N",
-        " "
-      ],
-      [
-        "T",
-        "V",
-        "L",
-        "G",
-        "N",
-        "O",
-        "R",
-        "P"
-      ],
-      [
-        "K",
-        "Q",
-        "I",
-        "L",
-        "O",
-        "T",
-        "E",
-        "C"
-      ],
-      [
-        " ",
-        "F",
-        "N",
-        "I",
-        "C",
-        "S",
-        "F",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "T",
-        "M",
-        "E",
-        "G",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "E",
-        "C",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CONDOR",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "STORM",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "GLINT",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "FERN",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "LIME",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "FIG",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 20,
-    "title": "Level 20",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 20)",
-    "world": "island",
-    "themeIcon": "card_giftcard",
-    "maskName": "Cross",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "Y",
-        "M",
-        "N",
-        "Q",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "G",
-        "R",
-        "O",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        "B",
-        "E",
-        "R",
-        "S",
-        "A",
-        "O",
-        "A",
-        "G"
-      ],
-      [
-        "I",
-        "R",
-        "O",
-        "T",
-        "E",
-        "N",
-        "L",
-        "J"
-      ],
-      [
-        "R",
-        "N",
-        "U",
-        "R",
-        "Z",
-        "M",
-        "A",
-        "B"
-      ],
-      [
-        "D",
-        "Z",
-        "N",
-        "E",
-        "S",
-        "R",
-        "M",
-        "C"
-      ],
-      [
-        " ",
-        " ",
-        "D",
-        "A",
-        "Y",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "Q",
-        "M",
-        "V",
-        "W",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "STREAM",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "GROUND",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "CANARY",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "BLOOM",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "WARM",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "BIRD",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 5,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 21,
-    "title": "Level 21",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 21)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Square",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        "K",
-        "J",
-        "W",
-        "U",
-        "E",
-        "L",
-        "D",
-        "J"
-      ],
-      [
-        "A",
-        "L",
-        "B",
-        "H",
-        "G",
-        "O",
-        "E",
-        "L"
-      ],
-      [
-        "R",
-        "R",
-        "E",
-        "P",
-        "A",
-        "O",
-        "S",
-        "T"
-      ],
-      [
-        "T",
-        "J",
-        "X",
-        "M",
-        "Y",
-        "K",
-        "I",
-        "E"
-      ],
-      [
-        "F",
-        "S",
-        "J",
-        "U",
-        "O",
-        "O",
-        "W",
-        "N"
-      ],
-      [
-        "M",
-        "U",
-        "O",
-        "I",
-        "V",
-        "U",
-        "J",
-        "R"
-      ],
-      [
-        "K",
-        "T",
-        "O",
-        "R",
-        "B",
-        "T",
-        "D",
-        "A"
-      ],
-      [
-        "U",
-        "Z",
-        "C",
-        "T",
-        "F",
-        "N",
-        "A",
-        "G"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "LOOKOUT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "TRIUMPH",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "VOYAGE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "GARNET",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "FROST",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "WISE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 22,
-    "title": "Level 22",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 22)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "Q",
-        "C",
-        "W",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "Q",
-        "K",
-        "E",
-        "A",
-        "E",
-        "E",
-        " "
-      ],
-      [
-        "Y",
-        "Y",
-        "N",
-        "N",
-        "R",
-        "M",
-        "Z",
-        "Z"
-      ],
-      [
-        "B",
-        "U",
-        "I",
-        "I",
-        "T",
-        "O",
-        "N",
-        "E"
-      ],
-      [
-        "U",
-        "Z",
-        "G",
-        "M",
-        "I",
-        "N",
-        "O",
-        "Y"
-      ],
-      [
-        "R",
-        "I",
-        "H",
-        "S",
-        "S",
-        "M",
-        "R",
-        "Y"
-      ],
-      [
-        " ",
-        "S",
-        "T",
-        "A",
-        "T",
-        "J",
-        "B",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "W",
-        "J",
-        "O",
-        "J",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "JASMINE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "ARTIST",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "KNIGHT",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "BRONZE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "LEMON",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "RUBY",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 23,
-    "title": "Level 23",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 23)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Diamond",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "K",
-        "K",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "N",
-        "N",
-        "O",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "R",
-        "A",
-        "I",
-        "I",
-        "R",
-        "V",
-        " "
-      ],
-      [
-        "D",
-        "E",
-        "N",
-        "H",
-        "A",
-        "C",
-        "I",
-        "V"
-      ],
-      [
-        "U",
-        "E",
-        "Y",
-        "T",
-        "R",
-        "H",
-        "N",
-        "P"
-      ],
-      [
-        " ",
-        "D",
-        "O",
-        "Y",
-        "R",
-        "I",
-        "E",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "N",
-        "V",
-        "E",
-        "D",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "B",
-        "T",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "TERRAIN",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "ORCHID",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "CANYON",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "THINK",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "VINE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "DEER",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 1
       }
     ]
   },
   {
     "id": 24,
     "title": "Level 24",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 24)",
+    "subtitle": "SUNNY VALLEY - CYCLE 5 PEAK 🔥 (H: 26.3)",
+    "world": "island",
+    "themeIcon": "whatshot",
+    "maskName": "Cross",
+    "maskIcon": "🔥",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 100,
+    "grid": [
+      [
+        " ",
+        " ",
+        "D",
+        "A",
+        "Y",
+        "C",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "D",
+        "K",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        "S",
+        "U",
+        "N",
+        "R",
+        "I",
+        "S",
+        "E",
+        "B"
+      ],
+      [
+        "D",
+        "C",
+        "O",
+        "I",
+        "P",
+        "C",
+        "W",
+        "F"
+      ],
+      [
+        "O",
+        "H",
+        "M",
+        "F",
+        "O",
+        "A",
+        "D",
+        "I"
+      ],
+      [
+        "E",
+        "Z",
+        "A",
+        "T",
+        "W",
+        "D",
+        "G",
+        "G"
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "L",
+        "E",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "N",
+        "R",
+        "P",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "DIAMOND",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "SUNRISE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "CASCADE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "DRIFT",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "POWER",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "FIG",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "DOE",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "DAY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "title": "Level 25",
+    "subtitle": "SUNNY VALLEY - RELIEF BREATHER 🌿 (H: 25.1)",
+    "world": "island",
+    "themeIcon": "eco",
+    "maskName": "Square",
+    "maskIcon": "🌿",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 105,
+    "grid": [
+      [
+        "N",
+        "F",
+        "I",
+        "J",
+        "B",
+        "A",
+        "R",
+        "L"
+      ],
+      [
+        "E",
+        "W",
+        "E",
+        "A",
+        "S",
+        "E",
+        "L",
+        "A"
+      ],
+      [
+        "D",
+        "G",
+        "D",
+        "V",
+        "J",
+        "A",
+        "T",
+        "G"
+      ],
+      [
+        "L",
+        "W",
+        "G",
+        "Y",
+        "L",
+        "Y",
+        "D",
+        "E"
+      ],
+      [
+        "O",
+        "R",
+        "C",
+        "T",
+        "F",
+        "G",
+        "E",
+        "R"
+      ],
+      [
+        "G",
+        "S",
+        "P",
+        "A",
+        "R",
+        "R",
+        "O",
+        "W"
+      ],
+      [
+        "A",
+        "P",
+        "P",
+        "L",
+        "E",
+        "N",
+        "X",
+        "X"
+      ],
+      [
+        "O",
+        "L",
+        "L",
+        "E",
+        "A",
+        "R",
+        "N",
+        "U"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SPARROW",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "GOLDEN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "WEASEL",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "LEARN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 6
+      },
+      {
+        "word": "REGAL",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 7
+      },
+      {
+        "word": "APPLE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "title": "Level 26",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 27.3)",
     "world": "island",
     "themeIcon": "wb_sunny",
     "maskName": "Cross",
@@ -3179,520 +3629,230 @@ export const GENERATED_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 90,
+    "timeLimit": 84,
     "grid": [
       [
         " ",
         " ",
-        "F",
-        "Q",
-        "L",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "X",
-        "A",
-        "R",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        "A",
-        "S",
-        "Y",
-        "U",
-        "H",
-        "Y",
-        "S",
-        "I"
-      ],
-      [
-        "I",
-        "O",
         "T",
-        "Q",
-        "N",
+        "T",
+        "T",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "U",
+        "P",
         "I",
-        "A",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        "K",
+        "Z",
+        "N",
+        "X",
+        "R",
+        "S",
+        "D",
         "R"
       ],
       [
-        "R",
-        "A",
-        "B",
+        "I",
+        "G",
         "O",
-        "T",
-        "A",
-        "N",
-        "Y"
-      ],
-      [
-        "N",
-        "P",
         "R",
         "I",
+        "E",
+        "E",
+        "C"
+      ],
+      [
+        "H",
+        "H",
+        "C",
+        "O",
+        "P",
+        "J",
+        "E",
+        "S"
+      ],
+      [
+        "P",
+        "I",
+        "O",
+        "Y",
         "S",
-        "M",
-        "B",
-        "F"
+        "A",
+        "R",
+        "I"
       ],
       [
         " ",
         " ",
-        "F",
-        "K",
+        "C",
+        "A",
+        "C",
         "M",
-        "X",
         " ",
         " "
       ],
       [
         " ",
         " ",
-        "S",
+        "O",
+        "L",
         "A",
-        "G",
-        "E",
+        "H",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "BOTANY",
+        "word": "MAJESTY",
         "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 7
-      },
-      {
-        "word": "NATURE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
+        "rowStart": 6,
+        "colStart": 5,
         "rowEnd": 0,
         "colEnd": 5
+      },
+      {
+        "word": "COCONUT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "SPIRIT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
       },
       {
         "word": "ROYAL",
         "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "PRISM",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "RAIN",
-        "found": false,
         "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 4
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
       },
       {
-        "word": "SAGE",
+        "word": "HALO",
         "found": false,
         "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 25,
-    "title": "Level 25",
-    "subtitle": "SUNNY VALLEY - HARD (LEVEL 25)",
-    "world": "island",
-    "themeIcon": "card_giftcard",
-    "maskName": "Square",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        "L",
-        "K",
-        "E",
-        "X",
-        "L",
-        "X",
-        "X",
-        "H"
-      ],
-      [
-        "I",
-        "S",
-        "Z",
-        "P",
-        "G",
-        "I",
-        "K",
-        "V"
-      ],
-      [
-        "A",
-        "J",
-        "P",
-        "A",
-        "A",
-        "E",
-        "Q",
-        "H"
-      ],
-      [
-        "U",
-        "Y",
-        "L",
-        "A",
-        "L",
-        "R",
-        "E",
-        "F"
-      ],
-      [
-        "Q",
-        "E",
-        "W",
-        "Z",
-        "R",
-        "I",
-        "G",
-        "J"
-      ],
-      [
-        "G",
-        "M",
-        "Z",
-        "F",
-        "G",
-        "R",
-        "N",
-        "O"
-      ],
-      [
-        "Q",
-        "U",
-        "F",
-        "H",
-        "V",
-        "O",
-        "O",
-        "X"
-      ],
-      [
-        "P",
-        "Y",
-        "T",
-        "Z",
-        "A",
-        "R",
-        "J",
-        "W"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SPARROW",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "HEIGHT",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "PUZZLE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 5
-      },
-      {
-        "word": "QUAIL",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "GRAPE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "GALE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 26,
-    "title": "Level 26",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 26)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "N",
-        "A",
-        "D",
-        "M",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "S",
-        "P",
-        "A",
-        "R",
-        "K",
-        "S",
-        " "
-      ],
-      [
-        "A",
-        "L",
-        "L",
-        "I",
-        "N",
-        "A",
-        "V",
-        "G"
-      ],
-      [
-        "K",
-        "W",
-        "E",
-        "A",
-        "T",
-        "H",
-        "E",
-        "R"
-      ],
-      [
-        "D",
-        "Y",
-        "N",
-        "A",
-        "S",
-        "T",
-        "Y",
-        "Q"
-      ],
-      [
-        "Y",
-        "R",
-        "E",
-        "B",
-        "M",
-        "I",
-        "T",
-        "V"
-      ],
-      [
-        " ",
-        "N",
-        "E",
-        "M",
-        "U",
-        "L",
-        "G",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "U",
-        "D",
-        "I",
-        "Y",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "VANILLA",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "WEATHER",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "DYNASTY",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "TIMBER",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "SPARK",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "LUMEN",
-        "found": false,
-        "rowStart": 6,
         "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 1
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "REED",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 6
       }
     ]
   },
   {
     "id": 27,
     "title": "Level 27",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 27)",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 28.3)",
     "world": "island",
     "themeIcon": "wb_sunny",
-    "maskName": "Diamond",
+    "maskName": "Cross",
     "maskIcon": "☀️",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 85,
+    "timeLimit": 98,
     "grid": [
       [
         " ",
         " ",
-        " ",
-        "W",
-        "E",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "M",
-        "K",
-        "O",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "Y",
-        "S",
-        "I",
+        "J",
         "A",
         "D",
-        "I",
+        "E",
+        " ",
         " "
       ],
       [
-        "S",
-        "T",
-        "H",
-        "U",
-        "N",
+        " ",
+        " ",
         "D",
+        "N",
+        "H",
+        "N",
+        " ",
+        " "
+      ],
+      [
+        "R",
+        "C",
+        "I",
+        "F",
+        "O",
+        "C",
+        "U",
+        "S"
+      ],
+      [
+        "L",
+        "W",
+        "W",
+        "K",
+        "L",
+        "A",
+        "W",
+        "V"
+      ],
+      [
+        "R",
         "E",
+        "D",
+        "N",
+        "U",
+        "H",
+        "T",
         "R"
       ],
       [
-        "S",
-        "G",
-        "S",
-        "E",
-        "N",
-        "T",
-        "R",
-        "Y"
-      ],
-      [
-        " ",
-        "S",
+        "I",
+        "C",
         "H",
-        "O",
-        "W",
+        "A",
+        "S",
+        "M",
         "E",
-        "R",
-        " "
+        "W"
       ],
       [
         " ",
         " ",
+        "E",
+        "J",
         "O",
-        "M",
-        "W",
-        "T",
+        "X",
         " ",
         " "
       ],
       [
         " ",
         " ",
-        " ",
-        "M",
-        "Z",
-        " ",
+        "B",
+        "R",
+        "E",
+        "H",
         " ",
         " "
       ]
@@ -3701,49 +3861,65 @@ export const GENERATED_LEVELS: LevelData[] = [
       {
         "word": "THUNDER",
         "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "SENTRY",
-        "found": false,
         "rowStart": 4,
-        "colStart": 2,
+        "colStart": 6,
         "rowEnd": 4,
-        "colEnd": 7
+        "colEnd": 0
       },
       {
-        "word": "SHOWER",
+        "word": "CHASM",
         "found": false,
         "rowStart": 5,
         "colStart": 1,
         "rowEnd": 5,
-        "colEnd": 6
+        "colEnd": 5
       },
       {
-        "word": "DAISY",
+        "word": "FOCUS",
         "found": false,
         "rowStart": 2,
-        "colStart": 5,
+        "colStart": 3,
         "rowEnd": 2,
-        "colEnd": 1
+        "colEnd": 7
       },
       {
-        "word": "MOSS",
+        "word": "WIND",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "HERB",
         "found": false,
         "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 0
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "WALK",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 3,
+        "colEnd": 3
+      },
+      {
+        "word": "JADE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 5
       }
     ]
   },
   {
     "id": 28,
     "title": "Level 28",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 28)",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 29.5)",
     "world": "island",
     "themeIcon": "wb_sunny",
     "maskName": "Cross",
@@ -3751,100 +3927,100 @@ export const GENERATED_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 90,
+    "timeLimit": 98,
     "grid": [
       [
         " ",
         " ",
-        "K",
+        "V",
         "Y",
-        "H",
-        "Q",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "S",
         "T",
-        "A",
-        "G",
+        "Y",
         " ",
         " "
       ],
       [
-        "G",
-        "O",
+        " ",
+        " ",
+        "F",
+        "R",
+        "R",
+        "I",
+        " ",
+        " "
+      ],
+      [
+        "Z",
+        "P",
+        "A",
+        "R",
+        "S",
         "L",
-        "D",
         "E",
+        "Y"
+      ],
+      [
+        "R",
+        "M",
+        "U",
+        "S",
+        "P",
+        "A",
+        "R",
+        "K"
+      ],
+      [
+        "S",
+        "L",
+        "R",
+        "E",
+        "D",
         "N",
-        "W",
-        "N"
+        "O",
+        "W"
       ],
       [
         "F",
-        "W",
-        "I",
-        "L",
-        "L",
-        "O",
-        "W",
-        "C"
-      ],
-      [
-        "W",
-        "T",
-        "T",
-        "R",
-        "E",
-        "K",
-        "I",
-        "T"
-      ],
-      [
-        "A",
-        "O",
-        "R",
+        "C",
         "A",
         "N",
-        "G",
-        "E",
-        "O"
+        "Y",
+        "O",
+        "N",
+        "E"
       ],
       [
         " ",
         " ",
-        "T",
-        "C",
-        "O",
-        "V",
+        "F",
+        "E",
+        "R",
+        "N",
         " ",
         " "
       ],
       [
         " ",
         " ",
-        "O",
+        "Q",
+        "R",
         "L",
-        "C",
-        "W",
+        "F",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "GOLDEN",
+        "word": "PARSLEY",
         "found": false,
         "rowStart": 2,
-        "colStart": 0,
+        "colStart": 1,
         "rowEnd": 2,
-        "colEnd": 5
+        "colEnd": 7
       },
       {
-        "word": "ORANGE",
+        "word": "CANYON",
         "found": false,
         "rowStart": 5,
         "colStart": 1,
@@ -3852,35 +4028,43 @@ export const GENERATED_LEVELS: LevelData[] = [
         "colEnd": 6
       },
       {
-        "word": "WILLOW",
+        "word": "FLURRY",
         "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 6
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 5
       },
       {
-        "word": "LOGIC",
+        "word": "WONDER",
         "found": false,
-        "rowStart": 7,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "SMART",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "SPARK",
+        "found": false,
+        "rowStart": 3,
         "colStart": 3,
         "rowEnd": 3,
         "colEnd": 7
       },
       {
-        "word": "TREK",
+        "word": "FERN",
         "found": false,
-        "rowStart": 4,
+        "rowStart": 6,
         "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "STAG",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 1,
+        "rowEnd": 6,
         "colEnd": 5
       }
     ]
@@ -3888,2115 +4072,93 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 29,
     "title": "Level 29",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 29)",
+    "subtitle": "SUNNY VALLEY - CYCLE 6 PEAK 🔥 (H: 31)",
     "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Square",
-    "maskIcon": "☀️",
+    "themeIcon": "whatshot",
+    "maskName": "Cross",
+    "maskIcon": "🔥",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 90,
+    "timeLimit": 88,
     "grid": [
       [
-        "Y",
-        "Z",
+        " ",
+        " ",
         "W",
-        "G",
-        "T",
-        "B",
-        "E",
-        "U"
+        "V",
+        "O",
+        "N",
+        " ",
+        " "
       ],
       [
-        "Z",
+        " ",
+        " ",
+        "L",
+        "A",
+        "N",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        "O",
         "C",
         "R",
-        "P",
         "E",
-        "D",
+        "A",
+        "T",
+        "E",
+        "T"
+      ],
+      [
         "H",
+        "S",
+        "U",
+        "R",
+        "H",
+        "T",
+        "S",
         "P"
       ],
       [
-        "K",
-        "M",
-        "T",
-        "A",
-        "R",
-        "K",
-        "Z",
-        "E"
-      ],
-      [
-        "W",
-        "A",
-        "R",
-        "B",
-        "L",
-        "E",
-        "R",
-        "A"
-      ],
-      [
-        "Q",
-        "F",
-        "C",
-        "B",
-        "R",
-        "E",
-        "H",
-        "C"
-      ],
-      [
-        "A",
-        "F",
-        "K",
-        "J",
-        "L",
-        "L",
-        "X",
-        "E"
-      ],
-      [
-        "I",
-        "X",
-        "E",
-        "M",
-        "P",
-        "I",
-        "R",
-        "E"
-      ],
-      [
-        "T",
-        "U",
-        "L",
-        "I",
-        "P",
-        "L",
-        "T",
-        "H"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "WARBLER",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "EMPIRE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "TULIP",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "PEACE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 7
-      },
-      {
-        "word": "HERB",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 3
-      },
-      {
-        "word": "BEAR",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 30,
-    "title": "Level 30",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 30)",
-    "world": "island",
-    "themeIcon": "card_giftcard",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "O",
-        "E",
-        "C",
-        "H",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "L",
-        "P",
-        "L",
-        "L",
-        "C",
-        "T",
-        " "
-      ],
-      [
-        "Q",
-        "Z",
-        "A",
-        "P",
-        "A",
-        "A",
-        "H",
-        "W"
-      ],
-      [
-        "H",
-        "D",
-        "L",
-        "A",
-        "R",
-        "E",
-        "M",
-        "E"
-      ],
-      [
-        "L",
-        "E",
-        "P",
-        "M",
-        "I",
-        "P",
-        "X",
-        "M"
-      ],
-      [
-        "V",
-        "F",
-        "R",
-        "N",
-        "T",
-        "T",
-        "U",
-        "H"
-      ],
-      [
-        " ",
-        "P",
-        "H",
-        "O",
-        "Y",
-        "N",
-        "L",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "U",
-        "A",
-        "N",
-        "Z",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "EMERALD",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 1
-      },
-      {
-        "word": "CLARITY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "HERON",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "PEACH",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "MAPLE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "OPAL",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 31,
-    "title": "Level 31",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 31)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Diamond",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "R",
-        "D",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "R",
-        "A",
-        "M",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "Q",
-        "T",
-        "E",
-        "C",
-        "E",
-        "H",
-        " "
-      ],
-      [
-        "R",
-        "H",
-        "A",
-        "F",
-        "A",
-        "M",
-        "L",
-        "Z"
-      ],
-      [
-        "C",
-        "A",
-        "M",
-        "L",
-        "V",
-        "O",
-        "K",
-        "C"
-      ],
-      [
-        " ",
-        "P",
-        "O",
-        "E",
-        "E",
-        "R",
-        "T",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "T",
-        "C",
-        "R",
-        "Y",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "T",
-        "N",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "REFLECT",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "MEMORY",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "TOMATO",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "CAVERN",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "CLEAR",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 32,
-    "title": "Level 32",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 32)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Cross",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "D",
-        "R",
-        "B",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "K",
-        "M",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        "E",
-        "O",
-        "N",
-        "I",
-        "A",
-        "R",
-        "B",
-        "H"
-      ],
-      [
-        "T",
-        "L",
         "S",
-        "Y",
-        "M",
-        "O",
-        "C",
-        "Y"
-      ],
-      [
-        "M",
-        "T",
-        "B",
-        "O",
-        "R",
         "L",
-        "L",
-        "U"
-      ],
-      [
-        "U",
-        "B",
-        "T",
         "O",
-        "N",
-        "F",
-        "I",
-        "X"
-      ],
-      [
-        " ",
-        " ",
-        "H",
-        "O",
-        "N",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "J",
-        "J",
-        "P",
-        "Y",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "FLORET",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "BRAIN",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 2
-      },
-      {
-        "word": "NOBLE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "ROOT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "MIST",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "TOP",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 33,
-    "title": "Level 33",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 33)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Square",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        "E",
-        "B",
-        "R",
-        "Z",
-        "A",
-        "C",
-        "C",
-        "H"
-      ],
-      [
-        "I",
-        "R",
-        "I",
-        "I",
-        "V",
-        "F",
-        "E",
-        "D"
-      ],
-      [
-        "H",
         "P",
         "E",
-        "R",
-        "Q",
-        "Q",
-        "R",
-        "U"
-      ],
-      [
-        "F",
-        "E",
-        "R",
-        "M",
-        "C",
-        "W",
-        "A",
-        "C"
-      ],
-      [
-        "Z",
-        "Z",
-        "Z",
-        "I",
-        "M",
-        "H",
-        "L",
-        "K"
-      ],
-      [
-        "G",
-        "R",
-        "Z",
-        "L",
-        "D",
-        "U",
-        "F",
-        "G"
-      ],
-      [
-        "S",
-        "V",
-        "I",
-        "K",
-        "J",
-        "E",
-        "S",
-        "R"
-      ],
-      [
-        "A",
-        "S",
-        "C",
-        "E",
-        "N",
-        "T",
-        "Q",
-        "Y"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ASCENT",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "SUMMER",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "FLARE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "BIRCH",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "PRIDE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "DUCK",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 4,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 34,
-    "title": "Level 34",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 34)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "R",
-        "M",
-        "M",
-        "J",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "A",
-        "E",
-        "A",
-        "X",
-        "C",
-        "R",
-        " "
-      ],
-      [
-        "G",
-        "Z",
-        "V",
-        "L",
-        "T",
-        "L",
-        "A",
-        "R"
-      ],
-      [
-        "G",
-        "L",
-        "A",
-        "L",
-        "E",
-        "W",
-        "V",
-        "Y"
-      ],
-      [
-        "I",
-        "A",
-        "E",
-        "A",
-        "R",
-        "O",
-        "E",
-        "T"
-      ],
-      [
-        "E",
-        "N",
-        "B",
-        "R",
-        "R",
-        "Z",
-        "N",
-        "I"
-      ],
-      [
-        " ",
-        "D",
-        "Z",
-        "D",
-        "E",
-        "E",
-        "M",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "W",
-        "S",
-        "F",
-        "A",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "MALLARD",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "FERRET",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "BEAVER",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "RAVEN",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "LAND",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 1
-      },
-      {
-        "word": "OWL",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 35,
-    "title": "Level 35",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 35)",
-    "world": "island",
-    "themeIcon": "card_giftcard",
-    "maskName": "Diamond",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "D",
-        "B",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "X",
-        "F",
-        "K",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "H",
-        "C",
-        "N",
-        "I",
-        "F",
-        "A",
-        " "
-      ],
-      [
-        "R",
-        "S",
-        "W",
-        "E",
-        "E",
-        "T",
-        "S",
-        "M"
-      ],
-      [
-        "S",
-        "U",
-        "N",
-        "R",
-        "I",
-        "S",
-        "E",
-        "T"
-      ],
-      [
-        " ",
-        "O",
-        "H",
-        "O",
-        "U",
-        "N",
-        "D",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "S",
-        "W",
-        "A",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "C",
-        "C",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SUNRISE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "FINCH",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "SWEET",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 5
-      },
-      {
-        "word": "HOUND",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "BEAM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "SWAN",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 36,
-    "title": "Level 36",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 36)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Cross",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        "X",
-        "J",
-        "R",
-        "D",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "C",
-        "A",
-        "R",
-        " ",
-        " "
-      ],
-      [
-        "A",
-        "W",
-        "C",
-        "Y",
-        "G",
-        "N",
-        "E",
-        "T"
-      ],
-      [
-        "J",
-        "E",
-        "T",
-        "H",
-        "G",
         "I",
         "R",
-        "B"
-      ],
-      [
-        "E",
-        "F",
-        "L",
-        "A",
-        "M",
-        "E",
-        "Z",
         "J"
       ],
       [
-        "O",
-        "G",
-        "N",
-        "A",
         "M",
-        "J",
-        "Z",
-        "R"
-      ],
-      [
-        " ",
-        " ",
-        "H",
-        "F",
-        "Z",
-        "G",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "I",
-        "E",
-        "A",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "AZALEA",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "BRIGHT",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "CYGNET",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "FLAME",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "MANGO",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 37,
-    "title": "Level 37",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 37)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Square",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        "Q",
-        "D",
-        "E",
-        "N",
-        "I",
-        "H",
-        "S",
-        "Y"
-      ],
-      [
-        "T",
-        "E",
-        "K",
-        "C",
-        "I",
         "R",
-        "C",
-        "W"
+        "E",
+        "H",
+        "T",
+        "A",
+        "E",
+        "H"
       ],
       [
+        " ",
+        " ",
         "L",
-        "T",
-        "N",
         "R",
-        "O",
-        "P",
-        "A",
-        "V"
-      ],
-      [
-        "Y",
-        "B",
-        "E",
-        "S",
-        "O",
-        "L",
-        "A",
-        "R"
-      ],
-      [
-        "V",
-        "A",
-        "D",
-        "S",
-        "L",
-        "S",
-        "C",
-        "K"
-      ],
-      [
-        "A",
-        "S",
-        "R",
-        "W",
-        "D",
-        "X",
-        "W",
-        "W"
-      ],
-      [
         "H",
         "R",
-        "A",
-        "H",
-        "E",
-        "A",
-        "T",
-        "O"
-      ],
-      [
-        "W",
-        "H",
-        "G",
-        "H",
-        "V",
-        "P",
-        "S",
-        "A"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CRICKET",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "GARDEN",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 2
-      },
-      {
-        "word": "SOLAR",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "VAPOR",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "SHINE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 38,
-    "title": "Level 38",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 38)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "T",
-        "I",
-        "X",
-        "Q",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "R",
-        "E",
-        "K",
-        "M",
-        "S",
-        "A",
-        " "
-      ],
-      [
-        "A",
-        "E",
-        "L",
-        "C",
-        "A",
-        "R",
-        "I",
-        "M"
-      ],
-      [
-        "Z",
-        "T",
-        "K",
-        "C",
-        "U",
-        "R",
-        "P",
-        "T"
-      ],
-      [
-        "E",
-        "S",
-        "R",
-        "O",
-        "H",
-        "R",
-        "I",
-        "M"
-      ],
-      [
-        "E",
-        "A",
-        "A",
-        "Y",
-        "D",
-        "U",
-        "T",
-        "S"
-      ],
-      [
-        " ",
-        "M",
-        "P",
-        "X",
-        "R",
-        "Y",
-        "T",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "S",
-        "F",
-        "U",
-        "U",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SPARKLE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "MIRACLE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "MASTER",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "HORSE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "FRUIT",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "STUDY",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 39,
-    "title": "Level 39",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 39)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Diamond",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "G",
-        "T",
-        " ",
         " ",
         " "
       ],
       [
         " ",
         " ",
-        "C",
-        "R",
-        "S",
-        "Z",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "R",
-        "A",
-        "T",
-        "C",
-        "E",
-        "N",
-        " "
-      ],
-      [
-        "E",
-        "R",
-        "A",
-        "I",
-        "N",
-        "B",
-        "O",
-        "W"
-      ],
-      [
-        "G",
-        "R",
-        "E",
-        "G",
-        "N",
-        "I",
-        "G",
-        "W"
-      ],
-      [
-        " ",
-        "S",
-        "O",
-        "L",
-        "V",
-        "E",
-        "O",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "I",
-        "A",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "T",
-        "G",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "RAINBOW",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "GINGER",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "NECTAR",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "SOLVE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "GLOW",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 40,
-    "title": "Level 40",
-    "subtitle": "SUNNY VALLEY - HARDER (LEVEL 40)",
-    "world": "island",
-    "themeIcon": "card_giftcard",
-    "maskName": "Cross",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 90,
-    "grid": [
-      [
-        " ",
-        " ",
-        "P",
-        "F",
-        "T",
-        "H",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "Y",
-        "P",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        "F",
-        "K",
-        "R",
-        "G",
-        "E",
-        "I",
-        "Z",
-        "K"
-      ],
-      [
-        "O",
         "A",
         "S",
-        "E",
-        "C",
-        "D",
-        "P",
-        "L"
-      ],
-      [
-        "H",
-        "O",
-        "L",
-        "N",
-        "N",
-        "A",
-        "P",
-        "A"
-      ],
-      [
-        "L",
-        "D",
-        "E",
-        "I",
-        "O",
-        "R",
-        "Z",
-        "W"
-      ],
-      [
-        " ",
-        " ",
-        "Y",
-        "U",
-        "C",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "S",
-        "O",
-        "X",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CONCEPT",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "PARSLEY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "RADISH",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "GENIUS",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "WALK",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "OAK",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 41,
-    "title": "Level 41",
-    "subtitle": "SUNNY VALLEY - HARDEST (LEVEL 41)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Square",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        "G",
-        "E",
-        "U",
-        "S",
-        "T",
-        "E",
-        "M",
-        "B"
-      ],
-      [
-        "W",
-        "O",
-        "C",
-        "M",
-        "N",
-        "D",
-        "A",
-        "W"
-      ],
-      [
-        "I",
-        "D",
-        "C",
-        "M",
-        "J",
-        "F",
-        "Z",
-        "T"
-      ],
-      [
-        "N",
-        "M",
-        "P",
-        "E",
-        "A",
-        "K",
-        "U",
-        "F"
-      ],
-      [
-        "T",
-        "J",
-        "A",
-        "J",
-        "I",
-        "W",
-        "G",
-        "A"
-      ],
-      [
-        "E",
-        "S",
-        "O",
-        "P",
-        "Y",
-        "X",
-        "V",
-        "R"
-      ],
-      [
-        "R",
-        "G",
-        "M",
-        "N",
-        "W",
-        "A",
-        "D",
-        "C"
-      ],
-      [
-        "Q",
-        "H",
-        "C",
-        "R",
-        "A",
-        "N",
-        "O",
-        "M"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "MONARCH",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "WINTER",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 0
-      },
-      {
-        "word": "CRAFT",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "STEM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "PEAK",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 5
-      },
-      {
-        "word": "DAWN",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "DOE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 42,
-    "title": "Level 42",
-    "subtitle": "SUNNY VALLEY - HARDEST (LEVEL 42)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        " ",
-        " ",
-        "J",
-        "D",
-        "V",
-        "C",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "M",
-        "A",
-        "K",
-        "P",
-        "J",
-        "T",
-        " "
-      ],
-      [
-        "W",
-        "R",
-        "E",
-        "M",
-        "M",
-        "I",
-        "H",
-        "S"
-      ],
-      [
-        "L",
-        "U",
-        "S",
-        "T",
-        "E",
-        "R",
-        "N",
-        "N"
-      ],
-      [
-        "V",
-        "H",
-        "C",
-        "N",
-        "A",
-        "R",
-        "B",
-        "E"
-      ],
-      [
-        "L",
-        "E",
-        "R",
-        "Y",
-        "H",
-        "P",
-        "E",
-        "Z"
-      ],
-      [
-        " ",
-        "G",
-        "R",
-        "O",
-        "L",
-        "A",
-        "V",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "H",
-        "A",
-        "W",
-        "K",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SHIMMER",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "BRANCH",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "ZEPHYR",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "LUSTER",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 5
-      },
-      {
-        "word": "VALOR",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "PINE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 7
-      },
-      {
-        "word": "HAWK",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 43,
-    "title": "Level 43",
-    "subtitle": "SUNNY VALLEY - HARDEST (LEVEL 43)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Diamond",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        " ",
-        "B",
-        "P",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "R",
-        "R",
-        "R",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "G",
-        "I",
-        "E",
-        "E",
-        "N",
-        "I",
-        " "
-      ],
-      [
-        "O",
-        "O",
-        "D",
-        "H",
-        "V",
-        "I",
-        "R",
-        "Z"
-      ],
-      [
-        "D",
-        "L",
-        "G",
-        "T",
-        "E",
-        "V",
-        "N",
-        "P"
-      ],
-      [
-        " ",
-        "D",
-        "E",
-        "A",
-        "L",
-        "A",
-        "X",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "E",
-        "C",
-        "R",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
         "H",
         "Z",
-        " ",
         " ",
         " "
       ]
@@ -6005,49 +4167,210 @@ export const GENERATED_LEVELS: LevelData[] = [
       {
         "word": "HEATHER",
         "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "CLEVER",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "RAVINE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "RIDGE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
+        "rowStart": 5,
+        "colStart": 7,
         "rowEnd": 5,
-        "colEnd": 2
+        "colEnd": 1
       },
       {
-        "word": "GOLD",
+        "word": "ARTIST",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "CREATE",
         "found": false,
         "rowStart": 2,
         "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 1
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "THRUSH",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "SHARP",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "SLOPE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 4
+      },
+      {
+        "word": "LAND",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 5
       }
     ]
   },
   {
-    "id": 44,
-    "title": "Level 44",
-    "subtitle": "SUNNY VALLEY - HARDEST (LEVEL 44)",
+    "id": 30,
+    "title": "Level 30",
+    "subtitle": "SUNNY VALLEY - RELIEF BREATHER 🌿 (H: 29.8)",
+    "world": "island",
+    "themeIcon": "eco",
+    "maskName": "Square",
+    "maskIcon": "🌿",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 105,
+    "grid": [
+      [
+        "K",
+        "E",
+        "R",
+        "T",
+        "F",
+        "C",
+        "K",
+        "F"
+      ],
+      [
+        "P",
+        "B",
+        "Y",
+        "P",
+        "S",
+        "T",
+        "E",
+        "M"
+      ],
+      [
+        "D",
+        "R",
+        "E",
+        "O",
+        "K",
+        "F",
+        "A",
+        "A"
+      ],
+      [
+        "X",
+        "A",
+        "N",
+        "P",
+        "T",
+        "F",
+        "Q",
+        "N"
+      ],
+      [
+        "B",
+        "V",
+        "R",
+        "L",
+        "T",
+        "Y",
+        "G",
+        "A"
+      ],
+      [
+        "E",
+        "E",
+        "U",
+        "A",
+        "W",
+        "D",
+        "G",
+        "N"
+      ],
+      [
+        "W",
+        "R",
+        "O",
+        "R",
+        "S",
+        "O",
+        "N",
+        "A"
+      ],
+      [
+        "S",
+        "Y",
+        "J",
+        "D",
+        "S",
+        "I",
+        "A",
+        "B"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BRAVERY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 7,
+        "colEnd": 1
+      },
+      {
+        "word": "JOURNEY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "POPLAR",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "BANANA",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "TREK",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "STEM",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "title": "Level 31",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 32)",
     "world": "island",
     "themeIcon": "wb_sunny",
     "maskName": "Cross",
@@ -6055,116 +4378,527 @@ export const GENERATED_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 90,
+    "timeLimit": 84,
     "grid": [
       [
         " ",
         " ",
-        "F",
-        "V",
-        "D",
-        "N",
+        "S",
+        "E",
+        "Z",
+        "G",
         " ",
         " "
       ],
       [
         " ",
         " ",
-        "L",
-        "A",
+        "T",
         "N",
         "E",
+        "J",
         " ",
         " "
       ],
       [
-        "R",
-        "H",
-        "O",
-        "L",
-        "O",
-        "M",
+        "W",
         "A",
+        "H",
+        "I",
+        "P",
+        "A",
+        "I",
+        "T"
+      ],
+      [
+        "O",
+        "A",
+        "G",
+        "V",
+        "H",
+        "S",
+        "O",
         "P"
       ],
       [
-        "S",
-        "O",
-        "W",
         "L",
-        "M",
-        "E",
-        "N",
-        "O"
-      ],
-      [
-        "T",
-        "H",
-        "E",
-        "E",
+        "R",
+        "U",
         "A",
-        "R",
-        "H",
-        "N"
-      ],
-      [
-        "V",
-        "W",
-        "R",
         "Y",
+        "M",
+        "R",
+        "T"
+      ],
+      [
+        "G",
+        "J",
+        "O",
+        "R",
+        "R",
         "I",
-        "P",
-        "L",
-        "Y"
+        "C",
+        "I"
       ],
       [
         " ",
         " ",
-        "J",
+        "H",
         "U",
-        "D",
-        "U",
+        "S",
+        "N",
         " ",
         " "
       ],
       [
         " ",
         " ",
-        "J",
+        "T",
         "M",
-        "B",
-        "S",
+        "X",
+        "E",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "SUPREME",
+        "word": "JASMINE",
         "found": false,
-        "rowStart": 7,
+        "rowStart": 1,
         "colStart": 5,
-        "rowEnd": 1,
+        "rowEnd": 7,
         "colEnd": 5
       },
       {
-        "word": "DIAMOND",
+        "word": "THOUGHT",
         "found": false,
-        "rowStart": 6,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "ZEPHYR",
+        "found": false,
+        "rowStart": 0,
         "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "RAVINE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "PRISM",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "GLOW",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "title": "Level 32",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 33)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 70,
+    "grid": [
+      [
+        " ",
+        " ",
+        "U",
+        "J",
+        "A",
+        "V",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "N",
+        "U",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        "Z",
+        "D",
+        "I",
+        "O",
+        "T",
+        "L",
+        "T",
+        "K"
+      ],
+      [
+        "I",
+        "P",
+        "M",
+        "Z",
+        "U",
+        "I",
+        "E",
+        "Y"
+      ],
+      [
+        "Q",
+        "S",
+        "B",
+        "I",
+        "M",
+        "A",
+        "E",
+        "T"
+      ],
+      [
+        "K",
+        "F",
+        "E",
+        "R",
+        "N",
+        "N",
+        "W",
+        "V"
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "O",
+        "O",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "F",
+        "H",
+        "D",
+        "Y",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VALIANT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "HORIZON",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "TIMBER",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "AUTUMN",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "HONEY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "title": "Level 33",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 34.2)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 98,
+    "grid": [
+      [
+        " ",
+        " ",
+        "D",
+        "M",
+        "N",
+        "J",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "I",
+        "A",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        "A",
+        "S",
+        "B",
+        "H",
+        "C",
+        "A",
+        "E",
+        "P"
+      ],
+      [
+        "T",
+        "O",
+        "R",
+        "A",
+        "T",
+        "C",
+        "E",
+        "N"
+      ],
+      [
+        "R",
+        "C",
+        "A",
+        "P",
+        "E",
+        "T",
+        "A",
+        "L"
+      ],
+      [
+        "Z",
+        "P",
+        "N",
+        "O",
+        "G",
+        "N",
+        "A",
+        "M"
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "M",
+        "A",
+        "O",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "N",
+        "J",
+        "Y",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BRANCH",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "NECTAR",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 2
+      },
+      {
+        "word": "PETAL",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "MANGO",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "PEACH",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 3
+      },
+      {
+        "word": "ROBIN",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
         "rowEnd": 0,
         "colEnd": 4
       },
       {
-        "word": "FLOWER",
+        "word": "MIST",
         "found": false,
         "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "title": "Level 34",
+    "subtitle": "SUNNY VALLEY - CYCLE 7 PEAK 🔥 (H: 35.7)",
+    "world": "island",
+    "themeIcon": "whatshot",
+    "maskName": "Cross",
+    "maskIcon": "🔥",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 88,
+    "grid": [
+      [
+        " ",
+        " ",
+        "S",
+        "G",
+        "B",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "B",
+        "R",
+        "A",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        "R",
+        "C",
+        "P",
+        "O",
+        "S",
+        "O",
+        "G",
+        "E"
+      ],
+      [
+        "E",
+        "E",
+        "E",
+        "U",
+        "I",
+        "R",
+        "F",
+        "Y"
+      ],
+      [
+        "K",
+        "C",
+        "V",
+        "S",
+        "L",
+        "M",
+        "W",
+        "Y"
+      ],
+      [
+        "X",
+        "T",
+        "A",
+        "E",
+        "L",
+        "A",
+        "Z",
+        "A"
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "E",
+        "L",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "B",
+        "I",
+        "P",
+        "C",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
       {
-        "word": "VALLEY",
+        "word": "GROUSE",
         "found": false,
         "rowStart": 0,
         "colStart": 3,
@@ -6172,17 +4906,1523 @@ export const GENERATED_LEVELS: LevelData[] = [
         "colEnd": 3
       },
       {
-        "word": "SHRUB",
+        "word": "AZALEA",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "CLEVER",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "STORM",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "PEACE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "BRAVE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 2
+      },
+      {
+        "word": "BASIL",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "title": "Level 35",
+    "subtitle": "SUNNY VALLEY - RELIEF BREATHER 🌿 (H: 34.5)",
+    "world": "island",
+    "themeIcon": "eco",
+    "maskName": "Square",
+    "maskIcon": "🌿",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 105,
+    "grid": [
+      [
+        "R",
+        "O",
+        "O",
+        "T",
+        "H",
+        "Z",
+        "H",
+        "V"
+      ],
+      [
+        "O",
+        "V",
+        "M",
+        "C",
+        "R",
+        "S",
+        "K",
+        "Y"
+      ],
+      [
+        "H",
+        "H",
+        "O",
+        "A",
+        "I",
+        "U",
+        "W",
+        "W"
+      ],
+      [
+        "C",
+        "H",
+        "W",
+        "R",
+        "B",
+        "G",
+        "K",
+        "G"
+      ],
+      [
+        "R",
+        "K",
+        "I",
+        "H",
+        "Z",
+        "A",
+        "O",
+        "C"
+      ],
+      [
+        "I",
+        "E",
+        "V",
+        "G",
+        "E",
+        "L",
+        "Q",
+        "L"
+      ],
+      [
+        "B",
+        "Y",
+        "N",
+        "O",
+        "M",
+        "R",
+        "A",
+        "H"
+      ],
+      [
+        "F",
+        "O",
+        "L",
+        "I",
+        "A",
+        "G",
+        "E",
+        "R"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "HARMONY",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 7,
+        "rowEnd": 6,
+        "colEnd": 1
+      },
+      {
+        "word": "FOLIAGE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 6
+      },
+      {
+        "word": "BIRCH",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "LOGIC",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "ROOT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "SKY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "title": "Level 36",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 36.7)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 70,
+    "grid": [
+      [
+        " ",
+        " ",
+        "K",
+        "A",
+        "L",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Q",
+        "X",
+        "Q",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        "B",
+        "R",
+        "E",
+        "D",
+        "L",
+        "U",
+        "O",
+        "B"
+      ],
+      [
+        "B",
+        "W",
+        "K",
+        "N",
+        "I",
+        "G",
+        "H",
+        "T"
+      ],
+      [
+        "F",
+        "R",
+        "E",
+        "M",
+        "M",
+        "I",
+        "L",
+        "G"
+      ],
+      [
+        "Y",
+        "C",
+        "O",
+        "P",
+        "P",
+        "E",
+        "R",
+        "M"
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "O",
+        "Z",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "M",
+        "Z",
+        "K",
+        "V",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BOULDER",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "GLIMMER",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "COPPER",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "KNIGHT",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "BROOK",
         "found": false,
         "rowStart": 3,
         "colStart": 0,
         "rowEnd": 7,
         "colEnd": 4
-      },
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "title": "Level 37",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 37.7)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 56,
+    "grid": [
+      [
+        " ",
+        " ",
+        "N",
+        "O",
+        "W",
+        "K",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "L",
+        "T",
+        "J",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        "T",
+        "H",
+        "G",
+        "I",
+        "S",
+        "N",
+        "I",
+        "T"
+      ],
+      [
+        "K",
+        "F",
+        "T",
+        "E",
+        "S",
+        "N",
+        "U",
+        "S"
+      ],
+      [
+        "L",
+        "H",
+        "H",
+        "T",
+        "M",
+        "R",
+        "A",
+        "W"
+      ],
+      [
+        "Y",
+        "L",
+        "F",
+        "E",
+        "R",
+        "I",
+        "F",
+        "D"
+      ],
+      [
+        " ",
+        " ",
+        "J",
+        "A",
+        "M",
+        "G",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Y",
+        "H",
+        "P",
+        "P",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
       {
-        "word": "PONY",
+        "word": "INSIGHT",
         "found": false,
         "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "FIREFLY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "WARMTH",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "SUNSET",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "title": "Level 38",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 38.9)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 98,
+    "grid": [
+      [
+        " ",
+        " ",
+        "L",
+        "W",
+        "H",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "M",
+        "A",
+        "O",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        "W",
+        "I",
+        "L",
+        "L",
+        "O",
+        "W",
+        "O",
+        "V"
+      ],
+      [
+        "Y",
+        "O",
+        "U",
+        "F",
+        "A",
+        "I",
+        "R",
+        "Y"
+      ],
+      [
+        "Y",
+        "S",
+        "Z",
+        "T",
+        "R",
+        "A",
+        "U",
+        "Q"
+      ],
+      [
+        "C",
+        "W",
+        "I",
+        "L",
+        "U",
+        "M",
+        "E",
+        "N"
+      ],
+      [
+        " ",
+        " ",
+        "W",
+        "A",
+        "R",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "X",
+        "D",
+        "D",
+        "Y",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "WILLOW",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 5
+      },
+      {
+        "word": "QUARTZ",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "FAIRY",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "DAISY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "LUMEN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "WARM",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "ROAM",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "title": "Level 39",
+    "subtitle": "SUNNY VALLEY - CYCLE 8 PEAK 🔥 (H: 40.4)",
+    "world": "island",
+    "themeIcon": "whatshot",
+    "maskName": "Cross",
+    "maskIcon": "🔥",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 100,
+    "grid": [
+      [
+        " ",
+        " ",
+        "K",
+        "E",
+        "L",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "I",
+        "T",
+        "I",
+        " ",
+        " "
+      ],
+      [
+        "S",
+        "E",
+        "L",
+        "K",
+        "R",
+        "A",
+        "P",
+        "S"
+      ],
+      [
+        "U",
+        "Y",
+        "M",
+        "G",
+        "E",
+        "E",
+        "G",
+        "H"
+      ],
+      [
+        "N",
+        "X",
+        "A",
+        "Y",
+        "V",
+        "P",
+        "E",
+        "A"
+      ],
+      [
+        "B",
+        "L",
+        "E",
+        "Y",
+        "L",
+        "R",
+        "X",
+        "D"
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "B",
+        "O",
+        "F",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "N",
+        "S",
+        "Y",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SPARKLE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "SOLVE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 4
+      },
+      {
+        "word": "DREAM",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 2
+      },
+      {
+        "word": "HERON",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "AGATE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "LILY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 1
+      },
+      {
+        "word": "DEER",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "SUN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "title": "Level 40",
+    "subtitle": "SUNNY VALLEY - RELIEF BREATHER 🌿 (H: 39.2)",
+    "world": "island",
+    "themeIcon": "eco",
+    "maskName": "Square",
+    "maskIcon": "🌿",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 105,
+    "grid": [
+      [
+        "S",
+        "T",
+        "U",
+        "D",
+        "Y",
+        "U",
+        "G",
+        "R"
+      ],
+      [
+        "V",
+        "R",
+        "Q",
+        "O",
+        "D",
+        "F",
+        "O",
+        "R"
+      ],
+      [
+        "F",
+        "R",
+        "E",
+        "M",
+        "O",
+        "O",
+        "S",
+        "E"
+      ],
+      [
+        "A",
+        "E",
+        "S",
+        "P",
+        "A",
+        "Y",
+        "L",
+        "B"
+      ],
+      [
+        "L",
+        "D",
+        "X",
+        "A",
+        "P",
+        "N",
+        "P",
+        "Y"
+      ],
+      [
+        "C",
+        "N",
+        "P",
+        "I",
+        "N",
+        "E",
+        "Q",
+        "L"
+      ],
+      [
+        "O",
+        "O",
+        "F",
+        "F",
+        "A",
+        "D",
+        "P",
+        "G"
+      ],
+      [
+        "N",
+        "P",
+        "H",
+        "I",
+        "L",
+        "L",
+        "Z",
+        "J"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "PEPPER",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "FALCON",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 0
+      },
+      {
+        "word": "PONDER",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "MOOSE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "STUDY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "HILL",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "title": "Level 41",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 41.4)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 98,
+    "grid": [
+      [
+        " ",
+        " ",
+        "G",
+        "L",
+        "M",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "B",
+        "A",
+        "G",
+        " ",
+        " "
+      ],
+      [
+        "J",
+        "T",
+        "E",
+        "O",
+        "G",
+        "A",
+        "D",
+        "N"
+      ],
+      [
+        "I",
+        "N",
+        "M",
+        "A",
+        "I",
+        "R",
+        "R",
+        "A"
+      ],
+      [
+        "O",
+        "I",
+        "P",
+        "R",
+        "C",
+        "U",
+        "I",
+        "W"
+      ],
+      [
+        "R",
+        "M",
+        "I",
+        "K",
+        "H",
+        "O",
+        "B",
+        "S"
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "Y",
+        "D",
+        "C",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "H",
+        "P",
+        "Q",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "COURAGE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "EMPIRE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "MAGIC",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 4
+      },
+      {
+        "word": "MINT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "BOAR",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "SWAN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "BIRD",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "title": "Level 42",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 42.4)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 84,
+    "grid": [
+      [
+        " ",
+        " ",
+        "V",
+        "M",
+        "B",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "L",
+        "E",
+        "C",
+        " ",
+        " "
+      ],
+      [
+        "J",
+        "R",
+        "O",
+        "S",
+        "S",
+        "H",
+        "Q",
+        "G"
+      ],
+      [
+        "N",
+        "O",
+        "C",
+        "I",
+        "O",
+        "O",
+        "K",
+        "A"
+      ],
+      [
+        "M",
+        "K",
+        "R",
+        "L",
+        "P",
+        "L",
+        "I",
+        "T"
+      ],
+      [
+        "H",
+        "J",
+        "O",
+        "V",
+        "R",
+        "A",
+        "T",
+        "S"
+      ],
+      [
+        " ",
+        " ",
+        "W",
+        "E",
+        "U",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "R",
+        "P",
+        "H",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SCHOLAR",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "PURPOSE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 4
+      },
+      {
+        "word": "SILVER",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "BLOOM",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "STAG",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "title": "Level 43",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 43.6)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 84,
+    "grid": [
+      [
+        " ",
+        " ",
+        "Y",
+        "N",
+        "A",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Q",
+        "U",
+        "O",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        "X",
+        "P",
+        "B",
+        "T",
+        "R",
+        "S",
+        "H",
+        "R"
+      ],
+      [
+        "Q",
+        "T",
+        "O",
+        "M",
+        "C",
+        "T",
+        "A",
+        "A"
+      ],
+      [
+        "I",
+        "Z",
+        "T",
+        "E",
+        "H",
+        "I",
+        "C",
+        "E"
+      ],
+      [
+        "I",
+        "M",
+        "A",
+        "G",
+        "I",
+        "N",
+        "E",
+        "B"
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "Z",
+        "D",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Y",
+        "H",
+        "C",
+        "U",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "IMAGINE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "DESTINY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "NUTMEG",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "BOTANY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "ORCHID",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "BEAR",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "title": "Level 44",
+    "subtitle": "SUNNY VALLEY - CYCLE 9 PEAK 🔥 (H: 45.1)",
+    "world": "island",
+    "themeIcon": "whatshot",
+    "maskName": "Cross",
+    "maskIcon": "🔥",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 100,
+    "grid": [
+      [
+        " ",
+        " ",
+        "A",
+        "A",
+        "F",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "U",
+        "R",
+        "J",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        "Q",
+        "R",
+        "O",
+        "D",
+        "T",
+        "W",
+        "I",
+        "G"
+      ],
+      [
+        "A",
+        "S",
+        "O",
+        "E",
+        "E",
+        "V",
+        "J",
+        "G"
+      ],
+      [
+        "T",
+        "B",
+        "S",
+        "S",
+        "A",
+        "I",
+        "C",
+        "A"
+      ],
+      [
+        "A",
+        "V",
+        "E",
+        "I",
+        "G",
+        "S",
+        "T",
+        "P"
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "G",
+        "L",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "N",
+        "E",
+        "A",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "DESIGN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "EAGLE",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "VISTA",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "FROST",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "TWIG",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "AURA",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "SEED",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "GAP",
+        "found": false,
+        "rowStart": 3,
         "colStart": 7,
         "rowEnd": 5,
         "colEnd": 7
@@ -6192,253 +6432,116 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 45,
     "title": "Level 45",
-    "subtitle": "SUNNY VALLEY - HARDEST (LEVEL 45)",
+    "subtitle": "SUNNY VALLEY - RELIEF BREATHER 🌿 (H: 43.9)",
     "world": "island",
-    "themeIcon": "card_giftcard",
+    "themeIcon": "eco",
     "maskName": "Square",
-    "maskIcon": "☀️",
+    "maskIcon": "🌿",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 95,
+    "timeLimit": 105,
     "grid": [
       [
-        "T",
-        "Q",
-        "C",
-        "B",
-        "B",
-        "C",
-        "P",
-        "C"
-      ],
-      [
-        "V",
-        "B",
-        "I",
-        "G",
-        "U",
-        "O",
-        "M",
-        "H"
-      ],
-      [
-        "T",
-        "W",
-        "G",
+        "E",
+        "R",
+        "J",
+        "E",
         "Y",
-        "S",
-        "T",
-        "O",
-        "D"
-      ],
-      [
-        "P",
-        "S",
         "A",
-        "T",
-        "U",
-        "T",
-        "R",
-        "N"
-      ],
-      [
-        "A",
-        "D",
-        "M",
-        "T",
-        "T",
-        "E",
-        "E",
-        "U"
-      ],
-      [
-        "R",
-        "O",
-        "Q",
-        "I",
-        "O",
-        "R",
-        "H",
-        "O"
-      ],
-      [
-        "F",
-        "V",
-        "E",
-        "W",
-        "L",
-        "Y",
-        "Q",
+        "B",
         "M"
       ],
       [
-        "Q",
-        "E",
-        "H",
-        "L",
-        "M",
-        "X",
-        "O",
-        "X"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "WITTY",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "LOTUS",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "MOUND",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "OTTER",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "MAGIC",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "DOVE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "HERO",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 46,
-    "title": "Level 46",
-    "subtitle": "SUNNY VALLEY - HARDEST (LEVEL 46)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        " ",
-        " ",
-        "Z",
-        "V",
-        "F",
-        "Y",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "Y",
-        "R",
-        "R",
-        "E",
-        "H",
+        "I",
         "C",
-        " "
+        "E",
+        "P",
+        "A",
+        "R",
+        "G",
+        "F"
       ],
       [
         "E",
-        "L",
-        "G",
-        "A",
         "E",
-        "L",
-        "L",
+        "S",
+        "I",
+        "W",
+        "S",
+        "M",
+        "L"
+      ],
+      [
+        "Z",
+        "C",
+        "A",
+        "N",
+        "A",
+        "R",
+        "Y",
         "A"
       ],
       [
-        "J",
-        "M",
-        "E",
+        "N",
         "A",
-        "D",
+        "N",
         "O",
-        "W",
-        "C"
-      ],
-      [
-        "H",
-        "S",
-        "U",
         "R",
-        "H",
-        "T",
-        "F",
-        "K"
+        "O",
+        "C",
+        "M"
       ],
       [
-        "J",
-        "A",
-        "D",
-        "E",
-        "T",
-        "A",
-        "R",
-        "T"
-      ],
-      [
-        " ",
+        "O",
         "Q",
-        "A",
-        "X",
+        "O",
+        "N",
         "E",
-        "A",
-        "S",
-        " "
+        "T",
+        "W",
+        "E"
       ],
       [
-        " ",
-        " ",
-        "M",
-        "L",
-        "B",
+        "R",
+        "C",
         "F",
-        " ",
-        " "
+        "U",
+        "O",
+        "V",
+        "C",
+        "S"
+      ],
+      [
+        "B",
+        "N",
+        "S",
+        "W",
+        "D",
+        "C",
+        "S",
+        "G"
       ]
     ],
     "targetWords": [
       {
-        "word": "MEADOW",
+        "word": "CORONA",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "BRONZE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "CANARY",
         "found": false,
         "rowStart": 3,
         "colStart": 1,
@@ -6446,152 +6549,434 @@ export const GENERATED_LEVELS: LevelData[] = [
         "colEnd": 6
       },
       {
-        "word": "THRUSH",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "CHERRY",
+        "word": "GRAPE",
         "found": false,
         "rowStart": 1,
         "colStart": 6,
         "rowEnd": 1,
-        "colEnd": 1
+        "colEnd": 2
       },
       {
-        "word": "EAGLE",
+        "word": "FLAME",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "WISE",
         "found": false,
         "rowStart": 2,
         "colStart": 4,
         "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "LEAF",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "JADE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "BARK",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 7
+        "colEnd": 1
       }
     ]
   },
   {
-    "id": 47,
-    "title": "Level 47",
-    "subtitle": "SUNNY VALLEY - HARDEST (LEVEL 47)",
+    "id": 46,
+    "title": "Level 46",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 46.1)",
     "world": "island",
     "themeIcon": "wb_sunny",
-    "maskName": "Diamond",
+    "maskName": "Cross",
     "maskIcon": "☀️",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 95,
+    "timeLimit": 98,
     "grid": [
       [
         " ",
         " ",
-        " ",
-        "O",
+        "S",
+        "G",
         "T",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "D",
-        "E",
-        "E",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "C",
         "L",
-        "O",
-        "V",
-        "E",
-        "R",
+        " ",
         " "
       ],
       [
-        "S",
-        "W",
-        "O",
-        "D",
-        "A",
-        "H",
-        "S",
-        "Y"
-      ],
-      [
-        "Y",
-        "K",
-        "C",
+        " ",
+        " ",
         "O",
         "R",
-        "O",
-        "N",
-        "A"
+        "D",
+        "L",
+        " ",
+        " "
       ],
       [
-        " ",
-        "A",
         "I",
-        "Q",
-        "V",
-        "O",
+        "R",
+        "A",
+        "L",
         "E",
-        " "
+        "M",
+        "O",
+        "N"
       ],
       [
-        " ",
-        " ",
-        "D",
+        "F",
+        "I",
+        "A",
+        "R",
+        "O",
         "L",
+        "F",
+        "J"
+      ],
+      [
+        "L",
+        "R",
         "E",
         "G",
+        "N",
+        "I",
+        "G",
+        "H"
+      ],
+      [
+        "L",
+        "A",
+        "G",
+        "I",
+        "L",
+        "E",
+        "I",
+        "N"
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "X",
+        "C",
+        "W",
         " ",
         " "
       ],
       [
         " ",
         " ",
-        " ",
-        "P",
-        "L",
-        " ",
+        "E",
+        "V",
+        "O",
+        "D",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "CORONA",
+        "word": "GINGER",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "FLORA",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 3,
+        "colEnd": 2
+      },
+      {
+        "word": "AGILE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "TRAIL",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "LEMON",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "DOVE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "FROG",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "title": "Level 47",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 47.1)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 84,
+    "grid": [
+      [
+        " ",
+        " ",
+        "U",
+        "I",
+        "T",
+        "X",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "O",
+        "W",
+        "L",
+        "V",
+        " ",
+        " "
+      ],
+      [
+        "Q",
+        "G",
+        "Y",
+        "P",
+        "O",
+        "N",
+        "A",
+        "C"
+      ],
+      [
+        "T",
+        "E",
+        "K",
+        "C",
+        "I",
+        "R",
+        "C",
+        "D"
+      ],
+      [
+        "H",
+        "G",
+        "U",
+        "O",
+        "B",
+        "E",
+        "G",
+        "D"
+      ],
+      [
+        "S",
+        "S",
+        "Y",
+        "B",
+        "A",
+        "V",
+        "G",
+        "P"
+      ],
+      [
+        " ",
+        " ",
+        "J",
+        "L",
+        "U",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "G",
+        "P",
+        "S",
+        "C",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CRICKET",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "CANOPY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 2
+      },
+      {
+        "word": "CAVERN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 5
+      },
+      {
+        "word": "ABYSS",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "BOUGH",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "OWL",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "title": "Level 48",
+    "subtitle": "SUNNY VALLEY - HARDEST (H: 48.3)",
+    "world": "island",
+    "themeIcon": "wb_sunny",
+    "maskName": "Cross",
+    "maskIcon": "☀️",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 84,
+    "grid": [
+      [
+        " ",
+        " ",
+        "K",
+        "A",
+        "O",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "U",
+        "H",
+        "V",
+        " ",
+        " "
+      ],
+      [
+        "M",
+        "R",
+        "R",
+        "E",
+        "M",
+        "Y",
+        "H",
+        "T"
+      ],
+      [
+        "J",
+        "W",
+        "O",
+        "D",
+        "A",
+        "H",
+        "S",
+        "N"
+      ],
+      [
+        "X",
+        "R",
+        "N",
+        "A",
+        "T",
+        "U",
+        "R",
+        "E"
+      ],
+      [
+        "Y",
+        "S",
+        "B",
+        "T",
+        "O",
+        "P",
+        "A",
+        "Z"
+      ],
+      [
+        " ",
+        " ",
+        "V",
+        "Q",
+        "E",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Y",
+        "C",
+        "W",
+        "I",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "THEORY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "NATURE",
         "found": false,
         "rowStart": 4,
         "colStart": 2,
@@ -6607,196 +6992,27 @@ export const GENERATED_LEVELS: LevelData[] = [
         "colEnd": 1
       },
       {
-        "word": "CLOVER",
+        "word": "THYME",
         "found": false,
         "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "SKILL",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "PEONY",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "SEED",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "DAY",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 48,
-    "title": "Level 48",
-    "subtitle": "SUNNY VALLEY - HARDEST (LEVEL 48)",
-    "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Cross",
-    "maskIcon": "☀️",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        " ",
-        " ",
-        "P",
-        "N",
-        "J",
-        "R",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "P",
-        "O",
-        "R",
-        "M",
-        " ",
-        " "
-      ],
-      [
-        "G",
-        "B",
-        "I",
-        "X",
-        "P",
-        "A",
-        "D",
-        "E"
-      ],
-      [
-        "D",
-        "U",
-        "O",
-        "L",
-        "C",
-        "L",
-        "E",
-        "W"
-      ],
-      [
-        "Y",
-        "G",
-        "R",
-        "E",
-        "N",
-        "E",
-        "A",
-        "L"
-      ],
-      [
-        "N",
-        "T",
-        "U",
-        "O",
-        "R",
-        "P",
-        "S",
-        "R"
-      ],
-      [
-        " ",
-        " ",
-        "B",
-        "U",
-        "C",
-        "V",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "M",
-        "A",
-        "O",
-        "R",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "POPLAR",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 7
-      },
-      {
-        "word": "ENERGY",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "SPROUT",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "LEARN",
-        "found": false,
-        "rowStart": 4,
         "colStart": 7,
-        "rowEnd": 0,
+        "rowEnd": 2,
         "colEnd": 3
       },
       {
-        "word": "CLOUD",
+        "word": "TOPAZ",
         "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 0
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 7
       },
       {
-        "word": "ROAM",
+        "word": "OAK",
         "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "CUB",
-        "found": false,
-        "rowStart": 6,
+        "rowStart": 0,
         "colStart": 4,
-        "rowEnd": 6,
+        "rowEnd": 0,
         "colEnd": 2
       }
     ]
@@ -6804,306 +7020,314 @@ export const GENERATED_LEVELS: LevelData[] = [
   {
     "id": 49,
     "title": "Level 49",
-    "subtitle": "SUNNY VALLEY - HARDEST (LEVEL 49)",
+    "subtitle": "SUNNY VALLEY - CYCLE 10 PEAK 🔥 (H: 49.8)",
     "world": "island",
-    "themeIcon": "wb_sunny",
-    "maskName": "Square",
-    "maskIcon": "☀️",
+    "themeIcon": "whatshot",
+    "maskName": "Cross",
+    "maskIcon": "🔥",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 95,
+    "timeLimit": 88,
     "grid": [
       [
-        "C",
-        "P",
-        "O",
-        "L",
-        "L",
-        "E",
-        "N",
-        "A"
-      ],
-      [
-        "U",
-        "B",
-        "R",
-        "A",
-        "V",
-        "E",
-        "R",
-        "Y"
-      ],
-      [
-        "B",
-        "U",
+        " ",
+        " ",
         "D",
-        "N",
-        "P",
-        "X",
-        "A",
-        "I"
-      ],
-      [
-        "A",
         "S",
-        "V",
-        "X",
-        "A",
-        "F",
+        "E",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Q",
+        "L",
         "D",
-        "N"
+        "O",
+        " ",
+        " "
       ],
       [
-        "U",
+        "T",
+        "X",
+        "I",
+        "N",
+        "E",
+        "O",
         "H",
-        "E",
-        "T",
-        "A",
-        "E",
-        "R",
-        "C"
+        "P"
       ],
       [
-        "Y",
-        "E",
-        "N",
-        "R",
+        "T",
         "U",
-        "O",
+        "I",
         "J",
-        "K"
+        "W",
+        "I",
+        "O",
+        "L"
       ],
       [
-        "C",
-        "O",
-        "C",
-        "O",
-        "N",
-        "U",
-        "T",
-        "K"
-      ],
-      [
-        "Z",
-        "N",
-        "U",
-        "T",
-        "M",
-        "E",
+        "A",
         "G",
+        "O",
+        "R",
+        "G",
+        "E",
+        "H",
+        "W"
+      ],
+      [
+        "T",
+        "E",
+        "R",
+        "R",
+        "A",
+        "I",
+        "N",
         "S"
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "Y",
+        "P",
+        "K",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "V",
+        "D",
+        "S",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "COCONUT",
+        "word": "TERRAIN",
         "found": false,
-        "rowStart": 6,
+        "rowStart": 5,
         "colStart": 0,
-        "rowEnd": 6,
+        "rowEnd": 5,
         "colEnd": 6
       },
       {
-        "word": "BRAVERY",
+        "word": "PHOENIX",
         "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 7
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 1
       },
       {
-        "word": "JOURNEY",
+        "word": "SPROUT",
         "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 5,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 2,
         "colEnd": 0
       },
       {
-        "word": "NUTMEG",
+        "word": "SHIELD",
         "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "CREATE",
-        "found": false,
-        "rowStart": 4,
+        "rowStart": 5,
         "colStart": 7,
-        "rowEnd": 4,
+        "rowEnd": 0,
         "colEnd": 2
       },
       {
-        "word": "POLLEN",
+        "word": "GORGE",
         "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "BUSH",
-        "found": false,
-        "rowStart": 1,
+        "rowStart": 4,
         "colStart": 1,
         "rowEnd": 4,
-        "colEnd": 1
+        "colEnd": 5
+      },
+      {
+        "word": "WOODS",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "HERO",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 2
       }
     ]
   },
   {
     "id": 50,
     "title": "Level 50",
-    "subtitle": "SUNNY VALLEY - VALLEY PEAK (LEVEL 50)",
+    "subtitle": "SUNNY VALLEY - VALLEY SUMMIT CLIMAX 👑 (H: 48.6)",
     "world": "island",
     "themeIcon": "emoji_events",
-    "maskName": "Octagon",
-    "maskIcon": "☀️",
+    "maskName": "Cross",
+    "maskIcon": "🌿",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 95,
+    "timeLimit": 130,
     "grid": [
       [
         " ",
         " ",
         "P",
-        "V",
-        "L",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "T",
-        "N",
-        "A",
-        "L",
-        "P",
-        "F",
-        " "
-      ],
-      [
-        "L",
-        "E",
-        "G",
-        "E",
-        "N",
-        "D",
-        "V",
-        "H"
-      ],
-      [
-        "E",
-        "E",
-        "M",
         "O",
-        "D",
-        "S",
-        "I",
-        "W"
-      ],
-      [
-        "R",
+        "N",
         "Y",
-        "R",
-        "O",
-        "T",
-        "C",
-        "I",
-        "V"
-      ],
-      [
-        "E",
-        "P",
-        "U",
-        "M",
-        "P",
-        "K",
-        "I",
-        "N"
-      ],
-      [
         " ",
-        "P",
-        "P",
-        "R",
-        "A",
-        "H",
-        "S",
         " "
       ],
       [
         " ",
         " ",
+        "H",
+        "E",
+        "A",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        "W",
         "P",
+        "E",
+        "O",
+        "N",
+        "Y",
+        "A",
+        "J"
+      ],
+      [
         "Q",
+        "D",
+        "F",
+        "E",
+        "R",
+        "R",
+        "E",
+        "T"
+      ],
+      [
+        "M",
+        "O",
+        "D",
+        "S",
+        "I",
+        "W",
+        "R",
+        "B"
+      ],
+      [
+        "P",
+        "S",
+        "E",
+        "I",
+        "P",
         "G",
-        "K",
+        "A",
+        "M"
+      ],
+      [
+        " ",
+        " ",
+        "L",
+        "A",
+        "P",
+        "O",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "F",
+        "A",
+        "E",
+        "L",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "PUMPKIN",
+        "word": "MAGPIE",
         "found": false,
         "rowStart": 5,
-        "colStart": 1,
+        "colStart": 7,
         "rowEnd": 5,
-        "colEnd": 7
+        "colEnd": 2
       },
       {
-        "word": "VICTORY",
+        "word": "FERRET",
         "found": false,
-        "rowStart": 4,
-        "colStart": 7,
-        "rowEnd": 4,
-        "colEnd": 1
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 7
       },
       {
         "word": "WISDOM",
         "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 2
+        "rowStart": 4,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 0
       },
       {
-        "word": "LEGEND",
+        "word": "PEONY",
         "found": false,
         "rowStart": 2,
-        "colStart": 0,
+        "colStart": 1,
         "rowEnd": 2,
         "colEnd": 5
       },
       {
-        "word": "SHARP",
+        "word": "HEAT",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "LEAF",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "OPAL",
         "found": false,
         "rowStart": 6,
-        "colStart": 6,
+        "colStart": 5,
         "rowEnd": 6,
         "colEnd": 2
       },
       {
-        "word": "PLANT",
+        "word": "PONY",
         "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "REGAL",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
+        "rowStart": 0,
+        "colStart": 2,
         "rowEnd": 0,
-        "colEnd": 4
+        "colEnd": 5
       }
     ]
   }

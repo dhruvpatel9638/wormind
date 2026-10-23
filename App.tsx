@@ -299,7 +299,7 @@ function AppContent() {
     // 🔹 Smart AdMob Interstitial Ad (Randomized Win + 3-min Time Auto-Trigger)
     showSmartInterstitialAd();
 
-    const nextLevel = levelId < 150 ? levelId + 1 : 150;
+    const nextLevel = levelId + 1;
 
     setPlayerState((prev) => {
       const currentHighest = prev.currentLevel || 1;
@@ -323,7 +323,7 @@ function AppContent() {
       setTimeout(() => {
         setShowCenturyModal(true);
       }, 450);
-    } else if (target === 'map' || levelId >= 150) {
+    } else if (target === 'map') {
       setCurrentScreen('worlds');
     } else {
       // Seamlessly play the next level without forced map scrolling
