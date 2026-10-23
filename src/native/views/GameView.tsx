@@ -26,7 +26,7 @@ import { HINT_COST, REVEAL_COST } from '../../config/economy';
 interface GameViewProps {
   levelId: number;
   onExit: () => void;
-  onCompleteLevel: (levelId: number, stars: number, coinsEarned: number) => void;
+  onCompleteLevel: (levelId: number, stars: number, coinsEarned: number, target?: 'next' | 'map') => void;
   coins: number;
   onDeductCoins: (amount: number) => boolean;
   onUseHint: () => boolean;
@@ -398,12 +398,12 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     resetLevelState(currentLevel);
   };
 
-  const handleCompleteAttempt = useCallback(() => {
-    // Tapping the celebration and its auto-advance timer can both fire.
+  const handleCompleteAttempt = useCallback((target: 'next' | 'map' = 'next') => {
+    // Tapping the celebration and its action buttons can both fire.
     if (attemptStatusRef.current !== 'won' || completionClaimedRef.current) return;
     completionClaimedRef.current = true;
     nativeAudio.stopVictory();
-    onCompleteLevelRef.current(levelId, 3, 50);
+    onCompleteLevelRef.current(levelId, 3, 50, target);
   }, [levelId]);
 
   // Check if given cells spell any unfound target word
@@ -1011,7 +1011,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         coinsEarned={50}
         strikeEarned={STRIKE_WIN_REWARD}
         xpEarned={100}
-        onNextLevel={handleCompleteAttempt}
+        onNextLevel={() => handleCompleteAttempt('next')}
+        onGoToMap={() => handleCompleteAttempt('map')}
       />
 
       {/* Pause Modal */}

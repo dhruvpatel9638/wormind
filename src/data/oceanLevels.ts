@@ -1,21 +1,45 @@
 import { LevelData } from '../types';
 
 export const OCEAN_MASKS_INFO = [
-  { name: 'Clam Shell', icon: '🐚' },
-  { name: 'Anchor', icon: '⚓' },
-  { name: 'Water Drop', icon: '🫧' },
-  { name: 'Ocean Fish', icon: '🐟' },
-  { name: 'Neptune Trident', icon: '🔱' },
-  { name: 'Jellyfish', icon: '🪼' },
-  { name: 'Nautilus Spiral', icon: '🐚' },
-  { name: 'Atlantis Citadel', icon: '🏰' },
+  {
+    "name": "Clam Shell",
+    "icon": "🐚"
+  },
+  {
+    "name": "Anchor",
+    "icon": "⚓"
+  },
+  {
+    "name": "Water Drop",
+    "icon": "🫧"
+  },
+  {
+    "name": "Ocean Fish",
+    "icon": "🐟"
+  },
+  {
+    "name": "Neptune Trident",
+    "icon": "🔱"
+  },
+  {
+    "name": "Jellyfish",
+    "icon": "🪼"
+  },
+  {
+    "name": "Nautilus Spiral",
+    "icon": "🐚"
+  },
+  {
+    "name": "Atlantis Citadel",
+    "icon": "🏰"
+  }
 ];
 
 export const OCEAN_LEVELS: LevelData[] = [
   {
-    "id": 101,
-    "title": "Level 101",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 101)",
+    "id": 51,
+    "title": "Level 51",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 51)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Clam Shell",
@@ -26,133 +50,133 @@ export const OCEAN_LEVELS: LevelData[] = [
     "timeLimit": 85,
     "grid": [
       [
-        "T",
-        "M",
-        "S",
+        " ",
+        " ",
+        "R",
         "H",
+        "D",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "L",
+        "Q",
+        "A",
+        "L",
+        "X",
+        "M",
+        " "
+      ],
+      [
         "W",
+        "H",
+        "I",
+        "A",
+        "D",
         "O",
-        "Z",
+        "S",
         "R"
       ],
       [
-        "V",
+        "J",
         "G",
-        "G",
+        "B",
         "A",
-        "S",
-        "T",
-        "T",
-        "E"
-      ],
-      [
-        "F",
-        "O",
-        "N",
-        "R",
-        "E",
-        "E",
-        "S",
-        "C"
-      ],
-      [
-        " ",
-        "L",
-        "I",
-        "M",
+        "H",
         "A",
-        "L",
-        "E",
-        " "
-      ],
-      [
-        " ",
-        "D",
-        "V",
-        "O",
-        "G",
-        "S",
-        "V",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "I",
-        "N",
-        "U",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "D",
         "Y",
+        "U"
+      ],
+      [
+        "M",
+        "O",
+        "Q",
+        "T",
+        "S",
+        "I",
+        "R",
+        "K"
+      ],
+      [
+        "C",
+        "C",
+        "A",
+        "P",
+        "S",
+        "T",
+        "A",
+        "N"
+      ],
+      [
+        " ",
+        "F",
+        "F",
+        "M",
         "L",
         "S",
-        " ",
+        "S",
         " "
       ],
       [
         " ",
         " ",
-        "I",
-        "T",
-        "L",
-        "M",
+        "N",
+        "S",
+        "Y",
+        "O",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "HARMONY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "SEAGULL",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "ISLET",
+        "word": "CAPSTAN",
         "found": false,
         "rowStart": 5,
-        "colStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "FATHOM",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
         "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "COBALT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 0,
         "colEnd": 5
       },
       {
-        "word": "DIVING",
+        "word": "RADAR",
         "found": false,
-        "rowStart": 6,
+        "rowStart": 0,
         "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
+        "rowEnd": 4,
+        "colEnd": 6
       },
       {
-        "word": "GOLD",
+        "word": "SAIL",
         "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 4,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 1,
         "colEnd": 1
       }
     ]
   },
   {
-    "id": 102,
-    "title": "Level 102",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 102)",
+    "id": 52,
+    "title": "Level 52",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 52)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Anchor",
@@ -163,97 +187,89 @@ export const OCEAN_LEVELS: LevelData[] = [
     "timeLimit": 85,
     "grid": [
       [
-        "G",
-        "K",
-        "S",
-        "V",
-        "X",
+        " ",
+        " ",
         "D",
-        "W",
+        "U",
+        "O",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "O",
+        "T",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        "B",
+        "M",
+        "F",
+        "Y",
+        "A",
+        "N",
+        "A",
         "A"
       ],
       [
-        "I",
-        "V",
-        "B",
-        "T",
-        "H",
-        "I",
-        "G",
-        "I"
-      ],
-      [
-        " ",
+        "D",
         "A",
-        "T",
-        "A",
-        "Y",
-        "A",
-        "C",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
         "J",
-        "Y",
-        "M",
-        " ",
-        " "
-      ],
-      [
-        "H",
-        " ",
-        "F",
-        "S",
-        "E",
-        "R",
-        " ",
-        "C"
-      ],
-      [
-        "B",
-        "G",
-        "G",
-        "G",
-        "P",
-        "E",
-        "E",
+        "A",
+        "O",
+        "I",
+        "X",
         "D"
       ],
       [
-        "G",
-        "U",
-        "T",
+        "W",
+        "R",
+        "L",
+        "B",
+        "L",
+        "R",
+        "W",
+        "V"
+      ],
+      [
+        "I",
+        "S",
+        "I",
+        "E",
+        "F",
         "A",
         "P",
-        "M",
-        "D",
-        "Z"
+        "M"
       ],
       [
         " ",
+        " ",
         "H",
-        "A",
-        "R",
-        "B",
-        "O",
-        "R",
+        "F",
+        "E",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "G",
+        "T",
+        "N",
+        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "MERMAID",
+        "word": "MARINER",
         "found": false,
         "rowStart": 6,
         "colStart": 5,
@@ -261,35 +277,43 @@ export const OCEAN_LEVELS: LevelData[] = [
         "colEnd": 5
       },
       {
-        "word": "BAY",
+        "word": "BALEEN",
         "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 3,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "BAYOU",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "FLOAT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 1,
         "colEnd": 4
       },
       {
-        "word": "HARBOR",
+        "word": "DRIFT",
         "found": false,
-        "rowStart": 7,
-        "colStart": 1,
+        "rowStart": 3,
+        "colStart": 0,
         "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 5,
         "colEnd": 4
       }
     ]
   },
   {
-    "id": 103,
-    "title": "Level 103",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 103)",
+    "id": 53,
+    "title": "Level 53",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 53)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Water Drop",
@@ -297,144 +321,136 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 95,
+    "timeLimit": 85,
     "grid": [
       [
         " ",
         " ",
-        "I",
-        "A",
-        "E",
-        "S",
+        " ",
+        "H",
+        "Z",
+        " ",
         " ",
         " "
       ],
       [
         " ",
-        "L",
+        " ",
         "X",
-        "C",
-        "N",
-        "N",
-        "B",
-        " "
-      ],
-      [
-        "J",
-        "L",
-        "F",
         "O",
-        "B",
-        "A",
-        "Z",
-        "B"
-      ],
-      [
         "I",
-        "E",
-        "L",
-        "R",
         "P",
-        "F",
-        "V",
-        "S"
-      ],
-      [
-        "W",
-        "H",
-        "O",
-        "A",
-        "B",
-        "Z",
-        "U",
-        "Y"
-      ],
-      [
-        "G",
-        "S",
-        "A",
-        "L",
-        "Z",
-        "H",
-        "Z",
-        "Y"
+        " ",
+        " "
       ],
       [
         " ",
+        "M",
+        "D",
         "R",
-        "T",
-        "C",
-        "A",
-        "V",
+        "O",
+        "J",
+        "F",
+        " "
+      ],
+      [
+        "S",
         "E",
+        "K",
+        "U",
+        "L",
+        "F",
+        "V",
+        "R"
+      ],
+      [
+        "B",
+        "K",
+        "O",
+        "G",
+        "I",
+        "D",
+        "N",
+        "I"
+      ],
+      [
+        " ",
+        "G",
+        "N",
+        "I",
+        "V",
+        "I",
+        "D",
         " "
       ],
       [
         " ",
         " ",
-        "L",
-        "P",
-        "N",
-        "N",
+        "F",
+        "O",
+        "A",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "X",
+        "J",
+        " ",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "CORAL",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "SHELL",
+        "word": "DIVING",
         "found": false,
         "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 1,
+        "colStart": 6,
+        "rowEnd": 5,
         "colEnd": 1
       },
       {
-        "word": "FLOAT",
+        "word": "FLUKES",
         "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 6,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "INDIGO",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
         "colEnd": 2
       },
       {
-        "word": "NAVY",
+        "word": "FJORD",
         "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 7
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 2
+      },
+      {
+        "word": "FOAM",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 5
       }
     ]
   },
   {
-    "id": 104,
-    "title": "Level 104",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 104)",
+    "id": 54,
+    "title": "Level 54",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 54)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Ocean Fish",
@@ -442,137 +458,7251 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 95,
+    "timeLimit": 85,
+    "grid": [
+      [
+        "R",
+        "P",
+        "W",
+        "C",
+        "D",
+        "P",
+        "G",
+        "R"
+      ],
+      [
+        "C",
+        "T",
+        "E",
+        "K",
+        "I",
+        "U",
+        "F",
+        "Y"
+      ],
+      [
+        "X",
+        "O",
+        "N",
+        "G",
+        "G",
+        "T",
+        "T",
+        "E"
+      ],
+      [
+        "Y",
+        "Z",
+        "M",
+        "A",
+        "K",
+        "U",
+        "Y",
+        "K"
+      ],
+      [
+        "A",
+        "G",
+        "M",
+        "P",
+        "I",
+        "A",
+        "T",
+        "A"
+      ],
+      [
+        "R",
+        "Y",
+        "M",
+        "H",
+        "A",
+        "G",
+        "T",
+        "Y"
+      ],
+      [
+        "E",
+        "O",
+        "N",
+        "A",
+        "C",
+        "S",
+        "M",
+        "A"
+      ],
+      [
+        "O",
+        "K",
+        "Z",
+        "V",
+        "G",
+        "B",
+        "S",
+        "K"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "COMPASS",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 6
+      },
+      {
+        "word": "CANOE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 0
+      },
+      {
+        "word": "KAYAK",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "GIANT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "CITY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "title": "Level 55",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 55)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Neptune Trident",
+    "maskIcon": "🔱",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
     "grid": [
       [
         " ",
+        " ",
+        "L",
+        "L",
+        "E",
+        "F",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "M",
+        "L",
+        "V",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        "V",
+        "I",
+        "V",
+        "U",
+        "A",
+        "H",
+        "R",
+        "P"
+      ],
+      [
+        "W",
+        "F",
+        "Y",
+        "G",
+        "W",
+        "I",
+        "K",
+        "Q"
+      ],
+      [
+        "O",
+        "E",
+        "K",
+        "A",
+        "E",
+        "P",
+        "W",
+        "X"
+      ],
+      [
+        "J",
+        "S",
+        "N",
+        "E",
+        "L",
+        "B",
+        "R",
+        "P"
+      ],
+      [
+        " ",
+        " ",
+        "G",
+        "S",
+        "D",
+        "J",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "U",
+        "I",
+        "N",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SEAGULL",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "SHIP",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "WAVE",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "PEAK",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "RUIN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "title": "Level 56",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 56)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        "S",
+        "H",
+        "M",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "L",
+        "T",
+        "Y",
+        "E",
+        "X",
+        "T",
+        " "
+      ],
+      [
+        "V",
+        "L",
+        "R",
+        "D",
+        "R",
+        "T",
+        "S",
+        "T"
+      ],
+      [
+        "H",
+        "U",
+        "A",
+        "R",
+        "M",
+        "I",
+        "E",
+        "V"
+      ],
+      [
+        "S",
+        "H",
+        "I",
+        "O",
+        "A",
+        "J",
+        "R",
+        "V"
+      ],
+      [
+        "F",
+        "T",
+        "T",
+        "L",
+        "I",
+        "G",
+        "C",
+        "S"
+      ],
+      [
+        " ",
+        "B",
+        "U",
+        "Z",
+        "D",
+        "O",
+        "W",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Q",
+        "P",
+        "W",
+        "A",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "MERMAID",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "STRAIT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "HYDRO",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "CREST",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "HULL",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 1
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "title": "Level 57",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 57)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Nautilus Spiral",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "R",
+        "Q",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "B",
+        "E",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "N",
+        "R",
+        "E",
+        "E",
+        "E",
+        "U",
+        " "
+      ],
+      [
+        "A",
+        "S",
+        "E",
+        "N",
+        "F",
+        "M",
+        "F",
+        "D"
+      ],
+      [
+        "J",
+        "N",
+        "L",
+        "T",
+        "R",
+        "P",
+        "O",
+        "S"
+      ],
+      [
+        " ",
+        "F",
+        "I",
+        "H",
+        "A",
+        "L",
+        "O",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "I",
+        "H",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "C",
+        "W",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BENTHIC",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "TEMPLE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "REEFS",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "RELIC",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "WHARF",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "title": "Level 58",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 58)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        "P",
+        "A",
+        "G",
         "D",
         "F",
+        "G",
+        "R",
+        "V"
+      ],
+      [
+        "Q",
+        "Z",
+        "Y",
+        "D",
+        "I",
+        "U",
+        "Q",
+        "S"
+      ],
+      [
+        "G",
+        "N",
+        "I",
+        "R",
+        "A",
+        "E",
+        "B",
+        "M"
+      ],
+      [
+        "E",
+        "Q",
+        "U",
+        "A",
+        "T",
+        "O",
+        "R",
+        "V"
+      ],
+      [
+        "C",
+        "Y",
+        "T",
+        "E",
+        "N",
+        "I",
+        "R",
+        "B"
+      ],
+      [
+        "F",
+        "L",
+        "S",
+        "N",
+        "L",
+        "V",
+        "R",
+        "L"
+      ],
+      [
+        "D",
+        "N",
+        "A",
         "W",
+        "N",
+        "U",
+        "R",
+        "F"
+      ],
+      [
+        "B",
         "P",
+        "M",
+        "R",
+        "J",
+        "S",
+        "X",
+        "N"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BEARING",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "EQUATOR",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "SQUID",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "BRINE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "MAST",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "title": "Level 59",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 59)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Clam Shell",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        "W",
+        "S",
+        "N",
+        "Q",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "Q",
+        "K",
+        "S",
+        "E",
+        "A",
+        "L",
+        " "
+      ],
+      [
+        "S",
+        "S",
+        "A",
+        "L",
+        "T",
+        "U",
+        "C",
+        "S"
+      ],
+      [
+        "O",
+        "R",
+        "I",
+        "A",
+        "S",
+        "R",
+        "O",
+        "C"
+      ],
+      [
+        "Q",
+        "X",
+        "S",
+        "S",
+        "O",
+        "N",
+        "G",
+        "P"
+      ],
+      [
+        "G",
+        "M",
+        "S",
+        "R",
+        "C",
+        "N",
+        "R",
+        "Q"
+      ],
+      [
+        " ",
+        "V",
+        "O",
+        "Y",
+        "A",
+        "G",
+        "E",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Z",
+        "A",
+        "Z",
+        "P",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CUTLASS",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "CORSAIR",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 1
+      },
+      {
+        "word": "VOYAGE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "SONG",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "SEAL",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "title": "Level 60",
+    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 60)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Anchor",
+    "maskIcon": "⚓",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        "S",
+        "N",
+        "F",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "R",
+        "S",
+        "Q",
+        " ",
+        " "
+      ],
+      [
+        "C",
+        "I",
+        "N",
+        "A",
+        "E",
+        "C",
+        "O",
+        "O"
+      ],
+      [
+        "X",
+        "K",
+        "U",
+        "C",
+        "A",
+        "L",
+        "A",
+        "D"
+      ],
+      [
+        "C",
+        "V",
+        "C",
+        "L",
+        "B",
+        "L",
+        "L",
+        "C"
+      ],
+      [
+        "E",
+        "C",
+        "R",
+        "O",
+        "E",
+        "O",
+        "Z",
+        "P"
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "W",
+        "D",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "N",
+        "L",
+        "A",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "OCEANIC",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "SEABED",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "CLOWN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "ATOLL",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "DOCK",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 1
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "title": "Level 61",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 61)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Water Drop",
+    "maskIcon": "🫧",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "L",
+        "R",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Y",
+        "O",
+        "E",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "E",
+        "A",
+        "O",
+        "I",
+        "A",
+        "U",
+        " "
+      ],
+      [
+        "Y",
+        "Y",
+        "S",
+        "H",
+        "R",
+        "R",
+        "V",
+        "W"
+      ],
+      [
+        "T",
+        "T",
+        "L",
+        "C",
+        "R",
+        "P",
+        "G",
+        "Z"
+      ],
+      [
+        " ",
+        "F",
+        "T",
+        "S",
+        "A",
+        "S",
+        "N",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "A",
+        "E",
+        "B",
         "B",
         " ",
         " "
       ],
       [
-        "N",
-        "X",
+        " ",
+        " ",
+        " ",
+        "R",
+        "J",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BARRIER",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "SCHOOL",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "JETTY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "SPRAY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "RAFT",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "title": "Level 62",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 62)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Ocean Fish",
+    "maskIcon": "🐟",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "L",
+        "R",
+        "A",
+        "E",
+        "P",
+        "V",
+        "W",
+        "L"
+      ],
+      [
         "D",
+        "N",
+        "Q",
+        "T",
+        "E",
         "A",
-        "I",
-        "Y",
-        "A",
+        "K",
+        "C"
+      ],
+      [
+        "T",
+        "V",
+        "B",
+        "S",
+        "Z",
+        "S",
+        "B",
+        "V"
+      ],
+      [
+        "G",
+        "H",
+        "S",
+        "J",
+        "D",
+        "J",
+        "X",
         "H"
       ],
       [
         "O",
-        "Z",
-        "L",
-        "V",
-        "S",
         "E",
-        "D",
-        "Y"
+        "G",
+        "C",
+        "T",
+        "W",
+        "O",
+        "F"
       ],
       [
+        "L",
+        "M",
+        "A",
+        "I",
+        "H",
+        "G",
+        "I",
+        "C"
+      ],
+      [
+        "D",
+        "V",
+        "Z",
+        "B",
+        "L",
+        "N",
+        "V",
+        "D"
+      ],
+      [
+        "E",
+        "L",
+        "G",
+        "D",
+        "S",
+        "D",
+        "P",
+        "K"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VESSEL",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "LIGHT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "PEARL",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 0
+      },
+      {
+        "word": "FINS",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "CAVE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "title": "Level 63",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 63)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Neptune Trident",
+    "maskIcon": "🔱",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "P",
+        "T",
+        "T",
+        "I",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "S",
+        "U",
+        "V",
+        " ",
+        " "
+      ],
+      [
+        "B",
+        "E",
+        "L",
+        "A",
+        "R",
+        "Y",
+        "C",
+        "P"
+      ],
+      [
+        "X",
+        "D",
+        "I",
+        "O",
+        "T",
+        "T",
+        "K",
+        "I"
+      ],
+      [
+        "T",
+        "D",
+        "C",
+        "C",
+        "L",
+        "L",
+        "X",
+        "E"
+      ],
+      [
+        "Z",
+        "Y",
+        "A",
+        "P",
+        "E",
+        "A",
+        "T",
+        "R"
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "U",
+        "T",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "B",
+        "L",
+        "G",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "PELICAN",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "TURTLE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "SALTY",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 5
+      },
+      {
+        "word": "COAST",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "EDDY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "PIER",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "title": "Level 64",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 64)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "S",
+        "L",
+        "U",
+        "F",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "G",
+        "P",
+        "L",
+        "O",
+        "E",
+        "R",
+        " "
+      ],
+      [
+        "L",
+        "Q",
+        "O",
+        "I",
+        "I",
+        "A",
+        "V",
+        "S"
+      ],
+      [
+        "I",
+        "P",
+        "U",
+        "G",
+        "N",
+        "Z",
+        "I",
+        "A"
+      ],
+      [
+        "A",
+        "R",
+        "T",
+        "O",
+        "V",
+        "T",
+        "Q",
+        "N"
+      ],
+      [
+        "T",
+        "I",
+        "S",
+        "B",
+        "J",
+        "H",
+        "E",
+        "D"
+      ],
+      [
+        " ",
+        "N",
+        "O",
+        "C",
+        "A",
+        "E",
+        "B",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "O",
+        "V",
+        "H",
+        "F",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BEACON",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 1
+      },
+      {
+        "word": "SONAR",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "SPOUT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "TAIL",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "SAND",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "GILL",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "title": "Level 65",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 65)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Nautilus Spiral",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "T",
+        "J",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "S",
+        "R",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "X",
+        "G",
+        "U",
+        "N",
+        "A",
+        "P",
+        " "
+      ],
+      [
+        "K",
+        "W",
         "R",
         "N",
         "O",
-        "E",
+        "X",
         "H",
+        "Z"
+      ],
+      [
+        "S",
+        "H",
+        "U",
+        "K",
+        "O",
+        "J",
+        "M",
+        "C"
+      ],
+      [
+        " ",
+        "W",
+        "S",
+        "E",
+        "G",
+        "V",
+        "U",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "N",
+        "A",
+        "X",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "M",
+        "L",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "LAGOON",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "SUNKEN",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "CHART",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "SURGE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "SWIM",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "title": "Level 66",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 66)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "N",
+        "D",
+        "T",
+        "K",
+        "N",
+        "R",
+        "S",
+        "Y"
+      ],
+      [
+        "E",
+        "E",
+        "E",
+        "W",
+        "E",
+        "V",
+        "I",
+        "D"
+      ],
+      [
+        "R",
+        "E",
+        "M",
+        "Y",
+        "B",
+        "P",
+        "C",
+        "R"
+      ],
+      [
+        "I",
+        "W",
+        "A",
+        "C",
+        "Z",
+        "A",
+        "K",
+        "K"
+      ],
+      [
+        "S",
+        "A",
+        "E",
+        "G",
+        "N",
+        "O",
+        "P",
+        "S"
+      ],
+      [
+        "G",
+        "E",
+        "S",
+        "N",
+        "Q",
+        "P",
+        "J",
+        "J"
+      ],
+      [
+        "J",
+        "S",
+        "O",
+        "A",
+        "Z",
+        "U",
+        "R",
+        "E"
+      ],
+      [
+        "A",
+        "N",
+        "N",
+        "T",
+        "F",
+        "I",
+        "W",
+        "F"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SEAWEED",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 1
+      },
+      {
+        "word": "CANNON",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 7,
+        "colEnd": 1
+      },
+      {
+        "word": "SPONGE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "AZURE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "SIREN",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "DIVE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 1,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "title": "Level 67",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 67)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Clam Shell",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "F",
+        "R",
+        "U",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "T",
+        "E",
+        "I",
+        "R",
+        "Q",
+        "T",
+        " "
+      ],
+      [
+        "A",
+        "X",
+        "E",
+        "K",
+        "R",
+        "X",
+        "X",
+        "T"
+      ],
+      [
+        "E",
+        "K",
+        "R",
+        "S",
+        "H",
+        "O",
+        "A",
+        "L"
+      ],
+      [
+        "J",
+        "N",
+        "I",
+        "B",
+        "A",
+        "C",
+        "G",
+        "Q"
+      ],
+      [
+        "E",
+        "K",
+        "C",
+        "E",
+        "D",
+        "N",
+        "E",
+        "F"
+      ],
+      [
+        " ",
+        "H",
+        "T",
+        "H",
+        "I",
+        "V",
+        "H",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "K",
+        "K",
+        "M",
+        "W",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CABIN",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "SHOAL",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "REEF",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "DECK",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "SURF",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "title": "Level 68",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 68)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Anchor",
+    "maskIcon": "⚓",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "D",
+        "A",
+        "A",
+        "Z",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "U",
+        "B",
+        "G",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        "K",
+        "N",
+        "U",
+        "E",
+        "L",
+        "A",
+        "H",
+        "W"
+      ],
+      [
+        "G",
+        "C",
+        "Z",
+        "N",
+        "W",
+        "O",
+        "R",
+        "C"
+      ],
+      [
+        "S",
+        "R",
+        "E",
+        "S",
+        "I",
+        "U",
+        "R",
+        "C"
+      ],
+      [
+        "O",
+        "N",
+        "A",
+        "C",
+        "L",
+        "O",
+        "V",
+        "R"
+      ],
+      [
+        " ",
+        " ",
+        "K",
+        "A",
+        "E",
+        "B",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "O",
+        "I",
+        "E",
+        "U",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VOLCANO",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "CRUISER",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 3
+      },
+      {
+        "word": "SCUBA",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "WHALE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 3
+      },
+      {
+        "word": "BEAK",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "title": "Level 69",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 69)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Water Drop",
+    "maskIcon": "🫧",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "G",
+        "K",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "A",
+        "B",
+        "F",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "E",
+        "N",
+        "A",
+        "V",
+        "Y",
+        "L",
+        " "
+      ],
+      [
+        "B",
+        "P",
+        "B",
+        "O",
+        "A",
+        "R",
+        "D",
+        "P"
+      ],
+      [
+        "F",
+        "L",
+        "E",
+        "E",
+        "W",
+        "A",
+        "R",
+        "D"
+      ],
+      [
+        " ",
+        "S",
+        "H",
+        "R",
+        "I",
+        "M",
+        "P",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "A",
+        "V",
+        "I",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "B",
+        "H",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "LEEWARD",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "SHRIMP",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "BOARD",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "KELP",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "NAVY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 5
+      },
+      {
+        "word": "NAVI",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "title": "Level 70",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 70)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Ocean Fish",
+    "maskIcon": "🐟",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "E",
+        "Q",
+        "Y",
+        "O",
+        "S",
+        "G",
+        "K",
+        "R"
+      ],
+      [
+        "Q",
+        "Y",
+        "L",
+        "F",
+        "M",
+        "B",
+        "S",
+        "C"
+      ],
+      [
+        "C",
+        "H",
+        "E",
+        "S",
+        "T",
+        "I",
+        "K",
+        "R"
+      ],
+      [
+        "E",
+        "L",
+        "I",
+        "A",
+        "L",
+        "L",
+        "K",
+        "O"
+      ],
+      [
+        "M",
+        "R",
+        "Z",
+        "F",
+        "Q",
+        "L",
+        "R",
+        "H"
+      ],
+      [
+        "W",
+        "F",
+        "O",
+        "U",
+        "Y",
+        "O",
+        "A",
+        "C"
+      ],
+      [
+        "R",
+        "S",
+        "A",
+        "H",
+        "M",
+        "W",
+        "H",
+        "N"
+      ],
+      [
+        "J",
+        "Y",
+        "E",
+        "W",
+        "S",
+        "I",
+        "S",
+        "A"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "ANCHOR",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "BILLOW",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "CHEST",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "SHARK",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 6,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "SHORE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "QUAY",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 1
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "title": "Level 71",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 71)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Neptune Trident",
+    "maskIcon": "🔱",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        "B",
+        "L",
+        "H",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "L",
+        "A",
+        "T",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        "A",
+        "Q",
+        "U",
+        "D",
+        "R",
+        "A",
+        "N",
+        "J"
+      ],
+      [
+        "F",
+        "E",
+        "B",
+        "I",
+        "O",
+        "G",
+        "F",
+        "P"
+      ],
+      [
+        "I",
+        "G",
+        "B",
+        "T",
+        "N",
+        "U",
+        "K",
+        "D"
+      ],
+      [
+        "D",
+        "E",
+        "E",
+        "P",
+        "S",
+        "E",
+        "A",
+        "O"
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "J",
+        "G",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "B",
+        "V",
+        "U",
+        "G",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BLUBBER",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "DEEPSEA",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "LEAGUE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "NORTH",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "TIDAL",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "title": "Level 72",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 72)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "Z",
+        "W",
+        "M",
+        "O",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "K",
+        "J",
+        "E",
+        "L",
+        "L",
+        "Y",
+        " "
+      ],
+      [
+        "S",
+        "E",
+        "X",
+        "T",
+        "A",
+        "N",
+        "T",
+        "Z"
+      ],
+      [
+        "S",
+        "E",
+        "L",
+        "A",
+        "C",
+        "S",
+        "B",
+        "M"
+      ],
+      [
+        "R",
+        "E",
+        "T",
+        "T",
+        "O",
+        "F",
+        "U",
+        "J"
+      ],
+      [
+        "M",
+        "O",
+        "O",
+        "R",
+        "I",
+        "N",
+        "G",
+        "O"
+      ],
+      [
+        " ",
+        "I",
+        "S",
+        "L",
+        "A",
+        "N",
+        "D",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "V",
+        "Z",
+        "K",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SEXTANT",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "MOORING",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "SCALES",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "ISLAND",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "OTTER",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "JELLY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "title": "Level 73",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 73)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Nautilus Spiral",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 80,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "O",
+        "O",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "K",
+        "Y",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "N",
+        "E",
+        "K",
+        "A",
+        "R",
+        "K",
+        " "
+      ],
+      [
+        "W",
+        "C",
+        "L",
+        "I",
+        "P",
+        "P",
+        "E",
+        "R"
+      ],
+      [
+        "V",
+        "Y",
+        "R",
+        "A",
+        "U",
+        "T",
+        "S",
+        "E"
+      ],
+      [
+        " ",
+        "W",
+        "A",
+        "L",
+        "R",
+        "U",
+        "S",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "T",
+        "Y",
+        "X",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "O",
+        "W",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "ESTUARY",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "CLIPPER",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "WALRUS",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "KRAKEN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 1
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "title": "Level 74",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 74)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "T",
+        "S",
+        "F",
+        "G",
+        "A",
+        "R",
+        "C",
+        "D"
+      ],
+      [
+        "I",
+        "P",
+        "N",
+        "Y",
+        "Q",
+        "E",
+        "J",
+        "G"
+      ],
+      [
+        "U",
+        "B",
+        "A",
+        "B",
+        "T",
+        "K",
+        "G",
+        "O"
+      ],
+      [
+        "S",
+        "R",
+        "E",
+        "T",
+        "C",
+        "A",
+        "B",
+        "G"
+      ],
+      [
+        "T",
+        "T",
+        "C",
+        "X",
+        "E",
         "E",
         "G",
         "G"
       ],
       [
-        "T",
-        "P",
-        "G",
         "E",
-        "H",
-        "T",
-        "A",
-        "V"
-      ],
-      [
-        "H",
-        "E",
-        "X",
-        "R",
-        "V",
-        "G",
-        "H",
-        "N"
-      ],
-      [
-        " ",
-        "E",
-        "N",
-        "K",
         "I",
-        "I",
-        "E",
-        " "
-      ],
-      [
-        "K",
+        "O",
+        "B",
         "D",
-        " ",
-        " ",
-        " ",
-        " ",
-        "K",
-        "J"
+        "R",
+        "U",
+        "L"
+      ],
+      [
+        "W",
+        "D",
+        "P",
+        "J",
+        "U",
+        "B",
+        "O",
+        "E"
+      ],
+      [
+        "R",
+        "E",
+        "S",
+        "E",
+        "V",
+        "O",
+        "C",
+        "S"
       ]
     ],
     "targetWords": [
       {
-        "word": "SEA",
+        "word": "WETSUIT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "BREAKER",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "GOGGLES",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 7
+      },
+      {
+        "word": "OCEAN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "TIDE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 7,
+        "colEnd": 1
+      },
+      {
+        "word": "COVE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 6,
+        "rowEnd": 7,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "title": "Level 75",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 75)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Clam Shell",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "Z",
+        "U",
+        "S",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "A",
+        "B",
+        "D",
+        "J",
+        "O",
+        "T",
+        " "
+      ],
+      [
+        "J",
+        "I",
+        "M",
+        "A",
+        "N",
+        "U",
+        "S",
+        "T"
+      ],
+      [
+        "N",
+        "A",
+        "C",
+        "R",
+        "O",
+        "N",
+        "M",
+        "E"
+      ],
+      [
+        "R",
+        "Z",
+        "F",
+        "I",
+        "S",
+        "H",
+        "A",
+        "P"
+      ],
+      [
+        "E",
+        "N",
+        "U",
+        "T",
+        "P",
+        "E",
+        "N",
+        "E"
+      ],
+      [
+        " ",
+        "S",
+        "L",
+        "O",
+        "O",
+        "P",
+        "F",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "M",
+        "C",
+        "Z",
+        "H",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "NEPTUNE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "TSUNAMI",
         "found": false,
         "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "SLOOP",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "JUMP",
+        "found": false,
+        "rowStart": 1,
         "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "ORCA",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 1
+      },
+      {
+        "word": "FISH",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "title": "Level 76",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 76)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Anchor",
+    "maskIcon": "⚓",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 80,
+    "grid": [
+      [
+        " ",
+        " ",
+        "G",
+        "H",
+        "G",
+        "C",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "D",
+        "J",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        "L",
+        "N",
+        "I",
+        "H",
+        "P",
+        "L",
+        "O",
+        "D"
+      ],
+      [
+        "T",
+        "R",
+        "E",
+        "N",
+        "C",
+        "H",
+        "P",
+        "U"
+      ],
+      [
+        "P",
+        "A",
+        "C",
+        "I",
+        "F",
+        "I",
+        "C",
+        "T"
+      ],
+      [
+        "R",
+        "I",
+        "G",
+        "G",
+        "I",
+        "N",
+        "G",
+        "H"
+      ],
+      [
+        " ",
+        " ",
+        "Q",
+        "W",
+        "S",
+        "J",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "J",
+        "P",
+        "Y",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "RIGGING",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "DOLPHIN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "PACIFIC",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
         "rowEnd": 4,
         "colEnd": 6
       },
       {
-        "word": "WAVE",
+        "word": "TRENCH",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "title": "Level 77",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 77)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Water Drop",
+    "maskIcon": "🫧",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "P",
+        "J",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "W",
+        "O",
+        "L",
+        "G",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "J",
+        "A",
+        "L",
+        "G",
+        "A",
+        "E",
+        " "
+      ],
+      [
+        "A",
+        "Z",
+        "R",
+        "U",
+        "D",
+        "D",
+        "E",
+        "R"
+      ],
+      [
+        "L",
+        "C",
+        "R",
+        "U",
+        "I",
+        "S",
+        "E",
+        "E"
+      ],
+      [
+        " ",
+        "M",
+        "U",
+        "T",
+        "I",
+        "N",
+        "Y",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "F",
+        "L",
+        "U",
+        "G",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "U",
+        "L",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "MUTINY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "RUDDER",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "CRUISE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "ALGAE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "GLOW",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "GULF",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "title": "Level 78",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 78)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Ocean Fish",
+    "maskIcon": "🐟",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "R",
+        "O",
+        "B",
+        "R",
+        "A",
+        "H",
+        "D",
+        "Y"
+      ],
+      [
+        "R",
+        "K",
+        "F",
+        "L",
+        "Z",
+        "O",
+        "S",
+        "H"
+      ],
+      [
+        "O",
+        "C",
+        "T",
+        "O",
+        "P",
+        "U",
+        "S",
+        "E"
+      ],
+      [
+        "L",
+        "Y",
+        "N",
+        "G",
+        "K",
+        "L",
+        "W",
+        "L"
+      ],
+      [
+        "L",
+        "H",
+        "E",
+        "B",
+        "Z",
+        "N",
+        "Q",
+        "M"
+      ],
+      [
+        "E",
+        "V",
+        "T",
+        "O",
+        "M",
+        "T",
+        "O",
+        "G"
+      ],
+      [
+        "H",
+        "P",
+        "F",
+        "O",
+        "I",
+        "W",
+        "C",
+        "T"
+      ],
+      [
+        "S",
+        "Z",
+        "H",
+        "K",
+        "P",
+        "L",
+        "B",
+        "H"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "LOGBOOK",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "OCTOPUS",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "HARBOR",
         "found": false,
         "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "SHELL",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "KNOT",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "HELM",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "title": "Level 79",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 79)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Neptune Trident",
+    "maskIcon": "🔱",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "M",
+        "U",
+        "X",
+        "K",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "A",
+        "E",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        "J",
+        "B",
+        "F",
+        "N",
+        "T",
+        "H",
+        "L",
+        "I"
+      ],
+      [
+        "P",
+        "R",
+        "L",
+        "E",
+        "R",
+        "G",
+        "E",
+        "M"
+      ],
+      [
+        "Z",
+        "I",
+        "A",
+        "M",
+        "O",
+        "N",
+        "E",
+        "Z"
+      ],
+      [
+        "O",
+        "G",
+        "R",
+        "O",
+        "V",
+        "I",
+        "K",
+        "Q"
+      ],
+      [
+        " ",
+        " ",
+        "O",
+        "N",
+        "Y",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "E",
+        "B",
+        "U",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "ANEMONE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "DINGHY",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "VORTEX",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "CORAL",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 2
+      },
+      {
+        "word": "BRIG",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "KEEL",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "title": "Level 80",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 80)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "D",
+        "U",
+        "Y",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "A",
+        "S",
+        "U",
+        "D",
+        "E",
+        "M",
+        " "
+      ],
+      [
+        "V",
+        "H",
+        "N",
+        "I",
+        "R",
+        "A",
+        "M",
+        "K"
+      ],
+      [
+        "O",
+        "U",
+        "E",
+        "H",
+        "T",
+        "O",
+        "R",
+        "F"
+      ],
+      [
+        "N",
+        "O",
+        "O",
+        "P",
+        "R",
+        "A",
+        "H",
+        "M"
+      ],
+      [
+        "U",
+        "T",
+        "R",
+        "I",
+        "D",
+        "E",
+        "N",
+        "T"
+      ],
+      [
+        " ",
+        "H",
+        "H",
+        "C",
+        "A",
+        "E",
+        "B",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Q",
+        "R",
+        "I",
+        "U",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "TRIDENT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "HARPOON",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "MEDUSA",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "FROTH",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 3
+      },
+      {
+        "word": "MARIN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 2
+      },
+      {
+        "word": "BEACH",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "title": "Level 81",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 81)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Nautilus Spiral",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "M",
+        "A",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "A",
+        "F",
+        "L",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "E",
+        "B",
+        "R",
+        "O",
+        "E",
+        "J",
+        " "
+      ],
+      [
+        "O",
+        "L",
+        "Y",
+        "I",
+        "D",
+        "T",
+        "N",
+        "H"
+      ],
+      [
+        "N",
+        "O",
+        "S",
+        "G",
+        "N",
+        "S",
+        "S",
+        "M"
+      ],
+      [
+        " ",
+        "H",
+        "S",
+        "A",
+        "O",
+        "Y",
+        "K",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "M",
+        "T",
+        "G",
+        "O",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "E",
+        "U",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "FRIGATE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "GONDOLA",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "OYSTER",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "ABYSS",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "HOLE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 1
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "title": "Level 82",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 82)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "R",
+        "O",
+        "Y",
+        "A",
+        "L",
+        "Q",
+        "B",
+        "K"
+      ],
+      [
+        "C",
+        "A",
+        "R",
+        "A",
+        "V",
+        "E",
+        "L",
+        "E"
+      ],
+      [
+        "P",
+        "L",
+        "O",
+        "B",
+        "S",
+        "T",
+        "E",
+        "R"
+      ],
+      [
+        "S",
+        "T",
+        "Y",
+        "E",
+        "L",
+        "E",
+        "F",
+        "C"
+      ],
+      [
+        "H",
+        "B",
+        "Z",
+        "B",
+        "K",
+        "U",
+        "S",
+        "Y"
+      ],
+      [
+        "C",
+        "U",
+        "R",
+        "R",
+        "E",
+        "N",
+        "T",
+        "O"
+      ],
+      [
+        "C",
+        "I",
+        "G",
+        "A",
+        "L",
+        "E",
+        "P",
+        "U"
+      ],
+      [
+        "F",
+        "R",
+        "N",
+        "Z",
+        "D",
+        "C",
+        "W",
+        "B"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "LOBSTER",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "CURRENT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "CARAVEL",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "PELAGIC",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 0
+      },
+      {
+        "word": "ROYAL",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "BUOY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "title": "Level 83",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 83)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Clam Shell",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "E",
+        "A",
+        "X",
+        "F",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "V",
+        "E",
+        "N",
+        "T",
+        "A",
+        "M",
+        " "
+      ],
+      [
+        "M",
+        "G",
+        "T",
+        "G",
+        "E",
+        "Q",
+        "A",
+        "M"
+      ],
+      [
+        "Q",
+        "Z",
+        "A",
+        "L",
+        "P",
+        "U",
+        "R",
+        "L"
+      ],
+      [
+        "C",
+        "Y",
+        "N",
+        "E",
+        "M",
+        "A",
+        "I",
+        "A"
+      ],
+      [
+        "T",
+        "A",
+        "A",
+        "R",
+        "I",
+        "T",
+        "N",
+        "P"
+      ],
+      [
+        " ",
+        "C",
+        "M",
+        "H",
+        "L",
+        "I",
+        "A",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Z",
+        "T",
+        "O",
+        "C",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "MANATEE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "AQUATIC",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "ANGLER",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 3
+      },
+      {
+        "word": "LIMPET",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 4
+      },
+      {
+        "word": "MARINA",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "PALM",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "title": "Level 84",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 84)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Anchor",
+    "maskIcon": "⚓",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "J",
+        "R",
+        "Z",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "T",
+        "C",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        "W",
+        "D",
+        "M",
+        "V",
+        "R",
+        "S",
+        "U",
+        "G"
+      ],
+      [
+        "E",
+        "W",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "G"
+      ],
+      [
+        "W",
+        "Y",
+        "S",
+        "L",
+        "B",
+        "L",
+        "I",
+        "I"
+      ],
+      [
+        "H",
+        "K",
+        "K",
+        "L",
+        "L",
+        "L",
+        "I",
+        "Z"
+      ],
+      [
+        " ",
+        " ",
+        "B",
+        "E",
+        "P",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Y",
+        "Y",
+        "N",
+        "B",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BALLAST",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "GALLEY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "VALLEY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "CRAB",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 4
+      },
+      {
+        "word": "MASK",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "RIDE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "title": "Level 85",
+    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 85)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Water Drop",
+    "maskIcon": "🫧",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "F",
+        "C",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "Y",
+        "A",
+        "N",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "E",
+        "G",
+        "N",
+        "O",
+        "P",
+        "S",
+        " "
+      ],
+      [
+        "H",
+        "V",
+        "O",
+        "L",
+        "C",
+        "A",
+        "N",
+        "O"
+      ],
+      [
+        "M",
+        "E",
+        "R",
+        "M",
+        "A",
+        "I",
+        "D",
+        "R"
+      ],
+      [
+        " ",
+        "C",
+        "O",
+        "N",
+        "C",
+        "H",
+        "R",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "P",
+        "E",
+        "E",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "H",
+        "L",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VOLCANO",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "MERMAID",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "SPONGE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "CONCH",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "DEEP",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "CYAN",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "title": "Level 86",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 86)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Ocean Fish",
+    "maskIcon": "🐟",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "B",
+        "A",
+        "Y",
+        "O",
+        "U",
+        "L",
+        "Z",
+        "A"
+      ],
+      [
+        "E",
+        "B",
+        "Q",
+        "F",
+        "J",
+        "Q",
+        "Z",
+        "P"
+      ],
+      [
+        "B",
+        "S",
+        "S",
+        "A",
+        "L",
+        "T",
+        "U",
+        "C"
+      ],
+      [
+        "B",
+        "E",
+        "A",
+        "R",
+        "I",
+        "N",
+        "G",
+        "D"
+      ],
+      [
+        "L",
+        "T",
+        "R",
+        "O",
+        "P",
+        "I",
+        "C",
+        "R"
+      ],
+      [
+        "U",
+        "G",
+        "K",
+        "T",
+        "P",
+        "G",
+        "U",
+        "I"
+      ],
+      [
+        "P",
+        "J",
+        "I",
+        "C",
+        "A",
+        "O",
+        "N",
+        "F"
+      ],
+      [
+        "C",
+        "K",
+        "R",
+        "A",
+        "H",
+        "S",
+        "B",
+        "T"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BEARING",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "CUTLASS",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "TROPIC",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "BAYOU",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "DRIFT",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 7
+      },
+      {
+        "word": "SHARK",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 1
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "title": "Level 87",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 87)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Neptune Trident",
+    "maskIcon": "🔱",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "R",
+        "W",
+        "Y",
+        "G",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "A",
+        "H",
+        "B",
+        " ",
+        " "
+      ],
+      [
+        "M",
+        "C",
+        "J",
+        "R",
+        "N",
+        "A",
+        "P",
+        "Z"
+      ],
+      [
+        "P",
+        "O",
+        "R",
+        "F",
+        "E",
+        "O",
+        "R",
+        "F"
+      ],
+      [
+        "N",
+        "E",
+        "H",
+        "O",
+        "H",
+        "S",
+        "S",
+        "F"
+      ],
+      [
+        "J",
+        "K",
+        "A",
+        "T",
+        "W",
+        "R",
+        "T",
+        "T"
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "R",
+        "A",
+        "N",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "A",
+        "M",
+        "L",
+        "F",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "FATHOM",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "SONAR",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "PEARL",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "WHARF",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "CREST",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "title": "Level 88",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 88)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "Z",
+        "D",
+        "L",
+        "W",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "M",
+        "N",
+        "P",
+        "W",
+        "I",
+        "T",
+        " "
+      ],
+      [
+        "H",
+        "A",
+        "N",
+        "E",
+        "I",
+        "A",
+        "A",
+        "P"
+      ],
+      [
+        "S",
+        "S",
+        "W",
+        "H",
+        "A",
+        "L",
+        "E",
+        "S"
+      ],
+      [
+        "C",
+        "I",
+        "H",
+        "T",
+        "N",
+        "E",
+        "B",
+        "G"
+      ],
+      [
+        "U",
+        "B",
+        "T",
+        "E",
+        "L",
+        "S",
+        "I",
+        "R"
+      ],
+      [
+        " ",
+        "D",
+        "E",
+        "C",
+        "K",
+        "T",
+        "K",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "U",
+        "Q",
+        "E",
+        "K",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BENTHIC",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "WHALE",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "ISLET",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "SAND",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "DECK",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "SAIL",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 0,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "title": "Level 89",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 89)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Nautilus Spiral",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "K",
+        "J",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "A",
+        "V",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "D",
+        "I",
+        "U",
+        "Q",
+        "S",
+        "Z",
+        " "
+      ],
+      [
+        "E",
+        "L",
+        "E",
+        "E",
+        "W",
+        "A",
+        "R",
+        "D"
+      ],
+      [
+        "R",
+        "E",
+        "I",
+        "R",
+        "R",
+        "A",
+        "B",
+        "L"
+      ],
+      [
+        " ",
+        "L",
+        "E",
+        "S",
+        "S",
+        "E",
+        "V",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "S",
+        "R",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "A",
+        "O",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "LEEWARD",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "BARRIER",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "VESSEL",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "SQUID",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "CAVE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "title": "Level 90",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 90)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "Z",
+        "N",
+        "T",
+        "R",
+        "H",
+        "F",
+        "I",
+        "R"
+      ],
+      [
+        "J",
+        "E",
+        "R",
+        "E",
+        "W",
+        "E",
+        "Z",
+        "E"
+      ],
+      [
+        "T",
+        "R",
+        "Z",
+        "L",
+        "G",
+        "B",
+        "I",
+        "C"
+      ],
+      [
+        "I",
+        "I",
+        "R",
+        "I",
+        "R",
+        "L",
+        "L",
+        "Y"
+      ],
+      [
+        "A",
+        "S",
+        "N",
+        "C",
+        "R",
+        "X",
+        "U",
+        "J"
+      ],
+      [
+        "R",
+        "E",
+        "T",
+        "A",
+        "R",
+        "I",
+        "P",
+        "O"
+      ],
+      [
+        "T",
+        "A",
+        "G",
+        "N",
+        "Y",
+        "T",
+        "I",
+        "C"
+      ],
+      [
+        "S",
+        "C",
+        "Y",
+        "C",
+        "H",
+        "A",
+        "R",
+        "T"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "PIRATE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "STRAIT",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 0
+      },
+      {
+        "word": "SIREN",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 1
+      },
+      {
+        "word": "CHART",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 7
+      },
+      {
+        "word": "RELIC",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "CITY",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 7,
+        "rowEnd": 6,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "title": "Level 91",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 91)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Clam Shell",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "O",
+        "D",
+        "H",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "N",
+        "O",
+        "R",
+        "R",
+        "W",
+        "O",
+        " "
+      ],
+      [
+        "V",
+        "C",
+        "C",
+        "O",
+        "V",
+        "L",
+        "O",
+        "Z"
+      ],
+      [
+        "K",
+        "Y",
+        "H",
+        "Y",
+        "S",
+        "O",
+        "N",
+        "G"
+      ],
+      [
+        "J",
+        "S",
+        "A",
+        "N",
+        "C",
+        "H",
+        "O",
+        "R"
+      ],
+      [
+        "F",
+        "F",
+        "J",
+        "O",
+        "R",
+        "D",
+        "T",
+        "M"
+      ],
+      [
+        " ",
+        "Z",
+        "J",
+        "P",
+        "L",
+        "E",
+        "K",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "Y",
+        "M",
+        "F",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "ANCHOR",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "SHORE",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "FJORD",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "KELP",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "SONG",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "DOCK",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "title": "Level 92",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 92)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Anchor",
+    "maskIcon": "⚓",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "L",
+        "N",
+        "C",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "A",
+        "S",
+        "Q",
+        " ",
+        " "
+      ],
+      [
+        "B",
+        "U",
+        "B",
+        "Y",
+        "P",
+        "S",
+        "T",
+        "D"
+      ],
+      [
+        "R",
+        "I",
+        "A",
+        "E",
+        "O",
+        "N",
+        "A",
+        "C"
+      ],
+      [
+        "N",
+        "Y",
+        "L",
+        "Y",
+        "U",
+        "U",
+        "K",
+        "M"
+      ],
+      [
+        "R",
+        "Y",
+        "E",
+        "G",
+        "T",
+        "X",
+        "A",
+        "W"
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "M",
+        "E",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "D",
+        "T",
+        "T",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BALEEN",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "SPOUT",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "BILGE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "CANOE",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 3
+      },
+      {
+        "word": "RUIN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "MAST",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "title": "Level 93",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 93)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Water Drop",
+    "maskIcon": "🫧",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "P",
+        "J",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "E",
+        "I",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "H",
+        "K",
+        "A",
+        "Y",
+        "A",
+        "K",
+        " "
+      ],
+      [
+        "S",
+        "E",
+        "A",
+        "G",
+        "U",
+        "L",
+        "L",
+        "O"
+      ],
+      [
+        "V",
+        "N",
+        "S",
+        "C",
+        "H",
+        "O",
+        "O",
+        "L"
+      ],
+      [
+        " ",
+        "U",
+        "I",
+        "N",
+        "A",
+        "V",
+        "I",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "F",
+        "M",
+        "B",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "W",
+        "B",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SEAGULL",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "SCHOOL",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "KAYAK",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "FINS",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "SHIP",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "NAVI",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "title": "Level 94",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 94)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Ocean Fish",
+    "maskIcon": "🐟",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "O",
+        "G",
+        "I",
+        "D",
+        "N",
+        "I",
+        "F",
+        "R"
+      ],
+      [
+        "R",
+        "E",
+        "S",
+        "I",
+        "U",
+        "R",
+        "C",
+        "O"
+      ],
+      [
+        "T",
+        "L",
+        "S",
+        "S",
+        "H",
+        "O",
+        "K",
+        "E"
+      ],
+      [
+        "B",
+        "A",
+        "O",
+        "H",
+        "S",
+        "E",
+        "E",
+        "X"
+      ],
+      [
+        "K",
+        "Q",
+        "U",
+        "R",
+        "A",
+        "V",
+        "G",
+        "D"
+      ],
+      [
+        "G",
+        "S",
+        "N",
+        "I",
+        "L",
+        "A",
+        "Z",
+        "V"
+      ],
+      [
+        "Z",
+        "P",
+        "D",
+        "M",
+        "P",
+        "W",
+        "F",
+        "U"
+      ],
+      [
+        "G",
+        "Y",
+        "T",
+        "P",
+        "S",
+        "X",
+        "C",
+        "K"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CRUISER",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 0
+      },
+      {
+        "word": "SHRIMP",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "SPLASH",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "INDIGO",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "SOUND",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "WAVE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "title": "Level 95",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 95)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Neptune Trident",
+    "maskIcon": "🔱",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "B",
+        "A",
+        "D",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "M",
+        "S",
+        "T",
+        "N",
+        " ",
+        " "
+      ],
+      [
+        "Y",
+        "A",
+        "A",
+        "E",
+        "B",
+        "O",
+        "D",
+        "F"
+      ],
+      [
+        "Y",
+        "N",
+        "R",
+        "A",
+        "E",
+        "O",
+        "L",
+        "M"
+      ],
+      [
+        "G",
+        "G",
+        "I",
+        "W",
+        "A",
+        "G",
+        "O",
+        "L"
+      ],
+      [
+        "J",
+        "Q",
+        "N",
+        "E",
+        "C",
+        "A",
+        "G",
+        "G"
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "E",
+        "O",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "R",
+        "D",
+        "N",
+        "L",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SEAWEED",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "MARINER",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "BEACON",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "LAGOON",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "ATOLL",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "title": "Level 96",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 96)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "A",
+        "T",
+        "H",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "Y",
+        "A",
+        "U",
+        "Q",
+        "Q",
+        "J",
+        " "
+      ],
+      [
+        "H",
+        "J",
+        "V",
+        "V",
+        "L",
+        "L",
+        "U",
+        "H"
+      ],
+      [
+        "S",
+        "S",
+        "A",
+        "P",
+        "M",
+        "O",
+        "C",
+        "U"
+      ],
+      [
+        "V",
+        "J",
+        "Y",
+        "G",
+        "I",
+        "L",
+        "L",
+        "Z"
+      ],
+      [
+        "O",
+        "E",
+        "X",
+        "F",
+        "O",
+        "A",
+        "M",
+        "H"
+      ],
+      [
+        " ",
+        "N",
+        "X",
+        "R",
+        "A",
+        "F",
+        "T",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "B",
+        "V",
+        "I",
+        "Y",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "COMPASS",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "FOAM",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "HULL",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "RAFT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "QUAY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "GILL",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "title": "Level 97",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 97)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Nautilus Spiral",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "R",
+        "K",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "P",
+        "I",
+        "E",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "G",
+        "N",
+        "I",
+        "V",
+        "I",
+        "D",
+        " "
+      ],
+      [
+        "K",
+        "T",
+        "E",
+        "M",
+        "P",
+        "L",
+        "E",
+        "H"
+      ],
+      [
+        "F",
+        "L",
+        "U",
+        "K",
+        "E",
+        "S",
+        "W",
+        "R"
+      ],
+      [
+        " ",
+        "E",
+        "G",
+        "A",
+        "Y",
+        "O",
+        "V",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Y",
+        "D",
+        "D",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "S",
+        "Y",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "FLUKES",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "VOYAGE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "DIVING",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "TEMPLE",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "PIER",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "EDDY",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "title": "Level 98",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 98)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "R",
+        "R",
+        "A",
+        "H",
+        "X",
+        "S",
+        "I",
+        "S"
+      ],
+      [
+        "A",
+        "K",
+        "B",
+        "Q",
+        "G",
+        "U",
+        "U",
+        "F"
+      ],
+      [
+        "D",
+        "S",
+        "E",
+        "A",
+        "L",
+        "N",
+        "K",
+        "P"
+      ],
+      [
+        "A",
+        "W",
+        "Z",
+        "C",
+        "K",
+        "D",
+        "H",
+        "U"
+      ],
+      [
+        "R",
+        "I",
+        "L",
+        "E",
+        "L",
+        "T",
+        "W",
+        "K"
+      ],
+      [
+        "K",
+        "M",
+        "N",
+        "Q",
+        "E",
+        "J",
+        "J",
+        "W"
+      ],
+      [
+        "N",
+        "I",
+        "B",
+        "A",
+        "C",
+        "H",
+        "Q",
+        "W"
+      ],
+      [
+        "W",
+        "R",
+        "W",
+        "O",
+        "L",
+        "L",
+        "I",
+        "B"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BILLOW",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 2
+      },
+      {
+        "word": "SUNKEN",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "CABIN",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 0
+      },
+      {
+        "word": "RADAR",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 0
+      },
+      {
+        "word": "SWIM",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "SEAL",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "title": "Level 99",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 99)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Clam Shell",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "N",
+        "I",
+        "C",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "A",
+        "A",
+        "O",
+        "A",
+        "J",
+        "N",
+        " "
+      ],
+      [
+        "N",
+        "B",
+        "C",
+        "R",
+        "P",
+        "O",
+        "L",
+        "G"
+      ],
+      [
+        "A",
+        "U",
+        "I",
+        "D",
+        "S",
+        "U",
+        "O",
+        "S"
+      ],
+      [
+        "V",
+        "C",
+        "L",
+        "Y",
+        "T",
+        "L",
+        "A",
+        "S"
+      ],
+      [
+        "Y",
+        "S",
+        "E",
+        "H",
+        "A",
+        "L",
+        "Q",
+        "K"
+      ],
+      [
+        " ",
+        "F",
+        "P",
+        "N",
+        "N",
+        "A",
+        "P",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "B",
+        "J",
+        "Y",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "PELICAN",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "CAPSTAN",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "SALTY",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "SCUBA",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "HYDRO",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "NAVY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "title": "Level 100",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 100)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Anchor",
+    "maskIcon": "⚓",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "L",
+        "I",
+        "A",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "F",
+        "Q",
+        "Y",
+        " ",
+        " "
+      ],
+      [
+        "J",
+        "K",
+        "E",
+        "X",
+        "C",
+        "T",
+        "A",
+        "K"
+      ],
+      [
+        "X",
+        "P",
+        "L",
+        "G",
+        "O",
+        "L",
+        "R",
+        "A"
+      ],
+      [
+        "Z",
+        "I",
+        "T",
+        "N",
+        "A",
+        "A",
+        "Y",
+        "E"
+      ],
+      [
+        "Y",
+        "L",
+        "R",
+        "I",
+        "S",
+        "B",
+        "N",
+        "B"
+      ],
+      [
+        " ",
+        " ",
+        "U",
+        "K",
+        "T",
+        "O",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "W",
+        "G",
+        "C",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "TURTLE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 2
+      },
+      {
+        "word": "COBALT",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 5
+      },
+      {
+        "word": "COAST",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 4
+      },
+      {
+        "word": "TAIL",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "KING",
+        "found": false,
+        "rowStart": 6,
         "colStart": 3,
         "rowEnd": 3,
         "colEnd": 3
       },
       {
-        "word": "BAY",
+        "word": "BEAK",
         "found": false,
-        "rowStart": 0,
-        "colStart": 5,
+        "rowStart": 5,
+        "colStart": 7,
         "rowEnd": 2,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "title": "Level 101",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 101)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Water Drop",
+    "maskIcon": "🫧",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 85,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "S",
+        "G",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "V",
+        "I",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "D",
+        "E",
+        "B",
+        "A",
+        "E",
+        "S",
+        " "
+      ],
+      [
+        "S",
+        "U",
+        "C",
+        "A",
+        "N",
+        "N",
+        "O",
+        "N"
+      ],
+      [
+        "J",
+        "T",
+        "E",
+        "G",
+        "R",
+        "U",
+        "S",
+        "P"
+      ],
+      [
+        " ",
+        "C",
+        "O",
+        "N",
+        "C",
+        "H",
+        "Q",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "P",
+        "C",
+        "N",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "W",
+        "S",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CANNON",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 3,
         "colEnd": 7
       },
       {
-        "word": "NORTH",
+        "word": "SEABED",
         "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 5,
-        "colEnd": 0
-      },
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 4,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
         "colEnd": 1
       },
       {
-        "word": "GOLD",
+        "word": "SURGE",
         "found": false,
         "rowStart": 4,
-        "colStart": 2,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "CONCH",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "DIVE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
         "rowEnd": 1,
         "colEnd": 2
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "title": "Level 102",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 102)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Ocean Fish",
+    "maskIcon": "🐟",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "S",
+        "Y",
+        "T",
+        "T",
+        "E",
+        "J",
+        "R",
+        "Q"
+      ],
+      [
+        "N",
+        "P",
+        "E",
+        "A",
+        "K",
+        "I",
+        "Q",
+        "W"
+      ],
+      [
+        "W",
+        "K",
+        "Q",
+        "F",
+        "A",
+        "L",
+        "I",
+        "L"
+      ],
+      [
+        "O",
+        "I",
+        "Q",
+        "S",
+        "F",
+        "X",
+        "F",
+        "O"
+      ],
+      [
+        "L",
+        "R",
+        "R",
+        "T",
+        "S",
+        "E",
+        "H",
+        "C"
+      ],
+      [
+        "C",
+        "O",
+        "G",
+        "A",
+        "T",
+        "U",
+        "J",
+        "K"
+      ],
+      [
+        "C",
+        "D",
+        "T",
+        "H",
+        "G",
+        "I",
+        "L",
+        "K"
+      ],
+      [
+        "T",
+        "V",
+        "O",
+        "T",
+        "U",
+        "M",
+        "Q",
+        "Q"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CORSAIR",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 6
+      },
+      {
+        "word": "CLOWN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 0
+      },
+      {
+        "word": "CHEST",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "LIGHT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "JETTY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 1
+      },
+      {
+        "word": "PEAK",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 4
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "title": "Level 103",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 103)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Neptune Trident",
+    "maskIcon": "🔱",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "M",
+        "M",
+        "L",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "X",
+        "A",
+        "C",
+        " ",
+        " "
+      ],
+      [
+        "T",
+        "R",
+        "A",
+        "G",
+        "O",
+        "Y",
+        "M",
+        "O"
+      ],
+      [
+        "M",
+        "E",
+        "Z",
+        "S",
+        "H",
+        "A",
+        "V",
+        "B"
+      ],
+      [
+        "N",
+        "E",
+        "U",
+        "H",
+        "S",
+        "N",
+        "Y",
+        "R"
+      ],
+      [
+        "K",
+        "F",
+        "R",
+        "B",
+        "R",
+        "I",
+        "N",
+        "E"
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "I",
+        "D",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "U",
+        "R",
+        "F",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "AZURE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "BRINE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "SHOAL",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "CYAN",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "REEF",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "SURF",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "title": "Level 104",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 104)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "O",
+        "G",
+        "D",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "G",
+        "C",
+        "G",
+        "R",
+        "E",
+        "T",
+        " "
+      ],
+      [
+        "D",
+        "B",
+        "E",
+        "A",
+        "O",
+        "E",
+        "N",
+        "W"
+      ],
+      [
+        "E",
+        "O",
+        "A",
+        "L",
+        "T",
+        "F",
+        "A",
+        "V"
+      ],
+      [
+        "C",
+        "A",
+        "N",
+        "L",
+        "A",
+        "S",
+        "I",
+        "D"
+      ],
+      [
+        "L",
+        "R",
+        "I",
+        "E",
+        "U",
+        "K",
+        "G",
+        "R"
+      ],
+      [
+        " ",
+        "D",
+        "C",
+        "O",
+        "Q",
+        "U",
+        "C",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "P",
+        "N",
+        "E",
+        "Z",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "EQUATOR",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 4
+      },
+      {
+        "word": "GALLEON",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "OCEANIC",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "REEFS",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "GIANT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "BOARD",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 1
       }
     ]
   },
@@ -581,151 +7711,135 @@ export const OCEAN_LEVELS: LevelData[] = [
     "title": "Level 105",
     "subtitle": "BUBBLE OCEAN - HARD (LEVEL 105)",
     "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Neptune Trident",
-    "maskIcon": "🔱",
+    "themeIcon": "card_giftcard",
+    "maskName": "Nautilus Spiral",
+    "maskIcon": "🐚",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 85,
     "grid": [
       [
-        "R",
-        "E",
         " ",
-        "K",
-        "X",
         " ",
-        "C",
-        "E"
+        " ",
+        "J",
+        "O",
+        " ",
+        " ",
+        " "
       ],
       [
-        "H",
-        "I",
-        "L",
+        " ",
+        " ",
+        "Z",
+        "V",
+        "B",
+        "U",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "S",
+        "S",
+        "P",
+        "R",
+        "A",
+        "Y",
+        " "
+      ],
+      [
         "P",
         "A",
-        "L",
-        "M",
-        "V"
-      ],
-      [
-        "E",
-        "A",
-        "D",
-        "Y",
-        "T",
+        "C",
+        "I",
+        "F",
         "I",
         "C",
-        "O"
+        "H"
       ],
       [
+        "T",
+        "S",
+        "N",
+        "O",
         "R",
         "K",
-        "N",
         "E",
-        "I",
+        "L"
+      ],
+      [
+        " ",
         "O",
-        "Y",
-        "C"
-      ],
-      [
-        " ",
-        "M",
-        "R",
-        "I",
-        "C",
-        "H",
-        "M",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "E",
-        "R",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "X",
         "W",
+        "H",
         "A",
-        " ",
+        "L",
+        "E",
         " "
       ],
       [
+        " ",
         " ",
         "N",
-        "Q",
-        "S",
-        "C",
-        "C",
-        "M",
+        "F",
+        "J",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "K",
+        "U",
+        " ",
+        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "RIDE",
+        "word": "SNORKEL",
         "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 3
-      },
-      {
-        "word": "MARINA",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "CITY",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 0,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
         "colEnd": 7
       },
       {
-        "word": "SWIM",
+        "word": "PACIFIC",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "SPRAY",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "WHALE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "KNOT",
         "found": false,
         "rowStart": 7,
         "colStart": 3,
         "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 1
+        "colEnd": 0
       }
     ]
   },
@@ -735,150 +7849,142 @@ export const OCEAN_LEVELS: LevelData[] = [
     "subtitle": "BUBBLE OCEAN - HARD (LEVEL 106)",
     "world": "island",
     "themeIcon": "water_drop",
-    "maskName": "Jellyfish",
-    "maskIcon": "🪼",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 90,
     "grid": [
       [
-        " ",
-        "A",
-        "C",
-        "O",
-        "V",
+        "W",
         "E",
         "Z",
-        " "
+        "C",
+        "H",
+        "A",
+        "R",
+        "T"
       ],
       [
-        "K",
         "T",
-        "S",
-        "E",
-        "D",
+        "N",
         "I",
-        "T",
-        "A"
+        "J",
+        "Z",
+        "B",
+        "Q",
+        "B"
       ],
       [
-        "R",
-        "L",
-        "U",
-        "L",
-        "K",
-        "U",
-        "R",
-        "L"
-      ],
-      [
-        "W",
+        "E",
+        "H",
         "A",
         "R",
         "P",
-        "G",
-        "U",
-        "A",
-        "Q"
-      ],
-      [
-        "T",
-        "N",
-        "F",
-        "M",
-        "G",
-        "E",
-        "N",
-        "E"
-      ],
-      [
-        "X",
-        "T",
-        " ",
-        "E",
-        "S",
-        " ",
         "O",
-        "Y"
+        "O",
+        "N"
       ],
       [
-        "M",
-        "I",
-        " ",
+        "W",
+        "C",
+        "U",
         "T",
+        "L",
+        "A",
         "S",
-        " ",
-        "S",
+        "S"
+      ],
+      [
+        "O",
+        "X",
+        "O",
+        "P",
+        "D",
+        "R",
+        "O",
         "V"
       ],
       [
-        "O",
-        "S",
-        " ",
-        "G",
-        "L",
-        " ",
         "Z",
-        "E"
+        "C",
+        "A",
+        "R",
+        "A",
+        "V",
+        "E",
+        "L"
+      ],
+      [
+        "R",
+        "A",
+        "S",
+        "Q",
+        "U",
+        "I",
+        "D",
+        "Z"
+      ],
+      [
+        "G",
+        "P",
+        "T",
+        "L",
+        "E",
+        "E",
+        "K",
+        "M"
       ]
     ],
     "targetWords": [
       {
-        "word": "TEMPLE",
+        "word": "HARPOON",
         "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "SEAL",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
+        "rowStart": 2,
+        "colStart": 1,
         "rowEnd": 2,
         "colEnd": 7
       },
       {
-        "word": "TIDE",
+        "word": "CUTLASS",
         "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "ATLANTIS",
-        "found": false,
-        "rowStart": 0,
+        "rowStart": 3,
         "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 1
+        "rowEnd": 3,
+        "colEnd": 7
       },
       {
-        "word": "SONAR",
+        "word": "CARAVEL",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "SQUID",
         "found": false,
         "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 2,
+        "colStart": 2,
+        "rowEnd": 6,
         "colEnd": 6
       },
       {
-        "word": "SURF",
+        "word": "CHART",
         "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 2
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 7
+      },
+      {
+        "word": "KEEL",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 6,
+        "rowEnd": 7,
+        "colEnd": 3
       }
     ]
   },
@@ -888,479 +7994,149 @@ export const OCEAN_LEVELS: LevelData[] = [
     "subtitle": "BUBBLE OCEAN - HARD (LEVEL 107)",
     "world": "island",
     "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
+    "maskName": "Clam Shell",
     "maskIcon": "🐚",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 90,
     "grid": [
       [
-        "E",
-        "A",
-        "Q",
-        "Z",
-        "D",
-        "S",
-        "O",
-        "C"
-      ],
-      [
-        "G",
-        "U",
-        "F",
-        "F",
-        "P",
-        "I",
-        "G",
-        "G"
-      ],
-      [
-        "S",
-        "R",
-        "Q",
-        "A",
-        "S",
+        " ",
+        " ",
         "T",
-        "S",
-        "D"
-      ],
-      [
-        "S",
-        "A",
-        "Y",
-        "H",
-        " ",
-        "N",
-        "E",
-        "Z"
-      ],
-      [
-        "H",
-        "S",
         "I",
-        "A",
+        "R",
+        "X",
         " ",
-        "A",
-        "A",
-        "H"
+        " "
       ],
       [
-        "A",
-        "P",
-        "H",
-        "N",
-        "B",
+        " ",
         "L",
-        "K",
-        "O"
-      ],
-      [
-        "R",
-        "I",
-        "D",
+        "U",
+        "P",
         "E",
-        "Z",
-        "T",
-        "F",
-        "O"
-      ],
-      [
-        "K",
-        "M",
         "S",
-        "G",
-        "N",
+        "R",
+        " "
+      ],
+      [
         "A",
+        "A",
+        "V",
+        "R",
+        "K",
+        "U",
+        "D",
+        "X"
+      ],
+      [
+        "B",
+        "Y",
+        "P",
         "E",
-        "B"
+        "A",
+        "P",
+        "E",
+        "E"
+      ],
+      [
+        "Z",
+        "O",
+        "O",
+        "T",
+        "E",
+        "O",
+        "E",
+        "O"
+      ],
+      [
+        "U",
+        "R",
+        "O",
+        "T",
+        "R",
+        "T",
+        "P",
+        "P"
+      ],
+      [
+        " ",
+        "S",
+        "L",
+        "O",
+        "B",
+        "C",
+        "F",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "B",
+        "A",
+        "O",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "ATLANTIS",
+        "word": "BREAKER",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "OCTOPUS",
         "found": false,
         "rowStart": 7,
         "colStart": 5,
-        "rowEnd": 0,
+        "rowEnd": 1,
         "colEnd": 5
       },
       {
-        "word": "SEA",
+        "word": "OTTER",
         "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 6
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 2,
+        "colEnd": 3
       },
       {
-        "word": "AURA",
+        "word": "SLOOP",
         "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 1
-      },
-      {
-        "word": "SHIP",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
+        "rowStart": 7,
+        "colStart": 2,
         "rowEnd": 3,
         "colEnd": 2
       },
       {
-        "word": "RIDE",
+        "word": "ROYAL",
         "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 3
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 1,
+        "colEnd": 1
       },
       {
-        "word": "SHARK",
+        "word": "DEEP",
         "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 0
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
       }
     ]
   },
   {
     "id": 108,
     "title": "Level 108",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 108)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "R",
-        "M",
-        "X",
-        "Q",
-        "N",
-        "W",
-        "F",
-        "H"
-      ],
-      [
-        "E",
-        "M",
-        "B",
-        "N",
-        "P",
-        "V",
-        "L",
-        "E"
-      ],
-      [
-        "K",
-        "T",
-        "A",
-        "Q",
-        "F",
-        "I",
-        "O",
-        "A"
-      ],
-      [
-        "C",
-        "S",
-        "A",
-        "R",
-        "S",
-        "W",
-        "A",
-        "T"
-      ],
-      [
-        "O",
-        "E",
-        "C",
-        "R",
-        "I",
-        "R",
-        "T",
-        "M"
-      ],
-      [
-        "R",
-        "D",
-        "V",
-        "U",
-        "I",
-        "N",
-        "K",
-        "G"
-      ],
-      [
-        "A",
-        "I",
-        "D",
-        "D",
-        "B",
-        "P",
-        "J",
-        "X"
-      ],
-      [
-        "L",
-        "T",
-        "E",
-        "W",
-        "K",
-        "A",
-        "M",
-        "P"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "CORAL",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "MARIN",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "SCUBA",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "PIRATE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 109,
-    "title": "Level 109",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 109)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "C",
-        "E",
-        "G",
-        "N",
-        "O",
-        "P",
-        "S",
-        "M"
-      ],
-      [
-        "T",
-        "R",
-        "O",
-        "P",
-        "I",
-        "C",
-        "S",
-        "E"
-      ],
-      [
-        "A",
-        "N",
-        "C",
-        "H",
-        "O",
-        "R",
-        "E",
-        "W"
-      ],
-      [
-        " ",
-        "S",
-        "H",
-        "E",
-        "L",
-        "L",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        "Y",
-        "N",
-        "A",
-        "V",
-        "Y",
-        "N",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "P",
-        "A",
-        "L",
-        "M",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "K",
-        "K",
-        "F",
-        "P",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "T",
-        "A",
-        "E",
-        "H",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SHELL",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 5
-      },
-      {
-        "word": "TROPIC",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "ANCHOR",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 5
-      },
-      {
-        "word": "NAVY",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "SPONGE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 110,
-    "title": "Level 110",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 110)",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 108)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Anchor",
@@ -1368,160 +8144,144 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 90,
     "grid": [
       [
-        "T",
-        "R",
-        "O",
-        "P",
-        "I",
-        "C",
-        "Y",
-        "F"
-      ],
-      [
-        "G",
-        "E",
-        "V",
-        "O",
-        "C",
-        "I",
-        "E",
-        "P"
-      ],
-      [
-        " ",
-        "G",
-        "R",
-        "H",
-        "S",
-        "V",
-        "R",
-        " "
-      ],
-      [
         " ",
         " ",
-        "C",
-        "L",
-        "A",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        "O",
-        " ",
-        "E",
         "W",
-        "T",
-        "U",
+        "J",
+        "N",
+        "Y",
         " ",
-        "F"
+        " "
       ],
       [
-        "S",
-        "T",
-        "A",
+        " ",
+        " ",
+        "H",
+        "E",
+        "I",
+        "R",
+        " ",
+        " "
+      ],
+      [
+        "I",
         "O",
-        "L",
-        "F",
-        "X",
+        "A",
+        "U",
+        "H",
+        "A",
+        "G",
+        "R"
+      ],
+      [
+        "T",
+        "K",
+        "R",
+        "G",
+        "P",
+        "U",
+        "U",
         "U"
       ],
       [
-        "F",
-        "R",
-        "U",
-        "S",
-        "K",
-        "S",
+        "M",
         "A",
-        "M"
+        "F",
+        "A",
+        "L",
+        "T",
+        "J",
+        "A"
+      ],
+      [
+        "R",
+        "L",
+        "O",
+        "E",
+        "O",
+        "S",
+        "S",
+        "H"
       ],
       [
         " ",
-        "U",
-        "W",
-        "A",
-        "T",
+        " ",
         "E",
-        "R",
+        "L",
+        "D",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "O",
+        "H",
+        "F",
+        "L",
+        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "WAVE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "ISLET",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "MASK",
+        "word": "ESTUARY",
         "found": false,
         "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "TROPIC",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
+        "colStart": 5,
         "rowEnd": 0,
         "colEnd": 5
       },
       {
-        "word": "WATER",
+        "word": "DOLPHIN",
         "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 6
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
       },
       {
-        "word": "SURF",
+        "word": "LEAGUE",
         "found": false,
         "rowStart": 6,
         "colStart": 3,
-        "rowEnd": 6,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "FLOAT",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "WHARF",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 2
+      },
+      {
+        "word": "HELM",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 4,
         "colEnd": 0
       }
     ]
   },
   {
-    "id": 111,
-    "title": "Level 111",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 111)",
+    "id": 109,
+    "title": "Level 109",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 109)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Water Drop",
@@ -1534,268 +8294,276 @@ export const OCEAN_LEVELS: LevelData[] = [
       [
         " ",
         " ",
-        "R",
+        " ",
         "X",
-        "M",
-        "H",
+        "B",
+        " ",
         " ",
         " "
       ],
       [
         " ",
-        "X",
-        "Q",
-        "G",
-        "N",
-        "O",
-        "S",
-        " "
-      ],
-      [
-        "O",
-        "X",
-        "G",
-        "N",
-        "I",
-        "K",
+        " ",
         "F",
-        "L"
+        "E",
+        "B",
+        "R",
+        " ",
+        " "
       ],
       [
-        "P",
+        " ",
+        "L",
+        "A",
+        "R",
+        "O",
         "C",
         "I",
-        "P",
-        "O",
-        "R",
-        "T",
-        "F"
+        " "
       ],
       [
-        "E",
+        "R",
         "I",
+        "G",
+        "G",
+        "I",
+        "N",
+        "G",
+        "G"
+      ],
+      [
         "T",
+        "E",
+        "D",
+        "N",
         "A",
-        "O",
         "L",
-        "F",
+        "S",
         "I"
       ],
       [
-        "Q",
-        "V",
-        "H",
-        "U",
-        "L",
-        "J",
-        "J",
-        "B"
-      ],
-      [
         " ",
-        "W",
-        "L",
-        "S",
-        "J",
+        "X",
+        "E",
+        "T",
+        "R",
+        "O",
         "V",
-        "D",
         " "
       ],
       [
         " ",
         " ",
-        "T",
-        "F",
+        "N",
+        "Z",
+        "V",
+        "V",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "S",
         "M",
-        "L",
+        " ",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "FLOAT",
+        "word": "RIGGING",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "VORTEX",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "ISLAND",
         "found": false,
         "rowStart": 4,
-        "colStart": 6,
+        "colStart": 7,
         "rowEnd": 4,
         "colEnd": 2
       },
       {
-        "word": "KING",
+        "word": "CORAL",
         "found": false,
         "rowStart": 2,
         "colStart": 5,
         "rowEnd": 2,
-        "colEnd": 2
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "SHIP",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "TROPIC",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 3,
         "colEnd": 1
+      },
+      {
+        "word": "BRIG",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 7
       }
     ]
   },
   {
-    "id": 112,
-    "title": "Level 112",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 112)",
+    "id": 110,
+    "title": "Level 110",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 110)",
     "world": "island",
-    "themeIcon": "water_drop",
+    "themeIcon": "card_giftcard",
     "maskName": "Ocean Fish",
     "maskIcon": "🐟",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 85,
+    "timeLimit": 90,
     "grid": [
       [
-        " ",
-        "N",
-        "U",
-        "O",
-        "S",
+        "T",
         "G",
-        " ",
-        " "
+        "D",
+        "D",
+        "N",
+        "C",
+        "H",
+        "V"
       ],
       [
+        "T",
         "P",
-        "I",
+        "M",
+        "R",
+        "C",
+        "L",
+        "R",
+        "S"
+      ],
+      [
+        "W",
         "H",
-        "S",
-        "J",
         "Z",
-        "X",
+        "E",
+        "Y",
+        "I",
+        "E",
+        "V"
+      ],
+      [
+        "Y",
+        "A",
+        "G",
+        "L",
+        "E",
+        "P",
+        "B",
+        "R"
+      ],
+      [
+        "E",
+        "R",
+        "O",
+        "G",
+        "L",
+        "P",
+        "B",
+        "X"
+      ],
+      [
+        "V",
+        "B",
+        "L",
+        "N",
+        "L",
+        "E",
+        "U",
+        "D"
+      ],
+      [
+        "A",
+        "O",
+        "L",
+        "A",
+        "A",
+        "R",
+        "L",
         "H"
       ],
       [
-        "F",
-        "G",
-        "D",
         "C",
-        "E",
-        "V",
-        "I",
-        "D"
-      ],
-      [
-        "K",
-        "E",
-        "E",
-        "V",
-        "O",
-        "C",
-        "V",
-        "D"
-      ],
-      [
-        "Z",
-        "G",
-        "Y",
-        "S",
-        "Q",
-        "U",
-        "I",
-        "D"
-      ],
-      [
-        "A",
-        "E",
+        "R",
         "D",
-        "B",
-        "A",
         "J",
-        "V",
-        "G"
-      ],
-      [
-        " ",
-        "D",
-        "V",
-        "A",
-        "F",
-        "N",
-        "Z",
-        " "
-      ],
-      [
-        "Q",
+        "G",
         "K",
-        " ",
-        " ",
-        " ",
-        " ",
-        "D",
-        "B"
+        "B",
+        "V"
       ]
     ],
     "targetWords": [
       {
-        "word": "SHIP",
+        "word": "BLUBBER",
         "found": false,
-        "rowStart": 1,
-        "colStart": 3,
+        "rowStart": 7,
+        "colStart": 6,
         "rowEnd": 1,
-        "colEnd": 0
+        "colEnd": 6
       },
       {
-        "word": "SQUID",
+        "word": "CLIPPER",
         "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 7
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
       },
       {
-        "word": "DIVE",
+        "word": "GALLEY",
         "found": false,
-        "rowStart": 2,
-        "colStart": 7,
+        "rowStart": 7,
+        "colStart": 4,
         "rowEnd": 2,
         "colEnd": 4
       },
       {
-        "word": "SAND",
+        "word": "HARBOR",
         "found": false,
-        "rowStart": 4,
-        "colStart": 3,
+        "rowStart": 2,
+        "colStart": 1,
         "rowEnd": 7,
-        "colEnd": 6
+        "colEnd": 1
       },
       {
-        "word": "COVE",
+        "word": "ANGLER",
         "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 2
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 3
+      },
+      {
+        "word": "CAVE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 0
       }
     ]
   },
   {
-    "id": 113,
-    "title": "Level 113",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 113)",
+    "id": 111,
+    "title": "Level 111",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 111)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Neptune Trident",
@@ -1803,65 +8571,15 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 95,
+    "timeLimit": 85,
     "grid": [
       [
-        "J",
-        "D",
         " ",
-        "N",
-        "D",
         " ",
-        "H",
-        "P"
-      ],
-      [
-        "X",
-        "Z",
-        "A",
-        "E",
         "L",
-        "A",
-        "H",
-        "W"
-      ],
-      [
-        "F",
-        "V",
-        "W",
         "D",
-        "O",
-        "C",
-        "K",
-        "L"
-      ],
-      [
-        "Y",
-        "W",
-        "M",
-        "X",
-        "X",
+        "B",
         "S",
-        "D",
-        "E"
-      ],
-      [
-        " ",
-        "F",
-        "P",
-        "H",
-        "O",
-        "S",
-        "I",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "I",
-        "N",
-        "D",
-        "E",
         " ",
         " "
       ],
@@ -1869,78 +8587,120 @@ export const OCEAN_LEVELS: LevelData[] = [
         " ",
         " ",
         "G",
-        "N",
-        "X",
         "A",
+        "P",
+        "P",
+        " ",
+        " "
+      ],
+      [
+        "Q",
+        "N",
+        "Y",
+        "O",
+        "S",
+        "E",
+        "W",
+        "X"
+      ],
+      [
+        "G",
+        "O",
+        "N",
+        "D",
+        "O",
+        "L",
+        "A",
+        "I"
+      ],
+      [
+        "U",
+        "G",
+        "J",
+        "Q",
+        "N",
+        "A",
+        "P",
+        "Q"
+      ],
+      [
+        "E",
+        "Y",
+        "E",
+        "R",
+        "A",
+        "G",
+        "Y",
+        "N"
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "T",
+        "R",
+        "I",
         " ",
         " "
       ],
       [
         " ",
-        "S",
-        "Y",
-        "J",
-        "S",
-        "B",
-        "R",
+        " ",
+        "F",
+        "G",
+        "O",
+        "C",
+        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "WHALE",
+        "word": "PELAGIC",
         "found": false,
         "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "NAVY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 3,
         "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "DOCK",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 6,
+        "rowEnd": 7,
         "colEnd": 5
       },
       {
-        "word": "FINS",
+        "word": "GONDOLA",
         "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 7,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 6
+      },
+      {
+        "word": "SPONGE",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "SONAR",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 4,
+        "rowEnd": 6,
         "colEnd": 4
+      },
+      {
+        "word": "BAYOU",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 0
       }
     ]
   },
   {
-    "id": 114,
-    "title": "Level 114",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 114)",
+    "id": 112,
+    "title": "Level 112",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 112)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Jellyfish",
@@ -1948,132 +8708,132 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 95,
+    "timeLimit": 90,
     "grid": [
       [
         " ",
-        "T",
-        "W",
-        "G",
+        " ",
+        "V",
+        "A",
         "C",
-        "U",
-        "P",
+        "H",
+        " ",
         " "
       ],
       [
-        "L",
-        "A",
-        "T",
-        "S",
-        "Y",
-        "R",
-        "C",
-        "P"
-      ],
-      [
-        "R",
-        "O",
-        "B",
-        "R",
-        "A",
-        "H",
-        "R",
-        "H"
-      ],
-      [
-        "R",
-        "L",
-        "E",
-        "U",
-        "L",
-        "B",
-        "X",
-        "S"
-      ],
-      [
-        "F",
-        "F",
-        "I",
-        "S",
-        "L",
-        "E",
-        "T",
-        "I"
-      ],
-      [
-        "B",
-        "C",
         " ",
-        "V",
-        "S",
-        " ",
+        "M",
         "N",
-        "F"
+        "O",
+        "R",
+        "T",
+        "H",
+        " "
       ],
       [
+        "A",
+        "W",
+        "A",
+        "L",
         "R",
+        "U",
+        "S",
+        "E"
+      ],
+      [
+        "A",
+        "E",
+        "S",
+        "P",
+        "E",
+        "E",
+        "D",
+        "D"
+      ],
+      [
+        "S",
+        "E",
+        "L",
+        "G",
+        "G",
+        "O",
+        "G",
+        "I"
+      ],
+      [
+        "M",
+        "O",
+        "Y",
+        "S",
+        "T",
+        "E",
+        "R",
+        "T"
+      ],
+      [
+        " ",
+        "J",
+        "W",
+        "L",
+        "J",
+        "V",
+        "A",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "U",
+        "T",
+        "G",
         "X",
         " ",
-        "T",
-        "P",
-        " ",
-        "O",
-        "O"
-      ],
-      [
-        "V",
-        "H",
-        " ",
-        "O",
-        "Q",
-        " ",
-        "I",
-        "I"
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "CRYSTAL",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "FLOAT",
+        "word": "GOGGLES",
         "found": false,
         "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "HARBOR",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 2,
+        "colStart": 6,
+        "rowEnd": 4,
         "colEnd": 0
       },
       {
-        "word": "BLUE",
+        "word": "DEEPSEA",
         "found": false,
         "rowStart": 3,
-        "colStart": 5,
+        "colStart": 6,
         "rowEnd": 3,
-        "colEnd": 2
+        "colEnd": 0
       },
       {
-        "word": "ISLET",
+        "word": "OYSTER",
         "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 4,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
         "colEnd": 6
       },
       {
-        "word": "FISH",
+        "word": "WALRUS",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 6
+      },
+      {
+        "word": "NORTH",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "TIDE",
         "found": false,
         "rowStart": 5,
         "colStart": 7,
@@ -2083,9 +8843,9 @@ export const OCEAN_LEVELS: LevelData[] = [
     ]
   },
   {
-    "id": 115,
-    "title": "Level 115",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 115)",
+    "id": 113,
+    "title": "Level 113",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 113)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Nautilus Spiral",
@@ -2093,145 +8853,419 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 85,
     "grid": [
       [
-        "M",
-        "S",
-        "P",
-        "L",
-        "V",
-        "G",
-        "H",
-        "S"
-      ],
-      [
-        "M",
-        "E",
-        "Q",
-        "T",
-        "A",
-        "V",
-        "C",
-        "E"
-      ],
-      [
-        "N",
-        "A",
-        "W",
-        "D",
-        "C",
-        "R",
-        "V",
-        "A"
-      ],
-      [
-        "C",
-        "G",
-        "W",
-        "J",
         " ",
-        "C",
-        "O",
-        "L"
-      ],
-      [
-        "S",
-        "U",
-        "A",
-        "H",
         " ",
-        "P",
-        "T",
-        "C"
-      ],
-      [
-        "E",
-        "L",
-        "T",
-        "D",
-        "A",
-        "A",
-        "F",
-        "L"
-      ],
-      [
-        "A",
-        "L",
-        "E",
-        "E",
-        "E",
-        "L",
+        " ",
         "K",
-        "A"
+        "V",
+        " ",
+        " ",
+        " "
       ],
       [
+        " ",
+        " ",
+        "S",
+        "O",
+        "D",
+        "C",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "A",
+        "S",
+        "O",
+        "I",
+        "I",
+        "A",
+        " "
+      ],
+      [
+        "E",
         "W",
+        "Y",
+        "B",
+        "A",
+        "P",
+        "O",
+        "V"
+      ],
+      [
+        "Y",
+        "O",
+        "B",
+        "G",
         "M",
-        "R",
-        "H",
+        "O",
+        "F",
+        "G"
+      ],
+      [
+        " ",
         "T",
+        "A",
+        "O",
+        "R",
+        "R",
+        "L",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "L",
         "E",
-        "E",
-        "F"
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "C",
+        "M",
+        " ",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "SEAGULL",
+        "word": "MERMAID",
         "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 1
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 4
       },
       {
-        "word": "CORAL",
+        "word": "LOGBOOK",
         "found": false,
-        "rowStart": 4,
-        "colStart": 7,
+        "rowStart": 6,
+        "colStart": 3,
         "rowEnd": 0,
         "colEnd": 3
       },
       {
-        "word": "HEAT",
+        "word": "TROPIC",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "ABYSS",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 2
+      },
+      {
+        "word": "CITY",
         "found": false,
         "rowStart": 7,
         "colStart": 3,
         "rowEnd": 4,
-        "colEnd": 6
+        "colEnd": 0
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "title": "Level 114",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 114)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        "P",
+        "A",
+        "L",
+        "M",
+        "K",
+        "M",
+        "E",
+        "J"
+      ],
+      [
+        "A",
+        "N",
+        "I",
+        "R",
+        "A",
+        "M",
+        "D",
+        "V"
+      ],
+      [
+        "C",
+        "Z",
+        "Q",
+        "K",
+        "I",
+        "J",
+        "M",
+        "B"
+      ],
+      [
+        "E",
+        "E",
+        "U",
+        "S",
+        "I",
+        "R",
+        "E",
+        "N"
+      ],
+      [
+        "E",
+        "B",
+        "L",
+        "W",
+        "I",
+        "W",
+        "T",
+        "C"
+      ],
+      [
+        "O",
+        "B",
+        "A",
+        "L",
+        "L",
+        "A",
+        "S",
+        "T"
+      ],
+      [
+        "V",
+        "L",
+        "X",
+        "R",
+        "E",
+        "L",
+        "I",
+        "C"
+      ],
+      [
+        "T",
+        "K",
+        "D",
+        "E",
+        "C",
+        "K",
+        "E",
+        "I"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BALLAST",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
       },
       {
-        "word": "WHALE",
+        "word": "MARINA",
         "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "WATER",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 6,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 1,
         "colEnd": 0
       },
       {
-        "word": "SEAL",
+        "word": "RELIC",
         "found": false,
-        "rowStart": 0,
-        "colStart": 7,
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "SIREN",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 3,
         "rowEnd": 3,
         "colEnd": 7
+      },
+      {
+        "word": "DECK",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 5
+      },
+      {
+        "word": "PALM",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 3
+      }
+    ]
+  },
+  {
+    "id": 115,
+    "title": "Level 115",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 115)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Clam Shell",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "F",
+        "V",
+        "K",
+        "I",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "O",
+        "B",
+        "S",
+        "A",
+        "I",
+        "L",
+        " "
+      ],
+      [
+        "L",
+        "H",
+        "C",
+        "N",
+        "E",
+        "R",
+        "T",
+        "P"
+      ],
+      [
+        "L",
+        "U",
+        "F",
+        "I",
+        "S",
+        "H",
+        "O",
+        "A"
+      ],
+      [
+        "W",
+        "G",
+        "N",
+        "I",
+        "R",
+        "O",
+        "O",
+        "M"
+      ],
+      [
+        "R",
+        "G",
+        "J",
+        "U",
+        "M",
+        "P",
+        "V",
+        "V"
+      ],
+      [
+        " ",
+        "A",
+        "M",
+        "A",
+        "S",
+        "K",
+        "A",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "T",
+        "Q",
+        "Z",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "MOORING",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 1
+      },
+      {
+        "word": "TRENCH",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "JUMP",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "FISH",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "SAIL",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "MASK",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 5
       }
     ]
   },
@@ -2241,150 +9275,142 @@ export const OCEAN_LEVELS: LevelData[] = [
     "subtitle": "BUBBLE OCEAN - HARD (LEVEL 116)",
     "world": "island",
     "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
+    "maskName": "Anchor",
+    "maskIcon": "⚓",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 90,
     "grid": [
       [
-        "E",
-        "M",
-        "D",
-        "Y",
-        "H",
-        "A",
-        "S",
-        "R"
-      ],
-      [
-        "X",
-        "C",
-        "V",
-        "J",
-        "X",
-        "H",
-        "A",
-        "T"
-      ],
-      [
-        "D",
-        "I",
-        "U",
-        "P",
-        "I",
+        " ",
+        " ",
+        "Z",
         "N",
-        "T",
-        "E"
+        "B",
+        "Z",
+        " ",
+        " "
       ],
       [
-        "B",
+        " ",
+        " ",
+        "E",
+        "X",
+        "U",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        "K",
         "T",
-        "A",
-        "P",
+        "C",
+        "U",
         "O",
         "H",
+        "J",
+        "G"
+      ],
+      [
+        "W",
+        "W",
+        "S",
+        "W",
+        "Y",
         "E",
-        "M"
+        "J",
+        "J"
       ],
       [
-        "A",
-        "Y",
-        "R",
-        "S",
+        "C",
         "O",
-        "D",
-        "D",
-        "P"
-      ],
-      [
-        "Y",
-        "Q",
-        "U",
-        "B",
-        "U",
         "O",
-        "I",
-        "L"
-      ],
-      [
+        "E",
+        "P",
         "L",
-        "A",
-        "A",
-        "I",
-        "S",
-        "B",
         "R",
-        "E"
+        "W"
       ],
       [
-        "Y",
-        "K",
+        "N",
         "R",
-        "V",
-        "S",
-        "V",
-        "M",
-        "F"
+        "R",
+        "L",
+        "R",
+        "L",
+        "B",
+        "G"
+      ],
+      [
+        " ",
+        " ",
+        "A",
+        "C",
+        "G",
+        "C",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "K",
+        "B",
+        "A",
+        "B",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "TEMPLE",
+        "word": "CREST",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "SHELL",
         "found": false,
         "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "SONAR",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
+        "colStart": 5,
         "rowEnd": 5,
-        "colEnd": 0
+        "colEnd": 5
       },
       {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "SHIP",
+        "word": "BUOY",
         "found": false,
         "rowStart": 0,
-        "colStart": 6,
+        "colStart": 4,
         "rowEnd": 3,
-        "colEnd": 3
+        "colEnd": 4
       },
       {
-        "word": "CITY",
+        "word": "GLOW",
         "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 4,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 3,
         "colEnd": 1
+      },
+      {
+        "word": "ORCA",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "CRAB",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 7,
+        "colEnd": 3
       }
     ]
   },
@@ -2394,80 +9420,20 @@ export const OCEAN_LEVELS: LevelData[] = [
     "subtitle": "BUBBLE OCEAN - HARD (LEVEL 117)",
     "world": "island",
     "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
+    "maskName": "Water Drop",
+    "maskIcon": "🫧",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 85,
     "grid": [
       [
-        "E",
-        "N",
-        "O",
-        "M",
-        "E",
-        "N",
-        "A",
-        "F"
-      ],
-      [
-        "S",
+        " ",
+        " ",
+        " ",
         "V",
-        "B",
-        "W",
-        "S",
-        "A",
         "L",
-        "S"
-      ],
-      [
-        "A",
-        "E",
-        "Y",
-        "A",
-        "X",
-        "V",
-        "G",
-        "P"
-      ],
-      [
         " ",
-        "N",
-        "A",
-        "T",
-        "R",
-        "Y",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        "Z",
-        "I",
-        "E",
-        "W",
-        "T",
-        "E",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "D",
-        "R",
-        "A",
-        "Q",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "J",
-        "E",
-        "A",
-        "V",
         " ",
         " "
       ],
@@ -2475,68 +9441,112 @@ export const OCEAN_LEVELS: LevelData[] = [
         " ",
         " ",
         "H",
-        "Q",
-        "I",
+        "B",
+        "L",
         "M",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "I",
+        "C",
+        "E",
+        "E",
+        "O",
+        "E",
+        " "
+      ],
+      [
+        "R",
+        "W",
+        "A",
+        "N",
+        "E",
+        "H",
+        "L",
+        "V"
+      ],
+      [
+        "Q",
+        "C",
+        "E",
+        "T",
+        "W",
+        "T",
+        "O",
+        "O"
+      ],
+      [
+        " ",
+        "C",
+        "B",
+        "H",
+        "A",
+        "A",
+        "H",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "I",
+        "R",
+        "F",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "C",
+        "D",
+        " ",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "MARINA",
+        "word": "LEEWARD",
         "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 0
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
       },
       {
-        "word": "WATER",
+        "word": "BENTHIC",
         "found": false,
         "rowStart": 1,
         "colStart": 3,
-        "rowEnd": 5,
+        "rowEnd": 7,
         "colEnd": 3
       },
       {
-        "word": "NAVY",
+        "word": "FATHOM",
         "found": false,
-        "rowStart": 0,
+        "rowStart": 6,
         "colStart": 5,
-        "rowEnd": 3,
+        "rowEnd": 1,
         "colEnd": 5
       },
       {
-        "word": "ANEMONE",
+        "word": "BEACH",
         "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 7,
+        "rowStart": 5,
         "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 3,
+        "rowEnd": 1,
         "colEnd": 2
       },
       {
-        "word": "ALGAE",
+        "word": "HOLE",
         "found": false,
-        "rowStart": 0,
+        "rowStart": 5,
         "colStart": 6,
-        "rowEnd": 4,
+        "rowEnd": 2,
         "colEnd": 6
       }
     ]
@@ -2544,160 +9554,144 @@ export const OCEAN_LEVELS: LevelData[] = [
   {
     "id": 118,
     "title": "Level 118",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 118)",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 118)",
     "world": "island",
     "themeIcon": "water_drop",
-    "maskName": "Anchor",
-    "maskIcon": "⚓",
+    "maskName": "Ocean Fish",
+    "maskIcon": "🐟",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 90,
     "grid": [
       [
-        "D",
-        "N",
-        "O",
-        "M",
-        "A",
-        "I",
-        "D",
-        "W"
-      ],
-      [
-        "G",
-        "T",
-        "F",
-        "E",
-        "E",
-        "R",
+        "Q",
+        "Y",
         "H",
-        "K"
+        "U",
+        "E",
+        "D",
+        "L",
+        "C"
       ],
       [
-        " ",
-        "R",
-        "I",
-        "D",
+        "E",
+        "G",
+        "B",
+        "V",
+        "O",
         "E",
         "S",
-        "Q",
-        " "
+        "T"
       ],
       [
-        " ",
-        " ",
-        "Q",
-        "T",
-        "I",
-        "Q",
-        " ",
-        " "
-      ],
-      [
-        "D",
-        " ",
-        "C",
-        "F",
+        "N",
+        "U",
+        "O",
+        "L",
+        "S",
         "A",
+        "I",
+        "N"
+      ],
+      [
+        "O",
+        "C",
+        "X",
+        "S",
+        "Z",
+        "D",
+        "I",
+        "C"
+      ],
+      [
+        "M",
         "F",
-        " ",
+        "E",
+        "A",
+        "A",
+        "R",
+        "R",
+        "I"
+      ],
+      [
+        "E",
+        "V",
+        "A",
+        "L",
+        "A",
+        "O",
+        "Q",
+        "T"
+      ],
+      [
+        "N",
+        "F",
+        "B",
+        "M",
+        "W",
+        "P",
+        "T",
         "V"
       ],
       [
-        "R",
-        "E",
-        "T",
         "A",
-        "W",
-        "N",
-        "T",
-        "S"
-      ],
-      [
-        "A",
-        "Q",
-        "N",
-        "I",
-        "U",
-        "R",
-        "R",
-        "K"
-      ],
-      [
-        " ",
-        "F",
-        "I",
-        "N",
         "S",
-        "A",
-        "B",
-        " "
+        "H",
+        "N",
+        "E",
+        "Q",
+        "U",
+        "G"
       ]
     ],
     "targetWords": [
       {
-        "word": "FINS",
+        "word": "ANEMONE",
         "found": false,
         "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "DIAMOND",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
+        "colStart": 0,
+        "rowEnd": 1,
         "colEnd": 0
       },
       {
-        "word": "RUIN",
+        "word": "VESSEL",
         "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "TITAN",
-        "found": false,
-        "rowStart": 1,
+        "rowStart": 5,
         "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "FISH",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 1,
+        "rowEnd": 0,
         "colEnd": 6
       },
       {
-        "word": "WATER",
+        "word": "CROWN",
         "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 0
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 7,
+        "colEnd": 3
       },
       {
-        "word": "REEF",
+        "word": "MARIN",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "TIDAL",
         "found": false,
         "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 2
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 3
       },
       {
-        "word": "RIDE",
+        "word": "COVE",
         "found": false,
-        "rowStart": 2,
+        "rowStart": 3,
         "colStart": 1,
-        "rowEnd": 2,
+        "rowEnd": 0,
         "colEnd": 4
       }
     ]
@@ -2705,619 +9699,289 @@ export const OCEAN_LEVELS: LevelData[] = [
   {
     "id": 119,
     "title": "Level 119",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 119)",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 119)",
     "world": "island",
     "themeIcon": "water_drop",
-    "maskName": "Water Drop",
-    "maskIcon": "🫧",
+    "maskName": "Neptune Trident",
+    "maskIcon": "🔱",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 85,
     "grid": [
       [
         " ",
         " ",
-        "G",
+        "T",
         "M",
-        "J",
-        "D",
+        "O",
+        "T",
         " ",
         " "
       ],
       [
         " ",
+        " ",
+        "W",
         "C",
         "V",
-        "E",
-        "V",
-        "O",
-        "C",
+        "N",
+        " ",
         " "
       ],
       [
-        "X",
-        "K",
-        "C",
-        "O",
-        "D",
-        "O",
-        "T",
-        "S"
-      ],
-      [
+        "W",
+        "F",
         "E",
-        "D",
-        "I",
-        "T",
-        "V",
-        "C",
-        "E",
-        "R"
-      ],
-      [
+        "U",
         "O",
-        "V",
-        "M",
-        "D",
-        "L",
         "A",
+        "Z",
+        "Z"
+      ],
+      [
+        "V",
+        "A",
+        "T",
+        "R",
         "L",
+        "T",
+        "S",
         "I"
       ],
       [
-        "Q",
-        "A",
-        "I",
-        "A",
-        "L",
-        "X",
+        "N",
+        "C",
         "S",
-        "K"
+        "R",
+        "C",
+        "X",
+        "T",
+        "W"
+      ],
+      [
+        "T",
+        "W",
+        "U",
+        "E",
+        "A",
+        "E",
+        "B",
+        "Q"
       ],
       [
         " ",
+        " ",
         "I",
-        "M",
-        "D",
+        "N",
+        "N",
         "S",
-        "Y",
-        "I",
+        " ",
         " "
       ],
       [
         " ",
         " ",
+        "T",
+        "T",
         "O",
-        "M",
-        "N",
-        "K",
+        "Z",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "ISLET",
+        "word": "VOLCANO",
         "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "SEAL",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 5,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 7,
         "colEnd": 4
       },
       {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "DOCK",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "DIVE",
+        "word": "SEXTANT",
         "found": false,
         "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 7,
+        "colStart": 5,
+        "rowEnd": 0,
         "colEnd": 5
       },
       {
-        "word": "CLAM",
+        "word": "CURRENT",
         "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 6,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 3
+      },
+      {
+        "word": "WETSUIT",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 7,
         "colEnd": 2
+      },
+      {
+        "word": "OCEAN",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 0
       }
     ]
   },
   {
     "id": 120,
     "title": "Level 120",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 120)",
+    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 120)",
     "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Ocean Fish",
-    "maskIcon": "🐟",
+    "themeIcon": "card_giftcard",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 90,
     "grid": [
       [
         " ",
-        "H",
-        "Q",
+        " ",
+        "C",
+        "A",
         "I",
-        "E",
-        "I",
+        "M",
         " ",
         " "
       ],
       [
-        "V",
-        "T",
-        "T",
-        "A",
-        "E",
-        "H",
-        "D",
-        "H"
-      ],
-      [
-        "A",
-        "T",
-        "F",
+        " ",
         "R",
+        "U",
+        "D",
+        "D",
         "E",
-        "P",
-        "O",
-        "O"
+        "R",
+        " "
       ],
       [
-        "S",
+        "W",
+        "M",
         "A",
         "N",
-        "D",
-        "O",
-        "S",
-        "C",
-        "W"
+        "A",
+        "T",
+        "E",
+        "E"
       ],
       [
-        "B",
-        "C",
-        "I",
         "T",
-        "Y",
         "N",
+        "E",
+        "D",
+        "I",
+        "R",
+        "T",
+        "V"
+      ],
+      [
+        "R",
+        "L",
+        "E",
         "K",
-        "N"
+        "R",
+        "O",
+        "N",
+        "S"
       ],
       [
-        "F",
-        "J",
-        "N",
-        "I",
+        "P",
+        "M",
+        "E",
+        "D",
         "U",
-        "R",
-        "G",
-        "F"
+        "S",
+        "A",
+        "M"
       ],
       [
         " ",
-        "A",
+        "I",
         "S",
-        "O",
-        "N",
-        "A",
-        "R",
+        "L",
+        "E",
+        "T",
+        "M",
         " "
       ],
       [
-        "U",
-        "V",
         " ",
         " ",
+        "D",
+        "Z",
+        "K",
+        "H",
         " ",
-        " ",
-        "A",
-        "L"
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "DOCK",
+        "word": "MANATEE",
         "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 6
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 7
       },
       {
-        "word": "NORTH",
+        "word": "SNORKEL",
         "found": false,
         "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 0,
+        "colStart": 7,
+        "rowEnd": 4,
         "colEnd": 1
       },
       {
-        "word": "SAND",
+        "word": "TRIDENT",
         "found": false,
         "rowStart": 3,
-        "colStart": 0,
+        "colStart": 6,
         "rowEnd": 3,
-        "colEnd": 3
+        "colEnd": 0
       },
       {
-        "word": "SONAR",
+        "word": "RUDDER",
         "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
+        "rowStart": 1,
+        "colStart": 1,
+        "rowEnd": 1,
         "colEnd": 6
       },
       {
-        "word": "RUIN",
+        "word": "MEDUSA",
         "found": false,
         "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "CITY",
-        "found": false,
-        "rowStart": 4,
         "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 4
+        "rowEnd": 5,
+        "colEnd": 6
       },
       {
-        "word": "HEAT",
+        "word": "ISLET",
         "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 3
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 5
       }
     ]
   },
   {
     "id": 121,
     "title": "Level 121",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 121)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Neptune Trident",
-    "maskIcon": "🔱",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        "X",
-        "F",
-        " ",
-        "B",
-        "M",
-        " ",
-        "A",
-        "S"
-      ],
-      [
-        "Q",
-        "O",
-        "D",
-        "H",
-        "E",
-        "N",
-        "B",
-        "E"
-      ],
-      [
-        "A",
-        "P",
-        "V",
-        "Y",
-        "R",
-        "A",
-        "U",
-        "A"
-      ],
-      [
-        "J",
-        "V",
-        "M",
-        "D",
-        "M",
-        "E",
-        "C",
-        "V"
-      ],
-      [
-        " ",
-        "V",
-        "O",
-        "R",
-        "A",
-        "C",
-        "S",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "Q",
-        "A",
-        "I",
-        "O",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "I",
-        "K",
-        "D",
-        "U",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "T",
-        "E",
-        "M",
-        "P",
-        "L",
-        "E",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "HYDRA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "TEMPLE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "SCUBA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "MERMAID",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 122,
-    "title": "Level 122",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 122)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Jellyfish",
-    "maskIcon": "🪼",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        "E",
-        "L",
-        "T",
-        "R",
-        "U",
-        "T",
-        " "
-      ],
-      [
-        "A",
-        "B",
-        "U",
-        "C",
-        "S",
-        "P",
-        "M",
-        "X"
-      ],
-      [
-        "T",
-        "T",
-        "S",
-        "U",
-        "N",
-        "A",
-        "M",
-        "I"
-      ],
-      [
-        "E",
-        "N",
-        "R",
-        "E",
-        "E",
-        "F",
-        "Z",
-        "W"
-      ],
-      [
-        "M",
-        "Y",
-        "L",
-        "H",
-        "Y",
-        "D",
-        "R",
-        "A"
-      ],
-      [
-        "P",
-        "O",
-        " ",
-        "G",
-        "U",
-        " ",
-        "I",
-        "E"
-      ],
-      [
-        "L",
-        "U",
-        " ",
-        "E",
-        "G",
-        " ",
-        "P",
-        "R"
-      ],
-      [
-        "E",
-        "J",
-        " ",
-        "E",
-        "E",
-        " ",
-        "E",
-        "T"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 5
-      },
-      {
-        "word": "SCUBA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "TEMPLE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "HYDRA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 7
-      },
-      {
-        "word": "TSUNAMI",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "TURTLE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 123,
-    "title": "Level 123",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 123)",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 121)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Nautilus Spiral",
@@ -3325,144 +9989,144 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 95,
+    "timeLimit": 90,
     "grid": [
       [
-        "I",
+        " ",
+        " ",
+        " ",
+        "R",
+        "B",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
         "M",
-        "A",
-        "J",
         "E",
+        "T",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "E",
+        "U",
+        "T",
         "S",
         "T",
+        "G",
+        " "
+      ],
+      [
+        "E",
+        "D",
+        "T",
+        "S",
+        "U",
+        "O",
+        "U",
         "Y"
       ],
       [
-        "P",
-        "E",
-        "V",
-        "O",
+        "I",
+        "I",
+        "I",
         "B",
-        "W",
-        "A",
-        "U"
-      ],
-      [
-        "O",
-        "V",
-        "Z",
-        "Y",
-        "O",
-        "A",
-        "U",
-        "U"
-      ],
-      [
-        "Z",
-        "A",
-        "G",
-        "S",
-        " ",
-        "F",
-        "A",
-        "S"
-      ],
-      [
         "N",
-        "C",
-        "A",
-        "T",
+        "R",
+        "L",
+        "O"
+      ],
+      [
         " ",
+        "R",
+        "N",
+        "O",
+        "A",
+        "F",
+        "F",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "Y",
         "L",
         "M",
-        "F"
+        "L",
+        " ",
+        " "
       ],
       [
-        "H",
-        "W",
-        "E",
-        "E",
-        "F",
-        "O",
-        "P",
-        "I"
-      ],
-      [
-        "U",
-        "B",
+        " ",
+        " ",
+        " ",
         "S",
-        "R",
-        "C",
-        "A",
         "I",
-        "N"
-      ],
-      [
-        "C",
-        "P",
-        "H",
-        "S",
-        "X",
-        "T",
-        "O",
-        "S"
+        " ",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "OYSTER",
+        "word": "LOBSTER",
         "found": false,
-        "rowStart": 1,
+        "rowStart": 6,
         "colStart": 3,
-        "rowEnd": 6,
+        "rowEnd": 0,
         "colEnd": 3
       },
       {
-        "word": "FINS",
+        "word": "TSUNAMI",
         "found": false,
-        "rowStart": 4,
-        "colStart": 7,
+        "rowStart": 1,
+        "colStart": 4,
         "rowEnd": 7,
-        "colEnd": 7
+        "colEnd": 4
       },
       {
-        "word": "FLOAT",
+        "word": "MUTINY",
         "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "MAJESTY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 6,
+        "rowStart": 1,
         "colStart": 2,
-        "rowEnd": 4,
+        "rowEnd": 6,
         "colEnd": 2
       },
       {
-        "word": "CAVE",
+        "word": "FROTH",
         "found": false,
-        "rowStart": 4,
-        "colStart": 1,
+        "rowStart": 5,
+        "colStart": 5,
         "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "GULF",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "RIDE",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 2,
         "colEnd": 1
       }
     ]
   },
   {
-    "id": 124,
-    "title": "Level 124",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 124)",
+    "id": 122,
+    "title": "Level 122",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 122)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Atlantis Citadel",
@@ -3473,141 +10137,149 @@ export const OCEAN_LEVELS: LevelData[] = [
     "timeLimit": 95,
     "grid": [
       [
-        "Y",
-        "Q",
         "E",
-        "N",
-        "M",
-        "A",
-        "L",
-        "C"
-      ],
-      [
-        "D",
-        "I",
+        "T",
+        "C",
         "V",
-        "I",
-        "N",
-        "G",
-        "G",
-        "D"
+        "X",
+        "L",
+        "O",
+        "T"
       ],
       [
-        "J",
-        "Y",
         "S",
-        "H",
-        "W",
-        "L",
-        "E",
-        "S"
+        "T",
+        "D",
+        "Z",
+        "R",
+        "C",
+        "I",
+        "I"
       ],
       [
-        "Y",
-        "V",
-        "B",
-        "P",
-        "G",
-        "G",
-        "P",
+        "N",
+        "N",
+        "A",
+        "A",
+        "A",
+        "A",
+        "E",
         "K"
       ],
       [
-        "U",
-        "S",
-        "B",
-        "L",
-        "L",
-        "F",
+        "Y",
+        "C",
         "E",
-        "S"
+        "G",
+        "R",
+        "C",
+        "H",
+        "R"
       ],
       [
+        "L",
+        "P",
         "D",
-        "K",
         "T",
-        "O",
-        "O",
-        "U",
-        "Q",
+        "I",
+        "B",
+        "X",
         "A"
       ],
       [
-        "W",
-        "U",
+        "L",
+        "V",
         "S",
-        "D",
-        "W",
-        "C",
-        "Y",
-        "M"
+        "T",
+        "R",
+        "R",
+        "V",
+        "K"
       ],
       [
-        "P",
-        "P",
-        "Z",
-        "O",
-        "H",
-        "S",
+        "E",
+        "T",
+        "F",
         "I",
-        "F"
+        "R",
+        "D",
+        "F",
+        "E"
+      ],
+      [
+        "J",
+        "S",
+        "S",
+        "H",
+        "A",
+        "R",
+        "K",
+        "N"
       ]
     ],
     "targetWords": [
       {
-        "word": "DOLPHIN",
+        "word": "FRIGATE",
         "found": false,
         "rowStart": 6,
-        "colStart": 3,
+        "colStart": 6,
         "rowEnd": 0,
-        "colEnd": 3
+        "colEnd": 0
       },
       {
-        "word": "GLOW",
+        "word": "KRAKEN",
         "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "DIVING",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 6,
+        "rowStart": 2,
         "colStart": 7,
-        "rowEnd": 3,
+        "rowEnd": 7,
         "colEnd": 7
       },
       {
-        "word": "FISH",
+        "word": "STRAIT",
         "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 4
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 7
       },
       {
-        "word": "CLAM",
+        "word": "JELLY",
         "found": false,
-        "rowStart": 0,
-        "colStart": 7,
+        "rowStart": 7,
+        "colStart": 0,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "DRIFT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 1
+      },
+      {
+        "word": "PEARL",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 1,
         "rowEnd": 0,
-        "colEnd": 4
+        "colEnd": 5
+      },
+      {
+        "word": "SHARK",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 7,
+        "colEnd": 6
       }
     ]
   },
   {
-    "id": 125,
-    "title": "Level 125",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 125)",
+    "id": 123,
+    "title": "Level 123",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 123)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Clam Shell",
@@ -3615,152 +10287,152 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 95,
     "grid": [
       [
-        "R",
-        "A",
-        "N",
+        " ",
+        " ",
         "O",
+        "D",
+        "Q",
         "S",
-        "P",
-        "B",
-        "Y"
-      ],
-      [
-        "C",
-        "R",
-        "A",
-        "B",
-        "E",
-        "L",
-        "K",
-        "A"
-      ],
-      [
-        "Y",
-        "T",
-        "S",
-        "E",
-        "J",
-        "A",
-        "M",
-        "B"
-      ],
-      [
         " ",
-        "P",
-        "F",
-        "P",
-        "G",
-        "T",
-        "H",
         " "
       ],
       [
         " ",
+        "Y",
+        "H",
+        "G",
+        "N",
+        "I",
+        "D",
+        " "
+      ],
+      [
+        "N",
+        "L",
+        "L",
+        "U",
         "G",
         "A",
         "E",
-        "S",
-        "S",
-        "R",
-        " "
+        "S"
       ],
       [
-        " ",
-        " ",
-        "M",
-        "L",
-        "H",
-        "Y",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "S",
+        "D",
+        "E",
+        "E",
         "W",
-        "M",
+        "A",
+        "E",
+        "S",
+        "T"
+      ],
+      [
+        "V",
+        "A",
+        "L",
+        "L",
+        "E",
+        "Y",
+        "D",
+        "H"
+      ],
+      [
+        "B",
+        "E",
+        "A",
         "R",
+        "I",
+        "N",
+        "G",
+        "V"
+      ],
+      [
         " ",
+        "P",
+        "I",
+        "R",
+        "A",
+        "T",
+        "E",
         " "
       ],
       [
         " ",
         " ",
-        "G",
-        "Z",
-        "J",
-        "C",
+        "M",
+        "U",
+        "O",
+        "Y",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "CRYSTAL",
+        "word": "BEARING",
         "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "SONAR",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "MAJESTY",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "CRAB",
-        "found": false,
-        "rowStart": 1,
+        "rowStart": 5,
         "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 3
+        "rowEnd": 5,
+        "colEnd": 6
       },
       {
-        "word": "BAY",
+        "word": "SEAWEED",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "SEAGULL",
         "found": false,
         "rowStart": 2,
         "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 7
+        "rowEnd": 2,
+        "colEnd": 1
       },
       {
-        "word": "PALM",
+        "word": "VALLEY",
         "found": false,
-        "rowStart": 3,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 5
+      },
+      {
+        "word": "PIRATE",
+        "found": false,
+        "rowStart": 6,
         "colStart": 1,
         "rowEnd": 6,
-        "colEnd": 4
+        "colEnd": 6
+      },
+      {
+        "word": "DINGHY",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 1
+      },
+      {
+        "word": "SAND",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 0,
+        "colEnd": 3
       }
     ]
   },
   {
-    "id": 126,
-    "title": "Level 126",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 126)",
+    "id": 124,
+    "title": "Level 124",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 124)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Anchor",
@@ -3768,305 +10440,297 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 90,
     "grid": [
       [
-        "P",
-        "R",
-        "E",
+        " ",
+        " ",
+        "J",
+        "Q",
         "T",
-        "S",
-        "Y",
-        "O",
-        "I"
+        "B",
+        " ",
+        " "
       ],
       [
-        "W",
-        "Y",
-        "W",
-        "T",
+        " ",
+        " ",
+        "S",
+        "X",
+        "N",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        "L",
+        "C",
         "I",
-        "D",
+        "T",
+        "A",
+        "U",
+        "Q",
+        "A"
+      ],
+      [
+        "V",
+        "C",
+        "R",
+        "U",
+        "I",
+        "S",
         "E",
+        "R"
+      ],
+      [
+        "N",
+        "P",
+        "L",
+        "A",
+        "G",
+        "O",
+        "O",
+        "N"
+      ],
+      [
+        "K",
+        "O",
+        "C",
+        "T",
+        "O",
+        "P",
+        "U",
         "S"
       ],
       [
         " ",
-        "V",
-        "E",
-        "W",
-        "A",
-        "V",
-        "E",
-        " "
-      ],
-      [
         " ",
-        " ",
-        "M",
-        "A",
-        "M",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        "E",
-        " ",
-        "A",
-        "U",
-        "A",
-        "R",
-        " ",
-        "H"
-      ],
-      [
-        "G",
-        "P",
-        "S",
-        "R",
-        "O",
-        "A",
-        "Z",
-        "I"
-      ],
-      [
-        "T",
-        "F",
-        "K",
-        "A",
-        "F",
-        "E",
         "I",
-        "Q"
+        "V",
+        "A",
+        "N",
+        " ",
+        " "
       ],
       [
         " ",
+        " ",
+        "S",
+        "D",
+        "W",
         "N",
-        "W",
-        "W",
-        "O",
-        "P",
-        "H",
+        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "PEARL",
+        "word": "CRUISER",
         "found": false,
-        "rowStart": 7,
-        "colStart": 5,
+        "rowStart": 3,
+        "colStart": 1,
         "rowEnd": 3,
-        "colEnd": 5
+        "colEnd": 7
       },
       {
-        "word": "OYSTER",
+        "word": "OCTOPUS",
         "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
+      },
+      {
+        "word": "AQUATIC",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 2,
         "colEnd": 1
       },
       {
-        "word": "WAVE",
+        "word": "LAGOON",
         "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 3,
+        "rowStart": 4,
         "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
+        "rowEnd": 4,
+        "colEnd": 7
       },
       {
-        "word": "TIDE",
+        "word": "GIANT",
         "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 6
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
       },
       {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "FOAM",
+        "word": "NAVI",
         "found": false,
         "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 4
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 2
       }
     ]
   },
   {
-    "id": 127,
-    "title": "Level 127",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 127)",
+    "id": 125,
+    "title": "Level 125",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 125)",
     "world": "island",
-    "themeIcon": "water_drop",
+    "themeIcon": "card_giftcard",
     "maskName": "Water Drop",
     "maskIcon": "🫧",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 95,
     "grid": [
       [
         " ",
         " ",
-        "O",
-        "R",
-        "L",
-        "H",
         " ",
-        " "
-      ],
-      [
-        " ",
-        "S",
-        "N",
-        "F",
-        "A",
-        "A",
-        "E",
-        " "
-      ],
-      [
-        "E",
-        "L",
-        "A",
-        "I",
-        "G",
-        "N",
-        "E",
-        "M"
-      ],
-      [
-        "S",
         "W",
-        "C",
         "S",
-        "S",
-        "M",
-        "O",
-        "S"
+        " ",
+        " ",
+        " "
       ],
       [
-        "P",
-        "H",
+        " ",
+        " ",
+        "K",
+        "O",
+        "C",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "L",
+        "E",
         "L",
         "H",
-        "E",
-        "A",
-        "X",
-        "S"
+        "L",
+        "D",
+        " "
       ],
       [
+        "N",
+        "M",
+        "L",
+        "L",
+        "O",
+        "O",
         "E",
-        "A",
+        "H"
+      ],
+      [
+        "F",
+        "I",
+        "P",
+        "I",
         "O",
-        "B",
-        "A",
-        "R",
-        "O",
+        "T",
+        "E",
         "Y"
       ],
       [
         " ",
-        "D",
-        "V",
         "R",
-        "M",
-        "I",
-        "J",
+        "B",
+        "B",
+        "L",
+        "A",
+        "P",
         " "
       ],
       [
         " ",
         " ",
-        "O",
-        "O",
-        "E",
-        "N",
+        "U",
+        "A",
+        "H",
+        "P",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "S",
+        "C",
+        " ",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "FISH",
+        "word": "SCHOOL",
         "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 3
-      },
-      {
-        "word": "MARIN",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "SHORE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "VOLCANO",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 3,
+        "rowStart": 0,
         "colStart": 4,
         "rowEnd": 5,
         "colEnd": 4
       },
       {
-        "word": "SONAR",
+        "word": "BILLOW",
         "found": false,
-        "rowStart": 4,
-        "colStart": 7,
+        "rowStart": 5,
+        "colStart": 3,
         "rowEnd": 0,
         "colEnd": 3
       },
       {
-        "word": "SEAL",
+        "word": "CABIN",
         "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 4
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "ATOLL",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "SURF",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "DEEP",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "KELP",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 4,
+        "colEnd": 2
       }
     ]
   },
   {
-    "id": 128,
-    "title": "Level 128",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 128)",
+    "id": 126,
+    "title": "Level 126",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 126)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Ocean Fish",
@@ -4074,160 +10738,152 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 95,
     "grid": [
       [
-        " ",
-        "N",
-        "I",
+        "P",
+        "J",
+        "V",
         "R",
+        "B",
+        "G",
+        "B",
+        "F"
+      ],
+      [
         "A",
         "M",
-        " ",
-        " "
+        "F",
+        "Q",
+        "Y",
+        "C",
+        "A",
+        "L"
       ],
       [
-        "A",
-        "T",
+        "C",
+        "X",
+        "I",
+        "W",
+        "E",
+        "O",
         "L",
+        "O"
+      ],
+      [
+        "I",
+        "O",
+        "D",
+        "W",
+        "A",
+        "R",
+        "E",
+        "A"
+      ],
+      [
+        "F",
+        "C",
+        "O",
+        "R",
+        "S",
+        "S",
+        "E",
+        "T"
+      ],
+      [
+        "I",
+        "U",
+        "C",
+        "D",
+        "U",
         "A",
         "N",
-        "T",
-        "I",
-        "S"
-      ],
-      [
-        "G",
-        "W",
-        "F",
-        "R",
-        "U",
-        "S",
-        "Q",
         "C"
       ],
       [
-        "R",
-        "E",
+        "C",
+        "C",
         "K",
-        "A",
-        "E",
-        "R",
-        "B",
-        "J"
-      ],
-      [
-        "K",
-        "M",
-        "A",
-        "R",
+        "S",
+        "S",
         "I",
-        "N",
-        "E",
-        "R"
+        "C",
+        "C"
       ],
       [
-        "T",
-        "A",
-        "O",
-        "L",
-        "F",
-        "H",
-        "V",
-        "V"
-      ],
-      [
-        " ",
         "I",
         "P",
-        "A",
-        "L",
-        "M",
-        "A",
-        " "
-      ],
-      [
-        "V",
-        "H",
-        " ",
-        " ",
-        " ",
-        " ",
-        "W",
-        "I"
+        "K",
+        "R",
+        "I",
+        "R",
+        "N",
+        "T"
       ]
     ],
     "targetWords": [
       {
-        "word": "FLOAT",
+        "word": "PACIFIC",
         "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 5,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 6,
         "colEnd": 0
       },
       {
-        "word": "MARINER",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 7
-      },
-      {
-        "word": "BREAKER",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "ATLANTIS",
+        "word": "CORSAIR",
         "found": false,
         "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "SURF",
-        "found": false,
-        "rowStart": 2,
         "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 2
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
+        "rowEnd": 7,
         "colEnd": 5
       },
       {
-        "word": "MARIN",
+        "word": "BALEEN",
         "found": false,
         "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 0,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "FLOAT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "SWIM",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 1,
         "colEnd": 1
       },
       {
-        "word": "WAVE",
+        "word": "DOCK",
         "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 4,
+        "rowStart": 3,
+        "colStart": 2,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "RUIN",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 7,
         "colEnd": 6
       }
     ]
   },
   {
-    "id": 129,
-    "title": "Level 129",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 129)",
+    "id": 127,
+    "title": "Level 127",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 127)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Neptune Trident",
@@ -4235,160 +10891,144 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 90,
     "grid": [
       [
+        " ",
+        " ",
+        "E",
+        "L",
+        "G",
+        "X",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
         "N",
-        "B",
-        " ",
-        "D",
         "Q",
+        "J",
+        "K",
         " ",
-        "B",
-        "K"
+        " "
       ],
       [
         "Q",
-        "M",
-        "S",
         "I",
-        "A",
-        "A",
+        "U",
         "S",
-        "T"
-      ],
-      [
-        "R",
-        "A",
-        "W",
         "U",
-        "Y",
-        "A",
-        "U",
-        "F"
-      ],
-      [
-        "Z",
-        "L",
-        "O",
-        "Q",
-        "M",
         "R",
-        "A",
-        "I"
+        "G",
+        "E"
       ],
       [
-        " ",
-        "C",
-        "L",
+        "S",
         "S",
         "T",
-        "E",
-        "Q",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "G",
-        "L",
-        "S",
-        "V",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "G",
+        "R",
         "A",
-        "I",
+        "H",
+        "C",
+        "O"
+      ],
+      [
+        "K",
+        "F",
+        "P",
+        "B",
+        "O",
+        "A",
+        "R",
+        "D"
+      ],
+      [
+        "Z",
+        "S",
+        "E",
+        "K",
+        "U",
+        "L",
+        "F",
+        "Y"
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "E",
+        "B",
+        "F",
         " ",
         " "
       ],
       [
         " ",
-        "Z",
-        "Y",
-        "W",
-        "J",
-        "D",
-        "M",
+        " ",
+        "K",
+        "I",
+        "R",
+        "H",
+        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "GLOW",
+        "word": "NEPTUNE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "FLUKES",
         "found": false,
         "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 2
-      },
-      {
-        "word": "TURTLE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "SQUID",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "DIVE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "CLAM",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 1,
+        "colStart": 6,
+        "rowEnd": 5,
         "colEnd": 1
       },
       {
-        "word": "SEA",
+        "word": "CHART",
         "found": false,
-        "rowStart": 5,
-        "colStart": 4,
+        "rowStart": 3,
+        "colStart": 6,
         "rowEnd": 3,
-        "colEnd": 6
+        "colEnd": 2
       },
       {
-        "word": "BAY",
+        "word": "SURGE",
         "found": false,
-        "rowStart": 0,
-        "colStart": 6,
+        "rowStart": 2,
+        "colStart": 3,
         "rowEnd": 2,
-        "colEnd": 4
+        "colEnd": 7
+      },
+      {
+        "word": "BOARD",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "REEFS",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
       }
     ]
   },
   {
-    "id": 130,
-    "title": "Level 130",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 130)",
+    "id": 128,
+    "title": "Level 128",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 128)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Jellyfish",
@@ -4396,100 +11036,132 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 95,
     "grid": [
       [
         " ",
+        " ",
         "T",
-        "U",
-        "R",
-        "T",
-        "L",
-        "E",
+        "C",
+        "J",
+        "O",
+        " ",
         " "
       ],
       [
-        "L",
-        "S",
+        " ",
+        "M",
+        "F",
+        "O",
+        "D",
+        "T",
+        "O",
+        " "
+      ],
+      [
+        "V",
         "E",
         "A",
-        "W",
-        "E",
-        "E",
-        "D"
-      ],
-      [
-        "L",
         "N",
-        "L",
-        "R",
-        "U",
-        "I",
-        "N",
-        "L"
-      ],
-      [
-        "U",
-        "I",
-        "R",
         "O",
+        "R",
+        "R",
+        "R"
+      ],
+      [
         "H",
+        "R",
+        "E",
         "C",
-        "N",
-        "A"
-      ],
-      [
-        "G",
+        "L",
         "R",
-        "R",
-        "A",
-        "N",
-        "O",
-        "S",
+        "D",
         "E"
       ],
       [
-        "A",
-        "A",
-        " ",
-        "Y",
+        "I",
+        "U",
         "G",
-        " ",
-        "N",
-        "D"
-      ],
-      [
+        "H",
+        "P",
         "E",
-        "M",
-        " ",
-        "R",
-        "M",
-        " ",
-        "B",
+        "Y",
         "I"
       ],
       [
-        "S",
-        "N",
-        " ",
-        "D",
+        "B",
+        "Z",
+        "L",
+        "O",
+        "H",
         "T",
+        "H",
+        "P"
+      ],
+      [
         " ",
-        "J",
-        "R"
+        "A",
+        "I",
+        "Q",
+        "I",
+        "T",
+        "H",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "B",
+        "U",
+        "N",
+        "O",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "ANCHOR",
+        "word": "DOLPHIN",
         "found": false,
-        "rowStart": 3,
-        "colStart": 7,
+        "rowStart": 1,
+        "colStart": 4,
+        "rowEnd": 7,
+        "colEnd": 4
+      },
+      {
+        "word": "CONCH",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "OTTER",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "BILGE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
         "rowEnd": 3,
         "colEnd": 2
       },
       {
-        "word": "MARIN",
+        "word": "HYDRO",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 1,
+        "colEnd": 6
+      },
+      {
+        "word": "AZURE",
         "found": false,
         "rowStart": 6,
         "colStart": 1,
@@ -4497,59 +11169,19 @@ export const OCEAN_LEVELS: LevelData[] = [
         "colEnd": 1
       },
       {
-        "word": "SEAGULL",
+        "word": "PIER",
         "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "SONAR",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "SEAWEED",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "TURTLE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "RUIN",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 7,
+        "rowStart": 5,
         "colStart": 7,
-        "rowEnd": 4,
+        "rowEnd": 2,
         "colEnd": 7
       }
     ]
   },
   {
-    "id": 131,
-    "title": "Level 131",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 131)",
+    "id": 129,
+    "title": "Level 129",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 129)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Nautilus Spiral",
@@ -4557,289 +11189,297 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 85,
+    "timeLimit": 90,
     "grid": [
       [
-        "N",
-        "W",
-        "X",
+        " ",
+        " ",
+        " ",
+        "T",
+        "Z",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
         "V",
-        "M",
-        "H",
-        "F",
-        "N"
-      ],
-      [
-        "H",
         "A",
-        "D",
-        "L",
-        "K",
-        "N",
-        "N",
-        "A"
+        "W",
+        " ",
+        " "
       ],
       [
-        "K",
+        " ",
+        "S",
         "E",
         "A",
         "B",
-        "K",
-        "R",
-        "O",
-        "H"
+        "E",
+        "D",
+        " "
       ],
       [
-        "J",
         "P",
-        "A",
-        "F",
-        " ",
-        "W",
+        "Y",
         "R",
-        "R"
-      ],
-      [
         "A",
-        "M",
-        "K",
+        "U",
         "T",
-        " ",
-        "O",
-        "T",
+        "S",
         "E"
       ],
       [
-        "O",
-        "G",
-        "Q",
-        "G",
-        "Y",
         "K",
-        "H",
-        "T"
-      ],
-      [
-        "P",
-        "R",
+        "C",
         "I",
-        "D",
-        "E",
-        "A",
         "N",
-        "A"
+        "A",
+        "E",
+        "C",
+        "O"
       ],
       [
-        "N",
-        "E",
-        "Z",
-        "X",
-        "N",
+        " ",
+        "Y",
+        "A",
         "R",
-        "B",
-        "W"
+        "P",
+        "S",
+        "L",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "S",
+        "A",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "S",
+        "A",
+        " ",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "PALM",
+        "word": "OCEANIC",
         "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 4
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 1
       },
       {
-        "word": "NORTH",
+        "word": "ESTUARY",
         "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 5,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 1
+      },
+      {
+        "word": "SEABED",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 2,
         "colEnd": 6
       },
       {
-        "word": "BAY",
+        "word": "SPRAY",
         "found": false,
-        "rowStart": 7,
-        "colStart": 6,
+        "rowStart": 5,
+        "colStart": 5,
         "rowEnd": 5,
-        "colEnd": 4
+        "colEnd": 1
       },
       {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "HEAT",
+        "word": "WAVE",
         "found": false,
         "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 4,
-        "colEnd": 3
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 2
       },
       {
-        "word": "WATER",
+        "word": "MAST",
         "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 7
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 2
       }
     ]
   },
   {
-    "id": 132,
-    "title": "Level 132",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 132)",
+    "id": 130,
+    "title": "Level 130",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 130)",
     "world": "island",
-    "themeIcon": "water_drop",
+    "themeIcon": "card_giftcard",
     "maskName": "Atlantis Citadel",
     "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 85,
+    "timeLimit": 95,
     "grid": [
       [
-        "S",
-        "B",
-        "K",
         "P",
-        "B",
-        "O",
         "A",
+        "N",
+        "C",
+        "H",
+        "O",
+        "R",
+        "Y"
+      ],
+      [
+        "L",
+        "S",
+        "P",
+        "A",
+        "N",
+        "S",
+        "Q",
         "H"
       ],
       [
-        "A",
-        "I",
-        "S",
-        "L",
-        "A",
-        "N",
-        "D",
-        "F"
-      ],
-      [
-        "T",
         "E",
-        "G",
+        "E",
+        "U",
         "N",
-        "O",
-        "P",
-        "S",
-        "L"
+        "W",
+        "B",
+        "Q",
+        "B"
       ],
       [
-        "G",
+        "V",
+        "O",
         "B",
         "N",
-        "I",
-        "R",
-        "A",
-        "M",
-        "O"
+        "O",
+        "E",
+        "D",
+        "Z"
       ],
       [
-        "I",
-        "N",
-        "N",
-        "P",
-        "Y",
-        "Q",
-        "W",
+        "A",
+        "H",
+        "R",
+        "O",
+        "L",
+        "A",
+        "Z",
         "A"
       ],
       [
-        "Z",
-        "Q",
-        "Z",
-        "A",
-        "M",
-        "E",
-        "H",
-        "T"
-      ],
-      [
-        "D",
-        "G",
-        "W",
-        "V",
-        "S",
-        "U",
-        "D",
-        "L"
-      ],
-      [
-        "E",
-        "L",
-        "T",
         "R",
-        "U",
+        "P",
+        "I",
+        "N",
+        "C",
+        "K",
+        "P",
+        "M"
+      ],
+      [
+        "A",
+        "P",
+        "N",
         "T",
-        "J",
-        "O"
+        "U",
+        "O",
+        "P",
+        "S"
+      ],
+      [
+        "C",
+        "H",
+        "E",
+        "B",
+        "Q",
+        "H",
+        "Z",
+        "B"
       ]
     ],
     "targetWords": [
       {
-        "word": "SPONGE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "ISLAND",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "TURTLE",
+        "word": "CARAVEL",
         "found": false,
         "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
+        "colStart": 0,
+        "rowEnd": 1,
         "colEnd": 0
       },
       {
-        "word": "JUMP",
+        "word": "CANNON",
         "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 4,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 5,
         "colEnd": 3
       },
       {
-        "word": "MARIN",
+        "word": "ANCHOR",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 6
+      },
+      {
+        "word": "CLOWN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 4
+      },
+      {
+        "word": "SPOUT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 7,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "BRINE",
         "found": false,
         "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 3,
+        "colStart": 2,
+        "rowEnd": 7,
         "colEnd": 2
       },
       {
-        "word": "FLOAT",
+        "word": "BEAK",
         "found": false,
-        "rowStart": 1,
-        "colStart": 7,
+        "rowStart": 2,
+        "colStart": 5,
         "rowEnd": 5,
-        "colEnd": 7
+        "colEnd": 5
       }
     ]
   },
   {
-    "id": 133,
-    "title": "Level 133",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 133)",
+    "id": 131,
+    "title": "Level 131",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 131)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Clam Shell",
@@ -4850,149 +11490,149 @@ export const OCEAN_LEVELS: LevelData[] = [
     "timeLimit": 95,
     "grid": [
       [
-        "K",
+        " ",
+        " ",
         "E",
-        "U",
-        "L",
-        "B",
-        "C",
-        "K",
-        "U"
-      ],
-      [
-        "A",
-        "P",
-        "D",
-        "H",
-        "W",
-        "O",
-        "L",
-        "G"
-      ],
-      [
+        "V",
         "I",
-        "S",
-        "L",
-        "A",
-        "N",
         "D",
-        "F",
-        "T"
-      ],
-      [
         " ",
-        "O",
-        "A",
-        "R",
-        "M",
-        "S",
-        "K",
         " "
       ],
       [
         " ",
-        "Z",
-        "R",
-        "M",
+        "J",
+        "D",
         "L",
-        "C",
-        "F",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
         "O",
-        "A",
-        "U",
-        " ",
+        "G",
+        "Q",
         " "
       ],
       [
-        " ",
-        " ",
-        "M",
-        "N",
-        "P",
-        "B",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
+        "G",
         "E",
-        "Y",
-        "F",
+        "S",
+        "I",
+        "U",
+        "R",
+        "C",
+        "L"
+      ],
+      [
+        "C",
+        "O",
+        "M",
+        "P",
         "A",
+        "S",
+        "S",
+        "C"
+      ],
+      [
+        "L",
+        "N",
+        "A",
+        "C",
+        "I",
+        "L",
+        "E",
+        "P"
+      ],
+      [
+        "B",
+        "R",
+        "E",
+        "A",
+        "K",
+        "E",
+        "R",
+        "Z"
+      ],
+      [
+        " ",
+        "L",
+        "E",
+        "A",
+        "G",
+        "U",
+        "E",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "D",
+        "D",
+        "N",
+        "X",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "GLOW",
+        "word": "COMPASS",
         "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "ISLAND",
-        "found": false,
-        "rowStart": 2,
+        "rowStart": 3,
         "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 5
+        "rowEnd": 3,
+        "colEnd": 6
       },
       {
-        "word": "BLUE",
+        "word": "BREAKER",
         "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 0,
+        "rowStart": 5,
+        "colStart": 0,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "PELICAN",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
         "colEnd": 1
       },
       {
-        "word": "HARMONY",
+        "word": "CRUISE",
         "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 1
       },
       {
-        "word": "EMERALD",
+        "word": "LEAGUE",
         "found": false,
-        "rowStart": 7,
-        "colStart": 2,
+        "rowStart": 6,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 6
+      },
+      {
+        "word": "GOLD",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
         "rowEnd": 1,
         "colEnd": 2
       },
       {
-        "word": "SCUBA",
+        "word": "DIVE",
         "found": false,
-        "rowStart": 3,
+        "rowStart": 0,
         "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 4
+        "rowEnd": 0,
+        "colEnd": 2
       }
     ]
   },
   {
-    "id": 134,
-    "title": "Level 134",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 134)",
+    "id": 132,
+    "title": "Level 132",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 132)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Anchor",
@@ -5003,149 +11643,149 @@ export const OCEAN_LEVELS: LevelData[] = [
     "timeLimit": 95,
     "grid": [
       [
-        "S",
-        "G",
-        "I",
-        "W",
-        "A",
+        " ",
+        " ",
+        "J",
+        "E",
         "T",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "L",
+        "T",
+        "J",
+        "O",
+        " ",
+        " "
+      ],
+      [
+        "G",
+        "N",
+        "I",
+        "K",
+        "A",
+        "G",
+        "U",
+        "N"
+      ],
+      [
+        "F",
+        "B",
+        "A",
+        "R",
+        "R",
+        "I",
         "E",
         "R"
       ],
       [
-        "E",
-        "F",
-        "K",
-        "P",
+        "D",
         "I",
-        "H",
+        "U",
+        "Q",
         "S",
+        "D",
+        "L",
         "J"
       ],
       [
-        " ",
-        "K",
-        "J",
-        "R",
-        "E",
-        "Z",
-        "H",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "D",
-        "A",
-        "A",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        "J",
-        " ",
-        "W",
-        "U",
+        "B",
         "V",
-        "H",
-        " ",
-        "P"
-      ],
-      [
         "N",
-        "V",
-        "O",
-        "R",
-        "Y",
-        "A",
-        "S",
+        "T",
+        "F",
+        "N",
+        "T",
         "T"
       ],
       [
-        "W",
-        "U",
-        "L",
-        "A",
-        "W",
-        "A",
+        " ",
+        " ",
         "V",
-        "E"
+        "S",
+        "E",
+        "I",
+        " ",
+        " "
       ],
       [
         " ",
+        " ",
+        "F",
+        "O",
         "A",
-        "G",
-        "N",
-        "I",
-        "K",
-        "E",
+        "M",
+        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "GLOW",
+        "word": "BARRIER",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "INDIGO",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "SQUID",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "FINS",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 0,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "FOAM",
         "found": false,
         "rowStart": 7,
         "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 2
+        "rowEnd": 7,
+        "colEnd": 5
       },
       {
-        "word": "WAVE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "SHARK",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "WATER",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "SHIP",
+        "word": "TAIL",
         "found": false,
         "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 3
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 6
       },
       {
         "word": "KING",
         "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 2
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 2,
+        "colEnd": 0
       }
     ]
   },
   {
-    "id": 135,
-    "title": "Level 135",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 135)",
+    "id": 133,
+    "title": "Level 133",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 133)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Water Drop",
@@ -5153,124 +11793,245 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 90,
     "grid": [
       [
         " ",
         " ",
+        " ",
         "Y",
-        "R",
-        "D",
-        "R",
+        "P",
+        " ",
         " ",
         " "
       ],
       [
         " ",
-        "Q",
+        " ",
+        "S",
+        "O",
+        "N",
+        "G",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "P",
+        "A",
+        "B",
         "U",
-        "B",
-        "O",
-        "S",
-        "R",
-        " "
-      ],
-      [
-        "S",
-        "I",
-        "Z",
-        "H",
-        "E",
-        "L",
-        "E",
-        "X"
-      ],
-      [
-        "N",
-        "W",
         "C",
-        "P",
-        "L",
         "S",
-        "T",
-        "A"
+        " "
       ],
       [
-        "W",
         "N",
-        "J",
-        "E",
+        "O",
+        "O",
         "P",
-        "H",
+        "R",
         "A",
-        "E"
+        "H",
+        "Y"
       ],
       [
+        "T",
+        "L",
         "A",
-        "A",
-        "H",
         "B",
-        "M",
-        "I",
-        "W",
-        "O"
+        "O",
+        "C",
+        "H",
+        "R"
       ],
       [
         " ",
-        "S",
-        "V",
-        "B",
+        "N",
         "E",
-        "P",
-        "T",
+        "K",
+        "N",
+        "U",
+        "S",
         " "
       ],
       [
         " ",
         " ",
-        "O",
+        "L",
+        "A",
         "E",
-        "T",
-        "R",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "D",
+        "X",
+        " ",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "TEMPLE",
+        "word": "HARPOON",
         "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 4
+        "rowStart": 3,
+        "colStart": 6,
+        "rowEnd": 3,
+        "colEnd": 0
       },
       {
-        "word": "WAVE",
+        "word": "COBALT",
         "found": false,
         "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 3
+        "colStart": 5,
+        "rowEnd": 4,
+        "colEnd": 0
       },
       {
-        "word": "SEA",
+        "word": "SUNKEN",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 1
+      },
+      {
+        "word": "SCUBA",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 2,
+        "colEnd": 2
+      },
+      {
+        "word": "SEAL",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "SONG",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 134,
+    "title": "Level 134",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 134)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Ocean Fish",
+    "maskIcon": "🐟",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 95,
+    "grid": [
+      [
+        "J",
+        "Q",
+        "Y",
+        "C",
+        "C",
+        "S",
+        "P",
+        "E"
+      ],
+      [
+        "E",
+        "U",
+        "P",
+        "X",
+        "E",
+        "C",
+        "D",
+        "N"
+      ],
+      [
+        "T",
+        "A",
+        "V",
+        "L",
+        "E",
+        "A",
+        "D",
+        "A"
+      ],
+      [
+        "T",
+        "Y",
+        "A",
+        "R",
+        "R",
+        "P",
+        "I",
+        "G"
+      ],
+      [
+        "Y",
+        "C",
+        "O",
+        "A",
+        "P",
+        "S",
+        "V",
+        "H"
+      ],
+      [
+        "S",
+        "H",
+        "F",
+        "A",
+        "B",
+        "T",
+        "I",
+        "F"
+      ],
+      [
+        "S",
+        "T",
+        "N",
+        "I",
+        "I",
+        "A",
+        "N",
+        "Y"
+      ],
+      [
+        "Z",
+        "U",
+        "O",
+        "W",
+        "G",
+        "N",
+        "G",
+        "G"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "CAPSTAN",
         "found": false,
         "rowStart": 1,
         "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "SHELL",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 2,
+        "rowEnd": 7,
         "colEnd": 5
       },
       {
-        "word": "ANCHOR",
+        "word": "SCALES",
         "found": false,
         "rowStart": 5,
         "colStart": 0,
@@ -5278,27 +12039,196 @@ export const OCEAN_LEVELS: LevelData[] = [
         "colEnd": 5
       },
       {
-        "word": "WATER",
+        "word": "DIVING",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 6,
+        "rowEnd": 7,
+        "colEnd": 6
+      },
+      {
+        "word": "JETTY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 0,
+        "rowEnd": 4,
+        "colEnd": 0
+      },
+      {
+        "word": "SHORE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 0,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "QUAY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 1,
+        "rowEnd": 3,
+        "colEnd": 1
+      },
+      {
+        "word": "RAFT",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 4,
+        "rowEnd": 6,
+        "colEnd": 1
+      }
+    ]
+  },
+  {
+    "id": 135,
+    "title": "Level 135",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 135)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Neptune Trident",
+    "maskIcon": "🔱",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 95,
+    "grid": [
+      [
+        " ",
+        " ",
+        "I",
+        "C",
+        "L",
+        "J",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "X",
+        "D",
+        "O",
+        "M",
+        " ",
+        " "
+      ],
+      [
+        "F",
+        "K",
+        "V",
+        "O",
+        "Y",
+        "A",
+        "G",
+        "E"
+      ],
+      [
+        "F",
+        "E",
+        "N",
+        "T",
+        "V",
+        "Y",
+        "S",
+        "N"
+      ],
+      [
+        "P",
+        "R",
+        "E",
+        "O",
+        "F",
+        "T",
+        "L",
+        "T"
+      ],
+      [
+        "L",
+        "I",
+        "A",
+        "R",
+        "T",
+        "L",
+        "N",
+        "B"
+      ],
+      [
+        " ",
+        " ",
+        "H",
+        "H",
+        "J",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "S",
+        "W",
+        "S",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VOYAGE",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "WHARF",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "COAST",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "SALTY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "KNOT",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 4
+      },
+      {
+        "word": "REEF",
         "found": false,
         "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
+        "colStart": 3,
+        "rowEnd": 2,
+        "colEnd": 0
       },
       {
         "word": "SHIP",
         "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "RUIN",
-        "found": false,
-        "rowStart": 0,
+        "rowStart": 7,
         "colStart": 3,
-        "rowEnd": 3,
+        "rowEnd": 4,
         "colEnd": 0
       }
     ]
@@ -5306,498 +12236,160 @@ export const OCEAN_LEVELS: LevelData[] = [
   {
     "id": 136,
     "title": "Level 136",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 136)",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 136)",
     "world": "island",
     "themeIcon": "water_drop",
-    "maskName": "Ocean Fish",
-    "maskIcon": "🐟",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 95,
     "grid": [
       [
         " ",
-        "L",
-        "A",
-        "R",
-        "O",
-        "C",
+        " ",
+        "E",
+        "K",
+        "U",
+        "I",
         " ",
         " "
       ],
       [
-        "S",
-        "I",
-        "T",
-        "N",
-        "A",
-        "L",
-        "T",
-        "A"
-      ],
-      [
-        "N",
-        "Y",
-        "T",
-        "S",
+        " ",
         "E",
-        "J",
+        "Q",
+        "B",
+        "N",
         "A",
-        "M"
+        "C",
+        " "
       ],
       [
-        "Z",
-        "A",
-        "S",
-        "H",
-        "O",
         "R",
+        "S",
+        "U",
         "E",
-        "X"
-      ],
-      [
-        "N",
-        "T",
-        "E",
+        "S",
+        "F",
         "A",
-        "R",
-        "D",
-        "Y",
         "H"
       ],
       [
-        "B",
+        "P",
+        "H",
         "A",
-        "Y",
-        "C",
+        "L",
+        "M",
+        "J",
+        "N",
+        "U"
+      ],
+      [
         "R",
+        "O",
+        "T",
+        "T",
+        "L",
+        "O",
+        "O",
+        "L"
+      ],
+      [
+        "K",
         "A",
-        "B",
-        "A"
+        "O",
+        "R",
+        "E",
+        "R",
+        "E",
+        "L"
       ],
       [
         " ",
-        "Z",
-        "E",
+        "L",
         "R",
-        "O",
-        "C",
-        "V",
+        "U",
+        "H",
+        "D",
+        "H",
         " "
       ],
       [
-        "M",
-        "G",
         " ",
         " ",
+        "L",
+        "T",
+        "F",
+        "V",
         " ",
-        " ",
-        "E",
-        "X"
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "ATLANTIS",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "CRAB",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "MAJESTY",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "CORAL",
+        "word": "EQUATOR",
         "found": false,
         "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "SHORE",
-        "found": false,
-        "rowStart": 3,
         "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 6
+        "rowEnd": 6,
+        "colEnd": 2
       },
       {
-        "word": "HYDRA",
+        "word": "TURTLE",
         "found": false,
-        "rowStart": 4,
-        "colStart": 7,
-        "rowEnd": 4,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 2,
         "colEnd": 3
       },
       {
-        "word": "BAY",
+        "word": "CANOE",
         "found": false,
-        "rowStart": 5,
-        "colStart": 0,
+        "rowStart": 1,
+        "colStart": 6,
         "rowEnd": 5,
-        "colEnd": 2
+        "colEnd": 6
+      },
+      {
+        "word": "FJORD",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 5
+      },
+      {
+        "word": "SHOAL",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 1
+      },
+      {
+        "word": "HELM",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 3,
+        "colEnd": 4
+      },
+      {
+        "word": "HULL",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
       }
     ]
   },
   {
     "id": 137,
     "title": "Level 137",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 137)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Neptune Trident",
-    "maskIcon": "🔱",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "N",
-        "K",
-        " ",
-        "P",
-        "L",
-        " ",
-        "P",
-        "B"
-      ],
-      [
-        "F",
-        "L",
-        "O",
-        "A",
-        "T",
-        "I",
-        "I",
-        "L"
-      ],
-      [
-        "A",
-        "L",
-        "L",
-        "E",
-        "H",
-        "S",
-        "H",
-        "U"
-      ],
-      [
-        "P",
-        "S",
-        "K",
-        "G",
-        "I",
-        "L",
-        "S",
-        "E"
-      ],
-      [
-        " ",
-        "A",
-        "S",
-        "N",
-        "S",
-        "A",
-        "P",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "O",
-        "L",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "N",
-        "P",
-        "E",
-        "D",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "Q",
-        "G",
-        "S",
-        "T",
-        "Y",
-        "K",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "ISLET",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "SHIP",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "SPONGE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "ISLAND",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "SHELL",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "BLUE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 138,
-    "title": "Level 138",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 138)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "F",
-        "A",
-        "Q",
-        "O",
-        "C",
-        "E",
-        "M",
-        "K"
-      ],
-      [
-        "V",
-        "V",
-        "S",
-        "I",
-        "V",
-        "A",
-        "R",
-        "H"
-      ],
-      [
-        "F",
-        "S",
-        "W",
-        "O",
-        "O",
-        "C",
-        "C",
-        "C"
-      ],
-      [
-        "E",
-        "X",
-        "C",
-        "F",
-        "W",
-        "N",
-        "E",
-        "A"
-      ],
-      [
-        "E",
-        "W",
-        "W",
-        "Z",
-        "E",
-        "O",
-        "V",
-        "E"
-      ],
-      [
-        "R",
-        "L",
-        "A",
-        "R",
-        "O",
-        "C",
-        "L",
-        "B"
-      ],
-      [
-        "U",
-        "G",
-        "T",
-        "E",
-        "D",
-        "I",
-        "R",
-        "G"
-      ],
-      [
-        "N",
-        "A",
-        "E",
-        "C",
-        "O",
-        "I",
-        "T",
-        "T"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "TRENCH",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "GLOW",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 4
-      },
-      {
-        "word": "FOAM",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "BEACH",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "CORAL",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 139,
-    "title": "Level 139",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 139)",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 137)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Nautilus Spiral",
@@ -5805,627 +12397,603 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 95,
     "grid": [
       [
-        "N",
-        "A",
+        " ",
+        " ",
+        " ",
         "U",
-        "T",
-        "I",
         "C",
-        "A",
-        "L"
+        " ",
+        " ",
+        " "
       ],
       [
-        "B",
+        " ",
+        " ",
         "K",
-        "H",
-        "E",
-        "R",
-        "E",
-        "A",
-        "B"
-      ],
-      [
-        "E",
-        "S",
-        "I",
-        "B",
-        "L",
-        "P",
-        "L",
-        "E"
-      ],
-      [
-        "V",
-        "A",
-        "W",
-        "P",
-        " ",
-        "E",
-        "G",
-        "A"
-      ],
-      [
-        "A",
-        "M",
-        "M",
-        "E",
-        " ",
+        "J",
+        "U",
         "C",
-        "A",
-        "C"
+        " ",
+        " "
       ],
       [
-        "C",
-        "E",
-        "W",
-        "O",
-        "L",
-        "G",
-        "E",
-        "H"
-      ],
-      [
-        "T",
-        "X",
-        "O",
+        " ",
         "Y",
-        "S",
+        "A",
+        "N",
         "T",
-        "E",
-        "R"
+        "H",
+        "K",
+        " "
       ],
       [
-        "G",
-        "B",
-        "A",
-        "D",
         "W",
+        "D",
+        "Y",
+        "O",
+        "L",
+        "E",
+        "E",
+        "K"
+      ],
+      [
+        "C",
+        "D",
         "A",
+        "C",
+        "A",
+        "S",
+        "W",
+        "Y"
+      ],
+      [
+        " ",
+        "E",
+        "K",
+        "A",
+        "S",
+        "T",
         "V",
-        "E"
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "V",
+        "E",
+        "S",
+        "A",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "B",
+        "N",
+        " ",
+        " ",
+        " "
       ]
     ],
     "targetWords": [
       {
-        "word": "WAVE",
+        "word": "CUTLASS",
         "found": false,
-        "rowStart": 7,
+        "rowStart": 0,
         "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 7
+        "rowEnd": 6,
+        "colEnd": 4
       },
       {
-        "word": "TEMPLE",
+        "word": "BEACON",
         "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 1,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 2,
+        "colEnd": 3
+      },
+      {
+        "word": "KAYAK",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "CHEST",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 5,
         "colEnd": 5
       },
       {
-        "word": "NAUTICAL",
+        "word": "KEEL",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 4
+      },
+      {
+        "word": "EDDY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 1
+      },
+      {
+        "word": "NAVY",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "title": "Level 138",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 138)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 95,
+    "grid": [
+      [
+        "M",
+        "M",
+        "Q",
+        "G",
+        "D",
+        "G",
+        "N",
+        "R"
+      ],
+      [
+        "G",
+        "J",
+        "A",
+        "N",
+        "M",
+        "O",
+        "B",
+        "A"
+      ],
+      [
+        "M",
+        "P",
+        "U",
+        "R",
+        "E",
+        "J",
+        "E",
+        "D"
+      ],
+      [
+        "Q",
+        "O",
+        "W",
+        "L",
+        "I",
+        "G",
+        "E",
+        "A"
+      ],
+      [
+        "S",
+        "D",
+        "L",
+        "L",
+        "R",
+        "N",
+        "M",
+        "R"
+      ],
+      [
+        "I",
+        "A",
+        "G",
+        "I",
+        "L",
+        "L",
+        "E",
+        "K"
+      ],
+      [
+        "G",
+        "V",
+        "C",
+        "Y",
+        "A",
+        "N",
+        "V",
+        "R"
+      ],
+      [
+        "P",
+        "M",
+        "I",
+        "R",
+        "H",
+        "S",
+        "Z",
+        "V"
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "MARINER",
         "found": false,
         "rowStart": 0,
+        "colStart": 1,
+        "rowEnd": 6,
+        "colEnd": 7
+      },
+      {
+        "word": "GALLEON",
+        "found": false,
+        "rowStart": 6,
         "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 6
+      },
+      {
+        "word": "SHRIMP",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 7,
+        "colEnd": 0
+      },
+      {
+        "word": "SOUND",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "RADAR",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
         "rowEnd": 0,
         "colEnd": 7
       },
       {
-        "word": "OYSTER",
+        "word": "GILL",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 5
+      },
+      {
+        "word": "CYAN",
         "found": false,
         "rowStart": 6,
         "colStart": 2,
         "rowEnd": 6,
-        "colEnd": 7
+        "colEnd": 5
+      }
+    ]
+  },
+  {
+    "id": 139,
+    "title": "Level 139",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 139)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Clam Shell",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 95,
+    "grid": [
+      [
+        " ",
+        " ",
+        "S",
+        "E",
+        "B",
+        "V",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "P",
+        "M",
+        "A",
+        "A",
+        "T",
+        "L",
+        " "
+      ],
+      [
+        "K",
+        "V",
+        "R",
+        "L",
+        "E",
+        "Z",
+        "I",
+        "H"
+      ],
+      [
+        "D",
+        "C",
+        "L",
+        "G",
+        "L",
+        "P",
+        "M",
+        "F"
+      ],
+      [
+        "G",
+        "E",
+        "P",
+        "A",
+        "A",
+        "O",
+        "P",
+        "M"
+      ],
+      [
+        "Y",
+        "Q",
+        "E",
+        "E",
+        "H",
+        "O",
+        "E",
+        "W"
+      ],
+      [
+        " ",
+        "T",
+        "A",
+        "C",
+        "W",
+        "L",
+        "T",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "K",
+        "R",
+        "L",
+        "S",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "VALLEY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 5,
+        "rowEnd": 5,
+        "colEnd": 0
+      },
+      {
+        "word": "LIMPET",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 6
       },
       {
         "word": "ALGAE",
         "found": false,
         "rowStart": 1,
-        "colStart": 6,
+        "colStart": 3,
         "rowEnd": 5,
-        "colEnd": 6
+        "colEnd": 3
       },
       {
-        "word": "MASK",
+        "word": "WHALE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 2,
+        "colEnd": 4
+      },
+      {
+        "word": "SLOOP",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 3,
+        "colEnd": 5
+      },
+      {
+        "word": "PEAK",
         "found": false,
         "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "BEACH",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 7
-      },
-      {
-        "word": "GLOW",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 5,
+        "colStart": 2,
+        "rowEnd": 7,
         "colEnd": 2
+      },
+      {
+        "word": "CRAB",
+        "found": false,
+        "rowStart": 3,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 4
       }
     ]
   },
   {
     "id": 140,
     "title": "Level 140",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 140)",
+    "subtitle": "BUBBLE OCEAN - HARDEST (LEVEL 140)",
     "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
+    "themeIcon": "card_giftcard",
+    "maskName": "Anchor",
+    "maskIcon": "⚓",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 90,
     "grid": [
       [
-        "G",
-        "P",
+        " ",
+        " ",
+        "L",
+        "L",
         "F",
-        "L",
         "O",
-        "A",
-        "T",
-        "B"
-      ],
-      [
-        "S",
-        "E",
-        "N",
-        "O",
-        "M",
-        "E",
-        "N",
-        "A"
-      ],
-      [
-        "B",
-        "V",
-        "N",
-        "O",
-        "R",
-        "T",
-        "H",
-        "C"
+        " ",
+        " "
       ],
       [
         " ",
+        " ",
         "M",
-        "A",
-        "S",
+        "O",
+        "R",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        "D",
         "K",
-        "P",
-        "R",
-        " "
-      ],
-      [
-        " ",
-        "M",
-        "E",
-        "S",
-        "L",
-        "A",
-        "R",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "V",
         "U",
         "B",
+        "I",
+        "G",
+        "B",
+        "H"
+      ],
+      [
+        "A",
+        "C",
+        "T",
+        "S",
+        "G",
+        "I",
+        "V",
+        "S"
+      ],
+      [
+        "I",
         "E",
-        " ",
-        " "
+        "I",
+        "T",
+        "A",
+        "A",
+        "C",
+        "I"
+      ],
+      [
+        "E",
+        "D",
+        "N",
+        "E",
+        "T",
+        "N",
+        "M",
+        "F"
       ],
       [
         " ",
         " ",
-        "A",
+        "Y",
         "R",
         "E",
-        "S",
+        "T",
         " ",
         " "
       ],
       [
         " ",
         " ",
-        "C",
-        "F",
         "N",
-        "V",
+        "S",
+        "J",
+        "B",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "NORTH",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "FLOAT",
+        "word": "FRIGATE",
         "found": false,
         "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "ANEMONE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "SURF",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
+        "colStart": 4,
+        "rowEnd": 6,
         "colEnd": 4
       },
       {
-        "word": "CAVE",
+        "word": "LOBSTER",
         "found": false,
-        "rowStart": 7,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "MUTINY",
+        "found": false,
+        "rowStart": 1,
         "colStart": 2,
-        "rowEnd": 4,
+        "rowEnd": 6,
         "colEnd": 2
       },
       {
-        "word": "SEA",
+        "word": "GIANT",
         "found": false,
-        "rowStart": 6,
+        "rowStart": 2,
         "colStart": 5,
-        "rowEnd": 4,
+        "rowEnd": 6,
         "colEnd": 5
       },
       {
-        "word": "CRAB",
+        "word": "FISH",
         "found": false,
-        "rowStart": 2,
+        "rowStart": 5,
         "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 4
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "DECK",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 1
       }
     ]
   },
   {
     "id": 141,
     "title": "Level 141",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 141)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        "N",
-        "Q",
-        "K",
-        "I",
-        "V",
-        "M",
-        "O",
-        "L"
-      ],
-      [
-        "Y",
-        "P",
-        "J",
-        "S",
-        "R",
-        "E",
-        "C",
-        "X"
-      ],
-      [
-        "Q",
-        "E",
-        "B",
-        "L",
-        "E",
-        "R",
-        "E",
-        "D"
-      ],
-      [
-        " ",
-        "E",
-        "T",
-        "E",
-        "N",
-        "M",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        "D",
-        "A",
-        "T",
-        "I",
-        "A",
-        "N",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "W",
-        "R",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "X",
-        "A",
-        "D",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "F",
-        "F",
-        "M",
-        "R",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ISLET",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 3
-      },
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "MARINER",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "MERMAID",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 142,
-    "title": "Level 142",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 142)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Anchor",
-    "maskIcon": "⚓",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        "T",
-        "U",
-        "R",
-        "T",
-        "L",
-        "E",
-        "D",
-        "R"
-      ],
-      [
-        "J",
-        "O",
-        "V",
-        "X",
-        "Q",
-        "H",
-        "T",
-        "S"
-      ],
-      [
-        " ",
-        "X",
-        "B",
-        "Z",
-        "T",
-        "C",
-        "F",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "V",
-        "I",
-        "S",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        "S",
-        " ",
-        "T",
-        "O",
-        "E",
-        "E",
-        " ",
-        "U"
-      ],
-      [
-        "G",
-        "A",
-        "N",
-        "V",
-        "U",
-        "R",
-        "C",
-        "S"
-      ],
-      [
-        "N",
-        "G",
-        "A",
-        "P",
-        "Z",
-        "T",
-        "J",
-        "J"
-      ],
-      [
-        " ",
-        "C",
-        "C",
-        "F",
-        "R",
-        "U",
-        "S",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 4
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 1
-      },
-      {
-        "word": "TRENCH",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "TURTLE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "TITAN",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 0
-      },
-      {
-        "word": "SURF",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 143,
-    "title": "Level 143",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 143)",
+    "subtitle": "BUBBLE OCEAN - HARDEST (ABYSS) (LEVEL 141)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Water Drop",
@@ -6438,147 +13006,147 @@ export const OCEAN_LEVELS: LevelData[] = [
       [
         " ",
         " ",
-        "E",
-        "V",
-        "Q",
-        "F",
         " ",
-        " "
-      ],
-      [
-        " ",
-        "J",
-        "L",
         "S",
-        "E",
-        "A",
-        "Z",
-        " "
-      ],
-      [
-        "L",
-        "O",
-        "P",
-        "C",
-        "R",
-        "E",
-        "S",
-        "T"
-      ],
-      [
-        "Y",
-        "J",
         "M",
-        "I",
-        "P",
-        "P",
-        "L",
-        "C"
+        " ",
+        " ",
+        " "
       ],
       [
-        "O",
+        " ",
+        " ",
+        "A",
+        "E",
+        "X",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "I",
+        "D",
+        "G",
         "U",
-        "E",
-        "C",
-        "H",
-        "I",
-        "J",
-        "U"
+        "L",
+        "F",
+        " "
       ],
       [
+        "L",
         "I",
-        "M",
-        "T",
-        "I",
-        "A",
         "S",
-        "Q",
-        "P"
+        "U",
+        "R",
+        "L",
+        "A",
+        "W"
+      ],
+      [
+        "R",
+        "E",
+        "D",
+        "D",
+        "U",
+        "R",
+        "M",
+        "M"
       ],
       [
         " ",
-        "P",
-        "A",
-        "T",
         "R",
-        "N",
-        "K",
+        "O",
+        "Y",
+        "A",
+        "L",
+        "I",
         " "
       ],
       [
         " ",
         " ",
-        "V",
-        "Y",
-        "T",
-        "J",
+        "E",
+        "L",
+        "O",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "G",
+        "S",
+        " ",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "TEMPLE",
+        "word": "WALRUS",
         "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 0,
+        "rowStart": 3,
+        "colStart": 7,
+        "rowEnd": 3,
         "colEnd": 2
       },
       {
-        "word": "SHIP",
+        "word": "RUDDER",
         "found": false,
-        "rowStart": 5,
+        "rowStart": 4,
         "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 2
+        "rowEnd": 4,
+        "colEnd": 0
       },
       {
-        "word": "SEA",
+        "word": "ROYAL",
         "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 1,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
         "colEnd": 5
       },
       {
-        "word": "CITY",
+        "word": "RIDE",
         "found": false,
         "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 7,
+        "colStart": 0,
+        "rowEnd": 1,
         "colEnd": 3
       },
       {
-        "word": "JUMP",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 1
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "CREST",
+        "word": "GULF",
         "found": false,
         "rowStart": 2,
         "colStart": 3,
         "rowEnd": 2,
-        "colEnd": 7
+        "colEnd": 6
+      },
+      {
+        "word": "SAIL",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "HOLE",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 2
       }
     ]
   },
   {
-    "id": 144,
-    "title": "Level 144",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 144)",
+    "id": 142,
+    "title": "Level 142",
+    "subtitle": "BUBBLE OCEAN - HARDEST (ABYSS) (LEVEL 142)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Ocean Fish",
@@ -6589,149 +13157,149 @@ export const OCEAN_LEVELS: LevelData[] = [
     "timeLimit": 95,
     "grid": [
       [
-        " ",
-        "T",
-        "Q",
-        "R",
-        "L",
-        "D",
-        " ",
-        " "
-      ],
-      [
-        "D",
-        "Y",
-        "F",
-        "X",
-        "E",
         "V",
-        "A",
-        "W"
-      ],
-      [
-        "E",
-        "Z",
-        "A",
-        "P",
-        "L",
-        "E",
-        "K",
-        "Y"
-      ],
-      [
-        "D",
         "N",
-        "E",
-        "B",
-        "X",
-        "V",
+        "K",
         "H",
-        "Y"
+        "T",
+        "I",
+        "N",
+        "P"
       ],
       [
-        "I",
-        "A",
-        "Q",
-        "V",
+        "P",
         "O",
-        "R",
+        "D",
         "T",
+        "R",
+        "Q",
+        "J",
         "V"
       ],
       [
-        "T",
-        "G",
-        "E",
-        "W",
-        "O",
-        "I",
-        "D",
-        "H"
-      ],
-      [
-        " ",
-        "J",
-        "J",
-        "S",
-        "C",
-        "C",
-        "S",
-        " "
-      ],
-      [
         "L",
+        "O",
+        "Y",
+        "O",
+        "E",
+        "L",
+        "O",
+        "E"
+      ],
+      [
+        "S",
+        "G",
+        "O",
         "R",
-        " ",
-        " ",
-        " ",
-        " ",
-        "P",
+        "N",
+        "E",
+        "E",
+        "S"
+      ],
+      [
+        "E",
+        "A",
+        "U",
+        "F",
+        "C",
+        "H",
+        "C",
+        "S"
+      ],
+      [
+        "Y",
+        "L",
+        "B",
+        "J",
+        "H",
+        "S",
+        "G",
+        "E"
+      ],
+      [
+        "B",
+        "E",
+        "N",
+        "T",
+        "H",
+        "I",
+        "C",
+        "L"
+      ],
+      [
+        "O",
+        "O",
+        "S",
+        "B",
+        "E",
+        "A",
+        "C",
         "H"
       ]
     ],
     "targetWords": [
       {
-        "word": "SEA",
+        "word": "BENTHIC",
         "found": false,
         "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 5,
         "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
+        "rowEnd": 6,
+        "colEnd": 6
       },
       {
-        "word": "WAVE",
+        "word": "TRENCH",
         "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 1,
+        "rowStart": 0,
+        "colStart": 4,
+        "rowEnd": 5,
         "colEnd": 4
       },
       {
-        "word": "CITY",
+        "word": "LAGOON",
         "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 3,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 0,
+        "colEnd": 1
+      },
+      {
+        "word": "VESSEL",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 7,
+        "rowEnd": 6,
         "colEnd": 7
+      },
+      {
+        "word": "BEACH",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 7
+      },
+      {
+        "word": "FROTH",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "BUOY",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 2
       }
     ]
   },
   {
-    "id": 145,
-    "title": "Level 145",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 145)",
+    "id": 143,
+    "title": "Level 143",
+    "subtitle": "BUBBLE OCEAN - HARDEST (ABYSS) (LEVEL 143)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Neptune Trident",
@@ -6739,120 +13307,402 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 90,
     "grid": [
       [
-        "G",
-        "D",
         " ",
-        "B",
-        "U",
         " ",
-        "V",
-        "S"
-      ],
-      [
-        "N",
-        "H",
-        "Y",
-        "D",
         "R",
+        "X",
         "A",
-        "Y",
-        "E"
+        "V",
+        " ",
+        " "
       ],
       [
-        "W",
+        " ",
+        " ",
+        "Y",
+        "K",
+        "D",
         "T",
+        " ",
+        " "
+      ],
+      [
+        "X",
+        "B",
         "E",
-        "L",
+        "A",
+        "R",
+        "I",
+        "N",
+        "G"
+      ],
+      [
+        "R",
+        "E",
         "S",
         "I",
-        "V",
-        "A"
-      ],
-      [
-        "T",
-        "E",
-        "M",
-        "P",
-        "L",
-        "E",
-        "A",
+        "U",
+        "R",
+        "C",
         "L"
       ],
       [
-        " ",
-        "N",
-        "E",
-        "Y",
-        "G",
-        "S",
-        "N",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "V",
-        "K",
+        "H",
+        "A",
+        "R",
+        "B",
         "O",
-        "A",
-        " ",
-        " "
+        "R",
+        "R",
+        "M"
       ],
       [
-        " ",
-        " ",
+        "T",
+        "S",
+        "E",
+        "R",
+        "C",
         "A",
-        "G",
         "L",
-        "N",
+        "H"
+      ],
+      [
+        " ",
+        " ",
+        "L",
+        "F",
+        "E",
+        "A",
         " ",
         " "
       ],
       [
         " ",
+        " ",
+        "G",
+        "P",
+        "P",
         "Z",
-        "W",
-        "I",
-        "D",
-        "D",
-        "M",
+        " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "TEMPLE",
+        "word": "BEARING",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "CRUISER",
         "found": false,
         "rowStart": 3,
-        "colStart": 0,
+        "colStart": 6,
         "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "HARBOR",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 0,
+        "rowEnd": 4,
         "colEnd": 5
       },
       {
-        "word": "WAVE",
+        "word": "CREST",
         "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 2
+        "rowStart": 5,
+        "colStart": 4,
+        "rowEnd": 5,
+        "colEnd": 0
       },
       {
-        "word": "HYDRA",
+        "word": "PEARL",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 3,
+        "colEnd": 7
+      },
+      {
+        "word": "PALM",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 4,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 144,
+    "title": "Level 144",
+    "subtitle": "BUBBLE OCEAN - HARDEST (ABYSS) (LEVEL 144)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Jellyfish",
+    "maskIcon": "🪼",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "M",
+        "R",
+        "I",
+        "L",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "K",
+        "E",
+        "E",
+        "O",
+        "E",
+        "O",
+        " "
+      ],
+      [
+        "E",
+        "R",
+        "D",
+        "B",
+        "N",
+        "E",
+        "Y",
+        "O"
+      ],
+      [
+        "C",
+        "A",
+        "U",
+        "B",
+        "A",
+        "T",
+        "S",
+        "A"
+      ],
+      [
+        "D",
+        "K",
+        "S",
+        "U",
+        "C",
+        "A",
+        "T",
+        "Z"
+      ],
+      [
+        "X",
+        "E",
+        "A",
+        "L",
+        "L",
+        "N",
+        "E",
+        "K"
+      ],
+      [
+        " ",
+        "N",
+        "T",
+        "B",
+        "O",
+        "A",
+        "R",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "O",
+        "T",
+        "V",
+        "M",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "BLUBBER",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 3,
+        "rowEnd": 0,
+        "colEnd": 3
+      },
+      {
+        "word": "VOLCANO",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 4,
+        "rowEnd": 1,
+        "colEnd": 4
+      },
+      {
+        "word": "MANATEE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 5
+      },
+      {
+        "word": "KRAKEN",
         "found": false,
         "rowStart": 1,
         "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 5
+        "rowEnd": 6,
+        "colEnd": 1
       },
       {
-        "word": "NAVY",
+        "word": "MEDUSA",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 2,
+        "rowEnd": 5,
+        "colEnd": 2
+      },
+      {
+        "word": "OYSTER",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 6,
+        "colEnd": 6
+      }
+    ]
+  },
+  {
+    "id": 145,
+    "title": "Level 145",
+    "subtitle": "BUBBLE OCEAN - HARDEST (ABYSS) (LEVEL 145)",
+    "world": "island",
+    "themeIcon": "card_giftcard",
+    "maskName": "Nautilus Spiral",
+    "maskIcon": "🐚",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "Z",
+        "Q",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "C",
+        "A",
+        "V",
+        "E",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "T",
+        "E",
+        "L",
+        "S",
+        "I",
+        "B",
+        " "
+      ],
+      [
+        "T",
+        "I",
+        "U",
+        "S",
+        "T",
+        "E",
+        "W",
+        "D"
+      ],
+      [
+        "I",
+        "M",
+        "E",
+        "R",
+        "M",
+        "A",
+        "I",
+        "D"
+      ],
+      [
+        " ",
+        "S",
+        "T",
+        "R",
+        "A",
+        "I",
+        "T",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "E",
+        "D",
+        "I",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "Z",
+        "E",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "MERMAID",
         "found": false,
         "rowStart": 4,
+        "colStart": 1,
+        "rowEnd": 4,
+        "colEnd": 7
+      },
+      {
+        "word": "WETSUIT",
+        "found": false,
+        "rowStart": 3,
         "colStart": 6,
-        "rowEnd": 1,
+        "rowEnd": 3,
+        "colEnd": 0
+      },
+      {
+        "word": "STRAIT",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 1,
+        "rowEnd": 5,
         "colEnd": 6
       },
       {
@@ -6864,187 +13714,171 @@ export const OCEAN_LEVELS: LevelData[] = [
         "colEnd": 1
       },
       {
-        "word": "SAND",
+        "word": "TIDE",
         "found": false,
-        "rowStart": 4,
+        "rowStart": 6,
         "colStart": 5,
-        "rowEnd": 7,
+        "rowEnd": 6,
+        "colEnd": 2
+      },
+      {
+        "word": "CAVE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 2,
+        "rowEnd": 1,
         "colEnd": 5
-      },
-      {
-        "word": "GOLD",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "SEAL",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 7
       }
     ]
   },
   {
     "id": 146,
     "title": "Level 146",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 146)",
+    "subtitle": "BUBBLE OCEAN - HARDEST (ABYSS) (LEVEL 146)",
     "world": "island",
     "themeIcon": "water_drop",
-    "maskName": "Jellyfish",
-    "maskIcon": "🪼",
+    "maskName": "Atlantis Citadel",
+    "maskIcon": "🏰",
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 100,
+    "timeLimit": 95,
     "grid": [
       [
-        " ",
+        "I",
         "L",
+        "I",
+        "G",
+        "H",
+        "T",
+        "D",
+        "S"
+      ],
+      [
+        "R",
+        "D",
+        "K",
+        "I",
+        "I",
+        "X",
+        "I",
+        "L"
+      ],
+      [
+        "E",
+        "L",
+        "R",
+        "K",
+        "Y",
+        "R",
+        "N",
+        "J"
+      ],
+      [
         "P",
-        "H",
-        "R",
-        "E",
-        "S",
-        " "
-      ],
-      [
-        "M",
-        "I",
-        "A",
-        "N",
-        "A",
-        "D",
-        "H",
-        "E"
-      ],
-      [
         "T",
+        "E",
         "A",
+        "E",
+        "Y",
+        "G",
+        "Y"
+      ],
+      [
+        "P",
+        "I",
         "L",
-        "F",
         "N",
-        "I",
-        "D",
-        "N"
-      ],
-      [
-        "E",
-        "T",
-        "M",
-        "E",
-        "O",
-        "T",
-        "N",
-        "O"
-      ],
-      [
-        "M",
-        "R",
-        "D",
-        "E",
-        "S",
-        "E",
+        "W",
         "A",
+        "H",
         "M"
       ],
       [
-        "P",
-        "Y",
-        " ",
-        "R",
-        "X",
-        " ",
+        "I",
+        "D",
+        "G",
+        "N",
         "L",
-        "E"
+        "E",
+        "Y",
+        "T"
       ],
       [
         "L",
-        "R",
-        " ",
-        "Y",
+        "A",
         "N",
-        " ",
-        "S",
+        "D",
+        "Q",
+        "Y",
+        "E",
         "N"
       ],
       [
-        "E",
-        "U",
-        " ",
-        "N",
+        "C",
+        "L",
+        "A",
         "D",
-        " ",
-        "I",
-        "A"
+        "D",
+        "G",
+        "C",
+        "L"
       ]
     ],
     "targetWords": [
       {
-        "word": "ISLAND",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "SONAR",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "TEMPLE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "ANEMONE",
+        "word": "LEEWARD",
         "found": false,
         "rowStart": 7,
         "colStart": 7,
         "rowEnd": 1,
-        "colEnd": 7
+        "colEnd": 1
       },
       {
-        "word": "TIDE",
+        "word": "CLIPPER",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 0,
+        "rowEnd": 1,
+        "colEnd": 0
+      },
+      {
+        "word": "DINGHY",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 6,
+        "rowEnd": 5,
+        "colEnd": 6
+      },
+      {
+        "word": "ANGLER",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 2
+      },
+      {
+        "word": "TIDAL",
         "found": false,
         "rowStart": 3,
-        "colStart": 5,
+        "colStart": 1,
+        "rowEnd": 7,
+        "colEnd": 1
+      },
+      {
+        "word": "SIREN",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 7,
+        "rowEnd": 4,
+        "colEnd": 3
+      },
+      {
+        "word": "LIGHT",
+        "found": false,
+        "rowStart": 0,
+        "colStart": 1,
         "rowEnd": 0,
         "colEnd": 5
       }
@@ -7053,337 +13887,7 @@ export const OCEAN_LEVELS: LevelData[] = [
   {
     "id": 147,
     "title": "Level 147",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 147)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "G",
-        "J",
-        "W",
-        "S",
-        "M",
-        "S",
-        "Y",
-        "C"
-      ],
-      [
-        "W",
-        "C",
-        "H",
-        "B",
-        "E",
-        "A",
-        "C",
-        "H"
-      ],
-      [
-        "O",
-        "O",
-        "S",
-        "N",
-        "K",
-        "M",
-        "Q",
-        "B"
-      ],
-      [
-        "L",
-        "R",
-        "A",
-        "A",
-        " ",
-        "L",
-        "A",
-        "S"
-      ],
-      [
-        "G",
-        "A",
-        "L",
-        "V",
-        " ",
-        "R",
-        "L",
-        "Q"
-      ],
-      [
-        "O",
-        "L",
-        "P",
-        "Y",
-        "C",
-        "A",
-        "M",
-        "G"
-      ],
-      [
-        "Y",
-        "N",
-        "S",
-        "W",
-        "L",
-        "E",
-        "B",
-        "B"
-      ],
-      [
-        "S",
-        "H",
-        "I",
-        "P",
-        "L",
-        "P",
-        "Q",
-        "V"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SPLASH",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "BEACH",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "PEARL",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 5
-      },
-      {
-        "word": "GLOW",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "CRAB",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "NAVY",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "SHIP",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "CORAL",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 148,
-    "title": "Level 148",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 148)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "S",
-        "E",
-        "A",
-        "W",
-        "A",
-        "T",
-        "E",
-        "R"
-      ],
-      [
-        "V",
-        "R",
-        "W",
-        "K",
-        "S",
-        "A",
-        "M",
-        "L"
-      ],
-      [
-        "D",
-        "N",
-        "O",
-        "M",
-        "A",
-        "I",
-        "D",
-        "C"
-      ],
-      [
-        "W",
-        "A",
-        "V",
-        "E",
-        " ",
-        "Z",
-        "A",
-        "H"
-      ],
-      [
-        "E",
-        "G",
-        "J",
-        "Q",
-        " ",
-        "V",
-        "E",
-        "W"
-      ],
-      [
-        "U",
-        "O",
-        "S",
-        "X",
-        "E",
-        "A",
-        "M",
-        "Q"
-      ],
-      [
-        "L",
-        "I",
-        "A",
-        "T",
-        "T",
-        "Q",
-        "T",
-        "M"
-      ],
-      [
-        "B",
-        "B",
-        "F",
-        "L",
-        "O",
-        "A",
-        "T",
-        "L"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "DIAMOND",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "SEAWATER",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "WAVE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 3
-      },
-      {
-        "word": "BLUE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 0
-      },
-      {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 149,
-    "title": "Level 149",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 149)",
+    "subtitle": "BUBBLE OCEAN - HARDEST (ABYSS) (LEVEL 147)",
     "world": "island",
     "themeIcon": "water_drop",
     "maskName": "Clam Shell",
@@ -7391,108 +13895,108 @@ export const OCEAN_LEVELS: LevelData[] = [
     "stars": 0,
     "completed": false,
     "locked": false,
-    "timeLimit": 110,
+    "timeLimit": 95,
     "grid": [
       [
-        "J",
+        " ",
+        " ",
         "G",
-        "J",
-        "E",
+        "F",
         "L",
-        "A",
-        "H",
-        "W"
+        "P",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "V",
+        "N",
+        "P",
+        "E",
+        "B",
+        "O",
+        " "
+      ],
+      [
+        "C",
+        "M",
+        "I",
+        "D",
+        "K",
+        "Y",
+        "R",
+        "N"
       ],
       [
         "M",
-        "O",
-        "U",
-        "D",
-        "P",
-        "Y",
-        "G",
+        "A",
+        "R",
+        "R",
+        "R",
+        "E",
+        "C",
         "A"
       ],
       [
+        "W",
+        "S",
+        "O",
+        "I",
         "O",
         "L",
-        "M",
-        "I",
-        "D",
-        "N",
-        "P",
-        "B"
-      ],
-      [
-        " ",
-        "D",
-        "P",
-        "R",
-        "E",
-        "E",
-        "F",
-        " "
-      ],
-      [
-        " ",
-        "W",
         "A",
-        "I",
-        "S",
-        "K",
-        "Y",
-        " "
+        "V"
       ],
       [
-        " ",
-        " ",
-        "A",
-        "Q",
-        "E",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "J",
         "V",
-        "A",
-        "R",
+        "K",
+        "O",
+        "F",
+        "N",
+        "L",
+        "L",
+        "I"
+      ],
+      [
         " ",
+        "T",
+        "M",
+        "T",
+        "S",
+        "A",
+        "Y",
         " "
       ],
       [
         " ",
         " ",
-        "Y",
-        "C",
         "E",
-        "K",
+        "O",
+        "G",
+        "G",
         " ",
         " "
       ]
     ],
     "targetWords": [
       {
-        "word": "JUMP",
+        "word": "SNORKEL",
         "found": false,
-        "rowStart": 0,
+        "rowStart": 6,
+        "colStart": 4,
+        "rowEnd": 0,
+        "colEnd": 4
+      },
+      {
+        "word": "MOORING",
+        "found": false,
+        "rowStart": 6,
         "colStart": 2,
-        "rowEnd": 3,
+        "rowEnd": 0,
         "colEnd": 2
       },
       {
-        "word": "HYDRA",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "KRAKEN",
+        "word": "GALLEY",
         "found": false,
         "rowStart": 7,
         "colStart": 5,
@@ -7500,51 +14004,309 @@ export const OCEAN_LEVELS: LevelData[] = [
         "colEnd": 5
       },
       {
-        "word": "GOLD",
+        "word": "DRIFT",
         "found": false,
-        "rowStart": 0,
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "MASK",
+        "found": false,
+        "rowStart": 2,
         "colStart": 1,
-        "rowEnd": 3,
+        "rowEnd": 5,
         "colEnd": 1
       },
       {
-        "word": "WAVE",
+        "word": "ORCA",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 6,
+        "rowEnd": 4,
+        "colEnd": 6
+      },
+      {
+        "word": "NAVI",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 7,
+        "rowEnd": 5,
+        "colEnd": 7
+      }
+    ]
+  },
+  {
+    "id": 148,
+    "title": "Level 148",
+    "subtitle": "BUBBLE OCEAN - HARDEST (ABYSS) (LEVEL 148)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Anchor",
+    "maskIcon": "⚓",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 90,
+    "grid": [
+      [
+        " ",
+        " ",
+        "T",
+        "W",
+        "L",
+        "H",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "N",
+        "S",
+        "A",
+        "S",
+        " ",
+        " "
+      ],
+      [
+        "G",
+        "J",
+        "A",
+        "P",
+        "R",
+        "A",
+        "F",
+        "E"
+      ],
+      [
+        "Y",
+        "U",
+        "T",
+        "O",
+        "O",
+        "L",
+        "L",
+        "W"
+      ],
+      [
+        "Y",
+        "M",
+        "X",
+        "N",
+        "C",
+        "P",
+        "D",
+        "D"
+      ],
+      [
+        "H",
+        "P",
+        "E",
+        "G",
+        "M",
+        "S",
+        "O",
+        "O"
+      ],
+      [
+        " ",
+        " ",
+        "S",
+        "E",
+        "M",
+        "T",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "T",
+        "V",
+        "E",
+        "R",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "SEXTANT",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 2,
+        "rowEnd": 0,
+        "colEnd": 2
+      },
+      {
+        "word": "TEMPLE",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 2,
+        "rowEnd": 2,
+        "colEnd": 7
+      },
+      {
+        "word": "SPONGE",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 3,
+        "rowEnd": 6,
+        "colEnd": 3
+      },
+      {
+        "word": "SPLASH",
+        "found": false,
+        "rowStart": 5,
+        "colStart": 5,
+        "rowEnd": 0,
+        "colEnd": 5
+      },
+      {
+        "word": "CORAL",
         "found": false,
         "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 7,
+        "colStart": 4,
+        "rowEnd": 0,
         "colEnd": 4
       },
       {
-        "word": "REEF",
+        "word": "JUMP",
+        "found": false,
+        "rowStart": 2,
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 1
+      }
+    ]
+  },
+  {
+    "id": 149,
+    "title": "Level 149",
+    "subtitle": "BUBBLE OCEAN - HARDEST (ABYSS) (LEVEL 149)",
+    "world": "island",
+    "themeIcon": "water_drop",
+    "maskName": "Water Drop",
+    "maskIcon": "🫧",
+    "stars": 0,
+    "completed": false,
+    "locked": false,
+    "timeLimit": 80,
+    "grid": [
+      [
+        " ",
+        " ",
+        " ",
+        "O",
+        "W",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "I",
+        "H",
+        "S",
+        "W",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "P",
+        "P",
+        "S",
+        "E",
+        "F",
+        "O",
+        " "
+      ],
+      [
+        "T",
+        "S",
+        "U",
+        "N",
+        "A",
+        "M",
+        "I",
+        "C"
+      ],
+      [
+        "T",
+        "U",
+        "T",
+        "C",
+        "G",
+        "N",
+        "O",
+        "A"
+      ],
+      [
+        " ",
+        "T",
+        "L",
+        "I",
+        "U",
+        "L",
+        "D",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "L",
+        "T",
+        "L",
+        "D",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "Y",
+        "L",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "targetWords": [
+      {
+        "word": "TSUNAMI",
         "found": false,
         "rowStart": 3,
-        "colStart": 3,
+        "colStart": 0,
         "rowEnd": 3,
         "colEnd": 6
       },
       {
-        "word": "SEA",
+        "word": "SEAGULL",
         "found": false,
-        "rowStart": 4,
+        "rowStart": 1,
         "colStart": 4,
-        "rowEnd": 6,
+        "rowEnd": 7,
         "colEnd": 4
       },
       {
-        "word": "WHALE",
+        "word": "SAND",
         "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 3
+        "rowStart": 2,
+        "colStart": 3,
+        "rowEnd": 5,
+        "colEnd": 6
       },
       {
-        "word": "RIDE",
+        "word": "CITY",
         "found": false,
-        "rowStart": 3,
+        "rowStart": 4,
         "colStart": 3,
-        "rowEnd": 0,
+        "rowEnd": 7,
         "colEnd": 3
       }
     ]
@@ -7552,8379 +14314,161 @@ export const OCEAN_LEVELS: LevelData[] = [
   {
     "id": 150,
     "title": "Level 150",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 150)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "D",
-        "E",
-        "F",
-        "N",
-        "I",
-        "R",
-        "A",
-        "M"
-      ],
-      [
-        "E",
-        "V",
-        "R",
-        "F",
-        "Z",
-        "X",
-        "T",
-        "L"
-      ],
-      [
-        "D",
-        "O",
-        "A",
-        "D",
-        "D",
-        "J",
-        "I",
-        "E"
-      ],
-      [
-        "U",
-        "C",
-        "O",
-        "O",
-        "L",
-        "G",
-        "T",
-        "D"
-      ],
-      [
-        "T",
-        "O",
-        "J",
-        "C",
-        "O",
-        "G",
-        "A",
-        "I"
-      ],
-      [
-        "J",
-        "K",
-        "S",
-        "K",
-        "G",
-        "E",
-        "N",
-        "R"
-      ],
-      [
-        "L",
-        "E",
-        "N",
-        "E",
-        "K",
-        "A",
-        "R",
-        "K"
-      ],
-      [
-        "A",
-        "G",
-        "C",
-        "R",
-        "A",
-        "B",
-        "B",
-        "L"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "DOCK",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "GOLD",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "MARIN",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "TITAN",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "KRAKEN",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "CRAB",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 151,
-    "title": "Level 151",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 151)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Water Drop",
-    "maskIcon": "🫧",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        "R",
-        "G",
-        "B",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "B",
-        "X",
-        "R",
-        "O",
-        "E",
-        "F",
-        " "
-      ],
-      [
-        "S",
-        "N",
-        "I",
-        "R",
-        "A",
-        "M",
-        "W",
-        "R"
-      ],
-      [
-        "R",
-        "O",
-        "H",
-        "C",
-        "N",
-        "A",
-        "O",
-        "V"
-      ],
-      [
-        "R",
-        "E",
-        "B",
-        "H",
-        "A",
-        "B",
-        "N",
-        "S"
-      ],
-      [
-        "F",
-        "E",
-        "D",
-        "I",
-        "R",
-        "W",
-        "W",
-        "G"
-      ],
-      [
-        " ",
-        "L",
-        "E",
-        "A",
-        "Q",
-        "I",
-        "N",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "H",
-        "F",
-        "M",
-        "H",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "MARIN",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 1
-      },
-      {
-        "word": "HARBOR",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "SWIM",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "ANCHOR",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 152,
-    "title": "Level 152",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 152)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Ocean Fish",
-    "maskIcon": "🐟",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        "T",
-        "M",
-        "A",
-        "D",
-        "C",
-        " ",
-        " "
-      ],
-      [
-        "P",
-        "R",
-        "K",
-        "H",
-        "K",
-        "D",
-        "X",
-        "N"
-      ],
-      [
-        "L",
-        "B",
-        "A",
-        "R",
-        "R",
-        "I",
-        "E",
-        "R"
-      ],
-      [
-        "E",
-        "V",
-        "A",
-        "E",
-        "C",
-        "P",
-        "Q",
-        "O"
-      ],
-      [
-        "K",
-        "H",
-        "T",
-        "I",
-        "T",
-        "A",
-        "N",
-        "B"
-      ],
-      [
-        "S",
-        "W",
-        "A",
-        "U",
-        "T",
-        "A",
-        "E",
-        "H"
-      ],
-      [
-        " ",
-        "B",
-        "N",
-        "K",
-        "N",
-        "Z",
-        "O",
-        " "
-      ],
-      [
-        "R",
-        "E",
-        " ",
-        " ",
-        " ",
-        " ",
-        "A",
-        "X"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "NEPTUNE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "TITAN",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "BARRIER",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "SHARK",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 4
-      },
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 153,
-    "title": "Level 153",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 153)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Neptune Trident",
-    "maskIcon": "🔱",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        "X",
-        "W",
-        " ",
-        "B",
-        "A",
-        " ",
-        "K",
-        "J"
-      ],
-      [
-        "P",
-        "O",
-        "S",
-        "E",
-        "I",
-        "D",
-        "O",
-        "N"
-      ],
-      [
-        "B",
-        "Q",
-        "E",
-        "L",
-        "P",
-        "M",
-        "E",
-        "T"
-      ],
-      [
-        "F",
-        "U",
-        "F",
-        "K",
-        "E",
-        "P",
-        "A",
-        "I"
-      ],
-      [
-        " ",
-        "L",
-        "Z",
-        "R",
-        "A",
-        "R",
-        "S",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "L",
-        "U",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "M",
-        "A",
-        "E",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "Y",
-        "T",
-        "T",
-        "T",
-        "D",
-        "E",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "POSEIDON",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "TEMPLE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 2
-      },
-      {
-        "word": "SURF",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "ISLET",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 154,
-    "title": "Level 154",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 154)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Jellyfish",
-    "maskIcon": "🪼",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        " ",
-        "T",
-        "M",
-        "R",
-        "J",
-        "B",
-        "A",
-        " "
-      ],
-      [
-        "D",
-        "P",
-        "M",
-        "U",
-        "J",
-        "A",
-        "T",
-        "L"
-      ],
-      [
-        "I",
-        "M",
-        "A",
-        "S",
-        "K",
-        "Y",
-        "L",
-        "Z"
-      ],
-      [
-        "A",
-        "C",
-        "R",
-        "Y",
-        "S",
-        "T",
-        "A",
-        "L"
-      ],
-      [
-        "M",
-        "F",
-        "L",
-        "O",
-        "A",
-        "T",
-        "N",
-        "N"
-      ],
-      [
-        "R",
-        "T",
-        " ",
-        "X",
-        "C",
-        " ",
-        "T",
-        "K"
-      ],
-      [
-        "E",
-        "E",
-        " ",
-        "M",
-        "S",
-        " ",
-        "I",
-        "J"
-      ],
-      [
-        "M",
-        "I",
-        " ",
-        "K",
-        "W",
-        " ",
-        "C",
-        "C"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ATLANTIC",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "CRYSTAL",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "MERMAID",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 5
-      },
-      {
-        "word": "JUMP",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 155,
-    "title": "Level 155",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 155)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "G",
-        "N",
-        "I",
-        "V",
-        "I",
-        "D",
-        "W",
-        "M"
-      ],
-      [
-        "I",
-        "L",
-        "F",
-        "A",
-        "I",
-        "N",
-        "R",
-        "M"
-      ],
-      [
-        "Y",
-        "Q",
-        "Z",
-        "S",
-        "F",
-        "O",
-        "O",
-        "A"
-      ],
-      [
-        "E",
-        "O",
-        "L",
-        "L",
-        " ",
-        "O",
-        "H",
-        "R"
-      ],
-      [
-        "C",
-        "E",
-        "O",
-        "A",
-        " ",
-        "G",
-        "C",
-        "I"
-      ],
-      [
-        "T",
-        "A",
-        "A",
-        "U",
-        "H",
-        "A",
-        "N",
-        "N"
-      ],
-      [
-        "T",
-        "I",
-        "D",
-        "E",
-        "V",
-        "L",
-        "A",
-        "A"
-      ],
-      [
-        "J",
-        "R",
-        "E",
-        "I",
-        "R",
-        "R",
-        "A",
-        "B"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 0
-      },
-      {
-        "word": "ISLET",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 0
-      },
-      {
-        "word": "ANCHOR",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "MARINA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "DIVING",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "BARRIER",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "LAGOON",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 156,
-    "title": "Level 156",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 156)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "A",
-        "T",
-        "L",
-        "A",
-        "N",
-        "T",
-        "I",
-        "C"
-      ],
-      [
-        "W",
-        "N",
-        "C",
-        "C",
-        "R",
-        "E",
-        "S",
-        "T"
-      ],
-      [
-        "C",
-        "N",
-        "E",
-        "G",
-        "N",
-        "O",
-        "P",
-        "S"
-      ],
-      [
-        "F",
-        "L",
-        "O",
-        "A",
-        "T",
-        "T",
-        "X",
-        "W"
-      ],
-      [
-        "T",
-        "C",
-        "I",
-        "P",
-        "O",
-        "R",
-        "T",
-        "D"
-      ],
-      [
-        "E",
-        "M",
-        "I",
-        "T",
-        "I",
-        "R",
-        "A",
-        "M"
-      ],
-      [
-        "L",
-        "R",
-        "R",
-        "O",
-        "H",
-        "C",
-        "N",
-        "A"
-      ],
-      [
-        "Y",
-        "N",
-        "O",
-        "M",
-        "R",
-        "A",
-        "H",
-        "Z"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "MARITIME",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 0
-      },
-      {
-        "word": "HARMONY",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "CREST",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "TROPIC",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 4
-      },
-      {
-        "word": "ATLANTIC",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "ANCHOR",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "SPONGE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 157,
-    "title": "Level 157",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 157)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "I",
-        "L",
-        "K",
-        "T",
-        "G",
-        "G",
-        "T",
-        "T"
-      ],
-      [
-        "U",
-        "L",
-        "H",
-        "R",
-        "N",
-        "N",
-        "A",
-        "S"
-      ],
-      [
-        "E",
-        "E",
-        "T",
-        "I",
-        "I",
-        "O",
-        "I",
-        "L"
-      ],
-      [
-        " ",
-        "H",
-        "R",
-        "D",
-        "K",
-        "S",
-        "L",
-        " "
-      ],
-      [
-        " ",
-        "S",
-        "O",
-        "E",
-        "R",
-        "C",
-        "J",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "N",
-        "N",
-        "I",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "T",
-        "D",
-        "B",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "X",
-        "A",
-        "E",
-        "S",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "NORTH",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "TRIDENT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "SHELL",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "KING",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 158,
-    "title": "Level 158",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 158)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "E",
-        "T",
-        "A",
-        "R",
-        "I",
-        "P",
-        "B",
-        "C"
-      ],
-      [
-        "J",
-        "K",
-        "E",
-        "L",
-        "P",
-        "A",
-        "P",
-        "N"
-      ],
-      [
-        "N",
-        "B",
-        "W",
-        "T",
-        "Y",
-        "B",
-        "A",
-        "D"
-      ],
-      [
-        " ",
-        "S",
-        "E",
-        "A",
-        "K",
-        "U",
-        "L",
-        " "
-      ],
-      [
-        " ",
-        "K",
-        "A",
-        "O",
-        "R",
-        "C",
-        "M",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "G",
-        "L",
-        "A",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "F",
-        "H",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "O",
-        "S",
-        "S",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "SHARK",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 4
-      },
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "SCUBA",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "PIRATE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 3
-      },
-      {
-        "word": "ALGAE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 159,
-    "title": "Level 159",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 159)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "L",
-        "F",
-        "O",
-        "W",
-        "H",
-        "A",
-        "L",
-        "E"
-      ],
-      [
-        "W",
-        "D",
-        "F",
-        "I",
-        "N",
-        "S",
-        "J",
-        "L"
-      ],
-      [
-        "O",
-        "O",
-        "I",
-        "J",
-        "E",
-        "L",
-        "Y",
-        "I"
-      ],
-      [
-        "C",
-        "X",
-        "L",
-        "A",
-        "Q",
-        "U",
-        "D",
-        "A"
-      ],
-      [
-        "E",
-        "M",
-        "I",
-        "R",
-        "M",
-        "J",
-        "L",
-        "T"
-      ],
-      [
-        "A",
-        "L",
-        "A",
-        "G",
-        "O",
-        "O",
-        "N",
-        "B"
-      ],
-      [
-        "N",
-        "W",
-        "A",
-        "U",
-        "R",
-        "A",
-        "N",
-        "L"
-      ],
-      [
-        "T",
-        "E",
-        "M",
-        "P",
-        "L",
-        "E",
-        "W",
-        "D"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "LAGOON",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "BLUE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "TEMPLE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "DIAMOND",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "WHALE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 0
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "FINS",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 160,
-    "title": "Level 160",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 160)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "O",
-        "N",
-        "A",
-        "C",
-        "L",
-        "O",
-        "V",
-        "T"
-      ],
-      [
-        "P",
-        "A",
-        "E",
-        "B",
-        "E",
-        "A",
-        "C",
-        "H"
-      ],
-      [
-        "V",
-        "O",
-        "S",
-        "F",
-        "R",
-        "S",
-        "E",
-        "C"
-      ],
-      [
-        "G",
-        "D",
-        "I",
-        "C",
-        " ",
-        "Q",
-        "E",
-        "L"
-      ],
-      [
-        "D",
-        "N",
-        "C",
-        "E",
-        " ",
-        "B",
-        "D",
-        "A"
-      ],
-      [
-        "S",
-        "A",
-        "F",
-        "O",
-        "A",
-        "A",
-        "I",
-        "M"
-      ],
-      [
-        "M",
-        "S",
-        "V",
-        "V",
-        "V",
-        "Y",
-        "R",
-        "I"
-      ],
-      [
-        "N",
-        "W",
-        "N",
-        "O",
-        "A",
-        "E",
-        "K",
-        "Q"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 1
-      },
-      {
-        "word": "FINS",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 0
-      },
-      {
-        "word": "VOLCANO",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "BEACH",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "CLAM",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 161,
-    "title": "Level 161",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 161)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Neptune Trident",
-    "maskIcon": "🔱",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        "O",
-        "X",
-        " ",
-        "L",
-        "X",
-        " ",
-        "S",
-        "X"
-      ],
-      [
-        "S",
-        "M",
-        "I",
-        "K",
-        "H",
-        "Z",
-        "Q",
-        "N"
-      ],
-      [
-        "G",
-        "A",
-        "B",
-        "R",
-        "B",
-        "N",
-        "D",
-        "S"
-      ],
-      [
-        "T",
-        "S",
-        "L",
-        "A",
-        "G",
-        "O",
-        "O",
-        "N"
-      ],
-      [
-        " ",
-        "K",
-        "H",
-        "K",
-        "P",
-        "R",
-        "C",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "J",
-        "E",
-        "V",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "N",
-        "G",
-        "H",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "D",
-        "S",
-        "H",
-        "E",
-        "L",
-        "L",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "NORTH",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 4
-      },
-      {
-        "word": "KRAKEN",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "LAGOON",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "SHELL",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 162,
-    "title": "Level 162",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 162)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Jellyfish",
-    "maskIcon": "🪼",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        "U",
-        "I",
-        "W",
-        "H",
-        "K",
-        "P",
-        " "
-      ],
-      [
-        "V",
-        "T",
-        "O",
-        "C",
-        "S",
-        "C",
-        "M",
-        "T"
-      ],
-      [
-        "X",
-        "L",
-        "O",
-        "E",
-        "I",
-        "O",
-        "U",
-        "S"
-      ],
-      [
-        "G",
-        "V",
-        "G",
-        "W",
-        "F",
-        "D",
-        "J",
-        "O"
-      ],
-      [
-        "E",
-        "N",
-        "O",
-        "M",
-        "E",
-        "N",
-        "A",
-        "N"
-      ],
-      [
-        "L",
-        "E",
-        " ",
-        "Z",
-        "E",
-        " ",
-        "G",
-        "G"
-      ],
-      [
-        "G",
-        "E",
-        " ",
-        "C",
-        "N",
-        " ",
-        "U",
-        "X"
-      ],
-      [
-        "A",
-        "Z",
-        " ",
-        "X",
-        "U",
-        " ",
-        "A",
-        "U"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ANEMONE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "GLOW",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "FISH",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 7
-      },
-      {
-        "word": "JUMP",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "DOCK",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 163,
-    "title": "Level 163",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 163)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        "N",
-        "I",
-        "R",
-        "A",
-        "M",
-        "G",
-        "S",
-        "E"
-      ],
-      [
-        "F",
-        "H",
-        "I",
-        "T",
-        "A",
-        "O",
-        "H",
-        "L"
-      ],
-      [
-        "X",
-        "J",
-        "S",
-        "F",
-        "N",
-        "E",
-        "S",
-        "T"
-      ],
-      [
-        "X",
-        "P",
-        "U",
-        "G",
-        " ",
-        "P",
-        "S",
-        "R"
-      ],
-      [
-        "E",
-        "L",
-        "R",
-        "F",
-        " ",
-        "A",
-        "B",
-        "U"
-      ],
-      [
-        "W",
-        "R",
-        "F",
-        "I",
-        "W",
-        "N",
-        "X",
-        "T"
-      ],
-      [
-        "R",
-        "G",
-        "F",
-        "K",
-        "E",
-        "L",
-        "P",
-        "W"
-      ],
-      [
-        "P",
-        "O",
-        "S",
-        "E",
-        "I",
-        "D",
-        "O",
-        "N"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 3
-      },
-      {
-        "word": "POSEIDON",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "TURTLE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "SURF",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "MARIN",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 164,
-    "title": "Level 164",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 164)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        "E",
-        "N",
-        "I",
-        "R",
-        "A",
-        "M",
-        "R",
-        "A"
-      ],
-      [
-        "H",
-        "S",
-        "S",
-        "C",
-        "E",
-        "E",
-        "U",
-        "E"
-      ],
-      [
-        "Z",
-        "I",
-        "R",
-        "L",
-        "I",
-        "R",
-        "E",
-        "L"
-      ],
-      [
-        "U",
-        "A",
-        "H",
-        "R",
-        "A",
-        "B",
-        "Y",
-        "L"
-      ],
-      [
-        "B",
-        "F",
-        "R",
-        "R",
-        "R",
-        "E",
-        "E",
-        "E"
-      ],
-      [
-        "Z",
-        "A",
-        "B",
-        "E",
-        "V",
-        "Y",
-        "S",
-        "H"
-      ],
-      [
-        "B",
-        "O",
-        "O",
-        "E",
-        "U",
-        "H",
-        "B",
-        "S"
-      ],
-      [
-        "K",
-        "O",
-        "P",
-        "F",
-        "J",
-        "V",
-        "P",
-        "L"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "BARRIER",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 4
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 4
-      },
-      {
-        "word": "MARIN",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "SHELL",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "CRAB",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 165,
-    "title": "Level 165",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 165)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "D",
-        "X",
-        "B",
-        "M",
-        "A",
-        "L",
-        "C",
-        "D"
-      ],
-      [
-        "V",
-        "S",
-        "Q",
-        "U",
-        "I",
-        "D",
-        "I",
-        "D"
-      ],
-      [
-        "P",
-        "E",
-        "E",
-        "D",
-        "K",
-        "V",
-        "N",
-        "S"
-      ],
-      [
-        " ",
-        "E",
-        "E",
-        "F",
-        "I",
-        "A",
-        "H",
-        " "
-      ],
-      [
-        " ",
-        "V",
-        "A",
-        "N",
-        "S",
-        "A",
-        "H",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "G",
-        "E",
-        "R",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "Y",
-        "K",
-        "S",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "M",
-        "I",
-        "W",
-        "S",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "DIVING",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "SQUID",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "CLAM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "SHARK",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "SWIM",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 166,
-    "title": "Level 166",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 166)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Anchor",
-    "maskIcon": "⚓",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "N",
-        "K",
-        "W",
-        "P",
-        "R",
-        "S",
-        "M",
-        "N"
-      ],
-      [
-        "V",
-        "D",
-        "S",
-        "I",
-        "F",
-        "E",
-        "G",
-        "N"
-      ],
-      [
-        " ",
-        "S",
-        "S",
-        "R",
-        "I",
-        "A",
-        "L",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "A",
-        "N",
-        "G",
-        " ",
-        " "
-      ],
-      [
-        "B",
-        " ",
-        "N",
-        "T",
-        "S",
-        "U",
-        " ",
-        "Z"
-      ],
-      [
-        "T",
-        "I",
-        "D",
-        "E",
-        "U",
-        "L",
-        "B",
-        "Y"
-      ],
-      [
-        "W",
-        "K",
-        "E",
-        "L",
-        "P",
-        "L",
-        "J",
-        "D"
-      ],
-      [
-        " ",
-        "L",
-        "F",
-        "I",
-        "S",
-        "H",
-        "Y",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "PIRATE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "FISH",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "SEAGULL",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "FINS",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 4
-      },
-      {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "BLUE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 167,
-    "title": "Level 167",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 167)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Water Drop",
-    "maskIcon": "🫧",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        " ",
-        " ",
-        "X",
-        "T",
-        "G",
-        "R",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "X",
-        "O",
-        "I",
-        "N",
-        "B",
-        "L",
-        " "
-      ],
-      [
-        "F",
-        "W",
-        "U",
-        "D",
-        "I",
-        "A",
-        "I",
-        "X"
-      ],
-      [
-        "E",
-        "H",
-        "M",
-        "E",
-        "V",
-        "R",
-        "A",
-        "Q"
-      ],
-      [
-        "E",
-        "A",
-        "I",
-        "E",
-        "I",
-        "R",
-        "T",
-        "T"
-      ],
-      [
-        "R",
-        "L",
-        "W",
-        "V",
-        "D",
-        "I",
-        "A",
-        "T"
-      ],
-      [
-        " ",
-        "E",
-        "S",
-        "A",
-        "R",
-        "E",
-        "K",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "X",
-        "C",
-        "V",
-        "R",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SWIM",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "BARRIER",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "DIVING",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 3
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "WHALE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 1
-      },
-      {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 3
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 168,
-    "title": "Level 168",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 168)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "F",
-        "S",
-        "O",
-        "N",
-        "G",
-        "F",
-        "N",
-        "R"
-      ],
-      [
-        "O",
-        "M",
-        "A",
-        "R",
-        "I",
-        "N",
-        "A",
-        "I"
-      ],
-      [
-        "W",
-        "T",
-        "I",
-        "D",
-        "E",
-        "L",
-        "E",
-        "M"
-      ],
-      [
-        "O",
-        "M",
-        "V",
-        "K",
-        "G",
-        "W",
-        "C",
-        "A"
-      ],
-      [
-        "L",
-        "S",
-        "Z",
-        "A",
-        "E",
-        "S",
-        "O",
-        "N"
-      ],
-      [
-        "G",
-        "I",
-        "E",
-        "N",
-        "H",
-        "L",
-        "S",
-        "U"
-      ],
-      [
-        "H",
-        "S",
-        "A",
-        "L",
-        "P",
-        "S",
-        "P",
-        "S"
-      ],
-      [
-        "N",
-        "O",
-        "O",
-        "G",
-        "A",
-        "L",
-        "X",
-        "T"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SPLASH",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 0
-      },
-      {
-        "word": "LAGOON",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "GLOW",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "ALGAE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "MARINA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "TSUNAMI",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 169,
-    "title": "Level 169",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 169)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "R",
-        "K",
-        "R",
-        "E",
-        "D",
-        "I",
-        "R",
-        "T"
-      ],
-      [
-        "A",
-        "A",
-        "R",
-        "U",
-        "A",
-        "M",
-        "C",
-        "U"
-      ],
-      [
-        "N",
-        "U",
-        "M",
-        "A",
-        "O",
-        "F",
-        "U",
-        "Z"
-      ],
-      [
-        "O",
-        "Y",
-        "D",
-        "C",
-        " ",
-        "I",
-        "H",
-        "Y"
-      ],
-      [
-        "S",
-        "D",
-        "D",
-        "N",
-        " ",
-        "N",
-        "T",
-        "V"
-      ],
-      [
-        "G",
-        "N",
-        "I",
-        "K",
-        "A",
-        "S",
-        "R",
-        "A"
-      ],
-      [
-        "H",
-        "X",
-        "A",
-        "U",
-        "C",
-        "S",
-        "O",
-        "N"
-      ],
-      [
-        "I",
-        "C",
-        "O",
-        "R",
-        "A",
-        "L",
-        "N",
-        "G"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "FOAM",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 2
-      },
-      {
-        "word": "KING",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 0
-      },
-      {
-        "word": "CORAL",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "SONAR",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "NAVY",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "NORTH",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "FINS",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 170,
-    "title": "Level 170",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 170)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "B",
-        "F",
-        "F",
-        "S",
-        "H",
-        "O",
-        "R",
-        "E"
-      ],
-      [
-        "A",
-        "O",
-        "I",
-        "L",
-        "K",
-        "C",
-        "O",
-        "D"
-      ],
-      [
-        "Y",
-        "A",
-        "N",
-        "A",
-        "C",
-        "O",
-        "V",
-        "E"
-      ],
-      [
-        " ",
-        "M",
-        "S",
-        "R",
-        "H",
-        "T",
-        "V",
-        " "
-      ],
-      [
-        " ",
-        "N",
-        "P",
-        "O",
-        "O",
-        "A",
-        "M",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "C",
-        "W",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "A",
-        "L",
-        "X",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "M",
-        "C",
-        "Z",
-        "Y",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CORAL",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "WAVE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "SHORE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "FINS",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "FOAM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 1
-      },
-      {
-        "word": "CLAM",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "DOCK",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 171,
-    "title": "Level 171",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 171)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        "W",
-        "E",
-        "U",
-        "L",
-        "B",
-        "W",
-        "V",
-        "F"
-      ],
-      [
-        "R",
-        "E",
-        "I",
-        "R",
-        "R",
-        "A",
-        "B",
-        "W"
-      ],
-      [
-        "S",
-        "T",
-        "U",
-        "R",
-        "T",
-        "L",
-        "E",
-        "V"
-      ],
-      [
-        "W",
-        "N",
-        "E",
-        "Y",
-        " ",
-        "B",
-        "F",
-        "M"
-      ],
-      [
-        "E",
-        "R",
-        "F",
-        "R",
-        " ",
-        "T",
-        "U",
-        "P"
-      ],
-      [
-        "N",
-        "S",
-        "Q",
-        "U",
-        "I",
-        "D",
-        "R",
-        "A"
-      ],
-      [
-        "P",
-        "Z",
-        "V",
-        "S",
-        "H",
-        "E",
-        "L",
-        "L"
-      ],
-      [
-        "M",
-        "A",
-        "R",
-        "I",
-        "N",
-        "E",
-        "R",
-        "M"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "MARINER",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "TURTLE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "BARRIER",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "SQUID",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "BLUE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "SHELL",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 172,
-    "title": "Level 172",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 172)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        "O",
-        "I",
-        "K",
-        "S",
-        "Z",
-        "D",
-        "W",
-        "H"
-      ],
-      [
-        "N",
-        "N",
-        "D",
-        "E",
-        "E",
-        "P",
-        "T",
-        "N"
-      ],
-      [
-        "A",
-        "R",
-        "I",
-        "Q",
-        "R",
-        "R",
-        "S",
-        "S"
-      ],
-      [
-        "C",
-        "F",
-        "L",
-        "H",
-        "O",
-        "Z",
-        "E",
-        "U"
-      ],
-      [
-        "L",
-        "O",
-        "N",
-        "N",
-        "P",
-        "A",
-        "E",
-        "I"
-      ],
-      [
-        "O",
-        "A",
-        "L",
-        "K",
-        "D",
-        "L",
-        "W",
-        "M"
-      ],
-      [
-        "V",
-        "M",
-        "W",
-        "H",
-        "C",
-        "T",
-        "O",
-        "O"
-      ],
-      [
-        "D",
-        "I",
-        "A",
-        "M",
-        "R",
-        "E",
-        "M",
-        "D"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "NORTH",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "MERMAID",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "VOLCANO",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "DOLPHIN",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "FOAM",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 1
-      },
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 173,
-    "title": "Level 173",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 173)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        "E",
-        "V",
-        "A",
-        "W",
-        "P",
-        "O",
-        "G",
-        "A"
-      ],
-      [
-        "A",
-        "C",
-        "Q",
-        "U",
-        "N",
-        "C",
-        "N",
-        "B"
-      ],
-      [
-        "D",
-        "R",
-        "R",
-        "U",
-        "R",
-        "E",
-        "I",
-        "P"
-      ],
-      [
-        " ",
-        "I",
-        "M",
-        "E",
-        "S",
-        "A",
-        "K",
-        " "
-      ],
-      [
-        " ",
-        "M",
-        "V",
-        "I",
-        "S",
-        "N",
-        "Y",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "I",
-        "W",
-        "T",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "X",
-        "S",
-        "N",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "U",
-        "V",
-        "K",
-        "G",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SWIM",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "DIVING",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "KING",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "CREST",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "WAVE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 5
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 174,
-    "title": "Level 174",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 174)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Anchor",
-    "maskIcon": "⚓",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        "P",
-        "S",
-        "Q",
-        "U",
-        "I",
-        "D",
-        "J",
-        "T"
-      ],
-      [
-        "M",
-        "C",
-        "J",
-        "A",
-        "Q",
-        "E",
-        "E",
-        "M"
-      ],
-      [
-        " ",
-        "A",
-        "J",
-        "E",
-        "L",
-        "R",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "A",
-        "Y",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        "S",
-        " ",
-        "H",
-        "F",
-        "K",
-        "A",
-        " ",
-        "W"
-      ],
-      [
-        "T",
-        "W",
-        "L",
-        "I",
-        "A",
-        "T",
-        "B",
-        "K"
-      ],
-      [
-        "V",
-        "Q",
-        "R",
-        "A",
-        "N",
-        "O",
-        "S",
-        "P"
-      ],
-      [
-        " ",
-        "N",
-        "K",
-        "C",
-        "O",
-        "D",
-        "E",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SQUID",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 4
-      },
-      {
-        "word": "WHALE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "SONAR",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "FOAM",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "DOCK",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 4,
-        "colEnd": 4
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 175,
-    "title": "Level 175",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 175)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "P",
-        "L",
-        "V",
-        "C",
-        "B",
-        "W",
-        "T",
-        "F"
-      ],
-      [
-        "E",
-        "D",
-        "O",
-        "L",
-        "N",
-        "A",
-        "N",
-        "Y"
-      ],
-      [
-        "E",
-        "N",
-        "L",
-        "A",
-        "W",
-        "V",
-        "D",
-        "S"
-      ],
-      [
-        "D",
-        "A",
-        "C",
-        "M",
-        " ",
-        "E",
-        "W",
-        "F"
-      ],
-      [
-        "I",
-        "S",
-        "A",
-        "X",
-        " ",
-        "I",
-        "U",
-        "I"
-      ],
-      [
-        "I",
-        "M",
-        "N",
-        "J",
-        "M",
-        "P",
-        "F",
-        "S"
-      ],
-      [
-        "K",
-        "N",
-        "O",
-        "O",
-        "G",
-        "A",
-        "L",
-        "H"
-      ],
-      [
-        "U",
-        "P",
-        "E",
-        "A",
-        "R",
-        "L",
-        "G",
-        "K"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "LAGOON",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 1
-      },
-      {
-        "word": "CLAM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 3
-      },
-      {
-        "word": "WAVE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 5
-      },
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "SWIM",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 4
-      },
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "FISH",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "PEARL",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "VOLCANO",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 176,
-    "title": "Level 176",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 176)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "T",
-        "E",
-        "N",
-        "O",
-        "O",
-        "G",
-        "A",
-        "L"
-      ],
-      [
-        "W",
-        "A",
-        "T",
-        "E",
-        "R",
-        "Y",
-        "A",
-        "B"
-      ],
-      [
-        "T",
-        "S",
-        "E",
-        "R",
-        "C",
-        "M",
-        "Q",
-        "Q"
-      ],
-      [
-        " ",
-        "M",
-        "T",
-        "I",
-        "T",
-        "A",
-        "N",
-        " "
-      ],
-      [
-        " ",
-        "S",
-        "H",
-        "Y",
-        "D",
-        "R",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "E",
-        "S",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "N",
-        "D",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "U",
-        "R",
-        "D",
-        "A",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "HYDRA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "WATER",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "LAGOON",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "MARINA",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "CREST",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "TITAN",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 177,
-    "title": "Level 177",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 177)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "I",
-        "M",
-        "A",
-        "N",
-        "U",
-        "S",
-        "T",
-        "G"
-      ],
-      [
-        "P",
-        "L",
-        "E",
-        "K",
-        "D",
-        "P",
-        "O",
-        "G"
-      ],
-      [
-        "A",
-        "F",
-        "W",
-        "N",
-        "H",
-        "L",
-        "Z",
-        "M"
-      ],
-      [
-        "B",
-        "B",
-        "L",
-        "E",
-        "L",
-        "A",
-        "H",
-        "W"
-      ],
-      [
-        "U",
-        "M",
-        "O",
-        "O",
-        "L",
-        "S",
-        "H",
-        "K"
-      ],
-      [
-        "C",
-        "J",
-        "A",
-        "H",
-        "A",
-        "H",
-        "S",
-        "C"
-      ],
-      [
-        "S",
-        "H",
-        "O",
-        "R",
-        "E",
-        "T",
-        "I",
-        "S"
-      ],
-      [
-        "T",
-        "R",
-        "E",
-        "N",
-        "C",
-        "H",
-        "F",
-        "D"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "WHALE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 3
-      },
-      {
-        "word": "SCUBA",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "TRENCH",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "FISH",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "SPLASH",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "TSUNAMI",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "SHORE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 178,
-    "title": "Level 178",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 178)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "A",
-        "M",
-        "E",
-        "R",
-        "M",
-        "A",
-        "I",
-        "D"
-      ],
-      [
-        "B",
-        "U",
-        "W",
-        "O",
-        "L",
-        "R",
-        "H",
-        "U"
-      ],
-      [
-        "U",
-        "M",
-        "C",
-        "G",
-        "E",
-        "D",
-        "C",
-        "G"
-      ],
-      [
-        "C",
-        "G",
-        "A",
-        "E",
-        " ",
-        "O",
-        "A",
-        "N"
-      ],
-      [
-        "S",
-        "E",
-        "F",
-        "A",
-        " ",
-        "C",
-        "V",
-        "O"
-      ],
-      [
-        "N",
-        "I",
-        "R",
-        "A",
-        "M",
-        "K",
-        "E",
-        "S"
-      ],
-      [
-        "S",
-        "I",
-        "T",
-        "N",
-        "A",
-        "L",
-        "T",
-        "A"
-      ],
-      [
-        "G",
-        "B",
-        "L",
-        "U",
-        "E",
-        "S",
-        "V",
-        "C"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ATLANTIS",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 0
-      },
-      {
-        "word": "BLUE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "MARIN",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 0
-      },
-      {
-        "word": "MERMAID",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "ALGAE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "DOCK",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "SCUBA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 179,
-    "title": "Level 179",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 179)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "B",
-        "N",
-        "T",
-        "E",
-        "K",
-        "D",
-        "F",
-        "S"
-      ],
-      [
-        "A",
-        "I",
-        "A",
-        "A",
-        "I",
-        "T",
-        "L",
-        "E"
-      ],
-      [
-        "Y",
-        "R",
-        "E",
-        "G",
-        "N",
-        "N",
-        "O",
-        "A"
-      ],
-      [
-        " ",
-        "A",
-        "H",
-        "L",
-        "G",
-        "E",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        "M",
-        "D",
-        "A",
-        "A",
-        "D",
-        "T",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "W",
-        "R",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "N",
-        "U",
-        "R",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "G",
-        "T",
-        "A",
-        "T",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "ALGAE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 4
-      },
-      {
-        "word": "TRIDENT",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "KING",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 4
-      },
-      {
-        "word": "MARIN",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "GOLD",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 7
-      }
-    ]
-  },
-  {
-    "id": 180,
-    "title": "Level 180",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 180)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "M",
-        "L",
-        "A",
-        "P",
-        "J",
-        "U",
-        "M",
-        "P"
-      ],
-      [
-        "K",
-        "N",
-        "C",
-        "S",
-        "L",
-        "N",
-        "Z",
-        "T"
-      ],
-      [
-        "E",
-        "I",
-        "A",
-        "H",
-        "I",
-        "I",
-        "C",
-        "B"
-      ],
-      [
-        "L",
-        "Q",
-        "V",
-        "E",
-        "A",
-        "H",
-        "G",
-        "A"
-      ],
-      [
-        "P",
-        "N",
-        "E",
-        "L",
-        "T",
-        "P",
-        "M",
-        "Y"
-      ],
-      [
-        "B",
-        "I",
-        "D",
-        "L",
-        "I",
-        "L",
-        "D",
-        "L"
-      ],
-      [
-        "O",
-        "C",
-        "E",
-        "A",
-        "N",
-        "O",
-        "F",
-        "A"
-      ],
-      [
-        "L",
-        "A",
-        "R",
-        "O",
-        "C",
-        "D",
-        "C",
-        "M"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "DOLPHIN",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 4
-      },
-      {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 0
-      },
-      {
-        "word": "JUMP",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "SHELL",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 4,
-        "colEnd": 7
-      },
-      {
-        "word": "CORAL",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 181,
-    "title": "Level 181",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 181)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        "U",
-        "N",
-        "D",
-        "W",
-        "P",
-        "A",
-        "L",
-        "M"
-      ],
-      [
-        "Y",
-        "A",
-        "N",
-        "F",
-        "E",
-        "E",
-        "R",
-        "H"
-      ],
-      [
-        "F",
-        "E",
-        "O",
-        "X",
-        "J",
-        "S",
-        "C",
-        "L"
-      ],
-      [
-        " ",
-        "C",
-        "M",
-        "A",
-        "W",
-        "A",
-        "C",
-        " "
-      ],
-      [
-        " ",
-        "O",
-        "A",
-        "X",
-        "E",
-        "O",
-        "X",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "I",
-        "B",
-        "V",
-        "Z",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "D",
-        "E",
-        "H",
-        "L",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "U",
-        "R",
-        "A",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "DIAMOND",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "BEACH",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 182,
-    "title": "Level 182",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 182)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Anchor",
-    "maskIcon": "⚓",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        "B",
-        "Y",
-        "N",
-        "O",
-        "M",
-        "R",
-        "A",
-        "H"
-      ],
-      [
-        "D",
-        "J",
-        "A",
-        "L",
-        "G",
-        "A",
-        "E",
-        "F"
-      ],
-      [
-        " ",
-        "E",
-        "Z",
-        "Z",
-        "S",
-        "K",
-        "I",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "E",
-        "U",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        "D",
-        " ",
-        "A",
-        "W",
-        "H",
-        "L",
-        " ",
-        "K"
-      ],
-      [
-        "T",
-        "R",
-        "E",
-        "M",
-        "A",
-        "B",
-        "A",
-        "Y"
-      ],
-      [
-        "R",
-        "I",
-        "D",
-        "E",
-        "M",
-        "E",
-        "A",
-        "T"
-      ],
-      [
-        " ",
-        "W",
-        "I",
-        "V",
-        "R",
-        "K",
-        "S",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ALGAE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "SEAWEED",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "HARMONY",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 5,
-        "colEnd": 7
-      },
-      {
-        "word": "FISH",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 4,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 183,
-    "title": "Level 183",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 183)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Water Drop",
-    "maskIcon": "🫧",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        " ",
-        " ",
-        "S",
-        "W",
-        "I",
-        "M",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "H",
-        "L",
-        "N",
-        "I",
-        "U",
-        "R",
-        " "
-      ],
-      [
-        "T",
-        "E",
-        "M",
-        "P",
-        "L",
-        "E",
-        "W",
-        "T"
-      ],
-      [
-        "Z",
-        "X",
-        "I",
-        "L",
-        "T",
-        "J",
-        "A",
-        "T"
-      ],
-      [
-        "P",
-        "M",
-        "N",
-        "S",
-        "I",
-        "U",
-        "V",
-        "Y"
-      ],
-      [
-        "A",
-        "A",
-        "Y",
-        "J",
-        "T",
-        "M",
-        "E",
-        "Y"
-      ],
-      [
-        " ",
-        "O",
-        "L",
-        "D",
-        "A",
-        "P",
-        "O",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "Z",
-        "M",
-        "N",
-        "V",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "OYSTER",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "TITAN",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "TEMPLE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 5
-      },
-      {
-        "word": "JUMP",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "WAVE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 5,
-        "colEnd": 6
-      },
-      {
-        "word": "RUIN",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "SWIM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 184,
-    "title": "Level 184",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 184)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Ocean Fish",
-    "maskIcon": "🐟",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        " ",
-        "A",
-        "P",
-        "H",
-        "Y",
-        "J",
-        " ",
-        " "
-      ],
-      [
-        "S",
-        "N",
-        "J",
-        "P",
-        "Q",
-        "V",
-        "T",
-        "W"
-      ],
-      [
-        "H",
-        "A",
-        "U",
-        "S",
-        "X",
-        "F",
-        "A",
-        "W"
-      ],
-      [
-        "I",
-        "E",
-        "M",
-        "A",
-        "R",
-        "U",
-        "A",
-        "N"
-      ],
-      [
-        "P",
-        "C",
-        "P",
-        "A",
-        "L",
-        "M",
-        "W",
-        "N"
-      ],
-      [
-        "O",
-        "O",
-        "V",
-        "F",
-        "C",
-        "O",
-        "V",
-        "E"
-      ],
-      [
-        " ",
-        "G",
-        "E",
-        "V",
-        "A",
-        "W",
-        "Q",
-        " "
-      ],
-      [
-        "M",
-        "P",
-        " ",
-        " ",
-        " ",
-        " ",
-        "Z",
-        "V"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "WAVE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 3
-      },
-      {
-        "word": "OCEAN",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "JUMP",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 4,
-        "rowEnd": 5,
-        "colEnd": 7
-      },
-      {
-        "word": "SHIP",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "NAVY",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 185,
-    "title": "Level 185",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 185)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "F",
-        "D",
-        "O",
-        "C",
-        "K",
-        "Q",
-        "D",
-        "D"
-      ],
-      [
-        "M",
-        "E",
-        "R",
-        "M",
-        "A",
-        "I",
-        "D",
-        "K"
-      ],
-      [
-        "D",
-        "E",
-        "E",
-        "W",
-        "A",
-        "E",
-        "S",
-        "X"
-      ],
-      [
-        " ",
-        "A",
-        "Y",
-        "R",
-        "F",
-        "H",
-        "C",
-        " "
-      ],
-      [
-        " ",
-        "F",
-        "U",
-        "M",
-        "L",
-        "A",
-        "P",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "S",
-        "R",
-        "O",
-        "B",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "E",
-        "N",
-        "A",
-        "Q",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
-        "Y",
-        "T",
-        "Y",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "MERMAID",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "SEAWEED",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "DOCK",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 3
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 186,
-    "title": "Level 186",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 186)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "D",
-        "K",
-        "E",
-        "I",
-        "N",
-        "O",
-        "U",
-        "J"
-      ],
-      [
-        "R",
-        "T",
-        "L",
-        "S",
-        "D",
-        "M",
-        "N",
-        "W"
-      ],
-      [
-        "E",
-        "T",
-        "T",
-        "T",
-        "T",
-        "A",
-        "E",
-        "H"
-      ],
-      [
-        "N",
-        "K",
-        "R",
-        "I",
-        "Z",
-        "R",
-        "T",
-        "P"
-      ],
-      [
-        "I",
-        "S",
-        "U",
-        "T",
-        "O",
-        "I",
-        "A",
-        "E"
-      ],
-      [
-        "R",
-        "A",
-        "T",
-        "A",
-        "X",
-        "N",
-        "R",
-        "E"
-      ],
-      [
-        "A",
-        "M",
-        "R",
-        "N",
-        "E",
-        "A",
-        "I",
-        "D"
-      ],
-      [
-        "M",
-        "B",
-        "E",
-        "G",
-        "N",
-        "O",
-        "P",
-        "S"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "TURTLE",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 0,
-        "colEnd": 2
-      },
-      {
-        "word": "SPONGE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "MARINA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 1
-      },
-      {
-        "word": "MARINER",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "PIRATE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 6
-      },
-      {
-        "word": "TITAN",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 6,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 187,
-    "title": "Level 187",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 187)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "A",
-        "T",
-        "Z",
-        "H",
-        "T",
-        "Y",
-        "E",
-        "A"
-      ],
-      [
-        "I",
-        "A",
-        "U",
-        "R",
-        "A",
-        "V",
-        "Q",
-        "Y"
-      ],
-      [
-        "Y",
-        "S",
-        "W",
-        "W",
-        "X",
-        "A",
-        "E",
-        "W"
-      ],
-      [
-        "Z",
-        "J",
-        "H",
-        "O",
-        " ",
-        "N",
-        "A",
-        "B"
-      ],
-      [
-        "G",
-        "U",
-        "A",
-        "L",
-        " ",
-        "T",
-        "F",
-        "M"
-      ],
-      [
-        "O",
-        "M",
-        "L",
-        "G",
-        "E",
-        "S",
-        "C",
-        "G"
-      ],
-      [
-        "L",
-        "P",
-        "E",
-        "R",
-        "F",
-        "E",
-        "E",
-        "R"
-      ],
-      [
-        "D",
-        "S",
-        "N",
-        "I",
-        "F",
-        "F",
-        "K",
-        "L"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "WHALE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "GOLD",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "WATER",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "GLOW",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 3
-      },
-      {
-        "word": "REEF",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "NAVY",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "FINS",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "JUMP",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 6,
-        "colEnd": 1
-      },
-      {
-        "word": "AURA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 188,
-    "title": "Level 188",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 188)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "M",
-        "E",
-        "R",
-        "M",
-        "A",
-        "I",
-        "D",
-        "R"
-      ],
-      [
-        "S",
-        "F",
-        "G",
-        "G",
-        "T",
-        "I",
-        "D",
-        "E"
-      ],
-      [
-        "S",
-        "O",
-        "N",
-        "G",
-        "N",
-        "S",
-        "E",
-        "A"
-      ],
-      [
-        " ",
-        "A",
-        "I",
-        "F",
-        "N",
-        "I",
-        "A",
-        " "
-      ],
-      [
-        " ",
-        "M",
-        "V",
-        "L",
-        "I",
-        "F",
-        "K",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "I",
-        "O",
-        "U",
-        "I",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "D",
-        "A",
-        "R",
-        "N",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "C",
-        "T",
-        "B",
-        "S",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "DIVING",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "RUIN",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 3,
-        "colEnd": 4
-      },
-      {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "MERMAID",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "FINS",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 5,
-        "rowEnd": 2,
-        "colEnd": 7
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "KING",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 3
-      },
-      {
-        "word": "FOAM",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 189,
-    "title": "Level 189",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 189)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "X",
-        "O",
-        "Z",
-        "E",
-        "B",
-        "R",
-        "R",
-        "D"
-      ],
-      [
-        "T",
-        "X",
-        "L",
-        "V",
-        "E",
-        "O",
-        "T",
-        "O"
-      ],
-      [
-        "Z",
-        "E",
-        "E",
-        "O",
-        "A",
-        "H",
-        "R",
-        "L"
-      ],
-      [
-        "L",
-        "C",
-        "M",
-        "C",
-        "C",
-        "C",
-        "I",
-        "P"
-      ],
-      [
-        "L",
-        "I",
-        "R",
-        "P",
-        "H",
-        "N",
-        "D",
-        "H"
-      ],
-      [
-        "E",
-        "L",
-        "E",
-        "E",
-        "L",
-        "A",
-        "E",
-        "I"
-      ],
-      [
-        "H",
-        "F",
-        "R",
-        "U",
-        "S",
-        "E",
-        "N",
-        "N"
-      ],
-      [
-        "S",
-        "O",
-        "N",
-        "A",
-        "R",
-        "T",
-        "T",
-        "Z"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ANCHOR",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "CREST",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 5
-      },
-      {
-        "word": "TRIDENT",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "BEACH",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 4
-      },
-      {
-        "word": "TEMPLE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "SHELL",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "SONAR",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "DOLPHIN",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "SURF",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 190,
-    "title": "Level 190",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 190)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "S",
-        "A",
-        "N",
-        "D",
-        "T",
-        "F",
-        "C",
-        "W"
-      ],
-      [
-        "E",
-        "V",
-        "A",
-        "C",
-        "L",
-        "N",
-        "D",
-        "W"
-      ],
-      [
-        "A",
-        "V",
-        "F",
-        "I",
-        "N",
-        "S",
-        "L",
-        "C"
-      ],
-      [
-        "L",
-        "S",
-        "O",
-        "N",
-        " ",
-        "Y",
-        "A",
-        "O"
-      ],
-      [
-        "S",
-        "E",
-        "A",
-        "C",
-        " ",
-        "U",
-        "R",
-        "R"
-      ],
-      [
-        "L",
-        "M",
-        "C",
-        "D",
-        "U",
-        "B",
-        "E",
-        "A"
-      ],
-      [
-        "F",
-        "Z",
-        "C",
-        "R",
-        "A",
-        "B",
-        "M",
-        "L"
-      ],
-      [
-        "G",
-        "L",
-        "O",
-        "W",
-        "M",
-        "V",
-        "E",
-        "G"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "EMERALD",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 0,
-        "rowEnd": 4,
-        "colEnd": 2
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "FINS",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 5
-      },
-      {
-        "word": "CRAB",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "CORAL",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "GLOW",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "SEAL",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 191,
-    "title": "Level 191",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 191)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Water Drop",
-    "maskIcon": "🫧",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        " ",
-        "A",
-        "E",
-        "X",
-        "P",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "T",
-        "N",
-        "D",
-        "E",
-        "E",
-        "L",
-        " "
-      ],
-      [
-        "U",
-        "E",
-        "D",
-        "I",
-        "R",
-        "E",
-        "I",
-        "D"
-      ],
-      [
-        "K",
-        "C",
-        "I",
-        "T",
-        "Y",
-        "D",
-        "A",
-        "I"
-      ],
-      [
-        "S",
-        "I",
-        "Z",
-        "D",
-        "I",
-        "H",
-        "T",
-        "F"
-      ],
-      [
-        "L",
-        "D",
-        "Q",
-        "N",
-        "A",
-        "P",
-        "I",
-        "F"
-      ],
-      [
-        " ",
-        "L",
-        "I",
-        "A",
-        "N",
-        "N",
-        "O",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "S",
-        "S",
-        "A",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 3
-      },
-      {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "FINS",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "CITY",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 4
-      },
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 4,
-        "rowEnd": 2,
-        "colEnd": 1
-      }
-    ]
-  },
-  {
-    "id": 192,
-    "title": "Level 192",
-    "subtitle": "BUBBLE OCEAN - EASY (LEVEL 192)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Ocean Fish",
-    "maskIcon": "🐟",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 85,
-    "grid": [
-      [
-        " ",
-        "E",
-        "R",
-        "O",
-        "H",
-        "S",
-        " ",
-        " "
-      ],
-      [
-        "S",
-        "N",
-        "S",
-        "W",
-        "A",
-        "C",
-        "T",
-        "H"
-      ],
-      [
-        "A",
-        "E",
-        "G",
-        "R",
-        "J",
-        "U",
-        "E",
-        "H"
-      ],
-      [
-        "N",
-        "P",
-        "E",
-        "O",
-        "V",
-        "B",
-        "M",
-        "K"
-      ],
-      [
-        "D",
-        "T",
-        "V",
-        "V",
-        "L",
-        "A",
-        "P",
-        "I"
-      ],
-      [
-        "I",
-        "U",
-        "P",
-        "S",
-        "A",
-        "D",
-        "L",
-        "B"
-      ],
-      [
-        " ",
-        "N",
-        "F",
-        "E",
-        "Y",
-        "C",
-        "E",
-        " "
-      ],
-      [
-        "X",
-        "E",
-        " ",
-        " ",
-        " ",
-        " ",
-        "X",
-        "O"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 3,
-        "colEnd": 2
-      },
-      {
-        "word": "TEMPLE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 6,
-        "colEnd": 6
-      },
-      {
-        "word": "NEPTUNE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 1
-      },
-      {
-        "word": "SCUBA",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "SHORE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 0,
-        "colEnd": 1
-      },
-      {
-        "word": "GOLD",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 193,
-    "title": "Level 193",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 193)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Neptune Trident",
-    "maskIcon": "🔱",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        "D",
-        "B",
-        " ",
-        "T",
-        "A",
-        " ",
-        "R",
-        "D"
-      ],
-      [
-        "R",
-        "Z",
-        "C",
-        "R",
-        "A",
-        "B",
-        "E",
-        "O"
-      ],
-      [
-        "M",
-        "O",
-        "F",
-        "O",
-        "R",
-        "H",
-        "T",
-        "C"
-      ],
-      [
-        "W",
-        "A",
-        "H",
-        "I",
-        "V",
-        "V",
-        "A",
-        "K"
-      ],
-      [
-        " ",
-        "B",
-        "O",
-        "C",
-        "S",
-        "E",
-        "W",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "Q",
-        "F",
-        "N",
-        "H",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "O",
-        "B",
-        "Y",
-        "A",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "D",
-        "E",
-        "R",
-        "U",
-        "I",
-        "N",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ANCHOR",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 5,
-        "rowEnd": 1,
-        "colEnd": 0
-      },
-      {
-        "word": "COVE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "FISH",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 5
-      },
-      {
-        "word": "FOAM",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "RUIN",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 6
-      },
-      {
-        "word": "WATER",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 6
-      },
-      {
-        "word": "DOCK",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 3,
-        "colEnd": 7
-      },
-      {
-        "word": "CRAB",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 194,
-    "title": "Level 194",
-    "subtitle": "BUBBLE OCEAN - MEDIUM (LEVEL 194)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Jellyfish",
-    "maskIcon": "🪼",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 95,
-    "grid": [
-      [
-        " ",
-        "W",
-        "U",
-        "Z",
-        "Y",
-        "E",
-        "D",
-        " "
-      ],
-      [
-        "R",
-        "B",
-        "S",
-        "M",
-        "A",
-        "O",
-        "I",
-        "S"
-      ],
-      [
-        "U",
-        "E",
-        "E",
-        "E",
-        "E",
-        "K",
-        "V",
-        "A"
-      ],
-      [
-        "I",
-        "A",
-        "A",
-        "R",
-        "G",
-        "H",
-        "E",
-        "N"
-      ],
-      [
-        "N",
-        "C",
-        "O",
-        "M",
-        "M",
-        "C",
-        "U",
-        "D"
-      ],
-      [
-        "T",
-        "H",
-        " ",
-        "A",
-        "A",
-        " ",
-        "P",
-        "E"
-      ],
-      [
-        "S",
-        "J",
-        " ",
-        "I",
-        "L",
-        " ",
-        "R",
-        "F"
-      ],
-      [
-        "G",
-        "G",
-        " ",
-        "D",
-        "C",
-        " ",
-        "Y",
-        "J"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "MERMAID",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 4,
-        "colEnd": 7
-      },
-      {
-        "word": "CLAM",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 4
-      },
-      {
-        "word": "DIVE",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 6
-      },
-      {
-        "word": "BEACH",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 1,
-        "rowEnd": 5,
-        "colEnd": 1
-      },
-      {
-        "word": "RUIN",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 4,
-        "colEnd": 0
-      },
-      {
-        "word": "SHORE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 4
-      },
-      {
-        "word": "SEA",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 2
-      }
-    ]
-  },
-  {
-    "id": 195,
-    "title": "Level 195",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 195)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "M",
-        "A",
-        "R",
-        "I",
-        "T",
-        "I",
-        "M",
-        "E"
-      ],
-      [
-        "E",
-        "M",
-        "E",
-        "R",
-        "A",
-        "L",
-        "D",
-        "C"
-      ],
-      [
-        "T",
-        "N",
-        "E",
-        "D",
-        "I",
-        "R",
-        "T",
-        "R"
-      ],
-      [
-        "F",
-        "E",
-        "X",
-        "D",
-        "D",
-        "F",
-        "T",
-        "Y"
-      ],
-      [
-        "L",
-        "U",
-        "O",
-        "C",
-        "N",
-        "G",
-        "G",
-        "S"
-      ],
-      [
-        "O",
-        "Y",
-        "N",
-        "Z",
-        "A",
-        "A",
-        "P",
-        "T"
-      ],
-      [
-        "A",
-        "B",
-        "U",
-        "C",
-        "S",
-        "V",
-        "S",
-        "A"
-      ],
-      [
-        "T",
-        "A",
-        "F",
-        "R",
-        "U",
-        "S",
-        "E",
-        "L"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "EMERALD",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "MARITIME",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "TRIDENT",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 6,
-        "rowEnd": 2,
-        "colEnd": 0
-      },
-      {
-        "word": "SAND",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 6,
-        "rowEnd": 3,
-        "colEnd": 3
-      },
-      {
-        "word": "CRYSTAL",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "SURF",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "SCUBA",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 4,
-        "rowEnd": 6,
-        "colEnd": 0
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "CAVE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 3,
-        "rowEnd": 7,
-        "colEnd": 6
-      }
-    ]
-  },
-  {
-    "id": 196,
-    "title": "Level 196",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 196)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "Y",
-        "F",
-        "L",
-        "O",
-        "A",
-        "T",
-        "S",
-        "W"
-      ],
-      [
-        "D",
-        "I",
-        "V",
-        "I",
-        "N",
-        "G",
-        "V",
-        "X"
-      ],
-      [
-        "T",
-        "D",
-        "P",
-        "S",
-        "D",
-        "M",
-        "W",
-        "S"
-      ],
-      [
-        "S",
-        "E",
-        "I",
-        "O",
-        " ",
-        "O",
-        "O",
-        "T"
-      ],
-      [
-        "E",
-        "V",
-        "R",
-        "N",
-        " ",
-        "N",
-        "L",
-        "A"
-      ],
-      [
-        "R",
-        "A",
-        "A",
-        "G",
-        "A",
-        "A",
-        "R",
-        "I"
-      ],
-      [
-        "C",
-        "W",
-        "T",
-        "R",
-        "Q",
-        "O",
-        "H",
-        "L"
-      ],
-      [
-        "U",
-        "W",
-        "E",
-        "A",
-        "G",
-        "L",
-        "A",
-        "M"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "WAVE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 1
-      },
-      {
-        "word": "TAIL",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "SONG",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 3,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "PIRATE",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "ALGAE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 5
-      },
-      {
-        "word": "DIVING",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 0,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "SONAR",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 3
-      },
-      {
-        "word": "CREST",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 0,
-        "rowEnd": 2,
-        "colEnd": 0
-      }
-    ]
-  },
-  {
-    "id": 197,
-    "title": "Level 197",
-    "subtitle": "BUBBLE OCEAN - HARD (LEVEL 197)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 100,
-    "grid": [
-      [
-        "G",
-        "H",
-        "M",
-        "E",
-        "M",
-        "A",
-        "O",
-        "F"
-      ],
-      [
-        "W",
-        "E",
-        "C",
-        "B",
-        "D",
-        "L",
-        "C",
-        "F"
-      ],
-      [
-        "E",
-        "A",
-        "O",
-        "A",
-        "D",
-        "I",
-        "L",
-        "M"
-      ],
-      [
-        " ",
-        "T",
-        "R",
-        "Y",
-        "T",
-        "O",
-        "T",
-        " "
-      ],
-      [
-        " ",
-        "O",
-        "A",
-        "Y",
-        "A",
-        "K",
-        "D",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "L",
-        "T",
-        "E",
-        "E",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "V",
-        "L",
-        "E",
-        "P",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "P",
-        "P",
-        "K",
-        "D",
-        " ",
-        " "
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 5,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 5,
-        "colEnd": 3
-      },
-      {
-        "word": "CORAL",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 2,
-        "rowEnd": 5,
-        "colEnd": 2
-      },
-      {
-        "word": "TIDE",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 3,
-        "colEnd": 1
-      },
-      {
-        "word": "FOAM",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "DEEP",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 3
-      },
-      {
-        "word": "CITY",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 4,
-        "colEnd": 3
-      },
-      {
-        "word": "BAY",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 3,
-        "rowEnd": 3,
-        "colEnd": 3
-      }
-    ]
-  },
-  {
-    "id": 198,
-    "title": "Level 198",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 198)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Atlantis Citadel",
-    "maskIcon": "🏰",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "S",
-        "U",
-        "R",
-        "F",
-        "M",
-        "R",
-        "E",
-        "T"
-      ],
-      [
-        "G",
-        "Z",
-        "R",
-        "L",
-        "S",
-        "H",
-        "J",
-        "R"
-      ],
-      [
-        "P",
-        "I",
-        "A",
-        "E",
-        "T",
-        "W",
-        "H",
-        "G"
-      ],
-      [
-        "E",
-        "P",
-        "G",
-        "R",
-        "T",
-        "T",
-        "I",
-        "K"
-      ],
-      [
-        "R",
-        "B",
-        "O",
-        "O",
-        "A",
-        "S",
-        "E",
-        "M"
-      ],
-      [
-        "O",
-        "N",
-        "L",
-        "E",
-        "L",
-        "L",
-        "Y",
-        "V"
-      ],
-      [
-        "H",
-        "H",
-        "H",
-        "U",
-        "P",
-        "D",
-        "W",
-        "O"
-      ],
-      [
-        "S",
-        "X",
-        "K",
-        "Z",
-        "E",
-        "P",
-        "B",
-        "X"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "OYSTER",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 7,
-        "rowEnd": 1,
-        "colEnd": 2
-      },
-      {
-        "word": "BLUE",
-        "found": false,
-        "rowStart": 4,
-        "colStart": 1,
-        "rowEnd": 7,
-        "colEnd": 4
-      },
-      {
-        "word": "SWIM",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 4,
-        "rowEnd": 4,
-        "colEnd": 7
-      },
-      {
-        "word": "SHORE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 0,
-        "rowEnd": 3,
-        "colEnd": 0
-      },
-      {
-        "word": "PALM",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 4
-      },
-      {
-        "word": "KELP",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 4
-      },
-      {
-        "word": "NORTH",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 1,
-        "rowEnd": 1,
-        "colEnd": 5
-      },
-      {
-        "word": "SURF",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "HEAT",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 3,
-        "colEnd": 5
-      },
-      {
-        "word": "GOLD",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 5
-      }
-    ]
-  },
-  {
-    "id": 199,
-    "title": "Level 199",
-    "subtitle": "BUBBLE OCEAN - HARDEST (BOSS) (LEVEL 199)",
-    "world": "island",
-    "themeIcon": "water_drop",
-    "maskName": "Nautilus Spiral",
-    "maskIcon": "🐚",
-    "stars": 0,
-    "completed": false,
-    "locked": false,
-    "timeLimit": 110,
-    "grid": [
-      [
-        "N",
-        "I",
-        "L",
-        "N",
-        "K",
-        "S",
-        "A",
-        "M"
-      ],
-      [
-        "A",
-        "S",
-        "Q",
-        "E",
-        "H",
-        "E",
-        "E",
-        "S"
-      ],
-      [
-        "U",
-        "L",
-        "M",
-        "K",
-        "J",
-        "A",
-        "N",
-        "P"
-      ],
-      [
-        "T",
-        "E",
-        "A",
-        "A",
-        " ",
-        "W",
-        "O",
-        "L"
-      ],
-      [
-        "I",
-        "T",
-        "R",
-        "R",
-        " ",
-        "E",
-        "M",
-        "A"
-      ],
-      [
-        "C",
-        "R",
-        "I",
-        "K",
-        "D",
-        "E",
-        "E",
-        "S"
-      ],
-      [
-        "A",
-        "K",
-        "N",
-        "I",
-        "S",
-        "D",
-        "N",
-        "H"
-      ],
-      [
-        "L",
-        "I",
-        "R",
-        "U",
-        "F",
-        "O",
-        "A",
-        "M"
-      ]
-    ],
-    "targetWords": [
-      {
-        "word": "ANEMONE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 6
-      },
-      {
-        "word": "MARIN",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "KRAKEN",
-        "found": false,
-        "rowStart": 5,
-        "colStart": 3,
-        "rowEnd": 0,
-        "colEnd": 3
-      },
-      {
-        "word": "FOAM",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 4,
-        "rowEnd": 7,
-        "colEnd": 7
-      },
-      {
-        "word": "SPLASH",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 7,
-        "rowEnd": 6,
-        "colEnd": 7
-      },
-      {
-        "word": "NAUTICAL",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 0,
-        "rowEnd": 7,
-        "colEnd": 0
-      },
-      {
-        "word": "ISLET",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 4,
-        "colEnd": 1
-      },
-      {
-        "word": "SEAWEED",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 5,
-        "rowEnd": 6,
-        "colEnd": 5
-      },
-      {
-        "word": "RIDE",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 2,
-        "rowEnd": 4,
-        "colEnd": 5
-      },
-      {
-        "word": "MASK",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 7,
-        "rowEnd": 0,
-        "colEnd": 4
-      }
-    ]
-  },
-  {
-    "id": 200,
-    "title": "Level 200",
-    "subtitle": "ATLANTIS SUMMIT - ULTIMATE CLIMAX (LEVEL 200)",
+    "subtitle": "ATLANTIS SUMMIT - ULTIMATE CLIMAX (LEVEL 150)",
     "world": "island",
     "themeIcon": "emoji_events",
-    "maskName": "Clam Shell",
-    "maskIcon": "🐚",
+    "maskName": "Ocean Fish",
+    "maskIcon": "🐟",
     "stars": 0,
     "completed": false,
     "locked": false,
     "timeLimit": 120,
     "grid": [
       [
-        "B",
-        "D",
-        "I",
-        "A",
-        "M",
-        "O",
-        "N",
-        "D"
-      ],
-      [
-        "A",
-        "E",
-        "T",
-        "A",
         "R",
+        "R",
+        "F",
         "I",
-        "P",
+        "D",
+        "Y",
+        "M",
         "E"
       ],
       [
-        "Y",
-        "X",
-        "F",
-        "E",
-        "P",
-        "A",
-        "L",
-        "M"
-      ],
-      [
-        " ",
-        "G",
-        "L",
-        "S",
-        "R",
-        "P",
-        "H",
-        " "
-      ],
-      [
-        " ",
-        "N",
+        "I",
+        "K",
+        "W",
         "O",
-        "U",
-        "M",
-        "Y",
-        "F",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "A",
+        "L",
+        "G",
         "E",
-        "D",
-        "R",
-        " ",
-        " "
+        "N"
       ],
       [
-        " ",
-        " ",
+        "G",
+        "P",
+        "E",
+        "L",
+        "A",
+        "G",
+        "I",
+        "C"
+      ],
+      [
+        "G",
+        "M",
+        "M",
+        "O",
+        "H",
+        "T",
+        "A",
+        "F"
+      ],
+      [
+        "I",
+        "D",
+        "S",
+        "H",
         "T",
         "R",
-        "U",
-        "A",
-        " ",
-        " "
+        "O",
+        "N"
       ],
       [
-        " ",
-        " ",
-        "A",
+        "N",
+        "O",
+        "C",
+        "T",
+        "O",
+        "P",
+        "U",
+        "S"
+      ],
+      [
+        "G",
         "S",
+        "S",
+        "Y",
         "B",
-        "X",
-        " ",
-        " "
+        "A",
+        "P",
+        "S"
+      ],
+      [
+        "I",
+        "D",
+        "D",
+        "C",
+        "R",
+        "O",
+        "W",
+        "N"
       ]
     ],
     "targetWords": [
       {
-        "word": "PIRATE",
-        "found": false,
-        "rowStart": 1,
-        "colStart": 6,
-        "rowEnd": 1,
-        "colEnd": 1
-      },
-      {
-        "word": "TEMPLE",
-        "found": false,
-        "rowStart": 6,
-        "colStart": 2,
-        "rowEnd": 1,
-        "colEnd": 7
-      },
-      {
-        "word": "HYDRA",
-        "found": false,
-        "rowStart": 3,
-        "colStart": 6,
-        "rowEnd": 7,
-        "colEnd": 2
-      },
-      {
-        "word": "DIAMOND",
-        "found": false,
-        "rowStart": 0,
-        "colStart": 1,
-        "rowEnd": 0,
-        "colEnd": 7
-      },
-      {
-        "word": "FLOAT",
-        "found": false,
-        "rowStart": 2,
-        "colStart": 2,
-        "rowEnd": 6,
-        "colEnd": 2
-      },
-      {
-        "word": "BAY",
+        "word": "RIGGING",
         "found": false,
         "rowStart": 0,
         "colStart": 0,
-        "rowEnd": 2,
+        "rowEnd": 6,
         "colEnd": 0
       },
       {
-        "word": "SURF",
-        "found": false,
-        "rowStart": 7,
-        "colStart": 3,
-        "rowEnd": 4,
-        "colEnd": 6
-      },
-      {
-        "word": "AURA",
+        "word": "OCTOPUS",
         "found": false,
         "rowStart": 5,
-        "colStart": 2,
-        "rowEnd": 2,
-        "colEnd": 5
+        "colStart": 1,
+        "rowEnd": 5,
+        "colEnd": 7
       },
       {
-        "word": "PALM",
+        "word": "PELAGIC",
         "found": false,
         "rowStart": 2,
-        "colStart": 4,
+        "colStart": 1,
         "rowEnd": 2,
         "colEnd": 7
       },
       {
-        "word": "SEA",
+        "word": "FATHOM",
         "found": false,
         "rowStart": 3,
-        "colStart": 3,
-        "rowEnd": 1,
+        "colStart": 7,
+        "rowEnd": 3,
+        "colEnd": 2
+      },
+      {
+        "word": "NORTH",
+        "found": false,
+        "rowStart": 4,
+        "colStart": 7,
+        "rowEnd": 4,
         "colEnd": 3
+      },
+      {
+        "word": "ABYSS",
+        "found": false,
+        "rowStart": 6,
+        "colStart": 5,
+        "rowEnd": 6,
+        "colEnd": 1
+      },
+      {
+        "word": "CROWN",
+        "found": false,
+        "rowStart": 7,
+        "colStart": 3,
+        "rowEnd": 7,
+        "colEnd": 7
+      },
+      {
+        "word": "GLOW",
+        "found": false,
+        "rowStart": 1,
+        "colStart": 5,
+        "rowEnd": 1,
+        "colEnd": 2
       }
     ]
   }

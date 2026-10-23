@@ -171,9 +171,9 @@ export const CenturyAchievementModal: React.FC<CenturyAchievementModalProps> = (
             </View>
 
             {/* Achievement Titles */}
-            <Text style={styles.title}>100 LEVELS CONQUERED!</Text>
+            <Text style={styles.title}>50 LEVELS CONQUERED!</Text>
             <Text style={styles.subtitle}>
-              Spectacular triumph! You mastered all 100 levels of Sunny Valley!
+              Spectacular triumph! You mastered all 50 levels of Sunny Valley!
             </Text>
 
             {/* Big Rewards Showcase */}

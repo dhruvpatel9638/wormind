@@ -1,6 +1,6 @@
 import { DAILY_REWARDS } from '../data/gameData';
 import { SPIN_PRIZES } from '../data/spinPrizes';
-import { HINT_COST } from '../config/economy';
+import { HINT_COST, STARTING_COINS } from '../config/economy';
 import type { PlayerState, SpinTicket } from '../types';
 
 export const localDayKey = (date = new Date()): string =>
@@ -20,13 +20,13 @@ export function millisecondsToNextDay(date = new Date()): number {
 
 export function createInitialPlayerState(): PlayerState {
   return {
-    coins: 100, xp: 0, stars: 380, hearts: 5, maxHearts: 5, heartSeconds: 252,
+    coins: STARTING_COINS, xp: 0, stars: 380, hearts: 5, maxHearts: 5, heartSeconds: 252,
     streak: 0, streakLvl: 2, streakMax: 7, claimedDays: [], hasClaimedDay5: false,
     equippedHat: 'none', unlockedHats: ['none', 'sunglasses'],
     solvedCount: 23, wordsDiscovered: 148,
     soundEnabled: true, musicEnabled: true, hapticsEnabled: true,
     currentLevel: 1, lastDailyClaimDate: null, lastSpinDate: null, pendingSpin: null,
-    strike: 10, strikeZeroFails: 0,
+    strike: 10, strikeZeroFails: 0, strikeFreeRestoresRemaining: 2,
   };
 }
 
@@ -58,9 +58,18 @@ export function restorePlayerState(value: unknown): PlayerState {
     ...defaults, ...saved,
     coins: nonnegative(saved.coins, defaults.coins),
     xp: nonnegative(saved.xp, 0),
+    hearts: nonnegative(saved.hearts, 5),
+    maxHearts: 5,
+    heartSeconds: nonnegative(saved.heartSeconds, 252),
     currentLevel: Math.max(1, nonnegative(saved.currentLevel, 1)),
     strike: nonnegative(saved.strike, defaults.strike),
     strikeZeroFails: nonnegative(saved.strikeZeroFails, 0),
+    strikeFreeRestoresRemaining: nonnegative(saved.strikeFreeRestoresRemaining, 2),
+    claimedChests: Array.isArray(saved.claimedChests) ? saved.claimedChests : [],
+    hasClaimedCenturyAchievement: Boolean(saved.hasClaimedCenturyAchievement),
+    soundEnabled: saved.soundEnabled !== false,
+    musicEnabled: saved.musicEnabled !== false,
+    hapticsEnabled: saved.hapticsEnabled !== false,
     unlockedHats: Array.isArray(saved.unlockedHats)
       ? [...new Set(['none', ...saved.unlockedHats.filter((hat) => typeof hat === 'string')])]
       : defaults.unlockedHats,
@@ -71,13 +80,17 @@ export function restorePlayerState(value: unknown): PlayerState {
 }
 
 export function rewardAvailability(state: PlayerState, now = new Date()) {
+  if (!state) {
+    return { canClaimDaily: false, canSpinToday: false, claimedDays: [], currentDay: 1, streak: 0 };
+  }
   const today = localDayKey(now);
+  const rawClaimedDays = Array.isArray(state.claimedDays) ? state.claimedDays : [];
   // A clock rollback must not reopen an already-claimed day.
   const canClaimDaily = !state.lastDailyClaimDate || state.lastDailyClaimDate < today;
   const canSpinToday = !state.lastSpinDate || state.lastSpinDate < today;
-  const claimedDays = state.claimedDays.length >= 7 && canClaimDaily ? [] : state.claimedDays;
+  const claimedDays = rawClaimedDays.length >= 7 && canClaimDaily ? [] : rawClaimedDays;
   const streak = state.lastDailyClaimDate === today || state.lastDailyClaimDate === previousDayKey(now)
-    ? state.streak : 0;
+    ? (state.streak ?? 0) : 0;
   return { canClaimDaily, canSpinToday, claimedDays, currentDay: (claimedDays.length % 7) + 1, streak };
 }
 

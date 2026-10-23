@@ -48,12 +48,13 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   onClaimChest,
 }) => {
   const [selectedChapter, setSelectedChapter] = useState<'sunny' | 'ocean'>(
-    activeLevelId > 100 ? 'ocean' : 'sunny'
+    activeLevelId > 50 ? 'ocean' : 'sunny'
   );
   const [selectedModalLevel, setSelectedModalLevel] = useState<number | null>(null);
   const [alertInfo, setAlertInfo] = useState<{ title: string; message: string } | null>(null);
   const [mapWidth, setMapWidth] = useState(360);
   const scrollRef = useRef<ScrollView>(null);
+  const isInitialScrollRef = useRef(true);
 
   const handleMapLayout = (event: LayoutChangeEvent) => {
     const nextWidth = event.nativeEvent.layout.width;
@@ -86,31 +87,40 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   };
 
   useEffect(() => {
-    if (activeLevelId > 100) {
+    if (activeLevelId > 50) {
       setSelectedChapter('ocean');
     }
   }, [activeLevelId]);
 
-  // ALL 100 Levels for Sunny Valley (Levels 1-100)
-  const chapter1Levels = INITIAL_LEVELS.filter((l) => l.id <= 100);
-  // ALL 100 Levels for Bubble Ocean (Levels 101-200)
-  const chapter2Levels = INITIAL_LEVELS.filter((l) => l.id >= 101);
+  // ALL 50 Levels for Sunny Valley (Levels 1-50)
+  const chapter1Levels = INITIAL_LEVELS.filter((l) => l.id <= 50);
+  // ALL 100 Levels for Bubble Ocean (Levels 51-150)
+  const chapter2Levels = INITIAL_LEVELS.filter((l) => l.id >= 51 && l.id <= 150);
   
   const activeLevelsList = selectedChapter === 'ocean' ? chapter2Levels : chapter1Levels;
 
-  const scrollToActiveLevel = () => {
+  const scrollToActiveLevel = (animated = false) => {
     if (scrollRef.current) {
       const mapHeight = activeLevelsList.length * 110 + 200;
       const relativeIndex = selectedChapter === 'ocean'
-        ? Math.max(0, Math.min(activeLevelsList.length - 1, activeLevelId - 101))
+        ? Math.max(0, Math.min(activeLevelsList.length - 1, activeLevelId - 51))
         : Math.max(0, Math.min(activeLevelsList.length - 1, activeLevelId - 1));
       const y = mapHeight - relativeIndex * 110 - 300;
-      scrollRef.current.scrollTo({ y: Math.max(0, y), animated: true });
+      scrollRef.current.scrollTo({ y: Math.max(0, y), animated });
     }
   };
 
   useEffect(() => {
-    setTimeout(scrollToActiveLevel, 300);
+    if (isInitialScrollRef.current) {
+      isInitialScrollRef.current = false;
+      // Instantly position at active level without rolling down violently from the top
+      scrollToActiveLevel(false);
+      const timer = setTimeout(() => scrollToActiveLevel(false), 50);
+      return () => clearTimeout(timer);
+    } else {
+      const timer = setTimeout(() => scrollToActiveLevel(true), 150);
+      return () => clearTimeout(timer);
+    }
   }, [activeLevelId, selectedChapter]);
 
   const handleNodeClick = (lvl: number, isLocked: boolean) => {
@@ -125,10 +135,10 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     setSelectedModalLevel(lvl);
   };
 
-  const completedInSunny = Math.min(100, Math.max(0, activeLevelId - 1));
-  const completedInOcean = Math.min(100, Math.max(0, activeLevelId - 100));
+  const completedInSunny = Math.min(50, Math.max(0, activeLevelId - 1));
+  const completedInOcean = Math.min(100, Math.max(0, activeLevelId - 50));
   const completedCount = selectedChapter === 'ocean' ? completedInOcean : completedInSunny;
-  const totalInChapter = activeLevelsList.length || 100;
+  const totalInChapter = activeLevelsList.length || (selectedChapter === 'ocean' ? 100 : 50);
   const chapterProgressPercent = Math.min(100, Math.round((completedCount / totalInChapter) * 100));
 
   const mapHeight = activeLevelsList.length * 110 + 200;
@@ -182,7 +192,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
               <ValleyTree type="pine" scale={0.9} />
             </View>
           )}
-          {lvlId === 100 && (
+          {lvlId === 50 && (
             <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 32, left: mapLeft(236, 100) }]}>
               <ValleySignpost label="VALLEY PEAK" />
             </View>
@@ -243,7 +253,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
     const isRightSideCurve = Math.sin(index * 0.8) * 100 > 0;
     const meadowX = isRightSideCurve ? 22 : 246;
 
-    if (lvlId === 101) {
+    if (lvlId === 51) {
       return (
         <View key={`landmark-${lvlId}`} pointerEvents="none" style={styles.landmarkWrapper}>
           <View style={[styles.landmarkItem, { bottom: bottom - 8, left: mapLeft(24) }]}>
@@ -256,7 +266,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
       );
     }
 
-    if (lvlId % 5 === 0 || lvlId === 200) {
+    if (lvlId % 5 === 0 || lvlId === 150) {
       const isClaimed = (claimedChests || []).includes(lvlId);
       const isReady = !isClaimed && activeLevelId > lvlId;
       const status: 'locked' | 'ready' | 'claimed' = isClaimed ? 'claimed' : isReady ? 'ready' : 'locked';
@@ -271,7 +281,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
               onPress={() => handleChestPress(lvlId, status)}
             />
           </View>
-          {lvlId === 200 && (
+          {lvlId === 150 && (
             <View pointerEvents="none" style={[styles.landmarkItem, { bottom: bottom + 35, left: mapLeft(236, 100) }]}>
               <OceanAtlantisPalace size={70} />
             </View>
@@ -324,7 +334,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         ref={scrollRef}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
-        onLayout={scrollToActiveLevel}
+        onLayout={() => scrollToActiveLevel(false)}
       >
         {/* Chapter Header Card */}
         <View style={[styles.chapterCard, isOcean && styles.chapterCardOcean]}>
@@ -388,24 +398,32 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                     : styles.worldPillTextInactive
                 }
               >
-                Sunny Valley (1-100)
+                Sunny Valley (1-50)
               </Text>
             </Pressable>
 
             <Pressable
               onPress={() => {
                 nativeAudio.playLetterTap(1);
+                if (activeLevelId <= 50) {
+                  setAlertInfo({
+                    title: 'Bubble Ocean Locked 🔒',
+                    message: 'Complete all 50 levels of Sunny Valley to unlock Bubble Ocean!',
+                  });
+                  return;
+                }
                 setSelectedChapter('ocean');
               }}
               style={[
                 styles.worldPill,
                 selectedChapter === 'ocean' ? styles.worldPillActiveOcean : styles.worldPillInactive,
+                activeLevelId <= 50 && { opacity: 0.8 },
               ]}
             >
               <MaterialIcons
-                name="water-drop"
+                name={activeLevelId <= 50 ? 'lock' : 'water-drop'}
                 size={14}
-                color={selectedChapter === 'ocean' ? '#FFFFFF' : '#06B6D4'}
+                color={selectedChapter === 'ocean' ? '#FFFFFF' : (activeLevelId <= 50 ? '#94A3B8' : '#06B6D4')}
               />
               <Text
                 style={
@@ -414,7 +432,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
                     : styles.worldPillTextInactive
                 }
               >
-                Bubble Ocean (101-200)
+                Bubble Ocean (51-150)
               </Text>
             </Pressable>
 
@@ -692,7 +710,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
               const modalLevelData = INITIAL_LEVELS.find((l) => l.id === selectedModalLevel);
               return (
                 <Text style={styles.modalSub}>
-                  {selectedModalLevel && selectedModalLevel > 100
+                  {selectedModalLevel && selectedModalLevel > 50
                     ? `Chapter 2 • Bubble Ocean ${modalLevelData?.maskIcon ? `(${modalLevelData.maskIcon} ${modalLevelData.maskName})` : ''}`
                     : 'Chapter 1 • Sunny Valley'}
                 </Text>
