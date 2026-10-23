@@ -22,11 +22,13 @@ import { VictoryModal } from '../components/VictoryModal';
 import { showRewardedAd } from '../../utils/admobService';
 import { STRIKE_LOSS_PENALTY, STRIKE_WIN_REWARD } from '../../config/strike';
 import { HINT_COST, REVEAL_COST } from '../../config/economy';
+import { getLevelDifficultyConfig } from '../../config/difficultyScaling';
+import { getLevelById } from '../../utils/endlessLevelGenerator';
 
 interface GameViewProps {
   levelId: number;
   onExit: () => void;
-  onCompleteLevel: (levelId: number, stars: number, coinsEarned: number) => void;
+  onCompleteLevel: (levelId: number, stars: number, coinsEarned: number, target?: 'next' | 'map') => void;
   coins: number;
   onDeductCoins: (amount: number) => boolean;
   onUseHint: () => boolean;
@@ -60,10 +62,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const tileSizeRef = useRef(tileSize);
   tileSizeRef.current = tileSize;
   const contentWidthStyle = { width: '100%' as const, maxWidth: 600 };
-  const currentLevel =
-    INITIAL_LEVELS.find((l) => l.id === levelId) ||
-    INITIAL_LEVELS.find((l) => l.id === 4) ||
-    INITIAL_LEVELS[0];
+  const currentLevel = getLevelById(levelId);
 
   const [grid, setGrid] = useState<string[][]>(currentLevel.grid);
   // Ensure all target words start as unfound when playing
@@ -89,24 +88,12 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [strikeLost, setStrikeLost] = useState(0);
   const strikeRef = useRef(strike);
   useEffect(() => { strikeRef.current = strike; }, [strike]);
+  const diffConfig = getLevelDifficultyConfig(levelId);
   const getLevelInitialTime = (lvl: typeof currentLevel) => {
     if (lvl.timeLimit && lvl.timeLimit > 0 && lvl.timeLimit <= 130) {
       return lvl.timeLimit;
     }
-    const count = lvl.targetWords?.length || 5;
-    const isHardest = Boolean(
-      lvl.subtitle && (lvl.subtitle.includes('HARDEST') || lvl.subtitle.includes('BOSS') || lvl.subtitle.includes('CLIMAX'))
-    );
-    const isHard = Boolean(lvl.subtitle && lvl.subtitle.includes('HARD')) || isHardest;
-
-    // Dynamically reduced timer so hard levels feel genuinely fast-paced and challenging:
-    if (count <= 4) return 80;
-    if (count === 5) return 85;
-    if (count === 6) return isHard ? 90 : 95;
-    if (count === 7) return isHard ? 95 : 100;
-    if (count === 8) return isHardest ? 100 : 105;
-    if (count === 9) return isHardest ? 110 : 115;
-    return 120; // 10 words: max 120s for intense boss feel!
+    return diffConfig.timeLimit;
   };
 
   const [timeLeft, setTimeLeft] = useState<number>(() => getLevelInitialTime(currentLevel));
@@ -398,13 +385,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     resetLevelState(currentLevel);
   };
 
-  const handleCompleteAttempt = useCallback(() => {
-    // Tapping the celebration and its auto-advance timer can both fire.
+  const handleCompleteAttempt = useCallback((target: 'next' | 'map' = 'next') => {
+    // Tapping the celebration and its action buttons can both fire.
     if (attemptStatusRef.current !== 'won' || completionClaimedRef.current) return;
     completionClaimedRef.current = true;
     nativeAudio.stopVictory();
-    onCompleteLevelRef.current(levelId, 3, 50);
-  }, [levelId]);
+    const finalCoins = Math.round(50 * diffConfig.coinMultiplier);
+    onCompleteLevelRef.current(levelId, 3, finalCoins, target);
+  }, [levelId, diffConfig.coinMultiplier]);
 
   // Check if given cells spell any unfound target word
   const checkSelection = useCallback(
@@ -718,6 +706,25 @@ export const NativeGameView: React.FC<GameViewProps> = ({
                 </Text>
               </View>
             )}
+            {diffConfig.titleBadge ? (
+              <View
+                style={[
+                  styles.diffPacingBadge,
+                  diffConfig.step === 4 && styles.diffPacingBadgePeak,
+                  diffConfig.step === 5 && styles.diffPacingBadgeRelief,
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.diffPacingText,
+                    diffConfig.step === 4 && styles.diffPacingTextPeak,
+                    diffConfig.step === 5 && styles.diffPacingTextRelief,
+                  ]}
+                >
+                  {diffConfig.titleBadge}
+                </Text>
+              </View>
+            ) : null}
           </View>
           <View style={styles.foundBadge}>
             <Text style={styles.foundBadgeText}>{foundCount} / {totalCount} FOUND</Text>
@@ -1008,10 +1015,11 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         visible={isVictory}
         levelId={levelId}
         maxWordStreak={maxWordStreak}
-        coinsEarned={50}
+        coinsEarned={Math.round(50 * diffConfig.coinMultiplier)}
         strikeEarned={STRIKE_WIN_REWARD}
-        xpEarned={100}
-        onNextLevel={handleCompleteAttempt}
+        xpEarned={diffConfig.xpReward}
+        onNextLevel={() => handleCompleteAttempt('next')}
+        onGoToMap={() => handleCompleteAttempt('map')}
       />
 
       {/* Pause Modal */}
@@ -1352,6 +1360,35 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     color: '#0369A1',
     letterSpacing: 0.3,
+  },
+  diffPacingBadge: {
+    backgroundColor: '#F3F4F6',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    marginLeft: 4,
+  },
+  diffPacingBadgePeak: {
+    backgroundColor: '#FEF2F2',
+    borderColor: '#FCA5A5',
+  },
+  diffPacingBadgeRelief: {
+    backgroundColor: '#F0FDF4',
+    borderColor: '#86EFAC',
+  },
+  diffPacingText: {
+    fontSize: 9,
+    fontWeight: '800',
+    color: '#4B5563',
+    letterSpacing: 0.2,
+  },
+  diffPacingTextPeak: {
+    color: '#DC2626',
+  },
+  diffPacingTextRelief: {
+    color: '#16A34A',
   },
   foundBadge: {
     backgroundColor: '#CCFBF1',

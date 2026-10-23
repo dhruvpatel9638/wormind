@@ -37,6 +37,8 @@ import {
   rewardAvailability,
   spendHint,
   startDailySpin,
+  createInitialPlayerState,
+  restorePlayerState,
 } from './src/native/rewardLogic';
 import { initAdMob, showRewardedAd, showSmartInterstitialAd } from './src/utils/admobService';
 import { STRIKE_LOSS_PENALTY, STRIKE_RESTORE_AMOUNT, STRIKE_WIN_REWARD } from './src/config/strike';
@@ -119,44 +121,27 @@ function AppContent() {
       if (data) {
         try {
           const parsed = JSON.parse(data);
-          const savedLevel = typeof parsed.currentLevel === 'number' && parsed.currentLevel >= 1
-            ? parsed.currentLevel
-            : DEFAULT_START_LEVEL;
-          const savedCoins = typeof parsed.coins === 'number' && parsed.coins >= 0
-            ? parsed.coins
-            : START_DEV_COINS;
-          const savedStrike = typeof parsed.strike === 'number' ? parsed.strike : 10;
-          const savedZeroFails = typeof parsed.strikeZeroFails === 'number' ? parsed.strikeZeroFails : 0;
-          const savedClaimedChests = Array.isArray(parsed.claimedChests) ? parsed.claimedChests : [];
-          const savedHasClaimedCentury = Boolean(parsed.hasClaimedCenturyAchievement);
-          // Older builds saved placeholder claims for Days 1–4 without a
-          // claim date. Those were never real rewards, so restart that old
-          // demo state at Day 1 instead of displaying an unclaimable Day 5.
-          const hasLegacyDemoClaims = !parsed.lastDailyClaimDate
-            && Array.isArray(parsed.claimedDays)
-            && parsed.claimedDays.length > 0;
-          setPlayerState((prev) => ({
-            ...prev,
-            ...parsed,
-            coins: savedCoins,
-            currentLevel: savedLevel,
-            strike: savedStrike,
-            strikeZeroFails: savedZeroFails,
-            claimedChests: savedClaimedChests,
-            hasClaimedCenturyAchievement: savedHasClaimedCentury,
-            claimedDays: hasLegacyDemoClaims ? [] : (Array.isArray(parsed.claimedDays) ? parsed.claimedDays : []),
-            streak: hasLegacyDemoClaims ? 0 : (typeof parsed.streak === 'number' ? parsed.streak : 0),
-            hasClaimedDay5: hasLegacyDemoClaims ? false : Boolean(parsed.hasClaimedDay5),
-          }));
-          setActiveLevelId(savedLevel);
-          nativeAudio.setSoundEnabled(parsed.soundEnabled ?? true);
-          nativeAudio.setMusicEnabled(parsed.musicEnabled ?? true);
-        } catch {}
+          const restored = restorePlayerState(parsed);
+          setPlayerState(restored);
+          setActiveLevelId(restored.currentLevel);
+          nativeAudio.setSoundEnabled(restored.soundEnabled ?? true);
+          nativeAudio.setMusicEnabled(restored.musicEnabled ?? true);
+        } catch (error) {
+          console.warn('Could not parse player progress, starting fresh:', error);
+          const initial = createInitialPlayerState();
+          setPlayerState(initial);
+          setActiveLevelId(initial.currentLevel);
+        }
       } else {
-        setActiveLevelId(DEFAULT_START_LEVEL);
+        const initial = createInitialPlayerState();
+        setPlayerState(initial);
+        setActiveLevelId(initial.currentLevel);
       }
     }).catch((error) => {
       console.warn('Could not load player progress:', error);
+      const initial = createInitialPlayerState();
+      setPlayerState(initial);
+      setActiveLevelId(initial.currentLevel);
     }).finally(() => {
       if (mounted) setHasLoadedPlayer(true);
     });
@@ -217,6 +202,50 @@ function AppContent() {
     setCurrentScreen('game');
   };
 
+  const handleUseFreeLifeline = (onSuccess?: () => void) => {
+    if (!hasLoadedPlayer) return;
+    const remaining = playerStateRef.current.strikeFreeRestoresRemaining ?? 2;
+    if (remaining <= 0) {
+      Alert.alert('No Free Lifelines Left', 'You have used both free lifelines. You can restore with 50 coins or watch an ad.');
+      return;
+    }
+    const nextRemaining = Math.max(0, remaining - 1);
+    setPlayerState((prev) => ({
+      ...prev,
+      strike: STRIKE_RESTORE_AMOUNT,
+      strikeZeroFails: 0,
+      strikeFreeRestoresRemaining: nextRemaining,
+    }));
+    Alert.alert('🔥 Free Lifeline Used!', `Strike restored to ${STRIKE_RESTORE_AMOUNT}x! (${nextRemaining} free lifeline${nextRemaining === 1 ? '' : 's'} remaining)`);
+    if (onSuccess) onSuccess();
+  };
+
+  const handleRestoreStrikeWithCoins = (onSuccess?: () => void) => {
+    if (!hasLoadedPlayer) return;
+    if (playerStateRef.current.coins < 50) {
+      Alert.alert('Coins Needed', 'You need 50 coins to restore your strike.');
+      return;
+    }
+    if (handleDeductCoins(50)) {
+      setPlayerState((prev) => ({
+        ...prev,
+        strike: STRIKE_RESTORE_AMOUNT,
+        strikeZeroFails: 0,
+      }));
+      Alert.alert('🔥 Strike Restored!', `Strike restored to ${STRIKE_RESTORE_AMOUNT}x for 50 coins!`);
+      if (onSuccess) onSuccess();
+    }
+  };
+
+  const handlePlayAnyway = () => {
+    setShowRestoreStrikeModal(false);
+    if (pendingLevelToStart !== null) {
+      setActiveLevelId(pendingLevelToStart);
+      setCurrentScreen('game');
+      setPendingLevelToStart(null);
+    }
+  };
+
   const handleFailLevel = () => {
     setPlayerState((prev) => ({
       ...prev,
@@ -250,7 +279,7 @@ function AppContent() {
       },
       () => {
         if (finished) return;
-        Alert.alert('Ad Unavailable', 'Could not load rewarded ad. Please try again in a moment.');
+        Alert.alert('Ad Unavailable', 'Could not load rewarded ad. You can use your free lifeline, coins, or play anyway!');
       },
       () => {
         if (finished) return;
@@ -261,11 +290,16 @@ function AppContent() {
     );
   };
 
-  const handleCompleteLevel = (levelId: number, starsEarned: number, coinsEarned: number) => {
+  const handleCompleteLevel = (
+    levelId: number,
+    starsEarned: number,
+    coinsEarned: number,
+    target: 'next' | 'map' = 'next'
+  ) => {
     // 🔹 Smart AdMob Interstitial Ad (Randomized Win + 3-min Time Auto-Trigger)
     showSmartInterstitialAd();
 
-    const nextLevel = levelId < 200 ? levelId + 1 : 200;
+    const nextLevel = levelId + 1;
 
     setPlayerState((prev) => {
       const currentHighest = prev.currentLevel || 1;
@@ -282,13 +316,18 @@ function AppContent() {
       };
     });
 
-    setActiveLevelId((prev) => Math.max(prev, nextLevel));
-    setCurrentScreen('worlds');
+    setActiveLevelId(nextLevel);
 
-    if (levelId === 100 && !playerState.hasClaimedCenturyAchievement) {
+    if (levelId === 50 && !playerState.hasClaimedCenturyAchievement) {
+      setCurrentScreen('worlds');
       setTimeout(() => {
         setShowCenturyModal(true);
       }, 450);
+    } else if (target === 'map') {
+      setCurrentScreen('worlds');
+    } else {
+      // Seamlessly play the next level without forced map scrolling
+      setCurrentScreen('game');
     }
   };
 
@@ -496,6 +535,7 @@ function AppContent() {
 
         {currentScreen === 'game' && (
           <NativeGameView
+            key={`game-level-${activeLevelId}`}
             levelId={activeLevelId}
             onExit={() => setCurrentScreen('worlds')}
             onCompleteLevel={handleCompleteLevel}
@@ -776,11 +816,29 @@ function AppContent() {
                 </View>
 
                 <View style={styles.strikeRuleItem}>
-                  <View style={[styles.ruleBullet, { backgroundColor: '#FEF3C7' }]}>
-                    <MaterialIcons name="ondemand-video" size={12} color="#D97706" />
+                  <View style={[styles.ruleBullet, { backgroundColor: '#DCFCE7' }]}>
+                    <MaterialIcons name="health-and-safety" size={12} color="#15803D" />
                   </View>
                   <Text style={styles.ruleItemText}>
-                    <Text style={styles.ruleBoldText}>Watch 1 Video Ad</Text> restores back to {STRIKE_RESTORE_AMOUNT} 🔥 free
+                    <Text style={styles.ruleBoldText}>2 Free Lifelines</Text> available when Strike drops to 0
+                  </Text>
+                </View>
+
+                <View style={styles.strikeRuleItem}>
+                  <View style={[styles.ruleBullet, { backgroundColor: '#FEF3C7' }]}>
+                    <MaterialIcons name="monetization-on" size={12} color="#D97706" />
+                  </View>
+                  <Text style={styles.ruleItemText}>
+                    <Text style={styles.ruleBoldText}>50 Coins or 1 Video Ad</Text> restores back to {STRIKE_RESTORE_AMOUNT} 🔥
+                  </Text>
+                </View>
+
+                <View style={styles.strikeRuleItem}>
+                  <View style={[styles.ruleBullet, { backgroundColor: '#E0E7FF' }]}>
+                    <MaterialIcons name="play-circle-outline" size={12} color="#4338CA" />
+                  </View>
+                  <Text style={styles.ruleItemText}>
+                    <Text style={styles.ruleBoldText}>Strike 0 never stops you</Text> — play anytime!
                   </Text>
                 </View>
               </View>
@@ -788,19 +846,70 @@ function AppContent() {
 
             {/* Bottom Action Buttons */}
             {(playerState.strike ?? 10) <= 0 ? (
-              <View style={styles.strikeActionRow}>
+              <View style={styles.strikeOptionsContainer}>
+                {/* 1. Free Lifeline Button (if available) */}
+                {(playerState.strikeFreeRestoresRemaining ?? 2) > 0 && (
+                  <Pressable
+                    disabled={isRestoringStrike}
+                    onPress={() => {
+                      handleUseFreeLifeline(() => {
+                        setShowRestoreStrikeModal(false);
+                        if (pendingLevelToStart !== null) {
+                          setActiveLevelId(pendingLevelToStart);
+                          setCurrentScreen('game');
+                          setPendingLevelToStart(null);
+                        }
+                      });
+                    }}
+                    style={({ pressed }) => [styles.strikeOptionBtn, pressed && styles.pressed]}
+                  >
+                    <LinearGradient
+                      colors={['#10B981', '#059669']}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 0 }}
+                      style={styles.strikeOptionBtnGradient}
+                    >
+                      <MaterialIcons name="health-and-safety" size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
+                      <Text style={styles.strikeOptionBtnText}>
+                        USE FREE LIFELINE ({playerState.strikeFreeRestoresRemaining ?? 2}/2)
+                      </Text>
+                    </LinearGradient>
+                  </Pressable>
+                )}
+
+                {/* 2. Restore with 50 Coins */}
                 <Pressable
-                  disabled={isRestoringStrike}
+                  disabled={isRestoringStrike || playerState.coins < 50}
                   onPress={() => {
-                    if (restoreStrikeInFlight.current) return;
-                    setShowRestoreStrikeModal(false);
-                    setPendingLevelToStart(null);
+                    handleRestoreStrikeWithCoins(() => {
+                      setShowRestoreStrikeModal(false);
+                      if (pendingLevelToStart !== null) {
+                        setActiveLevelId(pendingLevelToStart);
+                        setCurrentScreen('game');
+                        setPendingLevelToStart(null);
+                      }
+                    });
                   }}
-                  style={({ pressed }) => [styles.strikeCancelBtn, isRestoringStrike && styles.disabled, pressed && styles.pressed]}
+                  style={({ pressed }) => [
+                    styles.strikeOptionBtn,
+                    playerState.coins < 50 && styles.disabled,
+                    pressed && styles.pressed,
+                  ]}
                 >
-                  <Text style={styles.strikeCancelText}>CANCEL</Text>
+                  <LinearGradient
+                    colors={['#F59E0B', '#D97706']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.strikeOptionBtnGradient}
+                  >
+                    <MaterialIcons name="monetization-on" size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
+                    <Text style={styles.strikeOptionBtnText}>
+                      RESTORE FOR 50 🪙 ({playerState.coins} COINS)
+                    </Text>
+                  </LinearGradient>
                 </Pressable>
 
+                {/* 3. Watch Video Ad */}
                 <Pressable
                   disabled={isRestoringStrike}
                   onPress={() => {
@@ -813,18 +922,48 @@ function AppContent() {
                       }
                     });
                   }}
-                  style={({ pressed }) => [styles.strikeAdBtnWrapper, isRestoringStrike && styles.disabled, pressed && styles.pressed]}
+                  style={({ pressed }) => [
+                    styles.strikeOptionBtn,
+                    isRestoringStrike && styles.disabled,
+                    pressed && styles.pressed,
+                  ]}
                 >
                   <LinearGradient
                     colors={['#FF512F', '#F09819']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
-                    style={styles.strikeAdBtnGradient}
+                    style={styles.strikeOptionBtnGradient}
                   >
-                    <MaterialIcons name="ondemand-video" size={18} color="#FFFFFF" style={{ marginRight: 6 }} />
-                    <Text style={styles.strikeAdBtnText}>{isRestoringStrike ? 'LOADING...' : 'WATCH AD 🎬'}</Text>
+                    <MaterialIcons name="ondemand-video" size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
+                    <Text style={styles.strikeOptionBtnText}>
+                      {isRestoringStrike ? 'LOADING AD...' : 'WATCH AD 🎬 (FREE REIGNITE)'}
+                    </Text>
                   </LinearGradient>
                 </Pressable>
+
+                {/* 4. Close & Play Anyway Row */}
+                <View style={styles.strikeBottomActionRow}>
+                  <Pressable
+                    disabled={isRestoringStrike}
+                    onPress={() => {
+                      if (restoreStrikeInFlight.current) return;
+                      setShowRestoreStrikeModal(false);
+                      setPendingLevelToStart(null);
+                    }}
+                    style={({ pressed }) => [styles.strikeCancelBtn, pressed && styles.pressed]}
+                  >
+                    <Text style={styles.strikeCancelText}>CLOSE</Text>
+                  </Pressable>
+
+                  <Pressable
+                    disabled={isRestoringStrike}
+                    onPress={handlePlayAnyway}
+                    style={({ pressed }) => [styles.strikePlayAnywayBtn, pressed && styles.pressed]}
+                  >
+                    <MaterialIcons name="play-arrow" size={18} color="#6366F1" style={{ marginRight: 4 }} />
+                    <Text style={styles.strikePlayAnywayText}>PLAY ANYWAY 🎮</Text>
+                  </Pressable>
+                </View>
               </View>
             ) : (
               <Pressable
@@ -1220,6 +1359,56 @@ const styles = StyleSheet.create({
     color: '#1E293B',
     fontWeight: '900',
   },
+  strikeOptionsContainer: {
+    width: '100%',
+    gap: 8,
+  },
+  strikeOptionBtn: {
+    width: '100%',
+    height: 44,
+    borderRadius: 22,
+    overflow: 'hidden',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+  },
+  strikeOptionBtnGradient: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+  },
+  strikeOptionBtnText: {
+    color: '#FFFFFF',
+    fontWeight: '900',
+    fontSize: 12,
+    letterSpacing: 0.4,
+  },
+  strikeBottomActionRow: {
+    flexDirection: 'row',
+    gap: 8,
+    width: '100%',
+    marginTop: 4,
+  },
+  strikePlayAnywayBtn: {
+    flex: 1.4,
+    height: 42,
+    borderRadius: 21,
+    backgroundColor: '#EEF2FF',
+    borderWidth: 1.5,
+    borderColor: '#C7D2FE',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  strikePlayAnywayText: {
+    color: '#4F46E5',
+    fontWeight: '900',
+    fontSize: 12,
+  },
   strikeActionRow: {
     flexDirection: 'row',
     gap: 10,
@@ -1227,8 +1416,8 @@ const styles = StyleSheet.create({
   },
   strikeCancelBtn: {
     flex: 1,
-    height: 44,
-    borderRadius: 22,
+    height: 42,
+    borderRadius: 21,
     backgroundColor: '#F1F5F9',
     alignItems: 'center',
     justifyContent: 'center',

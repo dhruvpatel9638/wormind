@@ -51,6 +51,7 @@ export interface PlayerState {
   pendingSpin?: SpinTicket | null;
   strike: number;
   strikeZeroFails?: number;
+  strikeFreeRestoresRemaining?: number;
   claimedChests?: number[];
   hasClaimedCenturyAchievement?: boolean;
 }

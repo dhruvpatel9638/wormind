@@ -21,6 +21,7 @@ interface VictoryModalProps {
   strikeEarned?: number;
   xpEarned?: number;
   onNextLevel: () => void;
+  onGoToMap: () => void;
 }
 
 export const VictoryModal: React.FC<VictoryModalProps> = ({
@@ -31,6 +32,7 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
   strikeEarned = 10,
   xpEarned = 100,
   onNextLevel,
+  onGoToMap,
 }) => {
   const cardScale = useRef(new Animated.Value(0)).current;
   const sunburstRotate = useRef(new Animated.Value(0)).current;
@@ -95,15 +97,6 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
     }
   }, [visible]);
 
-  // Auto-advance after celebration if user hasn't tapped
-  useEffect(() => {
-    if (!visible) return;
-    const timer = setTimeout(() => {
-      onNextLevel();
-    }, 4500);
-    return () => clearTimeout(timer);
-  }, [visible, onNextLevel]);
-
   const haloSpin = sunburstRotate.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
@@ -111,7 +104,7 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
 
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
-      <Pressable style={styles.modalBackdrop} onPress={onNextLevel}>
+      <View style={styles.modalBackdrop}>
         {/* Confetti & Streamer Ribbons ("Zario") Celebration */}
         <PartyConfetti active={visible} />
 
@@ -263,14 +256,42 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
             </View>
           </Animated.View>
 
-          {/* Tap anywhere to continue hint */}
-          <View style={styles.tapPromptRow}>
-            <Text style={styles.tapPromptText}>TAP ANYWHERE TO CONTINUE</Text>
-            <MaterialIcons name="touch-app" size={16} color="#DDD6FE" />
+          {/* Action Buttons Row: MAP vs NEXT LEVEL */}
+          <View style={styles.actionBtnRow}>
+            {/* MAP Button */}
+            <Pressable
+              onPress={onGoToMap}
+              style={({ pressed }) => [
+                styles.mapBtn,
+                pressed && styles.btnPressed,
+              ]}
+            >
+              <MaterialIcons name="map" size={18} color="#DDD6FE" />
+              <Text style={styles.mapBtnText}>MAP</Text>
+            </Pressable>
+
+            {/* NEXT LEVEL Button */}
+            <Pressable
+              onPress={onNextLevel}
+              style={({ pressed }) => [
+                styles.nextBtnWrapper,
+                pressed && styles.btnPressed,
+              ]}
+            >
+              <LinearGradient
+                colors={['#10B981', '#059669']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.nextBtnGradient}
+              >
+                <Text style={styles.nextBtnText}>NEXT LEVEL</Text>
+                <MaterialIcons name="arrow-forward" size={18} color="#FFFFFF" />
+              </LinearGradient>
+            </Pressable>
           </View>
           </Animated.View>
         </ScrollView>
-      </Pressable>
+      </View>
     </Modal>
   );
 };
@@ -645,24 +666,60 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 
-  /* Tap Prompt */
-  tapPromptRow: {
+  /* Action Buttons Row */
+  actionBtnRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+    width: '100%',
+    marginTop: 12,
+  },
+  mapBtn: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    height: 48,
     borderRadius: 16,
-    backgroundColor: 'rgba(139, 92, 246, 0.18)',
-    borderWidth: 1,
-    borderColor: 'rgba(196, 181, 253, 0.3)',
-    marginTop: 2,
+    backgroundColor: 'rgba(139, 92, 246, 0.22)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(196, 181, 253, 0.45)',
   },
-  tapPromptText: {
+  mapBtnText: {
     color: '#DDD6FE',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '800',
-    letterSpacing: 1,
+    letterSpacing: 0.5,
+  },
+  nextBtnWrapper: {
+    flex: 1.5,
+    height: 48,
+    borderRadius: 16,
+    overflow: 'hidden',
+    elevation: 8,
+    shadowColor: '#10B981',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+  },
+  nextBtnGradient: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingHorizontal: 12,
+  },
+  nextBtnText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '900',
+    letterSpacing: 0.5,
+  },
+  btnPressed: {
+    transform: [{ scale: 0.96 }],
+    opacity: 0.9,
   },
 });
