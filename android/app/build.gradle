@@ -111,14 +111,16 @@ android {
             keyPassword 'android'
         }
         release {
-            if (!releaseKeystorePropertiesFile.exists()) {
-                throw new GradleException("Missing android/keystore.properties. Create it with release signing credentials before building a release.")
+            if (releaseKeystorePropertiesFile.exists()) {
+                storeFile rootProject.file(releaseKeystoreProperties['storeFile'])
+                storePassword releaseKeystoreProperties['storePassword']
+                keyAlias releaseKeystoreProperties['keyAlias']
+                keyPassword releaseKeystoreProperties['keyPassword']
+            } else {
+                // Keep debug builds runnable without release credentials. A release task
+                // is rejected below with a clear error before it can produce an artifact.
+                initWith signingConfigs.debug
             }
-
-            storeFile rootProject.file(releaseKeystoreProperties['storeFile'])
-            storePassword releaseKeystoreProperties['storePassword']
-            keyAlias releaseKeystoreProperties['keyAlias']
-            keyPassword releaseKeystoreProperties['keyPassword']
         }
     }
     buildTypes {
@@ -143,6 +145,15 @@ android {
     }
     androidResources {
         ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
+    }
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    def isReleaseBuild = taskGraph.allTasks.any { task ->
+        task.name.toLowerCase().contains('release')
+    }
+    if (isReleaseBuild && !releaseKeystorePropertiesFile.exists()) {
+        throw new GradleException("Missing android/keystore.properties. Create it with release signing credentials before building a release.")
     }
 }
 
