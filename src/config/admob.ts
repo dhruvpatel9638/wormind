@@ -8,7 +8,7 @@ export const TestIds = {
 
 export const ADMOB_CONFIG = {
   // Set to true to use Google's official test ad units in development
-  IS_TEST_MODE: true,
+  IS_TEST_MODE: false,
 
   // Production Ad Unit IDs from Google AdMob Console
   PROD_BANNER_ID: 'ca-app-pub-4708904475412828/2763273944',
