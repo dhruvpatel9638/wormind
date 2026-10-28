@@ -3,12 +3,6 @@ apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
-def releaseKeystorePropertiesFile = rootProject.file("keystore.properties")
-def releaseKeystoreProperties = new Properties()
-
-if (releaseKeystorePropertiesFile.exists()) {
-    releaseKeystorePropertiesFile.withInputStream { releaseKeystoreProperties.load(it) }
-}
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -98,8 +92,8 @@ android {
         applicationId 'com.amyaastudio.wormind'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 1
+        versionName "1.0.2"
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
     }
@@ -110,25 +104,15 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-        release {
-            if (releaseKeystorePropertiesFile.exists()) {
-                storeFile rootProject.file(releaseKeystoreProperties['storeFile'])
-                storePassword releaseKeystoreProperties['storePassword']
-                keyAlias releaseKeystoreProperties['keyAlias']
-                keyPassword releaseKeystoreProperties['keyPassword']
-            } else {
-                // Keep debug builds runnable without release credentials. A release task
-                // is rejected below with a clear error before it can produce an artifact.
-                initWith signingConfigs.debug
-            }
-        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
-            signingConfig signingConfigs.release
+            // Caution! In production, you need to generate your own keystore file.
+            // see https://reactnative.dev/docs/signed-apk-android.
+            signingConfig signingConfigs.debug
             def enableShrinkResources = findProperty('android.enableShrinkResourcesInReleaseBuilds') ?: 'false'
             shrinkResources enableShrinkResources.toBoolean()
             minifyEnabled enableMinifyInReleaseBuilds
@@ -145,15 +129,6 @@ android {
     }
     androidResources {
         ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
-    }
-}
-
-gradle.taskGraph.whenReady { taskGraph ->
-    def isReleaseBuild = taskGraph.allTasks.any { task ->
-        task.name.toLowerCase().contains('release')
-    }
-    if (isReleaseBuild && !releaseKeystorePropertiesFile.exists()) {
-        throw new GradleException("Missing android/keystore.properties. Create it with release signing credentials before building a release.")
     }
 }
 
