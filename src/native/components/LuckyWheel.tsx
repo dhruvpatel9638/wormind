@@ -238,7 +238,7 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
                   <G transform={`rotate(${rotDeg}, ${textX}, ${textY})`}>
                     <SvgText
                       x={textX}
-                      y={textY - 6}
+                      y={textY - 5}
                       fill="#FFFFFF"
                       fontSize="13"
                       fontWeight="bold"
@@ -248,13 +248,13 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
                     </SvgText>
                     <SvgText
                       x={textX}
-                      y={textY + 10}
+                      y={textY + 11}
                       fill={prize.accentColor}
-                      fontSize="10"
+                      fontSize="13"
                       fontWeight="bold"
                       textAnchor="middle"
                     >
-                      {prize.icon} {prize.subLabel}
+                      {prize.icon}
                     </SvgText>
                   </G>
                 </G>

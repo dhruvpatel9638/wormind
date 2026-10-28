@@ -114,6 +114,14 @@ function AppContent() {
     initAdMob();
   }, []);
 
+  // Silence all game sounds and BGM when app moves to background
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (nextAppState) => {
+      nativeAudio.handleAppStateChange(nextAppState);
+    });
+    return () => sub.remove();
+  }, []);
+
   // Load saved state from native AsyncStorage
   useEffect(() => {
     let mounted = true;

@@ -11,6 +11,7 @@ import {
   Animated,
   Easing,
   PanResponder,
+  AppState,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -161,6 +162,18 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     return () => {
       nativeAudio.setInGame(false);
     };
+  }, []);
+
+  // Auto-pause game and freeze timer if user switches apps or minimizes
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (nextState) => {
+      if (nextState !== 'active' && attemptStatusRef.current === 'playing') {
+        pausedRef.current = true;
+        setIsPaused(true);
+        nativeAudio.cancelLetterTaps();
+      }
+    });
+    return () => sub.remove();
   }, []);
 
   useEffect(() => {
@@ -699,32 +712,6 @@ export const NativeGameView: React.FC<GameViewProps> = ({
           <View style={styles.wordsTitleRow}>
             <MaterialIcons name="search" size={16} color="#4D8AFF" />
             <Text style={styles.wordsTitle}>WORDS TO FIND</Text>
-            {currentLevel.maskName && (
-              <View style={styles.maskTagBadge}>
-                <Text style={styles.maskTagText}>
-                  {currentLevel.maskIcon} {currentLevel.maskName.toUpperCase()}
-                </Text>
-              </View>
-            )}
-            {diffConfig.titleBadge ? (
-              <View
-                style={[
-                  styles.diffPacingBadge,
-                  diffConfig.step === 4 && styles.diffPacingBadgePeak,
-                  diffConfig.step === 5 && styles.diffPacingBadgeRelief,
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.diffPacingText,
-                    diffConfig.step === 4 && styles.diffPacingTextPeak,
-                    diffConfig.step === 5 && styles.diffPacingTextRelief,
-                  ]}
-                >
-                  {diffConfig.titleBadge}
-                </Text>
-              </View>
-            ) : null}
           </View>
           <View style={styles.foundBadge}>
             <Text style={styles.foundBadgeText}>{foundCount} / {totalCount} FOUND</Text>
@@ -965,26 +952,26 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         </View>
       </View>
 
-      {/* 3 Action Power-up Buttons */}
-      <View style={[styles.actionRow, contentWidthStyle, compactLayout && styles.actionRowCompact]}>
-        {/* Shuffle */}
+      {/* 4 Lifeline Action Power-up Buttons (Single Horizontal Row) */}
+      <View style={[styles.actionRow, contentWidthStyle]}>
+        {/* Shuffle / Clear */}
         <Pressable
           onPress={handleShuffle}
-          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, styles.shuffleBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, styles.shuffleBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="refresh" size={20} color="#7C3AED" />
-          <Text style={[styles.actionBtnTitle, { color: '#7C3AED' }]}>CLEAR</Text>
-          <Text style={[styles.actionBtnSub, { color: '#7C3AED' }]}>Free</Text>
+          <MaterialIcons name="refresh" size={18} color="#7C3AED" />
+          <Text numberOfLines={1} style={[styles.actionBtnTitle, { color: '#7C3AED' }]}>CLEAR</Text>
+          <Text numberOfLines={1} style={[styles.actionBtnSub, { color: '#7C3AED' }]}>Free</Text>
         </Pressable>
 
         {/* Hint */}
         <Pressable
           onPress={handleHint}
-          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, styles.hintBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, styles.hintBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="lightbulb" size={20} color="#B45309" />
-          <Text style={[styles.actionBtnTitle, { color: '#B45309' }]}>HINT</Text>
-          <Text style={[styles.actionBtnSub, { color: '#B45309' }]}>
+          <MaterialIcons name="lightbulb" size={18} color="#B45309" />
+          <Text numberOfLines={1} style={[styles.actionBtnTitle, { color: '#B45309' }]}>HINT</Text>
+          <Text numberOfLines={1} style={[styles.actionBtnSub, { color: '#B45309' }]}>
             {hasUsedCoinHint ? 'Ad only' : `🪙 ${HINT_COST}`}
           </Text>
         </Pressable>
@@ -992,21 +979,21 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         {/* Ad-rewarded hint */}
         <Pressable
           onPress={handleRewardedHint}
-          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, { backgroundColor: '#E0F2FE', borderColor: '#38BDF8' }, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, styles.adHintBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="ondemand-video" size={20} color="#0284C7" />
-          <Text style={[styles.actionBtnTitle, { color: '#0284C7' }]}>AD HINT</Text>
-          <Text style={[styles.actionBtnSub, { color: '#0284C7' }]}>🎬 Watch Ad</Text>
+          <MaterialIcons name="ondemand-video" size={18} color="#0284C7" />
+          <Text numberOfLines={1} style={[styles.actionBtnTitle, { color: '#0284C7' }]}>AD HINT</Text>
+          <Text numberOfLines={1} style={[styles.actionBtnSub, { color: '#0284C7' }]}>🎬 Free</Text>
         </Pressable>
 
         {/* Reveal */}
         <Pressable
           onPress={handleReveal}
-          style={({ pressed }) => [styles.actionBtn, compactLayout && styles.actionBtnCompact, styles.revealBtn, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.actionBtn, styles.revealBtn, pressed && styles.pressed]}
         >
-          <MaterialIcons name="auto-fix-high" size={20} color="#0D9488" />
-          <Text style={[styles.actionBtnTitle, { color: '#0D9488' }]}>REVEAL</Text>
-          <Text style={[styles.actionBtnSub, { color: '#0D9488' }]}>🪙 {REVEAL_COST}</Text>
+          <MaterialIcons name="auto-fix-high" size={18} color="#0D9488" />
+          <Text numberOfLines={1} style={[styles.actionBtnTitle, { color: '#0D9488' }]}>REVEAL</Text>
+          <Text numberOfLines={1} style={[styles.actionBtnSub, { color: '#0D9488' }]}>🪙 {REVEAL_COST}</Text>
         </Pressable>
       </View>
 
@@ -1513,25 +1500,24 @@ const styles = StyleSheet.create({
   actionRow: {
     flexDirection: 'row',
     width: '100%',
-    gap: 8,
+    gap: 6,
     marginTop: 8,
-  },
-  actionRowCompact: {
-    flexWrap: 'wrap',
+    marginBottom: 4,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   actionBtn: {
     flex: 1,
-    height: 50,
-    borderRadius: 14,
+    height: 48,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 2,
+    paddingVertical: 3,
     elevation: 3,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
-  },
-  actionBtnCompact: {
-    flexBasis: '47%',
   },
   shuffleBtn: {
     backgroundColor: '#F5F3FF',
@@ -1543,19 +1529,26 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#FDE68A',
   },
+  adHintBtn: {
+    backgroundColor: '#E0F2FE',
+    borderWidth: 2,
+    borderColor: '#38BDF8',
+  },
   revealBtn: {
     backgroundColor: '#F0FDFA',
     borderWidth: 2,
     borderColor: '#99F6E4',
   },
   actionBtnTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: '900',
     marginTop: 1,
+    textAlign: 'center',
   },
   actionBtnSub: {
-    fontSize: 9,
+    fontSize: 8.5,
     fontWeight: '800',
+    textAlign: 'center',
   },
   modalBackdrop: {
     flex: 1,

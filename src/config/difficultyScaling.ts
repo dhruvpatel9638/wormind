@@ -57,10 +57,11 @@ export const DIR_ALL_8 = [
  * Strictly replicates the reference graph curve and scales endlessly.
  */
 export function getLevelHardness(level: number): number {
-  if (level <= 0) return 1.0;
+  if (level <= 0) return 2.8;
 
   // Cycle 0 reference values (Levels 1 to 5)
-  const cycle0 = [1.0, 3.5, 5.5, 7.5, 5.7];
+  // L1 (2.8) and L2 (4.5) upgraded to introduce diagonal intrigue and 5-word depth for curiosity
+  const cycle0 = [2.8, 4.5, 5.8, 7.5, 5.7];
   if (level <= 5) return cycle0[level - 1];
 
   // Cycle 1 reference values (Levels 6 to 10)
@@ -116,12 +117,10 @@ export function getLevelDifficultyConfig(level: number): LevelDifficultyConfig {
   const hardness = getLevelHardness(safeLevel);
   const { cycle, step, role } = getCycleInfo(safeLevel);
 
-  // 1. Word Count mapping (4 to 8 words)
+  // 1. Word Count mapping (5 to 8 words)
   // Relief levels (step 5) drop word count by 1 compared to the peak (step 4)
   let wordCount: number;
-  if (hardness < 4.0) {
-    wordCount = 4;
-  } else if (hardness < 7.0) {
+  if (hardness < 7.0) {
     wordCount = step === 5 ? 4 : 5;
   } else if (hardness < 10.0) {
     wordCount = step === 5 ? 5 : 6;
@@ -136,10 +135,10 @@ export function getLevelDifficultyConfig(level: number): LevelDifficultyConfig {
 
   // 2. Word Lengths (Min and Max)
   let wordLengthMin = 3;
-  let wordLengthMax = 4;
-  if (hardness >= 3.5 && hardness < 7.5) {
-    wordLengthMin = 3;
-    wordLengthMax = 5;
+  let wordLengthMax = 5;
+  if (hardness >= 4.0 && hardness < 7.5) {
+    wordLengthMin = 4;
+    wordLengthMax = 6;
   } else if (hardness >= 7.5 && hardness < 11.0) {
     wordLengthMin = 4;
     wordLengthMax = 6;
@@ -150,8 +149,8 @@ export function getLevelDifficultyConfig(level: number): LevelDifficultyConfig {
 
   // 3. Allowed Directions
   let allowedDirections = DIR_EASY;
-  if (hardness >= 4.0 && hardness < 8.0) {
-    // Relief level 5 uses simpler forward directions even in mid cycles
+  if (hardness >= 2.5 && hardness < 8.0) {
+    // Level 1 (2.8) and Level 2 (4.5) use DIR_MEDIUM so players discover diagonals early!
     allowedDirections = step === 5 ? DIR_EASY : DIR_MEDIUM;
   } else if (hardness >= 8.0) {
     // Step 5 relief levels in high cycles drop to MEDIUM directions for relief
