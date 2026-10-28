@@ -1,4 +1,5 @@
 import { createAudioPlayer, setAudioModeAsync } from 'expo-audio';
+import { AppState, AppStateStatus } from 'react-native';
 
 // Pure React Native Audio Engine (zero browser / WebView)
 // Uses local offline assets bundled directly in the app
@@ -23,6 +24,7 @@ class NativeSoundEngine {
   private isSoundEnabled: boolean = true;
   private isMusicEnabled: boolean = true;
   private isInGame: boolean = false;
+  private isAppActive: boolean = true;
   private bgmPlayer: any = null;
   private soundPools = new Map<SoundEffect, SoundVoice[]>();
   private soundSequence = 0;
@@ -32,6 +34,39 @@ class NativeSoundEngine {
 
   constructor() {
     this.initAudio();
+    this.listenToAppState();
+  }
+
+  private listenToAppState() {
+    AppState.addEventListener('change', (nextState: AppStateStatus) => {
+      this.handleAppStateChange(nextState);
+    });
+  }
+
+  public handleAppStateChange(nextState: AppStateStatus) {
+    const isNowActive = nextState === 'active';
+    if (this.isAppActive === isNowActive) return;
+    this.isAppActive = isNowActive;
+
+    if (!isNowActive) {
+      // App went to background / screen locked / switched to another application
+      this.pauseBgm();
+      this.stopAllSounds();
+    } else {
+      // App returned to foreground
+      if (this.isMusicEnabled && !this.isInGame) {
+        this.playBgm();
+      }
+    }
+  }
+
+  public stopAllSounds() {
+    this.cancelLetterTaps();
+    for (const voices of this.soundPools.values()) {
+      for (const voice of voices) {
+        this.stopVoice(voice);
+      }
+    }
   }
 
   private async initAudio() {
@@ -57,7 +92,7 @@ class NativeSoundEngine {
 
   // ===== BACKGROUND MUSIC =====
   public async playBgm() {
-    if (!this.isMusicEnabled || this.isInGame) return;
+    if (!this.isAppActive || !this.isMusicEnabled || this.isInGame) return;
     try {
       if (!this.bgmPlayer) {
         this.bgmPlayer = createAudioPlayer(SOUND_ASSETS.bgm);
@@ -170,7 +205,7 @@ class NativeSoundEngine {
   }
 
   private playSound(sound: SoundEffect, volume: number = 0.7) {
-    if (!this.isSoundEnabled) return;
+    if (!this.isAppActive || !this.isSoundEnabled) return;
     const voices = this.soundPools.get(sound);
     if (!voices?.length) return;
     const voice = voices.find((entry) => entry.ready && entry.player.isLoaded)
@@ -178,7 +213,7 @@ class NativeSoundEngine {
     const revision = ++voice.revision;
     voice.lastStarted = ++this.soundSequence;
     const start = () => {
-      if (!this.isSoundEnabled || voice.revision !== revision) return;
+      if (!this.isAppActive || !this.isSoundEnabled || voice.revision !== revision) return;
       voice.ready = false;
       voice.player.volume = volume;
       voice.player.play();
@@ -205,7 +240,7 @@ class NativeSoundEngine {
   // A fast swipe can cross several cells in one native touch event. Space
   // their clicks out so they remain audible instead of all starting together.
   public playLetterTaps(count: number) {
-    if (!this.isSoundEnabled || !Number.isFinite(count) || count < 1) return;
+    if (!this.isAppActive || !this.isSoundEnabled || !Number.isFinite(count) || count < 1) return;
     // One grid line has at most eight cells; avoid a long backlog from jitter.
     this.pendingLetterTaps = Math.min(8, this.pendingLetterTaps + Math.floor(count));
     if (this.letterTapTimer === null) {
@@ -217,7 +252,7 @@ class NativeSoundEngine {
 
   private drainLetterTaps() {
     this.letterTapTimer = null;
-    if (!this.isSoundEnabled || this.pendingLetterTaps === 0) return;
+    if (!this.isAppActive || !this.isSoundEnabled || this.pendingLetterTaps === 0) return;
     this.pendingLetterTaps--;
     this.lastLetterTapAt = Date.now();
     this.playLetterTap();

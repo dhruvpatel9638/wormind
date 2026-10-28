@@ -262,8 +262,8 @@ function generateLevelGrid(candidateWords, allowedDirs, mask) {
 
 // Exact Hardness Calculator based on the [4-Climb + 1-Relief Drop] Level Design Graph
 function getLevelHardness(level) {
-  if (level <= 0) return 1.0;
-  const cycle0 = [1.0, 3.5, 5.5, 7.5, 5.7];
+  if (level <= 0) return 2.8;
+  const cycle0 = [2.8, 4.5, 5.8, 7.5, 5.7];
   if (level <= 5) return cycle0[level - 1];
   const cycle1 = [8.5, 9.5, 10.7, 12.2, 11.0];
   if (level <= 10) return cycle1[level - 6];
@@ -299,15 +299,17 @@ for (let lvl = 1; lvl <= 50; lvl++) {
   let difficultyName;
 
   if (hardness < 4.0) {
-    wordCount = 4;
-    allowedDirs = DIRS_EASY;
+    wordCount = 5;
+    allowedDirs = DIRS_MEDIUM;
     maskName = 'square';
-    difficultyName = `EASY (H: ${hardness})`;
+    difficultyName = `CURIOUS ASCENT (H: ${hardness})`;
   } else if (hardness < 7.0) {
     wordCount = isRelief ? 4 : 5;
     allowedDirs = isRelief ? DIRS_EASY : DIRS_MEDIUM;
     maskName = isRelief ? 'square' : 'octagon';
-    difficultyName = isRelief ? `RELIEF BREATHER 🌿 (H: ${hardness})` : `MEDIUM (H: ${hardness})`;
+    difficultyName = isRelief
+      ? `RELIEF BREATHER 🌿 (H: ${hardness})`
+      : (lvl === 2 ? `STEPPING UP (H: ${hardness})` : `MEDIUM (H: ${hardness})`);
   } else if (hardness < 10.0) {
     wordCount = isRelief ? 5 : (isPeak ? 6 : 5);
     allowedDirs = isRelief ? DIRS_MEDIUM : DIRS_ALL_8;
