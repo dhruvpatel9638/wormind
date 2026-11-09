@@ -29,8 +29,10 @@ import { AdBanner } from './src/native/components/AdBanner';
 import { NativeLoadingScreen } from './src/native/components/LoadingScreen';
 import { CustomAlert } from './src/native/components/CustomAlert';
 import { CenturyAchievementModal } from './src/native/components/CenturyAchievementModal';
+import { RefillHeartsModal, WordFlameStreakModal, CoinsEarnedModal, FreeCoinsModal } from './src/native/components/WorMindPopups';
 import { DAILY_REWARDS, INITIAL_LEVELS } from './src/data/gameData';
 import { nativeAudio } from './src/native/audio';
+import { nativeHaptics } from './src/native/haptics';
 import {
   completeDailySpin,
   claimDailyReward,
@@ -134,6 +136,7 @@ function AppContent() {
           setActiveLevelId(restored.currentLevel);
           nativeAudio.setSoundEnabled(restored.soundEnabled ?? true);
           nativeAudio.setMusicEnabled(restored.musicEnabled ?? true);
+          nativeHaptics.setEnabled(restored.hapticsEnabled ?? true);
         } catch (error) {
           console.warn('Could not parse player progress, starting fresh:', error);
           const initial = createInitialPlayerState();
@@ -444,6 +447,7 @@ function AppContent() {
     setPlayerState((prev) => {
       const next = !prev.soundEnabled;
       nativeAudio.setSoundEnabled(next);
+      if (next) nativeAudio.playLetterTap(1);
       return { ...prev, soundEnabled: next };
     });
   };
@@ -457,7 +461,12 @@ function AppContent() {
   };
 
   const handleToggleHaptics = () => {
-    setPlayerState((prev) => ({ ...prev, hapticsEnabled: !prev.hapticsEnabled }));
+    setPlayerState((prev) => {
+      const next = !prev.hapticsEnabled;
+      nativeHaptics.setEnabled(next);
+      if (next) nativeHaptics.selection();
+      return { ...prev, hapticsEnabled: next };
+    });
   };
 
   const handleResetProgress = () => {
@@ -513,9 +522,18 @@ function AppContent() {
           heartCountdown={formatCountdown(playerState.heartSeconds)}
           level={activeLevelId}
           strike={playerState.strike ?? 10}
-          onPressStrike={() => setShowRestoreStrikeModal(true)}
-        onOpenShop={() => setShowFreeCoinsModal(true)}
-        onRefillHearts={() => setShowRefillHeartsModal(true)}
+          onPressStrike={() => {
+          nativeHaptics.selection();
+          setShowRestoreStrikeModal(true);
+        }}
+        onOpenShop={() => {
+          nativeHaptics.selection();
+          setShowFreeCoinsModal(true);
+        }}
+        onRefillHearts={() => {
+          nativeHaptics.selection();
+          setShowRefillHeartsModal(true);
+        }}
         musicEnabled={playerState.musicEnabled}
         onToggleMusic={handleToggleMusic}
       />
@@ -555,6 +573,12 @@ function AppContent() {
             onFailLevel={handleFailLevel}
             onRestoreStrike={handleRestoreStrike}
             isRestoringStrike={isRestoringStrike}
+            soundEnabled={playerState.soundEnabled}
+            musicEnabled={playerState.musicEnabled}
+            hapticsEnabled={playerState.hapticsEnabled}
+            onToggleSound={handleToggleSound}
+            onToggleMusic={handleToggleMusic}
+            onToggleHaptics={handleToggleHaptics}
           />
         )}
 
@@ -589,459 +613,66 @@ function AppContent() {
       {currentScreen !== 'game' && (
         <NativeBottomNav
           currentScreen={currentScreen}
-          onNavigate={setCurrentScreen}
+          onNavigate={(screen) => {
+            nativeHaptics.selection();
+            setCurrentScreen(screen);
+          }}
           hasClaimableDaily={canClaimDaily}
           bottomOffset={(bannerHeight > 0 ? bannerHeight : insets.bottom) + 4}
         />
       )}
 
-      {/* Refill Hearts Modal */}
-      <Modal visible={showRefillHeartsModal} transparent animationType="fade">
-        <ScrollView
-          style={styles.modalScroll}
-          contentContainerStyle={styles.modalBackdrop}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={styles.restoreCard}>
-            <View style={[styles.fireHeaderCircle, { backgroundColor: '#FEF2F2', borderColor: '#FCA5A5' }]}>
-              <MaterialIcons name="favorite" size={44} color="#EF4444" />
-            </View>
-            <Text style={[styles.restoreTitle, { color: '#DC2626' }]}>
-              {playerState.hearts <= 0 ? 'OUT OF HEARTS! ❤️' : 'REFILL HEARTS ❤️'}
-            </Text>
-            <Text style={styles.restoreSub}>
-              {playerState.hearts <= 0
-                ? `You need at least 1 heart to play levels. Refill now with 50 Coins or wait for the timer (${formatCountdown(playerState.heartSeconds)}).`
-                : playerState.hearts >= playerState.maxHearts
-                ? `Your hearts are currently at max capacity (${playerState.hearts}/${playerState.maxHearts}).`
-                : `Your hearts: ${playerState.hearts}/${playerState.maxHearts}. Refill to full 5 hearts now for 50 Coins!`}
-            </Text>
+      {/* Refill Hearts Modal (WorMind Popup 3) */}
+      <RefillHeartsModal
+        visible={showRefillHeartsModal}
+        currentHearts={playerState.hearts}
+        maxHearts={playerState.maxHearts}
+        coinsCost={50}
+        userCoins={playerState.coins}
+        countdownText={formatCountdown(playerState.heartSeconds)}
+        onClose={() => setShowRefillHeartsModal(false)}
+        onRefill={() => {
+          if (handleDeductCoins(50)) {
+            handleRefillHearts();
+            setShowRefillHeartsModal(false);
+          }
+        }}
+      />
 
-            <View style={styles.restorePriceBox}>
-              <Text style={styles.restorePriceLabel}>REFILL COST:</Text>
-              <View style={styles.priceRow}>
-                <MaterialIcons name="monetization-on" size={24} color="#F59E0B" />
-                <Text style={styles.priceText}>50 Coins</Text>
-              </View>
-              <Text style={styles.currentCoinsText}>
-                Your Coins: {playerState.coins.toLocaleString()}
-              </Text>
-            </View>
-
-            <View style={styles.restoreBtnRow}>
-              <Pressable
-                onPress={() => setShowRefillHeartsModal(false)}
-                style={({ pressed }) => [styles.restoreCancelBtn, pressed && styles.pressed]}
-              >
-                <Text style={styles.restoreCancelText}>CLOSE</Text>
-              </Pressable>
-
-              <Pressable
-                disabled={playerState.hearts >= playerState.maxHearts}
-                onPress={() => {
-                  if (playerState.hearts >= playerState.maxHearts) return;
-                  if (handleDeductCoins(50)) {
-                    handleRefillHearts();
-                    setShowRefillHeartsModal(false);
-                  }
-                }}
-                style={({ pressed }) => [
-                  styles.restoreConfirmBtn,
-                  { backgroundColor: '#DC2626' },
-                  playerState.hearts >= playerState.maxHearts && { backgroundColor: '#CBD5E1', opacity: 0.6 },
-                  pressed && playerState.hearts < playerState.maxHearts && styles.pressed,
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.restoreConfirmText,
-                    playerState.hearts >= playerState.maxHearts && { color: '#64748B' },
-                  ]}
-                >
-                  {playerState.hearts >= playerState.maxHearts ? 'FULL (5/5)' : 'REFILL (50 🪙)'}
-                </Text>
-              </Pressable>
-            </View>
-          </View>
-        </ScrollView>
-      </Modal>
-
-      {/* Snapchat Strike Restore & Info Modal (Modern Game UI/UX) */}
-      <Modal
+      {/* Word Flame Streak Modal (WorMind Popup 4) */}
+      <WordFlameStreakModal
         visible={showRestoreStrikeModal}
-        transparent
-        animationType="fade"
-        onRequestClose={() => {
-          if (restoreStrikeInFlight.current) return;
+        strike={playerState.strike ?? 10}
+        milestoneProgress={Math.min(1, Math.max(0.2, ((playerState.strike ?? 10) % 50) / 50))}
+        isRestoring={isRestoringStrike}
+        onKeepBurning={() => {
           setShowRestoreStrikeModal(false);
           setPendingLevelToStart(null);
         }}
-      >
-        <ScrollView
-          style={styles.modalScroll}
-          contentContainerStyle={styles.modalBackdrop}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={styles.strikeCard}>
-            {/* Top Close Button */}
-            <Pressable
-              disabled={isRestoringStrike}
-              onPress={() => {
-                if (restoreStrikeInFlight.current) return;
-                setShowRestoreStrikeModal(false);
-                setPendingLevelToStart(null);
-              }}
-              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              style={[styles.modalCloseCornerBtn, isRestoringStrike && styles.disabled]}
-            >
-              <MaterialIcons name="close" size={20} color="#94A3B8" />
-            </Pressable>
+        onRestore={() => {
+          handleRestoreStrike(() => {
+            setShowRestoreStrikeModal(false);
+            if (pendingLevelToStart !== null) {
+              const lvl = pendingLevelToStart;
+              setPendingLevelToStart(null);
+              handleStartLevel(lvl);
+            }
+          });
+        }}
+        onClose={() => {
+          setShowRestoreStrikeModal(false);
+          setPendingLevelToStart(null);
+        }}
+      />
 
-            {/* Glowing 3D Flame Crest with Gradient */}
-            <View style={styles.strikeFlameGlowWrapper}>
-              <LinearGradient
-                colors={
-                  (playerState.strike ?? 10) <= 0
-                    ? ['#FF4500', '#DC2626']
-                    : ['#FF8A00', '#FF3D00']
-                }
-                style={styles.strikeFlameCircle}
-              >
-                <MaterialIcons name="local-fire-department" size={46} color="#FFFFFF" />
-              </LinearGradient>
-              <View
-                style={[
-                  styles.strikePillTag,
-                  {
-                    backgroundColor:
-                      (playerState.strike ?? 10) <= 0 ? '#FEF2F2' : '#FFF7ED',
-                    borderColor:
-                      (playerState.strike ?? 10) <= 0 ? '#FCA5A5' : '#FDBA74',
-                  },
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.strikePillTagText,
-                    {
-                      color:
-                        (playerState.strike ?? 10) <= 0 ? '#DC2626' : '#EA580C',
-                    },
-                  ]}
-                >
-                  {(playerState.strike ?? 10) <= 0 ? 'FLAME AT 0' : 'STRIKE ACTIVE'}
-                </Text>
-              </View>
-            </View>
-
-            {/* Modal Title & Subtitle */}
-            <Text style={styles.strikeModalTitle}>
-              {(playerState.strike ?? 10) <= 0
-                ? 'REIGNITE YOUR STRIKE! 🔥'
-                : 'SNAPCHAT STRIKE 🔥'}
-            </Text>
-            <Text style={styles.strikeModalSub}>
-              {(playerState.strike ?? 10) <= 0
-                ? 'Your flame has gone out! Watch 1 quick video ad to restore your strike and keep playing.'
-                : 'Keep your streak burning bright! Solve puzzle levels to build up your fire power.'}
-            </Text>
-
-            {/* Sleek Stats Card with Gradient & Rules */}
-            <LinearGradient
-              colors={['#FFFBEB', '#FFF7ED']}
-              style={styles.strikeStatsCard}
-            >
-              {/* Score Header Row */}
-              <View style={styles.strikeScoreRow}>
-                <View>
-                  <Text style={styles.strikeScoreLabel}>CURRENT STRIKE</Text>
-                  <View style={styles.strikeScoreValueRow}>
-                    <MaterialIcons
-                      name="whatshot"
-                      size={24}
-                      color={(playerState.strike ?? 10) <= 0 ? '#9CA3AF' : '#EA580C'}
-                    />
-                    <Text
-                      style={[
-                        styles.strikeScoreNumber,
-                        (playerState.strike ?? 10) <= 0 && { color: '#9CA3AF' },
-                      ]}
-                    >
-                      {playerState.strike ?? 10}x
-                    </Text>
-                  </View>
-                </View>
-
-                {/* Status Badge */}
-                <View
-                  style={[
-                    styles.strikeStatusBadge,
-                    (playerState.strike ?? 10) <= 0
-                      ? { backgroundColor: '#FEE2E2', borderColor: '#FCA5A5' }
-                      : { backgroundColor: '#DCFCE7', borderColor: '#86EFAC' },
-                  ]}
-                >
-                  <MaterialIcons
-                    name={(playerState.strike ?? 10) <= 0 ? 'priority-high' : 'check-circle'}
-                    size={14}
-                    color={(playerState.strike ?? 10) <= 0 ? '#DC2626' : '#16A34A'}
-                  />
-                  <Text
-                    style={[
-                      styles.strikeStatusText,
-                      {
-                        color:
-                          (playerState.strike ?? 10) <= 0 ? '#DC2626' : '#16A34A',
-                      },
-                    ]}
-                  >
-                    {(playerState.strike ?? 10) <= 0 ? 'NEEDS REIGNITE' : 'BURNING'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* Divider */}
-              <View style={styles.strikeCardDivider} />
-
-              {/* Rule Items */}
-              <View style={styles.strikeRulesList}>
-                <View style={styles.strikeRuleItem}>
-                  <View style={[styles.ruleBullet, { backgroundColor: '#DCFCE7' }]}>
-                    <MaterialIcons name="add" size={12} color="#15803D" />
-                  </View>
-                  <Text style={styles.ruleItemText}>
-                    <Text style={styles.ruleBoldText}>+{STRIKE_WIN_REWARD} Strike</Text> added on each level won
-                  </Text>
-                </View>
-
-                <View style={styles.strikeRuleItem}>
-                  <View style={[styles.ruleBullet, { backgroundColor: '#FEE2E2' }]}>
-                    <MaterialIcons name="remove" size={12} color="#DC2626" />
-                  </View>
-                  <Text style={styles.ruleItemText}>
-                    <Text style={styles.ruleBoldText}>-{STRIKE_LOSS_PENALTY} Strike</Text> deducted if level timer runs out
-                  </Text>
-                </View>
-
-                <View style={styles.strikeRuleItem}>
-                  <View style={[styles.ruleBullet, { backgroundColor: '#DCFCE7' }]}>
-                    <MaterialIcons name="health-and-safety" size={12} color="#15803D" />
-                  </View>
-                  <Text style={styles.ruleItemText}>
-                    <Text style={styles.ruleBoldText}>2 Free Lifelines</Text> available when Strike drops to 0
-                  </Text>
-                </View>
-
-                <View style={styles.strikeRuleItem}>
-                  <View style={[styles.ruleBullet, { backgroundColor: '#FEF3C7' }]}>
-                    <MaterialIcons name="monetization-on" size={12} color="#D97706" />
-                  </View>
-                  <Text style={styles.ruleItemText}>
-                    <Text style={styles.ruleBoldText}>50 Coins or 1 Video Ad</Text> restores back to {STRIKE_RESTORE_AMOUNT} 🔥
-                  </Text>
-                </View>
-
-                <View style={styles.strikeRuleItem}>
-                  <View style={[styles.ruleBullet, { backgroundColor: '#E0E7FF' }]}>
-                    <MaterialIcons name="play-circle-outline" size={12} color="#4338CA" />
-                  </View>
-                  <Text style={styles.ruleItemText}>
-                    <Text style={styles.ruleBoldText}>Strike 0 never stops you</Text> — play anytime!
-                  </Text>
-                </View>
-              </View>
-            </LinearGradient>
-
-            {/* Bottom Action Buttons */}
-            {(playerState.strike ?? 10) <= 0 ? (
-              <View style={styles.strikeOptionsContainer}>
-                {/* 1. Free Lifeline Button (if available) */}
-                {(playerState.strikeFreeRestoresRemaining ?? 2) > 0 && (
-                  <Pressable
-                    disabled={isRestoringStrike}
-                    onPress={() => {
-                      handleUseFreeLifeline(() => {
-                        setShowRestoreStrikeModal(false);
-                        if (pendingLevelToStart !== null) {
-                          setActiveLevelId(pendingLevelToStart);
-                          setCurrentScreen('game');
-                          setPendingLevelToStart(null);
-                        }
-                      });
-                    }}
-                    style={({ pressed }) => [styles.strikeOptionBtn, pressed && styles.pressed]}
-                  >
-                    <LinearGradient
-                      colors={['#10B981', '#059669']}
-                      start={{ x: 0, y: 0 }}
-                      end={{ x: 1, y: 0 }}
-                      style={styles.strikeOptionBtnGradient}
-                    >
-                      <MaterialIcons name="health-and-safety" size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
-                      <Text style={styles.strikeOptionBtnText}>
-                        USE FREE LIFELINE ({playerState.strikeFreeRestoresRemaining ?? 2}/2)
-                      </Text>
-                    </LinearGradient>
-                  </Pressable>
-                )}
-
-                {/* 2. Restore with 50 Coins */}
-                <Pressable
-                  disabled={isRestoringStrike || playerState.coins < 50}
-                  onPress={() => {
-                    handleRestoreStrikeWithCoins(() => {
-                      setShowRestoreStrikeModal(false);
-                      if (pendingLevelToStart !== null) {
-                        setActiveLevelId(pendingLevelToStart);
-                        setCurrentScreen('game');
-                        setPendingLevelToStart(null);
-                      }
-                    });
-                  }}
-                  style={({ pressed }) => [
-                    styles.strikeOptionBtn,
-                    playerState.coins < 50 && styles.disabled,
-                    pressed && styles.pressed,
-                  ]}
-                >
-                  <LinearGradient
-                    colors={['#F59E0B', '#D97706']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }}
-                    style={styles.strikeOptionBtnGradient}
-                  >
-                    <MaterialIcons name="monetization-on" size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
-                    <Text style={styles.strikeOptionBtnText}>
-                      RESTORE FOR 50 🪙 ({playerState.coins} COINS)
-                    </Text>
-                  </LinearGradient>
-                </Pressable>
-
-                {/* 3. Watch Video Ad */}
-                <Pressable
-                  disabled={isRestoringStrike}
-                  onPress={() => {
-                    handleRestoreStrike(() => {
-                      setShowRestoreStrikeModal(false);
-                      if (pendingLevelToStart !== null) {
-                        setActiveLevelId(pendingLevelToStart);
-                        setCurrentScreen('game');
-                        setPendingLevelToStart(null);
-                      }
-                    });
-                  }}
-                  style={({ pressed }) => [
-                    styles.strikeOptionBtn,
-                    isRestoringStrike && styles.disabled,
-                    pressed && styles.pressed,
-                  ]}
-                >
-                  <LinearGradient
-                    colors={['#FF512F', '#F09819']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }}
-                    style={styles.strikeOptionBtnGradient}
-                  >
-                    <MaterialIcons name="ondemand-video" size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
-                    <Text style={styles.strikeOptionBtnText}>
-                      {isRestoringStrike ? 'LOADING AD...' : 'WATCH AD 🎬 (FREE REIGNITE)'}
-                    </Text>
-                  </LinearGradient>
-                </Pressable>
-
-                {/* 4. Close & Play Anyway Row */}
-                <View style={styles.strikeBottomActionRow}>
-                  <Pressable
-                    disabled={isRestoringStrike}
-                    onPress={() => {
-                      if (restoreStrikeInFlight.current) return;
-                      setShowRestoreStrikeModal(false);
-                      setPendingLevelToStart(null);
-                    }}
-                    style={({ pressed }) => [styles.strikeCancelBtn, pressed && styles.pressed]}
-                  >
-                    <Text style={styles.strikeCancelText}>CLOSE</Text>
-                  </Pressable>
-
-                  <Pressable
-                    disabled={isRestoringStrike}
-                    onPress={handlePlayAnyway}
-                    style={({ pressed }) => [styles.strikePlayAnywayBtn, pressed && styles.pressed]}
-                  >
-                    <MaterialIcons name="play-arrow" size={18} color="#6366F1" style={{ marginRight: 4 }} />
-                    <Text style={styles.strikePlayAnywayText}>PLAY ANYWAY 🎮</Text>
-                  </Pressable>
-                </View>
-              </View>
-            ) : (
-              <Pressable
-                disabled={isRestoringStrike}
-                onPress={() => {
-                  if (restoreStrikeInFlight.current) return;
-                  setShowRestoreStrikeModal(false);
-                }}
-                style={({ pressed }) => [styles.strikeAwesomeBtn, isRestoringStrike && styles.disabled, pressed && styles.pressed]}
-              >
-                <LinearGradient
-                  colors={['#FF7A00', '#FF3D00']}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={styles.strikeAdBtnGradient}
-                >
-                  <MaterialIcons name="whatshot" size={18} color="#FFFFFF" style={{ marginRight: 6 }} />
-                  <Text style={styles.strikeAdBtnText}>KEEP BURNING! 🔥</Text>
-                </LinearGradient>
-              </Pressable>
-            )}
-          </View>
-        </ScrollView>
-      </Modal>
-
-      {/* Free Coins Rewarded Ad Modal */}
-      <Modal visible={showFreeCoinsModal} transparent animationType="fade">
-        <ScrollView
-          style={styles.modalScroll}
-          contentContainerStyle={styles.modalBackdrop}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={styles.restoreCard}>
-            <View style={[styles.fireHeaderCircle, { backgroundColor: '#FEF3C7', borderColor: '#F59E0B' }]}>
-              <MaterialIcons name="monetization-on" size={44} color="#D97706" />
-            </View>
-            <Text style={styles.restoreTitle}>GET FREE COINS! 🪙</Text>
-            <Text style={styles.restoreSub}>
-              Watch a short video ad to earn +{FREE_COINS_AD_REWARD} Coins for hints, restores, and reveals!
-            </Text>
-
-            <View style={styles.restorePriceBox}>
-              <Text style={styles.restorePriceLabel}>REWARD:</Text>
-              <View style={styles.priceRow}>
-                <MaterialIcons name="monetization-on" size={24} color="#F59E0B" />
-                <Text style={styles.priceText}>+{FREE_COINS_AD_REWARD} Coins</Text>
-              </View>
-              <Text style={styles.currentCoinsText}>
-                Your Coins: {playerState.coins.toLocaleString()}
-              </Text>
-            </View>
-
-            <View style={styles.restoreBtnRow}>
-              <Pressable
-                onPress={() => setShowFreeCoinsModal(false)}
-                style={({ pressed }) => [styles.restoreCancelBtn, pressed && styles.pressed]}
-              >
-                <Text style={styles.restoreCancelText}>CANCEL</Text>
-              </Pressable>
-
-              <Pressable
-                onPress={handleWatchAdForCoins}
-                style={({ pressed }) => [styles.restoreConfirmBtn, { backgroundColor: '#059669' }, pressed && styles.pressed]}
-              >
-                <Text style={styles.restoreConfirmText}>WATCH AD 🎬</Text>
-              </Pressable>
-            </View>
-          </View>
-        </ScrollView>
-      </Modal>
+      {/* Redesigned Free Coins Rewarded Ad Modal */}
+      <FreeCoinsModal
+        visible={showFreeCoinsModal}
+        rewardAmount={FREE_COINS_AD_REWARD}
+        userCoins={playerState.coins}
+        onWatchAd={handleWatchAdForCoins}
+        onClose={() => setShowFreeCoinsModal(false)}
+      />
 
       {/* Free Coins Result Alert */}
       {freeCoinsAlert && (
@@ -1055,13 +686,12 @@ function AppContent() {
         />
       )}
 
-      {/* Word Strike Info Modal */}
-      <CustomAlert
+      {/* Word Flame Streak Info Modal (WorMind Popup 4) */}
+      <WordFlameStreakModal
         visible={showStrikeInfoModal}
-        title="WORD STRIKE"
-        message={`Current Strike: ${playerState.strike ?? 10}!\n\n• Each level win gives +${STRIKE_WIN_REWARD} Strike!\n• Failing a level loses ${STRIKE_LOSS_PENALTY} Strike, down to 0.\n• If Strike hits 0, watch a rewarded ad to restore it to ${STRIKE_RESTORE_AMOUNT}!`}
-        icon="local-fire-department"
-        btnText="GOT IT"
+        strike={playerState.strike ?? 10}
+        milestoneProgress={Math.min(1, Math.max(0.2, ((playerState.strike ?? 10) % 50) / 50))}
+        onKeepBurning={() => setShowStrikeInfoModal(false)}
         onClose={() => setShowStrikeInfoModal(false)}
       />
 

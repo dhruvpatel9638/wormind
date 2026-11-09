@@ -1,4 +1,4 @@
-import { createAudioPlayer, setAudioModeAsync } from 'expo-audio';
+import { createAudioPlayer, setAudioModeAsync, setIsAudioActiveAsync } from 'expo-audio';
 import { AppState, AppStateStatus } from 'react-native';
 
 // Pure React Native Audio Engine (zero browser / WebView)
@@ -38,22 +38,47 @@ class NativeSoundEngine {
   }
 
   private listenToAppState() {
-    AppState.addEventListener('change', (nextState: AppStateStatus) => {
-      this.handleAppStateChange(nextState);
-    });
+    if (typeof AppState?.addEventListener === 'function') {
+      AppState.addEventListener('change', (nextState: AppStateStatus) => {
+        this.handleAppStateChange(nextState);
+      });
+    }
   }
 
-  public handleAppStateChange(nextState: AppStateStatus) {
+  public async handleAppStateChange(nextState: AppStateStatus) {
     const isNowActive = nextState === 'active';
     if (this.isAppActive === isNowActive) return;
     this.isAppActive = isNowActive;
 
     if (!isNowActive) {
       // App went to background / screen locked / switched to another application
+      // 1. Immediately pause and destroy BGM player so its MediaSession is released
       this.pauseBgm();
+      // 2. Immediately stop all active SFX voices
       this.stopAllSounds();
+      // 3. Deactivate audio session native-side to release audio focus and prevent
+      //    Bluetooth headphones / car stereos from resuming playback on 'Play/Resume' button click
+      try {
+        if (typeof setIsAudioActiveAsync === 'function') {
+          await setIsAudioActiveAsync(false);
+        }
+      } catch (e) {
+        console.warn('Error deactivating audio session:', e);
+      }
     } else {
-      // App returned to foreground
+      // App returned to foreground: re-activate audio session with proper non-intrusive mode
+      try {
+        if (typeof setIsAudioActiveAsync === 'function') {
+          await setIsAudioActiveAsync(true);
+        }
+        await setAudioModeAsync({
+          playsInSilentMode: true,
+          shouldPlayInBackground: false,
+          interruptionMode: 'mixWithOthers',
+        });
+      } catch (e) {
+        console.warn('Error reactivating audio session:', e);
+      }
       if (this.isMusicEnabled && !this.isInGame) {
         this.playBgm();
       }
@@ -65,6 +90,9 @@ class NativeSoundEngine {
     for (const voices of this.soundPools.values()) {
       for (const voice of voices) {
         this.stopVoice(voice);
+        try {
+          voice.player.volume = 0;
+        } catch (_) {}
       }
     }
   }
@@ -74,18 +102,22 @@ class NativeSoundEngine {
       await setAudioModeAsync({
         playsInSilentMode: true,
         shouldPlayInBackground: false,
+        interruptionMode: 'mixWithOthers',
       });
+      if (typeof setIsAudioActiveAsync === 'function') {
+        await setIsAudioActiveAsync(true);
+      }
     } catch (e) {
       console.warn('Audio mode init error:', e);
     }
-    // Prepare a bounded pool during startup, before the first drag. Several
-    // voices let consecutive letters overlap without cutting each other off.
+    // Prepare a bounded pool during startup, before the first drag.
+    // keepAudioSessionActive is FALSE to avoid holding MediaSessions open.
     this.prepareSoundPool('letter_tap', 6);
     this.prepareSoundPool('btn_1', 2);
     this.prepareSoundPool('btn_3', 2);
     this.prepareSoundPool('level_win', 1);
-    // Auto-play BGM if music is enabled and not in game
-    if (this.isMusicEnabled && !this.isInGame) {
+    // Auto-play BGM if music is enabled, app is active, and NOT inside active game
+    if (this.isMusicEnabled && this.isAppActive && !this.isInGame) {
       setTimeout(() => this.playBgm(), 500);
     }
   }
@@ -95,7 +127,9 @@ class NativeSoundEngine {
     if (!this.isAppActive || !this.isMusicEnabled || this.isInGame) return;
     try {
       if (!this.bgmPlayer) {
-        this.bgmPlayer = createAudioPlayer(SOUND_ASSETS.bgm);
+        this.bgmPlayer = createAudioPlayer(SOUND_ASSETS.bgm, {
+          keepAudioSessionActive: false,
+        });
         this.bgmPlayer.loop = true;
         this.bgmPlayer.volume = 0.25;
       }
@@ -108,19 +142,34 @@ class NativeSoundEngine {
   public pauseBgm() {
     try {
       if (this.bgmPlayer) {
-        this.bgmPlayer.pause();
+        try {
+          this.bgmPlayer.pause();
+        } catch (_) {}
+        try {
+          if (typeof this.bgmPlayer.release === 'function') {
+            this.bgmPlayer.release();
+          }
+        } catch (_) {}
+        try {
+          if (typeof this.bgmPlayer.remove === 'function') {
+            this.bgmPlayer.remove();
+          }
+        } catch (_) {}
+        this.bgmPlayer = null;
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Error pausing BGM:', e);
+    }
   }
 
   public setInGame(inGame: boolean) {
-    if (this.isInGame === inGame) return;
     this.isInGame = inGame;
     if (inGame) {
+      // Background music is turned OFF during active game screen
       this.pauseBgm();
     } else {
       this.cancelLetterTaps();
-      if (this.isMusicEnabled) {
+      if (this.isMusicEnabled && this.isAppActive) {
         this.playBgm();
       }
     }
@@ -128,7 +177,7 @@ class NativeSoundEngine {
 
   public setMusicEnabled(enabled: boolean) {
     this.isMusicEnabled = enabled;
-    if (enabled && !this.isInGame) {
+    if (enabled && this.isAppActive && !this.isInGame) {
       this.playBgm();
     } else {
       this.pauseBgm();
@@ -138,6 +187,18 @@ class NativeSoundEngine {
   public toggleMusic(): boolean {
     this.setMusicEnabled(!this.isMusicEnabled);
     return this.isMusicEnabled;
+  }
+
+  public getSoundEnabled(): boolean {
+    return this.isSoundEnabled;
+  }
+
+  public getMusicEnabled(): boolean {
+    return this.isMusicEnabled;
+  }
+
+  public getIsInGame(): boolean {
+    return this.isInGame;
   }
 
   // ===== SOUND EFFECTS =====
@@ -162,7 +223,7 @@ class NativeSoundEngine {
     for (let i = 0; i < count; i++) {
       try {
         const player = createAudioPlayer(SOUND_ASSETS[sound], {
-          keepAudioSessionActive: true,
+          keepAudioSessionActive: false,
         });
         const voice: SoundVoice = { player, ready: true, revision: 0, lastStarted: 0 };
         voices.push(voice);
@@ -279,7 +340,7 @@ class NativeSoundEngine {
   }
 
   public playVictory() {
-    if (!this.isSoundEnabled) return;
+    if (!this.isAppActive || !this.isSoundEnabled) return;
     try {
       this.playSound('level_win', 0.9);
     } catch (e) {

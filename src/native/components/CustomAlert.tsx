@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
+import { CoinsEarnedModal } from './WorMindPopups';
 
 export interface CustomAlertProps {
   visible: boolean;
@@ -127,6 +128,25 @@ export const CustomAlert: React.FC<CustomAlertProps> = ({
       onConfirm();
     }
   };
+
+  const isCoinAlert =
+    lowerTitle.includes('coin') ||
+    lowerTitle.includes('chest') ||
+    icon === 'monetization-on' ||
+    (lowerMsg.includes('earned') && lowerMsg.includes('coin'));
+
+  if (isCoinAlert) {
+    const coinMatch = (message || '').match(/\+?(\d[\d,]*)\s*Coins?/i) || (title || '').match(/\+?(\d[\d,]*)\s*Coins?/i);
+    const coinAmount = coinMatch ? parseInt(coinMatch[1].replace(/,/g, ''), 10) : 100;
+    return (
+      <CoinsEarnedModal
+        visible={visible}
+        coins={coinAmount}
+        title={title.toUpperCase().includes('CHEST') ? 'CHEST UNLOCKED!' : 'COINS EARNED!'}
+        onClose={handlePress}
+      />
+    );
+  }
 
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>

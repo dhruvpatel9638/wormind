@@ -67,6 +67,39 @@ const MASKS: Record<string, number[][]> = {
   ],
 };
 
+function createEndlessMask(shape: string, size: number): number[][] {
+  const grid: number[][] = [];
+  const kCorner = Math.floor(size / 4);
+  const mid = (size - 1) / 2;
+  const maxManhattan = mid + 0.5;
+
+  for (let r = 0; r < size; r++) {
+    const row: number[] = [];
+    for (let c = 0; c < size; c++) {
+      let isCell = false;
+      if (shape === 'square') {
+        isCell = true;
+      } else if (shape === 'cross') {
+        const inCorner = (r < kCorner || r >= size - kCorner) && (c < kCorner || c >= size - kCorner);
+        isCell = !inCorner;
+      } else if (shape === 'octagon') {
+        const dTL = r + c;
+        const dTR = r + (size - 1 - c);
+        const dBL = (size - 1 - r) + c;
+        const dBR = (size - 1 - r) + (size - 1 - c);
+        const cutoff = kCorner;
+        isCell = (dTL >= cutoff && dTR >= cutoff && dBL >= cutoff && dBR >= cutoff);
+      } else if (shape === 'diamond') {
+        const dist = Math.abs(r - mid) + Math.abs(c - mid);
+        isCell = dist <= maxManhattan;
+      }
+      row.push(isCell ? 1 : 0);
+    }
+    grid.push(row);
+  }
+  return grid;
+}
+
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 function generateEndlessLevel(levelId: number): LevelData {
@@ -83,8 +116,11 @@ function generateEndlessLevel(levelId: number): LevelData {
   const targetWordCount = Math.min(conf.wordCount, shuffledWords.length);
   const candidateWords = shuffledWords.slice(0, targetWordCount);
 
-  const maskPattern = MASKS[conf.maskShape] || MASKS.square;
-  const SIZE = 8;
+  const isMega = (levelId % 8 === 4 || levelId % 11 === 7);
+  const SIZE = isMega ? 12 : 8;
+  const maskPattern = isMega
+    ? createEndlessMask(conf.maskShape, 12)
+    : (MASKS[conf.maskShape] || MASKS.square);
 
   let bestGrid: string[][] = Array(SIZE).fill(null).map(() => Array(SIZE).fill(' '));
   let bestTargetWords: TargetWord[] = [];
@@ -165,7 +201,8 @@ function generateEndlessLevel(levelId: number): LevelData {
   return {
     id: levelId,
     title: `Level ${levelId}`,
-    subtitle: `${conf.pacingDescription}`,
+    subtitle: isMega ? `${conf.pacingDescription} - MEGA GRID 🔍` : `${conf.pacingDescription}`,
+    isMegaGrid: isMega,
     world: 'space',
     themeIcon: conf.step === 4 ? 'whatshot' : conf.step === 5 ? 'eco' : 'star',
     maskName: conf.maskShape.charAt(0).toUpperCase() + conf.maskShape.slice(1),
