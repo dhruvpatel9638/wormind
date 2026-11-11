@@ -12,7 +12,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { DAILY_REWARDS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
+import { nativeHaptics } from '../haptics';
 import { LuckyWheel } from '../components/LuckyWheel';
+import { DailyCalendarModal, RewardClaimedModal, WoodenPopupCard, Game3DButton } from '../components/WorMindPopups';
 import type { DailyReward, SpinTicket } from '../../types';
 
 interface DailyViewProps {
@@ -50,6 +52,7 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
     const reward = onClaimDaily(day);
     if (!reward) return;
     nativeAudio.playCoin();
+    nativeHaptics.success();
     const parts = [
       reward.coins > 0 && `+${reward.coins} Coins`,
       reward.hat && reward.hatLabel,
@@ -115,7 +118,10 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
 
           {/* Action Button: Opens Calendar Popup Modal */}
           <Pressable
-            onPress={() => setShowCalendarModal(true)}
+            onPress={() => {
+              nativeHaptics.selection();
+              setShowCalendarModal(true);
+            }}
             style={({ pressed }) => [styles.actionButtonWrapper, pressed && styles.pressed]}
           >
             <LinearGradient
@@ -163,7 +169,10 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
 
           {/* Action Button: Opens Lucky Wheel Popup Modal */}
           <Pressable
-            onPress={() => setShowWheelModal(true)}
+            onPress={() => {
+              nativeHaptics.selection();
+              setShowWheelModal(true);
+            }}
             style={({ pressed }) => [styles.actionButtonWrapper, pressed && styles.pressed]}
           >
             <LinearGradient
@@ -181,102 +190,18 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
         </LinearGradient>
       </ScrollView>
 
-      {/* MODAL 1: 7-DAY LOGIN REWARDS CALENDAR POPUP */}
-      <Modal
+      {/* REDESIGNED MODAL 1: 7-DAY LOGIN REWARDS CALENDAR POPUP */}
+      <DailyCalendarModal
         visible={showCalendarModal}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setShowCalendarModal(false)}
-      >
-        <ScrollView
-          style={styles.modalScroll}
-          contentContainerStyle={styles.modalBackdrop}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={[styles.calendarModalCard, contentWidthStyle]}>
-            {/* Top Close Button */}
-            <Pressable
-              onPress={() => setShowCalendarModal(false)}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-              style={styles.modalCloseCornerBtn}
-            >
-              <MaterialIcons name="close" size={22} color="#94A3B8" />
-            </Pressable>
+        claimedDays={claimedDays}
+        canClaimToday={canClaimToday}
+        currentDayToClaim={currentDayToClaim}
+        dailyRewards={DAILY_REWARDS}
+        onClaim={handleClaim}
+        onClose={() => setShowCalendarModal(false)}
+      />
 
-            {/* Header */}
-            <View style={styles.calendarModalHeader}>
-              <View style={[styles.fireCircle, { width: 40, height: 40, borderRadius: 20 }]}>
-                <MaterialIcons name="card-giftcard" size={22} color="#EF4444" />
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text allowFontScaling={false} style={styles.calendarModalTitle}>7-Day Login Rewards</Text>
-                <Text allowFontScaling={false} style={styles.calendarModalSub}>
-                  Day {currentDayToClaim} of 7 • {canClaimToday ? 'Tap Claim to collect!' : 'Reward claimed for today!'}
-                </Text>
-              </View>
-            </View>
-
-            {/* Rewards Grid */}
-            <View style={styles.rewardsGrid}>
-              {DAILY_REWARDS.map((reward) => {
-                const isClaimed = claimedDays.includes(reward.day);
-                const isReady = canClaimToday && reward.day === currentDayToClaim;
-
-                return (
-                  <View
-                    key={reward.day}
-                    style={[
-                      styles.rewardCard,
-                      compact && styles.rewardCardCompact,
-                      isReady && styles.rewardCardReady,
-                      isClaimed && styles.rewardCardClaimed,
-                    ]}
-                  >
-                    <Text allowFontScaling={false} style={styles.rewardDay}>DAY {reward.day}</Text>
-                    <MaterialIcons
-                      name={reward.isJackpot ? 'card-giftcard' : 'monetization-on'}
-                      size={24}
-                      color={isReady ? '#10B981' : isClaimed ? '#7B8AB8' : '#FFC928'}
-                    />
-                    <Text
-                      allowFontScaling={false}
-                      numberOfLines={2}
-                      style={[styles.rewardText, isReady && { color: '#059669', fontWeight: '900' }]}
-                    >
-                      {reward.rewardText}
-                    </Text>
-
-                    {isClaimed ? (
-                      <View style={styles.claimedPill}>
-                        <Text allowFontScaling={false} style={styles.claimedPillText}>CLAIMED</Text>
-                      </View>
-                    ) : isReady ? (
-                      <Pressable
-                        onPress={() => handleClaim(reward.day)}
-                        style={({ pressed }) => [styles.claimBtn, pressed && styles.pressed]}
-                      >
-                        <Text allowFontScaling={false} style={styles.claimBtnText}>CLAIM</Text>
-                      </Pressable>
-                    ) : (
-                      <Text allowFontScaling={false} style={styles.lockedText}>LOCKED</Text>
-                    )}
-                  </View>
-                );
-              })}
-            </View>
-
-            {/* Modal Bottom Close */}
-            <Pressable
-              onPress={() => setShowCalendarModal(false)}
-              style={({ pressed }) => [styles.modalBottomCloseBtn, pressed && styles.pressed]}
-            >
-              <Text allowFontScaling={false} style={styles.modalBottomCloseText}>CLOSE</Text>
-            </Pressable>
-          </View>
-        </ScrollView>
-      </Modal>
-
-      {/* MODAL 2: ROYAL LUCKY WHEEL POPUP */}
+      {/* REDESIGNED MODAL 2: ROYAL LUCKY WHEEL POPUP */}
       <Modal
         visible={showWheelModal}
         transparent
@@ -288,49 +213,48 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
           contentContainerStyle={styles.modalBackdrop}
           showsVerticalScrollIndicator={false}
         >
-          <View style={[styles.wheelModalContainer, contentWidthStyle]}>
-            {/* Top Close Button */}
-            <Pressable
-              onPress={() => setShowWheelModal(false)}
-              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              style={styles.wheelModalCloseCornerBtn}
+          <View style={{ alignItems: 'center', width: '100%' }}>
+            <WoodenPopupCard
+              ribbonTitle="LUCKY WHEEL 🎡"
+              ribbonVariant="gold"
+              cardGradient={['#3A1152', '#230839', '#130424']}
+              innerBorderColor="#F59E0B"
+              maxWidth={350}
             >
-              <MaterialIcons name="close" size={24} color="#FFFFFF" />
-            </Pressable>
+              {/* Top Close Button */}
+              <Pressable
+                onPress={() => setShowWheelModal(false)}
+                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                style={styles.modalCloseCornerBtn}
+              >
+                <MaterialIcons name="close" size={20} color="#CBD5E1" />
+              </Pressable>
 
-            <LuckyWheel
-              canSpinToday={canSpinToday}
-              onStartSpin={onStartSpin}
-              onCompleteSpin={onCompleteSpin}
-            />
+              <LuckyWheel
+                canSpinToday={canSpinToday}
+                onStartSpin={onStartSpin}
+                onCompleteSpin={onCompleteSpin}
+              />
 
-            <Pressable
-              onPress={() => setShowWheelModal(false)}
-              style={({ pressed }) => [styles.wheelModalBottomCloseBtn, pressed && styles.pressed]}
-            >
-              <Text allowFontScaling={false} style={styles.wheelModalBottomCloseText}>CLOSE WHEEL</Text>
-            </Pressable>
+              <View style={{ width: '100%', marginTop: 12 }}>
+                <Game3DButton
+                  title="CLOSE WHEEL"
+                  variant="purple"
+                  onPress={() => setShowWheelModal(false)}
+                  height={46}
+                />
+              </View>
+            </WoodenPopupCard>
           </View>
         </ScrollView>
       </Modal>
 
-      {/* MODAL 3: REWARD CLAIMED POPUP */}
-      <Modal visible={showClaimModal} transparent animationType="fade">
-        <View style={styles.modalBackdrop}>
-          <View style={styles.claimPopup}>
-            <MaterialIcons name="celebration" size={48} color="#FFC928" />
-            <Text allowFontScaling={false} style={styles.popupTitle}>REWARD CLAIMED!</Text>
-            <Text allowFontScaling={false} style={styles.popupSub}>{claimedMessage}</Text>
-
-            <Pressable
-              onPress={() => setShowClaimModal(false)}
-              style={({ pressed }) => [styles.popupBtn, pressed && styles.pressed]}
-            >
-              <Text allowFontScaling={false} style={styles.popupBtnText}>AWESOME!</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
+      {/* REDESIGNED MODAL 3: REWARD CLAIMED POPUP */}
+      <RewardClaimedModal
+        visible={showClaimModal}
+        message={claimedMessage}
+        onClose={() => setShowClaimModal(false)}
+      />
     </View>
   );
 };

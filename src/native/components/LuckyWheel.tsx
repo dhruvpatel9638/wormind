@@ -22,6 +22,7 @@ import Svg, {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { nativeAudio } from '../audio';
+import { nativeHaptics } from '../haptics';
 import { SPIN_PRIZES as PRIZES, spinTargetAngle } from '../../data/spinPrizes';
 import type { WheelPrize } from '../../data/spinPrizes';
 import type { SpinTicket } from '../../types';
@@ -95,6 +96,7 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
     setWonPrize(null);
     bannerScale.setValue(0);
     nativeAudio.playSparkle();
+    nativeHaptics.medium();
 
     const winningPrize = PRIZES[ticket.prizeIndex];
     spinAnim.setValue(currentRotation.current);
@@ -133,6 +135,7 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
       if (!onCompleteSpin(ticket)) return;
       setWonPrize(winningPrize);
       nativeAudio.playVictory();
+      nativeHaptics.success();
 
       // Banner pop-in
       Animated.spring(bannerScale, {

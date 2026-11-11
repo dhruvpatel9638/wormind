@@ -232,7 +232,7 @@ export const NativeLoadingScreen: React.FC<LoadingScreenProps> = ({
 
   return (
     <Animated.View style={[styles.container, { opacity: fadeOutAnim }]}>
-      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+      <StatusBar barStyle="light-content" />
 
       {/* High-Resolution Clean Background matching the exact theme */}
       <ImageBackground

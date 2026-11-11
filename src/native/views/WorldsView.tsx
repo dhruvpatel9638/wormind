@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, ComponentRef } from 'react';
 import {
   View,
   Text,
@@ -12,10 +12,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import Svg, { Path } from 'react-native-svg';
 import { nativeAudio } from '../audio';
+import { nativeHaptics } from '../haptics';
 import { INITIAL_LEVELS } from '../../data/gameData';
 import { CustomAlert } from '../components/CustomAlert';
 import { MILESTONE_CHEST_COINS } from '../../config/economy';
 import { getLevelDifficultyConfig } from '../../config/difficultyScaling';
+import { LevelInfoModal } from '../components/WorMindPopups';
 import {
   ValleySun,
   ValleyTree,
@@ -54,7 +56,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   const [selectedModalLevel, setSelectedModalLevel] = useState<number | null>(null);
   const [alertInfo, setAlertInfo] = useState<{ title: string; message: string } | null>(null);
   const [mapWidth, setMapWidth] = useState(360);
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<ComponentRef<typeof ScrollView>>(null);
   const isInitialScrollRef = useRef(true);
 
   const handleMapLayout = (event: LayoutChangeEvent) => {
@@ -126,6 +128,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
 
   const handleNodeClick = (lvl: number, isLocked: boolean) => {
     if (isLocked) {
+      nativeHaptics.warning();
       setAlertInfo({
         title: 'Level Locked',
         message: `Level ${lvl} is locked! Complete earlier levels first.`,
@@ -133,6 +136,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
       return;
     }
     nativeAudio.playLetterTap(2);
+    nativeHaptics.selection();
     setSelectedModalLevel(lvl);
   };
 
@@ -697,6 +701,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         <Pressable
           onPress={() => {
             nativeAudio.playLetterTap(3);
+            nativeHaptics.light();
             onStartLevel(activeLevelId);
           }}
           style={({ pressed }) => [
@@ -710,77 +715,27 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
         </Pressable>
       </View>
 
-      {/* Level Info Modal */}
-      <Modal visible={selectedModalLevel !== null} transparent animationType="fade">
-        <View style={styles.modalBackdrop}>
-          <View style={styles.modalCard}>
-            <View style={[styles.modalHeaderCircle, isOcean && { backgroundColor: '#0284C7' }]}>
-              <MaterialIcons name="explore" size={32} color="#FFFFFF" />
-            </View>
-            <Text style={styles.modalTitle}>LEVEL {selectedModalLevel}</Text>
-            {(() => {
-              const modalLevelData = INITIAL_LEVELS.find((l) => l.id === selectedModalLevel);
-              const conf = selectedModalLevel ? getLevelDifficultyConfig(selectedModalLevel) : null;
-              return (
-                <View style={{ alignItems: 'center', marginBottom: 6 }}>
-                  <Text style={styles.modalSub}>
-                    {selectedModalLevel && selectedModalLevel > 50
-                      ? `Chapter 2 • Bubble Ocean ${modalLevelData?.maskIcon ? `(${modalLevelData.maskIcon} ${modalLevelData.maskName})` : ''}`
-                      : `Chapter 1 • Sunny Valley ${modalLevelData?.maskIcon ? `(${modalLevelData.maskIcon} ${modalLevelData.maskName})` : ''}`}
-                  </Text>
-                  {conf && (
-                    <View
-                      style={[
-                        styles.modalDifficultyBadge,
-                        conf.step === 4 && styles.modalBadgePeak,
-                        conf.step === 5 && styles.modalBadgeRelief,
-                      ]}
-                    >
-                      <Text
-                        style={[
-                          styles.modalDifficultyBadgeText,
-                          conf.step === 4 && styles.modalBadgeTextPeak,
-                          conf.step === 5 && styles.modalBadgeTextRelief,
-                        ]}
-                      >
-                        {conf.titleBadge} • Hardness: {conf.hardness.toFixed(1)}
-                      </Text>
-                    </View>
-                  )}
-                </View>
-              );
-            })()}
-
-            <View style={styles.modalWordsPreview}>
-              <Text style={styles.modalWordsLabel}>OBJECTIVE</Text>
-              <Text style={styles.modalWordsText}>
-                Find all hidden words on the 8x8 matrix to earn 3 stars & 50 coins!
-              </Text>
-            </View>
-
-            <View style={styles.modalBtnRow}>
-              <Pressable
-                onPress={() => setSelectedModalLevel(null)}
-                style={styles.modalCancelBtn}
-              >
-                <Text style={styles.modalCancelText}>Cancel</Text>
-              </Pressable>
-
-              <Pressable
-                onPress={() => {
-                  const target = selectedModalLevel || activeLevelId;
-                  setSelectedModalLevel(null);
-                  onStartLevel(target);
-                }}
-                style={[styles.modalPlayBtn, isOcean && { backgroundColor: '#0284C7' }]}
-              >
-                <MaterialIcons name="favorite" size={16} color="#FFFFFF" style={{ marginRight: 4 }} />
-                <Text style={styles.modalPlayText}>Play (1 Heart)</Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      {/* Redesigned Level Info Modal */}
+      {(() => {
+        const modalLevelData = INITIAL_LEVELS.find((l) => l.id === selectedModalLevel);
+        const conf = selectedModalLevel ? getLevelDifficultyConfig(selectedModalLevel) : null;
+        return (
+          <LevelInfoModal
+            visible={selectedModalLevel !== null}
+            levelId={selectedModalLevel}
+            isOcean={selectedModalLevel ? selectedModalLevel > 50 : isOcean}
+            maskIcon={modalLevelData?.maskIcon}
+            maskName={modalLevelData?.maskName}
+            difficultyConfig={conf}
+            onClose={() => setSelectedModalLevel(null)}
+            onStartLevel={(lvl) => {
+              const target = lvl || activeLevelId;
+              setSelectedModalLevel(null);
+              onStartLevel(target);
+            }}
+          />
+        );
+      })()}
 
       <CustomAlert
         visible={!!alertInfo}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, ComponentRef } from 'react';
 import {
   View,
   ScrollView,
@@ -18,9 +18,16 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { TargetWord } from '../../types';
 import { INITIAL_LEVELS } from '../../data/gameData';
 import { nativeAudio } from '../audio';
+import { nativeHaptics } from '../haptics';
 import { CustomAlert } from '../components/CustomAlert';
 import { VictoryModal } from '../components/VictoryModal';
-import { showRewardedAd } from '../../utils/admobService';
+import { GamePausedModal, GameOverModal } from '../components/WorMindPopups';
+import {
+  showRewardedAd,
+  isAdCurrentlyShowing,
+  getLastAdDismissedAt,
+  addAdDismissListener,
+} from '../../utils/admobService';
 import { STRIKE_LOSS_PENALTY, STRIKE_WIN_REWARD } from '../../config/strike';
 import { HINT_COST, REVEAL_COST } from '../../config/economy';
 import { getLevelDifficultyConfig } from '../../config/difficultyScaling';
@@ -38,6 +45,12 @@ interface GameViewProps {
   onFailLevel?: () => void;
   onRestoreStrike?: (onSuccess?: () => void) => void;
   isRestoringStrike?: boolean;
+  soundEnabled?: boolean;
+  musicEnabled?: boolean;
+  hapticsEnabled?: boolean;
+  onToggleSound?: () => void;
+  onToggleMusic?: () => void;
+  onToggleHaptics?: () => void;
 }
 
 export const NativeGameView: React.FC<GameViewProps> = ({
@@ -52,18 +65,58 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   onFailLevel,
   onRestoreStrike,
   isRestoringStrike = false,
+  soundEnabled = true,
+  musicEnabled = true,
+  hapticsEnabled = true,
+  onToggleSound,
+  onToggleMusic,
+  onToggleHaptics,
 }) => {
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const compactLayout = windowWidth <= 360;
-  const gridSize = Math.max(
-    232,
-    Math.min(windowWidth - 28, 380, windowHeight <= 700 ? windowHeight * 0.43 : 380)
-  );
-  const tileSize = gridSize / 8;
+  const currentLevel = getLevelById(levelId);
+  const numRows = currentLevel.grid?.length || 8;
+  const numCols = currentLevel.grid?.[0]?.length || 8;
+  const maxDim = Math.max(numRows, numCols);
+  const isLargeGrid = maxDim > 8;
+  const isRandomLevel = levelId > 150;
+  const isZoomableLevel = isRandomLevel || Boolean(currentLevel.isMegaGrid) || isLargeGrid;
+
+  const gridSize = isZoomableLevel
+    ? Math.min(windowWidth, 420)
+    : Math.max(232, Math.min(windowWidth - 28, 380, windowHeight <= 700 ? windowHeight * 0.43 : 380));
+  const matrixHeight = isZoomableLevel
+    ? Math.max(300, Math.min(windowWidth, 420, windowHeight <= 700 ? windowHeight * 0.50 : 420))
+    : gridSize;
+  const tileSize = gridSize / maxDim;
   const tileSizeRef = useRef(tileSize);
   tileSizeRef.current = tileSize;
   const contentWidthStyle = { width: '100%' as const, maxWidth: 600 };
-  const currentLevel = getLevelById(levelId);
+
+  const tileFontSize = isLargeGrid
+    ? Math.max(12, Math.round(tileSize * 0.52))
+    : (compactLayout ? 20 : 24);
+
+  // ── Pinch-to-zoom & Pan state ──────────────────────────────────────────
+  const zoomScale = useRef(new Animated.Value(1)).current;
+  const zoomScaleValue = useRef(1);
+  const panX = useRef(new Animated.Value(0)).current;
+  const panXValue = useRef(0);
+  const panY = useRef(new Animated.Value(0)).current;
+  const panYValue = useRef(0);
+  const [displayZoom, setDisplayZoom] = useState(1);
+
+  const pinchStartDist = useRef<number | null>(null);
+  const pinchStartScale = useRef(1);
+  const pinchStartMid = useRef<{ x: number; y: number } | null>(null);
+  const pinchStartPan = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const isTwoFingerActive = useRef(false);
+
+  const MIN_ZOOM = 1.0;
+  const MAX_ZOOM = 2.8;
+
+  const matrixCardRef = useRef<ComponentRef<typeof View>>(null);
+  const matrixLayoutRef = useRef<{ x: number; y: number; width: number; height: number }>({ x: 0, y: 0, width: 0, height: 0 });
 
   const [grid, setGrid] = useState<string[][]>(currentLevel.grid);
   // Ensure all target words start as unfound when playing
@@ -91,7 +144,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   useEffect(() => { strikeRef.current = strike; }, [strike]);
   const diffConfig = getLevelDifficultyConfig(levelId);
   const getLevelInitialTime = (lvl: typeof currentLevel) => {
-    if (lvl.timeLimit && lvl.timeLimit > 0 && lvl.timeLimit <= 130) {
+    if (lvl.timeLimit && lvl.timeLimit > 0 && lvl.timeLimit <= 360) {
       return lvl.timeLimit;
     }
     return diffConfig.timeLimit;
@@ -102,6 +155,53 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [hintedCells, setHintedCells] = useState<{ r: number; c: number }[]>([]);
   const [hasUsedCoinHint, setHasUsedCoinHint] = useState(false);
   const hasUsedCoinHintRef = useRef(false);
+  const isAdActiveRef = useRef(false);
+
+  // Turn off BGM on game screen, resume when leaving GameView
+  useEffect(() => {
+    nativeAudio.setInGame(true);
+    return () => {
+      nativeAudio.setInGame(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    nativeHaptics.setEnabled(hapticsEnabled);
+  }, [hapticsEnabled]);
+
+  useEffect(() => {
+    nativeAudio.setSoundEnabled(soundEnabled);
+  }, [soundEnabled]);
+
+  useEffect(() => {
+    nativeAudio.setMusicEnabled(musicEnabled);
+  }, [musicEnabled]);
+
+  const toggleSound = () => {
+    if (onToggleSound) {
+      onToggleSound();
+    } else {
+      nativeAudio.setSoundEnabled(!soundEnabled);
+    }
+  };
+
+  const toggleMusic = () => {
+    if (onToggleMusic) {
+      onToggleMusic();
+    } else {
+      nativeAudio.setMusicEnabled(!musicEnabled);
+    }
+  };
+
+  const toggleHaptics = () => {
+    if (onToggleHaptics) {
+      onToggleHaptics();
+    } else {
+      const next = !hapticsEnabled;
+      nativeHaptics.setEnabled(next);
+      if (next) nativeHaptics.selection();
+    }
+  };
   const [isScrollingEnabled, setIsScrollingEnabled] = useState<boolean>(true);
 
   const scaleAnim = useRef(new Animated.Value(0)).current;
@@ -156,24 +256,46 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     }
   }, [isVictory]);
 
-  // Pause BGM when entering GameView, resume when exiting
+  // Listen for ad dismissal and AppState changes:
+  // When an ad completes, seamlessly return to gameplay without showing the resume popup!
   useEffect(() => {
-    nativeAudio.setInGame(true);
-    return () => {
-      nativeAudio.setInGame(false);
-    };
-  }, []);
+    const unsubscribeAdDismiss = addAdDismissListener(() => {
+      isAdActiveRef.current = false;
+      pausedRef.current = false;
+      setIsPaused(false);
+    });
 
-  // Auto-pause game and freeze timer if user switches apps or minimizes
-  useEffect(() => {
     const sub = AppState.addEventListener('change', (nextState) => {
-      if (nextState !== 'active' && attemptStatusRef.current === 'playing') {
-        pausedRef.current = true;
-        setIsPaused(true);
-        nativeAudio.cancelLetterTaps();
+      const isAdEvent = isAdCurrentlyShowing() || (Date.now() - getLastAdDismissedAt() < 2500);
+
+      if (nextState !== 'active') {
+        if (isAdEvent) {
+          // Screen was covered by an Ad (rewarded or interstitial).
+          // Freeze letter taps and mark ad active, but NEVER show the pause modal!
+          isAdActiveRef.current = true;
+          nativeAudio.cancelLetterTaps();
+          return;
+        }
+        // Genuine user minimizing the app or locking device
+        if (attemptStatusRef.current === 'playing') {
+          pausedRef.current = true;
+          setIsPaused(true);
+          nativeAudio.cancelLetterTaps();
+        }
+      } else if (nextState === 'active') {
+        if (isAdActiveRef.current || isAdEvent) {
+          // Returned from an ad: clear pause state so player directly enters gameplay
+          isAdActiveRef.current = false;
+          pausedRef.current = false;
+          setIsPaused(false);
+        }
       }
     });
-    return () => sub.remove();
+
+    return () => {
+      unsubscribeAdDismiss();
+      sub.remove();
+    };
   }, []);
 
   useEffect(() => {
@@ -289,6 +411,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       if (!mountedRef.current || attemptStatusRef.current !== 'won') return;
       setIsVictory(true);
       nativeAudio.playVictory();
+      nativeHaptics.success();
     }, 450);
   }, []);
 
@@ -306,7 +429,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     if (isPaused || isVictory || isGameOver) return;
 
     const timer = setInterval(() => {
-      if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
+      if (pausedRef.current || isAdActiveRef.current || isAdCurrentlyShowing() || attemptStatusRef.current !== 'playing') return;
       timeLeftRef.current = Math.max(0, timeLeftRef.current - 1);
       setTimeLeft(timeLeftRef.current);
       if (timeLeftRef.current === 0) {
@@ -315,6 +438,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         setStrikeLost(Math.min(Math.max(0, strikeRef.current), STRIKE_LOSS_PENALTY));
         setIsGameOver(true);
         nativeAudio.playGameOver();
+        nativeHaptics.error();
         onFailLevelRef.current?.();
       }
     }, 1000);
@@ -340,6 +464,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     attemptStatusRef.current = 'playing';
     completionClaimedRef.current = false;
     pausedRef.current = false;
+    setIsPaused(false);
     timeLeftRef.current = getLevelInitialTime(lvl);
     nativeAudio.cancelLetterTaps();
     dragActiveRef.current = false;
@@ -358,6 +483,17 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setStrikeLost(0);
     setWordStreak(0);
     setMaxWordStreak(0);
+    // Reset zoom and pan
+    zoomScale.setValue(1);
+    zoomScaleValue.current = 1;
+    panX.setValue(0);
+    panXValue.current = 0;
+    panY.setValue(0);
+    panYValue.current = 0;
+    pinchStartDist.current = null;
+    pinchStartMid.current = null;
+    isTwoFingerActive.current = false;
+    setDisplayZoom(1);
   }, [levelId]);
 
   useEffect(() => {
@@ -422,6 +558,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       if (matchIdx !== -1) {
         const matched = targetWords[matchIdx];
         nativeAudio.playWordFound();
+        nativeHaptics.success();
 
         // Increment Streak & trigger streak animation
         setWordStreak((prev) => {
@@ -472,33 +609,126 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     gameStateRef.current = { isPaused, isVictory, isGameOver, grid, checkSelection };
   }, [isPaused, isVictory, isGameOver, grid, checkSelection]);
 
-  // Both move and release must resolve the endpoint: native touch events can
-  // skip intermediate cells (or every move event) during a quick swipe.
-  const updateDragSelection = (locationX: number, locationY: number) => {
+  // Resolves precise client touch position relative to matrixCard top-left
+  const resolveTouchPoint = (evt: any) => {
+    const layout = matrixLayoutRef.current;
+    if (layout.width > 0 && evt.nativeEvent.pageX !== undefined && evt.nativeEvent.pageY !== undefined) {
+      return {
+        clientX: evt.nativeEvent.pageX - layout.x,
+        clientY: evt.nativeEvent.pageY - layout.y,
+      };
+    }
+    return {
+      clientX: evt.nativeEvent.locationX,
+      clientY: evt.nativeEvent.locationY,
+    };
+  };
+
+  // High-precision directional raycast drag selection with snap tolerance for high-density grids
+  const updateDragSelection = (clientX: number, clientY: number) => {
     const state = gameStateRef.current;
     if (!dragActiveRef.current || state.isPaused || state.isVictory || state.isGameOver) return;
-    const c = Math.floor(locationX / tileSizeRef.current);
-    const r = Math.floor(locationY / tileSizeRef.current);
-    if (r < 0 || r >= 8 || c < 0 || c >= 8 || !state.grid[r]?.[c] || state.grid[r][c] === ' ') return;
+
+    // Account for zoom scale and pan offset relative to center of matrix
+    const containerW = isZoomableLevel ? windowWidth : gridSize;
+    const containerH = isZoomableLevel ? matrixHeight : gridSize;
+    const centerX = containerW / 2;
+    const centerY = containerH / 2;
+    const scale = zoomScaleValue.current;
+    const pX = panXValue.current;
+    const pY = panYValue.current;
+
+    const gridX = (gridSize / 2) + (clientX - centerX - pX) / scale;
+    const gridY = (gridSize / 2) + (clientY - centerY - pY) / scale;
+
+    const tileSize = tileSizeRef.current;
+    const fR = gridY / tileSize;
+    const fC = gridX / tileSize;
+
+    const rows = state.grid.length;
+    const cols = state.grid[0]?.length || 0;
 
     const prev = dragSelectionRef.current;
-    const lastCell = prev[prev.length - 1];
-    if (lastCell?.r === r && lastCell.c === c) return;
     const startCell = prev[0];
+
     const updated: { r: number; c: number }[] = [];
+
     if (!startCell) {
+      // First touch: determine start cell with nearby snap tolerance for small cells
+      let r = Math.floor(fR);
+      let c = Math.floor(fC);
+
+      if (r < 0 || r >= rows || c < 0 || c >= cols || !state.grid[r]?.[c] || state.grid[r][c] === ' ') {
+        let bestDist = Infinity;
+        let bestNeighbor: { r: number; c: number } | null = null;
+        for (let dr = -1; dr <= 1; dr++) {
+          for (let dc = -1; dc <= 1; dc++) {
+            const nr = r + dr;
+            const nc = c + dc;
+            if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && state.grid[nr]?.[nc] && state.grid[nr][nc] !== ' ') {
+              const d = Math.hypot(fR - (nr + 0.5), fC - (nc + 0.5));
+              if (d < bestDist && d <= 0.85) {
+                bestDist = d;
+                bestNeighbor = { r: nr, c: nc };
+              }
+            }
+          }
+        }
+        if (bestNeighbor) {
+          r = bestNeighbor.r;
+          c = bestNeighbor.c;
+        } else {
+          return;
+        }
+      }
       updated.push({ r, c });
     } else {
-      const dr = r - startCell.r;
-      const dc = c - startCell.c;
-      // Keep the existing horizontal, vertical and diagonal selection rules.
-      if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) return;
-      const stepR = Math.sign(dr);
-      const stepC = Math.sign(dc);
-      const len = Math.max(Math.abs(dr), Math.abs(dc));
-      for (let i = 0; i <= len; i++) {
-        updated.push({ r: startCell.r + i * stepR, c: startCell.c + i * stepC });
+      // Drag in progress: Directional Snap Raycast from startCell
+      const dx = fC - (startCell.c + 0.5);
+      const dy = fR - (startCell.r + 0.5);
+      const dist = Math.hypot(dx, dy);
+
+      if (dist < 0.35) {
+        // Finger still hovering within start cell
+        updated.push(startCell);
+      } else {
+        // Map continuous drag vector into 8 directional compass sectors (45° cone each)
+        const normDeg = ((Math.atan2(dy, dx) * 180 / Math.PI) + 360) % 360;
+        const sector = Math.floor((normDeg + 22.5) / 45) % 8;
+        const DIRS = [
+          { stepR: 0, stepC: 1, diag: false },  // 0: Right (0°)
+          { stepR: 1, stepC: 1, diag: true },   // 1: Down-Right (45°)
+          { stepR: 1, stepC: 0, diag: false },  // 2: Down (90°)
+          { stepR: 1, stepC: -1, diag: true },  // 3: Down-Left (135°)
+          { stepR: 0, stepC: -1, diag: false }, // 4: Left (180°)
+          { stepR: -1, stepC: -1, diag: true }, // 5: Up-Left (225°)
+          { stepR: -1, stepC: 0, diag: false }, // 6: Up (270°)
+          { stepR: -1, stepC: 1, diag: true },  // 7: Up-Right (315°)
+        ];
+        const dir = DIRS[sector];
+
+        // Projected distance along the locked direction ray
+        const projected = dir.diag
+          ? (dx * dir.stepC + dy * dir.stepR) / 1.41421356
+          : (dx * dir.stepC + dy * dir.stepR);
+        const steps = Math.max(0, Math.round(projected));
+
+        // Trace cells along ray from startCell up to steps
+        for (let i = 0; i <= steps; i++) {
+          const currR = startCell.r + i * dir.stepR;
+          const currC = startCell.c + i * dir.stepC;
+          if (currR < 0 || currR >= rows || currC < 0 || currC >= cols) break;
+          if (!state.grid[currR]?.[currC] || state.grid[currR][currC] === ' ') break;
+          updated.push({ r: currR, c: currC });
+        }
       }
+    }
+
+    if (updated.length === 0) return;
+
+    // Avoid redundant renders if selection hasn't changed
+    if (prev.length === updated.length && prev.every((cell, idx) => cell.r === updated[idx].r && cell.c === updated[idx].c)) {
+      return;
     }
 
     let sharedCells = 0;
@@ -507,16 +737,34 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       && prev[sharedCells].c === updated[sharedCells].c) {
       sharedCells++;
     }
-    // Recover clicks for each crossed cell, including coalesced moves and
-    // backtracking. Audio is paced separately; the selection updates now.
+
     const crossedCells = Math.max(prev.length - sharedCells, updated.length - sharedCells);
     dragSelectionRef.current = updated;
     nativeAudio.playLetterTaps(crossedCells);
+    if (crossedCells > 0) {
+      nativeHaptics.light();
+    }
     setSelectedCells(updated);
     setSpelledWord(updated.map((cell) => state.grid[cell.r][cell.c]).join(''));
   };
 
-  // PanResponder for smooth drag / swipe selection
+  // ── Two-Finger Pinch-to-Zoom & Pan Helpers ────────────────────────────────
+  const getPinchDist = (touches: { pageX: number; pageY: number }[]): number => {
+    if (touches.length < 2) return 0;
+    const dx = touches[0].pageX - touches[1].pageX;
+    const dy = touches[0].pageY - touches[1].pageY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  const getPinchMid = (touches: { pageX: number; pageY: number }[]) => {
+    if (touches.length < 2) return { x: 0, y: 0 };
+    return {
+      x: (touches[0].pageX + touches[1].pageX) / 2,
+      y: (touches[0].pageY + touches[1].pageY) / 2,
+    };
+  };
+
+  // Unified PanResponder for 1-finger word selection & 2-finger zoom/pan
   const panResponder = useRef(
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
@@ -525,23 +773,107 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       onPanResponderGrant: (evt) => {
         const state = gameStateRef.current;
         if (state.isPaused || state.isVictory || state.isGameOver) return;
+
+        const touches = Array.from(evt.nativeEvent.touches);
+        if (isZoomableLevel && touches.length >= 2) {
+          isTwoFingerActive.current = true;
+          dragActiveRef.current = false;
+          dragSelectionRef.current = [];
+          setSelectedCells([]);
+          setSpelledWord('');
+
+          pinchStartDist.current = getPinchDist(touches);
+          pinchStartScale.current = zoomScaleValue.current;
+          pinchStartMid.current = getPinchMid(touches);
+          pinchStartPan.current = { x: panXValue.current, y: panYValue.current };
+          return;
+        }
+
+        isTwoFingerActive.current = false;
+        matrixCardRef.current?.measureInWindow((x, y, w, h) => {
+          if (w > 0 && h > 0) {
+            matrixLayoutRef.current = { x, y, width: w, height: h };
+          }
+        });
         nativeAudio.cancelLetterTaps();
         dragActiveRef.current = true;
         setIsScrollingEnabled(false);
         dragSelectionRef.current = [];
         setSelectedCells([]);
         setSpelledWord('');
-        const { locationX, locationY } = evt.nativeEvent;
-        updateDragSelection(locationX, locationY);
+        const pt = resolveTouchPoint(evt);
+        updateDragSelection(pt.clientX, pt.clientY);
       },
       onPanResponderMove: (evt) => {
-        const { locationX, locationY } = evt.nativeEvent;
-        updateDragSelection(locationX, locationY);
+        const touches = Array.from(evt.nativeEvent.touches);
+
+        if (isZoomableLevel && (touches.length >= 2 || isTwoFingerActive.current)) {
+          if (touches.length >= 2) {
+            isTwoFingerActive.current = true;
+            dragActiveRef.current = false;
+            dragSelectionRef.current = [];
+            setSelectedCells([]);
+            setSpelledWord('');
+
+            const dist = getPinchDist(touches);
+            const mid = getPinchMid(touches);
+
+            if (pinchStartDist.current === null) {
+              pinchStartDist.current = dist;
+              pinchStartScale.current = zoomScaleValue.current;
+              pinchStartMid.current = mid;
+              pinchStartPan.current = { x: panXValue.current, y: panYValue.current };
+            }
+
+            const newScale = Math.min(
+              MAX_ZOOM,
+              Math.max(MIN_ZOOM, pinchStartScale.current * (dist / pinchStartDist.current))
+            );
+            zoomScaleValue.current = newScale;
+            zoomScale.setValue(newScale);
+            setDisplayZoom(Math.round(newScale * 10) / 10);
+
+            if (pinchStartMid.current) {
+              const deltaX = mid.x - pinchStartMid.current.x;
+              const deltaY = mid.y - pinchStartMid.current.y;
+              const containerW = isZoomableLevel ? windowWidth : gridSize;
+              const containerH = isZoomableLevel ? matrixHeight : gridSize;
+              const maxPanX = Math.max(20, (gridSize * newScale - containerW) / 2 + 25);
+              const maxPanY = Math.max(20, (gridSize * newScale - containerH) / 2 + 25);
+              const newPanX = Math.min(maxPanX, Math.max(-maxPanX, pinchStartPan.current.x + deltaX));
+              const newPanY = Math.min(maxPanY, Math.max(-maxPanY, pinchStartPan.current.y + deltaY));
+              panXValue.current = newPanX;
+              panX.setValue(newPanX);
+              panYValue.current = newPanY;
+              panY.setValue(newPanY);
+            }
+          }
+          return;
+        }
+
+        if (dragActiveRef.current && !isTwoFingerActive.current) {
+          const pt = resolveTouchPoint(evt);
+          updateDragSelection(pt.clientX, pt.clientY);
+        }
       },
       onPanResponderRelease: (evt) => {
+        if (isTwoFingerActive.current) {
+          pinchStartDist.current = null;
+          pinchStartMid.current = null;
+          isTwoFingerActive.current = false;
+          setIsScrollingEnabled(true);
+          if (zoomScaleValue.current <= 1.05) {
+            panX.setValue(0);
+            panXValue.current = 0;
+            panY.setValue(0);
+            panYValue.current = 0;
+          }
+          return;
+        }
+
         if (!dragActiveRef.current) return;
-        const { locationX, locationY } = evt.nativeEvent;
-        updateDragSelection(locationX, locationY);
+        const pt = resolveTouchPoint(evt);
+        updateDragSelection(pt.clientX, pt.clientY);
         dragActiveRef.current = false;
         setIsScrollingEnabled(true);
         const state = gameStateRef.current;
@@ -551,9 +883,15 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         setSpelledWord('');
         if (state.isPaused || state.isVictory || state.isGameOver) return;
         const solved = state.checkSelection(current);
-        if (!solved && current.length >= 2) triggerStreakReset();
+        if (!solved && current.length >= 2) {
+          triggerStreakReset();
+          nativeHaptics.warning();
+        }
       },
       onPanResponderTerminate: () => {
+        pinchStartDist.current = null;
+        pinchStartMid.current = null;
+        isTwoFingerActive.current = false;
         nativeAudio.cancelLetterTaps();
         dragActiveRef.current = false;
         setIsScrollingEnabled(true);
@@ -563,6 +901,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       },
     })
   ).current;
+
+
 
   // Tap-to-select support (tap letters one by one)
   const handleTileClick = (r: number, c: number) => {
@@ -578,6 +918,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       const newWord = newSelection.map((cell) => grid[cell.r][cell.c]).join('');
       setSpelledWord(newWord);
       nativeAudio.playLetterTap(newSelection.length);
+      nativeHaptics.light();
     } else {
       // Add tile
       const newSelection = [...selectedCells, { r, c }];
@@ -585,6 +926,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       const newWord = newSelection.map((cell) => grid[cell.r][cell.c]).join('');
       setSpelledWord(newWord);
       nativeAudio.playLetterTap(newSelection.length);
+      nativeHaptics.light();
 
       // Check if this tap completes a target word
       checkSelection(newSelection);
@@ -592,6 +934,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   };
 
   const handleClear = () => {
+    nativeHaptics.light();
     if (selectedCells.length >= 2) {
       triggerStreakReset();
     }
@@ -602,6 +945,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   // Power-up: Shuffle (clears board selection)
   const handleShuffle = () => {
     nativeAudio.playLetterTap(1);
+    nativeHaptics.light();
     setSelectedCells([]);
     setSpelledWord('');
   };
@@ -628,6 +972,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     hasUsedCoinHintRef.current = true;
     setHasUsedCoinHint(true);
     nativeAudio.playSparkle();
+    nativeHaptics.medium();
     setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
     setTimeout(() => setHintedCells([]), 3500);
   };
@@ -668,6 +1013,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     if (!onDeductCoins(REVEAL_COST)) return;
 
     nativeAudio.playWordFound();
+    nativeHaptics.success();
     const unfoundWord = targetWords[unfoundIdx];
     const newTargetWords = [...targetWords];
     newTargetWords[unfoundIdx] = { ...unfoundWord, found: true };
@@ -738,29 +1084,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         </View>
       </View>
 
-      {/* Spelled Word Active Banner */}
-      <View style={[styles.spellingBar, contentWidthStyle]}>
-        <View style={styles.spellingLeft}>
-          <Text style={styles.spellingLabel}>SPELLING:</Text>
-          {spelledWord ? (
-            <Text style={styles.spelledActive}>{spelledWord}</Text>
-          ) : lastFoundMessage ? (
-            <Text style={styles.foundAlertText}>{lastFoundMessage}</Text>
-          ) : (
-            <Text style={styles.spelledPlaceholder}>Swipe or tap letters on grid...</Text>
-          )}
-        </View>
-
-        {spelledWord !== '' ? (
-          <Pressable onPress={handleClear} style={styles.clearBtn}>
-            <MaterialIcons name="close" size={16} color="#FFFFFF" />
-          </Pressable>
-        ) : (
-          <View style={{ width: 24, height: 24 }} />
-        )}
-      </View>
-
-      {/* Timer & Streak Row (Below Spelling Bar) */}
+      {/* Timer & Streak Row (Spelling row removed - grid moved up) */}
       <View style={[styles.timerControlRow, contentWidthStyle]}>
         <View style={styles.timerStreakGroup}>
           <Animated.View
@@ -858,6 +1182,21 @@ export const NativeGameView: React.FC<GameViewProps> = ({
               </Animated.View>
             ))}
           </View>
+
+          {/* Real-time word preview or found alert inline in timer row */}
+          {spelledWord !== '' ? (
+            <View style={styles.inlineSpelledChip}>
+              <Text numberOfLines={1} style={styles.inlineSpelledText}>
+                {spelledWord}
+              </Text>
+            </View>
+          ) : lastFoundMessage ? (
+            <View style={styles.inlineFoundChip}>
+              <Text numberOfLines={1} style={styles.inlineFoundText}>
+                {lastFoundMessage}
+              </Text>
+            </View>
+          ) : null}
         </View>
 
         <Pressable
@@ -870,86 +1209,137 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
 
 
-      {/* 8x8 Interactive Word Search Matrix (0-Gap Flat Square Matrix) with Drag & Tap */}
+      {/* Interactive Word Search Matrix with 2-Finger Zoom & Pan */}
       <View
-        style={[styles.matrixCard, { width: gridSize, height: gridSize }]}
+        ref={matrixCardRef}
+        onLayout={() => {
+          matrixCardRef.current?.measureInWindow((x, y, w, h) => {
+            if (w > 0 && h > 0) {
+              matrixLayoutRef.current = { x, y, width: w, height: h };
+            }
+          });
+        }}
+        style={[
+          styles.matrixCard,
+          isZoomableLevel
+            ? {
+                width: windowWidth,
+                marginHorizontal: -14,
+                height: matrixHeight,
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+                borderRadius: 0,
+                borderTopWidth: 1.5,
+                borderBottomWidth: 1.5,
+                borderLeftWidth: 0,
+                borderRightWidth: 0,
+                borderTopColor: 'rgba(124, 58, 237, 0.22)',
+                borderBottomColor: 'rgba(124, 58, 237, 0.22)',
+                backgroundColor: 'transparent',
+                paddingHorizontal: 0,
+                paddingVertical: 4,
+                marginVertical: 4,
+              }
+            : {
+                width: gridSize,
+                height: gridSize,
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+                borderRadius: 0,
+                borderWidth: 0,
+                backgroundColor: 'transparent',
+                marginVertical: 4,
+              },
+        ]}
+        {...panResponder.panHandlers}
       >
-        <View
-          {...panResponder.panHandlers}
-          style={[styles.gridContainer, { width: gridSize, height: gridSize }]}
+        <Animated.View
+          style={{
+            transform: [
+              { translateX: panX },
+              { translateY: panY },
+              { scale: zoomScale },
+            ],
+          }}
         >
-          {grid.map((row, r) => (
-            <View key={`row-${r}`} style={styles.gridRow} pointerEvents="none">
-              {row.map((letter, c) => {
-                const isSolved = solvedCells.some((cell) => cell.r === r && cell.c === c);
-                const isSelected = selectedCells.some((cell) => cell.r === r && cell.c === c);
-                const isHinted = hintedCells.some((cell) => cell.r === r && cell.c === c);
-                const isEmpty = letter === ' ';
+          <View style={[styles.gridContainer, { width: gridSize, height: gridSize }]}>
+            {grid.map((row, r) => (
+              <View key={`row-${r}`} style={styles.gridRow} pointerEvents="none">
+                {row.map((letter, c) => {
+                  const isSolved = solvedCells.some((cell) => cell.r === r && cell.c === c);
+                  const isSelected = selectedCells.some((cell) => cell.r === r && cell.c === c);
+                  const isHinted = hintedCells.some((cell) => cell.r === r && cell.c === c);
+                  const isEmpty = letter === ' ';
 
-                if (isEmpty) {
+                  if (isEmpty) {
+                    return (
+                      <View
+                        key={`${r}-${c}`}
+                        style={[
+                          styles.tile,
+                          {
+                            width: tileSize,
+                            height: tileSize,
+                            backgroundColor: 'transparent',
+                          },
+                        ]}
+                      />
+                    );
+                  }
+
+                  let tileBg = '#FFFFFF';
+                  let tileColor = '#2E1065';
+
+                  if (isSolved) {
+                    tileBg = '#CCFBF1'; // Teal solved
+                    tileColor = '#0F766E';
+                  } else if (isSelected) {
+                    tileBg = '#EDE9FE'; // Violet selected
+                    tileColor = '#6D28D9';
+                  } else if (isHinted) {
+                    tileBg = '#FEF3C7'; // Gold hinted
+                    tileColor = '#B45309';
+                  }
+
                   return (
                     <View
                       key={`${r}-${c}`}
                       style={[
                         styles.tile,
                         {
-                          width: tileSize,
-                          height: tileSize,
-                          backgroundColor: 'transparent',
+                          width: Math.max(16, tileSize - (isLargeGrid ? 2 : 4)),
+                          height: Math.max(16, tileSize - (isLargeGrid ? 2 : 4)),
+                          margin: isLargeGrid ? 1 : 2,
+                          backgroundColor: tileBg,
+                          borderRadius: isLargeGrid ? 6 : 10,
+                          elevation: isLargeGrid ? 1 : 3,
+                          shadowColor: '#0E1A3A',
+                          shadowOffset: { width: 0, height: 2 },
+                          shadowOpacity: 0.1,
+                          shadowRadius: 2,
                         },
                       ]}
-                    />
-                  );
-                }
-
-                let tileBg = '#FFFFFF';
-                let tileColor = '#2E1065';
-
-                if (isSolved) {
-                  tileBg = '#CCFBF1'; // Teal solved
-                  tileColor = '#0F766E';
-                } else if (isSelected) {
-                  tileBg = '#EDE9FE'; // Violet selected
-                  tileColor = '#6D28D9';
-                } else if (isHinted) {
-                  tileBg = '#FEF3C7'; // Gold hinted
-                  tileColor = '#B45309';
-                }
-
-                return (
-                  <View
-                    key={`${r}-${c}`}
-                    style={[
-                      styles.tile,
-                      {
-                        width: tileSize - 4,
-                        height: tileSize - 4,
-                        margin: 2,
-                        backgroundColor: tileBg,
-                        borderRadius: 10,
-                        elevation: 3,
-                        shadowColor: '#0E1A3A',
-                        shadowOffset: { width: 0, height: 3 },
-                        shadowOpacity: 0.1,
-                        shadowRadius: 3,
-                      },
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        styles.tileLetter,
-                        compactLayout && styles.tileLetterCompact,
-                        { color: tileColor },
-                      ]}
                     >
-                      {letter}
-                    </Text>
-                  </View>
-                );
-              })}
-            </View>
-          ))}
-        </View>
+                      <Text
+                        style={[
+                          styles.tileLetter,
+                          {
+                            fontSize: tileFontSize,
+                            color: tileColor,
+                          },
+                        ]}
+                      >
+                        {letter}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </View>
+            ))}
+          </View>
+        </Animated.View>
       </View>
 
       {/* 4 Lifeline Action Power-up Buttons (Single Horizontal Row) */}
@@ -1009,144 +1399,37 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         onGoToMap={() => handleCompleteAttempt('map')}
       />
 
-      {/* Pause Modal */}
-      <Modal visible={isPaused} transparent animationType="fade" onRequestClose={handleResume}>
-        <View style={styles.modalBackdrop}>
-          <View style={styles.gameOverCard}>
-            <View style={styles.timerCircle}>
-              <MaterialIcons name="pause-circle-filled" size={38} color="#7C3AED" />
-            </View>
-            <Text style={styles.gameOverTitle}>GAME PAUSED</Text>
-            <Text style={styles.gameOverSubtitle}>
-              Level {levelId} • {formatTime(timeLeft)} remaining
-            </Text>
+      {/* Redesigned Game Paused Modal (WorMind Popup 1) */}
+      <GamePausedModal
+        visible={isPaused}
+        levelId={levelId}
+        timeLeft={timeLeft}
+        soundEnabled={soundEnabled}
+        musicEnabled={musicEnabled}
+        hapticsEnabled={hapticsEnabled}
+        onToggleSound={toggleSound}
+        onToggleMusic={toggleMusic}
+        onToggleHaptics={toggleHaptics}
+        onResume={handleResume}
+        onExit={handleExit}
+      />
 
-            <Pressable
-              onPress={handleResume}
-              style={({ pressed }) => [styles.retryBtn, pressed && styles.pressed]}
-            >
-              <Text style={styles.retryBtnText}>RESUME</Text>
-            </Pressable>
-
-            <Pressable
-              onPress={handleExit}
-              style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
-            >
-              <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-
-      {/* Game Over Time-Out Modal */}
-      <Modal visible={isGameOver} transparent animationType="fade" onRequestClose={handleExit}>
-        <View style={styles.modalBackdrop}>
-          <Animated.View
-            style={[
-              styles.pauseCard,
-              {
-                borderColor: '#EF4444',
-                transform: [
-                  { scale: lossScaleAnim },
-                  { translateX: lossShakeAnim },
-                ],
-              },
-            ]}
-          >
-            <View style={styles.lossCircleHeader}>
-              <MaterialIcons name="heart-broken" size={38} color="#EF4444" />
-            </View>
-            <Text style={[styles.pauseTitle, { color: '#EF4444' }]}>TIME'S UP! ⏰</Text>
-            <Text style={styles.pauseSub}>Level {levelId} Failed</Text>
-
-            {/* Loss Animations: -1 Heart & actual Strike deduction */}
-            <View style={styles.lossBadgeContainer}>
-              {/* -1 Heart Box */}
-              <Animated.View
-                style={[
-                  styles.lossBadgeBox,
-                  {
-                    backgroundColor: '#FEF2F2',
-                    borderColor: '#FCA5A5',
-                    transform: [
-                      { scale: lossHeartAnim },
-                      {
-                        translateY: lossHeartAnim.interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [14, 0],
-                        }),
-                      },
-                    ],
-                  },
-                ]}
-              >
-                {/* Floating "-1" animation */}
-                <Animated.View
-                  style={[
-                    styles.floatingMinusBadge,
-                    {
-                      opacity: floatMinusOneAnim.interpolate({
-                        inputRange: [0, 0.2, 0.8, 1],
-                        outputRange: [0, 1, 1, 0],
-                      }),
-                      transform: [{ translateY: floatMinusOneY }],
-                    },
-                  ]}
-                >
-                  <Text style={styles.floatingMinusText}>-1 ❤️</Text>
-                </Animated.View>
-
-                <MaterialIcons name="favorite" size={26} color="#DC2626" />
-                <Text style={styles.lossBadgeValue}>-1 Heart</Text>
-                <Text style={styles.lossBadgeLabel}>LIFE MINUS</Text>
-              </Animated.View>
-
-              {/* Strike Penalty Box */}
-              <Animated.View
-                style={[
-                  styles.lossBadgeBox,
-                  {
-                    backgroundColor: '#FFF7ED',
-                    borderColor: '#FDBA74',
-                    transform: [
-                      { scale: lossStrikeAnim },
-                      {
-                        translateY: lossStrikeAnim.interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [14, 0],
-                        }),
-                      },
-                    ],
-                  },
-                ]}
-              >
-                <MaterialIcons name="whatshot" size={26} color="#EA580C" />
-                <Text style={[styles.lossBadgeValue, { color: '#EA580C' }]}>-{strikeLost} 🔥</Text>
-                <Text style={[styles.lossBadgeLabel, { color: '#C2410C' }]}>STRIKE LOST</Text>
-              </Animated.View>
-            </View>
-            <Text style={styles.pauseSub}>Strike remaining: {strike} 🔥</Text>
-
-            <Pressable
-              disabled={isRestoringStrike}
-              onPress={handleRetry}
-              style={({ pressed }) => [styles.resumeBtn, { backgroundColor: '#EF4444', opacity: isRestoringStrike ? 0.6 : 1 }, pressed && styles.pressed]}
-            >
-              <Text style={styles.resumeBtnText}>
-                {isRestoringStrike ? 'LOADING AD…' : strike <= 0 ? 'WATCH AD TO RESTORE 🔥 & RETRY' : 'TRY AGAIN'}
-              </Text>
-            </Pressable>
-
-            <Pressable
-              disabled={isRestoringStrike}
-              onPress={handleExit}
-              style={({ pressed }) => [styles.exitBtn, pressed && styles.pressed]}
-            >
-              <Text style={styles.exitBtnText}>EXIT TO MAP</Text>
-            </Pressable>
-          </Animated.View>
-        </View>
-      </Modal>
+      {/* Redesigned Game Over Time-Out Modal */}
+      <GameOverModal
+        visible={isGameOver}
+        levelId={levelId}
+        strike={strike}
+        strikeLost={strikeLost}
+        isRestoringStrike={isRestoringStrike}
+        lossScaleAnim={lossScaleAnim}
+        lossShakeAnim={lossShakeAnim}
+        lossHeartAnim={lossHeartAnim}
+        lossStrikeAnim={lossStrikeAnim}
+        floatMinusOneAnim={floatMinusOneAnim}
+        floatMinusOneY={floatMinusOneY}
+        onRetry={handleRetry}
+        onExit={handleExit}
+      />
 
       <CustomAlert 
         visible={!!alertInfo}
@@ -1220,8 +1503,39 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAF8FF',
     alignItems: 'center',
     paddingHorizontal: 14,
-    paddingTop: 8,
-    paddingBottom: 110,
+    paddingTop: 4,
+    paddingBottom: 65,
+  },
+  inlineSpelledChip: {
+    backgroundColor: '#EDE9FE',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#C4B5FD',
+    maxWidth: 130,
+    marginLeft: 6,
+  },
+  inlineSpelledText: {
+    fontSize: 12,
+    fontWeight: '800',
+    color: '#6D28D9',
+    letterSpacing: 0.5,
+  },
+  inlineFoundChip: {
+    backgroundColor: '#CCFBF1',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#5EEAD4',
+    maxWidth: 140,
+    marginLeft: 6,
+  },
+  inlineFoundText: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#0F766E',
   },
   timerControlRow: {
     width: '100%',
@@ -1471,6 +1785,59 @@ const styles = StyleSheet.create({
     backgroundColor: '#7C3AED',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  zoomControlBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    maxWidth: 420,
+    marginTop: 4,
+    marginBottom: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    backgroundColor: 'rgba(245, 243, 255, 0.85)',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(124, 58, 237, 0.2)',
+  },
+  zoomInfoBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  zoomInfoText: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#6D28D9',
+    letterSpacing: 0.5,
+  },
+  zoomBtnGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  zoomMiniBtn: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: '#EDE9FE',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  zoomResetBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 12,
+    backgroundColor: '#EDE9FE',
+  },
+  zoomResetText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#7C3AED',
   },
   matrixCard: {
     backgroundColor: 'transparent',

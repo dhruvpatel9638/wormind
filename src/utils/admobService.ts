@@ -1,15 +1,14 @@
-import MobileAds, {
-  InterstitialAd,
-  RewardedInterstitialAd,
-  AdEventType,
-  RewardedAdEventType,
-} from 'react-native-google-mobile-ads';
-import { ADMOB_CONFIG } from '../config/admob';
+import { ADMOB_CONFIG, getGoogleMobileAds } from '../config/admob';
 
 // Initialize Google Mobile Ads SDK
 export const initAdMob = async () => {
+  const ads = getGoogleMobileAds();
+  if (!ads) {
+    console.log('[AdMob] Native module unavailable (Expo Go); skipping initialization');
+    return;
+  }
   try {
-    await MobileAds().initialize();
+    await ads.default().initialize();
     console.log('[AdMob] Google Mobile Ads SDK initialized successfully');
   } catch (error) {
     console.warn('[AdMob] SDK initialization failed:', error);
@@ -23,6 +22,37 @@ let lastInterstitialShownAt = Date.now();
 let isInterstitialLoading = false;
 let isRewardedInterstitialLoadingOrShowing = false;
 
+// Global tracking to prevent gameplay disruption & pause modals when ads are displaying
+let isAnyAdShowing = false;
+let lastAdClosedTime = 0;
+const adDismissListeners = new Set<() => void>();
+
+export const isAdCurrentlyShowing = (): boolean => isAnyAdShowing;
+export const getLastAdDismissedAt = (): number => lastAdClosedTime;
+
+export const addAdDismissListener = (listener: () => void): (() => void) => {
+  adDismissListeners.add(listener);
+  return () => {
+    adDismissListeners.delete(listener);
+  };
+};
+
+export const notifyAdOpened = () => {
+  isAnyAdShowing = true;
+};
+
+export const notifyAdClosed = () => {
+  isAnyAdShowing = false;
+  lastAdClosedTime = Date.now();
+  adDismissListeners.forEach((listener) => {
+    try {
+      listener();
+    } catch (err) {
+      console.warn('Error in ad dismiss listener:', err);
+    }
+  });
+};
+
 // Keep a full two-minute gap between random interstitials. If this interval
 // expires while the player is solving a level, the next completed level shows
 // the pending ad instead of interrupting their game.
@@ -30,6 +60,12 @@ const INTERSTITIAL_GAP_MS = 3 * 60 * 1000;
 
 // Show Google Interstitial Ad (Full Screen)
 export const showInterstitialAd = (onClosed?: () => void, onShown?: () => void) => {
+  const ads = getGoogleMobileAds();
+  if (!ads) {
+    onClosed?.();
+    return;
+  }
+  const { InterstitialAd, AdEventType } = ads;
   const interstitial = InterstitialAd.createForAdRequest(ADMOB_CONFIG.INTERSTITIAL_ID, {
     requestNonPersonalizedAdsOnly: true,
   });
@@ -44,18 +80,21 @@ export const showInterstitialAd = (onClosed?: () => void, onShown?: () => void) 
   };
 
   const unsubscribeLoaded = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+    notifyAdOpened();
     onShown?.();
     interstitial.show();
   });
 
   const unsubscribeClosed = interstitial.addAdEventListener(AdEventType.CLOSED, () => {
     cleanup();
+    notifyAdClosed();
     if (onClosed) onClosed();
   });
 
   const unsubscribeError = interstitial.addAdEventListener(AdEventType.ERROR, (error) => {
     console.warn('[AdMob Interstitial] Error loading ad:', error);
     cleanup();
+    notifyAdClosed();
     if (onClosed) onClosed();
   });
 
@@ -109,6 +148,14 @@ export const showRewardedAd = (
     return;
   }
 
+  const ads = getGoogleMobileAds();
+  if (!ads) {
+    onError?.();
+    onFinished?.();
+    return;
+  }
+  const { RewardedInterstitialAd, AdEventType, RewardedAdEventType } = ads;
+
   isRewardedInterstitialLoadingOrShowing = true;
   const subscriptions: Array<() => void> = [];
   let rewardEarned = false;
@@ -119,6 +166,7 @@ export const showRewardedAd = (
     if (finished) return;
     finished = true;
     isRewardedInterstitialLoadingOrShowing = false;
+    notifyAdClosed();
     for (const unsubscribe of subscriptions.splice(0)) unsubscribe();
     try {
       if (failed) onError?.();
@@ -146,6 +194,7 @@ export const showRewardedAd = (
       rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
         if (finished || showing) return;
         showing = true;
+        notifyAdOpened();
         try {
           void Promise.resolve(rewarded.show()).catch(fail);
         } catch (error) {

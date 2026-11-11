@@ -11,6 +11,8 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import { PlayerState } from '../../types';
 import { nativeAudio } from '../audio';
+import { nativeHaptics } from '../haptics';
+import { ResetConfirmModal } from '../components/WorMindPopups';
 
 interface ProfileViewProps {
   playerState: PlayerState;
@@ -50,7 +52,10 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               </View>
               <Switch
                 value={playerState.soundEnabled}
-                onValueChange={onToggleSound}
+                onValueChange={() => {
+                  nativeHaptics.selection();
+                  onToggleSound();
+                }}
                 trackColor={{ false: '#4B5563', true: '#7C3AED' }}
                 thumbColor="#C4B5FD"
               />
@@ -64,7 +69,10 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
               </View>
               <Switch
                 value={playerState.musicEnabled}
-                onValueChange={onToggleMusic}
+                onValueChange={() => {
+                  nativeHaptics.selection();
+                  onToggleMusic();
+                }}
                 trackColor={{ false: '#4B5563', true: '#7C3AED' }}
                 thumbColor="#C4B5FD"
               />
@@ -86,7 +94,10 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
 
             {/* Reset Progress */}
             <Pressable
-              onPress={() => setShowResetModal(true)}
+              onPress={() => {
+                nativeHaptics.warning();
+                setShowResetModal(true);
+              }}
               style={({ pressed }) => [styles.resetBtn, pressed && styles.pressed]}
             >
               <Text style={styles.resetBtnText}>Reset Progress</Text>
@@ -94,35 +105,15 @@ export const NativeProfileView: React.FC<ProfileViewProps> = ({
           </View>
       </ScrollView>
 
-      {/* Reset Confirmation Modal */}
-      <Modal visible={showResetModal} transparent animationType="fade">
-        <View style={styles.modalBackdrop}>
-          <View style={styles.resetPopup}>
-            <MaterialIcons name="warning" size={42} color="#EF3B3B" />
-            <Text style={styles.popupTitle}>RESET PROGRESS?</Text>
-            <Text style={styles.popupSub}>This will erase all your game progress, stars, and daily streaks. Are you sure?</Text>
-            
-            <View style={styles.modalBtnRow}>
-              <Pressable
-                onPress={() => setShowResetModal(false)}
-                style={({ pressed }) => [styles.modalCancelBtn, pressed && styles.pressed]}
-              >
-                <Text style={styles.modalCancelText}>CANCEL</Text>
-              </Pressable>
-              
-              <Pressable
-                onPress={() => {
-                  setShowResetModal(false);
-                  onResetProgress();
-                }}
-                style={({ pressed }) => [styles.modalConfirmBtn, pressed && styles.pressed]}
-              >
-                <Text style={styles.modalConfirmText}>RESET</Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      {/* Redesigned Reset Progress Confirmation Modal */}
+      <ResetConfirmModal
+        visible={showResetModal}
+        onConfirm={() => {
+          setShowResetModal(false);
+          onResetProgress();
+        }}
+        onClose={() => setShowResetModal(false)}
+      />
     </View>
   );
 };

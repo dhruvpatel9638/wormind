@@ -24,6 +24,7 @@ export interface LevelData {
   completed: boolean;
   locked: boolean;
   timeLimit?: number;
+  isMegaGrid?: boolean;
 }
 
 export interface PlayerState {
