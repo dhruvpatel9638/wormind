@@ -707,9 +707,9 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         ];
         const dir = DIRS[sector];
 
-        // Projected distance along the locked direction ray
+        // Projected grid-step count along the locked direction ray: (d · v) / (stepC² + stepR²)
         const projected = dir.diag
-          ? (dx * dir.stepC + dy * dir.stepR) / 1.41421356
+          ? (dx * dir.stepC + dy * dir.stepR) / 2
           : (dx * dir.stepC + dy * dir.stepR);
         const steps = Math.max(0, Math.round(projected));
 

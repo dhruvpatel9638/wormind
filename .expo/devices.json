@@ -2,19 +2,7 @@
   "devices": [
     {
       "installationId": "6cbae2c3-3267-45e6-86eb-5514cc932dc2",
-      "lastUsed": 1794380908689
-    },
-    {
-      "installationId": "a146c794-291a-405a-808a-8db5dea04467",
-<<<<<<< Updated upstream
-      "lastUsed": 1792769816194
-=======
-      "lastUsed": 1793203752027
->>>>>>> Stashed changes
-    },
-    {
-      "installationId": "86934cc2-37d0-4f03-9d6f-65ea9ba34bd1",
-      "lastUsed": 1791796928528
+      "lastUsed": 1794381494413
     }
   ]
 }
