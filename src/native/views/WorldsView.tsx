@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, ComponentRef } from 'react';
 import {
   View,
   Text,
@@ -56,7 +56,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
   const [selectedModalLevel, setSelectedModalLevel] = useState<number | null>(null);
   const [alertInfo, setAlertInfo] = useState<{ title: string; message: string } | null>(null);
   const [mapWidth, setMapWidth] = useState(360);
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<ComponentRef<typeof ScrollView>>(null);
   const isInitialScrollRef = useRef(true);
 
   const handleMapLayout = (event: LayoutChangeEvent) => {

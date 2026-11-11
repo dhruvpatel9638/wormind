@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LayoutChangeEvent, View, StyleSheet } from 'react-native';
-import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
-import { ADMOB_CONFIG } from '../../config/admob';
+import { ADMOB_CONFIG, getGoogleMobileAds } from '../../config/admob';
 
 interface AdBannerProps {
   style?: object;
@@ -11,10 +10,13 @@ interface AdBannerProps {
 
 export const AdBanner: React.FC<AdBannerProps> = ({ style, bottomInset = 0, onHeightChange }) => {
   const [hasError, setHasError] = useState(false);
+  const ads = getGoogleMobileAds();
 
-  if (hasError) {
+  if (!ads || hasError) {
     return null;
   }
+
+  const { BannerAd, BannerAdSize } = ads;
 
   const handleLayout = (event: LayoutChangeEvent) => {
     onHeightChange?.(event.nativeEvent.layout.height);

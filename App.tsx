@@ -502,7 +502,7 @@ function AppContent() {
   if (isAppLoading) {
     return (
       <View style={styles.loadingContainer}>
-        <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+        <StatusBar barStyle="light-content" />
         <NativeLoadingScreen onFinish={() => setIsAppLoading(false)} />
       </View>
     );
@@ -510,7 +510,7 @@ function AppContent() {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
-      <StatusBar barStyle="light-content" backgroundColor="#7C3AED" />
+      <StatusBar barStyle="light-content" />
 
       {/* Keep the gameplay HUD out of the startup loading screen. On Android,
           elevated header badges can otherwise draw above an absolute overlay. */}

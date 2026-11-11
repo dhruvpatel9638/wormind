@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, ComponentRef } from 'react';
 import {
   View,
   ScrollView,
@@ -115,7 +115,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const MIN_ZOOM = 1.0;
   const MAX_ZOOM = 2.8;
 
-  const matrixCardRef = useRef<View>(null);
+  const matrixCardRef = useRef<ComponentRef<typeof View>>(null);
   const matrixLayoutRef = useRef<{ x: number; y: number; width: number; height: number }>({ x: 0, y: 0, width: 0, height: 0 });
 
   const [grid, setGrid] = useState<string[][]>(currentLevel.grid);

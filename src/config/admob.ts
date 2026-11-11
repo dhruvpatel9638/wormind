@@ -1,9 +1,37 @@
-import { TestIds as GoogleTestIds } from 'react-native-google-mobile-ads';
+import { TurboModuleRegistry } from 'react-native';
+
+type GoogleMobileAdsModule = typeof import('react-native-google-mobile-ads');
+
+let cachedModule: GoogleMobileAdsModule | null | undefined;
+
+/**
+ * Lazily loads `react-native-google-mobile-ads` only when its native TurboModule
+ * is linked in the binary (returns `null` in Expo Go).
+ */
+export const getGoogleMobileAds = (): GoogleMobileAdsModule | null => {
+  if (cachedModule !== undefined) return cachedModule;
+  try {
+    if (TurboModuleRegistry.get('RNGoogleMobileAdsModule')) {
+      cachedModule = require('react-native-google-mobile-ads') as GoogleMobileAdsModule;
+      return cachedModule;
+    }
+  } catch {
+    // Unavailable when running without the native AdMob module (e.g. Expo Go).
+  }
+  cachedModule = null;
+  return null;
+};
 
 export const TestIds = {
-  BANNER: GoogleTestIds.BANNER,
-  INTERSTITIAL: GoogleTestIds.INTERSTITIAL,
-  REWARDED_INTERSTITIAL: GoogleTestIds.REWARDED_INTERSTITIAL,
+  get BANNER() {
+    return getGoogleMobileAds()?.TestIds.BANNER ?? '';
+  },
+  get INTERSTITIAL() {
+    return getGoogleMobileAds()?.TestIds.INTERSTITIAL ?? '';
+  },
+  get REWARDED_INTERSTITIAL() {
+    return getGoogleMobileAds()?.TestIds.REWARDED_INTERSTITIAL ?? '';
+  },
 };
 
 export const ADMOB_CONFIG = {

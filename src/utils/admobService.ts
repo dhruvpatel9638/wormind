@@ -1,15 +1,14 @@
-import MobileAds, {
-  InterstitialAd,
-  RewardedInterstitialAd,
-  AdEventType,
-  RewardedAdEventType,
-} from 'react-native-google-mobile-ads';
-import { ADMOB_CONFIG } from '../config/admob';
+import { ADMOB_CONFIG, getGoogleMobileAds } from '../config/admob';
 
 // Initialize Google Mobile Ads SDK
 export const initAdMob = async () => {
+  const ads = getGoogleMobileAds();
+  if (!ads) {
+    console.log('[AdMob] Native module unavailable (Expo Go); skipping initialization');
+    return;
+  }
   try {
-    await MobileAds().initialize();
+    await ads.default().initialize();
     console.log('[AdMob] Google Mobile Ads SDK initialized successfully');
   } catch (error) {
     console.warn('[AdMob] SDK initialization failed:', error);
@@ -61,6 +60,12 @@ const INTERSTITIAL_GAP_MS = 3 * 60 * 1000;
 
 // Show Google Interstitial Ad (Full Screen)
 export const showInterstitialAd = (onClosed?: () => void, onShown?: () => void) => {
+  const ads = getGoogleMobileAds();
+  if (!ads) {
+    onClosed?.();
+    return;
+  }
+  const { InterstitialAd, AdEventType } = ads;
   const interstitial = InterstitialAd.createForAdRequest(ADMOB_CONFIG.INTERSTITIAL_ID, {
     requestNonPersonalizedAdsOnly: true,
   });
@@ -142,6 +147,14 @@ export const showRewardedAd = (
     onFinished?.();
     return;
   }
+
+  const ads = getGoogleMobileAds();
+  if (!ads) {
+    onError?.();
+    onFinished?.();
+    return;
+  }
+  const { RewardedInterstitialAd, AdEventType, RewardedAdEventType } = ads;
 
   isRewardedInterstitialLoadingOrShowing = true;
   const subscriptions: Array<() => void> = [];
