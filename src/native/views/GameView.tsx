@@ -942,14 +942,6 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setSpelledWord('');
   };
 
-  // Power-up: Shuffle (clears board selection)
-  const handleShuffle = () => {
-    nativeAudio.playLetterTap(1);
-    nativeHaptics.light();
-    setSelectedCells([]);
-    setSpelledWord('');
-  };
-
   // One coin-funded hint is allowed per level; further hints use rewarded ads.
   const handleHint = () => {
     if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
@@ -1342,18 +1334,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         </Animated.View>
       </View>
 
-      {/* 4 Lifeline Action Power-up Buttons (Single Horizontal Row) */}
+      {/* 3 Lifeline Action Power-up Buttons (Single Horizontal Row) */}
       <View style={[styles.actionRow, contentWidthStyle]}>
-        {/* Shuffle / Clear */}
-        <Pressable
-          onPress={handleShuffle}
-          style={({ pressed }) => [styles.actionBtn, styles.shuffleBtn, pressed && styles.pressed]}
-        >
-          <MaterialIcons name="refresh" size={18} color="#7C3AED" />
-          <Text numberOfLines={1} style={[styles.actionBtnTitle, { color: '#7C3AED' }]}>CLEAR</Text>
-          <Text numberOfLines={1} style={[styles.actionBtnSub, { color: '#7C3AED' }]}>Free</Text>
-        </Pressable>
-
         {/* Hint */}
         <Pressable
           onPress={handleHint}
@@ -1885,11 +1867,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
-  },
-  shuffleBtn: {
-    backgroundColor: '#F5F3FF',
-    borderWidth: 2,
-    borderColor: '#DDD6FE',
   },
   hintBtn: {
     backgroundColor: '#FFF8E1',
