@@ -35,6 +35,8 @@ export const CustomAlert: React.FC<CustomAlertProps> = ({
   const cardScale = useRef(new Animated.Value(0)).current;
   const sunburstRotate = useRef(new Animated.Value(0)).current;
   const starScale = useRef(new Animated.Value(0)).current;
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   // Continuous rotating sunburst halo (same as VictoryModal)
   useEffect(() => {
@@ -70,6 +72,11 @@ export const CustomAlert: React.FC<CustomAlertProps> = ({
           useNativeDriver: true,
         }),
       ]).start();
+
+      const timer = setTimeout(() => {
+        onCloseRef.current();
+      }, 7000);
+      return () => clearTimeout(timer);
     } else {
       cardScale.setValue(0);
       starScale.setValue(0);

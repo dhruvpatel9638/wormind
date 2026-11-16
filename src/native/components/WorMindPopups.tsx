@@ -1051,12 +1051,19 @@ export const CoinsEarnedModal: React.FC<CoinsEarnedModalProps> = ({
   onClose,
 }) => {
   const popScale = useRef(new Animated.Value(0)).current;
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     if (visible) {
       nativeAudio.playCoin();
       popScale.setValue(0.7);
       Animated.spring(popScale, { toValue: 1, friction: 6, tension: 70, useNativeDriver: true }).start();
+
+      const timer = setTimeout(() => {
+        onCloseRef.current();
+      }, 7000);
+      return () => clearTimeout(timer);
     }
   }, [visible]);
 
@@ -1109,12 +1116,19 @@ export const RefillHeartsModal: React.FC<RefillHeartsModalProps> = ({
   onRefill,
 }) => {
   const popScale = useRef(new Animated.Value(0)).current;
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
   const isFull = currentHearts >= maxHearts;
 
   useEffect(() => {
     if (visible) {
       popScale.setValue(0.7);
       Animated.spring(popScale, { toValue: 1, friction: 6, tension: 70, useNativeDriver: true }).start();
+
+      const timer = setTimeout(() => {
+        onCloseRef.current();
+      }, 7000);
+      return () => clearTimeout(timer);
     }
   }, [visible]);
 
@@ -1206,11 +1220,24 @@ export const WordFlameStreakModal: React.FC<WordFlameStreakModalProps> = ({
   onClose,
 }) => {
   const popScale = useRef(new Animated.Value(0)).current;
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+  const onKeepBurningRef = useRef(onKeepBurning);
+  onKeepBurningRef.current = onKeepBurning;
 
   useEffect(() => {
     if (visible) {
       popScale.setValue(0.7);
       Animated.spring(popScale, { toValue: 1, friction: 6, tension: 70, useNativeDriver: true }).start();
+
+      const timer = setTimeout(() => {
+        if (onCloseRef.current) {
+          onCloseRef.current();
+        } else {
+          onKeepBurningRef.current();
+        }
+      }, 7000);
+      return () => clearTimeout(timer);
     }
   }, [visible]);
 
@@ -1224,17 +1251,6 @@ export const WordFlameStreakModal: React.FC<WordFlameStreakModalProps> = ({
             ribbonTitle={isAtZero ? "REIGNITE STRIKE!" : "WORD FLAME STREAK!"}
             isFireRibbon={true}
           >
-            {/* Top Close Button if onClose provided */}
-            {onClose && (
-              <Pressable
-                onPress={onClose}
-                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-                style={styles.flameCloseCornerBtn}
-              >
-                <MaterialIcons name="close" size={18} color="#94A3B8" />
-              </Pressable>
-            )}
-
             {/* Center Mascot Flame in Bowl */}
             <View style={[styles.centerArtWrapper, { marginTop: 10 }]}>
               <FlameMascotVector size={110} />
@@ -1276,7 +1292,7 @@ export const WordFlameStreakModal: React.FC<WordFlameStreakModalProps> = ({
               </View>
             </View>
 
-            {/* Fiery Action Button */}
+            {/* Fiery Action Button & Bottom Close Button */}
             <View style={{ width: '100%', marginTop: 8 }}>
               <Game3DButton
                 title={
@@ -1290,6 +1306,16 @@ export const WordFlameStreakModal: React.FC<WordFlameStreakModalProps> = ({
                 height={52}
                 icon="local-fire-department"
               />
+              {isAtZero && (
+                <View style={{ width: '100%', marginTop: 8 }}>
+                  <Game3DButton
+                    title="CLOSE"
+                    variant="gray"
+                    onPress={onClose || onKeepBurning}
+                    height={44}
+                  />
+                </View>
+              )}
             </View>
           </WoodenPopupCard>
         </Animated.View>
@@ -1606,11 +1632,18 @@ export const DailyCalendarModal: React.FC<DailyCalendarModalProps> = ({
   onClose,
 }) => {
   const popScale = useRef(new Animated.Value(0)).current;
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     if (visible) {
       popScale.setValue(0.7);
       Animated.spring(popScale, { toValue: 1, friction: 6, tension: 70, useNativeDriver: true }).start();
+
+      const timer = setTimeout(() => {
+        onCloseRef.current();
+      }, 7000);
+      return () => clearTimeout(timer);
     }
   }, [visible]);
 
@@ -1625,15 +1658,6 @@ export const DailyCalendarModal: React.FC<DailyCalendarModalProps> = ({
             innerBorderColor="#FBBF24"
             maxWidth={345}
           >
-            {/* Top Close Button */}
-            <Pressable
-              onPress={onClose}
-              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              style={styles.flameCloseCornerBtn}
-            >
-              <MaterialIcons name="close" size={18} color="#94A3B8" />
-            </Pressable>
-
             {/* Subtitle */}
             <Text style={styles.pausedSubtitle}>
               Day {currentDayToClaim} of 7 • {canClaimToday ? 'Tap Claim to collect!' : 'Reward claimed for today!'}
@@ -1731,13 +1755,18 @@ export const DailyCalendarModal: React.FC<DailyCalendarModalProps> = ({
             {/* Bottom Juicy Action Button */}
             <View style={{ width: '100%', marginTop: 8 }}>
               {canClaimToday ? (
-                <Game3DButton
-                  title={`CLAIM DAY ${currentDayToClaim} 🎁`}
-                  variant="green"
-                  onPress={() => onClaim(currentDayToClaim)}
-                  height={50}
-                  icon="card-giftcard"
-                />
+                <>
+                  <Game3DButton
+                    title={`CLAIM DAY ${currentDayToClaim} 🎁`}
+                    variant="green"
+                    onPress={() => onClaim(currentDayToClaim)}
+                    height={50}
+                    icon="card-giftcard"
+                  />
+                  <View style={{ width: '100%', marginTop: 8 }}>
+                    <Game3DButton title="CLOSE" variant="gray" onPress={onClose} height={44} />
+                  </View>
+                </>
               ) : (
                 <Game3DButton title="CLOSE" variant="gray" onPress={onClose} height={46} />
               )}
@@ -1766,12 +1795,19 @@ export const RewardClaimedModal: React.FC<RewardClaimedModalProps> = ({
   onClose,
 }) => {
   const popScale = useRef(new Animated.Value(0)).current;
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     if (visible) {
       nativeAudio.playVictory();
       popScale.setValue(0.7);
       Animated.spring(popScale, { toValue: 1, friction: 6, tension: 70, useNativeDriver: true }).start();
+
+      const timer = setTimeout(() => {
+        onCloseRef.current();
+      }, 7000);
+      return () => clearTimeout(timer);
     }
   }, [visible]);
 
@@ -1825,11 +1861,18 @@ export const FreeCoinsModal: React.FC<FreeCoinsModalProps> = ({
   onClose,
 }) => {
   const popScale = useRef(new Animated.Value(0)).current;
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     if (visible) {
       popScale.setValue(0.7);
       Animated.spring(popScale, { toValue: 1, friction: 6, tension: 70, useNativeDriver: true }).start();
+
+      const timer = setTimeout(() => {
+        onCloseRef.current();
+      }, 7000);
+      return () => clearTimeout(timer);
     }
   }, [visible]);
 
@@ -1843,15 +1886,6 @@ export const FreeCoinsModal: React.FC<FreeCoinsModalProps> = ({
             cardGradient={['#4D2604', '#321601', '#1A0B00']}
             innerBorderColor="#FACC15"
           >
-            {/* Top Close Button */}
-            <Pressable
-              onPress={onClose}
-              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              style={styles.flameCloseCornerBtn}
-            >
-              <MaterialIcons name="close" size={18} color="#94A3B8" />
-            </Pressable>
-
             {/* Subtitle */}
             <Text style={styles.freeCoinsSubtitle}>
               Watch a short video ad to earn free coins for hints, lifelines & reveals!
@@ -1877,7 +1911,7 @@ export const FreeCoinsModal: React.FC<FreeCoinsModalProps> = ({
             {/* Side-by-Side Action Buttons */}
             <View style={styles.sideBySideBtnRow}>
               <View style={{ flex: 1, marginRight: 6 }}>
-                <Game3DButton title="CANCEL" variant="gray" onPress={onClose} height={48} />
+                <Game3DButton title="CLOSE" variant="gray" onPress={onClose} height={48} />
               </View>
               <View style={{ flex: 1.4, marginLeft: 6 }}>
                 <Game3DButton
@@ -1961,6 +1995,379 @@ export const ResetConfirmModal: React.FC<ResetConfirmModalProps> = ({
 };
 
 // ══════════════════════════════════════════════════════════════════════════════
+// 15. CLOCK & LIFELINE VECTOR ARTWORKS
+// ══════════════════════════════════════════════════════════════════════════════
+export const ClockExtraTimeVector: React.FC<{ size?: number }> = ({ size = 96 }) => {
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+  useEffect(() => {
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, { toValue: 1.08, duration: 600, useNativeDriver: true }),
+        Animated.timing(pulseAnim, { toValue: 1, duration: 600, useNativeDriver: true }),
+      ])
+    );
+    loop.start();
+    return () => loop.stop();
+  }, [pulseAnim]);
+
+  return (
+    <Animated.View
+      style={{
+        width: size,
+        height: size,
+        alignItems: 'center',
+        justifyContent: 'center',
+        transform: [{ scale: pulseAnim }],
+      }}
+    >
+      <Svg width={size} height={size} viewBox="0 0 96 96">
+        <Defs>
+          <SvgGradient id="clockGoldGrad" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0%" stopColor="#FEF08A" />
+            <Stop offset="50%" stopColor="#F59E0B" />
+            <Stop offset="100%" stopColor="#B45309" />
+          </SvgGradient>
+          <SvgGradient id="clockDialGrad" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0%" stopColor="#1E293B" />
+            <Stop offset="100%" stopColor="#0F172A" />
+          </SvgGradient>
+          <SvgRadial id="clockOrangeGlow" cx="50%" cy="50%" r="50%">
+            <Stop offset="0%" stopColor="#F97316" stopOpacity="0.5" />
+            <Stop offset="100%" stopColor="#F97316" stopOpacity="0" />
+          </SvgRadial>
+        </Defs>
+
+        {/* Outer Glow */}
+        <Circle cx="48" cy="52" r="42" fill="url(#clockOrangeGlow)" />
+
+        {/* Stopwatch Top Button / Crown */}
+        <Rect x="44" y="8" width="8" height="8" rx="2" fill="url(#clockGoldGrad)" stroke="#78350F" strokeWidth="1" />
+        <Rect x="42" y="5" width="12" height="4" rx="2" fill="#FDE047" stroke="#78350F" strokeWidth="1" />
+
+        {/* Stopwatch Angled Ear Buttons */}
+        <Rect x="20" y="15" width="6" height="8" rx="2" fill="url(#clockGoldGrad)" transform="rotate(-30 23 19)" stroke="#78350F" strokeWidth="1" />
+        <Rect x="70" y="15" width="6" height="8" rx="2" fill="url(#clockGoldGrad)" transform="rotate(30 73 19)" stroke="#78350F" strokeWidth="1" />
+
+        {/* Clock Outer Rim */}
+        <Circle cx="48" cy="52" r="36" fill="url(#clockGoldGrad)" stroke="#78350F" strokeWidth="2" />
+        {/* Clock Inner Dial Face */}
+        <Circle cx="48" cy="52" r="30" fill="url(#clockDialGrad)" stroke="#F59E0B" strokeWidth="1.5" />
+
+        {/* Dial Hour Tick Marks */}
+        {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => (
+          <Rect
+            key={deg}
+            x="47"
+            y="26"
+            width="2"
+            height={deg % 90 === 0 ? 5 : 3}
+            fill="#FEF08A"
+            transform={`rotate(${deg} 48 52)`}
+          />
+        ))}
+
+        {/* Clock Hands (Ticking at high alert) */}
+        <Path d="M 48 52 L 48 33" stroke="#FDE047" strokeWidth="3" strokeLinecap="round" />
+        <Path d="M 48 52 L 62 42" stroke="#EF4444" strokeWidth="2.5" strokeLinecap="round" />
+        <Circle cx="48" cy="52" r="4" fill="#F59E0B" stroke="#78350F" strokeWidth="1" />
+
+        {/* Floating +30s Badge */}
+        <Rect x="28" y="68" width="40" height="20" rx="10" fill="#EF4444" stroke="#FFFFFF" strokeWidth="1.5" />
+      </Svg>
+      <View style={styles.clockExtraBadgeTextWrapper}>
+        <Text style={styles.clockExtraBadgeText}>+30s</Text>
+      </View>
+    </Animated.View>
+  );
+};
+
+export const LifelineBulbVector: React.FC<{ size?: number }> = ({ size = 84 }) => {
+  return (
+    <View style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
+      <Svg width={size} height={size} viewBox="0 0 84 84">
+        <Defs>
+          <SvgGradient id="bulbGrad" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0%" stopColor="#FFFBEB" />
+            <Stop offset="40%" stopColor="#FDE047" />
+            <Stop offset="100%" stopColor="#F59E0B" />
+          </SvgGradient>
+          <SvgRadial id="bulbGlow" cx="50%" cy="50%" r="50%">
+            <Stop offset="0%" stopColor="#FDE047" stopOpacity="0.55" />
+            <Stop offset="100%" stopColor="#FDE047" stopOpacity="0" />
+          </SvgRadial>
+        </Defs>
+
+        {/* Radial Glow */}
+        <Circle cx="42" cy="38" r="36" fill="url(#bulbGlow)" />
+
+        {/* Radiating Light Beams */}
+        {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+          <Rect
+            key={deg}
+            x="40"
+            y="6"
+            width="4"
+            height="7"
+            rx="2"
+            fill="#FEF08A"
+            transform={`rotate(${deg} 42 38)`}
+          />
+        ))}
+
+        {/* Bulb Glass Body */}
+        <Path
+          d="M 28 34 C 24 24, 30 14, 42 14 C 54 14, 60 24, 56 34 C 53 41, 50 44, 49 50 L 35 50 C 34 44, 31 41, 28 34 Z"
+          fill="url(#bulbGrad)"
+          stroke="#D97706"
+          strokeWidth="1.5"
+        />
+
+        {/* Screw Base */}
+        <Rect x="36" y="52" width="12" height="4" rx="1.5" fill="#CBD5E1" stroke="#64748B" strokeWidth="0.8" />
+        <Rect x="37" y="57" width="10" height="4" rx="1.5" fill="#94A3B8" stroke="#475569" strokeWidth="0.8" />
+        <Rect x="39" y="62" width="6" height="3" rx="1.5" fill="#475569" />
+
+        {/* Filament Sparkle */}
+        <Path d="M 38 34 Q 42 26 46 34" stroke="#FFFFFF" strokeWidth="2" fill="none" strokeLinecap="round" />
+        <Circle cx="42" cy="26" r="2.5" fill="#FFFFFF" />
+      </Svg>
+    </View>
+  );
+};
+
+export const LifelineWandVector: React.FC<{ size?: number }> = ({ size = 84 }) => {
+  return (
+    <View style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
+      <Svg width={size} height={size} viewBox="0 0 84 84">
+        <Defs>
+          <SvgGradient id="wandStarGrad" x1="0" y1="0" x2="1" y2="1">
+            <Stop offset="0%" stopColor="#A7F3D0" />
+            <Stop offset="50%" stopColor="#2DD4BF" />
+            <Stop offset="100%" stopColor="#0D9488" />
+          </SvgGradient>
+          <SvgRadial id="wandGlow" cx="50%" cy="50%" r="50%">
+            <Stop offset="0%" stopColor="#2DD4BF" stopOpacity="0.5" />
+            <Stop offset="100%" stopColor="#2DD4BF" stopOpacity="0" />
+          </SvgRadial>
+        </Defs>
+
+        <Circle cx="42" cy="42" r="38" fill="url(#wandGlow)" />
+
+        {/* Wand Stick (Diagonal) */}
+        <Path
+          d="M 22 66 L 46 42 L 50 46 L 26 70 Z"
+          fill="#38BDF8"
+          stroke="#0284C7"
+          strokeWidth="1.2"
+        />
+        <Rect x="20" y="64" width="8" height="8" rx="2" fill="#0284C7" transform="rotate(45 24 68)" />
+
+        {/* Magic Star Top */}
+        <Path
+          d="M 54 22 L 57 32 L 67 33 L 59 40 L 62 50 L 53 44 L 45 50 L 48 40 L 40 33 L 50 32 Z"
+          fill="url(#wandStarGrad)"
+          stroke="#0F766E"
+          strokeWidth="1.5"
+        />
+
+        {/* Mini Sparkles */}
+        <Circle cx="30" cy="28" r="2.5" fill="#FEF08A" />
+        <Circle cx="68" cy="22" r="2" fill="#5EEAD4" />
+        <Circle cx="64" cy="58" r="2.5" fill="#FDE047" />
+        <Circle cx="26" cy="48" r="1.8" fill="#A7F3D0" />
+      </Svg>
+    </View>
+  );
+};
+
+// ══════════════════════════════════════════════════════════════════════════════
+// 16. TIMEOUT EXTRA TIME MODAL (Watch Ad for +30s, up to 2 times)
+// ══════════════════════════════════════════════════════════════════════════════
+export interface TimeoutExtraTimeModalProps {
+  visible: boolean;
+  levelId: number;
+  adCount: number; // 0 or 1
+  maxAds?: number; // 2
+  onWatchAd: () => void;
+  onGiveUp: () => void;
+  isWatchingAd?: boolean;
+}
+
+export const TimeoutExtraTimeModal: React.FC<TimeoutExtraTimeModalProps> = ({
+  visible,
+  levelId,
+  adCount,
+  maxAds = 2,
+  onWatchAd,
+  onGiveUp,
+  isWatchingAd = false,
+}) => {
+  const popScale = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible) {
+      popScale.setValue(0.7);
+      Animated.spring(popScale, { toValue: 1, friction: 6, tension: 70, useNativeDriver: true }).start();
+    }
+  }, [visible]);
+
+  const chanceNum = Math.min(adCount + 1, maxAds);
+
+  return (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onGiveUp}>
+      <View style={styles.modalBackdrop}>
+        <Animated.View style={{ transform: [{ scale: popScale }] }}>
+          <WoodenPopupCard
+            ribbonTitle="TIME'S UP!"
+            ribbonVariant="fire"
+            isFireRibbon={true}
+            cardGradient={['#1E1B4B', '#1E293B', '#0F172A']}
+            innerBorderColor="#F97316"
+          >
+            {/* Level Subtitle */}
+            <Text style={styles.pausedSubtitle}>
+              Level {levelId} • Chance {chanceNum} of {maxAds}
+            </Text>
+
+            {/* Pulsing Stopwatch Artwork */}
+            <View style={[styles.centerArtWrapper, { marginVertical: 6 }]}>
+              <ClockExtraTimeVector size={92} />
+            </View>
+
+            {/* Offer Inset Card */}
+            <View style={styles.timeoutParchment}>
+              <Text style={styles.timeoutParchmentTitle}>⏱️ NEED EXTRA TIME?</Text>
+              <Text style={styles.timeoutParchmentDesc}>
+                Watch a quick video ad to get <Text style={{ color: '#F97316', fontWeight: '900' }}>+30 SECONDS</Text> and keep your level progress!
+              </Text>
+              <View style={styles.timeoutChancesBadge}>
+                <MaterialIcons name="replay" size={14} color="#EA580C" />
+                <Text style={styles.timeoutChancesText}>
+                  {adCount === 0 ? 'Chance 1 of 2 available' : '⚠️ LAST extra time chance for this level!'}
+                </Text>
+              </View>
+            </View>
+
+            {/* Action Buttons */}
+            <View style={styles.actionBtnStack}>
+              <Game3DButton
+                title={isWatchingAd ? 'LOADING AD…' : 'WATCH AD (+30s)'}
+                variant="fire"
+                icon="ondemand-video"
+                height={52}
+                disabled={isWatchingAd}
+                onPress={onWatchAd}
+              />
+              <Game3DButton
+                title="GIVE UP & RETRY"
+                variant="purple"
+                height={44}
+                onPress={onGiveUp}
+              />
+            </View>
+          </WoodenPopupCard>
+        </Animated.View>
+      </View>
+    </Modal>
+  );
+};
+
+// ══════════════════════════════════════════════════════════════════════════════
+// 17. LIFELINE REWARDED AD MODAL (Watch Ad to use Hint / Reveal when low coins)
+// ══════════════════════════════════════════════════════════════════════════════
+export interface LifelineAdModalProps {
+  visible: boolean;
+  levelId: number;
+  type: 'hint' | 'reveal';
+  coins: number;
+  cost: number;
+  onWatchAd: () => void;
+  onClose: () => void;
+  isWatchingAd?: boolean;
+}
+
+export const LifelineAdModal: React.FC<LifelineAdModalProps> = ({
+  visible,
+  levelId,
+  type,
+  coins,
+  cost,
+  onWatchAd,
+  onClose,
+  isWatchingAd = false,
+}) => {
+  const popScale = useRef(new Animated.Value(0)).current;
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    if (visible) {
+      popScale.setValue(0.7);
+      Animated.spring(popScale, { toValue: 1, friction: 6, tension: 70, useNativeDriver: true }).start();
+
+      const timer = setTimeout(() => {
+        onCloseRef.current();
+      }, 7000);
+      return () => clearTimeout(timer);
+    }
+  }, [visible]);
+
+  const isHint = type === 'hint';
+  const title = isHint ? 'FREE HINT!' : 'FREE REVEAL!';
+  const ribbonColor = isHint ? 'gold' : 'ocean';
+
+  return (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+      <View style={styles.modalBackdrop}>
+        <Animated.View style={{ transform: [{ scale: popScale }] }}>
+          <WoodenPopupCard
+            ribbonTitle={title}
+            ribbonVariant={ribbonColor}
+            cardGradient={isHint ? ['#1E3A8A', '#172554', '#0F172A'] : ['#0F766E', '#115E59', '#042F2E']}
+            innerBorderColor={isHint ? '#FACC15' : '#2DD4BF'}
+          >
+            <Text style={styles.pausedSubtitle}>
+              Level {levelId} • Free Lifeline
+            </Text>
+
+            <View style={[styles.centerArtWrapper, { marginVertical: 6 }]}>
+              {isHint ? <LifelineBulbVector size={80} /> : <LifelineWandVector size={80} />}
+            </View>
+
+            <View style={styles.lifelineParchment}>
+              <Text style={styles.lifelineParchmentTitle}>✦ NEED MORE COINS? ✦</Text>
+              <Text style={styles.lifelineParchmentDesc}>
+                This lifeline costs <Text style={{ color: '#F59E0B', fontWeight: '900' }}>{cost} Coins</Text> (You have <Text style={{ color: '#FEF08A', fontWeight: '900' }}>{coins} 🪙</Text>).
+              </Text>
+              <Text style={[styles.lifelineParchmentDesc, { marginTop: 4, fontWeight: '800', color: isHint ? '#FDE047' : '#99F6E4' }]}>
+                Watch a quick video ad to get this {isHint ? 'Hint' : 'Word Reveal'} for FREE!
+              </Text>
+            </View>
+
+            <View style={styles.actionBtnStack}>
+              <Game3DButton
+                title={isWatchingAd ? 'LOADING AD…' : isHint ? 'WATCH AD FOR HINT' : 'WATCH AD FOR REVEAL'}
+                variant="green"
+                icon="ondemand-video"
+                height={52}
+                disabled={isWatchingAd}
+                onPress={onWatchAd}
+              />
+              <Game3DButton
+                title="CLOSE"
+                variant="purple"
+                height={44}
+                onPress={onClose}
+              />
+            </View>
+          </WoodenPopupCard>
+        </Animated.View>
+      </View>
+    </Modal>
+  );
+};
+
+// ══════════════════════════════════════════════════════════════════════════════
 // STYLESHEET
 // ══════════════════════════════════════════════════════════════════════════════
 const styles = StyleSheet.create({
@@ -1970,18 +2377,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-  },
-  flameCloseCornerBtn: {
-    position: 'absolute',
-    top: 6,
-    right: 6,
-    zIndex: 20,
-    width: 26,
-    height: 26,
-    borderRadius: 13,
-    backgroundColor: 'rgba(15, 23, 42, 0.6)',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   // Wooden Outer Bezel Frame
   woodenOuterBezel: {
@@ -2658,6 +3053,89 @@ const styles = StyleSheet.create({
     textShadowColor: '#451A03',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
+  },
+
+  // Clock Extra Time Vector Badge
+  clockExtraBadgeTextWrapper: {
+    position: 'absolute',
+    bottom: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  clockExtraBadgeText: {
+    fontSize: 12,
+    fontWeight: '900',
+    color: '#FFFFFF',
+    letterSpacing: 0.5,
+  },
+  // Timeout Parchment Inset
+  timeoutParchment: {
+    width: '100%',
+    backgroundColor: 'rgba(254, 243, 199, 0.95)',
+    borderRadius: 14,
+    borderWidth: 1.5,
+    borderColor: '#F59E0B',
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    marginVertical: 6,
+  },
+  timeoutParchmentTitle: {
+    fontSize: 13,
+    fontWeight: '900',
+    color: '#78350F',
+    letterSpacing: 0.5,
+    marginBottom: 4,
+  },
+  timeoutParchmentDesc: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#451A03',
+    textAlign: 'center',
+    lineHeight: 16,
+  },
+  timeoutChancesBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    marginTop: 6,
+    backgroundColor: 'rgba(249, 115, 22, 0.15)',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(249, 115, 22, 0.4)',
+  },
+  timeoutChancesText: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#C2410C',
+  },
+  // Lifeline Parchment Inset
+  lifelineParchment: {
+    width: '100%',
+    backgroundColor: 'rgba(15, 23, 42, 0.82)',
+    borderRadius: 14,
+    borderWidth: 1.5,
+    borderColor: 'rgba(56, 189, 248, 0.3)',
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    marginVertical: 6,
+  },
+  lifelineParchmentTitle: {
+    fontSize: 12,
+    fontWeight: '900',
+    color: '#FDE047',
+    letterSpacing: 0.8,
+    marginBottom: 4,
+  },
+  lifelineParchmentDesc: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#E2E8F0',
+    textAlign: 'center',
+    lineHeight: 16,
   },
 });
 

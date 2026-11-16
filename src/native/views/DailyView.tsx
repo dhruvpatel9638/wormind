@@ -224,15 +224,6 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
               innerBorderColor="#F59E0B"
               maxWidth={350}
             >
-              {/* Top Close Button */}
-              <Pressable
-                onPress={() => setShowWheelModal(false)}
-                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-                style={styles.modalCloseCornerBtn}
-              >
-                <MaterialIcons name="close" size={20} color="#CBD5E1" />
-              </Pressable>
-
               <LuckyWheel
                 canSpinToday={canSpinToday}
                 onStartSpin={onStartSpin}
@@ -428,18 +419,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
   },
-  modalCloseCornerBtn: {
-    position: 'absolute',
-    top: 14,
-    right: 14,
-    zIndex: 10,
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: '#F1F5F9',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   calendarModalHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -543,18 +522,6 @@ const styles = StyleSheet.create({
     width: '100%',
     position: 'relative',
     alignItems: 'center',
-  },
-  wheelModalCloseCornerBtn: {
-    position: 'absolute',
-    top: -8,
-    right: 4,
-    zIndex: 20,
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   wheelModalBottomCloseBtn: {
     marginTop: 10,
