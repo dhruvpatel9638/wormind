@@ -36,6 +36,7 @@ import {
   OceanAtlantisPalace,
   OceanChest,
 } from '../components/BubbleOceanVectors';
+import { logLevelSelected, logChestClaimed } from '../../utils/analytics';
 
 interface WorldsViewProps {
   onStartLevel: (levelId: number) => void;
@@ -82,6 +83,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
       });
     } else if (status === 'ready') {
       onClaimChest?.(lvlId);
+      logChestClaimed(lvlId, MILESTONE_CHEST_COINS);
       setAlertInfo({
         title: 'CHEST UNLOCKED! 🎁',
         message: `Congratulations! You claimed the Level ${lvlId} Milestone Chest!\n\n🪙 +${MILESTONE_CHEST_COINS} Coins added\n🔥 +50 Word Strike added`,
@@ -702,6 +704,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
           onPress={() => {
             nativeAudio.playLetterTap(3);
             nativeHaptics.light();
+            logLevelSelected(activeLevelId, activeLevelId > 50 ? 'ocean' : 'sunny');
             onStartLevel(activeLevelId);
           }}
           style={({ pressed }) => [
@@ -731,6 +734,7 @@ export const NativeWorldsView: React.FC<WorldsViewProps> = ({
             onStartLevel={(lvl) => {
               const target = lvl || activeLevelId;
               setSelectedModalLevel(null);
+              logLevelSelected(target, target > 50 ? 'ocean' : 'sunny');
               onStartLevel(target);
             }}
           />

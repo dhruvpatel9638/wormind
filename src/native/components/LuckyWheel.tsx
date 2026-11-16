@@ -27,6 +27,7 @@ import { SPIN_PRIZES as PRIZES, spinTargetAngle } from '../../data/spinPrizes';
 import type { WheelPrize } from '../../data/spinPrizes';
 import type { SpinTicket } from '../../types';
 import { CustomAlert } from './CustomAlert';
+import { logWheelSpin, logCoinEarned } from '../../utils/analytics';
 
 const NUM_SLICES = PRIZES.length;
 const SLICE_ANGLE = (2 * Math.PI) / NUM_SLICES; // 45 deg in rad
@@ -134,6 +135,10 @@ export const LuckyWheel: React.FC<LuckyWheelProps> = ({
       spinAnim.setValue(currentRotation.current);
       if (!onCompleteSpin(ticket)) return;
       setWonPrize(winningPrize);
+      logWheelSpin(winningPrize.label);
+      if (winningPrize.amount > 0) {
+        logCoinEarned(winningPrize.amount, 'wheel_spin');
+      }
       nativeAudio.playVictory();
       nativeHaptics.success();
 

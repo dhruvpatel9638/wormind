@@ -28,6 +28,19 @@ import {
   getLastAdDismissedAt,
   addAdDismissListener,
 } from '../../utils/admobService';
+import {
+  logLevelStart,
+  logLevelComplete,
+  logLevelFail,
+  logWordFound,
+  logHintUsed,
+  logAdHintUsed,
+  logRevealUsed,
+  logCoinSpend,
+  logStrikeRestored,
+  logSettingToggle,
+  logWordStreak,
+} from '../../utils/analytics';
 import { STRIKE_LOSS_PENALTY, STRIKE_WIN_REWARD } from '../../config/strike';
 import { HINT_COST, REVEAL_COST } from '../../config/economy';
 import { getLevelDifficultyConfig } from '../../config/difficultyScaling';
@@ -183,6 +196,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     } else {
       nativeAudio.setSoundEnabled(!soundEnabled);
     }
+    logSettingToggle('sound', !soundEnabled);
   };
 
   const toggleMusic = () => {
@@ -191,6 +205,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     } else {
       nativeAudio.setMusicEnabled(!musicEnabled);
     }
+    logSettingToggle('music', !musicEnabled);
   };
 
   const toggleHaptics = () => {
@@ -201,6 +216,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       nativeHaptics.setEnabled(next);
       if (next) nativeHaptics.selection();
     }
+    logSettingToggle('haptics', !hapticsEnabled);
   };
   const [isScrollingEnabled, setIsScrollingEnabled] = useState<boolean>(true);
 
@@ -417,6 +433,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   useEffect(() => {
     mountedRef.current = true;
+    logLevelStart(levelId);
     return () => {
       mountedRef.current = false;
       attemptStatusRef.current = 'exited';
@@ -439,6 +456,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         setIsGameOver(true);
         nativeAudio.playGameOver();
         nativeHaptics.error();
+        logLevelFail(levelId);
         onFailLevelRef.current?.();
       }
     }, 1000);
@@ -527,7 +545,10 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     if (isRestoringStrike || attemptStatusRef.current !== 'lost') return;
     if (strike <= 0) {
       onRestoreStrike?.(() => {
-        if (mountedRef.current && attemptStatusRef.current === 'lost') resetLevelState(currentLevel);
+        if (mountedRef.current && attemptStatusRef.current === 'lost') {
+          logStrikeRestored('rewarded_ad');
+          resetLevelState(currentLevel);
+        }
       });
       return;
     }
@@ -540,6 +561,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     completionClaimedRef.current = true;
     nativeAudio.stopVictory();
     const finalCoins = Math.round(50 * diffConfig.coinMultiplier);
+    logLevelComplete(levelId, 3, finalCoins);
     onCompleteLevelRef.current(levelId, 3, finalCoins, target);
   }, [levelId, diffConfig.coinMultiplier]);
 
@@ -559,12 +581,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         const matched = targetWords[matchIdx];
         nativeAudio.playWordFound();
         nativeHaptics.success();
+        logWordFound(matched.word, levelId);
 
         // Increment Streak & trigger streak animation
         setWordStreak((prev) => {
           const next = prev + 1;
           setMaxWordStreak((m) => Math.max(m, next));
           triggerStreakAnimation(next);
+          logWordStreak(next, levelId);
           return next;
         });
 
@@ -965,6 +989,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setHasUsedCoinHint(true);
     nativeAudio.playSparkle();
     nativeHaptics.medium();
+    logHintUsed(levelId);
     setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
     setTimeout(() => setHintedCells([]), 3500);
   };
@@ -979,6 +1004,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     }
 
     showRewardedAd(() => {
+      logAdHintUsed(levelId);
       setAlertInfo({
         title: '🎁 Ad Hint Unlocked!',
         message: 'You watched an ad! Tap GOT IT to reveal a hint on the grid.',
@@ -1007,6 +1033,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     nativeAudio.playWordFound();
     nativeHaptics.success();
     const unfoundWord = targetWords[unfoundIdx];
+    logRevealUsed(unfoundWord?.word ?? '', levelId);
+    logCoinSpend(REVEAL_COST, 'reveal_word');
     const newTargetWords = [...targetWords];
     newTargetWords[unfoundIdx] = { ...unfoundWord, found: true };
     setTargetWords(newTargetWords);

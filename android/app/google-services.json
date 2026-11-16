@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "76896024673",
+    "project_id": "word-search-puzzul-wormind",
+    "storage_bucket": "word-search-puzzul-wormind.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76896024673:android:514714309618f6a9009220",
+        "android_client_info": {
+          "package_name": "com.amyaastudio.wormind"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJyc0enStKxSEIw2IRqGWJEZqvc_HPgjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

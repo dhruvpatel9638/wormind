@@ -16,6 +16,7 @@ import { nativeHaptics } from '../haptics';
 import { LuckyWheel } from '../components/LuckyWheel';
 import { DailyCalendarModal, RewardClaimedModal, WoodenPopupCard, Game3DButton } from '../components/WorMindPopups';
 import type { DailyReward, SpinTicket } from '../../types';
+import { logDailyRewardClaimed, logWheelSpin, logCoinEarned } from '../../utils/analytics';
 
 interface DailyViewProps {
   claimedDays: number[];
@@ -58,6 +59,8 @@ export const NativeDailyView: React.FC<DailyViewProps> = ({
       reward.hat && reward.hatLabel,
     ].filter(Boolean);
     setClaimedMessage(`You received ${parts.join(', ')}!`);
+    logDailyRewardClaimed(day, reward.coins);
+    if (reward.coins > 0) logCoinEarned(reward.coins, 'daily_reward');
     setShowCalendarModal(false);
     setShowClaimModal(true);
   };

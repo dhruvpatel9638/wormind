@@ -1,4 +1,5 @@
 import { ADMOB_CONFIG, getGoogleMobileAds } from '../config/admob';
+import { logAdShown, logAdRewardClaimed } from './analytics';
 
 // Initialize Google Mobile Ads SDK
 export const initAdMob = async () => {
@@ -37,8 +38,9 @@ export const addAdDismissListener = (listener: () => void): (() => void) => {
   };
 };
 
-export const notifyAdOpened = () => {
+export const notifyAdOpened = (adType: 'interstitial' | 'rewarded' | 'banner' = 'interstitial') => {
   isAnyAdShowing = true;
+  logAdShown(adType);
 };
 
 export const notifyAdClosed = () => {
@@ -80,7 +82,7 @@ export const showInterstitialAd = (onClosed?: () => void, onShown?: () => void) 
   };
 
   const unsubscribeLoaded = interstitial.addAdEventListener(AdEventType.LOADED, () => {
-    notifyAdOpened();
+    notifyAdOpened('interstitial');
     onShown?.();
     interstitial.show();
   });
@@ -194,7 +196,7 @@ export const showRewardedAd = (
       rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
         if (finished || showing) return;
         showing = true;
-        notifyAdOpened();
+        notifyAdOpened('rewarded');
         try {
           void Promise.resolve(rewarded.show()).catch(fail);
         } catch (error) {
@@ -204,7 +206,10 @@ export const showRewardedAd = (
     );
     subscriptions.push(
       rewarded.addAdEventListener(RewardedAdEventType.EARNED_REWARD, () => {
-        if (!finished) rewardEarned = true;
+        if (!finished) {
+          rewardEarned = true;
+          logAdRewardClaimed(0); // levelId passed generically; callers can extend
+        }
       })
     );
     subscriptions.push(
