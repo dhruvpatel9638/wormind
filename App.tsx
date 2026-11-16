@@ -395,6 +395,10 @@ function AppContent() {
     );
   };
 
+  const handleCloseFreeCoinsModal = useCallback(() => {
+    setShowFreeCoinsModal(false);
+  }, []);
+
   const handleDeductCoins = (amount: number): boolean => {
     if (!hasLoadedPlayer || !Number.isFinite(amount) || amount < 0 || playerStateRef.current.coins < amount) return false;
     const next = { ...playerStateRef.current, coins: playerStateRef.current.coins - amount };
@@ -671,7 +675,7 @@ function AppContent() {
         rewardAmount={FREE_COINS_AD_REWARD}
         userCoins={playerState.coins}
         onWatchAd={handleWatchAdForCoins}
-        onClose={() => setShowFreeCoinsModal(false)}
+        onClose={handleCloseFreeCoinsModal}
       />
 
       {/* Free Coins Result Alert */}
@@ -856,18 +860,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#FED7AA',
     position: 'relative',
-  },
-  modalCloseCornerBtn: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#F8FAFC',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10,
   },
   strikeFlameGlowWrapper: {
     alignItems: 'center',

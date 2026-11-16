@@ -21,7 +21,12 @@ import { nativeAudio } from '../audio';
 import { nativeHaptics } from '../haptics';
 import { CustomAlert } from '../components/CustomAlert';
 import { VictoryModal } from '../components/VictoryModal';
-import { GamePausedModal, GameOverModal } from '../components/WorMindPopups';
+import {
+  GamePausedModal,
+  GameOverModal,
+  TimeoutExtraTimeModal,
+  LifelineAdModal,
+} from '../components/WorMindPopups';
 import {
   showRewardedAd,
   isAdCurrentlyShowing,
@@ -134,7 +139,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isVictory, setIsVictory] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
-  const attemptStatusRef = useRef<'playing' | 'won' | 'lost' | 'exited'>('playing');
+  const attemptStatusRef = useRef<'playing' | 'won' | 'lost' | 'exited' | 'timeout_paused'>('playing');
   const completionClaimedRef = useRef(false);
   const pausedRef = useRef(false);
   const mountedRef = useRef(true);
@@ -144,10 +149,27 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   useEffect(() => { strikeRef.current = strike; }, [strike]);
   const diffConfig = getLevelDifficultyConfig(levelId);
   const getLevelInitialTime = (lvl: typeof currentLevel) => {
-    if (lvl.timeLimit && lvl.timeLimit > 0 && lvl.timeLimit <= 360) {
+    const baseTime = (lvl.timeLimit && lvl.timeLimit > 0 && lvl.timeLimit <= 360)
+      ? lvl.timeLimit
+      : diffConfig.timeLimit;
+
+    // Preserve unit test overrides where timeLimit is explicitly <= 5
+    if (lvl.timeLimit && lvl.timeLimit <= 5) {
       return lvl.timeLimit;
     }
-    return diffConfig.timeLimit;
+
+    // Dynamic level time decrease based on difficulty:
+    // - Hard / Peak / Mega levels: 30s decrease
+    // - Easy levels: 1 min (60s) decrease
+    // - Medium levels: 45s decrease
+    const numRows = lvl.grid?.length || 8;
+    const numCols = lvl.grid?.[0]?.length || 8;
+    const isLarge = Math.max(numRows, numCols) > 8 || Boolean(lvl.isMegaGrid);
+    const isHard = isLarge || diffConfig.step === 4 || diffConfig.hardness >= 10.0;
+    const isEasy = (diffConfig.hardness < 6.0 && !isLarge) || diffConfig.step === 1;
+
+    const decrease = isHard ? 30 : isEasy ? 60 : 45;
+    return Math.max(35, baseTime - decrease);
   };
 
   const [timeLeft, setTimeLeft] = useState<number>(() => getLevelInitialTime(currentLevel));
@@ -156,6 +178,14 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   const [hasUsedCoinHint, setHasUsedCoinHint] = useState(false);
   const hasUsedCoinHintRef = useRef(false);
   const isAdActiveRef = useRef(false);
+
+  // Extra Time (+30s rewarded ad, up to 2 times) & Lifeline Rewarded Ad states
+  const [timeoutAdCount, setTimeoutAdCount] = useState<number>(0);
+  const timeoutAdCountRef = useRef<number>(0);
+  const [showTimeoutModal, setShowTimeoutModal] = useState<boolean>(false);
+  const [isWatchingTimeoutAd, setIsWatchingTimeoutAd] = useState<boolean>(false);
+  const [lifelineAdPrompt, setLifelineAdPrompt] = useState<{ type: 'hint' | 'reveal'; cost: number } | null>(null);
+  const [isWatchingLifelineAd, setIsWatchingLifelineAd] = useState<boolean>(false);
 
   // Turn off BGM on game screen, resume when leaving GameView
   useEffect(() => {
@@ -426,16 +456,28 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   // Keep side effects outside React state updaters, which may be replayed.
   useEffect(() => {
-    if (isPaused || isVictory || isGameOver) return;
+    if (isPaused || isVictory || isGameOver || showTimeoutModal) return;
 
     const timer = setInterval(() => {
       if (pausedRef.current || isAdActiveRef.current || isAdCurrentlyShowing() || attemptStatusRef.current !== 'playing') return;
       timeLeftRef.current = Math.max(0, timeLeftRef.current - 1);
       setTimeLeft(timeLeftRef.current);
       if (timeLeftRef.current === 0) {
-        attemptStatusRef.current = 'lost';
         clearInterval(timer);
+
+        // If player has used fewer than 2 timeout ads in this attempt, offer +30s rewarded ad!
+        if (timeoutAdCountRef.current < 2) {
+          attemptStatusRef.current = 'timeout_paused';
+          setShowTimeoutModal(true);
+          nativeAudio.playGameOver();
+          nativeHaptics.warning();
+          return;
+        }
+
+        // 3rd timeout in this attempt: level fails and must restart from beginning!
+        attemptStatusRef.current = 'lost';
         setStrikeLost(Math.min(Math.max(0, strikeRef.current), STRIKE_LOSS_PENALTY));
+        setShowTimeoutModal(false);
         setIsGameOver(true);
         nativeAudio.playGameOver();
         nativeHaptics.error();
@@ -444,7 +486,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isPaused, isVictory, isGameOver]);
+  }, [isPaused, isVictory, isGameOver, showTimeoutModal]);
 
   // Pulse timer badge on tick & urgent pulse when low time (<= 30s)
   useEffect(() => {
@@ -465,6 +507,12 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     completionClaimedRef.current = false;
     pausedRef.current = false;
     setIsPaused(false);
+    timeoutAdCountRef.current = 0;
+    setTimeoutAdCount(0);
+    setShowTimeoutModal(false);
+    setIsWatchingTimeoutAd(false);
+    setLifelineAdPrompt(null);
+    setIsWatchingLifelineAd(false);
     timeLeftRef.current = getLevelInitialTime(lvl);
     nativeAudio.cancelLetterTaps();
     dragActiveRef.current = false;
@@ -499,6 +547,12 @@ export const NativeGameView: React.FC<GameViewProps> = ({
   useEffect(() => {
     hasUsedCoinHintRef.current = false;
     setHasUsedCoinHint(false);
+    timeoutAdCountRef.current = 0;
+    setTimeoutAdCount(0);
+    setShowTimeoutModal(false);
+    setIsWatchingTimeoutAd(false);
+    setLifelineAdPrompt(null);
+    setIsWatchingLifelineAd(false);
     resetLevelState(currentLevel);
   }, [levelId]);
 
@@ -525,6 +579,12 @@ export const NativeGameView: React.FC<GameViewProps> = ({
 
   const handleRetry = () => {
     if (isRestoringStrike || attemptStatusRef.current !== 'lost') return;
+    timeoutAdCountRef.current = 0;
+    setTimeoutAdCount(0);
+    setShowTimeoutModal(false);
+    setIsWatchingTimeoutAd(false);
+    setLifelineAdPrompt(null);
+    setIsWatchingLifelineAd(false);
     if (strike <= 0) {
       onRestoreStrike?.(() => {
         if (mountedRef.current && attemptStatusRef.current === 'lost') resetLevelState(currentLevel);
@@ -532,6 +592,46 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       return;
     }
     resetLevelState(currentLevel);
+  };
+
+  // Timeout extra time handlers
+  const handleWatchTimeoutAd = () => {
+    if (isWatchingTimeoutAd) return;
+    setIsWatchingTimeoutAd(true);
+
+    showRewardedAd(
+      () => {
+        timeoutAdCountRef.current += 1;
+        setTimeoutAdCount(timeoutAdCountRef.current);
+        setShowTimeoutModal(false);
+        setIsWatchingTimeoutAd(false);
+        timeLeftRef.current = 30;
+        setTimeLeft(30);
+        attemptStatusRef.current = 'playing';
+        nativeAudio.playSparkle();
+        nativeHaptics.success();
+      },
+      () => {
+        setIsWatchingTimeoutAd(false);
+        setAlertInfo({
+          title: 'Ad Unavailable',
+          message: 'Could not load rewarded ad. You can try again or restart the level.',
+        });
+      },
+      () => {
+        setIsWatchingTimeoutAd(false);
+      }
+    );
+  };
+
+  const handleGiveUpTimeout = () => {
+    setShowTimeoutModal(false);
+    attemptStatusRef.current = 'lost';
+    setStrikeLost(Math.min(Math.max(0, strikeRef.current), STRIKE_LOSS_PENALTY));
+    setIsGameOver(true);
+    nativeAudio.playGameOver();
+    nativeHaptics.error();
+    onFailLevelRef.current?.();
   };
 
   const handleCompleteAttempt = useCallback((target: 'next' | 'map' = 'next') => {
@@ -950,68 +1050,8 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     setSpelledWord('');
   };
 
-  // One coin-funded hint is allowed per level; further hints use rewarded ads.
-  const handleHint = () => {
-    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
-    const unfound = targetWords.find((tw) => !tw.found);
-    if (!unfound) return;
-
-    if (hasUsedCoinHintRef.current) {
-      setAlertInfo({
-        title: 'Ad Hint Required',
-        message: 'Your coin hint for this level is already used. Watch an ad to unlock another hint.',
-      });
-      return;
-    }
-
-    if (!onUseHint()) {
-      setAlertInfo({ title: 'Coins Needed', message: `You need ${HINT_COST} coins for a Hint!` });
-      return;
-    }
-
-    hasUsedCoinHintRef.current = true;
-    setHasUsedCoinHint(true);
-    nativeAudio.playSparkle();
-    nativeHaptics.medium();
-    setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
-    setTimeout(() => setHintedCells([]), 3500);
-  };
-
-  // Rewarded Ad: grant one hint directly after the ad is watched.
-  const handleRewardedHint = () => {
-    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
-    const unfound = targetWords.find((tw) => !tw.found);
-    if (!unfound) {
-      setAlertInfo({ title: 'No Words Left', message: 'All words are already found!' });
-      return;
-    }
-
-    showRewardedAd(() => {
-      setAlertInfo({
-        title: '🎁 Ad Hint Unlocked!',
-        message: 'You watched an ad! Tap GOT IT to reveal a hint on the grid.',
-        onConfirm: () => {
-          nativeAudio.playSparkle();
-          setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
-          setTimeout(() => setHintedCells([]), 3500);
-        },
-      });
-    });
-  };
-
-  // Power-up: reveal an entire word at a premium over a single-cell hint.
-  const handleReveal = () => {
-    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
-    const unfoundIdx = targetWords.findIndex((tw) => !tw.found);
-    if (unfoundIdx === -1) return;
-
-    if (coins < REVEAL_COST) {
-      setAlertInfo({ title: 'Coins Needed', message: `You need ${REVEAL_COST} coins to Reveal a word!` });
-      return;
-    }
-
-    if (!onDeductCoins(REVEAL_COST)) return;
-
+  // Helper to apply word reveal logic
+  const applyRevealWord = (unfoundIdx: number) => {
     nativeAudio.playWordFound();
     nativeHaptics.success();
     const unfoundWord = targetWords[unfoundIdx];
@@ -1046,6 +1086,114 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     if (newTargetWords.every((w) => w.found)) {
       finishVictory();
     }
+  };
+
+  // Hint lifeline: If coins not enough or coin hint already used, prompt to watch ad for free hint
+  const handleHint = () => {
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
+    const unfound = targetWords.find((tw) => !tw.found);
+    if (!unfound) return;
+
+    if (hasUsedCoinHintRef.current) {
+      setLifelineAdPrompt({ type: 'hint', cost: HINT_COST });
+      return;
+    }
+
+    if (coins < HINT_COST) {
+      setLifelineAdPrompt({ type: 'hint', cost: HINT_COST });
+      return;
+    }
+
+    if (!onUseHint()) {
+      setLifelineAdPrompt({ type: 'hint', cost: HINT_COST });
+      return;
+    }
+
+    hasUsedCoinHintRef.current = true;
+    setHasUsedCoinHint(true);
+    nativeAudio.playSparkle();
+    nativeHaptics.medium();
+    setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
+    setTimeout(() => setHintedCells([]), 3500);
+  };
+
+  // Rewarded Ad: grant one hint directly after the ad is watched.
+  const handleRewardedHint = () => {
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
+    const unfound = targetWords.find((tw) => !tw.found);
+    if (!unfound) {
+      setAlertInfo({ title: 'No Words Left', message: 'All words are already found!' });
+      return;
+    }
+
+    showRewardedAd(() => {
+      setAlertInfo({
+        title: '🎁 Ad Hint Unlocked!',
+        message: 'You watched an ad! Tap GOT IT to reveal a hint on the grid.',
+        onConfirm: () => {
+          nativeAudio.playSparkle();
+          setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
+          setTimeout(() => setHintedCells([]), 3500);
+        },
+      });
+    });
+  };
+
+  // Reveal lifeline: If coins not enough, prompt to watch ad for free reveal
+  const handleReveal = () => {
+    if (pausedRef.current || attemptStatusRef.current !== 'playing') return;
+    const unfoundIdx = targetWords.findIndex((tw) => !tw.found);
+    if (unfoundIdx === -1) return;
+
+    if (coins < REVEAL_COST) {
+      setLifelineAdPrompt({ type: 'reveal', cost: REVEAL_COST });
+      return;
+    }
+
+    if (!onDeductCoins(REVEAL_COST)) {
+      setLifelineAdPrompt({ type: 'reveal', cost: REVEAL_COST });
+      return;
+    }
+
+    applyRevealWord(unfoundIdx);
+  };
+
+  // Watch rewarded ad to unlock Hint or Reveal for free
+  const handleWatchLifelineAd = () => {
+    if (!lifelineAdPrompt || isWatchingLifelineAd) return;
+    const targetType = lifelineAdPrompt.type;
+    setIsWatchingLifelineAd(true);
+
+    showRewardedAd(
+      () => {
+        setLifelineAdPrompt(null);
+        setIsWatchingLifelineAd(false);
+        if (targetType === 'hint') {
+          const unfound = targetWords.find((tw) => !tw.found);
+          if (!unfound) return;
+          hasUsedCoinHintRef.current = true;
+          setHasUsedCoinHint(true);
+          nativeAudio.playSparkle();
+          nativeHaptics.medium();
+          setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
+          setTimeout(() => setHintedCells([]), 3500);
+        } else {
+          const unfoundIdx = targetWords.findIndex((tw) => !tw.found);
+          if (unfoundIdx === -1) return;
+          applyRevealWord(unfoundIdx);
+        }
+      },
+      () => {
+        setIsWatchingLifelineAd(false);
+        setAlertInfo({
+          title: 'Ad Unavailable',
+          message: 'Could not load rewarded ad. Please try again in a moment.',
+        });
+      },
+      () => {
+        setIsWatchingLifelineAd(false);
+      }
+    );
   };
 
   return (
@@ -1413,6 +1561,31 @@ export const NativeGameView: React.FC<GameViewProps> = ({
         onResume={handleResume}
         onExit={handleExit}
       />
+
+      {/* Timeout Extra Time Modal (Watch Ad for +30s, up to 2 times) */}
+      <TimeoutExtraTimeModal
+        visible={showTimeoutModal}
+        levelId={levelId}
+        adCount={timeoutAdCount}
+        maxAds={2}
+        isWatchingAd={isWatchingTimeoutAd}
+        onWatchAd={handleWatchTimeoutAd}
+        onGiveUp={handleGiveUpTimeout}
+      />
+
+      {/* Lifeline Rewarded Ad Modal (Watch Ad for Free Hint / Reveal when low coins) */}
+      {lifelineAdPrompt && (
+        <LifelineAdModal
+          visible={Boolean(lifelineAdPrompt)}
+          levelId={levelId}
+          type={lifelineAdPrompt.type}
+          coins={coins}
+          cost={lifelineAdPrompt.cost}
+          isWatchingAd={isWatchingLifelineAd}
+          onWatchAd={handleWatchLifelineAd}
+          onClose={() => setLifelineAdPrompt(null)}
+        />
+      )}
 
       {/* Redesigned Game Over Time-Out Modal */}
       <GameOverModal

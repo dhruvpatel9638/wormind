@@ -47,7 +47,7 @@ function harness(options = {}) {
     exports: {},
     require(name) {
       if (name === 'react-native-google-mobile-ads') return sdk;
-      if (name === '../config/admob') return { ADMOB_CONFIG: { REWARDED_INTERSTITIAL_ID: 'test' } };
+      if (name === '../config/admob') return { ADMOB_CONFIG: { REWARDED_INTERSTITIAL_ID: 'test' }, getGoogleMobileAds: () => sdk };
       throw new Error(`Unexpected import: ${name}`);
     },
     console: { log() {}, warn() {} },
