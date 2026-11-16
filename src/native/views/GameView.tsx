@@ -1071,6 +1071,7 @@ export const NativeGameView: React.FC<GameViewProps> = ({
     nativeAudio.playWordFound();
     nativeHaptics.success();
     const unfoundWord = targetWords[unfoundIdx];
+    logRevealUsed(unfoundWord?.word ?? '', levelId);
     const newTargetWords = [...targetWords];
     newTargetWords[unfoundIdx] = { ...unfoundWord, found: true };
     setTargetWords(newTargetWords);
@@ -1168,31 +1169,38 @@ export const NativeGameView: React.FC<GameViewProps> = ({
       return;
     }
 
-    if (!onDeductCoins(REVEAL_COST)) return;
+    if (!onDeductCoins(REVEAL_COST)) {
+      setLifelineAdPrompt({ type: 'reveal', cost: REVEAL_COST });
+      return;
+    }
 
-    nativeAudio.playWordFound();
-    nativeHaptics.success();
-    const unfoundWord = targetWords[unfoundIdx];
-    const newTargetWords = [...targetWords];
-    newTargetWords[unfoundIdx] = { ...unfoundWord, found: true };
-    setTargetWords(newTargetWords);
+    logCoinSpend(REVEAL_COST, 'reveal_word');
+    applyRevealWord(unfoundIdx);
+  };
 
-    // Add its cells to solvedCells
-    const minR = Math.min(unfoundWord.rowStart, unfoundWord.rowEnd);
-    const maxR = Math.max(unfoundWord.rowStart, unfoundWord.rowEnd);
-    const minC = Math.min(unfoundWord.colStart, unfoundWord.colEnd);
-    const maxC = Math.max(unfoundWord.colStart, unfoundWord.colEnd);
-    const rStep = unfoundWord.rowEnd === unfoundWord.rowStart ? 0 : unfoundWord.rowEnd > unfoundWord.rowStart ? 1 : -1;
-    const cStep = unfoundWord.colEnd === unfoundWord.colStart ? 0 : unfoundWord.colEnd > unfoundWord.colStart ? 1 : -1;
-    const len = Math.max(maxR - minR, maxC - minC);
+  // Watch rewarded ad to unlock Hint or Reveal for free
+  const handleWatchLifelineAd = () => {
+    if (!lifelineAdPrompt || isWatchingLifelineAd) return;
+    const targetType = lifelineAdPrompt.type;
+    setIsWatchingLifelineAd(true);
 
-    setSolvedCells((prev) => {
-      const copy = [...prev];
-      for (let i = 0; i <= len; i++) {
-        const r = unfoundWord.rowStart + i * rStep;
-        const c = unfoundWord.colStart + i * cStep;
-        if (!copy.some((existing) => existing.r === r && existing.c === c)) {
-          copy.push({ r, c });
+    showRewardedAd(
+      () => {
+        setLifelineAdPrompt(null);
+        setIsWatchingLifelineAd(false);
+        if (targetType === 'hint') {
+          const unfound = targetWords.find((tw) => !tw.found);
+          if (!unfound) return;
+          hasUsedCoinHintRef.current = true;
+          setHasUsedCoinHint(true);
+          nativeAudio.playSparkle();
+          nativeHaptics.medium();
+          setHintedCells([{ r: unfound.rowStart, c: unfound.colStart }]);
+          setTimeout(() => setHintedCells([]), 3500);
+        } else {
+          const unfoundIdx = targetWords.findIndex((tw) => !tw.found);
+          if (unfoundIdx === -1) return;
+          applyRevealWord(unfoundIdx);
         }
       },
       () => {
